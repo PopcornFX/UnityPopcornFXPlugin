@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{99BE8D1E-0574-0614-8E68-00EBFA1CFD17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Common">
+      <UniqueIdentifier>{CD0EFC38-39EE-7AD4-4206-06ABAE64E135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Common\Scene">
+      <UniqueIdentifier>{AAA169CD-1662-E503-DF9C-2E814B1C2AE0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External">
+      <UniqueIdentifier>{07CD4F05-7337-047C-BC75-B521281FE2D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX">
+      <UniqueIdentifier>{B2545DA7-9EB7-EC4B-473D-2502337FB8CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX\include">
+      <UniqueIdentifier>{250E8582-119D-0E4C-BABB-2247A6291FF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\GL">
+      <UniqueIdentifier>{09555DA7-F5B7-EC4B-9E3D-25028A7FB8CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\GL\include">
+      <UniqueIdentifier>{7C75CF18-6804-59E2-1123-6DDDFD906988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\GL\include\GL">
+      <UniqueIdentifier>{5E25DCDA-CA5C-2472-D366-88953F1D4B6B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\SDL2">
+      <UniqueIdentifier>{CB370DF4-B705-01FA-A099-71208C06DD5E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\SDL2\include">
+      <UniqueIdentifier>{3EFA8EC6-2AF4-B718-1361-4E29FFF91D85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\imgui">
+      <UniqueIdentifier>{B1435977-1DCF-C63B-26E0-493092EA223C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_1.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_2.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_3.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_4.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_assert.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_atomic.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_audio.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_bits.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_blendmode.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_clipboard.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_config.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_cpuinfo.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_egl.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_endian.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_error.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_events.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_filesystem.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_gamecontroller.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_gesture.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_haptic.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_hints.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_joystick.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_keyboard.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_keycode.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_loadso.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_log.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_main.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_messagebox.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_mouse.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_mutex.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_name.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengl.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengl_glext.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_gl2.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_gl2ext.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_gl2platform.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_khrplatform.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_pixels.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_platform.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_power.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_quit.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_rect.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_render.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_revision.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_rwops.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_scancode.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_shape.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_stdinc.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_surface.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_system.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_syswm.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_assert.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_common.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_compare.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_crc32.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_font.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_fuzzer.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_harness.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_images.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_log.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_md5.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_random.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_thread.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_timer.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_touch.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_types.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_version.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_video.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\begin_code.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\close_code.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\imconfig.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\imgui.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\imgui_internal.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\pk_imgui_warnings.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_rect_pack.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_textedit.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_truetype.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.h">
+      <Filter>_Common\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_05_Stats\Stats.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\GPUContext.cpp">
+      <Filter>_Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.cpp">
+      <Filter>_Common\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_05_Stats\Main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_05_Stats\Stats.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

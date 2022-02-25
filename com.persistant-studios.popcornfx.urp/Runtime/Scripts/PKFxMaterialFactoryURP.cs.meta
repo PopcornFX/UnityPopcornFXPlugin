@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: adc625b8137030244a0d6ee78e36ea80
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - DistortionShader: {fileID: 4800000, guid: d148465e45222432f85a1d3e92677308, type: 3}
+  - BlurShader: {fileID: 4800000, guid: 0dc1a323808c03945a1db3a1cfacef2a, type: 3}
+  - m_VertexBillboardingFallback: {fileID: 11400000, guid: aca9aef425f77a0449dfb339cfa7a245,
+      type: 2}
+  - m_CPUBillboardingFallback: {fileID: 11400000, guid: 0424bb726ab77574d9b199426f7abb38,
+      type: 2}
+  - m_TransparentMeshFallback: {fileID: 11400000, guid: 4376f5d22082bc943a29f6b66c76a25a,
+      type: 2}
+  - m_OpaqueMeshFallback: {fileID: 11400000, guid: c506fc2477e1e9d4987c2d86e10c0606,
+      type: 2}
+  - m_VertexBillboardingOpaque: {fileID: 11400000, guid: 78047b4352375684a9d26590a82cf9db,
+      type: 2}
+  - m_CPUBillboardingOpaque: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
+      type: 2}
+  - m_OpaqueLitMeshFallback: {fileID: 11400000, guid: ae062c3deb9ca0e48a9c4867fc8da578,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

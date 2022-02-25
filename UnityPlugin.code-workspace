@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "com.persistant-studios.popcornfx"
+		},
+		{
+			"path": "com.persistant-studios.popcornfx.hdrp"
+		},
+		{
+			"path": "com.persistant-studios.popcornfx.urp"
+		},
+		{
+			"path": "Native"
+		}
+	],
+	"settings": {
+		"search.showLineNumbers": true,
+		"search.useGlobalIgnoreFiles": true,
+		"files.exclude": {
+			"**/*.meta": true
+		}
+	}
+}

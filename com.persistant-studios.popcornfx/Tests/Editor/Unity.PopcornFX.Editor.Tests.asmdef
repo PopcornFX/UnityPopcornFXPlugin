@@ -1,0 +1,14 @@
+{
+  "name": "Unity.PopcornFX.Editor.Tests",
+  "references": [
+    "Unity.PopcornFX.Editor",
+    "Unity.PopcornFX.Runtime"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": []
+}

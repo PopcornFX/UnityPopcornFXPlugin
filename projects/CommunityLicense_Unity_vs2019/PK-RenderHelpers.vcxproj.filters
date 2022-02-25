@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\basic_renderer_properties">
+      <UniqueIdentifier>{94D8D18B-0047-270B-4930-E20AB5DD1CA7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\batches">
+      <UniqueIdentifier>{CAAF6598-363B-D35C-3F4C-5651AB562F5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\buffer_pool">
+      <UniqueIdentifier>{23EDF09C-8F4E-CEAA-18BC-145D841C056A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\draw_requests">
+      <UniqueIdentifier>{39095868-A575-1363-6E69-ABC0DA9435CB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\frame_collector">
+      <UniqueIdentifier>{A1C2F4A7-0DFA-3C3F-1604-A16282BA6338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\resource_manager">
+      <UniqueIdentifier>{9294F164-7EB9-40E5-A704-267593883F03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{99BE8D1E-0574-0614-8E68-00EBFA1CFD17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\basic_renderer_properties">
+      <UniqueIdentifier>{5C828A56-C8F0-DFD5-11DA-9AD57D87D571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\batches">
+      <UniqueIdentifier>{92B7728E-FE42-E052-0754-6347735E3C53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\buffer_pool">
+      <UniqueIdentifier>{EB984C5E-57FA-296C-E067-701E4CC8602B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\draw_requests">
+      <UniqueIdentifier>{01C74DEF-6D33-09EA-3627-A147A2522B52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\frame_collector">
+      <UniqueIdentifier>{691251C3-D549-995A-DE53-FD7D4A0AC053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\include">
+      <UniqueIdentifier>{FCF66EC6-6882-DC8A-7193-5F7FDD9D388B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_basic_renderer_properties.h">
+      <Filter>Headers\basic_renderer_properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_vertex_animation_renderer_properties.h">
+      <Filter>Headers\basic_renderer_properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.inl">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_ribbon_batch_helper.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_decal_batch.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_decal_batch.inl">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_light_batch.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_light_batch.inl">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_mesh_batch.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_mesh_batch.inl">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_particle_batch_policy_data.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_ribbon_batch.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_ribbon_batch.inl">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_sound_batch.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_sound_batch.inl">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.h">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.inl">
+      <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.h">
+      <Filter>Headers\buffer_pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.inl">
+      <Filter>Headers\buffer_pool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard_cpu.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard_cpu_tasks.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard_light.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_common.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_copystream_cpu.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_copystream_cpu_tasks.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_decal.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_decal_cpu.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_decal_cpu_tasks.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_draw_requests.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_job_pools.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_light.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_mesh.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_mesh_cpu.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_mesh_cpu_tasks.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_ribbon.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_ribbon_cpu.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_ribbon_cpu_tasks.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_sound.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_tasks.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu_tasks.h">
+      <Filter>Headers\draw_requests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.inl">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.inl">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.inl">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_data.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_particle_render_data_factory.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.h">
+      <Filter>Headers\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.inl">
+      <Filter>Headers\resource_manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\rh_init.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\include\pv_renderhelpers.h">
+      <Filter>Sources\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_basic_renderer_properties.cpp">
+      <Filter>Sources\basic_renderer_properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_vertex_animation_renderer_properties.cpp">
+      <Filter>Sources\basic_renderer_properties</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batches\rh_billboard_ribbon_batch_helper.cpp">
+      <Filter>Sources\batches</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\buffer_pool\rh_bufferpool.cpp">
+      <Filter>Sources\buffer_pool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard_cpu.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard_cpu_tasks.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_common.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_copystream_cpu.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_copystream_cpu_tasks.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_decal.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_decal_cpu.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_decal_cpu_tasks.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_draw_requests.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_light.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_mesh.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_mesh_cpu.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_mesh_cpu_tasks.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_ribbon.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_ribbon_cpu.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_ribbon_cpu_tasks.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_sound.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle_cpu.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle_cpu_tasks.cpp">
+      <Filter>Sources\draw_requests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_particle_render_data_factory.cpp">
+      <Filter>Sources\frame_collector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_renderers_walker.cpp">
+      <Filter>Sources\frame_collector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_init.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

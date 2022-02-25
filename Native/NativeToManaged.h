@@ -1,0 +1,226 @@
+//----------------------------------------------------------------------------
+// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+//----------------------------------------------------------------------------
+
+#pragma once
+
+#include "PKUnity_InterfaceCommon.h"
+
+#include <pk_particles/include/ps_scene.h>
+
+extern "C"
+{
+	//----------------------------------------------------------------------------
+	// Data structures:
+	//----------------------------------------------------------------------------
+
+	// Ray-cast pack:
+	struct	SRaycastPack
+	{
+		const CFloat4	*m_RayOrigins;
+		const CFloat4	*m_RayDirections;
+		CFloat4			*m_OutNormals;
+		CFloat4			*m_OutPositions;
+		float			*m_OutDistances;
+		int				m_FilterLayer;
+		int				m_RayCount;
+	};
+
+	struct SRenderingFeatureLitDesc
+	{
+		const char				*m_NormalMap;
+		const char				*m_RoughMetalMap;
+
+		ManagedBool				m_CastShadows;
+
+		float					m_NormalBendingFactor;
+		float					m_Roughness;
+		float					m_Metalness;
+
+		SRenderingFeatureLitDesc()
+			: m_NormalMap(null)
+			, m_RoughMetalMap(null)
+			, m_CastShadows(ManagedBool_False)
+			, m_NormalBendingFactor(0.5f)
+			, m_Roughness(1)
+			, m_Metalness(0)
+		{
+
+		}
+	};
+
+	// Create Renderers:
+	// Billboards and ribbons:
+	struct SPopcornRendererDesc
+	{
+		int							m_ShaderVariationFlags;
+		int							m_BlendMode;
+		ManagedBool					m_RotateUvs;
+
+		const char					*m_DiffuseMap;
+		const char					*m_AlphaRemap;
+		const char					*m_DiffuseRampMap;
+		float						m_InvSoftnessDistance;
+
+		int							m_BillboardMode;
+		int							m_DrawOrder;
+
+		SRenderingFeatureLitDesc	*m_LitRendering;
+
+		SPopcornRendererDesc()
+			: m_ShaderVariationFlags(0)
+			, m_BlendMode(0)
+			, m_RotateUvs(ManagedBool_False)
+			, m_DiffuseMap(null)
+			, m_AlphaRemap(null)
+			, m_InvSoftnessDistance(0)
+			, m_BillboardMode(0)
+			, m_DrawOrder(0)
+			, m_LitRendering(null)
+		{
+		}
+	};
+
+	// Meshes:
+	struct SMeshRendererDesc
+	{
+		// Common info for the renderers:
+		const char					*m_MeshAsset;
+		int							m_ShaderVariationFlags;
+		int							m_BlendMode;
+		// ------------------------------
+		ManagedBool					m_HasMeshAtlas;
+
+		const char					*m_DiffuseMap;
+
+		SRenderingFeatureLitDesc	*m_LitRendering;
+
+		SMeshRendererDesc()
+			: m_MeshAsset(null)
+			, m_ShaderVariationFlags(0)
+			, m_BlendMode(0)
+			, m_HasMeshAtlas(ManagedBool_False)
+			, m_DiffuseMap(null)
+			, m_LitRendering(null)
+		{
+		}
+
+		~SMeshRendererDesc()
+		{
+			PK_SAFE_DELETE(m_LitRendering);
+			m_LitRendering = null;
+		}
+	};
+
+	// Bounds
+	struct	SUpdateRendererBounds
+	{
+		CFloat3			m_Min;
+		CFloat3			m_Max;
+	};
+
+	// Effect info:
+	struct	SRetrieveRendererInfo
+	{
+		ManagedBool	*m_IsIndex32;
+
+		int			*m_VertexBufferSize;
+		int			*m_IndexBufferSize;
+		int			*m_InfoBSize;
+		int			*m_AtlasesBSize;
+		int			*m_IndirectArgsParticleCountMultiplier;
+
+		void		**m_VBHandler;
+		void		**m_IBHandler;
+		void		**m_InfoBHandler;
+		void		**m_AtlasesBHandler;
+		void		**m_IndirectArgsBHandler;
+		ManagedBool	*m_UseComputeBuffers;
+
+		ManagedBool	*m_HasCustomMaterial;
+		int			*m_CustomMatID;
+	};
+
+	//----------------------------------------------------------------------------
+	// Callbacks:
+	//----------------------------------------------------------------------------
+
+#if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
+#	pragma GCC visibility push(default)
+#endif
+
+	// Fake file system manager:
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResourceLoad(void *delegatePtr);
+	unsigned long long							OnResourceLoad(const char *path, void **handler);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResourceWrite(void *delegatePtr);
+	unsigned long long							OnResourceWrite(const char *path, const void *data, u64 offset, u64 size);
+
+	// Particles to Unity interactions:
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastPack(void *delegatePtr);
+	void										OnRaycastPack(const SRaycastPack *raycastPack);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnFxStopped(void *delegatePtr);
+	void										OnFxStopped(int guid);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaiseEvent(void *delegatePtr);
+	void										OnRaiseEvent(unsigned int guid, unsigned int key, const char* eventName, unsigned int payloadCount, void *payloadDescs, void *payloadValues);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnAudioWaveformData(void *delegatePtr);
+	void										*OnGetAudioWaveformData(const char *name, int *nbSamples);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnAudioSpectrumData(void *delegatePtr);
+	void										*OnGetAudioSpectrumData(const char *name, int *nbSamples);
+
+	// Rendering interactions:
+	// Create renderers:
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewBillboardRenderer(void *delegatePtr);
+	int											OnSetupNewBillboardRenderer(const SPopcornRendererDesc *rendererDesc, int idx);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewRibbonRenderer(void *delegatePtr);
+	int											OnSetupNewRibbonRenderer(const SPopcornRendererDesc *rendererDesc, int idx);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewMeshRenderer(void *delegatePtr);
+	int											OnSetupNewMeshRenderer(const SMeshRendererDesc *rendererDesc, int idx);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewTriangleRenderer(void *delegatePtr);
+	int											OnSetupNewTriangleRenderer(const SPopcornRendererDesc *rendererDesc, int idx);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResizeRenderer(void *delegatePtr);
+	ManagedBool									OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetParticleCount(void *delegatePtr);
+	void										OnSetParticleCount(int rendererGUID, int particleCount);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetRendererActive(void *delegatePtr);
+	void										OnSetRendererActive(int rendererGUID, ManagedBool active);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetMeshInstancesCount(void *delegatePtr);
+	void										OnSetMeshInstancesCount(int rendererGUID, int submesh, int instancesCount);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetMeshInstancesBuffer(void *delegatePtr);
+	void										OnSetMeshInstancesBuffer(int rendererGUID, int submesh, void *instanceBuffer);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr);
+	void										OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveRendererBufferInfo(void *delegatePtr);
+	void										OnRetrieveRendererBufferInfo(int rendererGUID, const SRetrieveRendererInfo *info);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnUpdateRendererBounds(void *delegatePtr);
+	void										OnUpdateRendererBounds(int rendererGUID, const SUpdateRendererBounds *bounds);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshCount(void *delegatePtr);
+	int											OnGetMeshCount(int rendererGUID);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshBounds(void *delegatePtr);
+	void										OnGetMeshBounds(int rendererGUID, int submesh, void* bbox);
+
+#if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
+#	pragma GCC visibility pop
+#endif
+
+	void										ClearNativeToManagedCallbacks();
+}
+
+//----------------------------------------------------------------------------

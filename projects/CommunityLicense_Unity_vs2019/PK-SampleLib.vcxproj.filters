@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ApiContext">
+      <UniqueIdentifier>{6F8275F3-5B66-3649-C4C6-309CB0C920CB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ApiContext\D3D">
+      <UniqueIdentifier>{D90F5ADE-C509-8330-AE76-19419A0FE99C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ApiContext\Metal">
+      <UniqueIdentifier>{B18ADCDD-9DAF-2B5E-C6FA-10EEB27E2A7C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ApiContext\OpenGL">
+      <UniqueIdentifier>{C338D79E-2FFB-0A29-78AB-99B5E4ACE306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ApiContext\Vulkan">
+      <UniqueIdentifier>{0F9D89AF-7B5F-BD39-C40F-4CC630119617}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\PopcornStartup">
+      <UniqueIdentifier>{E43B44DE-D035-6D30-B9A2-0341A53BD39C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\RenderIntegrationNull">
+      <UniqueIdentifier>{2F30E794-9B48-CEBE-64F5-5D58D0CC6258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\RenderIntegrationRHI">
+      <UniqueIdentifier>{77CE0E33-6389-FEDE-0C41-7729F8DA486F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\RenderPasses">
+      <UniqueIdentifier>{7F7F5EE9-6B0E-E8B2-142D-FCAD009BF858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\SampleScene">
+      <UniqueIdentifier>{00874CE1-6CE8-29EF-F555-70A161B660AE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\SampleScene\Entities">
+      <UniqueIdentifier>{B47FB5E3-A03A-A58F-49F2-1DDA358CEF1F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ShaderDefinitions">
+      <UniqueIdentifier>{E3A03299-4F63-6623-9813-F5AF04153F01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ShaderGenerator">
+      <UniqueIdentifier>{0EB0BB5F-7AE7-03F7-83F1-671AEFA72AF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\WindowContext">
+      <UniqueIdentifier>{CDDC95C7-3949-51C2-023D-E91F6E68732A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\WindowContext\OffscreenContext">
+      <UniqueIdentifier>{DC5DCDD0-C8AF-A4C0-B1CE-E1D09DBFBDA9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\WindowContext\SdlContext">
+      <UniqueIdentifier>{E4CFDC3F-D020-C881-F984-B643E5345BEB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{99BE8D1E-0574-0614-8E68-00EBFA1CFD17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{EFAC8DF2-5B8C-0C8E-64A4-9764D00273EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Generated">
+      <UniqueIdentifier>{4D14F45B-B92A-F2F1-02A2-7D136EF7C279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ApiContext">
+      <UniqueIdentifier>{37D5A64E-23B9-67A4-8C19-62F7781C5226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ApiContext\D3D">
+      <UniqueIdentifier>{A1860744-8D80-3096-76ED-C6A662869602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ApiContext\OpenGL">
+      <UniqueIdentifier>{8B9A8602-F75C-BA8C-400D-4919AC0E936A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ApiContext\Vulkan">
+      <UniqueIdentifier>{D7FE3813-43C1-6C9D-8C71-FB29F872457B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\PopcornStartup">
+      <UniqueIdentifier>{ACB2F143-98AC-1A96-8119-B1A66DB28002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderIntegrationNull">
+      <UniqueIdentifier>{F7358221-634E-694B-2CFB-F8E498D2FDE4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderIntegrationRHI">
+      <UniqueIdentifier>{3F3BFCE1-2BF6-EB8D-D4AD-64D8C047361E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderPasses">
+      <UniqueIdentifier>{47A42FD6-3333-B99F-DC51-CD9AC8BFC945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\SampleScene">
+      <UniqueIdentifier>{C832A8A2-3494-85B0-BD01-CC622962BC6F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\SampleScene\Entities">
+      <UniqueIdentifier>{7CECA292-68A7-923E-115F-0B89FDF8DCCE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ShaderDefinitions">
+      <UniqueIdentifier>{AB02E2FC-17C5-1587-6075-A413CC76EE64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ShaderGenerator">
+      <UniqueIdentifier>{D6FF177B-4237-6012-4B41-C435B7F7860B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\WindowContext">
+      <UniqueIdentifier>{959A8B4E-0107-4749-CAFA-DEA6362669B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\WindowContext\OffscreenContext">
+      <UniqueIdentifier>{A464DF18-90B6-B608-79D5-F31865C6CFF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\WindowContext\SdlContext">
+      <UniqueIdentifier>{AC60C34D-98B1-AE8F-C115-9D51ADC541F9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External">
+      <UniqueIdentifier>{07CD4F05-7337-047C-BC75-B521281FE2D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX">
+      <UniqueIdentifier>{B2545DA7-9EB7-EC4B-473D-2502337FB8CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX\include">
+      <UniqueIdentifier>{250E8582-119D-0E4C-BABB-2247A6291FF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\GL">
+      <UniqueIdentifier>{09555DA7-F5B7-EC4B-9E3D-25028A7FB8CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\GL\include">
+      <UniqueIdentifier>{7C75CF18-6804-59E2-1123-6DDDFD906988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\GL\include\GL">
+      <UniqueIdentifier>{5E25DCDA-CA5C-2472-D366-88953F1D4B6B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\SDL2">
+      <UniqueIdentifier>{CB370DF4-B705-01FA-A099-71208C06DD5E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\SDL2\include">
+      <UniqueIdentifier>{3EFA8EC6-2AF4-B718-1361-4E29FFF91D85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\fmodex-4.44.19">
+      <UniqueIdentifier>{683B1E79-5460-6DF9-7DAB-5289692F6C17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\fmodex-4.44.19\inc">
+      <UniqueIdentifier>{7142390B-5DFD-28B7-06B5-A101F24E7347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\imgui">
+      <UniqueIdentifier>{B1435977-1DCF-C63B-26E0-493092EA223C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_1.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_2.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_3.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_4.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h">
+      <Filter>_External\GL\include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_assert.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_atomic.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_audio.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_bits.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_blendmode.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_clipboard.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_config.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_cpuinfo.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_egl.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_endian.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_error.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_events.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_filesystem.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_gamecontroller.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_gesture.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_haptic.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_hints.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_joystick.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_keyboard.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_keycode.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_loadso.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_log.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_main.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_messagebox.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_mouse.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_mutex.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_name.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengl.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengl_glext.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_gl2.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_gl2ext.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_gl2platform.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_opengles2_khrplatform.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_pixels.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_platform.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_power.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_quit.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_rect.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_render.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_revision.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_rwops.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_scancode.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_shape.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_stdinc.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_surface.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_system.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_syswm.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_assert.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_common.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_compare.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_crc32.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_font.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_fuzzer.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_harness.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_images.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_log.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_md5.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_test_random.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_thread.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_timer.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_touch.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_types.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_version.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_video.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\begin_code.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\close_code.h">
+      <Filter>_External\SDL2\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\fmodex-4.44.19\inc\fmod.h">
+      <Filter>_External\fmodex-4.44.19\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\fmodex-4.44.19\inc\fmod.hpp">
+      <Filter>_External\fmodex-4.44.19\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\fmodex-4.44.19\inc\fmod_codec.h">
+      <Filter>_External\fmodex-4.44.19\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\fmodex-4.44.19\inc\fmod_dsp.h">
+      <Filter>_External\fmodex-4.44.19\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\fmodex-4.44.19\inc\fmod_errors.h">
+      <Filter>_External\fmodex-4.44.19\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\fmodex-4.44.19\inc\fmod_memoryinfo.h">
+      <Filter>_External\fmodex-4.44.19\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\fmodex-4.44.19\inc\fmod_output.h">
+      <Filter>_External\fmodex-4.44.19\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\imconfig.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\imgui.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\imgui_internal.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\pk_imgui_warnings.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_rect_pack.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_textedit.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_truetype.h">
+      <Filter>_External\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\D3D\D3D11Context.h">
+      <Filter>Headers\ApiContext\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\D3D\D3D12Context.h">
+      <Filter>Headers\ApiContext\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\IApiContext.h">
+      <Filter>Headers\ApiContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\Metal\MetalContext.h">
+      <Filter>Headers\ApiContext\Metal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\Metal\MetalContextFactory.h">
+      <Filter>Headers\ApiContext\Metal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\Metal\MetalFinalBlitShader.h">
+      <Filter>Headers\ApiContext\Metal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\EGLContext.h">
+      <Filter>Headers\ApiContext\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\GLContext.h">
+      <Filter>Headers\ApiContext\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\GLXContext.h">
+      <Filter>Headers\ApiContext\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\NSGLContext.h">
+      <Filter>Headers\ApiContext\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\WGLContext.h">
+      <Filter>Headers\ApiContext\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\Vulkan\VulkanContext.h">
+      <Filter>Headers\ApiContext\Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContextConfig.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Billboard.geom.h">
+      <Filter>Shaders\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Billboard.vert.h">
+      <Filter>Shaders\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Ribbon.vert.h">
+      <Filter>Shaders\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Triangle.vert.h">
+      <Filter>Shaders\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\BRDFLUT.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\BlueNoise.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Camera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\DebugHelper.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Gizmo.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSample.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSampleInit.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PipelineCacheHelper.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PopcornStartup\PopcornStartup.h">
+      <Filter>Headers\PopcornStartup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ProfilerRenderer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RHIRenderParticleSceneHelpers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullBillboardingBatchPolicy.h">
+      <Filter>Headers\RenderIntegrationNull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullFrameCollectorTypes.h">
+      <Filter>Headers\RenderIntegrationNull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRenderDataFactory.h">
+      <Filter>Headers\RenderIntegrationNull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRendererCache.h">
+      <Filter>Headers\RenderIntegrationNull</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy_Vertex.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHICustomTasks.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGPUSorter.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGraphicResources.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIParticleRenderDataFactory.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIRenderIntegrationConfig.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHITypePolicy.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.h">
+      <Filter>Headers\RenderIntegrationRHI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxDistortion.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxFXAA.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxToneMapping.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\AbstractGraphicScene.h">
+      <Filter>Headers\SampleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\DeferredScene.h">
+      <Filter>Headers\SampleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\EnvironmentMapEntity.h">
+      <Filter>Headers\SampleScene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\LightEntity.h">
+      <Filter>Headers\SampleScene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\MeshEntity.h">
+      <Filter>Headers\SampleScene\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleUtils.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\BasicSceneShaderDefinitions.h">
+      <Filter>Headers\ShaderDefinitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\PopEdShaderDefinitions.h">
+      <Filter>Headers\ShaderDefinitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\SampleLibShaderDefinitions.h">
+      <Filter>Headers\ShaderDefinitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\ShaderDefinitions.h">
+      <Filter>Headers\ShaderDefinitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\UnitTestsShaderDefinitions.h">
+      <Filter>Headers\ShaderDefinitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\GLSLShaderGenerator.h">
+      <Filter>Headers\ShaderGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\HLSLShaderGenerator.h">
+      <Filter>Headers\ShaderGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\MetalShaderGenerator.h">
+      <Filter>Headers\ShaderGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\ParticleShaderGenerator.h">
+      <Filter>Headers\ShaderGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\ShaderGenerator.h">
+      <Filter>Headers\ShaderGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\VulkanShaderGenerator.h">
+      <Filter>Headers\ShaderGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h">
+      <Filter>Headers\WindowContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.h">
+      <Filter>Headers\WindowContext\OffscreenContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.h">
+      <Filter>Headers\WindowContext\SdlContext</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\SDK\Samples\External\imgui\imgui.cpp">
+      <Filter>_External\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\External\imgui\imgui_demo.cpp">
+      <Filter>_External\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\External\imgui\imgui_draw.cpp">
+      <Filter>_External\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\D3D\D3D11Context.cpp">
+      <Filter>Sources\ApiContext\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\D3D\D3D12Context.cpp">
+      <Filter>Sources\ApiContext\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\EGLContext.cpp">
+      <Filter>Sources\ApiContext\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\GLContext.cpp">
+      <Filter>Sources\ApiContext\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\GLXContext.cpp">
+      <Filter>Sources\ApiContext\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\OpenGL\WGLContext.cpp">
+      <Filter>Sources\ApiContext\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContext\Vulkan\VulkanContext.cpp">
+      <Filter>Sources\ApiContext\Vulkan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\BRDFLUT.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\BlueNoise.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Camera.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\DebugHelper.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Gizmo.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSampleInit.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PipelineCacheHelper.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PopcornStartup\PopcornStartup.cpp">
+      <Filter>Sources\PopcornStartup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ProfilerRenderer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RHIRenderParticleSceneHelpers.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullBillboardingBatchPolicy.cpp">
+      <Filter>Sources\RenderIntegrationNull</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRenderDataFactory.cpp">
+      <Filter>Sources\RenderIntegrationNull</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRendererCache.cpp">
+      <Filter>Sources\RenderIntegrationNull</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy_Vertex.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHICustomTasks.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGPUSorter.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGraphicResources.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIParticleRenderDataFactory.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.cpp">
+      <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.cpp">
+      <Filter>Sources\RenderPasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.cpp">
+      <Filter>Sources\RenderPasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.cpp">
+      <Filter>Sources\RenderPasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxDistortion.cpp">
+      <Filter>Sources\RenderPasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxFXAA.cpp">
+      <Filter>Sources\RenderPasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxToneMapping.cpp">
+      <Filter>Sources\RenderPasses</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\AbstractGraphicScene.cpp">
+      <Filter>Sources\SampleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\DeferredScene.cpp">
+      <Filter>Sources\SampleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\EnvironmentMapEntity.cpp">
+      <Filter>Sources\SampleScene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\LightEntity.cpp">
+      <Filter>Sources\SampleScene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\MeshEntity.cpp">
+      <Filter>Sources\SampleScene\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleUtils.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\BasicSceneShaderDefinitions.cpp">
+      <Filter>Sources\ShaderDefinitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\PopEdShaderDefinitions.cpp">
+      <Filter>Sources\ShaderDefinitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\SampleLibShaderDefinitions.cpp">
+      <Filter>Sources\ShaderDefinitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\ShaderDefinitions.cpp">
+      <Filter>Sources\ShaderDefinitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\UnitTestsShaderDefinitions.cpp">
+      <Filter>Sources\ShaderDefinitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\GLSLShaderGenerator.cpp">
+      <Filter>Sources\ShaderGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\HLSLShaderGenerator.cpp">
+      <Filter>Sources\ShaderGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\MetalShaderGenerator.cpp">
+      <Filter>Sources\ShaderGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\ParticleShaderGenerator.cpp">
+      <Filter>Sources\ShaderGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\ShaderGenerator.cpp">
+      <Filter>Sources\ShaderGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\VulkanShaderGenerator.cpp">
+      <Filter>Sources\ShaderGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp">
+      <Filter>Sources\WindowContext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.cpp">
+      <Filter>Sources\WindowContext\OffscreenContext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.cpp">
+      <Filter>Sources\WindowContext\SdlContext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

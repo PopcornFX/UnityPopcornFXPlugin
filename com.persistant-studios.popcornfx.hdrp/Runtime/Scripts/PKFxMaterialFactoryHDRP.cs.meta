@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: e86258acff9b07e4082f2e3d0fa6a3a9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - DistortionShader: {fileID: 4800000, guid: d148465e45222432f85a1d3e92677308, type: 3}
+  - BlurShader: {fileID: 4800000, guid: 0dc1a323808c03945a1db3a1cfacef2a, type: 3}
+  - m_VertexBillboardingFallback: {fileID: 11400000, guid: 7f67f307367622b4a918f3b1d1fa2b7d,
+      type: 2}
+  - m_CPUBillboardingFallback: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+      type: 2}
+  - m_TransparentMeshFallback: {fileID: 11400000, guid: aa462fed5ee8b1648a851841552ca83c,
+      type: 2}
+  - m_OpaqueMeshFallback: {fileID: 11400000, guid: aa462fed5ee8b1648a851841552ca83c,
+      type: 2}
+  - m_VertexBillboardingOpaque: {fileID: 11400000, guid: f77bde1e293ddc04a84d99e7bc8455fb,
+      type: 2}
+  - m_CPUBillboardingOpaque: {fileID: 11400000, guid: 4a9fbef0372a2d14983d828dee9359ad,
+      type: 2}
+  - m_DoubleSidedDistortionMaterial: {fileID: 2100000, guid: 52caf2d5932f6bf48a6ba436be085d9e,
+      type: 2}
+  - m_ParticleProceduralShader_Distortion: {fileID: 4800000, guid: 818bd1a323845d9489219aa05225d7ac,
+      type: 3}
+  - m_UnlitOpaqueMeshFallback: {fileID: 11400000, guid: 4d0dead003f1e1d45a46cb10aa0b40bc,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

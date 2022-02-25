@@ -1,0 +1,1352 @@
+//----------------------------------------------------------------------------
+// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+//----------------------------------------------------------------------------
+
+#include "precompiled.h"
+#include "RuntimeManager.h"
+#include "UnityBillboardingBatchPolicy.h"
+#include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
+
+__PK_API_BEGIN
+//----------------------------------------------------------------------------
+
+CUnityBillboardingBatchPolicy::CUnityBillboardingBatchPolicy()
+:	m_RendererType(Renderer_Invalid)
+,	m_BBox(CAABB::DEGENERATED)
+,	m_GPUBillboarding(false)
+,	m_VertexCount(0)
+,	m_IndexCount(0)
+,	m_ParticleCount(0)
+,	m_PrevParticleCount(0)
+,	m_MeshIsValid(true)
+,	m_MappedVtxBuffer(null)
+,	m_MappedIdxBuffer(null)
+,	m_MappedInfoBillboardBuffer(null)
+,	m_MappedAtlasesBuffer(null)
+{
+}
+
+CUnityBillboardingBatchPolicy::~CUnityBillboardingBatchPolicy()
+{
+}
+
+bool CUnityBillboardingBatchPolicy::Init(UnityGfxRenderer deviceType)
+{
+	m_UnityMeshInfo.Init(deviceType);
+	return true;
+}
+
+//----------------------------------------------------------------------------
+// UPDATE THREAD:
+//----------------------------------------------------------------------------
+
+bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::SBillboard_DrawRequest *, const PRendererCacheBase &, SUnityRenderContext &)
+{
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::SRibbon_DrawRequest *, const PRendererCacheBase &, SUnityRenderContext &)
+{
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::SMesh_DrawRequest *, const PRendererCacheBase &, SUnityRenderContext &)
+{
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::SLight_DrawRequest *, const PRendererCacheBase &, SUnityRenderContext &)
+{
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::SSound_DrawRequest *, const PRendererCacheBase &, SUnityRenderContext &)
+{
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::STriangle_DrawRequest *, const PRendererCacheBase &, SUnityRenderContext &)
+{
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+void	CUnityBillboardingBatchPolicy::ClearBatch()
+{
+	m_ParticleCount = 0;
+	CustomStepFlagInactive();
+}
+
+void	CUnityBillboardingBatchPolicy::CustomStepFlagInactive()
+{
+	CRuntimeManager	&manager = CRuntimeManager::Instance();
+
+	if (m_ParticleCount == 0 && m_PrevParticleCount != 0)
+	{
+		manager.OnSetRendererActive(m_UnityMeshInfo.m_RendererGUID, ManagedBool_False);
+
+	}
+}
+
+bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const SBuffersToAlloc &allocBuffers, const TMemoryView<SSceneView> &views, ERendererClass rendererType)
+{
+	(void)views;
+	PK_ASSERT(!allocBuffers.m_DrawRequests.Empty());
+	PK_ASSERT(allocBuffers.m_DrawRequests.Count() == allocBuffers.m_RendererCaches.Count());
+	PK_ASSERT((allocBuffers.m_TotalVertexCount > 0 && allocBuffers.m_TotalIndexCount > 0) || allocBuffers.m_TotalParticleCount > 0);
+	PK_ASSERT(allocBuffers.m_DrawRequests.First() != null);
+	if (!PK_VERIFY(ctx.m_RenderApiData != null))
+	{
+		CLog::Log(PK_ERROR, "Unity render api data was not initialized: UnityPluginLoad was not called");
+		return false;
+	}
+
+	// The first time the batch is used, we store the material desc in the batch (all the material descs should be the same):
+	if (m_RendererType == Renderer_Invalid)
+	{
+		const CUnityRendererCache		*rendererCache = static_cast<const CUnityRendererCache *>(allocBuffers.m_RendererCaches.First().Get());
+
+		m_RendererType = rendererCache->m_RendererType;
+		m_MaterialDescBillboard = rendererCache->m_MaterialDescBillboard;
+		m_MaterialDescMesh = rendererCache->m_MaterialDescMesh;
+		m_UnityMeshInfo = rendererCache->m_UnityMeshInfo;
+	}
+
+	m_ParticleCount = allocBuffers.m_TotalParticleCount;
+
+	_UpdateThread_SetUnityMeshBounds(allocBuffers);
+
+	if (rendererType == Renderer_Billboard || rendererType == Renderer_Ribbon || rendererType == Renderer_Triangle)
+	{
+		m_VertexCount = allocBuffers.m_TotalVertexCount;
+		m_IndexCount = allocBuffers.m_TotalIndexCount;
+		_UpdateThread_ResizeUnityMesh(allocBuffers, ctx.m_RenderApiData);
+
+		if (!allocBuffers.m_DrawRequests.Empty())
+		{
+			const Drawers::SBase_DrawRequest	*dr = allocBuffers.m_DrawRequests.First();
+			if (PK_VERIFY(dr != null))
+			{
+				if (rendererType == Renderer_Billboard)
+				{
+					const Drawers::SBillboard_BillboardingRequest	*bbRequest = checked_cast<const Drawers::SBillboard_BillboardingRequest*>(&dr->BaseBillboardingRequest());
+					if (PK_VERIFY(bbRequest != null))
+						m_AtlasList = bbRequest->m_Atlas;
+				}
+				else if (rendererType == Renderer_Ribbon)
+				{
+					const Drawers::SRibbon_BillboardingRequest		*bbRequest = checked_cast<const Drawers::SRibbon_BillboardingRequest*>(&dr->BaseBillboardingRequest());
+					if (PK_VERIFY(bbRequest != null))
+						m_AtlasList = bbRequest->m_Atlas;
+				}
+			}
+		}
+	}
+	else if (rendererType == Renderer_Mesh)
+	{
+		_UpdateThread_ResizeUnityMeshInstanceCount(allocBuffers, ctx.m_RenderApiData);
+	}
+	return true;
+}
+
+//----------------------------------------------------------------------------
+// RENDER THREAD:
+//----------------------------------------------------------------------------
+
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap)
+{
+	(void)views;
+	if (!PK_VERIFY(ctx.m_RenderApiData != null))
+	{
+		CLog::Log(PK_ERROR, "Unity render api data was not initialized: UnityPluginLoad was not called");
+		return false;
+	}
+
+	if (!m_MeshIsValid)
+		return true;
+
+	// Here we map the Unity buffers:
+	const u32	vboFullSize = m_UnityMeshInfo.m_VBElemCount * m_UnityMeshInfo.m_VertexStride;
+	const u32	vboMapSize = m_VertexCount * m_UnityMeshInfo.m_VertexStride;
+
+	// Alloc the buffers:
+	if (!PK_VERIFY(_RenderThread_AllocBillboardingBuffers(toMap, ctx.m_RenderApiData)))
+		return false;
+	if (!PK_VERIFY(_RenderThread_AllocPerViewGeomBuffers(toMap, ctx.m_RenderApiData)))
+		return false;
+
+	// Setup the memory view in the jobs:
+	if (!PK_VERIFY(_RenderThread_SetupBuffersBillboards(toMap, batchJobs)))
+		return false;
+
+	// Map the final buffers:
+	m_MappedVtxBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_VBHandler, false, vboFullSize, vboMapSize);
+	if (!PK_VERIFY(m_MappedVtxBuffer != null))
+		return false;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SGPUBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap)
+{
+	(void)views;
+	if (!PK_VERIFY(ctx.m_RenderApiData != null))
+	{
+		CLog::Log(PK_ERROR, "Unity render api data was not initialized: UnityPluginLoad was not called");
+		return false;
+	}
+
+	if (!m_MeshIsValid)
+		return true;
+
+	m_GPUBillboarding = true;
+	// VMN: Not sure if we want to alloc all of them
+	if (!PK_VERIFY(_RenderThread_AllocPerViewGeomBuffers(toMap, ctx.m_RenderApiData)))
+		return false;
+	if (m_AtlasList != null)
+	{
+		//VMN: Should be done once.
+		m_MappedAtlasesBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_AtlasesHandler, false, m_UnityMeshInfo.m_AtlasesSize, m_UnityMeshInfo.m_AtlasesSize);
+		if (!PK_VERIFY(m_MappedAtlasesBuffer != null))
+			return false;
+
+		u32		*count = reinterpret_cast<u32*>(Mem::AdvanceRawPointer(m_MappedAtlasesBuffer, 0));
+		CFloat4	*data = reinterpret_cast<CFloat4*>(Mem::AdvanceRawPointer(m_MappedAtlasesBuffer, sizeof(CUint4))); // Alignement
+		*count = m_AtlasList->m_RectsFp32.Count();
+		PK_ASSERT(*count < 0x100);
+		PK_ASSERT(m_AtlasList->m_RectsFp32.Stride() == sizeof(CFloat4));
+		Mem::Copy(data, m_AtlasList->m_RectsFp32.RawDataPointer(), m_AtlasList->m_RectsFp32.CoveredBytes());
+
+		if (m_MappedAtlasesBuffer != null)
+			ctx.m_RenderApiData->EndModifyNativeBuffer(m_UnityMeshInfo.m_AtlasesHandler, false);
+
+		m_AtlasList = null;
+	}
+
+	// Here we map the Unity buffers:
+	const u32	vboFullSize = m_UnityMeshInfo.m_VBElemCount * m_UnityMeshInfo.m_VertexStride;
+	const u32	vboMapSize = m_VertexCount * m_UnityMeshInfo.m_VertexStride;
+	const u32	iboFullSize = m_UnityMeshInfo.m_IBElemCount * (m_UnityMeshInfo.m_LargeIndices == ManagedBool_True ? 4 : 2);
+	const u32	iboMapSize = m_IndexCount * (m_UnityMeshInfo.m_LargeIndices == ManagedBool_True ? 4 : 2);
+
+	// Map the final buffers:
+	m_MappedVtxBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_VBHandler, false, vboFullSize, vboMapSize);
+	if (!PK_VERIFY(m_MappedVtxBuffer != null))
+		return false;
+	m_MappedIdxBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_IBHandler, true, iboFullSize, iboMapSize);
+	if (!PK_VERIFY(m_MappedIdxBuffer != null))
+		return false;
+	m_MappedInfoBillboardBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_InfoHandler, false, m_UnityMeshInfo.m_InfoSize, m_UnityMeshInfo.m_InfoSize);
+	if (!PK_VERIFY(m_MappedInfoBillboardBuffer != null))
+		return false;
+
+	if (!_RenderThread_SetupBuffersGeomBillboards(toMap, batchJobs))
+		return false;
+
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SRibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap)
+{
+	(void)views;
+	if (!PK_VERIFY(ctx.m_RenderApiData != null))
+	{
+		CLog::Log(PK_ERROR, "Unity render api data was not initialized: UnityPluginLoad was not called");
+		return false;
+	}
+
+	if (!m_MeshIsValid)
+		return true;
+
+	// Here we map the Unity buffers:
+	const u32	vboFullSize = m_UnityMeshInfo.m_VBElemCount * m_UnityMeshInfo.m_VertexStride;
+	const u32	vboMapSize = m_VertexCount * m_UnityMeshInfo.m_VertexStride;
+
+	// Alloc the buffers:
+	if (!PK_VERIFY(_RenderThread_AllocBillboardingBuffers(toMap, ctx.m_RenderApiData)))
+		return false;
+	if (!PK_VERIFY(_RenderThread_AllocPerViewGeomBuffers(toMap, ctx.m_RenderApiData)))
+		return false;
+
+	// Setup the memory view in the jobs:
+	if (!PK_VERIFY(_RenderThread_SetupBuffersRibbons(toMap, batchJobs)))
+		return false;
+
+	// Map the final buffers:
+	m_MappedVtxBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_VBHandler, false, vboFullSize, vboMapSize);
+	if (!PK_VERIFY(m_MappedVtxBuffer != null))
+		return false;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext & ctx, const TMemoryView<SSceneView>& views, SGPURibbonBatchJobs * batchJobs, const SGeneratedInputs & toMap)
+{
+	(void)ctx;
+	(void)views;
+	(void)batchJobs;
+	(void)toMap;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SMeshBatchJobs *batchJobs, const SGeneratedInputs &toMap)
+{
+	(void)ctx; (void)views;
+	if (!m_MeshIsValid)
+		return true;
+	return _RenderThread_SetupBuffersMeshes(toMap, batchJobs);
+}
+
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext & ctx, const TMemoryView<SSceneView>& views, STriangleBatchJobs * batchJobs, const SGeneratedInputs & toMap)
+{
+	(void)views;
+	if (!PK_VERIFY(ctx.m_RenderApiData != null))
+	{
+		CLog::Log(PK_ERROR, "Unity render api data was not initialized: UnityPluginLoad was not called");
+		return false;
+	}
+
+	if (!m_MeshIsValid)
+		return true;
+
+	// Here we map the Unity buffers:
+	const u32	vboFullSize = m_UnityMeshInfo.m_VBElemCount * m_UnityMeshInfo.m_VertexStride;
+	const u32	vboMapSize = m_VertexCount * m_UnityMeshInfo.m_VertexStride;
+
+	// Alloc the buffers:
+	if (!PK_VERIFY(_RenderThread_AllocBillboardingBuffers(toMap, ctx.m_RenderApiData)))
+		return false;
+	if (!PK_VERIFY(_RenderThread_AllocPerViewGeomBuffers(toMap, ctx.m_RenderApiData)))
+		return false;
+
+	// Setup the memory view in the jobs:
+	if (!PK_VERIFY(_RenderThread_SetupBuffersTriangles(toMap, batchJobs)))
+		return false;
+
+	// Map the final buffers:
+	m_MappedVtxBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_VBHandler, false, vboFullSize, vboMapSize);
+	if (!PK_VERIFY(m_MappedVtxBuffer != null))
+		return false;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext & ctx, const TMemoryView<SSceneView>& views, SGPUTriangleBatchJobs * batchJobs, const SGeneratedInputs & toMap)
+{
+	(void)ctx; (void)views; (void)batchJobs; (void)toMap;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SBillboard_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch)
+{
+	(void)ctx; (void)drawRequests; (void)batch;
+	if (!m_MeshIsValid)
+		return true;
+	CBilboard_Exec_BillboardInfo::SBillboardInfo	*mappedInfo = static_cast<CBilboard_Exec_BillboardInfo::SBillboardInfo*>(m_MappedInfoBillboardBuffer);
+	m_Exec_BillboardInfo.Clear();
+	m_Exec_BillboardInfo.m_GeomDrawRequests = TMemoryView<CBilboard_Exec_BillboardInfo::SBillboardInfo>(mappedInfo, 256);
+	batch->AddExecDuringPages(&m_Exec_BillboardInfo);
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::STriangle_DrawRequest * const> &drawRequests, Drawers::CTriangle_CPU *batch)
+{
+	(void)drawRequests;
+	if (!m_MeshIsValid)
+		return true;
+	_PrepareCopySOA2AOS(ctx);
+	if (m_Exec_SAO2AOS.m_MappedVertexBuffer != null)
+		batch->AddExecAfterPage(&m_Exec_SAO2AOS);
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::STriangle_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch)
+{
+	(void)ctx; (void)drawRequests; (void)batch;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SBillboard_DrawRequest * const> &drawRequests, Drawers::CBillboard_CPU *batch)
+{
+	(void)drawRequests;
+	if (!m_MeshIsValid)
+		return true;
+	_PrepareCopySOA2AOS(ctx);
+	if (m_Exec_SAO2AOS.m_MappedVertexBuffer != null)
+		batch->AddExecLatePage(&m_Exec_SAO2AOS);
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SRibbon_DrawRequest * const> &drawRequests, Drawers::CRibbon_CPU *batch)
+{
+	(void)drawRequests;
+	if (!m_MeshIsValid)
+		return true;
+	_PrepareCopySOA2AOS(ctx);
+	if (m_Exec_SAO2AOS.m_MappedVertexBuffer != null)
+		batch->AddExecBatch(&m_Exec_SAO2AOS);
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SRibbon_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch)
+{
+	// Not implemented 
+	(void)ctx;
+	(void)drawRequests;
+	(void)batch;
+	return true;
+} 
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SMesh_DrawRequest * const> &drawRequests, Drawers::CMesh_CPU *batch)
+{
+	(void)ctx; (void)drawRequests; (void)batch;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SLight_DrawRequest * const> &drawRequests, Drawers::CBillboard_CPU *batch)
+{
+	(void)ctx; (void)drawRequests; (void)batch;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SSound_DrawRequest * const> &drawRequests, Drawers::CBillboard_CPU *batch)
+{
+	(void)ctx; (void)drawRequests; (void)batch;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::WaitForCustomTasks(SUnityRenderContext &ctx)
+{
+	(void)ctx;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::UnmapBuffers(SUnityRenderContext &ctx)
+{
+	if (!m_MeshIsValid)
+		return true;
+	if (m_RendererType == Renderer_Billboard || m_RendererType == Renderer_Ribbon || m_RendererType == Renderer_Triangle)
+	{
+		// Unmap the final buffers:
+		if (m_MappedVtxBuffer != null)
+			ctx.m_RenderApiData->EndModifyNativeBuffer(m_UnityMeshInfo.m_VBHandler, false);
+
+		if (!m_GPUBillboarding)
+		{
+			// Mem copy the indices:
+			const u32	iboFullSize = m_UnityMeshInfo.m_IBElemCount * (m_UnityMeshInfo.m_LargeIndices ? sizeof(u32) : sizeof(u16));
+			const u32	srcIdxSize = m_IndexCount * (m_UnityMeshInfo.m_LargeIndices ? sizeof(u32) : sizeof(u16));
+			void		*indices = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_IBHandler, true, iboFullSize, iboFullSize);
+
+			if (PK_VERIFY(indices != null))
+			{
+				Mem::Copy(indices, m_Exec_SAO2AOS.m_ParticleBuffers.m_Indices, srcIdxSize);
+				Mem::Clear(Mem::AdvanceRawPointer(indices, srcIdxSize), iboFullSize - srcIdxSize);
+			}
+			else
+				return false;
+		}
+		else
+		{
+			ctx.m_RenderApiData->EndModifyNativeBuffer(m_UnityMeshInfo.m_InfoHandler, false);
+			m_MappedInfoBillboardBuffer = null;
+		}
+		ctx.m_RenderApiData->EndModifyNativeBuffer(m_UnityMeshInfo.m_IBHandler, true);
+		m_MappedVtxBuffer = null;
+		m_MappedIdxBuffer = null;
+	}
+	return true;
+}
+
+void	CUnityBillboardingBatchPolicy::ClearBuffers(SUnityRenderContext &ctx)
+{
+	(void)ctx;
+	m_ParticleBuffers.m_AdditionalFieldsBuffers.Clear();
+	m_IndexCount = 0;
+	m_VertexCount = 0;
+	m_PrevParticleCount = m_ParticleCount;
+	m_ParticleCount = 0;
+}
+
+bool	CUnityBillboardingBatchPolicy::AreBillboardingBatchable(const PCRendererCacheBase &firstCache, const PCRendererCacheBase &secondCache) const
+{
+	const CUnityRendererCache	*firstMaterialDesc = static_cast<const CUnityRendererCache *>(firstCache.Get());
+	const CUnityRendererCache	*secondMaterialDesc = static_cast<const CUnityRendererCache *>(secondCache.Get());
+	return firstMaterialDesc == secondMaterialDesc || *firstMaterialDesc == *secondMaterialDesc;
+}
+
+bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const SDrawCallDesc &toEmit, SUnityDrawOutputs &output)
+{
+	(void)ctx; (void)toEmit; (void)output;
+	return true;
+}
+
+void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMesh(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData)
+{
+	(void)allocBuffers; (void)renderApiData;
+
+	m_MeshIsValid = true;
+
+	CRuntimeManager	&manager = CRuntimeManager::Instance();
+
+	// If the Unity mesh is too small, we resize it:
+	if ((u32)m_UnityMeshInfo.m_VBElemCount < m_VertexCount || (u32)m_UnityMeshInfo.m_IBElemCount < m_IndexCount)
+	{
+		SRetrieveRendererInfo	rendererInfo;
+
+		rendererInfo.m_VBHandler = &m_UnityMeshInfo.m_VBHandler.m_Buffer->m_DeviceLocal;
+		rendererInfo.m_IBHandler = &m_UnityMeshInfo.m_IBHandler.m_Buffer->m_DeviceLocal;
+		rendererInfo.m_VertexBufferSize = &m_UnityMeshInfo.m_VBElemCount;
+		rendererInfo.m_IndexBufferSize = &m_UnityMeshInfo.m_IBElemCount;
+		rendererInfo.m_IsIndex32 = &m_UnityMeshInfo.m_LargeIndices;
+
+		rendererInfo.m_InfoBSize = &m_UnityMeshInfo.m_InfoSize;
+		rendererInfo.m_InfoBHandler = &m_UnityMeshInfo.m_InfoHandler.m_Buffer->m_DeviceLocal;
+		rendererInfo.m_AtlasesBSize = &m_UnityMeshInfo.m_AtlasesSize;
+		rendererInfo.m_AtlasesBHandler = &m_UnityMeshInfo.m_AtlasesHandler.m_Buffer->m_DeviceLocal;
+
+		rendererInfo.m_IndirectArgsBHandler = &m_UnityMeshInfo.m_IndirectArgsHandler.m_Buffer->m_DeviceLocal;
+		rendererInfo.m_IndirectArgsParticleCountMultiplier = &m_UnityMeshInfo.m_IndirectArgsParticleCountMultiplier;
+
+		// Only checked at creation of renderer cache:
+		rendererInfo.m_UseComputeBuffers = null;
+		rendererInfo.m_HasCustomMaterial = null;
+		m_MeshIsValid = manager.OnResizeRenderer(m_UnityMeshInfo.m_RendererGUID, m_ParticleCount, m_VertexCount, m_IndexCount, &rendererInfo);
+	}
+	else if (m_GPUBillboarding)
+	{
+		if (CCurrentThread::IsMainThread())
+		{
+			::OnSetParticleCount(m_UnityMeshInfo.m_RendererGUID, m_ParticleCount);
+		}
+		else // is render thread
+		{
+			if (PK_VERIFY(m_UnityMeshInfo.m_IndirectArgsHandler.m_Buffer->m_DeviceLocal != null))
+			{
+				const u32	indirectArgsSize = 5 * sizeof(u32);
+				u32			*mappedArgs = static_cast<u32*>(renderApiData->BeginModifyNativeBuffer(m_UnityMeshInfo.m_IndirectArgsHandler, false, indirectArgsSize, indirectArgsSize));
+
+				mappedArgs[0] = m_ParticleCount * m_UnityMeshInfo.m_IndirectArgsParticleCountMultiplier;
+				mappedArgs[1] = 1;
+				mappedArgs[2] = 0;
+				mappedArgs[3] = 0;
+				mappedArgs[4] = 0;
+				renderApiData->EndModifyNativeBuffer(m_UnityMeshInfo.m_IndirectArgsHandler, false);
+			}
+		}
+	}
+	if (m_PrevParticleCount == 0 && m_ParticleCount != 0)
+	{
+		m_MeshIsValid = manager.OnSetRendererActive(m_UnityMeshInfo.m_RendererGUID, ManagedBool_True);
+	}
+}
+
+void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers)
+{
+	CAABB	bbox = CAABB::DEGENERATED;
+
+	for (u32 i = 0; i < allocBuffers.m_DrawRequests.Count(); ++i)
+	{
+		bbox.Add(allocBuffers.m_DrawRequests[i]->StreamToRender().BBox());
+	}
+
+	CRuntimeManager	&manager = CRuntimeManager::Instance();
+
+	if (bbox == CAABB::DEGENERATED)
+	{
+		SUpdateRendererBounds	bounds;
+
+		bounds.m_Min = CFloat3::ZERO;
+		bounds.m_Max = CFloat3::ZERO;
+		manager.OnUpdateRendererBounds(m_UnityMeshInfo.m_RendererGUID, &bounds);
+		m_BBox = CAABB::ZERO;
+	}
+	else if (m_BBox != bbox)
+	{
+		SUpdateRendererBounds	bounds;
+
+		bounds.m_Min = bbox.Min();
+		bounds.m_Max = bbox.Max();
+		manager.OnUpdateRendererBounds(m_UnityMeshInfo.m_RendererGUID, &bounds);
+		m_BBox = bbox;
+	}
+}
+
+void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData)
+{
+	(void)renderApiData;
+	PK_ASSERT((allocBuffers.m_ToGenerate.m_GeneratedInputs & Drawers::GenInput_Matrices) != 0);
+
+	int	rdrGUID = m_UnityMeshInfo.m_RendererGUID;
+
+	if (m_PerMeshBuffers.Count() < allocBuffers.m_PerMeshParticleCount.Count())
+		m_PerMeshBuffers.Resize(allocBuffers.m_PerMeshParticleCount.Count());
+	for (u32 subMesh = 0; subMesh < allocBuffers.m_PerMeshParticleCount.Count(); ++subMesh)
+	{
+		PK_ASSERT((subMesh < m_PerMeshBuffers.Count()));
+
+		SMeshParticleBuffers	&meshBuff = m_PerMeshBuffers[subMesh];
+		u32						particleCount = allocBuffers.m_PerMeshParticleCount[subMesh];
+
+		if (meshBuff.m_InstanceCount < particleCount)
+		{
+			u32			overEstimatedInstanceCount = Mem::Align(particleCount, 0x100);
+			u32			buffSize = overEstimatedInstanceCount * (sizeof(CFloat4x4) + sizeof(CFloat4));
+
+			meshBuff.m_InstanceCount = overEstimatedInstanceCount;
+			// Lets say that we only handle meshes transform and color (float4x4 and float4):
+			if (meshBuff.m_RawPerInstanceBuffer != null)
+				PK_FREE(meshBuff.m_RawPerInstanceBuffer);
+			meshBuff.m_RawPerInstanceBuffer = PK_MALLOC_ALIGNED(buffSize, 0x10);
+			if (!PK_VERIFY(meshBuff.m_RawPerInstanceBuffer != null))
+			{
+				CLog::Log(PK_ERROR, "Could not allocate the mesh instance buffer");
+				return;
+			}
+			if (rdrGUID >= 0)
+			{
+				if (m_MaterialDescMesh.m_HasMeshAtlas)
+				{
+					::OnSetMeshInstancesBuffer(rdrGUID, subMesh, meshBuff.m_RawPerInstanceBuffer);
+				}
+				else
+				{
+					::OnSetMeshInstancesBuffer(rdrGUID, -1, meshBuff.m_RawPerInstanceBuffer);
+				}
+			}
+		}
+		meshBuff.m_Transforms = TMemoryView<CFloat4x4>(static_cast<CFloat4x4*>(meshBuff.m_RawPerInstanceBuffer), particleCount);
+		void	*colorBuff = Mem::AdvanceRawPointer(meshBuff.m_RawPerInstanceBuffer, particleCount * sizeof(CFloat4x4));
+		meshBuff.m_Colors = TMemoryView<CFloat4>(static_cast<CFloat4*>(colorBuff), particleCount);
+
+		if (m_MaterialDescMesh.m_HasMeshAtlas)
+		{
+			::OnSetMeshInstancesCount(rdrGUID, subMesh, particleCount);
+		}
+		else
+		{
+			::OnSetMeshInstancesCount(rdrGUID, -1, particleCount);
+		}
+	}
+
+	if (m_PrevParticleCount == 0 && m_ParticleCount != 0)
+	{
+		CRuntimeManager	&manager = CRuntimeManager::Instance();
+		manager.OnSetRendererActive(m_UnityMeshInfo.m_RendererGUID, ManagedBool_True);
+	}
+}
+
+bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocPerViewGeomBuffers(const SGeneratedInputs &genInputs, IRenderAPIData *renderApiData)
+{
+	(void)renderApiData;
+	PK_SCOPEDPROFILE();
+	// -----------------------------------------
+	// View dependent inputs:
+	// -----------------------------------------
+	u32		viewIdx = 0;
+
+	if (!m_ParticleBuffers.m_PerViewGeom.Resize(genInputs.m_PerViewGeneratedInputs.Count()))
+		return false;
+	PK_FOREACH(perViewBuff, genInputs.m_PerViewGeneratedInputs)
+	{
+		SParticleBuffers::SPerView	 &curViewBuffs = m_ParticleBuffers.m_PerViewGeom[viewIdx];
+
+		curViewBuffs.m_Positions.ResizeIFN(Drawers::GenInput_Position, perViewBuff->m_GeneratedInputs, curViewBuffs.m_GeneratedInputs, m_VertexCount);
+		curViewBuffs.m_Normals.ResizeIFN(Drawers::GenInput_Normal, perViewBuff->m_GeneratedInputs, curViewBuffs.m_GeneratedInputs, m_VertexCount);
+		// TODO: implem tangents
+		curViewBuffs.m_UVFactors.ResizeIFN(Drawers::GenInput_UVFactors, perViewBuff->m_GeneratedInputs, curViewBuffs.m_GeneratedInputs, m_VertexCount);
+
+		curViewBuffs.m_GeneratedInputs = perViewBuff->m_GeneratedInputs;
+		++viewIdx;
+	}
+
+	const u32	indexStride = (m_UnityMeshInfo.m_LargeIndices == ManagedBool_True ? sizeof(u32) : sizeof(u16));
+
+	// -----------------------------------------
+	// View dependent indices:
+	// -----------------------------------------
+	if (m_IndexCount > m_ParticleBuffers.m_IndicesCount || m_ParticleBuffers.m_LargeIndices != m_UnityMeshInfo.m_LargeIndices)
+	{
+		u32		paddedIdxCount = Mem::Align<0x1000>(m_IndexCount);
+
+		viewIdx = 0;
+		if (!m_ParticleBuffers.m_PerViewGeom.Resize(genInputs.m_PerViewGeneratedInputs.Count()))
+			return false;
+		PK_FOREACH(perViewBuff, genInputs.m_PerViewGeneratedInputs)
+		{
+			PK_ASSERT((viewIdx < m_ParticleBuffers.m_PerViewGeom.Count()));
+			SParticleBuffers::SPerView	 &curViewBuffs = m_ParticleBuffers.m_PerViewGeom[viewIdx];
+
+			if ((perViewBuff->m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+			{
+				PK_FREE(curViewBuffs.m_Indices);
+				curViewBuffs.m_Indices = (CFloat4*)PK_MALLOC_ALIGNED(paddedIdxCount * indexStride, 0x10);
+			}
+			++viewIdx;
+		}
+		m_ParticleBuffers.m_IndicesCount = paddedIdxCount;
+		m_ParticleBuffers.m_LargeIndices = m_UnityMeshInfo.m_LargeIndices;
+	}
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const SGeneratedInputs &genInputs, IRenderAPIData *renderApiData)
+{
+	(void)renderApiData;
+	PK_SCOPEDPROFILE();
+
+	// -----------------------------------------
+	// VERTEX INPUTS:
+	// -----------------------------------------
+	{
+		// -----------------------------------------
+		// View independent inputs:
+		// -----------------------------------------
+		m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.ResizeIFN(Drawers::GenInput_Position, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+		m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.ResizeIFN(Drawers::GenInput_Normal, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+		// TODO: implem tangents
+		m_ParticleBuffers.m_ViewIndependantGeom.m_UVFactors.ResizeIFN(Drawers::GenInput_UVFactors, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+
+		m_ParticleBuffers.m_TexCoords0.ResizeIFN(Drawers::GenInput_UV0, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+		m_ParticleBuffers.m_TexCoords1.ResizeIFN(Drawers::GenInput_UV1, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+		m_ParticleBuffers.m_AtlasId.ResizeIFN(Drawers::GenInput_AtlasId, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+		m_ParticleBuffers.m_UVRemap.ResizeIFN(Drawers::GenInput_UVRemap, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+
+		if (_FindAdditionalInput(BasicRendererProperties::SID_Diffuse_Color(), BaseType_Float4, genInputs))
+		{
+			m_ParticleBuffers.m_Colors.ResizeIFN(m_VertexCount);
+		}
+		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_Cursor(), BaseType_Float, genInputs))
+		{
+			m_ParticleBuffers.m_AlphaCursor.ResizeIFN(m_VertexCount);
+		}
+
+		m_ParticleBuffers.m_GeneratedInputs = genInputs.m_GeneratedInputs;
+	}
+
+	// -----------------------------------------
+	// INDEX BUFFER:
+	// -----------------------------------------
+	const u32	indexStride = (m_UnityMeshInfo.m_LargeIndices == ManagedBool_True ? sizeof(u32) : sizeof(u16));
+
+	if (m_IndexCount > m_ParticleBuffers.m_IndicesCount || m_ParticleBuffers.m_LargeIndices != m_UnityMeshInfo.m_LargeIndices)
+	{
+		// Allocate more to avoid resizing to often:
+		u32		paddedIdxCount = Mem::Align<0x1000>(m_IndexCount);
+		// -----------------------------------------
+		// View independent indices:
+		// -----------------------------------------
+		if ((genInputs.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+		{
+			PK_FREE(m_ParticleBuffers.m_ViewIndependantGeom.m_Indices);
+			m_ParticleBuffers.m_ViewIndependantGeom.m_Indices = PK_MALLOC_ALIGNED(paddedIdxCount * indexStride, 0x10);
+		}
+	}
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const SGeneratedInputs &toMap, SBillboardBatchJobs *billboardBatch)
+{
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Indices != null))
+			return false;
+		billboardBatch->m_Exec_Indices.m_IndexStream.m_Indices = m_ParticleBuffers.m_ViewIndependantGeom.m_Indices;
+		billboardBatch->m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+		billboardBatch->m_Exec_Indices.m_IndexStream.m_Large = m_UnityMeshInfo.m_LargeIndices == ManagedBool_True;
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Position) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.m_Ptr != null))
+			return false;
+		billboardBatch->m_Exec_PNT.m_Positions = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.m_Ptr, m_VertexCount, 0x10);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Normal) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr != null))
+			return false;
+		billboardBatch->m_Exec_PNT.m_Normals = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr, m_VertexCount, 0x10);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
+	{
+		// Not implemented yet...
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UV0) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_TexCoords0.m_Ptr != null))
+			return false;
+		billboardBatch->m_Exec_Texcoords.m_Texcoords = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords0.m_Ptr, m_VertexCount);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UV1) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_TexCoords1.m_Ptr != null))
+			return false;
+		billboardBatch->m_Exec_Texcoords.m_Texcoords2 = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords1.m_Ptr, m_VertexCount);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_AtlasId) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_AtlasId.m_Ptr != null))
+			return false;
+		billboardBatch->m_Exec_Texcoords.m_AtlasIds = TMemoryView<float>(m_ParticleBuffers.m_AtlasId.m_Ptr, m_VertexCount);
+	}
+
+	// Map only the color and alpha cursor
+	// We only handle max 2 additional fields:
+	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2))
+		return false;
+	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
+	{
+		const SGeneratedInputs::SAdditionalInputInfo	&addInput = toMap.m_AdditionalGeneratedInputs[i];
+
+		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(CFloat4);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaCursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+	}
+
+	billboardBatch->m_Exec_CopyField.m_FieldsToCopy = m_ParticleBuffers.m_AdditionalFieldsBuffers;
+
+	// -----------------------------------------
+	// View dependent inputs:
+	// -----------------------------------------
+
+	for (u32 i = 0; i < billboardBatch->m_PerView.Count(); ++i)
+	{
+		PK_ASSERT((i < m_ParticleBuffers.m_PerViewGeom.Count()));
+
+		const SParticleBuffers::SPerView		&src = m_ParticleBuffers.m_PerViewGeom[i];
+		SBillboardBatchJobs::SPerView			&dst = billboardBatch->m_PerView[i];
+		SGeneratedInputs::SViewGeneratedInputs	curViewInputs = toMap.m_PerViewGeneratedInputs[i];
+
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+		{
+			if (!PK_VERIFY(src.m_Indices != null))
+				return false;
+			dst.m_Exec_Indices.m_IndexStream.m_Indices = src.m_Indices;
+			dst.m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+			dst.m_Exec_Indices.m_IndexStream.m_Large = m_UnityMeshInfo.m_LargeIndices == ManagedBool_True;
+		}
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Position) != 0)
+		{
+			if (!PK_VERIFY(src.m_Positions.m_Ptr != null))
+				return false;
+			dst.m_Exec_PNT.m_Positions = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)src.m_Positions.m_Ptr, m_VertexCount, 0x10);
+		}
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Normal) != 0)
+		{
+			if (!PK_VERIFY(src.m_Normals.m_Ptr != null))
+				return false;
+			dst.m_Exec_PNT.m_Normals = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)src.m_Normals.m_Ptr, m_VertexCount, 0x10);
+		}
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
+		{
+			// Not implemented yet...
+		}
+	}
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersGeomBillboards(const SGeneratedInputs &toMap, SGPUBillboardBatchJobs *billboardBatch)
+{
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+	{
+		if (!PK_VERIFY(m_MappedIdxBuffer != null))
+			return false;
+		billboardBatch->m_Exec_Indices.m_IndexStream.m_Indices = m_MappedIdxBuffer;
+		billboardBatch->m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+		PK_ASSERT(m_UnityMeshInfo.m_LargeIndices == ManagedBool_True);
+		billboardBatch->m_Exec_Indices.m_IndexStream.m_Large = (m_UnityMeshInfo.m_LargeIndices == ManagedBool_True);
+	}
+	u32		rawBufferOffset = 0;
+
+	if (!PK_VERIFY(m_MappedVtxBuffer != null))
+		return false;
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_ParticlePosition) != 0)
+	{
+		void	*rawptr = Mem::AdvanceRawPointer(m_MappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
+		billboardBatch->m_Exec_CopyBillboardingStreams.m_PositionsDrIds = TMemoryView<Drawers::SVertex_PositionDrId>(static_cast<Drawers::SVertex_PositionDrId*>(rawptr), m_VertexCount);
+		rawBufferOffset += sizeof(float) * 4;
+	}
+	if (toMap.m_GeneratedInputs & Drawers::GenInput_ParticleSize)
+	{
+		void	*rawptr = Mem::AdvanceRawPointer(m_MappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
+		billboardBatch->m_Exec_CopyBillboardingStreams.m_Sizes = TMemoryView<float>(static_cast<float*>(rawptr), m_VertexCount);
+		rawBufferOffset += sizeof(float);
+	}
+	if (toMap.m_GeneratedInputs & Drawers::GenInput_ParticleSize2)
+	{
+		void	*rawptr = Mem::AdvanceRawPointer(m_MappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
+		billboardBatch->m_Exec_CopyBillboardingStreams.m_Sizes2 = TMemoryView<CFloat2>(static_cast<CFloat2*>(rawptr), m_VertexCount);
+		rawBufferOffset += sizeof(float) * 2;
+	}
+	if (toMap.m_GeneratedInputs & Drawers::GenInput_ParticleRotation)
+	{
+		void	*rawptr = Mem::AdvanceRawPointer(m_MappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
+		billboardBatch->m_Exec_CopyBillboardingStreams.m_Rotations = TMemoryView<float>(static_cast<float*>(rawptr), m_VertexCount);
+		rawBufferOffset += sizeof(float);
+	}
+	if (toMap.m_GeneratedInputs & Drawers::GenInput_ParticleAxis0)
+	{
+		void	*rawptr = Mem::AdvanceRawPointer(m_MappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
+		billboardBatch->m_Exec_CopyBillboardingStreams.m_Axis0 = TMemoryView<CFloat3>(static_cast<CFloat3*>(rawptr), m_VertexCount);
+		rawBufferOffset += sizeof(float) * 3;
+	}
+	if (toMap.m_GeneratedInputs & Drawers::GenInput_ParticleAxis1)
+	{
+		void	*rawptr = Mem::AdvanceRawPointer(m_MappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
+		billboardBatch->m_Exec_CopyBillboardingStreams.m_Axis1 = TMemoryView<CFloat3>(static_cast<CFloat3*>(rawptr), m_VertexCount);
+		rawBufferOffset += sizeof(float) * 3;
+	}
+	// Additional inputs:
+	// Map only the color and alpha cursor
+	// We only handle max 2 additional fields:
+	// We Add a third input for Atlases
+	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2 + 1))
+		return false;
+	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
+	{
+		void											*rawptr = Mem::AdvanceRawPointer(m_MappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
+		const SGeneratedInputs::SAdditionalInputInfo	&addInput = toMap.m_AdditionalGeneratedInputs[i];
+
+		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)rawptr;
+			field.m_Storage.m_Stride = sizeof(CFloat4);
+			rawBufferOffset += sizeof(float) * 4;
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)rawptr;
+			field.m_Storage.m_Stride = sizeof(float);
+			rawBufferOffset += sizeof(float);
+		}
+
+		else if (addInput.m_Name == BasicRendererProperties::SID_Atlas_TextureID() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)rawptr;
+			field.m_Storage.m_Stride = sizeof(float);
+			rawBufferOffset += sizeof(float);
+		}
+	}
+	billboardBatch->m_Exec_CopyAdditionalFields.m_FieldsToCopy = m_ParticleBuffers.m_AdditionalFieldsBuffers;
+
+	// -----------------------------------------
+	// View dependent inputs:
+	// -----------------------------------------
+	PK_TODO("Unsure about if perview billboarding is setup in this factory");
+	PK_ASSERT(billboardBatch->m_PerView.Count() <= 1);
+	for (u32 i = 0; i < billboardBatch->m_PerView.Count(); ++i)
+	{
+		const u32	viewGeneratedInputs = toMap.m_PerViewGeneratedInputs[i].m_GeneratedInputs;
+		if (viewGeneratedInputs & Drawers::GenInput_Indices)
+		{
+			if (!PK_VERIFY(m_MappedIdxBuffer != null))
+				return false;
+			billboardBatch->m_PerView[i].m_Exec_Indices.m_IndexStream.m_Indices = m_MappedIdxBuffer;
+			billboardBatch->m_PerView[i].m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+			PK_ASSERT(m_UnityMeshInfo.m_LargeIndices == ManagedBool_True);
+			billboardBatch->m_PerView[i].m_Exec_Indices.m_IndexStream.m_Large = (m_UnityMeshInfo.m_LargeIndices == ManagedBool_True);
+		}
+	}
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGeneratedInputs &toMap, SRibbonBatchJobs *ribbonBatch)
+{
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Indices != null))
+			return false;
+		ribbonBatch->m_Exec_Indices.m_IndexStream.m_Indices = m_ParticleBuffers.m_ViewIndependantGeom.m_Indices;
+		ribbonBatch->m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+		ribbonBatch->m_Exec_Indices.m_IndexStream.m_Large = m_UnityMeshInfo.m_LargeIndices == ManagedBool_True;
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Position) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.m_Ptr != null))
+			return false;
+		ribbonBatch->m_Exec_PNT.m_Positions = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.m_Ptr, m_VertexCount, 0x10);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UVFactors) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_UVFactors.m_Ptr != null))
+			return false;
+		ribbonBatch->m_Exec_PNT.m_UVFactors = TStridedMemoryView<CFloat2>((CFloat2*)m_ParticleBuffers.m_ViewIndependantGeom.m_UVFactors.m_Ptr, m_VertexCount);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Normal) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr != null))
+			return false;
+		ribbonBatch->m_Exec_PNT.m_Normals = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr, m_VertexCount, 0x10);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
+	{
+		// Not implemented yet...
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UV0) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_TexCoords0.m_Ptr != null))
+			return false;
+		ribbonBatch->m_Exec_Texcoords.m_Texcoords = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords0.m_Ptr, m_VertexCount);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UVRemap) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_UVRemap.m_Ptr != null))
+			return false;
+		ribbonBatch->m_Exec_UVRemap.m_UVRemap = TMemoryView<CFloat4>(m_ParticleBuffers.m_UVRemap.m_Ptr, m_VertexCount);
+	}
+
+	// Map only the color and alpha cursor
+	// We only handle max 2 additional fields:
+	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2))
+		return false;
+	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
+	{
+		const SGeneratedInputs::SAdditionalInputInfo	&addInput = toMap.m_AdditionalGeneratedInputs[i];
+
+		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(CFloat4);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaCursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+	}
+
+	ribbonBatch->m_Exec_CopyField.m_FieldsToCopy = m_ParticleBuffers.m_AdditionalFieldsBuffers;
+
+	// -----------------------------------------
+	// View dependent inputs:
+	// -----------------------------------------
+	for (u32 i = 0; i < ribbonBatch->m_PerView.Count(); ++i)
+	{
+		PK_ASSERT((i < m_ParticleBuffers.m_PerViewGeom.Count()));
+
+		const SParticleBuffers::SPerView		&src = m_ParticleBuffers.m_PerViewGeom[i];
+		SRibbonBatchJobs::SPerView				&dst = ribbonBatch->m_PerView[i];
+		SGeneratedInputs::SViewGeneratedInputs	curViewInputs = toMap.m_PerViewGeneratedInputs[i];
+
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+		{
+			if (!PK_VERIFY(src.m_Indices != null))
+				return false;
+			dst.m_Exec_Indices.m_IndexStream.m_Indices = src.m_Indices;
+			dst.m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+			dst.m_Exec_Indices.m_IndexStream.m_Large = m_UnityMeshInfo.m_LargeIndices == ManagedBool_True;
+		}
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Position) != 0)
+		{
+			if (!PK_VERIFY(src.m_Positions.m_Ptr != null))
+				return false;
+			dst.m_Exec_PNT.m_Positions = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)src.m_Positions.m_Ptr, m_VertexCount, 0x10);
+		}
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Normal) != 0)
+		{
+			if (!PK_VERIFY(src.m_Normals.m_Ptr != null))
+				return false;
+			dst.m_Exec_PNT.m_Normals = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)src.m_Normals.m_Ptr, m_VertexCount, 0x10);
+		}
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
+		{
+			// Not implemented yet...
+		}
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_UVFactors) != 0)
+		{
+			if (!PK_VERIFY(src.m_UVFactors.m_Ptr != null))
+				return false;
+			dst.m_Exec_PNT.m_UVFactors = TStridedMemoryView<CFloat2>((CFloat2*)src.m_UVFactors.m_Ptr, m_VertexCount);
+		}
+	}
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SGeneratedInputs &toMap, SMeshBatchJobs *meshBatch)
+{
+	if (m_PerMeshBuffers.Count() == 0)
+		return false;
+	bool	needColors = false;
+
+	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
+	{
+		const SGeneratedInputs::SAdditionalInputInfo	&addInput = toMap.m_AdditionalGeneratedInputs[i];
+
+		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		{
+			m_MeshColorAdditionalField.m_AdditionalInputIndex = i;
+			m_MeshColorAdditionalField.m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_Colors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+			needColors = true;
+		}
+	}
+	meshBatch->m_Exec_Matrices.m_MatricesPerMesh = TStridedMemoryView<TStridedMemoryView<CFloat4x4> >(&m_PerMeshBuffers.First().m_Transforms, m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+	if (needColors)
+	{
+		meshBatch->m_Exec_CopyField.m_FieldsToCopyPerMesh = TStridedMemoryView<const Drawers::SCopyFieldDescPerMesh> (&m_MeshColorAdditionalField, 1U, sizeof(Drawers::SCopyFieldDescPerMesh));
+	}
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SGeneratedInputs &toMap, STriangleBatchJobs *triangleBatch)
+{
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+	{
+		triangleBatch->m_Exec_Indices.m_IndexStream.m_Indices = m_ParticleBuffers.m_ViewIndependantGeom.m_Indices;
+		triangleBatch->m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+		triangleBatch->m_Exec_Indices.m_IndexStream.m_Large = m_UnityMeshInfo.m_LargeIndices == ManagedBool_True;
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Position) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.m_Ptr != null))
+			return false;
+		triangleBatch->m_Exec_PNT.m_Positions = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)(m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.m_Ptr), m_VertexCount, 0x10);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Normal) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr != null))
+			return false;
+		triangleBatch->m_Exec_PNT.m_Normals = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr, m_VertexCount, 0x10);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UV0) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_TexCoords0.m_Ptr != null))
+			return false;
+		triangleBatch->m_Exec_PNT.m_Texcoords = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords0.m_Ptr, m_VertexCount);
+	}
+
+	// View dependent inputs:
+	for (u32 i = 0; i < triangleBatch->m_PerView.Count(); ++i)
+	{
+		const SParticleBuffers::SPerView		&src = m_ParticleBuffers.m_PerViewGeom[i];
+		STriangleBatchJobs::SPerView			&dst = triangleBatch->m_PerView[i];
+		SGeneratedInputs::SViewGeneratedInputs	curViewInputs = toMap.m_PerViewGeneratedInputs[i];
+
+		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
+		{
+			if (!PK_VERIFY(src.m_Indices != null))
+				return false;
+			dst.m_Exec_Indices.m_IndexStream.m_Indices = src.m_Indices;
+			dst.m_Exec_Indices.m_IndexStream.m_Count = m_IndexCount;
+			dst.m_Exec_Indices.m_IndexStream.m_Large = m_UnityMeshInfo.m_LargeIndices == ManagedBool_True;
+		}
+	}
+
+	// Additional inputs:
+	// Map only the color and alpha cursor
+	// We only handle max 2 additional fields:
+	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2))
+		return false;
+	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
+	{
+		const SGeneratedInputs::SAdditionalInputInfo	&addInput = toMap.m_AdditionalGeneratedInputs[i];
+
+		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(CFloat4);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaCursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+	}
+
+	triangleBatch->m_Exec_CopyField.m_FieldsToCopy = m_ParticleBuffers.m_AdditionalFieldsBuffers;
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CUnityBillboardingBatchPolicy::_FindAdditionalInput(const CStringId &inputName, EBaseTypeID inputType, const SGeneratedInputs &genInputs)
+{
+	PK_FOREACH(addInput, genInputs.m_AdditionalGeneratedInputs)
+	{
+		if (addInput->m_Name == inputName && addInput->m_Type == inputType)
+			return true;
+	}
+	return false;
+}
+
+void	CUnityBillboardingBatchPolicy::_PrepareCopySOA2AOS(const SUnityRenderContext &ctx)
+{
+	(void)ctx;
+
+	m_Exec_SAO2AOS.Clear();
+
+	PK_ASSERT(m_MappedVtxBuffer != null);
+	m_Exec_SAO2AOS.m_MappedVertexBuffer = m_MappedVtxBuffer;
+
+	if (m_Exec_SAO2AOS.m_MappedVertexBuffer != null)
+	{
+		m_Exec_SAO2AOS.m_ShaderVariationFlags = m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags;
+		m_Exec_SAO2AOS.m_ParticleBuffers.Clear();
+		m_Exec_SAO2AOS.m_ParticleBuffers.FromParticleBuffers(m_ParticleBuffers);
+		m_Exec_SAO2AOS.m_SemanticOffsets = &m_UnityMeshInfo.m_SemanticOffsets;
+		m_Exec_SAO2AOS.m_VertexStride = m_UnityMeshInfo.m_VertexStride;
+	}
+}
+
+void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::operator()(const Drawers::SBillboard_ExecPage &batch)
+{
+	const u32		renderedParticleCount = batch.m_Page->RenderedParticleCount();
+	const u32		vertexCount = renderedParticleCount * batch.m_Billboarder->BillboardVertexCount();
+
+	_CopyData(batch.m_VertexOffset, vertexCount);
+}
+
+void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::operator()(const Drawers::SRibbon_ExecBatch &batch)
+{
+	_CopyData(batch.FullVertexOffset(), batch.m_VertexCount);
+}
+
+void CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::operator()(const Drawers::STriangle_ExecPage & batch)
+{
+	const u32        renderedParticleCount = batch.m_Page->RenderedParticleCount();
+	const u32        vertexCount = renderedParticleCount * 3;
+
+	_CopyData(batch.m_VertexOffset, vertexCount);
+}
+
+void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 vertexOffset, u32 vertexCount)
+{
+	PK_NAMEDSCOPEDPROFILE("CBillboard_Exec_SOA_OAS::_CopyData VB Fill");
+
+	PK_TODO("Of stride is a multiple of 16 bytes, store aligned the position");
+
+	volatile void		*bfPtr = Mem::AdvanceRawPointer(m_MappedVertexBuffer, m_VertexStride * vertexOffset);
+	const u32	endVertex = vertexOffset + vertexCount;
+
+	for (u32 vertexID = vertexOffset; vertexID < endVertex; vertexID++)
+	{
+		FillPositions(&(m_ParticleBuffers.m_Positions[vertexID]), bfPtr, *m_SemanticOffsets);
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
+		{
+			FillNormals(&(m_ParticleBuffers.m_Normals[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Color) != 0)
+		{
+			FillColors(&(m_ParticleBuffers.m_Colors[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) != 0)
+		{
+			FillUVFactors(&(m_ParticleBuffers.m_UVFactors[vertexID]), bfPtr, *m_SemanticOffsets);
+			FillUVScalesAndOffsets(&(((CFloat4*)m_ParticleBuffers.m_UVRemap)[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		else
+		{
+			FillUV0(&(m_ParticleBuffers.m_TexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) != 0)
+		{
+			FillUV1(&(((CFloat2*)m_ParticleBuffers.m_TexCoords1)[vertexID]), bfPtr, *m_SemanticOffsets);
+			FillAtlasId(&(m_ParticleBuffers.m_AtlasId[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+		{
+			FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		bfPtr = Mem::AdvanceRawPointer(bfPtr, m_VertexStride);
+	}
+}
+
+//----------------------------------------------------------------------------
+
+void	CUnityBillboardingBatchPolicy::CBilboard_Exec_BillboardInfo::operator()(const Drawers::CCopyStream_CPU &bb)
+{
+	_Prepare(bb.DrawRequests());
+}
+
+//----------------------------------------------------------------------------
+
+void	CUnityBillboardingBatchPolicy::CBilboard_Exec_BillboardInfo::operator()(const TStridedMemoryView<const Drawers::SBase_DrawRequest * const> &drawRequests)
+{
+	_Prepare(drawRequests);
+}
+
+//----------------------------------------------------------------------------
+
+void	CUnityBillboardingBatchPolicy::CBilboard_Exec_BillboardInfo::_Prepare(const TStridedMemoryView<const Drawers::SBase_DrawRequest * const> &drawRequests)
+{
+	PK_SCOPEDPROFILE();
+	PK_ASSERT(drawRequests.Count() > 0);
+	PK_ASSERT(m_GeomDrawRequests.Count() >= drawRequests.Count());
+	const TStridedMemoryView<const Drawers::SBillboard_DrawRequest * const>	&drs = TStridedMemoryView<const Drawers::SBillboard_DrawRequest * const>::Reinterpret(drawRequests);
+
+	for (u32 dri = 0; dri < drawRequests.Count(); ++dri)
+	{
+		const Drawers::SBillboard_DrawRequest			*dr = drs[dri];
+		const Drawers::SBillboard_BillboardingRequest	&br = dr->m_BB;
+
+		SBillboardInfo			&info = m_GeomDrawRequests[dri];
+
+		info.m_Flags = br.m_Mode + 1;
+		if (br.m_Flags.m_FlipU &&  br.m_Flags.m_FlipV)
+			info.m_Flags |= 8U;
+		if (br.m_Flags.m_HasAtlasBlending)
+			info.m_Flags |= 16U;
+		info.m_NormalBendingFactor = br.m_NormalsBendingFactor;
+	}
+
+}
+
+//----------------------------------------------------------------------------
+__PK_API_END

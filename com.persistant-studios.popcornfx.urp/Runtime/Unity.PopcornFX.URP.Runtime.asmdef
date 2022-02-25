@@ -1,0 +1,16 @@
+{
+    "name": "Unity.PopcornFX.URP",
+    "rootNamespace": "",
+    "references": [
+        "GUID:29af3fce8f8cac1469ca1f08a27174fa"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

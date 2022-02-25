@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Common">
+      <UniqueIdentifier>{D960DB0A-C52E-CF10-AEC2-3F379A2FAB75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Common\PKFX">
+      <UniqueIdentifier>{E176A6F8-4DD8-8306-D645-CAB842A6BAC5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Ovens">
+      <UniqueIdentifier>{DB59485E-471A-C494-1055-0D127CD40871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Common">
+      <UniqueIdentifier>{A18F02DC-8D5D-F6E1-76F1-6608625ED246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Common\PKFX">
+      <UniqueIdentifier>{A92202BA-1584-DFC7-9EF1-257A0A521687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Native\Common\PKFX\FxPlugins.h">
+      <Filter>Headers\Common\PKFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h">
+      <Filter>Headers\Common\PKFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxPlugins.cpp">
+      <Filter>Sources\Common\PKFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxStartup.cpp">
+      <Filter>Sources\Common\PKFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

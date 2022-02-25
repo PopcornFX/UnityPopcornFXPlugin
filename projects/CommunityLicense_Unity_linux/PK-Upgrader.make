@@ -78,8 +78,12 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/main.o
+GENERATED += $(OBJDIR)/precompiled.o
+GENERATED += $(OBJDIR)/tests.o
 OBJECTS += $(OBJDIR)/main.o
 OBJECTS += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/tests.o
@@ -90,7 +94,7 @@ OBJECTS += $(OBJDIR)/tests.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-Upgrader
 	$(SILENT) $(LINKCMD)
@@ -116,9 +120,11 @@ clean:
 	@echo Cleaning PK-Upgrader
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

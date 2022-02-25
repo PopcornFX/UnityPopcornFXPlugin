@@ -105,7 +105,9 @@ extern "C"
 		IsMeshRenderer				= (1 << 2),
 		// Samplers:
 		IsMeshSampler				= (1 << 3),
-		IsTextureSampler			= (1 << 4)
+		IsTextureSampler			= (1 << 4),
+
+		IsVatTexture				= (1 << 5),
 	};
 
 	enum EPrintConsoleType

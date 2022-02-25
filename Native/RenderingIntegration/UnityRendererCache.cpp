@@ -6,6 +6,7 @@
 #include "UnityRendererCache.h"
 #include "UnityRenderDataFactory.h"
 #include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
+#include <pk_render_helpers/include/basic_renderer_properties/rh_vertex_animation_renderer_properties.h>
 
 #include "NativeToManaged.h"
 #include "RuntimeManager.h"
@@ -332,6 +333,19 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_NormalBendingFactor(0.5f)
 ,	m_Roughness(1.0f)
 ,	m_Metalness(0.0f)
+//Feature Vat
+,	m_Vat_PositionMap(CStringId::Null)
+,	m_Vat_NormalMap(CStringId::Null)
+,	m_Vat_ColorMap(CStringId::Null)
+,	m_Vat_RotationMap(CStringId::Null)
+,	m_Vat_NumFrames(0)
+,	m_Vat_PackedData(false)
+,	m_Vat_Color{}
+,	m_Vat_BoundsPivot{}
+,	m_Vat_NormalizedData(false)
+,	m_Vat_BoundsPosition{}
+,	m_Vat_PadToPowerOf2(false)
+,	m_Vat_PaddedRatio{}
 {
 }
 
@@ -412,7 +426,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue	*meshAtlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_MeshAtlas());
 
 	if (PK_VERIFY(mesh != null && !mesh->ValuePath().Empty()))
-		m_MeshPath = CStringId(mesh->ValuePath());
+		m_MeshPath = CStringId(CFilePath::Purified(mesh->ValuePath()));
 	else
 		return false;
 
@@ -422,7 +436,108 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	else
 		m_HasMeshAtlas = false;
 	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_DiffuseMap) != 0)
-		m_DiffuseMap = CStringId(diffuseMap->ValuePath());
+		m_DiffuseMap = CStringId(CFilePath::Purified(diffuseMap->ValuePath()));
+
+	//-----------------------------
+	// VAT features
+	//-----------------------------
+	const SRendererFeaturePropertyValue	*fluid = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid());
+	const SRendererFeaturePropertyValue	*soft = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Soft());
+	const SRendererFeaturePropertyValue	*rigid = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Rigid());
+
+	if ((fluid != null && fluid->ValueB()))
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_FluidVAT;
+	else if ((soft != null && soft->ValueB()))
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_SoftVAT;
+	else if ((rigid != null && rigid->ValueB()))
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_RigidVAT;
+
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0)
+	{
+		const SRendererFeaturePropertyValue	*fluid_PositionMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_PositionMap());
+		if (fluid_PositionMap != null && !fluid_PositionMap->ValuePath().Empty())
+			m_Vat_PositionMap = CStringId(CFilePath::Purified(fluid_PositionMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*fluid_NormalMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_NormalMap());
+		if (fluid_NormalMap != null && !fluid_NormalMap->ValuePath().Empty())
+			m_Vat_NormalMap = CStringId(CFilePath::Purified(fluid_NormalMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*fluid_ColorMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_ColorMap());
+		if (fluid_ColorMap != null && !fluid_ColorMap->ValuePath().Empty())
+			m_Vat_ColorMap = CStringId(CFilePath::Purified(fluid_ColorMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*fluid_NumFrames = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_NumFrames());
+		if (fluid_NumFrames != null)
+			m_Vat_NumFrames = fluid_NumFrames->ValueI().x();
+
+		const SRendererFeaturePropertyValue	*fluid_PackedData = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_PackedData());
+		if (fluid_PackedData != null)
+			m_Vat_PackedData = fluid_PackedData->ValueB();
+
+		const SRendererFeaturePropertyValue	*fluid_Color = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_Color());
+		if (fluid_Color != null)
+			m_Vat_Color = fluid_Color->ValueF();
+	}
+	else if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0)
+	{
+		const SRendererFeaturePropertyValue	*soft_PositionMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Soft_PositionMap());
+		if (soft_PositionMap != null && !soft_PositionMap->ValuePath().Empty())
+			m_Vat_PositionMap = CStringId(CFilePath::Purified(soft_PositionMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*soft_NormalMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Soft_NormalMap());
+		if (soft_NormalMap != null && !soft_NormalMap->ValuePath().Empty())
+			m_Vat_NormalMap = CStringId(CFilePath::Purified(soft_NormalMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*soft_ColorMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Soft_ColorMap());
+		if (soft_ColorMap != null && !soft_ColorMap->ValuePath().Empty())
+			m_Vat_ColorMap = CStringId(CFilePath::Purified(soft_ColorMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*soft_NumFrames = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Soft_NumFrames());
+		if (soft_NumFrames != null)
+			m_Vat_NumFrames = soft_NumFrames->ValueI().x();
+
+		const SRendererFeaturePropertyValue	*soft_PackedData = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Soft_PackedData());
+		if (soft_PackedData != null)
+			m_Vat_PackedData = soft_PackedData->ValueB();
+	}
+	else if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_RigidVAT) != 0)
+	{
+		const SRendererFeaturePropertyValue	*rigid_PositionMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_PositionMap());
+		if (rigid_PositionMap != null && !rigid_PositionMap->ValuePath().Empty())
+			m_Vat_PositionMap = CStringId(CFilePath::Purified(rigid_PositionMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*rigid_RotationMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_RotationMap());
+		if (rigid_RotationMap != null && !rigid_RotationMap->ValuePath().Empty())
+			m_Vat_RotationMap = CStringId(CFilePath::Purified(rigid_RotationMap->ValuePath()));
+
+		const SRendererFeaturePropertyValue	*rigid_NumFrames = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_NumFrames());
+		if (rigid_NumFrames != null)
+			m_Vat_NumFrames = rigid_NumFrames->ValueI().x();
+
+		const SRendererFeaturePropertyValue	*rigid_BoundsPivot = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_BoundsPivot());
+		if (rigid_BoundsPivot != null)
+			m_Vat_BoundsPivot = CFloat2{ rigid_BoundsPivot->ValueF().x(), rigid_BoundsPivot->ValueF().y() };
+	}
+
+	const SRendererFeaturePropertyValue	*vat_NormalizedData = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_NormalizedData());
+	if (vat_NormalizedData != null)
+		m_Vat_NormalizedData = vat_NormalizedData->ValueB();
+
+	const SRendererFeaturePropertyValue	*vat_BoundsPosition = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_BoundsPosition());
+	if (vat_BoundsPosition != null)
+		m_Vat_BoundsPosition = CFloat2{ vat_BoundsPosition->ValueF().x(), vat_BoundsPosition->ValueF().y() };
+
+	const SRendererFeaturePropertyValue	*vat_PadToPowerOf2 = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_PadToPowerOf2());
+	if (vat_PadToPowerOf2 != null && vat_PadToPowerOf2->ValueB())
+	{
+		m_Vat_PadToPowerOf2 = true;
+
+		const SRendererFeaturePropertyValue	*vat_PaddedRatio = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_PaddedRatio());
+		if (vat_PaddedRatio != null)
+			m_Vat_PaddedRatio = CFloat2{ vat_PaddedRatio->ValueF().x(), vat_PaddedRatio->ValueF().y() };
+	}
+	else
+		m_Vat_PadToPowerOf2 = false;
 
 	// ----------------------------
 	// Lighting Features
@@ -439,9 +554,9 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		const SRendererFeaturePropertyValue	*metalness = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Lit_Metalness());
 
 		if (normalMap != null && !normalMap->ValuePath().Empty())
-			m_NormalMap = CStringId(normalMap->ValuePath());
+			m_NormalMap = CStringId(CFilePath::Purified(normalMap->ValuePath()));
 		if (roughMetalMap != null && !roughMetalMap->ValuePath().Empty())
-			m_RoughMetalMap = CStringId(roughMetalMap->ValuePath());
+			m_RoughMetalMap = CStringId(CFilePath::Purified(roughMetalMap->ValuePath()));
 		if (castShadows != null)
 			m_CastShadows = castShadows->ValueB();
 		if (normalBend != null && normalBend->ValueB() && normalBendingFactor != null)
@@ -599,7 +714,9 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 	if ((m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
 	{
 		desc.m_LitRendering = PK_NEW(SRenderingFeatureLitDesc);
-		PK_ASSERT(desc.m_LitRendering != null);
+
+		if (!PK_VERIFY(desc.m_LitRendering != null))
+			return false;
 
 		desc.m_LitRendering->m_NormalMap = m_MaterialDescBillboard.m_NormalMap.ToStringData();
 		desc.m_LitRendering->m_RoughMetalMap = m_MaterialDescBillboard.m_RoughMetalMap.ToStringData();
@@ -624,6 +741,56 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	desc.m_HasMeshAtlas = m_MaterialDescMesh.m_HasMeshAtlas ? ManagedBool_True : ManagedBool_False;
 	desc.m_DiffuseMap = m_MaterialDescMesh.m_DiffuseMap.ToStringData();
 
+	bool fluidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0;
+	bool softVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0;
+	bool rigidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_RigidVAT) != 0;
+
+	if (fluidVAT || softVAT || rigidVAT)
+	{
+		desc.m_VatRendering = PK_NEW(SRenderingFeatureVATDesc);
+
+		if (!PK_VERIFY(desc.m_VatRendering != null))
+			return false;
+
+		if (!m_MaterialDescMesh.m_Vat_PositionMap.Empty())
+			desc.m_VatRendering->m_PositionMap = m_MaterialDescMesh.m_Vat_PositionMap.ToStringData();
+
+		if (softVAT)
+		{
+			if (!m_MaterialDescMesh.m_Vat_NormalMap.Empty())
+				desc.m_VatRendering->m_NormalMap = m_MaterialDescMesh.m_Vat_NormalMap.ToStringData();
+		}
+
+		if (fluidVAT || softVAT)
+		{
+			if (!m_MaterialDescMesh.m_Vat_ColorMap.Empty())
+				desc.m_VatRendering->m_ColorMap = m_MaterialDescMesh.m_Vat_ColorMap.ToStringData();
+
+			desc.m_VatRendering->m_PackedData = m_MaterialDescMesh.m_Vat_PackedData ? ManagedBool_True : ManagedBool_False;
+		}
+
+		desc.m_VatRendering->m_NumFrames = m_MaterialDescMesh.m_Vat_NumFrames;
+
+		if (fluidVAT)
+			desc.m_VatRendering->m_Color = m_MaterialDescMesh.m_Vat_Color;
+
+		if (rigidVAT)
+		{
+			if (!m_MaterialDescMesh.m_Vat_RotationMap.Empty())
+				desc.m_VatRendering->m_RotationMap = m_MaterialDescMesh.m_Vat_RotationMap.ToStringData();
+
+			desc.m_VatRendering->m_BoundsPivot = m_MaterialDescMesh.m_Vat_BoundsPivot;
+		}
+
+		desc.m_VatRendering->m_NormalizedData = m_MaterialDescMesh.m_Vat_NormalizedData ? ManagedBool_True : ManagedBool_False;
+		desc.m_VatRendering->m_BoundsPosition = m_MaterialDescMesh.m_Vat_BoundsPosition;
+		
+		desc.m_VatRendering->m_PadToPowerOf2 = m_MaterialDescMesh.m_Vat_PadToPowerOf2 ? ManagedBool_True : ManagedBool_False;
+		desc.m_VatRendering->m_PaddedRatio = m_MaterialDescMesh.m_Vat_PaddedRatio;
+	}
+	else
+		desc.m_VatRendering = null;
+
 	if ((m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
 	{
 		desc.m_LitRendering = PK_NEW(SRenderingFeatureLitDesc);
@@ -644,133 +811,132 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 
 void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 {
-	if (m_RendererType == Renderer_Billboard || m_RendererType == Renderer_Ribbon || m_RendererType == Renderer_Triangle)
+	for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
 	{
-		// Renderer info in case we need to update the renderer's buffers:
-		SRetrieveRendererInfo	rendererInfo;
-		ManagedBool				hasCustomMat = ManagedBool_False;
-		ManagedBool				useComputeBuffers = ManagedBool_False;
-
-		rendererInfo.m_VBHandler = &m_UnityMeshInfo.m_VBHandler.m_Buffer->m_DeviceLocal;
-		rendererInfo.m_IBHandler = &m_UnityMeshInfo.m_IBHandler.m_Buffer->m_DeviceLocal;
-		rendererInfo.m_VertexBufferSize = &m_UnityMeshInfo.m_VBElemCount;
-		rendererInfo.m_IndexBufferSize = &m_UnityMeshInfo.m_IBElemCount;
-		rendererInfo.m_IsIndex32 = &m_UnityMeshInfo.m_LargeIndices;
-
-		rendererInfo.m_HasCustomMaterial = &hasCustomMat;
-		rendererInfo.m_CustomMatID = &m_CustomMatID;
-
-		rendererInfo.m_InfoBSize = &m_UnityMeshInfo.m_InfoSize;
-		rendererInfo.m_InfoBHandler = &m_UnityMeshInfo.m_InfoHandler.m_Buffer->m_DeviceLocal;
-		rendererInfo.m_AtlasesBSize = &m_UnityMeshInfo.m_AtlasesSize;
-		rendererInfo.m_AtlasesBHandler = &m_UnityMeshInfo.m_AtlasesHandler.m_Buffer->m_DeviceLocal;
-
-		rendererInfo.m_IndirectArgsBHandler = &m_UnityMeshInfo.m_IndirectArgsHandler.m_Buffer->m_DeviceLocal;
-		rendererInfo.m_IndirectArgsParticleCountMultiplier = &m_UnityMeshInfo.m_IndirectArgsParticleCountMultiplier;
-
-		rendererInfo.m_UseComputeBuffers = &useComputeBuffers;
-
-		// We alloc the Unity mesh here:
-		SPopcornRendererDesc	desc;
-		GetRendererInfo(desc);
-
-		if (m_RendererType == Renderer_Billboard)
+		if (m_RendererType == Renderer_Billboard || m_RendererType == Renderer_Ribbon || m_RendererType == Renderer_Triangle)
 		{
-			m_UnityMeshInfo.m_RendererGUID = ::OnSetupNewBillboardRenderer(&desc, idx);
-			if (m_UnityMeshInfo.m_RendererGUID < 0)
+			// Renderer info in case we need to update the renderer's buffers:
+			SRetrieveRendererInfo	rendererInfo;
+			ManagedBool				hasCustomMat = ManagedBool_False;
+			ManagedBool				useComputeBuffers = ManagedBool_False;
+
+			rendererInfo.m_VBHandler = &m_UnityMeshInfoPerViews[i].m_VBHandler.m_Buffer->m_DeviceLocal;
+			rendererInfo.m_IBHandler = &m_UnityMeshInfoPerViews[i].m_IBHandler.m_Buffer->m_DeviceLocal;
+			rendererInfo.m_VertexBufferSize = &m_UnityMeshInfo.m_VBElemCount;
+			rendererInfo.m_IndexBufferSize = &m_UnityMeshInfo.m_IBElemCount;
+			rendererInfo.m_IsIndex32 = &m_UnityMeshInfo.m_LargeIndices;
+
+			rendererInfo.m_HasCustomMaterial = &hasCustomMat;
+			rendererInfo.m_CustomMatID = &m_CustomMatID;
+
+			rendererInfo.m_InfoBSize = &m_UnityMeshInfo.m_InfoSize;
+			rendererInfo.m_InfoBHandler = &m_UnityMeshInfoPerViews[i].m_InfoHandler.m_Buffer->m_DeviceLocal;
+			rendererInfo.m_AtlasesBSize = &m_UnityMeshInfo.m_AtlasesSize;
+			rendererInfo.m_AtlasesBHandler = &m_UnityMeshInfoPerViews[i].m_AtlasesHandler.m_Buffer->m_DeviceLocal;
+
+			rendererInfo.m_IndirectArgsBHandler = &m_UnityMeshInfoPerViews[i].m_IndirectArgsHandler.m_Buffer->m_DeviceLocal;
+			rendererInfo.m_IndirectArgsParticleCountMultiplier = &m_UnityMeshInfo.m_IndirectArgsParticleCountMultiplier;
+
+			rendererInfo.m_UseComputeBuffers = &useComputeBuffers;
+
+			// We alloc the Unity mesh here:
+			SPopcornRendererDesc	desc;
+			GetRendererInfo(desc);
+			desc.m_CameraID = i;
+
+			if (m_RendererType == Renderer_Billboard)
+			{
+				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewBillboardRenderer(&desc, idx);
+			}
+			else if (m_RendererType == Renderer_Ribbon)
+			{
+				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewRibbonRenderer(&desc, idx);
+			}
+			else if (m_RendererType == Renderer_Triangle)
+			{
+				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewTriangleRenderer(&desc, idx);
+			}
+
+			if (m_UnityMeshInfoPerViews[i].m_RendererGUID < 0)
 				return;
-			::OnResizeRenderer(m_UnityMeshInfo.m_RendererGUID, 0, 0x100, 0x300);
-			::OnRetrieveRendererBufferInfo(m_UnityMeshInfo.m_RendererGUID, &rendererInfo);
-		}
-		else if (m_RendererType == Renderer_Ribbon)
-		{
-			m_UnityMeshInfo.m_RendererGUID = ::OnSetupNewRibbonRenderer(&desc, idx);
-			if (m_UnityMeshInfo.m_RendererGUID < 0)
-				return;
-			::OnResizeRenderer(m_UnityMeshInfo.m_RendererGUID, 0, 0x100, 0x300);
-			::OnRetrieveRendererBufferInfo(m_UnityMeshInfo.m_RendererGUID, &rendererInfo);
-		}
-		else if (m_RendererType == Renderer_Triangle)
-		{
-			m_UnityMeshInfo.m_RendererGUID = ::OnSetupNewTriangleRenderer(&desc, idx);
-			if (m_UnityMeshInfo.m_RendererGUID < 0)
-				return;
-			::OnResizeRenderer(m_UnityMeshInfo.m_RendererGUID, 0, 0x100, 0x300);
-			::OnRetrieveRendererBufferInfo(m_UnityMeshInfo.m_RendererGUID, &rendererInfo);
-		}
 
-		if (gpuBillboarding && m_RendererType == Renderer_Billboard)
-		{
-			m_UnityMeshInfo.m_VertexStride = GetGeomBillboardVertexBufferStride(m_BillboardBR.m_Mode, m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags);
-		}
-		else
-		{
-			m_UnityMeshInfo.m_VertexStride = FillOffsetTableAndGetVertexBufferStride(m_UnityMeshInfo.m_SemanticOffsets, m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags);
-		}
-		m_HasCustomMat = hasCustomMat == ManagedBool_True ? true : false;
+			::OnResizeRenderer(m_UnityMeshInfoPerViews[i].m_RendererGUID, 0, 0x100, 0x300);
+			::OnRetrieveRendererBufferInfo(m_UnityMeshInfoPerViews[i].m_RendererGUID, &rendererInfo);
+			m_HasCustomMat = hasCustomMat == ManagedBool_True ? true : false;
 
-		// Set the info if the handlers are compute buffers or not:
+			if (gpuBillboarding && m_RendererType == Renderer_Billboard)
+			{
+				m_UnityMeshInfo.m_VertexStride = GetGeomBillboardVertexBufferStride(m_BillboardBR.m_Mode, m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags);
+			}
+			else
+			{
+				m_UnityMeshInfo.m_VertexStride = FillOffsetTableAndGetVertexBufferStride(m_UnityMeshInfo.m_SemanticOffsets, m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags);
+			}
+			m_HasCustomMat = hasCustomMat == ManagedBool_True ? true : false;
+
+			// Set the info if the handlers are compute buffers or not:
 #if		defined(PK_ORBIS)
 
-		((CGNMBufferHandles*)m_UnityMeshInfo.m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CGNMBufferHandles*)m_UnityMeshInfo.m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CGNMBufferHandles*)m_UnityMeshInfo.m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CGNMBufferHandles*)m_UnityMeshInfo.m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CGNMBufferHandles*)m_UnityMeshInfo.m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
 #elif	defined(PK_UNKNOWN2)
 
-		((CUNKNOWN2BufferHandles*)m_UnityMeshInfo.m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CUNKNOWN2BufferHandles*)m_UnityMeshInfo.m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CUNKNOWN2BufferHandles*)m_UnityMeshInfo.m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CUNKNOWN2BufferHandles*)m_UnityMeshInfo.m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-		((CUNKNOWN2BufferHandles*)m_UnityMeshInfo.m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
 #endif	// defined(PK_ORBIS)
-	}
-	else if (m_RendererType == Renderer_Mesh)
-	{
-		// Renderer info in case we need to update the renderer's buffers:
-		SRetrieveRendererInfo	rendererInfo;
-		ManagedBool				hasCustomMat;
-
-		rendererInfo.m_VBHandler = null;
-		rendererInfo.m_IBHandler = null;
-		rendererInfo.m_VertexBufferSize = null;
-		rendererInfo.m_IndexBufferSize = null;
-		rendererInfo.m_IsIndex32 = null;
-
-		rendererInfo.m_HasCustomMaterial = &hasCustomMat;
-		rendererInfo.m_CustomMatID = &m_CustomMatID;
-
-		rendererInfo.m_InfoBSize = null;
-		rendererInfo.m_InfoBHandler = null;
-		rendererInfo.m_AtlasesBSize = null;
-		rendererInfo.m_AtlasesBHandler = null;
-
-		rendererInfo.m_IndirectArgsBHandler = null;
-		rendererInfo.m_IndirectArgsParticleCountMultiplier = null;
-
-		rendererInfo.m_UseComputeBuffers = null;
-
-		SMeshRendererDesc		desc;
-		if (!GetRendererInfo(desc))
-			return;
-
- 		m_UnityMeshInfo.m_RendererGUID = ::OnSetupNewMeshRenderer(&desc, idx);
-		if (m_UnityMeshInfo.m_RendererGUID < 0)
-			return;
-		m_MeshCount = ::OnGetMeshCount(m_UnityMeshInfo.m_RendererGUID);
-		PK_ASSERT(m_MeshCount > 0);
-		m_GlobalMeshBound.Degenerate();
-		for (u32 i = 0; i < m_MeshCount; ++i)
-		{
-			CFloat3 bb;
-
-			::OnGetMeshBounds(m_UnityMeshInfo.m_RendererGUID, i, &bb);
-			m_SubMeshBounds.PushBack(bb);
-			m_GlobalMeshBound.Add(bb);
 		}
-		::OnRetrieveRendererBufferInfo(m_UnityMeshInfo.m_RendererGUID, &rendererInfo);
-		m_HasCustomMat = hasCustomMat == ManagedBool_True ? true : false;
+		else if (m_RendererType == Renderer_Mesh)
+		{
+			// Renderer info in case we need to update the renderer's buffers:
+			SRetrieveRendererInfo	rendererInfo;
+			ManagedBool				hasCustomMat;
+
+			rendererInfo.m_VBHandler = null;
+			rendererInfo.m_IBHandler = null;
+			rendererInfo.m_VertexBufferSize = null;
+			rendererInfo.m_IndexBufferSize = null;
+			rendererInfo.m_IsIndex32 = null;
+
+			rendererInfo.m_HasCustomMaterial = &hasCustomMat;
+			rendererInfo.m_CustomMatID = &m_CustomMatID;
+
+			rendererInfo.m_InfoBSize = null;
+			rendererInfo.m_InfoBHandler = null;
+			rendererInfo.m_AtlasesBSize = null;
+			rendererInfo.m_AtlasesBHandler = null;
+
+			rendererInfo.m_IndirectArgsBHandler = null;
+			rendererInfo.m_IndirectArgsParticleCountMultiplier = null;
+
+			rendererInfo.m_UseComputeBuffers = null;
+
+			SMeshRendererDesc		desc;
+			if (!GetRendererInfo(desc))
+				return;
+
+			m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewMeshRenderer(&desc, idx);
+			if (m_UnityMeshInfoPerViews[i].m_RendererGUID < 0)
+				return;
+
+			m_MeshCount = ::OnGetMeshCount(m_UnityMeshInfoPerViews[i].m_RendererGUID);
+			m_GlobalMeshBound.Degenerate();
+			for (u32 iMeshCount = 0; iMeshCount < m_MeshCount; ++iMeshCount)
+			{
+				CFloat3 bb;
+
+				::OnGetMeshBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, iMeshCount, &bb);
+				m_SubMeshBounds.PushBack(bb);
+				m_GlobalMeshBound.Add(bb);
+			}
+			::OnRetrieveRendererBufferInfo(m_UnityMeshInfoPerViews[i].m_RendererGUID, &rendererInfo);
+			m_HasCustomMat = hasCustomMat == ManagedBool_True ? true : false;
+		}
 	}
 }
 

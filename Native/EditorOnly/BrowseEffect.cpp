@@ -34,6 +34,7 @@
 #include "RenderingIntegration/UnityRendererCache.h"
 
 #include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
+#include <pk_render_helpers/include/basic_renderer_properties/rh_vertex_animation_renderer_properties.h>
 #include <pk_render_helpers/include/draw_requests/rh_billboard.h>
 
 __PK_API_BEGIN
@@ -94,6 +95,22 @@ struct	SUnityDependencyAppendHelper
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == BasicRendererProperties::SID_Lit_NormalMap())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_PositionMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_NormalMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_ColorMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_PositionMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_NormalMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_ColorMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_PositionMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_RotationMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
 					else
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_sRGB;
 				}
@@ -220,7 +237,11 @@ bool	BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool
 			}
 			else if (dependency.m_Type == SResourceDependency::Type_Image)
 			{
-				if (dependency.m_Usage & SResourceDependency::UsageFlags_Image_Linear)
+				if (dependency.m_Usage & SResourceDependency::UsageFlags_Image_VAT)
+				{
+					dependencyMask |= IsVatTexture;
+				}
+				else if (dependency.m_Usage & SResourceDependency::UsageFlags_Image_Linear)
 				{
 					dependencyMask |= IsLinearTextureRenderer;
 				}
@@ -432,8 +453,8 @@ bool	BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerLis
 
 		if (sampler != null)
 		{
-			CParticleNodeSamplerData			*samplerData = sampler->DefaultValue();
-			SFxSamplerDesc						samplerDesc;
+			CResourceDescriptor	*samplerData = sampler->AttribSamplerDefaultValue();
+			SFxSamplerDesc		samplerDesc;
 
 			if (samplerData == null)
 			{
@@ -461,19 +482,16 @@ bool	BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerLis
 			}
 			else
 			{
-				CParticleNodeSamplerData_Shape		*shapeData = HBO::Cast<CParticleNodeSamplerData_Shape>(samplerData);
-				CParticleNodeSamplerData_Texture	*imageData = HBO::Cast<CParticleNodeSamplerData_Texture>(samplerData);
-				CParticleNodeSamplerData_Text		*textData = HBO::Cast<CParticleNodeSamplerData_Text>(samplerData);
-				CParticleNodeSamplerData_Curve		*curveData = HBO::Cast<CParticleNodeSamplerData_Curve>(samplerData);
+				CResourceDescriptor_Shape	*shapeData = HBO::Cast<CResourceDescriptor_Shape>(samplerData);
+				CResourceDescriptor_Image	*imageData = HBO::Cast<CResourceDescriptor_Image>(samplerData);
+				CResourceDescriptor_Text	*textData = HBO::Cast<CResourceDescriptor_Text>(samplerData);
+				CResourceDescriptor_Curve	*curveData = HBO::Cast<CResourceDescriptor_Curve>(samplerData);
 
 				if (shapeData != null)
 				{
 					samplerDesc.m_SamplerType = SamplerShape;
-					const CParticleNodeSamplerData_Shape		*shapeSampler = static_cast<const CParticleNodeSamplerData_Shape*>(sampler->DefaultValue().Get());
-					const CFloat4x4								&shapeTransform = shapeSampler->Transforms();
-
-					samplerDesc.m_ShapeRotation = Transforms::Quaternion::FromEuler(Units::DegreesToRadians<CFloat3>(shapeSampler->Orientation()));
-					samplerDesc.m_ShapePosition = shapeTransform.Axis(3).xyz();
+					samplerDesc.m_ShapeRotation = Transforms::Quaternion::FromEuler(Units::DegreesToRadians<CFloat3>(shapeData->Orientation()));
+					samplerDesc.m_ShapePosition = shapeData->Transforms().StrippedTranslations();
 				}
 				else if (imageData != null)
 					samplerDesc.m_SamplerType = SamplerImage;

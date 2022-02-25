@@ -33,6 +33,9 @@ extern "C"
 		ManagedBool				m_EnableLocalizedPages;
 		ManagedBool				m_EnableLocalizedByDefault;
 
+		ManagedBool				m_FreeUnusedBatches;
+		u32						m_FrameCountBeforeFreeingUnusedBatches;
+
 		ManagedBool				m_IsUnitTesting;
 		// Threading:
 		ManagedBool				m_SingleThreadedExecution;
@@ -51,11 +54,14 @@ extern "C"
 			settings += "[PKFX Unity Settings] EnableGPUBillboard: ................. %s\r\n";
 			settings += "[PKFX Unity Settings] SingleThreadedExecution: ............ %s\r\n";
 			settings += "[PKFX Unity Settings] OverrideThreadPool: ................. %s\r\n";
-			settings += "[PKFX Unity Settings] LocalizedPages: ..................... %s, %s";
+			settings += "[PKFX Unity Settings] LocalizedPages: ..................... %s, %s\r\n";
+			settings += "[PKFX Unity Settings] FreeUnusedBatches: ...................%s\r\n";
+			settings += "[PKFX Unity Settings] FrameCountBeforeFreeingUnusedBatches: %u";
 
 
 			if (m_OverrideThreadPool == ManagedBool_True)
 			{
+				settings += "\r\n";
 				settings += "[PKFX Unity Settings] Explicit worker count: .............. %u\r\n";
 				settings += "[PKFX Unity Settings] Explicit worker affinities: ......... %s";
 				CLog::Log(PK_INFO, settings.Data()
@@ -66,6 +72,8 @@ extern "C"
 					, MANAGED_BOOL_2_STR(m_SingleThreadedExecution)
 					, MANAGED_BOOL_2_STR(m_OverrideThreadPool)
 					, MANAGED_BOOL_2_STR(m_EnableLocalizedPages), MANAGED_BOOL_2_STR(m_EnableLocalizedByDefault)
+					, MANAGED_BOOL_2_STR(m_FreeUnusedBatches)
+					, m_FrameCountBeforeFreeingUnusedBatches
 					, m_WorkerCount
 					, m_WorkerAffinities != null ? "true" : "false");
 			}
@@ -78,8 +86,9 @@ extern "C"
 					, MANAGED_BOOL_2_STR(m_EnableGPUBillboarding)
 					, MANAGED_BOOL_2_STR(m_SingleThreadedExecution)
 					, MANAGED_BOOL_2_STR(m_OverrideThreadPool)
-					, MANAGED_BOOL_2_STR(m_EnableLocalizedPages)
-					, MANAGED_BOOL_2_STR(m_EnableLocalizedByDefault));
+					, MANAGED_BOOL_2_STR(m_EnableLocalizedPages), MANAGED_BOOL_2_STR(m_EnableLocalizedByDefault)
+					, MANAGED_BOOL_2_STR(m_FreeUnusedBatches)
+					, m_FrameCountBeforeFreeingUnusedBatches);
 			}
 		}
 	};
@@ -258,6 +267,7 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void								SetMaxLogStack(int maxLogStack);
 	MANAGED_TO_POPCORN_CONVENTION int								UnstackLog(char *dstBuffer, int dstSize, int &logSeverity);
 	// Update and rendering:
+	MANAGED_TO_POPCORN_CONVENTION void								SetMaxCameraCount(int number);
 	MANAGED_TO_POPCORN_CONVENTION void								UpdateCamDesc(int camID, const SCamDesc *desc, ManagedBool update); // Update camera
 	MANAGED_TO_POPCORN_CONVENTION void								UpdateParticles(float dt); // Update evolve
 	void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API					OnRenderEvent(int eventID); // Render function
@@ -315,6 +325,8 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void								Reset();
 	MANAGED_TO_POPCORN_CONVENTION void								DeepReset();
 	MANAGED_TO_POPCORN_CONVENTION void								ClearAllCallbacks();
+
+	MANAGED_TO_POPCORN_CONVENTION void								UnloadFx(const char *path);
 
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop

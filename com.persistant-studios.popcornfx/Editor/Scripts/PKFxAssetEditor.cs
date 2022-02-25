@@ -21,6 +21,11 @@ namespace PopcornFX
 			return bound.FindPropertyRelative(variable).FindPropertyRelative("f1").floatValue;
 		}
 
+		public override void OnInteractivePreviewGUI(Rect rect, GUIStyle background)
+		{
+			//Handles.DrawCamera(r, previewCamera_);
+		}	
+
 		public override void OnInspectorGUI()
 		{
 			//var m_FXText = serializedObject.FindProperty("m_FXText");

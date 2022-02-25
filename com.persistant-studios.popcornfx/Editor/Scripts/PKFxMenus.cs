@@ -63,7 +63,9 @@ namespace PopcornFX
 
 			foreach (FieldInfo fieldInfo in fields)
 			{
-				if (fieldInfo.ReflectedType == typeof(PKFxEffectAsset))
+				if (fieldInfo == null)
+					continue;
+				if (fieldInfo.FieldType == typeof(PKFxEffectAsset))
 				{
 					PKFxEffectAsset fxAsset = fieldInfo.GetValue(obj) as PKFxEffectAsset;
 					if (fxAsset != null)
@@ -111,11 +113,15 @@ namespace PopcornFX
 			if (!string.IsNullOrEmpty(startingScene.path))
 				startingScenePath = startingScene.path;
 
+
+			string[] folders = { "Assets" };
+
 			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", null);
-			string[] foundPrefabs = AssetDatabase.FindAssets("t:Prefab");
+			string[] foundPrefabs = AssetDatabase.FindAssets("t:Prefab", folders);
+			string[] foundScripts = AssetDatabase.FindAssets("t:Script", folders);
 
 			int referenceUpdateCount = 0;
-			int totalElemCount = foundScenes.Length + foundPrefabs.Length;
+			int totalElemCount = foundScenes.Length + foundPrefabs.Length + foundScripts.Length;
 			int currElemCount = 0;
 
 			foreach (var guid in foundScenes)
@@ -133,6 +139,8 @@ namespace PopcornFX
 
 				foreach (var obj in objs)
 				{
+					if (obj == null)
+						continue;
 					if (UpdateAssetsReferences(obj))
 					{
 						referenceUpdateCount++;
@@ -157,9 +165,9 @@ namespace PopcornFX
 			if (startingScenePath != null)
 				EditorSceneManager.OpenScene(startingScenePath);
 
-			bool prefabsUpdated = false;
+			bool assetUpdated = false;
 			List<string> filesToReimport = new List<string>();
-			AssetList prefabAssets = new AssetList();
+			AssetList updatedAssets = new AssetList();
 
 			foreach (string guid in foundPrefabs)
 			{
@@ -170,22 +178,48 @@ namespace PopcornFX
 				Object[] objs = AssetDatabase.LoadAllAssetsAtPath(path);
 				foreach (var obj in objs)
 				{
+					if (obj == null)
+						continue;
 					if (UpdateAssetsReferences(obj))
 					{
 						referenceUpdateCount++;
-						prefabsUpdated = true;
+						assetUpdated = true;
 						EditorUtility.SetDirty(obj);
 						filesToReimport.Add(path);
-						prefabAssets.Add(new Asset(path));
+						updatedAssets.Add(new Asset(path));
 					}
 				}
 				currElemCount++;
 			}
-			if (prefabsUpdated)
+
+			foreach (string guid in foundScripts)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+
+				EditorUtility.DisplayProgressBar("Update PKFxFX References", path, (float)currElemCount / (float)totalElemCount);
+
+				Object[] objs = AssetDatabase.LoadAllAssetsAtPath(path);
+				foreach (var obj in objs)
+				{
+					if (obj == null)
+						continue;
+					if (UpdateAssetsReferences(obj))
+					{
+						referenceUpdateCount++;
+						assetUpdated = true;
+						EditorUtility.SetDirty(obj);
+						filesToReimport.Add(path);
+						updatedAssets.Add(new Asset(path));
+
+					}
+				}
+				currElemCount++;
+			}
+			if (assetUpdated)
 			{
 				if (Provider.isActive)
 				{
-					Task task = Provider.Checkout(prefabAssets, CheckoutMode.Both);
+					Task task = Provider.Checkout(updatedAssets, CheckoutMode.Both);
 					task.Wait();
 				}
 				AssetDatabase.SaveAssets();
@@ -196,6 +230,118 @@ namespace PopcornFX
 			foreach (var path in filesToReimport)
 				AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
 			Debug.Log("[PopcornFX] " + referenceUpdateCount + " PKFxFX references updated.");
+		}
+
+		static bool UpdatePKFXAssetsGUID(string path)
+		{
+			var GUIDLookup = PKFxSettings.AssetGUID;
+			bool updated = false;
+			string contents = File.ReadAllText(path);
+			foreach (var pair in GUIDLookup)
+			{
+				if (pair.m_New != pair.m_Old)
+				{
+					if (contents.Contains("guid: " + pair.m_Old))
+					{
+						contents = contents.Replace("guid: " + pair.m_Old, "guid: " + pair.m_New);
+						updated = true;
+					}
+				}
+			}
+			if (updated)
+				File.WriteAllText(path, contents);
+			return updated;
+		}
+
+		[MenuItem("Assets/PopcornFX/Update PKFxFXAsset GUID (experimental)")]
+		static void UpdatePKFxFXReferencesInScene()
+		{
+
+			Scene startingScene = EditorSceneManager.GetActiveScene();
+			string startingScenePath = null;
+
+			if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+				return; //abort
+
+			if (!string.IsNullOrEmpty(startingScene.path))
+				startingScenePath = startingScene.path;
+
+			int referenceUpdateCount = 0;
+
+			string[] folders = { "Assets" };
+
+			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", folders);
+			string[] foundPrefabs = AssetDatabase.FindAssets("t:Prefab", folders);
+			string[] foundScripts = AssetDatabase.FindAssets("t:Script", folders);
+
+			int totalElemCount = foundScenes.Length + foundPrefabs.Length + foundScripts.Length;
+			int currElemCount = 0;
+
+			AssetList updatedAssets = new AssetList();
+
+			foreach (var guid in foundScenes)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+				if (path.Length == 0)
+					continue;
+
+				EditorUtility.DisplayProgressBar("Update PKFxFXAsset GUID from scene: ", path, (float)currElemCount / (float)totalElemCount);
+
+				if (UpdatePKFXAssetsGUID(path))
+				{
+
+					referenceUpdateCount++;
+				}
+				currElemCount++;
+			}
+			foreach (var guid in foundPrefabs)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+				if (path.Length == 0)
+					continue;
+
+				EditorUtility.DisplayProgressBar("Update PKFxFXAsset GUID from prefab: ", path, (float)currElemCount / (float)totalElemCount);
+
+				if (UpdatePKFXAssetsGUID(path))
+				{
+					referenceUpdateCount++;
+					updatedAssets.Add(new Asset(path));
+				}
+				currElemCount++;
+			}
+			foreach (var guid in foundScripts)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+				if (path.Length == 0)
+					continue;
+
+				EditorUtility.DisplayProgressBar("Update PKFxFXAsset GUID from script: ", path, (float)currElemCount / (float)totalElemCount);
+
+				if (UpdatePKFXAssetsGUID(path))
+				{
+					referenceUpdateCount++;
+					updatedAssets.Add(new Asset(path));
+				}
+				currElemCount++;
+			}
+			if (currElemCount != 0)
+			{
+				if (Provider.isActive)
+				{
+					Task task = Provider.Checkout(updatedAssets, CheckoutMode.Both);
+					task.Wait();
+				}
+			}
+
+			AssetDatabase.SaveAssets();
+			AssetDatabase.Refresh();
+
+			Debug.Log("[PopcornFX] " + referenceUpdateCount + " PKFxFXAssets updated.");
+
+			EditorUtility.ClearProgressBar();
+			//restore the starting scene
+			if (startingScenePath != null)
+				EditorSceneManager.OpenScene(startingScenePath);
 		}
 
 		[MenuItem("Assets/PopcornFX/Update PKFxFX References")]

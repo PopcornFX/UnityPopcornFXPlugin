@@ -40,8 +40,8 @@
     <Filter Include="Kernel\Headers\platforms">
       <UniqueIdentifier>{B800BA80-A425-0901-CD70-EE90B9F4071F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Kernel\Headers\platforms\ios">
-      <UniqueIdentifier>{F22FD75A-DEEA-C606-87A2-3F51733C1197}</UniqueIdentifier>
+    <Filter Include="Kernel\Headers\platforms\apple">
+      <UniqueIdentifier>{59BED26C-45E4-9CD3-2E2A-229F1AEFC19F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Kernel\Headers\platforms\win32">
       <UniqueIdentifier>{BAF25C6E-A618-27D5-8F5E-ACA07B234CA1}</UniqueIdentifier>
@@ -90,6 +90,9 @@
     </Filter>
     <Filter Include="Particles\Headers\Samplers\CPU">
       <UniqueIdentifier>{E4EE2D7F-D014-F8E5-B95A-7DB1A51F1DB2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles\Headers\Samplers\GPU">
+      <UniqueIdentifier>{E8FF2D7F-D425-F8E5-BD6B-7DB1A9301DB2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Particles\Headers\Storage">
       <UniqueIdentifier>{5B0AF3AA-C7CC-2635-107D-B5C17C7EFF12}</UniqueIdentifier>
@@ -254,21 +257,6 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_units.h">
       <Filter>EngineUtils\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_billboards.h">
-      <Filter>Geometrics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_billboards_c0.h">
-      <Filter>Geometrics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_billboards_c1.h">
-      <Filter>Geometrics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_billboards_c2.h">
-      <Filter>Geometrics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_billboards_ribbon.h">
-      <Filter>Geometrics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_collidable_object.h">
       <Filter>Geometrics\Headers</Filter>
@@ -759,8 +747,8 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\pk_license.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\ios\kr_timers.impl.h">
-      <Filter>Kernel\Headers\platforms\ios</Filter>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\apple\kr_timers.impl.h">
+      <Filter>Kernel\Headers\platforms\apple</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\win32\kr_callstack.impl.h">
       <Filter>Kernel\Headers\platforms\win32</Filter>
@@ -1023,6 +1011,9 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu.h">
       <Filter>Particles\Headers\Samplers\CPU</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\GPU\sampler_gpu.h">
+      <Filter>Particles\Headers\Samplers\GPU</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\Auto\storage_spatial_auto.h">
       <Filter>Particles\Headers\Storage\Auto</Filter>
     </ClInclude>
@@ -1195,6 +1186,9 @@
       <Filter>Particles\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_scene.h">
+      <Filter>Particles\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_scripts_gpu.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_simcache.h">

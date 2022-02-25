@@ -40,7 +40,10 @@ namespace PopcornFX
 		Has_CastShadow = (1 << 10),
 		Has_Atlas = (1 << 11),
 		Has_Size2 = (1 << 12),
-		Has_DiffuseRamp = (1 << 13)
+		Has_DiffuseRamp = (1 << 13),
+		Has_FluidVAT = (1 << 14),
+		Has_SoftVAT = (1 << 15),
+		Has_RigidVAT = (1 << 16)
 	};
 
 	public enum EBlendMode : int
@@ -83,17 +86,19 @@ namespace PopcornFX
 
 			if (desc.m_NormalMap != IntPtr.Zero)
 			{
-				string normalTextureFileName = Marshal.PtrToStringAnsi(desc.m_NormalMap);
-				string filePath = Path.GetDirectoryName(normalTextureFileName) + "/" + Path.GetFileNameWithoutExtension(normalTextureFileName);
-				string extension = Path.GetExtension(normalTextureFileName);
-				normalStr = filePath.Replace('\\', '/') + "_linear" + extension;
+				normalStr = Marshal.PtrToStringAnsi(desc.m_NormalMap);
+				//string normalTextureFileName = Marshal.PtrToStringAnsi(desc.m_NormalMap);
+				//string filePath = Path.GetDirectoryName(normalTextureFileName) + "/" + Path.GetFileNameWithoutExtension(normalTextureFileName);
+				//string extension = Path.GetExtension(normalTextureFileName);
+				//normalStr = filePath.Replace('\\', '/') + "_linear" + extension;
 			}
 			if (desc.m_RoughMetalMap != IntPtr.Zero)
 			{
-				string RMTextureFileName = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
-				string filePath = Path.GetDirectoryName(RMTextureFileName) + "/" + Path.GetFileNameWithoutExtension(RMTextureFileName);
-				string extension = Path.GetExtension(RMTextureFileName);
-				roughtMetalStr = filePath.Replace('\\', '/') + "_linear" + extension;
+				roughtMetalStr = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
+				//string RMTextureFileName = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
+				//string filePath = Path.GetDirectoryName(RMTextureFileName) + "/" + Path.GetFileNameWithoutExtension(RMTextureFileName);
+				//string extension = Path.GetExtension(RMTextureFileName);
+				//roughtMetalStr = filePath.Replace('\\', '/') + "_linear" + extension;
 			}
 			m_NormalMap = normalStr;
 			m_RoughMetalMap = roughtMetalStr;
@@ -127,8 +132,83 @@ namespace PopcornFX
 		}
 	}
 
-
 	[Serializable]
+	public class SBatchVatFeatureDesc
+	{
+		public string m_PositionMap = null;
+		public string m_NormalMap = null;
+		public string m_ColorMap = null;
+		public string m_RotationMap = null;
+		public int m_NumFrames;
+		public bool m_PackedData;
+		public Vector4 m_Color;
+		public Vector2 m_BoundsPivot;
+		public bool m_NormalizedData;
+		public Vector2 m_BoundsPosition;
+		public bool m_PadToPowerOf2;
+		public Vector2 m_PaddedRatio;
+
+		public SBatchVatFeatureDesc(SRenderingFeatureVATDesc desc)
+		{
+			if (desc.m_PositionMap != IntPtr.Zero)
+			{
+				m_PositionMap = Marshal.PtrToStringAnsi(desc.m_PositionMap);
+			}
+			if (desc.m_NormalMap != IntPtr.Zero)
+			{
+				m_NormalMap = Marshal.PtrToStringAnsi(desc.m_NormalMap);
+			}
+			if (desc.m_ColorMap != IntPtr.Zero)
+			{
+				m_ColorMap = Marshal.PtrToStringAnsi(desc.m_ColorMap);
+			}
+			if (desc.m_RotationMap != IntPtr.Zero)
+			{
+				m_RotationMap = Marshal.PtrToStringAnsi(desc.m_RotationMap);
+			}
+
+			m_NumFrames = desc.m_NumFrames;
+			m_PackedData = desc.m_PackedData != 0 ? true : false;
+			m_Color = desc.m_Color;
+			m_BoundsPivot = desc.m_BoundsPivot;
+			m_NormalizedData = desc.m_NormalizedData != 0 ? true : false;
+			m_BoundsPosition = desc.m_BoundsPosition;
+			m_PadToPowerOf2 = desc.m_PadToPowerOf2 != 0 ? true : false;
+			m_PaddedRatio = desc.m_PaddedRatio;
+		}
+
+		internal string GetGeneratedName()
+		{
+			string name = "[Vat:";
+
+			name += " ";
+			name += m_PositionMap == null ? "none" : m_PositionMap;
+			name += " ";
+			name += m_NormalMap == null ? "none" : m_NormalMap;
+			name += " ";
+			name += m_ColorMap == null ? "none" : m_ColorMap;
+			name += " ";
+			name += m_RotationMap == null ? "none" : m_RotationMap;
+			name += " ";
+			name += m_NumFrames;
+			name += " ";
+			name += m_PackedData ? "Packed Data" : "Unpacked Data";
+			name += " ";
+			name += m_Color;
+			name += " ";
+			name += m_BoundsPivot;
+			name += " ";
+			name += m_NormalizedData ? "Normalized Data" : "notNormalized Data";
+			name += " ";
+			name += m_BoundsPosition;
+
+			name += "]";
+			return name;
+		}
+	}
+
+
+		[Serializable]
 	public class SEventDesc
 	{
 		public int		m_Slot;
@@ -164,11 +244,14 @@ namespace PopcornFX
 		public bool					m_HasMeshAtlas;
 		public float				m_InvSoftnessDistance;
 		public string				m_GeneratedName;
+		public SBatchVatFeatureDesc m_VatFeature;
+
 		//Lit Feature
 		public SBatchLitFeatureDesc	m_LitFeature;
 
 		//Internal
 		internal int				m_InternalId;
+		internal int				m_CameraId;
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc, int idx)
 		{
 			string diffuseStr = null;
@@ -192,6 +275,10 @@ namespace PopcornFX
 			m_AlphaRemap = alphaRemapStr;
 			m_BillboardMode = desc.m_BillboardMode;
 			m_InvSoftnessDistance = desc.m_InvSoftnessDistance;
+
+			m_VatFeature = null;
+
+			m_CameraId = desc.m_CameraId;
 
 			unsafe
 			{
@@ -225,6 +312,15 @@ namespace PopcornFX
 			m_MeshAsset = meshAssetStr;
 			m_HasMeshAtlas = desc.m_HasMeshAtlas == 1 ? true : false;
 			
+
+			unsafe
+			{
+				SRenderingFeatureVATDesc* vatDesc = (SRenderingFeatureVATDesc*)desc.m_VatRendering.ToPointer();
+				if (vatDesc != null)
+					m_VatFeature = new SBatchVatFeatureDesc(*vatDesc);
+				else
+					m_VatFeature = null;
+			}
 
 			unsafe
 			{
@@ -272,6 +368,12 @@ namespace PopcornFX
 				finalName += " DoubleSided";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_CastShadow) != 0)
 				finalName += " CastShadow";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_FluidVAT) != 0)
+				finalName += " FluidVAT";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
+				finalName += " SoftVAT";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_RigidVAT) != 0)
+				finalName += " RigidVAT";
 			return finalName.Length == 0 ? " MaterialBasic" : finalName;
 		}
 
@@ -317,6 +419,8 @@ namespace PopcornFX
 			finalName += m_DiffuseMap == null ? "(none)" : m_DiffuseMap;
 			finalName += " ";
 			finalName += m_LitFeature == null ? "(none)" : m_LitFeature.GetGeneratedName();
+			finalName += " ";
+			finalName += m_VatFeature == null ? "(none)" : m_VatFeature.GetGeneratedName();
 			if (m_Type != ERendererType.Mesh)
 			{
 				finalName += " ";

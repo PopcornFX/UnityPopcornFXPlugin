@@ -75,8 +75,22 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/AssetBaker_Cookery.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_Font.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_HBO.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_HBO_AttributeHotfix.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_Mesh.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_StraightCopy.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_Texture.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_VectorField.o
+GENERATED += $(OBJDIR)/AssetBaker_Startup.o
+GENERATED += $(OBJDIR)/ConvexHull.o
+GENERATED += $(OBJDIR)/TextureTrimmer.o
+GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/AssetBaker_Cookery.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven_Font.o
@@ -97,7 +111,7 @@ OBJECTS += $(OBJDIR)/precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-AssetBakerLib
 	$(SILENT) $(LINKCMD)
@@ -123,9 +137,11 @@ clean:
 	@echo Cleaning PK-AssetBakerLib
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

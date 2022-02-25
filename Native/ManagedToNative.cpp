@@ -238,6 +238,14 @@ extern "C"
 		return -1;
 	}
 
+
+	MANAGED_TO_POPCORN_CONVENTION void	SetMaxCameraCount(int count)
+	{
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return);
+
+		CRuntimeManager::Instance().SetMaxCameraCount(count);
+	}
+
 	//----------------------------------------------------------------------------
 
 	MANAGED_TO_POPCORN_CONVENTION void	UpdateCamDesc(int camID, const SCamDesc *desc, ManagedBool update)
@@ -296,7 +304,7 @@ extern "C"
 		}
 
 		const u32					camID = renderEvent;
-		const TArray<SSceneView>	&sceneViews = scene.SceneViews();
+		const TArray<SUnitySceneView>	&sceneViews = scene.SceneViews();
 
 		if (camID >= sceneViews.Count())
 		{
@@ -304,7 +312,8 @@ extern "C"
 			return;
 		}
 
-		scene.BuildDrawCalls(sceneViews[camID]);
+		if (camID == 0)
+			scene.BuildDrawCalls(sceneViews[camID]);
 	}
 
 	//----------------------------------------------------------------------------
@@ -906,6 +915,22 @@ extern "C"
 #if		PK_UNITY_EDITOR
 		ClearNativeToManagedEditorCallbacks();
 #endif
+	}
+
+	//----------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION void	UnloadFx(const char *path)
+	{
+		NEED_PK_RUNTIME_STARTED(return);
+		PK_SCOPEDPROFILE();
+
+		CPKFXScene	&scene = CRuntimeManager::Instance().GetScene();
+
+		// Needs simulation sync
+		if (!PK_VERIFY(scene.GameThread_WaitForUpdateEnd()))
+			return;
+
+		CRuntimeManager::Instance().ClearFxInstances(path);
 	}
 
 	//----------------------------------------------------------------------------

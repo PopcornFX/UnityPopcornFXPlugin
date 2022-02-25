@@ -19,7 +19,7 @@ namespace PopcornFX
 			set { _data = value; }
 		}
 		[SerializeField]
-		private string m_AssetFullPath = "";
+		internal string m_AssetFullPath = "";
 		[SerializeField]
 		private string m_AssetVirtualPath = "";
 

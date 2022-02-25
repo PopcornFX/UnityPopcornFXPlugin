@@ -95,7 +95,6 @@ namespace PopcornFX
 		public PKFxEffectAsset EffectAsset
 		{
 			get { return m_FxAsset; }
-			set { m_FxAsset = value; UpdateEffectAsset(m_FxAsset, true); }
 		}
 		public string EffectName { get { return m_FxName; }  set { m_FxName = value; } }
 
@@ -107,7 +106,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 		void Awake()
 		{
-			PKFxManager.StartupPopcorn(true);
+			PKFxManager.StartupPopcorn(false);
 
 			m_DelayedCallbacks = new List<PKFxRaiseEventCallbackData>();
 			m_Callbacks = new Dictionary<int, PKFxRaiseEventCallbackData>();
@@ -270,7 +269,7 @@ namespace PopcornFX
 			{
 				// Set the m_IsPlaying to true:
 				SetPlayingState(true);  // Do that BEFORE the call to StartEffect as it can call inline the OnFxStopped delegate
-										// Start the FX in the native plugin:
+				// Start the FX in the native plugin:
 				PKFxManager.StartEffect(m_FXGUID, dt, m_PreWarm);
 			}
 		}
@@ -429,6 +428,7 @@ namespace PopcornFX
 		// Will not actually change the asset, just retrieve the attributes and samplers from it
 		public bool UpdateEffectAsset(PKFxEffectAsset updatedAsset, bool resetAllAttributes, bool mismatchAttribsWarning = false)
 		{
+			m_FxAsset = updatedAsset;
 			bool hasChanged = false;
 
 			if (updatedAsset == null)

@@ -164,8 +164,17 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/Main.o
+GENERATED += $(OBJDIR)/SampleScene.o
+GENERATED += $(OBJDIR)/SimInterface.o
+GENERATED += $(OBJDIR)/SimInterfaceImplem_CPU.o
+GENERATED += $(OBJDIR)/SimInterfaceImplem_GPU.o
+GENERATED += $(OBJDIR)/SimInterfaceImplem_ISPC.o
+GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/GPUContext.o
 OBJECTS += $(OBJDIR)/Main.o
 OBJECTS += $(OBJDIR)/SampleScene.o
@@ -181,7 +190,7 @@ OBJECTS += $(OBJDIR)/precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-Sample_06_SimInterface
 	$(SILENT) $(LINKCMD)
@@ -207,9 +216,11 @@ clean:
 	@echo Cleaning PK-Sample_06_SimInterface
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

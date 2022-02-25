@@ -154,8 +154,115 @@ PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -include pk_compiler_warnings.h
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/AbstractCommandBuffer.o
+GENERATED += $(OBJDIR)/AbstractConstantSet.o
+GENERATED += $(OBJDIR)/AbstractFrameBuffer.o
+GENERATED += $(OBJDIR)/AbstractGpuBuffer.o
+GENERATED += $(OBJDIR)/AbstractRenderPass.o
+GENERATED += $(OBJDIR)/AbstractRenderTarget.o
+GENERATED += $(OBJDIR)/AbstractTexture.o
+GENERATED += $(OBJDIR)/D3D11ApiManager.o
+GENERATED += $(OBJDIR)/D3D11CommandBuffer.o
+GENERATED += $(OBJDIR)/D3D11ComputeState.o
+GENERATED += $(OBJDIR)/D3D11ConstantSampler.o
+GENERATED += $(OBJDIR)/D3D11ConstantSet.o
+GENERATED += $(OBJDIR)/D3D11FrameBuffer.o
+GENERATED += $(OBJDIR)/D3D11GpuBuffer.o
+GENERATED += $(OBJDIR)/D3D11PopcornEnumConversion.o
+GENERATED += $(OBJDIR)/D3D11QueryPool.o
+GENERATED += $(OBJDIR)/D3D11RHI.o
+GENERATED += $(OBJDIR)/D3D11ReadBackTexture.o
+GENERATED += $(OBJDIR)/D3D11RenderPass.o
+GENERATED += $(OBJDIR)/D3D11RenderState.o
+GENERATED += $(OBJDIR)/D3D11RenderTarget.o
+GENERATED += $(OBJDIR)/D3D11ShaderModule.o
+GENERATED += $(OBJDIR)/D3D11ShaderProgram.o
+GENERATED += $(OBJDIR)/D3D11Texture.o
+GENERATED += $(OBJDIR)/D3D12ApiManager.o
+GENERATED += $(OBJDIR)/D3D12CommandBuffer.o
+GENERATED += $(OBJDIR)/D3D12ComputeState.o
+GENERATED += $(OBJDIR)/D3D12ConstantSampler.o
+GENERATED += $(OBJDIR)/D3D12ConstantSet.o
+GENERATED += $(OBJDIR)/D3D12DescriptorAllocator.o
+GENERATED += $(OBJDIR)/D3D12Fence.o
+GENERATED += $(OBJDIR)/D3D12FrameBuffer.o
+GENERATED += $(OBJDIR)/D3D12GpuBuffer.o
+GENERATED += $(OBJDIR)/D3D12PopcornEnumConversion.o
+GENERATED += $(OBJDIR)/D3D12QueryPool.o
+GENERATED += $(OBJDIR)/D3D12RHI.o
+GENERATED += $(OBJDIR)/D3D12ReadBackTexture.o
+GENERATED += $(OBJDIR)/D3D12RenderPass.o
+GENERATED += $(OBJDIR)/D3D12RenderState.o
+GENERATED += $(OBJDIR)/D3D12RenderTarget.o
+GENERATED += $(OBJDIR)/D3D12ShaderModule.o
+GENERATED += $(OBJDIR)/D3D12ShaderProgram.o
+GENERATED += $(OBJDIR)/D3D12Texture.o
+GENERATED += $(OBJDIR)/D3DCompileShader.o
+GENERATED += $(OBJDIR)/D3DPopcornEnumConversion.o
+GENERATED += $(OBJDIR)/EnumHelper.o
+GENERATED += $(OBJDIR)/IFrameBuffer.o
+GENERATED += $(OBJDIR)/IGpuBuffer.o
+GENERATED += $(OBJDIR)/IReadBackTexture.o
+GENERATED += $(OBJDIR)/IRenderPass.o
+GENERATED += $(OBJDIR)/IRenderTarget.o
+GENERATED += $(OBJDIR)/NullApiManager.o
+GENERATED += $(OBJDIR)/NullCommandBuffer.o
+GENERATED += $(OBJDIR)/NullConstantSampler.o
+GENERATED += $(OBJDIR)/NullConstantSet.o
+GENERATED += $(OBJDIR)/NullFrameBuffer.o
+GENERATED += $(OBJDIR)/NullGpuBuffer.o
+GENERATED += $(OBJDIR)/NullReadBackTexture.o
+GENERATED += $(OBJDIR)/NullRenderPass.o
+GENERATED += $(OBJDIR)/NullRenderState.o
+GENERATED += $(OBJDIR)/NullRenderTarget.o
+GENERATED += $(OBJDIR)/NullShaderModule.o
+GENERATED += $(OBJDIR)/NullShaderProgram.o
+GENERATED += $(OBJDIR)/NullTexture.o
+GENERATED += $(OBJDIR)/OpenGLApiManager.o
+GENERATED += $(OBJDIR)/OpenGLCommandBuffer.o
+GENERATED += $(OBJDIR)/OpenGLComputeState.o
+GENERATED += $(OBJDIR)/OpenGLConstantSampler.o
+GENERATED += $(OBJDIR)/OpenGLConstantSet.o
+GENERATED += $(OBJDIR)/OpenGLFrameBuffer.o
+GENERATED += $(OBJDIR)/OpenGLGpuBuffer.o
+GENERATED += $(OBJDIR)/OpenGLPopcornEnumConversion.o
+GENERATED += $(OBJDIR)/OpenGLQueryPool.o
+GENERATED += $(OBJDIR)/OpenGLRHI.o
+GENERATED += $(OBJDIR)/OpenGLReadBackTexture.o
+GENERATED += $(OBJDIR)/OpenGLRenderPass.o
+GENERATED += $(OBJDIR)/OpenGLRenderState.o
+GENERATED += $(OBJDIR)/OpenGLRenderTarget.o
+GENERATED += $(OBJDIR)/OpenGLShaderModule.o
+GENERATED += $(OBJDIR)/OpenGLShaderProgram.o
+GENERATED += $(OBJDIR)/OpenGLTexture.o
+GENERATED += $(OBJDIR)/PixelFormatFallbacks.o
+GENERATED += $(OBJDIR)/RHIInit.o
+GENERATED += $(OBJDIR)/SConstantSetLayout.o
+GENERATED += $(OBJDIR)/SShaderBindings.o
+GENERATED += $(OBJDIR)/ShaderConstantBindingGenerator.o
+GENERATED += $(OBJDIR)/Startup.o
+GENERATED += $(OBJDIR)/VulkanApiManager.o
+GENERATED += $(OBJDIR)/VulkanCommandBuffer.o
+GENERATED += $(OBJDIR)/VulkanComputeState.o
+GENERATED += $(OBJDIR)/VulkanConstantSampler.o
+GENERATED += $(OBJDIR)/VulkanConstantSet.o
+GENERATED += $(OBJDIR)/VulkanFrameBuffer.o
+GENERATED += $(OBJDIR)/VulkanGpuBuffer.o
+GENERATED += $(OBJDIR)/VulkanPopcornEnumConversion.o
+GENERATED += $(OBJDIR)/VulkanQueryPool.o
+GENERATED += $(OBJDIR)/VulkanRHI.o
+GENERATED += $(OBJDIR)/VulkanReadBackTexture.o
+GENERATED += $(OBJDIR)/VulkanRenderPass.o
+GENERATED += $(OBJDIR)/VulkanRenderState.o
+GENERATED += $(OBJDIR)/VulkanRenderTarget.o
+GENERATED += $(OBJDIR)/VulkanShaderModule.o
+GENERATED += $(OBJDIR)/VulkanShaderProgram.o
+GENERATED += $(OBJDIR)/VulkanTexture.o
+GENERATED += $(OBJDIR)/glew.o
+GENERATED += $(OBJDIR)/rhi_precompiled.o
 OBJECTS += $(OBJDIR)/AbstractCommandBuffer.o
 OBJECTS += $(OBJDIR)/AbstractConstantSet.o
 OBJECTS += $(OBJDIR)/AbstractFrameBuffer.o
@@ -269,7 +376,7 @@ OBJECTS += $(OBJDIR)/rhi_precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-RHI
 	$(SILENT) $(LINKCMD)
@@ -295,9 +402,11 @@ clean:
 	@echo Cleaning PK-RHI
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

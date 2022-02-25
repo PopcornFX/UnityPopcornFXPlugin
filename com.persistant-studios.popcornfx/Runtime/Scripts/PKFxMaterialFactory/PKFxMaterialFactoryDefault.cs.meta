@@ -14,6 +14,12 @@ MonoImporter:
       type: 2}
   - m_OpaqueMeshFallback: {fileID: 11400000, guid: 2ed0a31622b4bde4fa94fcc3efb0fca3,
       type: 2}
+  - m_MeshVATFluidFallback: {fileID: 11400000, guid: f54ce8df91b089e4caf42e962afc27fa,
+      type: 2}
+  - m_MeshVATSoftFallback: {fileID: 11400000, guid: dab802d84246cdb4885ed185ab4878b7,
+      type: 2}
+  - m_MeshVATRigidFallback: {fileID: 11400000, guid: aa12ac4816b3b1a4baa25f3f9c86cae7,
+      type: 2}
   - m_VertexBillboardingOpaque: {fileID: 11400000, guid: d19a42aac00a18d4a8d50480e52271a7,
       type: 2}
   - m_CPUBillboardingOpaque: {fileID: 11400000, guid: 55f3db6beebff084da8144594da18bab,

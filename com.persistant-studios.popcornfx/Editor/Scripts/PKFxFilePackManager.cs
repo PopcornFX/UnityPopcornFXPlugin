@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System;
+using System.Collections.Generic;
 
 namespace PopcornFX
 {
@@ -12,6 +13,7 @@ namespace PopcornFX
 	public class PKFxFilePackManager : AssetPostprocessor
 	{
 		static private bool m_DllLoaded = false;
+		static private List<PKFxEmitter> m_FxsToRestart = new List<PKFxEmitter>();
 
 		//----------------------------------------------------------------------------
 
@@ -31,7 +33,9 @@ namespace PopcornFX
 
 		static bool Initialize()
 		{
-			if (PKFxManager.IsDllLoaded() && !Application.isPlaying)
+			if (Application.isPlaying && !PKFxSettings.EnableHotreloadInPlayMode)
+				return false;
+			if (PKFxManager.IsDllLoaded())
 			{
 				PKFxManager.StartupPopcorn(false);
 				PKFxManager.StartupPopcornFileWatcher(PKFxSettings.EnableEffectHotreload);
@@ -56,7 +60,7 @@ namespace PopcornFX
 
 		static void Update()
 		{
-			if (EditorApplication.isPlaying == true)
+			if (Application.isPlaying && !PKFxSettings.EnableHotreloadInPlayMode)
 				return;
 			if (m_DllLoaded == false)
 			{
@@ -69,16 +73,21 @@ namespace PopcornFX
 			int totalChanges = 0;
 			int remainingChanges = 0;
 			bool unstackChangesSuccess = true;
+			List<string> updatedAssets = null;
 
 			try // Need try catch to avoid dead lock!
 			{
 				unstackChangesSuccess = PKFxManager.PullPackWatcherChanges(out totalChanges);
 
+				if (totalChanges > 0)
+					updatedAssets = new List<string>(totalChanges);
 				remainingChanges = totalChanges;
 				while (remainingChanges > 0 && unstackChangesSuccess)
 				{
 					unstackChangesSuccess = PKFxManager.PullPackWatcherChanges(out remainingChanges);
 
+					if (!updatedAssets.Contains(PKFxManager.GetImportedAssetPath()))
+						updatedAssets.Add(PKFxManager.GetImportedAssetPath());
 					if (EditorUtility.DisplayCancelableProgressBar("Baking and importing PopcornFX effects",
 																	"Importing \'" + PKFxManager.GetImportedAssetName() + "\' and its dependencies.",
 																	(float)(totalChanges - remainingChanges) / (float)totalChanges))
@@ -100,6 +109,33 @@ namespace PopcornFX
 			}
 
 			PKFxManager.UnlockPackWatcherChanges();
+
+			// Restart effects from the previous update:
+			foreach (PKFxEmitter effect in m_FxsToRestart)
+			{
+				effect.StartEffect();
+			}
+			m_FxsToRestart.Clear();
+			if (Application.isPlaying && updatedAssets != null)
+			{
+				// Get the list of effects currently running:
+				foreach (KeyValuePair<int, PKFxEmitter> effect in PKFxEmitter.g_ListEffects)
+				{
+					foreach (string curAsset in updatedAssets)
+					{
+						if (effect.Value.EffectAsset.AssetVirtualPath == curAsset)
+						{
+							m_FxsToRestart.Add(effect.Value);
+						}
+					}
+				}
+				// UnloadEffect kills and unloads each effect that has been updated:
+				foreach (string curAsset in updatedAssets)
+				{
+					PKFxManager.UnloadEffect(curAsset);
+				}
+				AssetDatabase.Refresh();
+			}
 
 			// We can display the PopcornFX logs here for baking errors:
 			PKFxLogger.LogUpdate(PKFxManager.EPopcornLogLevels.Level_Info);

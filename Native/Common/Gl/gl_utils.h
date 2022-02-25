@@ -35,14 +35,6 @@
 #	define	PK_BUILD_WITH_OPENGL3	1
 #endif
 
-//
-// uncomment to force OpenGL 2:
-//
-//#ifdef PK_BUILD_WITH_OPENGL3
-//#	undef	PK_BUILD_WITH_OPENGL3
-//#	define	PK_BUILD_WITH_OPENGL3	0
-//#endif
-
 #if 1
 #	define PK_ASSERT_GL_ERROR(__errorCode, __fmt, ...)		do { \
 		const GLenum	errorCode = __errorCode; \
@@ -155,6 +147,11 @@ bool			glHasExtension(const char *extensionString, const char *messageIfNotSuppo
 bool			glHasExtension(const char *extensionString, bool otherConditionToBeTrue, const char *messageIfNotSupported);
 
 bool			glGLVersionGE(int maj, int min);
+
+//----------------------------------------------------------------------------
+
+bool			CheckShaderCompilation(GLuint shaderModule);
+GLuint			CreateShaderProgramFromSources(const PopcornFX::CString &vertexShaderSource, const PopcornFX::CString &fragmentShaderSource);
 
 //----------------------------------------------------------------------------
 #endif /* __SAMPLEGL_GL_UTILS_H__ */

@@ -66,6 +66,9 @@ namespace PopcornFX
 		public bool m_EnableLocalizedPages;
 		public bool m_EnableLocalizedByDefault;
 
+		public bool m_FreeUnusedBatches;
+		public uint m_FrameCountBeforeFreeingUnusedBatches;
+
 		public bool m_IsUnitTesting;
 
 		// Threading
@@ -170,6 +173,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern int UnstackLog(StringBuilder dstBuffer, int dstSize, ref int logSeverity);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetMaxCameraCount(int number);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void UpdateCamDesc(int camID, ref SCamDesc desc, bool update);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void UpdateParticles(float DT);
@@ -260,6 +265,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void DeepReset();
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void UnloadFx(string path);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void ClearAllCallbacks();
 
 #if UNITY_EDITOR
@@ -305,12 +312,11 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.9.20 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.11.2 for " + m_UnityVersion;
 #if UNITY_EDITOR
 		public static string m_CurrentVersionString = "";
 #endif
 		public static bool m_IsStarted = false;
-		public static bool m_IsStartedAsPlayMode = false;
 		public static int m_DistortionLayer = 31;
 
 		public static GameObject m_RenderersRoot = null;
@@ -482,7 +488,6 @@ namespace PopcornFX
 			if (cameraID >= 0)
 			{
 				UInt32 eventID = ((UInt16)cameraID | POPCORN_MAGIC_NUMBER);
-
 				GL.IssuePluginEvent(GetRenderEventFunc(), (int)eventID);
 			}
 			else
@@ -597,6 +602,11 @@ namespace PopcornFX
 		{
 			foreach (PKFxEffectAsset.DependencyDesc depDesc in fxAsset.m_Dependencies)
 			{
+				if (depDesc.m_Object == null)
+				{
+					Debug.LogWarning("Dependency: \"" + depDesc.m_Path + "\" of Effect: \"" + fxAsset.AssetVirtualPath + "\" is null, Reimport your effect");
+					return;
+				}
 				PKFxAsset depAsset = depDesc.m_Object as PKFxAsset;
 
 				PKFxEffectAsset depFx = depDesc.m_Object as PKFxEffectAsset;
@@ -672,6 +682,15 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		public static void UnloadFxInDependencies(string path)
+		{
+			// May be null when recompiling C#
+			if (m_Dependencies != null)
+				m_Dependencies.RemoveAll(x => x.AssetVirtualPath == path);
+		}
+
+		//----------------------------------------------------------------------------
+
 		public static void ClearRenderers()
 		{
 			m_CurrentRenderersGUID = 0;
@@ -690,7 +709,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private static GameObject GetNewRenderingObject(string name)
+		public static GameObject GetNewRenderingObject(string name)
 		{
 			if (m_RenderersRoot == null)
 			{
@@ -705,7 +724,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private static void SetupSliceInRenderingObject(SMeshDesc desc)
+		public static void SetupSliceInRenderingObject(SMeshDesc desc)
 		{
 			GameObject gameObject = desc.m_RenderingObject;
 
@@ -738,7 +757,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private static void SetupProceduralInRenderingObject(SMeshDesc desc)
+		public static void SetupProceduralInRenderingObject(SMeshDesc desc)
 		{
 			GameObject gameObject = desc.m_RenderingObject;
 
@@ -764,7 +783,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 		// Sets up the root gameobject for the different mesh "slices" with the same material.
-		private static int SetupRenderingObject(GameObject renderingObject,
+		public static int SetupRenderingObject(GameObject renderingObject,
 												SBatchDesc batchDesc,
 												Material mat)
 		{
@@ -788,7 +807,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private static int SetupMeshRenderingObject(GameObject renderingObject, SBatchDesc batchDesc, Material mat)
+		public static int SetupMeshRenderingObject(GameObject renderingObject, SBatchDesc batchDesc, Material mat)
 		{
 			int newId = m_CurrentRenderersGUID++;
 
@@ -797,6 +816,9 @@ namespace PopcornFX
 			renderer.m_Material = mat;
 
 			PKFxSettings.MaterialFactory.SetupMeshRenderer(batchDesc, renderingObject, renderer);
+
+			if (renderer.Meshes.Length == 0)
+				return -1;
 
 			var filter = renderingObject.AddComponent<MeshFilter>();
 			filter.mesh = renderer.Meshes[0];

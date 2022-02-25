@@ -21,6 +21,7 @@ namespace PopcornFX
 
 		//Advanced
 		public string					m_MeshColorPropertyName = "_BaseColor";
+		public string					m_MeshCursorPropertyName = "_VATCursor";
 		public string					m_NormalMapPropertyName = null;
 
 		public PKFxRenderFeatureBinding()
@@ -95,6 +96,13 @@ namespace PopcornFX
 			if (m_MeshColorPropertyName == null || m_MeshColorPropertyName.Length == 0)
 				return null;
 			return m_MeshColorPropertyName;
+		}
+
+		public string GetMeshVATCursorPropertyName()
+		{
+			if (m_MeshCursorPropertyName == null || m_MeshCursorPropertyName.Length == 0)
+				return null;
+			return m_MeshCursorPropertyName;
 		}
 
 		public string GetNormalMapPropertyName()

@@ -43,10 +43,11 @@
 #include <pk_maths/include/pk_maths_type_converters.h>
 #include <pk_base_object/include/hbo_helpers.h>
 
-#include <pk_geometrics/include/ge_billboards.h>	// for CBillboarderConfig
+//#include <pk_geometrics/include/ge_billboards.h>	// for CBillboarderConfig
 
-#include <pk_render_helpers/include/rh_init.h>	// for CBillboarderConfig
+#include <pk_render_helpers/include/rh_init.h>
 #include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
+#include <pk_render_helpers/include/basic_renderer_properties/rh_vertex_animation_renderer_properties.h>
 
 #if	(PK_BUILD_WITH_D3D11_SUPPORT != 0)
 #	include "UnityGraphicsAPI/IUnityGraphicsD3D11.h"
@@ -533,6 +534,32 @@ bool	CRuntimeManager::InitializeInstanceIFN(const SPopcornFxSettings *settings)
 	return true;
 }
 
+void	CRuntimeManager::SetMaxCameraCount(int count)
+{
+	if (!PK_VERIFY(count > 0))
+		return;
+	CParticleMediumCollection		*medCol = m_ParticleScene->GetParticleMediumCollection(false);
+	CParticleMediumCollection		*medColMeshes = m_ParticleScene->GetParticleMediumCollection(true);
+	TArray<SUnitySceneView>				&sceneViews = m_ParticleScene->SceneViewsForUpdate();
+
+	for (u32 i = 0; i < sceneViews.Count(); ++i)
+	{
+		medCol->UnregisterView(sceneViews[i].m_UserData.m_CamSlotIdxInMedCol);
+		if (medCol != medColMeshes)
+			medColMeshes->UnregisterView(sceneViews[i].m_UserData.m_CamSlotIdxInMeshMedCol);
+	}
+
+	if (!sceneViews.Resize(count))
+		return;
+
+	for (u32 i = 0; i < sceneViews.Count(); ++i)
+	{
+		sceneViews[i].m_UserData.m_CamSlotIdxInMedCol = medCol->RegisterView();
+		if (medCol != medColMeshes)
+			sceneViews[i].m_UserData.m_CamSlotIdxInMeshMedCol = medColMeshes->RegisterView();
+	}
+}
+
 //----------------------------------------------------------------------------
 
 CRuntimeManager	&CRuntimeManager::Instance()
@@ -1015,6 +1042,24 @@ void	CRuntimeManager::ClearAllInstances(bool managedIsCleared)
 
 //----------------------------------------------------------------------------
 
+void	CRuntimeManager::ClearFxInstances(const char *fxPath)
+{
+	CString pathToClear = fxPath;
+
+	for (u32 i = 0; i < m_Effects.Count(); ++i)
+	{
+		if (m_Effects[i] != null && m_Effects[i]->Path() == pathToClear)
+		{
+			m_Effects[i]->KillFX();
+			OnFxStopped(i);
+		}
+	}
+	m_PreloadedFx.Remove(CStringId(pathToClear));
+	CParticleEffect::Unload(pathToClear);
+}
+
+//----------------------------------------------------------------------------
+
 void	CRuntimeManager::SceneMeshClear()
 {
 	m_ParticleScene->UnsetCollisionMesh();
@@ -1166,7 +1211,7 @@ void	CRuntimeManager::ExecDelayedManagedToNativeMethods()
 
 //----------------------------------------------------------------------------
 
-bool		CRuntimeManager::OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount, const SRetrieveRendererInfo *info)
+bool		CRuntimeManager::OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount, const SRetrieveRendererInfo *info, bool *delayedResult)
 {
 	if (CCurrentThread::IsMainThread())
 	{
@@ -1174,6 +1219,7 @@ bool		CRuntimeManager::OnResizeRenderer(int rendererGUID, int particleCount, int
 		ManagedBool		resized = ::OnResizeRenderer(rendererGUID, particleCount, reservedVertexCount, reservedIndexCount);
 		if (resized)
 			OnRetrieveRendererBufferInfo(rendererGUID, info);
+		*delayedResult = true;
 		return true;
 	}
 	else
@@ -1190,6 +1236,7 @@ bool		CRuntimeManager::OnResizeRenderer(int rendererGUID, int particleCount, int
 		cb.m_ReservedVertexCount = reservedVertexCount;
 		cb.m_ReservedIndexCount = reservedIndexCount;
 		cb.m_BufferInfo = *info;
+		cb.m_DelayedResult = delayedResult;
 		return false;
 	}
 }
@@ -1319,6 +1366,7 @@ void			CRuntimeManager::ExecDelayedNativeToManagedMethods()
 		ManagedBool		resized = ::OnResizeRenderer(cb->m_RendererGUID, cb->m_ParticleCount, cb->m_ReservedVertexCount, cb->m_ReservedIndexCount);
 		if (resized)
 			::OnRetrieveRendererBufferInfo(cb->m_RendererGUID, &cb->m_BufferInfo);
+		*(cb->m_DelayedResult) = true;
 	}
 	m_GameThread_OnResizeRenderer.Clear();
 	PK_FOREACH(cb, m_GameThread_OnSetParticleCount)
@@ -1684,26 +1732,13 @@ void	CRuntimeManager::_ExecUpdateCamDesc(int camID, SCamDesc desc, bool update)
 	(void)update;
 	CParticleMediumCollection		*medCol = m_ParticleScene->GetParticleMediumCollection(false);
 	CParticleMediumCollection		*medColMeshes = m_ParticleScene->GetParticleMediumCollection(true);
-	TArray<SSceneView>				&sceneViews = m_ParticleScene->SceneViewsForUpdate();
-
-	if (sceneViews.Count() < (u32)(camID + 1))
-	{
-		if (!sceneViews.Resize(camID + 1))
-			return;
-	}
+	TArray<SUnitySceneView>				&sceneViews = m_ParticleScene->SceneViewsForUpdate();
 
 	PK_ASSERT(s32(sceneViews.Count()) >= camID);
-	SSceneView		&sceneView = sceneViews[camID];
+	if (sceneViews.Count() < (u32)(camID + 1))
+		return;
 
-	if (!sceneView.m_UserData.m_CamSlotIdxInMedCol.Valid())
-	{
-		sceneView.m_UserData.m_CamSlotIdxInMedCol = medCol->RegisterView();
-		if (medCol != medColMeshes)
-		{
-			sceneView.m_UserData.m_CamSlotIdxInMeshMedCol = medColMeshes->RegisterView();
-		}
-	}
-
+	SUnitySceneView	&sceneView = sceneViews[camID];
 	CFloat4x4	camTransform = desc.m_ViewMatrix.Inverse();
 	CFloat3		axisForward = camTransform.StrippedXAxis().Cross(camTransform.StrippedYAxis());
 	camTransform.StrippedZAxis() = axisForward;
@@ -1853,6 +1888,7 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup()
 		CCoordinateFrame::SetGlobalFrame(Frame_LeftHand_Y_Up);
 
 		BasicRendererProperties::Startup();
+		VertexAnimationRendererProperties::Startup();
 
 		PK_LOG_MODULE_INIT_START;
 		PK_LOG_MODULE_INIT_END;

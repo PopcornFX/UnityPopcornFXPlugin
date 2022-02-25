@@ -39,6 +39,9 @@ namespace PopcornFX
 		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUBillboardingFallback;
 		[HideInInspector]public PKFxRenderFeatureBinding			m_TransparentMeshFallback;
 		[HideInInspector]public PKFxRenderFeatureBinding			m_OpaqueMeshFallback;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_MeshVATFluidFallback;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_MeshVATSoftFallback;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_MeshVATRigidFallback;
 		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingOpaque;
 		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUBillboardingOpaque;
 
@@ -132,6 +135,8 @@ namespace PopcornFX
 
 			if (rawPath != null)
 			{
+				rawPath = rawPath.Replace('\\', '/');
+				rawPath = rawPath.Replace("//", "/");
 				PKFxEffectAsset.DependencyDesc DepDesc = null;
 
 				if (isLinear)
@@ -141,7 +146,9 @@ namespace PopcornFX
 					DepDesc = asset.m_Dependencies.Find(x => path.Contains(x.m_Path));
 				}
 				if (DepDesc == null)
+				{
 					DepDesc = asset.m_Dependencies.Find(x => rawPath.Contains(x.m_Path));
+				}
 				if (DepDesc != null)
 					texture = DepDesc.m_Object as Texture;
 
@@ -169,6 +176,33 @@ namespace PopcornFX
 			}
 			Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName);
 			return null;
+		}
+
+		// Replace bindings with legacy ones, if it exists.
+		// Corresponding legacy bindings are resolved from path as follow:
+		// "baseBindingDirectory/Legacy/version/baseBindingName"
+		protected void ReplaceBindingsWithLegacy()
+		{
+#if UNITY_2020 || UNITY_2019
+			for (int i = 0; i < m_RenderFeatureBindings.Count; i++)
+			{
+				string	path = AssetDatabase.GetAssetPath(m_RenderFeatureBindings[i]);
+				int		insertAt = path.LastIndexOf("/") + 1;
+
+				{
+					PKFxRenderFeatureBinding legacyBinding = AssetDatabase.LoadAssetAtPath<PKFxRenderFeatureBinding>(path.Insert(insertAt, "Legacy/2020/"));
+					if (legacyBinding != null)
+						m_RenderFeatureBindings[i] = legacyBinding;
+				}
+#if UNITY_2019
+				{
+					PKFxRenderFeatureBinding legacyBinding = AssetDatabase.LoadAssetAtPath<PKFxRenderFeatureBinding>(path.Insert(insertAt, "Legacy/2019/"));
+					if (legacyBinding != null)
+						m_RenderFeatureBindings[i] = legacyBinding;
+				}
+#endif
+			}
+#endif
 		}
 	}
 }

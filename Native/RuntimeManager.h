@@ -79,6 +79,8 @@ public:
 	// Handle singleton startup etc...
 	static bool				IsInstanceInitialized();
 	static bool				InitializeInstanceIFN(const SPopcornFxSettings *settings); // Create the scene and startup PopcornFX
+
+	void					SetMaxCameraCount(int count);
 	static CRuntimeManager	&Instance();
 
 	static SMeshDataToFill				*CreateMeshDataToFill(int vertexCount, int indexCount, int bonesCount, int vertexAttributes);
@@ -132,6 +134,7 @@ public:
 	CGuid								FxRegister(CPKFXEffect *fx);
 	CPKFXEffect							*FxGet(CGuid guid);
 	void								ClearAllInstances(bool managedIsCleared = false);
+	void								ClearFxInstances(const char *fxPath);
 
 	TMemoryView<const float * const>	GetSpectrumPyramid(CStringId name, u32 &outBaseCount);
 	TMemoryView<const float * const>	GetWaveformPyramid(CStringId name, u32 &outBaseCount);
@@ -151,7 +154,7 @@ public:
 	void								ExecDelayedManagedToNativeMethods();
 
 	// CAN BE DELAYED: Native to managed (return false if delayed)
-	bool								OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount, const SRetrieveRendererInfo *info);
+	bool								OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount, const SRetrieveRendererInfo *info, bool* delayedResult);
 	bool								OnSetParticleCount(int rendererGUID, int particleCount);
 	bool								OnSetRendererActive(int rendererGUID, ManagedBool active);
 	bool								OnUpdateRendererBounds(int rendererGUID, const SUpdateRendererBounds *bounds);

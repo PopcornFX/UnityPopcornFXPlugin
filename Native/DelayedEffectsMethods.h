@@ -78,6 +78,7 @@ struct SOnResizeRenderer
 	int						m_ReservedVertexCount;
 	int						m_ReservedIndexCount;
 	SRetrieveRendererInfo	m_BufferInfo;
+	bool					*m_DelayedResult;
 };
 
 struct SOnSetParticleCount

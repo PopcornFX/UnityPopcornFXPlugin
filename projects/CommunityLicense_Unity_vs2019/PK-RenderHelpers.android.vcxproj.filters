@@ -7,8 +7,14 @@
     <Filter Include="Headers\basic_renderer_properties">
       <UniqueIdentifier>{94D8D18B-0047-270B-4930-E20AB5DD1CA7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\batch_jobs">
+      <UniqueIdentifier>{5F763A5A-4B5A-FBAF-B4BA-F502A0BDE531}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\batches">
       <UniqueIdentifier>{CAAF6598-363B-D35C-3F4C-5651AB562F5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\billboarders">
+      <UniqueIdentifier>{253BF426-11CA-7DF0-BAE8-91EBA6568E96}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\buffer_pool">
       <UniqueIdentifier>{23EDF09C-8F4E-CEAA-18BC-145D841C056A}</UniqueIdentifier>
@@ -18,6 +24,9 @@
     </Filter>
     <Filter Include="Headers\frame_collector">
       <UniqueIdentifier>{A1C2F4A7-0DFA-3C3F-1604-A16282BA6338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\frame_collector\legacy">
+      <UniqueIdentifier>{A57E694B-91A4-33B2-7AEA-B87D66AF587E}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\resource_manager">
       <UniqueIdentifier>{9294F164-7EB9-40E5-A704-267593883F03}</UniqueIdentifier>
@@ -31,8 +40,17 @@
     <Filter Include="Sources\basic_renderer_properties">
       <UniqueIdentifier>{5C828A56-C8F0-DFD5-11DA-9AD57D87D571}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\batch_jobs">
+      <UniqueIdentifier>{27C96BB5-13AD-2C0B-7C0D-275E6810178D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\batches">
       <UniqueIdentifier>{92B7728E-FE42-E052-0754-6347735E3C53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\billboarders">
+      <UniqueIdentifier>{ED5FC513-D9EE-4EDD-820D-63D86E7B5F83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\billboarders\include">
+      <UniqueIdentifier>{60247608-4CDF-65B4-F596-DEFEE130B044}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\buffer_pool">
       <UniqueIdentifier>{EB984C5E-57FA-296C-E067-701E4CC8602B}</UniqueIdentifier>
@@ -56,6 +74,48 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_vertex_animation_renderer_properties.h">
       <Filter>Headers\basic_renderer_properties</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_cpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_gpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_cpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_gpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_helpers.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_light_std.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_cpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_gpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_cpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_gpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_sound_std.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_cpu.h">
+      <Filter>Headers\batch_jobs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_gpu.h">
+      <Filter>Headers\batch_jobs</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.h">
       <Filter>Headers\batches</Filter>
@@ -104,6 +164,21 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.inl">
       <Filter>Headers\batches</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards.h">
+      <Filter>Headers\billboarders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c0.h">
+      <Filter>Headers\billboarders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c1.h">
+      <Filter>Headers\billboarders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c2.h">
+      <Filter>Headers\billboarders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_ribbon.h">
+      <Filter>Headers\billboarders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.h">
       <Filter>Headers\buffer_pool</Filter>
@@ -183,6 +258,18 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu_tasks.h">
       <Filter>Headers\draw_requests</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.h">
+      <Filter>Headers\frame_collector\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.inl">
+      <Filter>Headers\frame_collector\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_data_legacy.h">
+      <Filter>Headers\frame_collector\legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_batch_drawer.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.h">
       <Filter>Headers\frame_collector</Filter>
     </ClInclude>
@@ -198,13 +285,13 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.h">
       <Filter>Headers\frame_collector</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.inl">
-      <Filter>Headers\frame_collector</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_data.h">
       <Filter>Headers\frame_collector</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_particle_render_data_factory.h">
+      <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_render_medium.h">
       <Filter>Headers\frame_collector</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h">
@@ -218,6 +305,12 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\rh_init.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_billboards.h">
+      <Filter>Sources\billboarders\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons.h">
+      <Filter>Sources\billboarders\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\include\pv_renderhelpers.h">
       <Filter>Sources\include</Filter>
@@ -233,8 +326,74 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_vertex_animation_renderer_properties.cpp">
       <Filter>Sources\basic_renderer_properties</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_cpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_gpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_decal_cpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_decal_gpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_helpers.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_light_std.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_mesh_cpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_mesh_gpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_ribbon_cpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_ribbon_gpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_sound_std.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_triangle_cpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_triangle_gpu.cpp">
+      <Filter>Sources\batch_jobs</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batches\rh_billboard_ribbon_batch_helper.cpp">
       <Filter>Sources\batches</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_capsule.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_quad.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_spheroidal.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_planar_quad.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_screen_quad.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_standard.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_view_quad.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_ribbons.cpp">
+      <Filter>Sources\billboarders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_ribbons_axial.cpp">
+      <Filter>Sources\billboarders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\buffer_pool\rh_bufferpool.cpp">
       <Filter>Sources\buffer_pool</Filter>
@@ -302,7 +461,16 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle_cpu_tasks.cpp">
       <Filter>Sources\draw_requests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_batch_drawer.cpp">
+      <Filter>Sources\frame_collector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_frame_collector.cpp">
+      <Filter>Sources\frame_collector</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_particle_render_data_factory.cpp">
+      <Filter>Sources\frame_collector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_render_medium.cpp">
       <Filter>Sources\frame_collector</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_renderers_walker.cpp">

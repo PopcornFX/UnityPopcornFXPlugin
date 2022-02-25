@@ -76,8 +76,69 @@ PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -include pk_imgui_warnings.h
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/AWindowContext.o
+GENERATED += $(OBJDIR)/AbstractGraphicScene.o
+GENERATED += $(OBJDIR)/BRDFLUT.o
+GENERATED += $(OBJDIR)/BasicSceneShaderDefinitions.o
+GENERATED += $(OBJDIR)/BlueNoise.o
+GENERATED += $(OBJDIR)/Camera.o
+GENERATED += $(OBJDIR)/D3D11Context.o
+GENERATED += $(OBJDIR)/D3D12Context.o
+GENERATED += $(OBJDIR)/DebugHelper.o
+GENERATED += $(OBJDIR)/DeferredScene.o
+GENERATED += $(OBJDIR)/DownSampleTexture.o
+GENERATED += $(OBJDIR)/EGLContext.o
+GENERATED += $(OBJDIR)/EnvironmentMapEntity.o
+GENERATED += $(OBJDIR)/FeatureRenderingSettings.o
+GENERATED += $(OBJDIR)/FrameCollector.o
+GENERATED += $(OBJDIR)/GBuffer.o
+GENERATED += $(OBJDIR)/GLContext.o
+GENERATED += $(OBJDIR)/GLSLShaderGenerator.o
+GENERATED += $(OBJDIR)/GLXContext.o
+GENERATED += $(OBJDIR)/Gizmo.o
+GENERATED += $(OBJDIR)/HLSLShaderGenerator.o
+GENERATED += $(OBJDIR)/ImguiRhiImplem.o
+GENERATED += $(OBJDIR)/LightEntity.o
+GENERATED += $(OBJDIR)/MaterialToRHI.o
+GENERATED += $(OBJDIR)/MeshEntity.o
+GENERATED += $(OBJDIR)/MetalShaderGenerator.o
+GENERATED += $(OBJDIR)/OffscreenContext.o
+GENERATED += $(OBJDIR)/PKSampleInit.o
+GENERATED += $(OBJDIR)/ParticleShaderGenerator.o
+GENERATED += $(OBJDIR)/PipelineCacheHelper.o
+GENERATED += $(OBJDIR)/PopEdShaderDefinitions.o
+GENERATED += $(OBJDIR)/PopcornStartup.o
+GENERATED += $(OBJDIR)/PostFxBloom.o
+GENERATED += $(OBJDIR)/PostFxDistortion.o
+GENERATED += $(OBJDIR)/PostFxFXAA.o
+GENERATED += $(OBJDIR)/PostFxToneMapping.o
+GENERATED += $(OBJDIR)/ProfilerRenderer.o
+GENERATED += $(OBJDIR)/RHIBillboardingBatchPolicy.o
+GENERATED += $(OBJDIR)/RHIBillboardingBatchPolicy_Vertex.o
+GENERATED += $(OBJDIR)/RHICustomTasks.o
+GENERATED += $(OBJDIR)/RHIGPUSorter.o
+GENERATED += $(OBJDIR)/RHIGraphicResources.o
+GENERATED += $(OBJDIR)/RHIParticleRenderDataFactory.o
+GENERATED += $(OBJDIR)/RHIRenderParticleSceneHelpers.o
+GENERATED += $(OBJDIR)/RendererCache.o
+GENERATED += $(OBJDIR)/SampleLibShaderDefinitions.o
+GENERATED += $(OBJDIR)/SampleUtils.o
+GENERATED += $(OBJDIR)/SdlContext.o
+GENERATED += $(OBJDIR)/ShaderDefinitions.o
+GENERATED += $(OBJDIR)/ShaderGenerator.o
+GENERATED += $(OBJDIR)/ShaderLoader.o
+GENERATED += $(OBJDIR)/SoundPoolCache.o
+GENERATED += $(OBJDIR)/UnitTestsShaderDefinitions.o
+GENERATED += $(OBJDIR)/VulkanContext.o
+GENERATED += $(OBJDIR)/VulkanShaderGenerator.o
+GENERATED += $(OBJDIR)/WGLContext.o
+GENERATED += $(OBJDIR)/imgui.o
+GENERATED += $(OBJDIR)/imgui_demo.o
+GENERATED += $(OBJDIR)/imgui_draw.o
+GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/AWindowContext.o
 OBJECTS += $(OBJDIR)/AbstractGraphicScene.o
 OBJECTS += $(OBJDIR)/BRDFLUT.o
@@ -104,9 +165,6 @@ OBJECTS += $(OBJDIR)/LightEntity.o
 OBJECTS += $(OBJDIR)/MaterialToRHI.o
 OBJECTS += $(OBJDIR)/MeshEntity.o
 OBJECTS += $(OBJDIR)/MetalShaderGenerator.o
-OBJECTS += $(OBJDIR)/NullBillboardingBatchPolicy.o
-OBJECTS += $(OBJDIR)/NullRenderDataFactory.o
-OBJECTS += $(OBJDIR)/NullRendererCache.o
 OBJECTS += $(OBJDIR)/OffscreenContext.o
 OBJECTS += $(OBJDIR)/PKSampleInit.o
 OBJECTS += $(OBJDIR)/ParticleShaderGenerator.o
@@ -148,7 +206,7 @@ OBJECTS += $(OBJDIR)/precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-SampleLib
 	$(SILENT) $(LINKCMD)
@@ -174,9 +232,11 @@ clean:
 	@echo Cleaning PK-SampleLib
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 
@@ -257,15 +317,6 @@ $(OBJDIR)/ProfilerRenderer.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/Profiler
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/RHIRenderParticleSceneHelpers.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RHIRenderParticleSceneHelpers.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/NullBillboardingBatchPolicy.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderIntegrationNull/NullBillboardingBatchPolicy.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/NullRenderDataFactory.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderIntegrationNull/NullRenderDataFactory.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/NullRendererCache.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderIntegrationNull/NullRendererCache.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/FeatureRenderingSettings.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderIntegrationRHI/FeatureRenderingSettings.cpp

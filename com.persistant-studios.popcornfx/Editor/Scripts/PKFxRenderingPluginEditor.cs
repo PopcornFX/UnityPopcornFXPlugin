@@ -13,9 +13,11 @@ namespace PopcornFX
 	public class PKFxRenderingPluginEditor : Editor
 	{
 		GUIContent timeMultiplierLabel = new GUIContent(" Time scale for the particle simulation");
+		GUIContent cameraNumberLabel = new GUIContent(" Max number of cameras");
 
 		SerializedProperty m_TimeMultiplier;
 		SerializedProperty m_ShowAdvanced;
+		SerializedProperty m_MaxCameraSupport;
 		SerializedProperty m_EnableDistortion;
 		SerializedProperty m_EnableBlur;
 		SerializedProperty m_BlurFactor;
@@ -28,6 +30,7 @@ namespace PopcornFX
 		void OnEnable()
 		{
 			m_TimeMultiplier = serializedObject.FindProperty("m_TimeMultiplier");
+			m_MaxCameraSupport = serializedObject.FindProperty("m_MaxCameraSupport");
 			m_EnableDistortion = serializedObject.FindProperty("m_EnableDistortion");
 			m_EnableBlur = serializedObject.FindProperty("m_EnableBlur");
 			m_PreloadEffect = serializedObject.FindProperty("m_PreloadEffect");
@@ -71,6 +74,14 @@ namespace PopcornFX
 				PKFxManager.TimeMultiplier = timeMulValue;
 			}
 			EditorGUILayout.EndHorizontal();
+
+			EditorGUI.BeginChangeCheck();
+			int maxCamValue = EditorGUILayout.IntSlider(cameraNumberLabel, m_MaxCameraSupport.intValue, 1, 4);
+			if (EditorGUI.EndChangeCheck())
+			{
+				m_MaxCameraSupport.intValue = maxCamValue;
+				PKFxManager.SetMaxCameraCount(maxCamValue);
+			}
 
 			EditorGUILayout.PropertyField(m_EnableDistortion);
 			EditorGUILayout.PropertyField(m_EnableBlur);
@@ -151,12 +162,13 @@ namespace PopcornFX
 					// We also save the configuration file:
 					if (PKFxSettings.AutomaticMeshResizing)
 						EditorUtility.SetDirty(PKFxSettings.Instance);
-					PKFxManager.StartupPopcorn(false);
+					PKFxManager.StartupPopcorn(true);
 					PKFxManager.RestartPackWatcher();
 				}
 				else if (state == PlayModeStateChange.EnteredPlayMode)
 				{
-					PKFxManager.PausePackWatcher();
+					if (!PKFxSettings.EnableHotreloadInPlayMode)
+						PKFxManager.PausePackWatcher();
 				}
 			}
 		}

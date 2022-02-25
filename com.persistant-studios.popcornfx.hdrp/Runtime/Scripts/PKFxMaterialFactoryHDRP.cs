@@ -51,6 +51,10 @@ namespace PopcornFX
 
 			m_RenderFeatureBindings.Add(m_VertexBillboardingFallback);
 			m_RenderFeatureBindings.Add(m_CPUBillboardingFallback);
+			m_RenderFeatureBindings.Add(m_MeshVATFluidFallback);
+			m_RenderFeatureBindings.Add(m_MeshVATSoftFallback);
+			m_RenderFeatureBindings.Add(m_MeshVATRigidFallback);
+
 			m_RenderFeatureBindings.Add(m_VertexBillboardingOpaque);
 			m_RenderFeatureBindings.Add(m_CPUBillboardingOpaque);
 
@@ -63,6 +67,9 @@ namespace PopcornFX
 			{
 				meshRenderer.sortingLayerName = "PopcornFX";
 			}
+			int layer = 0;
+			PKFxSettings.Instance.GetRenderingLayerForBatchDesc(batchDesc, out layer);
+			gameObject.layer = layer;
 		}
 
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)
@@ -95,7 +102,10 @@ namespace PopcornFX
 				}
 				meshRenderer.m_MeshesImportTransform = trans.ToArray();
 				meshRenderer.Meshes = meshes.ToArray();
-				meshRenderer.m_ColorPropertyName = ResolveBatchBinding(batchDesc).m_MeshColorPropertyName;
+
+				PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
+				meshRenderer.m_ColorPropertyName = binding.GetMeshColorPropertyName();
+				meshRenderer.m_CursorPropertyName = binding.GetMeshVATCursorPropertyName();
 			}
 			if (batchDesc.m_LitFeature != null)
 				meshRenderer.m_CastShadow = batchDesc.m_LitFeature.m_CastShadows;
@@ -159,6 +169,56 @@ namespace PopcornFX
 			}
 			if (material == null)
 				return null;
+
+			// Set VAT textures
+			bool hasFluidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_FluidVAT);
+			bool hasSoftVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SoftVAT);
+			bool hasRigidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT);
+			bool hasVAT = hasFluidVAT || hasSoftVAT || hasRigidVAT;
+
+			if (batchDesc.m_Type == ERendererType.Mesh && hasVAT && batchDesc.m_VatFeature != null)
+			{
+				material.SetInt("_NumFrames", batchDesc.m_VatFeature.m_NumFrames);
+				material.SetVector("_Bounds", batchDesc.m_VatFeature.m_BoundsPosition);
+				material.SetInt("_PackedData", Convert.ToInt32(batchDesc.m_VatFeature.m_PackedData));
+				material.SetInt("_NormalizedData", Convert.ToInt32(batchDesc.m_VatFeature.m_NormalizedData));
+
+				if (hasRigidVAT)
+					material.SetVector("_Pivot", batchDesc.m_VatFeature.m_BoundsPivot);
+
+				if (!string.IsNullOrEmpty(batchDesc.m_VatFeature.m_PositionMap))
+				{
+					Texture positionTexture = GetTextureAsset(asset, batchDesc.m_VatFeature.m_PositionMap, true, wrapMode);
+					if (positionTexture != null)
+					{
+						material.SetTexture("_PositionMap", positionTexture);
+					}
+				}
+				if (!string.IsNullOrEmpty(batchDesc.m_VatFeature.m_NormalMap))
+				{
+					Texture normalTexture = GetTextureAsset(asset, batchDesc.m_VatFeature.m_NormalMap, true, wrapMode);
+					if (normalTexture != null)
+					{
+						material.SetTexture("_NormalMap", normalTexture);
+					}
+				}
+				if (hasRigidVAT && !string.IsNullOrEmpty(batchDesc.m_VatFeature.m_RotationMap))
+				{
+					Texture rotationTexture = GetTextureAsset(asset, batchDesc.m_VatFeature.m_RotationMap, true, wrapMode);
+					if (rotationTexture != null)
+					{
+						material.SetTexture("_RotationMap", rotationTexture);
+					}
+				}
+				if (hasFluidVAT && !string.IsNullOrEmpty(batchDesc.m_VatFeature.m_ColorMap))
+				{
+					Texture colorTexture = GetTextureAsset(asset, batchDesc.m_VatFeature.m_ColorMap, true, wrapMode);
+					if (colorTexture != null)
+					{
+						material.SetTexture("_ColorMap", colorTexture);
+					}
+				}
+			}
 
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
 				material.EnableKeyword("PK_HAS_DIFFUSE_RAMP");

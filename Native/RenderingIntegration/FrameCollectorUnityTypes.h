@@ -14,6 +14,15 @@ __PK_API_BEGIN
 struct	SUnityRenderContext
 {
 	IRenderAPIData	*m_RenderApiData;
+	bool			m_FreeUnusedBatches;
+	u32				m_FrameCountBeforeFreeingUnusedBatches;
+
+	SUnityRenderContext()
+	:	m_RenderApiData(null)
+	,	m_FreeUnusedBatches(false)
+	,	m_FrameCountBeforeFreeingUnusedBatches(0)
+	{
+	}
 };
 
 struct	SUnityDrawOutputs
@@ -40,7 +49,7 @@ public:
 typedef TFrameCollector<CUnityParticleBatchTypes> 	CUnityFrameCollector;
 
 // Camera data with custom user data:
-typedef TSceneView<SViewUserData>					SSceneView;
+typedef TSceneView<SViewUserData>					SUnitySceneView;
 
 //----------------------------------------------------------------------------
 __PK_API_END

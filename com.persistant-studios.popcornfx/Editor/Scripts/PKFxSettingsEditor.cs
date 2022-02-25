@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PopcornFX
 {
@@ -23,7 +25,8 @@ namespace PopcornFX
 		}
 
 		GUIContent forceDeterminismLabel = new GUIContent(" Enable force determinism while baking asset");
-		GUIContent hotreloadLabel = new GUIContent(" Enable the hotreload of effects from source pack");
+		GUIContent hotreloadLabel = new GUIContent(" Enable hot reloading effects from source pack");
+		GUIContent hotreloadInPlayLabel = new GUIContent(" Enable hot reloading effects while in play mode");
 		GUIContent debugEffectsBoundingBoxes = new GUIContent(" Debug the effects bounding boxes");
 		GUIContent debugEffectsRaycasts = new GUIContent(" Debug the effects raycasts");
 		GUIContent enableSoftParticlesLabel = new GUIContent(" Enable soft particles");
@@ -36,6 +39,9 @@ namespace PopcornFX
 
 		GUIContent enableLocalizedPages = new GUIContent(" Enable Localized Pages");
 		GUIContent enableLocalizedPagesByDefault = new GUIContent(" Enable Localized Pages By Default");
+
+		GUIContent freeUnusedBactchesLabel = new GUIContent(" Free unused batches");
+		GUIContent frameCountBeforeFreeUnusedBactchesLabel = new GUIContent(" Frame count before freeing unused batches");
 
 #if UNITY_2017 || UNITY_2018
 	GUIContent useGPUBillboarding = new GUIContent(" Enable GPU Billboarding -- Not compatible with your Unity version --");
@@ -54,6 +60,62 @@ namespace PopcornFX
 		GUIContent indexBufferSizeMultiplicatorLabel = new GUIContent(" Index buffer size multiplicator");
 
 		bool	showBuffers = true;
+
+
+		private static void _AddCameraLayersIFN()
+		{
+			UnityEngine.Object[] tagManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
+
+			if (tagManager.Length == 0)
+				return;
+
+			SerializedObject	tagsAndLayersManager = new SerializedObject(tagManager[0]);
+			SerializedProperty	layersProp = tagsAndLayersManager.FindProperty("layers");
+
+			List<string>		cameraLayerName = new List<string>(new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" });
+
+			//serch if the sorting layer already exist
+			for (int i = 0; i < layersProp.arraySize; ++i)
+			{
+				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
+
+				if (layer != null && layer.stringValue.Length != 0)
+				{
+					if (cameraLayerName.Contains(layer.stringValue))
+					{
+						int idx = cameraLayerName.IndexOf(layer.stringValue);
+						PKFxSettings.Instance.m_PopcornLayerName[cameraLayerName.IndexOf(layer.stringValue)] = layer.stringValue;
+						cameraLayerName[idx] = "";
+					}
+						
+				}
+			}
+			cameraLayerName = cameraLayerName.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+
+			if (cameraLayerName.Count == 0)
+				return;
+
+			for (int i = layersProp.arraySize -1; i >= 0 ; --i)
+			{
+				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
+
+				if (layer != null && layer.stringValue.Length == 0)
+				{
+					layer.stringValue = cameraLayerName[0];
+
+					PKFxSettings.Instance.m_PopcornLayerName[cameraLayerName.IndexOf(layer.stringValue)] = layer.stringValue;
+
+					cameraLayerName.RemoveAt(0);
+					if (cameraLayerName.Count == 0)
+					{
+						break;
+					}
+				}
+			}
+		
+			tagsAndLayersManager.ApplyModifiedProperties();
+
+		}
 
 		private static void _AddSortingLayerIFN(string layerName, bool isFirst)
 		{
@@ -153,6 +215,8 @@ namespace PopcornFX
 				return;
 
 			GetOrCreateSettingsAsset();
+
+			_AddCameraLayersIFN();
 			_AddSortingLayerIFN("PopcornFX", true);
 			_AddSortingLayerIFN("PopcornFXUI", false);
 
@@ -189,6 +253,64 @@ namespace PopcornFX
 				}
 			}
 
+			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(PKFxSettings.AssetCategory, "Assets")))
+			{
+				PKFxSettings.AssetCategory = category.IsExpanded();
+				if (category.IsExpanded())
+				{
+					EditorGUILayout.BeginVertical();
+					EditorGUILayout.BeginHorizontal();
+					if (GUILayout.Button("Update Asset List"))
+					{
+						string[] assets = AssetDatabase.FindAssets("t:PKFxEffectAsset");
+						foreach (string id in assets)
+						{
+							string path = AssetDatabase.GUIDToAssetPath(id);
+							PKFxEffectAsset obj = AssetDatabase.LoadAssetAtPath(path, typeof(PKFxEffectAsset)) as PKFxEffectAsset;
+							if (obj != null)
+							{
+								PKFxSettings.Instance.AddGUIDForAsset(obj.AssetFullPath + ".asset", id);
+							}
+						}
+					}
+					if (GUILayout.Button("Clear Asset List"))
+					{
+						PKFxSettings.AssetGUID.Clear();
+					}
+					var AssetGUID = PKFxSettings.AssetGUID;
+					EditorGUILayout.EndHorizontal();
+
+					GUIStyle boldStyle = new GUIStyle();
+					boldStyle.fontStyle = FontStyle.Bold;
+					boldStyle.normal.textColor = Color.white;
+					boldStyle.hover.textColor = Color.white;
+
+					GUIStyle greyedStyle = new GUIStyle();
+					greyedStyle.fontStyle = FontStyle.Normal;
+					greyedStyle.normal.textColor = Color.gray;
+					greyedStyle.hover.textColor = Color.gray;
+
+					foreach (var guid in AssetGUID)
+					{
+						EditorGUILayout.BeginHorizontal();
+						EditorGUILayout.LabelField(guid.m_Path, boldStyle);
+						EditorGUILayout.EndHorizontal();
+						EditorGUI.indentLevel += 2;
+						if (guid.m_New != guid.m_Old)
+						{
+							EditorGUILayout.BeginHorizontal();
+							EditorGUILayout.LabelField("Previous GUID:\t" + guid.m_Old.ToString(), greyedStyle);
+							EditorGUILayout.EndHorizontal();
+						}
+						EditorGUILayout.BeginHorizontal();
+						EditorGUILayout.LabelField("Current GUID:\t" + guid.m_New.ToString());
+						EditorGUILayout.EndHorizontal();
+						EditorGUI.indentLevel -= 2;
+					}
+					EditorGUILayout.EndVertical();
+				}
+			}
+
 			if (GUI.changed)
 				EditorUtility.SetDirty(settings);
 		}
@@ -210,6 +332,16 @@ namespace PopcornFX
 				PKFxSettings.EnableEffectHotreload = hotreload;
 			EditorGUILayout.EndHorizontal();
 
+			EditorGUI.BeginDisabledGroup(!PKFxSettings.EnableEffectHotreload);
+
+			EditorGUILayout.BeginHorizontal();
+			bool hotreloadInPlay = EditorGUILayout.ToggleLeft(hotreloadInPlayLabel, PKFxSettings.EnableHotreloadInPlayMode);
+			if (hotreloadInPlay != PKFxSettings.EnableHotreloadInPlayMode)
+				PKFxSettings.EnableHotreloadInPlayMode = hotreloadInPlay;
+			EditorGUILayout.EndHorizontal();
+
+			EditorGUI.EndDisabledGroup();
+
 			EditorGUILayout.BeginHorizontal();
 			{
 				EditorGUILayout.BeginVertical();
@@ -223,7 +355,6 @@ namespace PopcornFX
 						EditorGUILayout.LabelField("<empty>", boldStyleRed);
 					}
 
-
 					if (!string.IsNullOrEmpty(PKFxSettings.UnityPackFxPath))
 					{
 						EditorGUILayout.LabelField(PKFxSettings.UnityPackFxPath);
@@ -232,8 +363,6 @@ namespace PopcornFX
 					{
 						EditorGUILayout.LabelField("<empty>", boldStyleRed);
 					}
-
-
 					EditorGUILayout.LabelField("Reimport Pack");
 				}
 				EditorGUILayout.EndVertical();
@@ -290,6 +419,7 @@ namespace PopcornFX
 
 			}
 			EditorGUILayout.EndHorizontal();
+
 
 
 #if UNITY_EDITOR_OSX
@@ -350,6 +480,24 @@ namespace PopcornFX
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.EnableLocalizedByDefault = EditorGUILayout.ToggleLeft(enableLocalizedPagesByDefault, PKFxSettings.EnableLocalizedByDefault);
 			EditorGUILayout.EndHorizontal();
+
+			EditorGUILayout.BeginHorizontal();
+			PKFxSettings.FreeUnusedBatches = EditorGUILayout.ToggleLeft(freeUnusedBactchesLabel, PKFxSettings.FreeUnusedBatches);
+			EditorGUILayout.EndHorizontal();
+
+			using (new EditorGUI.DisabledScope(!PKFxSettings.FreeUnusedBatches))
+			{
+				EditorGUI.indentLevel++;
+
+				EditorGUILayout.BeginHorizontal();
+				int frameCountBeforeFreeingBatch = (int)PKFxSettings.FrameCountBeforeFreeingUnusedBatches;
+				frameCountBeforeFreeingBatch = EditorGUILayout.IntField(frameCountBeforeFreeUnusedBactchesLabel, frameCountBeforeFreeingBatch);
+				frameCountBeforeFreeingBatch = Math.Max(frameCountBeforeFreeingBatch, 1);
+				PKFxSettings.FrameCountBeforeFreeingUnusedBatches = (uint)frameCountBeforeFreeingBatch;
+				EditorGUILayout.EndHorizontal();
+
+				EditorGUI.indentLevel--;
+			}
 
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.AutomaticMeshResizing = EditorGUILayout.ToggleLeft(automaticMeshResizingLabel, PKFxSettings.AutomaticMeshResizing);

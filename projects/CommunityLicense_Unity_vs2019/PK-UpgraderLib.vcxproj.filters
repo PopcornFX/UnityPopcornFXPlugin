@@ -61,6 +61,24 @@
     <Filter Include="Sources\Upgrades\Data\2.1.0.53244">
       <UniqueIdentifier>{EA7F9D25-56EE-F2A4-9FD7-ADA40B85E840}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.10.0.8984">
+      <UniqueIdentifier>{15325B68-81A0-B0E7-CA89-6BE73637A683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.10.0.9172">
+      <UniqueIdentifier>{4B9C5B68-B70A-B1E7-00F4-6BE76CA1A683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.10.0.9560">
+      <UniqueIdentifier>{2CAD5B68-981B-B1E7-E104-6CE74DB2A683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.10.0.9625">
+      <UniqueIdentifier>{EEB05B68-5A1F-B1E7-A308-6CE70FB6A683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.10.0.9653">
+      <UniqueIdentifier>{4FB15B68-BB1F-B1E7-0409-6CE770B6A683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.11.0.11056">
+      <UniqueIdentifier>{76B5BAE7-62F1-BD51-CB03-D648B75E666C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\Upgrades\Data\2.2.0.56591">
       <UniqueIdentifier>{73A31B9A-DF11-7119-28FB-2B1994A866B5}</UniqueIdentifier>
     </Filter>
@@ -515,6 +533,540 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.1.0.53244\Library_PopcornFXCore_Templates_Samplers_pkfx_2_1_0_53244.h">
       <Filter>Sources\Upgrades\Data\2.1.0.53244</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_AnimationTracks_Circle_pkcf_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_AnimationTracks_PingPong_pkcf_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_Effects_Basic_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_Effects_FX_Simple_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_MaterialEditor_BillboardMaterial_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_MaterialEditor_DecalMaterial_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_MaterialEditor_LightMaterial_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_MaterialEditor_MeshMaterial_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_MaterialEditor_RibbonMaterial_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_MaterialEditor_SoundMaterial_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Editor_Presets_MaterialEditor_TriangleMaterial_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Default_Billboard_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Default_Decal_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Default_Light_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Default_Mesh_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Default_Ribbon_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Default_Sound_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Default_Triangle_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Distortion_Billboard_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Distortion_Ribbon_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Diffuse_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Distortion_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Emissive_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Opaque_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Tinted_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Decal_Decal_Diffuse_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Decal_Decal_Emissive_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Light_Light_Default_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Mesh_Mesh_Emissive_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Mesh_Mesh_Opaque_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Mesh_Mesh_Tinted_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Diffuse_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Distortion_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Emissive_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Opaque_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Tinted_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Diffuse_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Distortion_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Emissive_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Opaque_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Tinted_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Sound_Sound_Default_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Diffuse_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Distortion_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Emissive_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Opaque_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Tinted_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Interface_Editor_pkri_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Interface_Experimental_pkri_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Opaque_Billboard_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Opaque_Ribbon_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Opaque_Triangle_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Materials_Transparent_Mesh_pkma_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Default_Billboard_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Default_Mesh_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Default_Ribbon_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Default_Triangle_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Experimental_includes_PKLighting_h_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Opaque_Billboard_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Opaque_Ribbon_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Opaque_Triangle_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Shaders_Particle_Master_frag_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Color_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Core_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_CurvePresets_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Debug_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Dynamics_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Events_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Legacy_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Placement_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Samplers_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Trails_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\Library_PopcornFXCore_Templates_Utils_pkfx_2_10_0_8984.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_AnimationTracks_Circle_pkcf_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_AnimationTracks_PingPong_pkcf_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_Effects_Basic_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_Effects_FX_Simple_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_MaterialEditor_BillboardMaterial_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_MaterialEditor_DecalMaterial_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_MaterialEditor_MeshMaterial_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_MaterialEditor_RibbonMaterial_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_MaterialEditor_SoundMaterial_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Editor_Presets_MaterialEditor_TriangleMaterial_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Shaders_Default_Decal_frag_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_Color_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_Core_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_CurvePresets_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_Debug_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_Placement_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_Samplers_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_Trails_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\Library_PopcornFXCore_Templates_Utils_pkfx_2_10_0_9172.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Editor_Presets_Effects_Basic_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Editor_Presets_Effects_FX_Simple_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Core_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Debug_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Dynamics_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Events_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Legacy_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Samplers_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Trails_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\Library_PopcornFXCore_Templates_Utils_pkfx_2_10_0_9560.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9625\Library_PopcornFXCore_Templates_Utils_pkfx_2_10_0_9625.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9625</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9653\Library_PopcornFXCore_Templates_Dynamics_pkfx_2_10_0_9653.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9653</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9653\Library_PopcornFXCore_Templates_Events_pkfx_2_10_0_9653.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9653</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9653\Library_PopcornFXCore_Templates_Trails_pkfx_2_10_0_9653.h">
+      <Filter>Sources\Upgrades\Data\2.10.0.9653</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_AnimationTracks_Circle_pkcf_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_AnimationTracks_PingPong_pkcf_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_Effects_Basic_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_Effects_FX_Simple_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_MaterialEditor_BillboardMaterial_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_MaterialEditor_DecalMaterial_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_MaterialEditor_LightMaterial_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_MaterialEditor_MeshMaterial_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_MaterialEditor_RibbonMaterial_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_MaterialEditor_SoundMaterial_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Editor_Presets_MaterialEditor_TriangleMaterial_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Default_Billboard_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Default_Decal_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Default_Light_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Default_Mesh_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Default_Ribbon_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Default_Sound_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Default_Triangle_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Distortion_Billboard_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Distortion_Ribbon_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Diffuse_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Distortion_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Emissive_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Opaque_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Billboard_Billboard_Tinted_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Decal_Decal_Diffuse_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Decal_Decal_Emissive_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Light_Light_Default_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Mesh_Mesh_Emissive_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Mesh_Mesh_Opaque_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Mesh_Mesh_Tinted_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Diffuse_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Distortion_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Emissive_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Opaque_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_CorrectDeformation_Tinted_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Diffuse_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Distortion_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Emissive_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Opaque_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Ribbon_Ribbon_Tinted_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Sound_Sound_Default_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Diffuse_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Distortion_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Emissive_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Opaque_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Experimental_Triangle_Triangle_Tinted_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Interface_Editor_pkri_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Interface_Experimental_pkri_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Opaque_Billboard_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Opaque_Ribbon_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Opaque_Triangle_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Materials_Transparent_Mesh_pkma_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Default_Billboard_frag_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Default_Light_frag_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Default_Ribbon_frag_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Default_Triangle_frag_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Experimental_Particle_Master_frag_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Experimental_includes_FeatureAtlas_h_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Experimental_includes_PKLighting_h_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Shaders_Particle_Master_frag_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Color_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Core_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_CurvePresets_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Debug_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Dynamics_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Events_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Legacy_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Placement_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Samplers_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Trails_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\Library_PopcornFXCore_Templates_Utils_pkfx_2_11_0_11056.h">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.2.0.56591\Editor_Templates_Basic_pkfx_2_2_0_56591.h">
       <Filter>Sources\Upgrades\Data\2.2.0.56591</Filter>
@@ -1460,6 +2012,24 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.1.0.53244\core_upgrader_2_1_0_53244.cpp">
       <Filter>Sources\Upgrades\Data\2.1.0.53244</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.8984\core_upgrader_2_10_0_8984.cpp">
+      <Filter>Sources\Upgrades\Data\2.10.0.8984</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9172\core_upgrader_2_10_0_9172.cpp">
+      <Filter>Sources\Upgrades\Data\2.10.0.9172</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9560\core_upgrader_2_10_0_9560.cpp">
+      <Filter>Sources\Upgrades\Data\2.10.0.9560</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9625\core_upgrader_2_10_0_9625.cpp">
+      <Filter>Sources\Upgrades\Data\2.10.0.9625</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.10.0.9653\core_upgrader_2_10_0_9653.cpp">
+      <Filter>Sources\Upgrades\Data\2.10.0.9653</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.11.0.11056\core_upgrader_2_11_0_11056.cpp">
+      <Filter>Sources\Upgrades\Data\2.11.0.11056</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.2.0.56591\core_upgrader_2_2_0_56591.cpp">
       <Filter>Sources\Upgrades\Data\2.2.0.56591</Filter>
     </ClCompile>
@@ -1817,6 +2387,9 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Library\PopcornFXCore\Shaders\Experimental\includes\upg_data_FeatureDistortion.h.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Library\PopcornFXCore\Shaders\Experimental\includes</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Library\PopcornFXCore\Shaders\Experimental\includes\upg_data_FeatureDithering.h.cpp">
+      <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Library\PopcornFXCore\Shaders\Experimental\includes</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Library\PopcornFXCore\Shaders\Experimental\includes\upg_data_FeatureEmissive.h.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Library\PopcornFXCore\Shaders\Experimental\includes</Filter>
     </ClCompile>
@@ -1992,6 +2565,12 @@
       <Filter>Sources\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.1.0.cpp">
+      <Filter>Sources\Upgrades</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.10.0.cpp">
+      <Filter>Sources\Upgrades</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.11.0.cpp">
       <Filter>Sources\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.2.0.cpp">

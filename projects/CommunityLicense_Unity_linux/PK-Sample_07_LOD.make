@@ -78,8 +78,14 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/LOD.o
+GENERATED += $(OBJDIR)/Main.o
+GENERATED += $(OBJDIR)/SampleScene.o
+GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/GPUContext.o
 OBJECTS += $(OBJDIR)/LOD.o
 OBJECTS += $(OBJDIR)/Main.o
@@ -92,7 +98,7 @@ OBJECTS += $(OBJDIR)/precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-Sample_07_LOD
 	$(SILENT) $(LINKCMD)
@@ -118,9 +124,11 @@ clean:
 	@echo Cleaning PK-Sample_07_LOD
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

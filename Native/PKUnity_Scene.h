@@ -81,10 +81,10 @@ public:
 public:
 	CPKFXScene();
 	~CPKFXScene();
-	const TArray<SSceneView>	&SceneViews() const { return this->m_SceneViews; };
-	TArray<SSceneView>&			SceneViewsForUpdate()  { return this->m_SceneViews; };
-	EUpdateMode					UpdateMode() const { return m_UpdateMode; }
-	CParticleMediumCollection	*GetParticleMediumCollection(bool useMeshRenderer) const;
+	const TArray<SUnitySceneView>	&SceneViews() const { return this->m_SceneViews; };
+	TArray<SUnitySceneView>&		SceneViewsForUpdate()  { return this->m_SceneViews; };
+	EUpdateMode						UpdateMode() const { return m_UpdateMode; }
+	CParticleMediumCollection		*GetParticleMediumCollection(bool useMeshRenderer) const;
 
 	// Setup medium collection
 	bool						InitializeInstanceIFN(const SPopcornFxSettings *settings);
@@ -100,7 +100,7 @@ public:
 	void						SyncPreviousUpdateAndRunDeferredCallsIFN();
 	void						LaunchUpdate(float dt);
 	// Then build draw-calls:
-	void						BuildDrawCalls(const SSceneView &view);
+	void						BuildDrawCalls(const SUnitySceneView &view);
 
 	void						RaiseEventsIFN();
 	void						Reset();
@@ -251,6 +251,7 @@ private:
 	void	_ClearPendingEventsNoLock();
 	void	_ClearEvents();
 	void	_PostUpdateEvents();
+	void	_RemoveUnloadedRenderers(const SParticleCollectedFrameToRender *renderedFrame);
 
 public:
 	bool										RegisterEventListener(s32 guid, const CStringId &event, u32 unityKey);
@@ -261,7 +262,7 @@ public:
 	void										UnregisterAllEventsListeners();
 
 	void										BroadcastEvent(	Threads::SThreadContext *threadCtx, CParticleMedium *parentMedium, u32 eventID,
-																CStringId eventName, u32 count, const TMemoryView<const float> &spawnDtToEnd,
+																CStringId eventName, u32 count, const SUpdateTimeArgs &timeArgs, const TMemoryView<const float> &spawnDtToEnd,
 																const TMemoryView<const CEffectID> &effectIDs, const SPayloadView &payloadView);
 
 protected:
@@ -296,7 +297,7 @@ private:
 	CThreadID									m_RenderThread;
 	bool										m_RenderThreadIsSet;
 
-	TArray<SSceneView>							m_SceneViews;
+	TArray<SUnitySceneView>						m_SceneViews;
 
 	bool										m_EnableRaycastCollisions;
 

@@ -72,8 +72,19 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/directive.o
+GENERATED += $(OBJDIR)/eval.o
+GENERATED += $(OBJDIR)/expand.o
+GENERATED += $(OBJDIR)/main.o
+GENERATED += $(OBJDIR)/mbchar.o
+GENERATED += $(OBJDIR)/pk_mcpp_bridge.o
+GENERATED += $(OBJDIR)/pk_preprocessor.o
+GENERATED += $(OBJDIR)/precompiled.o
+GENERATED += $(OBJDIR)/support.o
+GENERATED += $(OBJDIR)/system.o
 OBJECTS += $(OBJDIR)/directive.o
 OBJECTS += $(OBJDIR)/eval.o
 OBJECTS += $(OBJDIR)/expand.o
@@ -91,7 +102,7 @@ OBJECTS += $(OBJDIR)/system.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-MCPP
 	$(SILENT) $(LINKCMD)
@@ -117,9 +128,11 @@ clean:
 	@echo Cleaning PK-MCPP
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

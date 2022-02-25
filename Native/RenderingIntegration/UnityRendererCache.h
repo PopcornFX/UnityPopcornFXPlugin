@@ -67,7 +67,10 @@ namespace	ShaderVariationFlags
 		Has_Atlas				= (1 << 11),
 		Has_Size2				= (1 << 12),
 		Has_DiffuseRamp			= (1 << 13),
-		ShaderVariation_Count	= 13,
+		Has_FluidVAT			= (1 << 14),
+		Has_SoftVAT				= (1 << 15),
+		Has_RigidVAT			= (1 << 16),
+		ShaderVariation_Count	= 16,
 	};
 }
 
@@ -176,6 +179,20 @@ public:
 	float									m_Roughness;
 	float									m_Metalness;
 
+	// VAT
+	CStringId								m_Vat_PositionMap;
+	CStringId								m_Vat_NormalMap;
+	CStringId								m_Vat_ColorMap;
+	CStringId								m_Vat_RotationMap;
+	int										m_Vat_NumFrames;
+	bool									m_Vat_PackedData;
+	CFloat4									m_Vat_Color;
+	CFloat2									m_Vat_BoundsPivot;
+	bool									m_Vat_NormalizedData;
+	CFloat2									m_Vat_BoundsPosition;
+	bool									m_Vat_PadToPowerOf2;
+	CFloat2									m_Vat_PaddedRatio;
+
 	CParticleMaterialDescMesh();
 
 	bool		InitFromRenderer(const CRendererDataMesh &renderer);
@@ -183,48 +200,29 @@ public:
 	bool		operator == (const CParticleMaterialDescMesh &oth) const;
 };
 
-struct		SUnityMeshInfo
+struct	SUnityMeshInfoPerView
 {
 	// Unity mesh handler:
 	int							m_RendererGUID;
 
 	// Unity mesh data:
+	// CPU + GPU Billboarding:
 	SBufferHandles				m_VBHandler;
+	// GPU Billboarding:
 	SBufferHandles				m_IBHandler;
-
-	s32							m_VBElemCount;
-	s32							m_IBElemCount;
-
-	u32							m_SemanticOffsets[__Semantic_Count];
-	u32							m_VertexStride;
-
-	ManagedBool					m_LargeIndices;
-
-	CAABB						m_MeshBounds;
-
-	s32							m_InfoSize;
 	SBufferHandles				m_InfoHandler;
-
-	s32							m_AtlasesSize;
 	SBufferHandles				m_AtlasesHandler;
-
-	s32							m_IndirectArgsParticleCountMultiplier;
 	SBufferHandles				m_IndirectArgsHandler;
 
-	SUnityMeshInfo()
-		: m_RendererGUID(-1)
-		, m_VBHandler()
-		, m_IBHandler()
-		, m_VBElemCount(0)
-		, m_IBElemCount(0)
-		, m_VertexStride(0)
-		, m_LargeIndices(ManagedBool_False)
-		, m_InfoSize(0)
-		, m_InfoHandler()
-		, m_AtlasesSize(0)
-		, m_AtlasesHandler()
-		, m_IndirectArgsHandler()
+	SUnityMeshInfoPerView()
+	: m_RendererGUID(-1)
+	, m_VBHandler()
+	, m_IBHandler()
+	, m_InfoHandler()
+	, m_AtlasesHandler()
+	, m_IndirectArgsHandler()
 	{
+
 	}
 
 	bool	Init(UnityGfxRenderer deviceType)
@@ -240,14 +238,61 @@ struct		SUnityMeshInfo
 
 };
 
+struct		SUnityMeshInfo
+{
+	s32							m_VBElemCount;
+	s32							m_IBElemCount;
+
+	u32							m_SemanticOffsets[__Semantic_Count];
+	u32							m_VertexStride;
+
+	ManagedBool					m_LargeIndices;
+
+	CAABB						m_MeshBounds;
+
+	s32							m_InfoSize;
+
+	s32							m_AtlasesSize;
+
+	s32							m_IndirectArgsParticleCountMultiplier;
+
+	SUnityMeshInfo()
+	: m_VBElemCount(0)
+	, m_IBElemCount(0)
+	, m_VertexStride(0)
+	, m_LargeIndices(ManagedBool_False)
+	, m_MeshBounds(CAABB::DEGENERATED)
+	, m_InfoSize(-1)
+	, m_AtlasesSize(-1)
+	, m_IndirectArgsParticleCountMultiplier(-1)
+	{
+		for (u32 i = 0; i < __Semantic_Count; ++i)
+			m_SemanticOffsets[i] = 0;
+	}
+
+	SUnityMeshInfo(const SUnityMeshInfo &other)
+	{
+		m_VBElemCount = other.m_VBElemCount;
+		m_IBElemCount = other.m_IBElemCount;
+		m_VertexStride = other.m_VertexStride;
+		m_LargeIndices = other.m_LargeIndices;
+		m_MeshBounds = other.m_MeshBounds;
+		m_InfoSize = other.m_InfoSize;
+		m_AtlasesSize = other.m_AtlasesSize;
+		m_IndirectArgsParticleCountMultiplier = other.m_IndirectArgsParticleCountMultiplier;
+		for (u32 i = 0; i < __Semantic_Count; ++i)
+			m_SemanticOffsets[i] = other.m_SemanticOffsets[i];
+	}
+};
+
 class	CUnityRendererCache : public CRendererCacheBase
 {
 public:
 	CUnityRendererCache(const CUnityRenderDataFactory *renderDataFactory)
-		:	m_RenderDataFactory(renderDataFactory)
-		,	m_AssetName("")
-		,	m_HasCustomMat(false)
-		,	m_CustomMatID(-1)
+	:	m_RenderDataFactory(renderDataFactory)
+	,	m_AssetName("")
+	,	m_HasCustomMat(false)
+	,	m_CustomMatID(-1)
 	{
 	}
 
@@ -255,7 +300,7 @@ public:
 
 
 private:
-	const CUnityRenderDataFactory				*m_RenderDataFactory;
+	const CUnityRenderDataFactory		*m_RenderDataFactory;
 public:
 
 	const CUnityRenderDataFactory		*RenderDataFactory() const { return m_RenderDataFactory; }
@@ -289,8 +334,9 @@ public:
 	CParticleMaterialDescMesh					m_MaterialDescMesh;
 
 	CString										m_AssetName;
-
-	SUnityMeshInfo								m_UnityMeshInfo; // Should be one per camera if view dependent particles...
+	
+	TArray<SUnityMeshInfoPerView>				m_UnityMeshInfoPerViews;
+	SUnityMeshInfo								m_UnityMeshInfo;
 
 	bool										m_HasCustomMat;
 	int											m_CustomMatID;

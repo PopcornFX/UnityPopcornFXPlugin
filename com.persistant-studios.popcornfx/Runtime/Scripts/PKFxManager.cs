@@ -12,6 +12,7 @@ namespace PopcornFX
 	public class PKFxManager
 	{
 		public static string ImportedAssetName { get; set; }
+		public static string ImportedAssetPath { get; set; }
 		public static int DistortionLayer { get { return PKFxManagerImpl.m_DistortionLayer; } }
 
 		public static float					TimeMultiplier = 1.0f;
@@ -42,18 +43,12 @@ namespace PopcornFX
 			return PKFxManagerImpl._IsDllLoaded();
 		}
 
-		public static void StartupPopcorn(bool isInPlayMode)
+		public static void StartupPopcorn(bool forceRestart)
 		{
-			if (!PKFxManagerImpl.m_IsStarted)
+			if (!PKFxManagerImpl.m_IsStarted || forceRestart)
 			{
-				SetupPopcornFxSettings(isInPlayMode, IsUnitTesting);
+				SetupPopcornFxSettings(IsUnitTesting);
 				PKFxManagerImpl.Startup();
-				PKFxManagerImpl.m_IsStartedAsPlayMode = isInPlayMode;
-			}
-			else if (PKFxManagerImpl.m_IsStartedAsPlayMode != isInPlayMode)
-			{
-				SetupPopcornFxSettings(isInPlayMode, IsUnitTesting);
-				PKFxManagerImpl.m_IsStartedAsPlayMode = isInPlayMode;
 			}
 		}
 
@@ -164,7 +159,7 @@ namespace PopcornFX
 		}
 #endif
 
-		public static void SetupPopcornFxSettings(bool isInPlayMode, bool isUnitTesting)
+		public static void SetupPopcornFxSettings(bool isUnitTesting)
 		{
 			SPopcornFxSettings settings = new SPopcornFxSettings();
 
@@ -177,13 +172,16 @@ namespace PopcornFX
 			settings.m_EnableLocalizedPages = PKFxSettings.EnableLocalizedPages;
 			settings.m_EnableLocalizedByDefault = PKFxSettings.EnableLocalizedByDefault;
 
+			settings.m_FreeUnusedBatches = PKFxSettings.FreeUnusedBatches;
+			settings.m_FrameCountBeforeFreeingUnusedBatches = PKFxSettings.FrameCountBeforeFreeingUnusedBatches;
+
 			if (PKFxSettings.EnablePopcornFXLogs)
 				SetMaxLogsPerFrame(0x100);
 			else
 				SetMaxLogsPerFrame(0);
-			if (!isInPlayMode)
+			if (!Application.isPlaying)
 			{
-				settings.m_SingleThreadedExecution = true;
+				settings.m_SingleThreadedExecution = false;
 				settings.m_OverrideThreadPool = false;
 				settings.m_WorkerCount = 0;
 				settings.m_WorkerAffinities = IntPtr.Zero;
@@ -191,7 +189,6 @@ namespace PopcornFX
 			else
 			{
 				settings.m_SingleThreadedExecution = PKFxSettings.SingleThreadedExecution;
-
 				if (!PKFxSettings.SingleThreadedExecution && PKFxSettings.OverrideThreadPoolConfig)
 				{
 					// Create pool with correct affinities:
@@ -217,6 +214,11 @@ namespace PopcornFX
 			{
 				Marshal.FreeHGlobal(settings.m_WorkerAffinities);
 			}
+		}
+
+		public static void SetMaxCameraCount(int count)
+		{
+			PKFxManagerImpl.SetMaxCameraCount(count);
 		}
 
 		// Editor Only
@@ -381,6 +383,12 @@ namespace PopcornFX
 		{
 			return PKFxManagerImpl.GetTextureSamplerData(byteSize);
 		}
+
+		public static void UnloadEffect(string path)
+		{
+			PKFxManagerImpl.UnloadFxInDependencies(path);
+			PKFxManagerImpl.UnloadFx(path);
+		}
 		#endregion effectsApi
 
 		//Audio Callback
@@ -524,6 +532,11 @@ namespace PopcornFX
 		public static string GetImportedAssetName()
 		{
 			return ImportedAssetName;
+		}
+
+		public static string GetImportedAssetPath()
+		{
+			return ImportedAssetPath;
 		}
 		#endregion Get/Set
 

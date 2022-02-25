@@ -64,8 +64,40 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/BrowseEffect.o
+GENERATED += $(OBJDIR)/EditorManagedToNative.o
+GENERATED += $(OBJDIR)/EditorManager.o
+GENERATED += $(OBJDIR)/EditorNativeToManaged.o
+GENERATED += $(OBJDIR)/EffectBaking.o
+GENERATED += $(OBJDIR)/FileWatcher.o
+GENERATED += $(OBJDIR)/FrameCollectorUnityTypes.o
+GENERATED += $(OBJDIR)/FxEffect.o
+GENERATED += $(OBJDIR)/FxStartup.o
+GENERATED += $(OBJDIR)/ManagedToNative.o
+GENERATED += $(OBJDIR)/MeshBaking.o
+GENERATED += $(OBJDIR)/NativeToManaged.o
+GENERATED += $(OBJDIR)/PKUnity_CImageResourceManager.o
+GENERATED += $(OBJDIR)/PKUnity_FileSystemController.o
+GENERATED += $(OBJDIR)/PKUnity_Log.o
+GENERATED += $(OBJDIR)/PKUnity_Plugins.o
+GENERATED += $(OBJDIR)/PKUnity_Scene.o
+GENERATED += $(OBJDIR)/PKUnity_SkinnedMesh.o
+GENERATED += $(OBJDIR)/PKUnity_Tasks.o
+GENERATED += $(OBJDIR)/PackFxExplorer.o
+GENERATED += $(OBJDIR)/RenderAPI_DX11Data.o
+GENERATED += $(OBJDIR)/RenderAPI_Data.o
+GENERATED += $(OBJDIR)/RenderAPI_GLData.o
+GENERATED += $(OBJDIR)/RenderAPI_VulkanData.o
+GENERATED += $(OBJDIR)/RuntimeManager.o
+GENERATED += $(OBJDIR)/UnityBillboardingBatchPolicy.o
+GENERATED += $(OBJDIR)/UnityRenderDataFactory.o
+GENERATED += $(OBJDIR)/UnityRendererCache.o
+GENERATED += $(OBJDIR)/gl_utils.o
+GENERATED += $(OBJDIR)/glew.o
+GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/BrowseEffect.o
 OBJECTS += $(OBJDIR)/EditorManagedToNative.o
 OBJECTS += $(OBJDIR)/EditorManager.o
@@ -104,7 +136,7 @@ OBJECTS += $(OBJDIR)/precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-IntegrationUnity
 	$(SILENT) $(LINKCMD)
@@ -130,9 +162,11 @@ clean:
 	@echo Cleaning PK-IntegrationUnity
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

@@ -75,8 +75,232 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/core_upgrader.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_45754.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_46520.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_47147.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_47887.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_48439.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_48597.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_49290.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_50071.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_50306.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_50392.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_0_51547.o
+GENERATED += $(OBJDIR)/core_upgrader_2_0_2_51773.o
+GENERATED += $(OBJDIR)/core_upgrader_2_10_0_8984.o
+GENERATED += $(OBJDIR)/core_upgrader_2_10_0_9172.o
+GENERATED += $(OBJDIR)/core_upgrader_2_10_0_9560.o
+GENERATED += $(OBJDIR)/core_upgrader_2_10_0_9625.o
+GENERATED += $(OBJDIR)/core_upgrader_2_10_0_9653.o
+GENERATED += $(OBJDIR)/core_upgrader_2_11_0_11056.o
+GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53018.o
+GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53244.o
+GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
+GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59136.o
+GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59175.o
+GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59344.o
+GENERATED += $(OBJDIR)/core_upgrader_2_4_0_61372.o
+GENERATED += $(OBJDIR)/core_upgrader_2_4_0_61427.o
+GENERATED += $(OBJDIR)/core_upgrader_2_4_0_61613.o
+GENERATED += $(OBJDIR)/core_upgrader_2_5_0_63107.o
+GENERATED += $(OBJDIR)/core_upgrader_2_6_0_64722.o
+GENERATED += $(OBJDIR)/core_upgrader_2_6_0_64941.o
+GENERATED += $(OBJDIR)/core_upgrader_2_7_0_835.o
+GENERATED += $(OBJDIR)/core_upgrader_2_8_0_3675.o
+GENERATED += $(OBJDIR)/core_upgrader_2_8_0_3864.o
+GENERATED += $(OBJDIR)/core_upgrader_2_8_0_4071.o
+GENERATED += $(OBJDIR)/core_upgrader_2_9_0_6358.o
+GENERATED += $(OBJDIR)/core_upgrader_2_9_0_6714.o
+GENERATED += $(OBJDIR)/core_upgrades_generated.o
+GENERATED += $(OBJDIR)/manifest.o
+GENERATED += $(OBJDIR)/manifest1.o
+GENERATED += $(OBJDIR)/upg_builder.o
+GENERATED += $(OBJDIR)/upg_data_Basic.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Basic.pkfx1.o
+GENERATED += $(OBJDIR)/upg_data_BillboardMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Black.dds.o
+GENERATED += $(OBJDIR)/upg_data_Black.dds1.o
+GENERATED += $(OBJDIR)/upg_data_Blur.h.o
+GENERATED += $(OBJDIR)/upg_data_Circle.fbx.o
+GENERATED += $(OBJDIR)/upg_data_Circle.pkcf.o
+GENERATED += $(OBJDIR)/upg_data_Classic.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Color.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Color_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Core.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Core_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_CurvePresets.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_CurvePresets_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Debug.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Debug_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_DecalMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Decal_Default.vert.o
+GENERATED += $(OBJDIR)/upg_data_Default_AlphaMap.dds.o
+GENERATED += $(OBJDIR)/upg_data_Default_AlphaMap.dds1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Billboard.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Billboard.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Billboard.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Default_Billboard.pkma1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Decal.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Decal.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Default_Decal.vert.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.pkma1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.vert.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.vert1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Mesh.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Mesh.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Mesh.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Default_Mesh.pkma1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.pkma1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Sound.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Default_Sound.pkma1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Triangle.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Triangle.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Diffuse.dds.o
+GENERATED += $(OBJDIR)/upg_data_Diffuse.dds1.o
+GENERATED += $(OBJDIR)/upg_data_Distort.dds.o
+GENERATED += $(OBJDIR)/upg_data_Distort.dds1.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.frag.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.pkma1.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Ribbon.frag.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Ribbon.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Dynamics.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Dynamics_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Editor.pkbo.o
+GENERATED += $(OBJDIR)/upg_data_Editor.pkri.o
+GENERATED += $(OBJDIR)/upg_data_Editor.pkri1.o
+GENERATED += $(OBJDIR)/upg_data_Editor_2.9.0.pkri.o
+GENERATED += $(OBJDIR)/upg_data_Events.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Events_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_ExBillboard_Diffuse.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExBillboard_Distortion.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExBillboard_Emissive.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExBillboard_Opaque.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExBillboard_Tinted.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExDecal_Diffuse.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExDecal_Emissive.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExLight_Default.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExMesh_Emissive.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExMesh_Opaque.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExMesh_Tinted.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_CD_Diffuse.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_CD_Distortion.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_CD_Emissive.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_CD_Opaque.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_CD_Tinted.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_Diffuse.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_Distortion.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_Emissive.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_Opaque.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExRibbon_Tinted.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExSound_Default.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExTriangle_Diffuse.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExTriangle_Distortion.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExTriangle_Emissive.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExTriangle_Opaque.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_ExTriangle_Tinted.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_Experimental.pkri.o
+GENERATED += $(OBJDIR)/upg_data_FX_Simple.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_FX_Simple.pkfx1.o
+GENERATED += $(OBJDIR)/upg_data_FeatureAtlas.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDecal.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDiffuse.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDistortion.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDithering.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureEmissive.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureRibbonCorrectDeformation.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureSoftParticles.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureTint.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureTransformUVs.h.o
+GENERATED += $(OBJDIR)/upg_data_Legacy.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_LightMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Light_Default.frag.o
+GENERATED += $(OBJDIR)/upg_data_Light_Default.vert.o
+GENERATED += $(OBJDIR)/upg_data_MeshMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_NMap_Flat.dds.o
+GENERATED += $(OBJDIR)/upg_data_NMap_Flat.dds1.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Billboard.frag.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Billboard.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Ribbon.frag.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Ribbon.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Triangle.frag.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Triangle.pkma.1.o
+GENERATED += $(OBJDIR)/upg_data_PKLighting.h.o
+GENERATED += $(OBJDIR)/upg_data_PKOutputColor.h.o
+GENERATED += $(OBJDIR)/upg_data_PKSurface.h.o
+GENERATED += $(OBJDIR)/upg_data_Particle_Master.frag.o
+GENERATED += $(OBJDIR)/upg_data_Particle_Master.frag1.o
+GENERATED += $(OBJDIR)/upg_data_PingPong.fbx.o
+GENERATED += $(OBJDIR)/upg_data_PingPong.pkcf.o
+GENERATED += $(OBJDIR)/upg_data_Placement.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Placement_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_RibbonMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_SampleLibSettings.pkbo.o
+GENERATED += $(OBJDIR)/upg_data_SampleLibSettings.pkbo1.o
+GENERATED += $(OBJDIR)/upg_data_Samplers.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Samplers_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_SoundMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Sphere.fbx.o
+GENERATED += $(OBJDIR)/upg_data_Trails.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Trails_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.frag.o
+GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.pkma1.o
+GENERATED += $(OBJDIR)/upg_data_TriangleMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Utils.h.o
+GENERATED += $(OBJDIR)/upg_data_Utils.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Utils_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_White.dds.o
+GENERATED += $(OBJDIR)/upg_data_White.dds1.o
+GENERATED += $(OBJDIR)/upg_helper_core_upgrade.o
+GENERATED += $(OBJDIR)/upg_helper_file.o
+GENERATED += $(OBJDIR)/upg_helper_material.o
+GENERATED += $(OBJDIR)/upg_helper_nodegraph.o
+GENERATED += $(OBJDIR)/upg_helper_script.o
+GENERATED += $(OBJDIR)/upg_helper_string.o
+GENERATED += $(OBJDIR)/upg_import_v1.o
+GENERATED += $(OBJDIR)/upg_logger.o
+GENERATED += $(OBJDIR)/upg_main.o
+GENERATED += $(OBJDIR)/upg_precompiled.o
+GENERATED += $(OBJDIR)/upg_rawfile.o
+GENERATED += $(OBJDIR)/upg_upgrader.o
+GENERATED += $(OBJDIR)/upg_upgrades_hardfix.o
+GENERATED += $(OBJDIR)/upg_upgrades_v1.13.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v1.14.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_alpha0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_alpha1.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_alpha2.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_alpha3.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_alpha4.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_beta1.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_beta2.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_beta3.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.0.0_beta4.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.1.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.10.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.11.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.2.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.5.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.6.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.7.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.8.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.9.0.o
 OBJECTS += $(OBJDIR)/core_upgrader.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_0_0_45754.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_0_0_46520.o
@@ -90,6 +314,12 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_0_0_50306.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_0_0_50392.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_0_0_51547.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_0_2_51773.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_10_0_8984.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_10_0_9172.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_10_0_9560.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_10_0_9625.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_10_0_9653.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_11_0_11056.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53244.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
@@ -210,6 +440,7 @@ OBJECTS += $(OBJDIR)/upg_data_FeatureAtlas.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureDecal.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureDiffuse.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureDistortion.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureDithering.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureEmissive.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureRibbonCorrectDeformation.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureSoftParticles.h.o
@@ -283,6 +514,8 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.0.0_beta2.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.0.0_beta3.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.0.0_beta4.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.1.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.10.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.11.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.2.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
@@ -298,7 +531,7 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.9.0.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-UpgraderLib
 	$(SILENT) $(LINKCMD)
@@ -324,9 +557,11 @@ clean:
 	@echo Cleaning PK-UpgraderLib
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 
@@ -401,6 +636,24 @@ $(OBJDIR)/core_upgrader_2_1_0_53018.o: ../../ExternalLibs/pk_upgraderlib/src/Upg
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_1_0_53244.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53244/core_upgrader_2_1_0_53244.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_8984.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.8984/core_upgrader_2_10_0_8984.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9172.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9172/core_upgrader_2_10_0_9172.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9560.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9560/core_upgrader_2_10_0_9560.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9625.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9625/core_upgrader_2_10_0_9625.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9653.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9653/core_upgrader_2_10_0_9653.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_11_0_11056.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.11.0.11056/core_upgrader_2_11_0_11056.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
@@ -760,6 +1013,9 @@ $(OBJDIR)/upg_data_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upg
 $(OBJDIR)/upg_data_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Experimental/includes/upg_data_FeatureDistortion.h.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Experimental/includes/upg_data_FeatureDithering.h.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Experimental/includes/upg_data_FeatureEmissive.h.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -935,6 +1191,12 @@ $(OBJDIR)/upg_upgrades_v2.0.0_beta4.o: ../../ExternalLibs/pk_upgraderlib/src/Upg
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.1.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.1.0.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.10.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.10.0.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.11.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.11.0.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp

@@ -75,6 +75,11 @@ namespace PopcornFX
 			if (DependenciesLoading.ContainsKey(key))
 			{
 				UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object));
+				if (obj == null)
+				{
+					Debug.LogError("[PKFX] Unable to load dependency at " + path);
+					return;
+				}
 				List<PKFxEffectAsset> assets = DependenciesLoading[key];
 				foreach (PKFxEffectAsset asset in assets)
 				{
@@ -130,6 +135,9 @@ namespace PopcornFX
 					return false;
 				CreateAssetFolderUpToPath(assetChange.m_Path);
 				AssetDatabase.CreateAsset(fxAsset, fxAsset.AssetFullPath + ".asset");
+#if !(UNITY_2017 || UNITY_2018 || UNITY_2019)
+				PKFxSettings.Instance.AddGUIDForAsset(fxAsset.AssetFullPath + ".asset", AssetDatabase.GUIDFromAssetPath(fxAsset.AssetFullPath + ".asset"));
+#endif
 			}
 			return true;
 		}
@@ -161,7 +169,6 @@ namespace PopcornFX
 
 				if (effect.EffectName == fxPathToPatch) // Sometimes the effect.m_FxAsset is null here, so we test against the m_FxName
 				{
-					effect.EffectAsset = fxAsset;
 					if (effect.UpdateEffectAsset(fxAsset, false, false))
 						sceneHasChanged = true;
 				}
@@ -187,6 +194,7 @@ namespace PopcornFX
 			foreach (PKFxEffectAsset.DependencyDesc dependency in fxAsset.m_Dependencies)
 			{
 				dependency.m_Path = dependency.m_Path.Replace("\\", "/");
+				dependency.m_Path = dependency.m_Path.Replace("//", "/");
 				CreateAssetFolderUpToPath(dependency.m_Path);
 
 				//Cases where we need originals assets without bake.
@@ -244,6 +252,28 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		private delegate void GetWidthAndHeight(TextureImporter importer, ref int width, ref int height);
+		private static GetWidthAndHeight getWidthAndHeightDelegate;
+
+		public static void GetOriginalTextureSize(TextureImporter importer, ref int width, ref int height)
+		{
+			if (getWidthAndHeightDelegate == null)
+			{
+				var method = typeof(TextureImporter).GetMethod("GetWidthAndHeight", BindingFlags.NonPublic | BindingFlags.Instance);
+				if (method != null)
+				{
+					getWidthAndHeightDelegate = Delegate.CreateDelegate(typeof(GetWidthAndHeight), null, method) as GetWidthAndHeight;
+				}
+				else
+				{
+					Debug.LogError("[PopcornFX] Could not load the function TextureImporter.GetWidthAndHeight (internal unity api function)");
+					return;
+				}
+			}
+
+			getWidthAndHeightDelegate.Invoke(importer, ref width, ref height);
+		}
+
 		private static void ApplyPKImportSetting(PKFxEffectAsset.DependencyDesc dependency, string path)
 		{
 			string fExt = Path.GetExtension(path);
@@ -263,7 +293,18 @@ namespace PopcornFX
 				if (textureImporter != null)
 				{
 					bool reimport = false;
-					if (textureImporter.sRGBTexture == depIsLinearTexture)
+					if (dependency.HasUsageFlag(EUseInfoFlag.IsVatTexture))
+					{
+						textureImporter.sRGBTexture = false;
+						textureImporter.npotScale = TextureImporterNPOTScale.None;
+						textureImporter.mipmapEnabled = false;
+						textureImporter.textureCompression = TextureImporterCompression.Uncompressed;
+						int width = 0, height = 0;
+						GetOriginalTextureSize(textureImporter, ref width, ref height);
+						textureImporter.maxTextureSize = width > height ? width : height;
+						reimport = true;
+					}
+					else if (textureImporter.sRGBTexture == depIsLinearTexture)
 					{
 						textureImporter.sRGBTexture = !depIsLinearTexture;
 						reimport = true;

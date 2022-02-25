@@ -74,6 +74,23 @@ namespace PopcornFX
 		public float m_Metalness;
 	};
 
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SRenderingFeatureVATDesc
+	{
+		public IntPtr m_PositionMap;
+		public IntPtr m_NormalMap;
+		public IntPtr m_ColorMap;
+		public IntPtr m_RotationMap;
+		public int m_NumFrames;
+		public int m_PackedData;
+		public Vector4 m_Color;
+		public Vector2 m_BoundsPivot;
+		public int m_NormalizedData;
+		public Vector2 m_BoundsPosition;
+		public int m_PadToPowerOf2;
+		public Vector2 m_PaddedRatio;
+	};
+
 	// Create Renderers:
 	// Billboards and ribbons:
 	[StructLayout(LayoutKind.Sequential)]
@@ -92,6 +109,8 @@ namespace PopcornFX
 		public int m_DrawOrder;
 
 		public IntPtr m_LitRendering;
+
+		public int	m_CameraId;
 	};
 
 	// Meshes:
@@ -106,6 +125,7 @@ namespace PopcornFX
 		public IntPtr m_DiffuseMap;
 
 		public IntPtr m_LitRendering;
+		public IntPtr m_VatRendering;
 	};
 
 
@@ -200,7 +220,9 @@ namespace PopcornFX
 		IsMeshRenderer = (1 << 2),
 		// Samplers:
 		IsMeshSampler = (1 << 3),
-		IsTextureSampler = (1 << 4)
+		IsTextureSampler = (1 << 4),
+
+		IsVatTexture = (1 << 5),
 	};
 
 	public enum EPrintConsoleType : int
@@ -431,6 +453,7 @@ namespace PopcornFX
 				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshRenderer;
 
 			bool isLinearTexture = (useInfoFlags & (int)EUseInfoFlag.IsLinearTextureRenderer) != 0;
+			
 			if (isLinearTexture)
 				depDesc.m_Path = Path.GetDirectoryName(depDesc.m_Path) + "/" + Path.GetFileNameWithoutExtension(depDesc.m_Path) + "_linear" + Path.GetExtension(depDesc.m_Path);
 
@@ -877,7 +900,7 @@ namespace PopcornFX
 												reserveVertexCount,
 												reserveIndexCount,
 												useLargeIndices);
-			return ok;
+			return ok; 
 		}
 
 		//----------------------------------------------------------------------------
@@ -946,8 +969,16 @@ namespace PopcornFX
 			if (mesh.GetIndexCount(0) < usedIndexCount)
 			{
 				int[] triangles = new int[reservedIndexCount];			// index
-																		// fix to set the right vertex buffer size on PS4 and UNKNOWN2 : fill the index buffer with vertex ids
-				if (Application.platform == RuntimePlatform.PS4 || Application.platform == RuntimePlatform.PS5)
+				// fix to set the right vertex buffer size on PS4 and UNKNOWN2 : fill the index buffer with vertex ids
+				if (
+#if UNITY_PS4
+				Application.platform == RuntimePlatform.PS4 ||
+#elif UNITY_UNKNOWN2
+				Application.platform == RuntimePlatform.PS5 ||
+#else
+				false
+#endif
+				)
 				{
 					for (int i = 0; i < mesh.vertexCount; ++i)
 						triangles[i] = i;
@@ -1245,6 +1276,7 @@ namespace PopcornFX
 		[MonoPInvokeCallback(typeof(EffectAboutToBakeCallback))]
 		public static void OnEffectAboutToBake(string path)
 		{
+			PKFxManager.ImportedAssetPath = path;
 			PKFxManager.ImportedAssetName = Path.GetFileName(path);
 		}
 

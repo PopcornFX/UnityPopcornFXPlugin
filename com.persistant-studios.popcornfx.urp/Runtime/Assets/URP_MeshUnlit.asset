@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: URP_MeshUnlit
   m_EditorClassIdentifier: 
   m_UseShader: 1
-  m_Shader: {fileID: -6465566751694194690, guid: bf62a4900a4512a48929eb42659a1207, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: bf62a4900a4512a48929eb42659a1207,
+    type: 3}
   m_Material: {fileID: 0}
   m_RenderTypes: 00000100
   m_BlendMode: 000000000101
-  m_ShaderMask: 8167
+  m_ShaderMask: 122855
   m_BillboardingLocation: 0
   m_MeshColorPropertyName: _BaseColor
+  m_MeshCursorPropertyName: _VATCursor
   m_NormalMapPropertyName: 

@@ -20,4 +20,5 @@ MonoBehaviour:
   m_ShaderMask: -1
   m_BillboardingLocation: 0
   m_MeshColorPropertyName: _BaseColor
+  m_MeshCursorPropertyName: _VATCursor
   m_NormalMapPropertyName: 

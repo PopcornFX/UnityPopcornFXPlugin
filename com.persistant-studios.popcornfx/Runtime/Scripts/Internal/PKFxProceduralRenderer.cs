@@ -313,7 +313,21 @@ namespace PopcornFX
 				return;
 			if (m_RenderingPlugin == null)
 				return;
-			RenderParticles(m_RenderingPlugin.CameraForDrawProcedural);
+
+
+			if (PKFxManager.IsUnitTesting)
+				RenderParticles(null);
+			else
+			{
+				for (int i = 0; i < m_RenderingPlugin.m_Cameras.Count; ++i)
+				{
+					if (i < m_RenderingPlugin.m_MaxCameraSupport)
+					{
+						RenderParticles(m_RenderingPlugin.m_Cameras[i].GetComponent<Camera>());
+					}
+				}
+			}
+
 #if UNITY_EDITOR
 			foreach (SceneView sc in SceneView.sceneViews)
 			{

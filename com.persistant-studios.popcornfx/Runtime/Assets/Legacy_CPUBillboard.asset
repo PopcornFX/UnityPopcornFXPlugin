@@ -16,8 +16,9 @@ MonoBehaviour:
   m_Shader: {fileID: 4800000, guid: ad0ae35fb4dc10e4e9e4847dce76e721, type: 3}
   m_Material: {fileID: 0}
   m_RenderTypes: 01010001
-  m_BlendMode: 010101010000
-  m_ShaderMask: -1
+  m_BlendMode: 010101010101
+  m_ShaderMask: 16383
   m_BillboardingLocation: 0
   m_MeshColorPropertyName: _BaseColor
+  m_MeshCursorPropertyName: _Cursor
   m_NormalMapPropertyName: 

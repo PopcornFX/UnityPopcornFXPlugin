@@ -5,15 +5,23 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.XR;
 using System.Collections.Generic;
+using System;
 
 namespace PopcornFX
 {
 	public class PKFxCamera : MonoBehaviour
 	{
 		// Static data
-		private static int				g_LastFrameCount = -1;
+		private int						m_LastFrameCount = -1;
 		public static short				g_CameraUID = 0;
-		public static short				GetUniqueID { get { return 0; } }
+		public static short				GetUniqueID { 
+			get 
+			{
+				short value = g_CameraUID;
+				g_CameraUID += 1;
+				return value;
+			} 
+		}
 
 		// Instance data
 		private RenderTexture			m_DistortionRt = null;
@@ -21,9 +29,9 @@ namespace PopcornFX
 		private PKFxRenderingPlugin		m_RenderingPlugin;
 
 		[HideInInspector]
-		protected short					m_CameraID = 0;
+		public short					m_CameraID = -1;
 		protected short					m_VRReservedID = 0;
-		protected short					m_CurrentCameraID = 0;
+		public short					m_CurrentCameraID = 0;
 		protected Camera				m_Camera;
 		protected SCamDesc				m_CameraDescription;
 		protected uint					m_CurrentFrameID = 0;
@@ -91,7 +99,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		public void Clean()
+		private void Clean()
 		{
 			if (m_CommandBuffer != null)
 				m_Camera.RemoveCommandBuffer(CameraEvent.BeforeImageEffects, m_CommandBuffer);
@@ -100,6 +108,26 @@ namespace PopcornFX
 			m_CommandBuffer = null;
 			m_DistortionMat = null;
 			m_BlurMat = null;
+		}
+		public void OnDestroy()
+		{
+			if (m_CameraID >= 0)
+				m_RenderingPlugin.UnRegisterCamera(this);
+			Clean();
+		}
+
+		public void OnEnable()
+		{
+			int id = m_RenderingPlugin.RegisterCamera(this);
+			if (id >= 0)
+				m_CameraID = (short)id;
+
+		}
+
+		public void OnDisable()
+		{
+			if (m_CameraID >= 0)
+				m_RenderingPlugin.UnRegisterCamera(this);
 		}
 
 		//----------------------------------------------------------------------------
@@ -117,8 +145,7 @@ namespace PopcornFX
 				Debug.LogWarning("[PopcornFX] Multiple PKFxRenderingPlugin components detected, will cause issue with PopcornFX effects");
 			}
 			m_RenderingPlugin = rendering[0];
-			m_CameraID = GetUniqueID;
-			m_CurrentCameraID = m_CameraID;
+			
 #if !UNITY_SWITCH && !UNITY_XBOXONE && !UNITY_GAMECORE_UNKNOWN1
 
 			if (Application.platform != RuntimePlatform.IPhonePlayer && UnityEngine.XR.XRSettings.enabled)
@@ -133,8 +160,6 @@ namespace PopcornFX
 					}
 				}
 			}
-
-
 #endif
 			m_Camera = GetComponent<Camera>();
 			// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
@@ -142,6 +167,20 @@ namespace PopcornFX
 			//Enable depth texture on mobile
 			if (PKFxSettings.EnableSoftParticles)
 				m_Camera.depthTextureMode = DepthTextureMode.Depth;
+		}
+
+		internal void SetCullingMask(short ID)
+		{
+			m_CurrentCameraID = ID;
+
+			string[] renderingMask = PKFxSettings.Instance.GetRenderingLayerMaskNames();
+			string[] targetMaskName = new string[] { renderingMask[ID] };
+
+			int cull = m_Camera.cullingMask;						// << Origin Mask
+			int pKMask = LayerMask.GetMask(renderingMask);			// << All PK Related Mask
+			int targetMask = LayerMask.GetMask(targetMaskName);  // << PK Mask to flip to one
+
+			m_Camera.cullingMask = (cull & (~pKMask)) | targetMask;
 		}
 
 		//----------------------------------------------------------------------------
@@ -254,9 +293,9 @@ namespace PopcornFX
 
 		public void LateUpdateCamera()
 		{
-			if (g_LastFrameCount != Time.frameCount)
+			if (m_LastFrameCount != Time.frameCount)
 			{
-				g_LastFrameCount = Time.frameCount;
+				m_LastFrameCount = Time.frameCount;
 				if (_updated)
 				{
 					_updated = false;

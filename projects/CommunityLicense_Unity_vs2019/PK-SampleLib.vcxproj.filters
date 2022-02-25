@@ -22,9 +22,6 @@
     <Filter Include="Headers\PopcornStartup">
       <UniqueIdentifier>{E43B44DE-D035-6D30-B9A2-0341A53BD39C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\RenderIntegrationNull">
-      <UniqueIdentifier>{2F30E794-9B48-CEBE-64F5-5D58D0CC6258}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\RenderIntegrationRHI">
       <UniqueIdentifier>{77CE0E33-6389-FEDE-0C41-7729F8DA486F}</UniqueIdentifier>
     </Filter>
@@ -78,9 +75,6 @@
     </Filter>
     <Filter Include="Sources\PopcornStartup">
       <UniqueIdentifier>{ACB2F143-98AC-1A96-8119-B1A66DB28002}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\RenderIntegrationNull">
-      <UniqueIdentifier>{F7358221-634E-694B-2CFB-F8E498D2FDE4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\RenderIntegrationRHI">
       <UniqueIdentifier>{3F3BFCE1-2BF6-EB8D-D4AD-64D8C047361E}</UniqueIdentifier>
@@ -567,18 +561,6 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RHIRenderParticleSceneHelpers.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullBillboardingBatchPolicy.h">
-      <Filter>Headers\RenderIntegrationNull</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullFrameCollectorTypes.h">
-      <Filter>Headers\RenderIntegrationNull</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRenderDataFactory.h">
-      <Filter>Headers\RenderIntegrationNull</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRendererCache.h">
-      <Filter>Headers\RenderIntegrationNull</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
@@ -766,15 +748,6 @@
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RHIRenderParticleSceneHelpers.cpp">
       <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullBillboardingBatchPolicy.cpp">
-      <Filter>Sources\RenderIntegrationNull</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRenderDataFactory.cpp">
-      <Filter>Sources\RenderIntegrationNull</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationNull\NullRendererCache.cpp">
-      <Filter>Sources\RenderIntegrationNull</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.cpp">
       <Filter>Sources\RenderIntegrationRHI</Filter>

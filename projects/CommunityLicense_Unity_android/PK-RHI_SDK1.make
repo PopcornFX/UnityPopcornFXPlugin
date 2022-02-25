@@ -154,8 +154,10 @@ PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -include pk_compiler_warnings.h
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/glew.o
 OBJECTS += $(OBJDIR)/glew.o
 
 # Rules
@@ -164,7 +166,7 @@ OBJECTS += $(OBJDIR)/glew.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-RHI_SDK1
 	$(SILENT) $(LINKCMD)
@@ -190,9 +192,11 @@ clean:
 	@echo Cleaning PK-RHI_SDK1
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

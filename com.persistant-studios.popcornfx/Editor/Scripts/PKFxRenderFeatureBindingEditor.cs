@@ -45,6 +45,9 @@ namespace PopcornFX
 			"Atlas",
 			"Size2",
 			"DiffuseRampMap",
+			"FluidVAT",
+			"SoftVAT",
+			"RigidVAT",
 		};
 
 		public static string GetSelectedPathOrFallback()

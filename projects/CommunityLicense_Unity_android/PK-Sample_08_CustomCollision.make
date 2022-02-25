@@ -164,8 +164,17 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/CustomCollision.o
+GENERATED += $(OBJDIR)/CustomCollision_Scene.o
+GENERATED += $(OBJDIR)/CustomCollision_SimInterface_Decl.o
+GENERATED += $(OBJDIR)/CustomCollision_SimInterface_Impl.o
+GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/Main.o
+GENERATED += $(OBJDIR)/SampleScene.o
+GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/CustomCollision.o
 OBJECTS += $(OBJDIR)/CustomCollision_Scene.o
 OBJECTS += $(OBJDIR)/CustomCollision_SimInterface_Decl.o
@@ -181,7 +190,7 @@ OBJECTS += $(OBJDIR)/precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-Sample_08_CustomCollision
 	$(SILENT) $(LINKCMD)
@@ -207,9 +216,11 @@ clean:
 	@echo Cleaning PK-Sample_08_CustomCollision
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

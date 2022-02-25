@@ -20,6 +20,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PK-RenderHelpers_SDK1</RootNamespace>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -93,6 +94,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -123,6 +125,7 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -153,6 +156,7 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -164,6 +168,20 @@
   <ItemGroup>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_basic_renderer_properties.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_vertex_animation_renderer_properties.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_helpers.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_light_std.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_sound_std.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_gpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_ribbon_batch_helper.h" />
@@ -180,6 +198,11 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_sound_batch.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c0.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c1.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c2.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_ribbon.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard.h" />
@@ -206,14 +229,18 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_data_legacy.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_batch_drawer.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_data.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_particle_render_data_factory.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_render_medium.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.inl" />

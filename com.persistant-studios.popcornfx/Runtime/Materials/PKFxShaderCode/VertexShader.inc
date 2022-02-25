@@ -30,6 +30,7 @@ SVertexOutput	vert(SVertexInput v)
 
 	#if	PK_HAS_LIGHTING
 		o.Normal = v.Normal;
+		o.Tangent = v.Tangent;
 	#endif
 
 	#if	PK_HAS_RIBBON_COMPLEX

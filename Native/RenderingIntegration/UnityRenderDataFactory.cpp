@@ -23,8 +23,32 @@ __PK_API_BEGIN
 PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(const PRendererDataBase &renderer, const CParticleDescriptor *particleDesc)
 {
 	PUnityRendererCache		rendererCache = PK_NEW(CUnityRendererCache(this));
+	CRuntimeManager			&RTManager = CRuntimeManager::Instance();
 
-	rendererCache->m_UnityMeshInfo.Init(CRuntimeManager::Instance().GetDeviceType());
+	const TArray<SUnitySceneView>	&views = RTManager.GetScene().SceneViews();
+	UnityGfxRenderer			deviceType = RTManager.GetDeviceType();
+
+	if (renderer->m_RendererType != Renderer_Mesh)
+	{
+		u32 count = views.Empty() ? 1 : views.Count();
+		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(count)))
+			return null;
+		for (u32 i = 0; i < count; ++i)
+		{
+			rendererCache->m_UnityMeshInfoPerViews[i].Init(deviceType);
+		}
+	}
+	else
+	{
+		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(1)))
+			return null;
+		for (u32 i = 0; i < views.Count(); ++i)
+		{
+			rendererCache->m_UnityMeshInfoPerViews[i].Init(deviceType);
+		}
+	}
+
+	
 	renderer->m_RendererCache = rendererCache;
 
 	bool succeeded = true;
@@ -89,15 +113,21 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 				rendererCache->m_HasCustomMat = (hasCustomMaterial == ManagedBool_True ? true : false);
 				rendererCache->m_CustomMatID = customMaterialID;
 				//Check if a batchable renderer cache exist
-				for (u32 j = 0; j < m_RendererCaches.Count(); ++j)
 				{
-					if (*m_RendererCaches[j] == *rendererCache)
+					PK_SCOPEDLOCK_READ(m_CacheLock);
+					for (u32 j = 0; j < m_RendererCaches.Count(); ++j)
 					{
-						return m_RendererCaches[j];
+						if (*m_RendererCaches[j] == *rendererCache)
+						{
+							return m_RendererCaches[j];
+						}
 					}
 				}
 				rendererCache->CreateUnityMesh(rendererCount, m_UseGPUBillboarding);
-				m_RendererCaches.PushBack(rendererCache);
+				{
+					PK_SCOPEDLOCK_WRITE(m_CacheLock);
+					m_RendererCaches.PushBack(rendererCache);
+				}
 				return rendererCache;
 			}
 			++rendererCount;
@@ -168,7 +198,8 @@ CUnityRenderDataFactory::CBillboardingBatchInterface	*CUnityRenderDataFactory::C
 	}
 	if (policy != null)
 	{
-		policy->Init(CRuntimeManager::Instance().GetDeviceType());
+		policy->Init(CRuntimeManager::Instance().GetDeviceType(), this);
+		PK_SCOPEDLOCK_WRITE(m_CacheLock);
 		m_Batches.PushBack(policy);
 	}
 	return retValue;
@@ -186,12 +217,14 @@ bool	CUnityRenderDataFactory::GetDelayUnityCallbacks() const
 
 void	CUnityRenderDataFactory::Reset()
 {
+	PK_SCOPEDLOCK_WRITE(m_CacheLock);
 	m_RendererCaches.Clear();
 	m_Batches.Clear();
 }
 
 void	CUnityRenderDataFactory::EmptyAllBatches()
 {
+	PK_SCOPEDLOCK_READ(m_CacheLock);
 	for (u32 i = 0; i < m_Batches.Count(); ++i)
 	{
 		m_Batches[i]->ClearBatch();
@@ -200,10 +233,23 @@ void	CUnityRenderDataFactory::EmptyAllBatches()
 
 void	CUnityRenderDataFactory::CustomStepFlagInactive()
 {
+	PK_SCOPEDLOCK_READ(m_CacheLock);
 	for (u32 i = 0; i < m_Batches.Count(); ++i)
 	{
 		m_Batches[i]->CustomStepFlagInactive();
 	}
+}
+
+void	CUnityRenderDataFactory::RemoveRendererCache(const PCUnityRendererCache &cache)
+{
+	PK_SCOPEDLOCK_WRITE(m_CacheLock);
+	m_RendererCaches.RemoveElement(cache);
+}
+
+void	CUnityRenderDataFactory::RemoveBatch(CUnityBillboardingBatchPolicy *batch)
+{
+	PK_SCOPEDLOCK_WRITE(m_CacheLock);
+	m_Batches.RemoveElement(batch);
 }
 
 //----------------------------------------------------------------------------

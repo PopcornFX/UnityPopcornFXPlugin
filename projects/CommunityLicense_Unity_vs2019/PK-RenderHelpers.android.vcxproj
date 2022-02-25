@@ -54,46 +54,47 @@
     <ProjectGuid>{1822BA45-2535-4E66-B24D-90B284A46F5B}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'" Label="Globals">
     <Keyword>Android</Keyword>
     <RootNamespace>PK-RenderHelpers.android</RootNamespace>
-    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'" Label="Globals">
     <Keyword>Android</Keyword>
     <RootNamespace>PK-RenderHelpers.android</RootNamespace>
-    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'" Label="Globals">
     <Keyword>Android</Keyword>
     <RootNamespace>PK-RenderHelpers.android</RootNamespace>
-    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'" Label="Globals">
     <Keyword>Android</Keyword>
     <RootNamespace>PK-RenderHelpers.android</RootNamespace>
-    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'" Label="Globals">
     <Keyword>Android</Keyword>
     <RootNamespace>PK-RenderHelpers.android</RootNamespace>
-    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'" Label="Globals">
     <Keyword>Android</Keyword>
     <RootNamespace>PK-RenderHelpers.android</RootNamespace>
-    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
   </PropertyGroup>
@@ -343,6 +344,20 @@
   <ItemGroup>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_basic_renderer_properties.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_vertex_animation_renderer_properties.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_helpers.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_light_std.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_sound_std.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_gpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_ribbon_batch_helper.h" />
@@ -359,6 +374,11 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_sound_batch.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c0.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c1.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c2.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_ribbon.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard.h" />
@@ -385,25 +405,53 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_data_legacy.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_batch_drawer.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_data.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_particle_render_data_factory.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_render_medium.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\rh_init.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_billboards.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\include\pv_renderhelpers.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_basic_renderer_properties.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_vertex_animation_renderer_properties.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_decal_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_decal_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_helpers.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_light_std.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_mesh_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_mesh_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_ribbon_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_ribbon_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_sound_std.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_triangle_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_triangle_gpu.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batches\rh_billboard_ribbon_batch_helper.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_capsule.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_spheroidal.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_planar_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_screen_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_standard.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_view_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_ribbons.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_ribbons_axial.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\buffer_pool\rh_bufferpool.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard_cpu.cpp" />
@@ -426,7 +474,10 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle_cpu.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle_cpu_tasks.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_batch_drawer.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_frame_collector.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_particle_render_data_factory.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_render_medium.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_renderers_walker.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_init.cpp" />

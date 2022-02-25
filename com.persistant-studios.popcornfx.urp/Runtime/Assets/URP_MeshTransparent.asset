@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: URP_MeshTransparent
   m_EditorClassIdentifier: 
   m_UseShader: 1
-  m_Shader: {fileID: -6465566751694194690, guid: 6f62c1138be319243910f8ce89b6157b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 703453c785de5a741b03d288dc3fb379,
+    type: 3}
   m_Material: {fileID: 0}
   m_RenderTypes: 00000100
   m_BlendMode: 010101010000
-  m_ShaderMask: -1
+  m_ShaderMask: 16383
   m_BillboardingLocation: 0
   m_MeshColorPropertyName: _BaseColor
+  m_MeshCursorPropertyName: _Cursor
   m_NormalMapPropertyName: 

@@ -78,8 +78,22 @@ endif
 # File sets
 # #############################################
 
+GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/AttributeSampler_GeometryCustom.o
+GENERATED += $(OBJDIR)/AttributeSampler_GeometryCustomProxy.o
+GENERATED += $(OBJDIR)/AttributeSampler_GeometryDefault.o
+GENERATED += $(OBJDIR)/AttributeSampler_GeometryProcedural.o
+GENERATED += $(OBJDIR)/AttributeSampler_GeometryProxy.o
+GENERATED += $(OBJDIR)/AttributeSampler_GeometryShape.o
+GENERATED += $(OBJDIR)/EffectInstance.o
+GENERATED += $(OBJDIR)/EffectInterface.o
+GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/Main.o
+GENERATED += $(OBJDIR)/SampleScene.o
+GENERATED += $(OBJDIR)/SkinnedMesh.o
+GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryCustom.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryCustomProxy.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryDefault.o
@@ -100,7 +114,7 @@ OBJECTS += $(OBJDIR)/precompiled.o
 all: $(TARGET)
 	@:
 
-$(TARGET): $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
+$(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
 	@echo Linking PK-Sample_04_EffectInterface
 	$(SILENT) $(LINKCMD)
@@ -126,9 +140,11 @@ clean:
 	@echo Cleaning PK-Sample_04_EffectInterface
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
+	$(SILENT) rm -rf $(GENERATED)
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

@@ -140,6 +140,9 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 	// Split double sided materials:
 	m_RenderDataFactory.SetGPUBillboarding(settings.m_EnableGPUBillboarding == ManagedBool_True);
 
+	m_RenderContext.m_FreeUnusedBatches = settings.m_FreeUnusedBatches == ManagedBool_True;
+	m_RenderContext.m_FrameCountBeforeFreeingUnusedBatches = settings.m_FrameCountBeforeFreeingUnusedBatches;
+
 	m_IsMediumCollectionInitialized = true;
 	return true;
 }
@@ -163,6 +166,7 @@ void	CPKFXScene::SyncPreviousUpdateAndRunDeferredCallsIFN()
 			m_ParticleMediumCollection->UpdateFence();
 	// Now that we are sure that the update of the previous frame is over, we can call all the deferred callbacks on the game thread:
 	// Deferred Unity callbacks:
+	CRuntimeManager::Instance().ExecDelayedManagedToNativeMethods();
 	CRuntimeManager::Instance().ExecDelayedNativeToManagedMethods();
 	CRuntimeManager::Instance().ExecDelayedManagedToNativeMethods();
 }
@@ -193,8 +197,8 @@ void	CPKFXScene::LaunchUpdate(float dt)
 
 				if (!m_GameThreadCalled)
 				{
-					TMemoryView<SSceneView>		views = m_SceneViews;
-					SUnityDrawOutputs			dummy;
+					TMemoryView<SUnitySceneView>		views = m_SceneViews;
+					SUnityDrawOutputs					dummy;
 
 					if (m_ParticleMeshFrameCollector->UpdateThread_BeginCollectFrame())
 					{
@@ -202,14 +206,20 @@ void	CPKFXScene::LaunchUpdate(float dt)
 						m_ParticleMeshFrameCollector->BuildNewFrame(m_ParticleMeshFrameCollector->UpdateThread_GetLastCollectedFrame());
 
 						if (m_ParticleMeshFrameCollector->RenderedFrame() != null)
+						{
+							_RemoveUnloadedRenderers(m_ParticleMeshFrameCollector->RenderedFrame());
 							m_ParticleMeshFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kAllStepsMask);
+						}
 					}
 					if (m_ParticleFrameCollector->UpdateThread_BeginCollectFrame())
 					{
 						m_ParticleFrameCollector->UpdateThread_CollectFrame(m_ParticleMediumCollection);
 						m_ParticleFrameCollector->BuildNewFrame(m_ParticleFrameCollector->UpdateThread_GetLastCollectedFrame());
 						if (m_ParticleFrameCollector->RenderedFrame() != null)
+						{
+							_RemoveUnloadedRenderers(m_ParticleFrameCollector->RenderedFrame());
 							m_ParticleFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kGameThreadGenDrawCallsSteps);
+						}
 						m_RenderDataFactory.CustomStepFlagInactive();
 					}
 				}
@@ -224,8 +234,8 @@ void	CPKFXScene::LaunchUpdate(float dt)
 				m_ParticleMeshMediumCollection->Update(dt);
 				m_ParticleMeshMediumCollection->UpdateFence();
 
-				TMemoryView<SSceneView>		views = m_SceneViews;
-				SUnityDrawOutputs			dummy;
+				TMemoryView<SUnitySceneView>		views = m_SceneViews;
+				SUnityDrawOutputs					dummy;
 
 				if (m_ParticleMeshFrameCollector->UpdateThread_BeginCollectFrame())
 				{
@@ -233,7 +243,10 @@ void	CPKFXScene::LaunchUpdate(float dt)
 					m_ParticleMeshFrameCollector->BuildNewFrame(m_ParticleMeshFrameCollector->UpdateThread_GetLastCollectedFrame());
 
 					if (m_ParticleMeshFrameCollector->RenderedFrame() != null)
+					{
+						_RemoveUnloadedRenderers(m_ParticleMeshFrameCollector->RenderedFrame());
 						m_ParticleMeshFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kAllStepsMask);
+					}
 				}
 
 				// Then other particles update:
@@ -246,7 +259,7 @@ void	CPKFXScene::LaunchUpdate(float dt)
 
 //----------------------------------------------------------------------------
 
-void	CPKFXScene::BuildDrawCalls(const SSceneView &view)
+void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 {
 	(void)view;
 	PK_NAMEDSCOPEDPROFILE_C("CPKFXScene: BuildDrawCalls", CFloat3(0.0f, 0.6f, 1.0f));
@@ -265,8 +278,8 @@ void	CPKFXScene::BuildDrawCalls(const SSceneView &view)
 	}
 	m_RenderContext.m_RenderApiData->BeginFrame();
 
-	TMemoryView<SSceneView>		views = m_SceneViews;
-	SUnityDrawOutputs			dummy;
+	TMemoryView<SUnitySceneView>		views = m_SceneViews;
+	SUnityDrawOutputs					dummy;
 
 	if (m_WaitForUpdateOnRenderThread)
 	{
@@ -285,7 +298,10 @@ void	CPKFXScene::BuildDrawCalls(const SSceneView &view)
 		m_ParticleMediumCollection->UpdateFence();
 		m_ParticleFrameCollector->BuildNewFrame(m_ParticleFrameCollector->UpdateThread_GetLastCollectedFrame());
 		if (m_ParticleFrameCollector->RenderedFrame() != null)
+		{
+			_RemoveUnloadedRenderers(m_ParticleFrameCollector->RenderedFrame());
 			m_ParticleFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kGameThreadGenDrawCallsSteps);
+		}
 		m_RenderDataFactory.CustomStepFlagInactive();
 	}
 	if (m_ParticleFrameCollector->RenderedFrame() != null)
@@ -668,6 +684,15 @@ void	CPKFXScene::_PostUpdateEvents()
 	_ClearPendingEventsNoLock();
 }
 
+void	CPKFXScene::_RemoveUnloadedRenderers(const SParticleCollectedFrameToRender *renderedFrame)
+{
+	for (u32 i = 0; i < renderedFrame->m_PendingDeleteRendererCaches.Count(); ++i)
+	{
+		const CUnityRendererCache *cache = static_cast<const CUnityRendererCache*>(renderedFrame->m_PendingDeleteRendererCaches[i].Get());
+		m_RenderDataFactory.RemoveRendererCache(cache);
+	}
+}
+
 bool	CPKFXScene::RegisterEventListener(s32 guid, const CStringId &event, u32 unityKey)
 {
 	CRuntimeManager	&runtimeManager = CRuntimeManager::Instance();
@@ -807,12 +832,14 @@ void	CPKFXScene::BroadcastEvent(	Threads::SThreadContext				*threadCtx,
 									u32									eventID,
 									CStringId							eventName,
 									u32									count,
+									const SUpdateTimeArgs				&timeArgs,
 									const TMemoryView<const float>		&spawnDtToEnd,
 									const TMemoryView<const CEffectID>	&effectIDs,
 									const SPayloadView					&payloadView)
 {
 	(void)spawnDtToEnd;
 	(void)count;
+	(void)timeArgs;
 	(void)threadCtx;
 
 	PK_SCOPEDPROFILE();

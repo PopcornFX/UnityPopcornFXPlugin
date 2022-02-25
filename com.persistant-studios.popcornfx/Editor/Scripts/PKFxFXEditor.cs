@@ -113,6 +113,11 @@ namespace PopcornFX
 			}
 		}
 
+		public override void OnInteractivePreviewGUI(Rect r, GUIStyle background)
+		{
+			base.OnInteractivePreviewGUI(r, background);
+		}
+
 		//----------------------------------------------------------------------------
 
 		public override void OnInspectorGUI()

@@ -67,6 +67,8 @@ extern "C"
 
 		SRenderingFeatureLitDesc	*m_LitRendering;
 
+		int							m_CameraID;
+
 		SPopcornRendererDesc()
 			: m_ShaderVariationFlags(0)
 			, m_BlendMode(0)
@@ -77,6 +79,39 @@ extern "C"
 			, m_BillboardMode(0)
 			, m_DrawOrder(0)
 			, m_LitRendering(null)
+			, m_CameraID(0)
+		{
+		}
+	};
+
+	struct SRenderingFeatureVATDesc
+	{
+		const char*		m_PositionMap;
+		const char*		m_NormalMap;
+		const char*		m_ColorMap;
+		const char*		m_RotationMap;
+		int				m_NumFrames;
+		ManagedBool		m_PackedData;
+		CFloat4			m_Color;
+		CFloat2			m_BoundsPivot;
+		ManagedBool		m_NormalizedData;
+		CFloat2			m_BoundsPosition;
+		ManagedBool		m_PadToPowerOf2;
+		CFloat2			m_PaddedRatio;
+
+		SRenderingFeatureVATDesc()
+			: m_PositionMap(null)
+			, m_NormalMap(null)
+			, m_ColorMap(null)
+			, m_RotationMap(null)
+			, m_NumFrames(0)
+			, m_PackedData(ManagedBool_False)
+			, m_Color{}
+			, m_BoundsPivot{}
+			, m_NormalizedData(ManagedBool_False)
+			, m_BoundsPosition{}
+			, m_PadToPowerOf2(ManagedBool_False)
+			, m_PaddedRatio{}
 		{
 		}
 	};
@@ -94,6 +129,7 @@ extern "C"
 		const char					*m_DiffuseMap;
 
 		SRenderingFeatureLitDesc	*m_LitRendering;
+		SRenderingFeatureVATDesc	*m_VatRendering;
 
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
@@ -102,6 +138,7 @@ extern "C"
 			, m_HasMeshAtlas(ManagedBool_False)
 			, m_DiffuseMap(null)
 			, m_LitRendering(null)
+			, m_VatRendering(null)
 		{
 		}
 
@@ -109,6 +146,9 @@ extern "C"
 		{
 			PK_SAFE_DELETE(m_LitRendering);
 			m_LitRendering = null;
+
+			PK_SAFE_DELETE(m_VatRendering);
+			m_VatRendering = null;
 		}
 	};
 

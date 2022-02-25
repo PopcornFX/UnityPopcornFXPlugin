@@ -37,10 +37,14 @@ public:
 	void								EmptyAllBatches();
 	void								CustomStepFlagInactive();
 
+	void								RemoveRendererCache(const PCUnityRendererCache &batch);
+	void								RemoveBatch(CUnityBillboardingBatchPolicy *batch);
+
 private:
 	bool								m_DelayUnityCallbacks;
 	bool								m_UseGPUBillboarding;
 
+	Threads::CRWLock						m_CacheLock;
 	TArray<PUnityRendererCache>				m_RendererCaches;
 	TArray<CUnityBillboardingBatchPolicy*>	m_Batches;
 };

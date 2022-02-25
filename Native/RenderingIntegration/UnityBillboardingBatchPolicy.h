@@ -11,6 +11,7 @@
 
 struct	SParticleBuffers;
 class	CFrameCollector;
+class	CUnityRenderDataFactory;
 
 __PK_API_BEGIN
 //----------------------------------------------------------------------------
@@ -21,7 +22,7 @@ public:
 	CUnityBillboardingBatchPolicy();
 	~CUnityBillboardingBatchPolicy();
 
-	bool			Init(UnityGfxRenderer deviceType);
+	bool			Init(UnityGfxRenderer deviceType, CUnityRenderDataFactory *renderDataFactory);
 
 	// Only called when not empty:
 	static bool		CanRender(const Drawers::SBillboard_DrawRequest *request, const PRendererCacheBase &rendererCache, SUnityRenderContext &ctx);
@@ -33,19 +34,19 @@ public:
 	static bool		IsStateless() { return false; }
 
 	// Do not remove
-	bool		Tick(SUnityRenderContext &, const TMemoryView<SSceneView> &) { return true; }
+	bool		Tick(SUnityRenderContext &, const TMemoryView<SUnitySceneView> &);
 
 	void		ClearBatch();
 	void		CustomStepFlagInactive();
-	bool		AllocBuffers(SUnityRenderContext &ctx, const SBuffersToAlloc &allocBuffers, const TMemoryView<SSceneView> &views, ERendererClass rendererType);
+	bool		AllocBuffers(SUnityRenderContext &ctx, const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views, ERendererClass rendererType);
 
-	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap);
-	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SGPUBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap);
-	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SRibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap);
-	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SGPURibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap);
-	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SMeshBatchJobs *batchJobs, const SGeneratedInputs &toMap);
-	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, STriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
-	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SSceneView> &views, SGPUTriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPUBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SRibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPURibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SMeshBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, STriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPUTriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SBillboard_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch);
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SBillboard_DrawRequest * const> &drawRequests, Drawers::CBillboard_CPU *batch);
@@ -84,7 +85,9 @@ private:
 	bool		_RenderThread_SetupBuffersTriangles(const SGeneratedInputs &toMap, STriangleBatchJobs *triangleBatch);
 	bool		_FindAdditionalInput(const CStringId &inputName, EBaseTypeID inputType, const SGeneratedInputs &genInputs);
 
-	void		_PrepareCopySOA2AOS(const SUnityRenderContext &ctx);
+	bool		_PrepareCopySOA2AOS(const SUnityRenderContext &ctx, u32 idx);
+
+	CUnityRenderDataFactory			*m_RenderDataFactory;
 
 	// ----------------------------------------------------------------------------
 	// FILLED ON GAME THREAD - ALLOC UNITY BUFFERS:
@@ -96,6 +99,8 @@ private:
 	ERendererClass					m_RendererType;
 	CParticleMaterialDescBillboard	m_MaterialDescBillboard;
 	CParticleMaterialDescMesh		m_MaterialDescMesh;
+
+	TArray<SUnityMeshInfoPerView>	m_UnityMeshInfoPerViews;
 	SUnityMeshInfo					m_UnityMeshInfo;
 	CAABB							m_BBox;
 	bool							m_GPUBillboarding;
@@ -112,6 +117,8 @@ private:
 
 	// Can we fill the buffer?
 	bool							m_MeshIsValid;
+
+	u32								m_UnusedFrameCount;
 
 	// ----------------------------------------------------------------------------
 	// FILLED ON RENDER THREAD - ALLOC BILLBOARDING BUFFERS:
@@ -251,6 +258,7 @@ private:
 
 		TStridedMemoryView<CFloat4x4>			m_Transforms;
 		TStridedMemoryView<CFloat4>				m_Colors;
+		TStridedMemoryView<float>				m_Cursors;
 
 		SMeshParticleBuffers()
 		:	m_InstanceCount(0)
@@ -266,11 +274,11 @@ private:
 		}
 	};
 
-	Drawers::SCopyFieldDescPerMesh		m_MeshColorAdditionalField;
-	TArray<SMeshParticleBuffers>		m_PerMeshBuffers;
+	TArray<Drawers::SCopyFieldDescPerMesh>	m_MeshAdditionalField;
+	TArray<SMeshParticleBuffers>			m_PerMeshBuffers;
 
 	// Mapped Unity buffers:
-	void						*m_MappedVtxBuffer;
+	TArray<void*>				m_MappedVtxBuffer;
 	void						*m_MappedIdxBuffer;
 	//GPU ONLY
 	void						*m_MappedInfoBillboardBuffer;
@@ -299,7 +307,7 @@ private:
 			Clear();
 		}
 
-		void	FromParticleBuffers(const SParticleBuffers &buffers)
+		void	FromParticleBuffers(const SParticleBuffers &buffers, u32 viewIdx)
 		{
 			if (buffers.m_GeneratedInputs & Drawers::GenInput_Indices)
 				m_Indices = buffers.m_ViewIndependantGeom.m_Indices;
@@ -325,17 +333,16 @@ private:
 			m_Colors = buffers.m_Colors.m_Ptr;
 			m_AlphaCursor = buffers.m_AlphaCursor.m_Ptr;
 
-			// We get the buffers of the first view for the moment:
-			if (!buffers.m_PerViewGeom.Empty())
+			if (buffers.m_PerViewGeom.Count() > viewIdx)
 			{
-				if (buffers.m_PerViewGeom.First().m_GeneratedInputs & Drawers::GenInput_Indices)
-					m_Indices = buffers.m_PerViewGeom.First().m_Indices;
-				if (buffers.m_PerViewGeom.First().m_GeneratedInputs & Drawers::GenInput_Position)
-					m_Positions = buffers.m_PerViewGeom.First().m_Positions.m_Ptr;
-				if (buffers.m_PerViewGeom.First().m_GeneratedInputs & Drawers::GenInput_Normal)
-					m_Normals = buffers.m_PerViewGeom.First().m_Normals.m_Ptr;
-				if (buffers.m_PerViewGeom.First().m_GeneratedInputs & Drawers::GenInput_UVFactors)
-					m_UVFactors = buffers.m_PerViewGeom.First().m_UVFactors.m_Ptr;
+				if (buffers.m_PerViewGeom[viewIdx].m_GeneratedInputs & Drawers::GenInput_Indices)
+					m_Indices = buffers.m_PerViewGeom[viewIdx].m_Indices;
+				if (buffers.m_PerViewGeom[viewIdx].m_GeneratedInputs & Drawers::GenInput_Position)
+					m_Positions = buffers.m_PerViewGeom[viewIdx].m_Positions.m_Ptr;
+				if (buffers.m_PerViewGeom[viewIdx].m_GeneratedInputs & Drawers::GenInput_Normal)
+					m_Normals = buffers.m_PerViewGeom[viewIdx].m_Normals.m_Ptr;
+				if (buffers.m_PerViewGeom[viewIdx].m_GeneratedInputs & Drawers::GenInput_UVFactors)
+					m_UVFactors = buffers.m_PerViewGeom[viewIdx].m_UVFactors.m_Ptr;
 			}
 		}
 
@@ -357,16 +364,17 @@ private:
 	class	CBillboard_Exec_SOA_OAS
 	{
 	public:
+		u32						m_IdxView = 0;
 		u32						m_ShaderVariationFlags;
 
 		SParticleSourceBuffers	m_ParticleBuffers;		// Src
-		void					*m_MappedVertexBuffer;	// Dst vtx
+		TArray<void*>			m_MappedVertexBuffer;	// Dst vtx
 
 		// Dst buffers info:
 		u32						(*m_SemanticOffsets)[__Semantic_Count];
 		u32						m_VertexStride;
 
-		CBillboard_Exec_SOA_OAS() : m_ShaderVariationFlags(0), m_MappedVertexBuffer(null), m_VertexStride(0) { Mem::Clear(m_SemanticOffsets); }
+		CBillboard_Exec_SOA_OAS() : m_ShaderVariationFlags(0), m_VertexStride(0) { Mem::Clear(m_SemanticOffsets); }
 		void	Clear() { Mem::Reinit(*this); }
 		void	operator()(const Drawers::SBillboard_ExecPage &batch);
 		void	operator()(const Drawers::SRibbon_ExecBatch &batch);
@@ -375,7 +383,7 @@ private:
 		void	_CopyData(u32 vertexOffset, u32 vertexCount);
 	};
 
-	CBillboard_Exec_SOA_OAS		m_Exec_SAO2AOS;
+	TArray<CBillboard_Exec_SOA_OAS>		m_Exec_SAO2AOS;
 
 	class	CBilboard_Exec_BillboardInfo
 	{

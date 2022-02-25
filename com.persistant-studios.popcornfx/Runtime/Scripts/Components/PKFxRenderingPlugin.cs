@@ -1,6 +1,7 @@
 //----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,9 +37,7 @@ namespace PopcornFX
 		public float m_BlurFactor = 0.2f;
 
 		[HideInInspector]
-		public Camera m_Camera = null;
-
-		private PKFxCamera m_current = null;
+		public List<PKFxCamera> m_Cameras = null;
 
 		[HideInInspector]
 		public List<PKFxEffectAsset> m_PreloadEffect;
@@ -52,15 +51,21 @@ namespace PopcornFX
 			}
 		}
 
-		public Camera CameraForDrawProcedural
+		[HideInInspector]
+		[Tooltip("Max camera that can render particle. WARNING: Heavy performance hit as billboarding will be duplicated for each camera !")]
+		[Range(1, 4)]
+		public int m_MaxCameraSupport = 1;
+
+		[HideInInspector]
+		public int MaxCameraSupport
 		{
-			get 
-			{ 
-				if (PKFxManager.IsUnitTesting)
-					return null;
-				return m_Camera;
+			get { return m_MaxCameraSupport; }
+			set { 
+				m_MaxCameraSupport = value;
+				PKFxManager.SetMaxCameraCount(m_MaxCameraSupport);
 			}
 		}
+
 
 		//----------------------------------------------------------------------------
 
@@ -104,7 +109,9 @@ namespace PopcornFX
 				gameObject.SetActive(false);
 				return;
 			}
-			PKFxManager.StartupPopcorn(true);
+			PKFxManager.StartupPopcorn(false);
+			PKFxManager.SetMaxCameraCount(m_MaxCameraSupport);
+
 			PKFxSoundManager.ClearSounds();
 
 			if (Camera.main == null)
@@ -119,22 +126,11 @@ namespace PopcornFX
 		{
 			float frameDt = Time.smoothDeltaTime * TimeMultiplier;
 
-			m_Camera = Camera.main;
-
-			if (m_Camera != null)
+			for (int i = 0; i < m_Cameras.Count; ++i)
 			{
-				PKFxCamera current = m_Camera.GetComponent<PKFxCamera>();
-
-				if (current)
+				if (i < m_MaxCameraSupport)
 				{
-					if (current != m_current)
-					{
-						if (m_current)
-							m_current.Clean();
-						m_current = current;
-					}
-					current.UpdateCamera(m_EnableDistortion, m_EnableBlur);
-
+					m_Cameras[i].UpdateCamera(m_EnableDistortion, m_EnableBlur);
 				}
 			}
 		}
@@ -146,23 +142,55 @@ namespace PopcornFX
 			if (g_LastFrameCount != Time.frameCount)
 			{
 				PKFxManager.UpdateParticles();
-				if (m_Camera != null)
-				{
-					PKFxCamera current = m_Camera.GetComponent<PKFxCamera>();
 
-					if (current)
-						current.LateUpdateCamera();
+				for (int i = 0; i < m_Cameras.Count; ++i)
+				{
+					if (i < m_MaxCameraSupport)
+					{
+						m_Cameras[i].LateUpdateCamera();
+					}
 				}
 			}
 			PKFxSoundManager.DeleteSoundsIFN();
 
 		}
 
+		internal int RegisterCamera(PKFxCamera PKFxCamera)
+		{
+			if (!m_Cameras.Contains(PKFxCamera))
+			{
+				if (m_Cameras.Count >= m_MaxCameraSupport)
+					Debug.LogWarning("[PKFX] All available Cameras slot are registered. Current camera is queue until slot is freed.");
+				m_Cameras.Add(PKFxCamera);
+				int id = m_Cameras.IndexOf(PKFxCamera);
+				PKFxCamera.SetCullingMask((short)id);
+
+				return id;
+			}
+			return -1;
+		}
+
+		internal bool UnRegisterCamera(PKFxCamera PKFxCamera)
+		{
+			if (m_Cameras.Contains(PKFxCamera))
+			{
+				m_Cameras.Remove(PKFxCamera);
+
+				for (int i = 0; i < m_Cameras.Count; ++i)
+				{
+					m_Cameras[i].m_CameraID = (short)i;
+					m_Cameras[i].SetCullingMask((short)i);
+				}
+				return true;
+			}
+			return false;
+		}
+
 #if !UNITY_EDITOR
-	private void OnApplicationQuit()
-	{
-		PKFxManager.ShutdownPopcorn();
-	}
+		private void OnApplicationQuit()
+		{
+			PKFxManager.ShutdownPopcorn();
+		}
 #endif
 	}
 }

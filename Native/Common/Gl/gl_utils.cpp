@@ -18,6 +18,8 @@
 
 //----------------------------------------------------------------------------
 
+using namespace	PK_NAMESPACE;
+
 #define	_GLGETERRSTR(__enum)		{ __enum, #__enum }
 
 const char	*glGetFramebufferStatusStrError(GLenum glError)
@@ -293,6 +295,85 @@ bool	glGLVersionGE(int maj, int min)
 	if (glmaj == maj)
 		return glmin >= min;
 	return false;
+}
+
+//----------------------------------------------------------------------------
+//
+//	Shader program compilation
+//
+//----------------------------------------------------------------------------
+
+bool	CheckShaderCompilation(GLuint shaderModule)
+{
+	GLint	isCompiled = 0;
+	glGetShaderiv(shaderModule, GL_COMPILE_STATUS, &isCompiled);
+	if (isCompiled == GL_FALSE)
+	{
+		GLint	maxLength = 0;
+		glGetShaderiv(shaderModule, GL_INFO_LOG_LENGTH, &maxLength);
+		TArray<GLchar>	infoLog(maxLength);
+		glGetShaderInfoLog(shaderModule, maxLength, &maxLength, &infoLog[0]);
+		glDeleteShader(shaderModule);
+		CLog::Log(PK_ERROR, "Shader compilation error: '%s'", infoLog.RawDataPointer());
+		return false;
+	}
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+GLuint	CreateShaderProgramFromSources(const CString &vertexShaderSource, const CString &fragmentShaderSource)
+{
+	GLuint		vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	GLuint		fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	GLERR;
+
+	const char	*_vertexShaderSource = vertexShaderSource.Data();
+	const char	*_fragmentShaderSource = fragmentShaderSource.Data();
+
+	glShaderSource(vertexShader, 1, &_vertexShaderSource, null);
+	glCompileShader(vertexShader);
+	GLERR;
+
+	if (!CheckShaderCompilation(vertexShader))
+		return 0;
+
+	glShaderSource(fragmentShader, 1, &_fragmentShaderSource, null);
+	glCompileShader(fragmentShader);
+	GLERR;
+
+	if (!CheckShaderCompilation(fragmentShader))
+		return 0;
+
+	GLuint		currentShaderProgram = glCreateProgram();
+
+	glAttachShader(currentShaderProgram, vertexShader);
+	glAttachShader(currentShaderProgram, fragmentShader);
+
+	glLinkProgram(currentShaderProgram);
+	GLERR;
+
+	GLint isLinked = 0;
+	glGetProgramiv(currentShaderProgram, GL_LINK_STATUS, (int *)&isLinked);
+	if (isLinked == GL_FALSE)
+	{
+		GLint maxLength = 0;
+		glGetProgramiv(currentShaderProgram, GL_INFO_LOG_LENGTH, &maxLength);
+		TArray<GLchar>	infoLog(maxLength);
+		glGetProgramInfoLog(currentShaderProgram, maxLength, &maxLength, &infoLog[0]);
+		glDeleteProgram(currentShaderProgram);
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
+		CLog::Log(PK_ERROR, "Shader linkage error: '%s'", infoLog.RawDataPointer());
+		return 0;
+	}
+
+	glDetachShader(currentShaderProgram, vertexShader);
+	glDetachShader(currentShaderProgram, fragmentShader);
+
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+	return currentShaderProgram;
 }
 
 //----------------------------------------------------------------------------

@@ -14,11 +14,20 @@ MonoImporter:
       type: 2}
   - m_OpaqueMeshFallback: {fileID: 11400000, guid: c506fc2477e1e9d4987c2d86e10c0606,
       type: 2}
+  - m_MeshVATFluidFallback: {instanceID: 0}
+  - m_MeshVATSoftFallback: {instanceID: 0}
+  - m_MeshVATRigidFallback: {instanceID: 0}
   - m_VertexBillboardingOpaque: {fileID: 11400000, guid: 78047b4352375684a9d26590a82cf9db,
       type: 2}
   - m_CPUBillboardingOpaque: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
       type: 2}
   - m_OpaqueLitMeshFallback: {fileID: 11400000, guid: ae062c3deb9ca0e48a9c4867fc8da578,
+      type: 2}
+  - m_OpaqueLitMeshFallback2020: {fileID: 11400000, guid: 9b4246bcd705b4c4ea8607ffb9702a6f,
+      type: 2}
+  - m_OpaqueMeshFallback2020: {fileID: 11400000, guid: 8302134102371f3458b94a24f20b68f7,
+      type: 2}
+  - m_TransparentMeshFallback2020: {fileID: 11400000, guid: a536485ade7a1074c97a58c4f6768bb6,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

@@ -4,6 +4,10 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using System;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace PopcornFX
 {
@@ -38,18 +42,28 @@ namespace PopcornFX
 
 		// General:
 		[SerializeField] private bool m_GeneralCategory = true;
+		[SerializeField] private bool m_AssetCategory = true;
 		[SerializeField] private bool m_EnableRaycastForCollisions = false;
 		[SerializeField] private string m_PopcornPackFxPath = null;
 		[SerializeField] private string m_UnityPackFxPath = "/PopcornFXAssets";
 		[SerializeField] private bool m_EnableForceDeterminism = false;
 		[SerializeField] private bool m_EnablePopcornFXLogs = true;
 		[SerializeField] private bool m_EnableEffectHotreload = true;
+		[SerializeField] private bool m_EnableHotreloadInPlayMode = false;
 		[SerializeField] private bool m_EnableFileLogs = false;
+
+		[SerializeField] public string[]	m_PopcornLayerName = new string[4];
+		
 
 		public static bool GeneralCategory
 		{
 			get { return Instance.m_GeneralCategory; }
 			set { Instance.m_GeneralCategory = value; }
+		}
+		public static bool AssetCategory
+		{
+			get { return Instance.m_AssetCategory; }
+			set { Instance.m_AssetCategory = value; }
 		}
 
 		public static bool EnableRaycastForCollisions
@@ -88,6 +102,19 @@ namespace PopcornFX
 			}
 		}
 
+		public void GetRenderingLayerForBatchDesc(SBatchDesc batchDesc, out int layer)
+		{
+			Debug.Assert((batchDesc.m_CameraId >= 0 && batchDesc.m_CameraId < m_PopcornLayerName.Length), "[PKFX] Wrong camera ID feeded to materials factory");
+
+
+			layer = LayerMask.NameToLayer(m_PopcornLayerName[batchDesc.m_CameraId]);
+		}
+
+		internal string[] GetRenderingLayerMaskNames()
+		{
+			return m_PopcornLayerName;
+		}
+
 		public static bool EnableEffectHotreload
 		{
 			get { return Instance.m_EnableEffectHotreload; }
@@ -102,7 +129,13 @@ namespace PopcornFX
 #endif
 			}
 		}
-		
+
+		public static bool EnableHotreloadInPlayMode
+		{
+			get { return Instance.m_EnableHotreloadInPlayMode; }
+			set { Instance.m_EnableHotreloadInPlayMode = value; }
+		}
+
 		public static bool EnableForceDeterminism
 		{
 			get { return Instance.m_EnableForceDeterminism; }
@@ -135,6 +168,35 @@ namespace PopcornFX
 			get; set;
 		}
 
+		[Serializable]
+		public class CAssetGUID
+		{
+			public string	m_Path;
+			public string	m_New;
+			public string	m_Old;
+
+			public CAssetGUID(string path, GUID newID, GUID oldID)
+			{
+				m_Path = path;
+				m_New = newID.ToString();
+				m_Old = oldID.ToString();
+			}
+			public CAssetGUID(string path, string newID, string oldID)
+			{
+				m_Path = path;
+				m_New = newID;
+				m_Old = oldID;
+			}
+		}
+
+		[SerializeField] private List<CAssetGUID> m_AssetGUID = new List<CAssetGUID>();
+
+		public static List<CAssetGUID> AssetGUID
+		{
+			get { return Instance.m_AssetGUID; }
+			set { Instance.m_AssetGUID = value; }
+		}
+
 #if UNITY_EDITOR
 		public static bool GetAllAssetPath()
 		{
@@ -158,6 +220,38 @@ namespace PopcornFX
 			PKFxManager.ReimportAssets(assetsList);
 			return true;
 		}
+
+		internal void AddGUIDForAsset(string assetPath, string newGUID)
+		{
+			CAssetGUID entry = m_AssetGUID.Find(x => x.m_Path.Equals(assetPath));
+			if (entry != null)
+			{
+				if (entry.m_New == newGUID.ToString())
+					return;
+				entry.m_Old = entry.m_New;
+				entry.m_New = newGUID.ToString();
+			}
+			else
+			{
+				m_AssetGUID.Add(new CAssetGUID(assetPath, newGUID, newGUID));
+			}
+		}
+		internal void AddGUIDForAsset(string assetPath, GUID newGUID)
+		{
+			CAssetGUID entry = m_AssetGUID.Find(x => x.m_Path.Equals(assetPath));
+			if (entry != null)
+			{
+				if (entry.m_New == newGUID.ToString())
+					return;
+				entry.m_Old = entry.m_New;
+				entry.m_New = newGUID.ToString();
+			}
+			else
+			{
+				m_AssetGUID.Add(new CAssetGUID(assetPath, newGUID, newGUID));
+			}
+		}
+
 #endif
 
 		// Rendering
@@ -182,6 +276,9 @@ namespace PopcornFX
 
 		[SerializeField] private bool m_EnableLocalizedPages = true;
 		[SerializeField] private bool m_EnableLocalizedByDefault = false;
+
+		[SerializeField] private bool m_FreeUnusedBatches = false;
+		[SerializeField] private uint m_FrameCountBeforeFreeingUnusedBatches = 240;
 
 		[SerializeField] private bool m_AutomaticMeshResizing = true;
 		[SerializeField] private float m_VertexBufferSizeMultiplicator = 0.5f;
@@ -216,6 +313,18 @@ namespace PopcornFX
 		{
 			get { return Instance.m_EnableLocalizedByDefault; }
 			set { Instance.m_EnableLocalizedByDefault = value; }
+		}
+
+		public static bool FreeUnusedBatches
+		{
+			get { return Instance.m_FreeUnusedBatches; }
+			set { Instance.m_FreeUnusedBatches = value; }
+		}
+
+		public static uint FrameCountBeforeFreeingUnusedBatches
+		{
+			get { return Instance.m_FrameCountBeforeFreeingUnusedBatches; }
+			set { Instance.m_FrameCountBeforeFreeingUnusedBatches = value; }
 		}
 
 		public static PKFxMaterialFactory MaterialFactory

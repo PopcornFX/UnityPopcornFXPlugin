@@ -15,6 +15,8 @@ using UnityEditor;
 //----------------------------------------------------------------------------
 namespace PopcornFX
 {
+	public delegate void AssetChangeCallback(ref SAssetChangesDesc assetChange);
+
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SRaycastPack
 	{
@@ -969,11 +971,11 @@ namespace PopcornFX
 			if (mesh.GetIndexCount(0) < usedIndexCount)
 			{
 				int[] triangles = new int[reservedIndexCount];			// index
-				// fix to set the right vertex buffer size on PS4 and UNKNOWN2 : fill the index buffer with vertex ids
+				// fix to set the right vertex buffer size on PS4 and PS5 : fill the index buffer with vertex ids
 				if (
 #if UNITY_PS4
 				Application.platform == RuntimePlatform.PS4 ||
-#elif UNITY_UNKNOWN2
+#elif UNITY_PS5
 				Application.platform == RuntimePlatform.PS5 ||
 #else
 				false
@@ -1280,7 +1282,6 @@ namespace PopcornFX
 			PKFxManager.ImportedAssetName = Path.GetFileName(path);
 		}
 
-		internal delegate void AssetChangeCallback(ref SAssetChangesDesc assetChange);
 
 		[MonoPInvokeCallback(typeof(AssetChangeCallback))]
 		public static void OnAssetChange(ref SAssetChangesDesc assetChange)

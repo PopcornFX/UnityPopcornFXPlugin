@@ -33,31 +33,31 @@
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h">
       <Filter>Headers\Common\PKFX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBaker\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,13 +68,13 @@
     <ClCompile Include="..\..\Native\Common\PKFX\FxStartup.cpp">
       <Filter>Sources\Common\PKFX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp">
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp">
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.cpp">
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\precompiled.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

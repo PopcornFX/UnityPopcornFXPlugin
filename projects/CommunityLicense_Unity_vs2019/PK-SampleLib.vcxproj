@@ -55,19 +55,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Debug\PK-SampleLib\</IntDir>
     <TargetName>PK-SampleLib_d</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Release\PK-SampleLib\</IntDir>
     <TargetName>PK-SampleLib_r</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Retail\PK-SampleLib\</IntDir>
     <TargetName>PK-SampleLib_s</TargetName>
     <TargetExt>.lib</TargetExt>
@@ -81,13 +81,14 @@
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>false</ExceptionHandling>
@@ -95,10 +96,11 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
@@ -111,13 +113,14 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>false</ExceptionHandling>
@@ -126,10 +129,11 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
@@ -142,8 +146,9 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -161,6 +166,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
@@ -185,14 +191,14 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h" />
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
     <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL.h" />
     <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_assert.h" />
     <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL_atomic.h" />
@@ -292,6 +298,8 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ApiContextConfig.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Billboard.geom.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Billboard.vert.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\GPUSimInterface_GBuffer_ProjectToNormal.d3d.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\GPUSimInterface_GBuffer_ProjectToPosition.d3d.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Ribbon.vert.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Triangle.vert.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\BRDFLUT.h" />
@@ -343,6 +351,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\ShaderGenerator.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\VulkanShaderGenerator.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterfaces.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.h" />
@@ -407,6 +416,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\ShaderGenerator.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\VulkanShaderGenerator.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterface_GBufferSampling.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.cpp" />

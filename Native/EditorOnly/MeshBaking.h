@@ -1,8 +1,7 @@
-#pragma once
-//----------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
-//----------------------------------------------------------------------------
-
+//--------------------------------------------------------------------------------------------------------
+#pragma once
 #include <pk_kernel/include/kr_threads.h>
 #include <pk_geometrics/include/ge_mesh.h>
 #include <pk_geometrics/include/ge_mesh_resource.h>

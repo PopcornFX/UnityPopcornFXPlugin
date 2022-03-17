@@ -1,5 +1,6 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
+//--------------------------------------------------------------------------------------------------------
+// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+//--------------------------------------------------------------------------------------------------------
 Shader "PopcornFX/PKFxDistortion"
 {
 	Properties

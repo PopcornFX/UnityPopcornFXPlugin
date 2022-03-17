@@ -10,6 +10,7 @@ struct SVertexInput
 
 #	if	PK_HAS_LIGHTING
 		float4 Normal				: NORMAL;
+		float3 Tangent				: TANGENT;
 #	endif
 
 #	if	PK_HAS_RIBBON_COMPLEX

@@ -83,7 +83,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -99,7 +99,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -111,7 +111,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -133,7 +133,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -145,7 +145,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -167,7 +167,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>

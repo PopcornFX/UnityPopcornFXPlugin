@@ -137,7 +137,7 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 		m_MaterialDescBillboard = rendererCache->m_MaterialDescBillboard;
 		m_MaterialDescMesh = rendererCache->m_MaterialDescMesh;
 
-		u32 viewCount = views.Count();
+		u32 viewCount = m_RendererType == Renderer_Mesh ? 1 : views.Count();
 
 		PK_ASSERT(viewCount > 0);
 		if (!PK_VERIFY(m_Exec_SAO2AOS.Resize(viewCount)) ||

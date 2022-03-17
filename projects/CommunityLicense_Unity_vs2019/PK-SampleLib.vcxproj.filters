@@ -40,6 +40,9 @@
     <Filter Include="Headers\ShaderGenerator">
       <UniqueIdentifier>{0EB0BB5F-7AE7-03F7-83F1-671AEFA72AF0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\SimInterfaces">
+      <UniqueIdentifier>{BD14FE9D-2981-B998-F274-51F65EA0DB00}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\WindowContext">
       <UniqueIdentifier>{CDDC95C7-3949-51C2-023D-E91F6E68732A}</UniqueIdentifier>
     </Filter>
@@ -93,6 +96,9 @@
     </Filter>
     <Filter Include="Sources\ShaderGenerator">
       <UniqueIdentifier>{D6FF177B-4237-6012-4B41-C435B7F7860B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\SimInterfaces">
+      <UniqueIdentifier>{85D2F324-F13E-AF1F-BA32-477D265ED187}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\WindowContext">
       <UniqueIdentifier>{959A8B4E-0107-4749-CAFA-DEA6362669B1}</UniqueIdentifier>
@@ -198,28 +204,28 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\SDL2\include\SDL.h">
@@ -519,6 +525,12 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Billboard.vert.h">
       <Filter>Shaders\Generated</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\GPUSimInterface_GBuffer_ProjectToNormal.d3d.h">
+      <Filter>Shaders\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\GPUSimInterface_GBuffer_ProjectToPosition.d3d.h">
+      <Filter>Shaders\Generated</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\generated\Ribbon.vert.h">
       <Filter>Shaders\Generated</Filter>
     </ClInclude>
@@ -671,6 +683,9 @@
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterfaces.h">
+      <Filter>Headers\SimInterfaces</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h">
       <Filter>Headers\WindowContext</Filter>
@@ -853,6 +868,9 @@
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterface_GBufferSampling.cpp">
+      <Filter>Sources\SimInterfaces</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp">
       <Filter>Sources\WindowContext</Filter>

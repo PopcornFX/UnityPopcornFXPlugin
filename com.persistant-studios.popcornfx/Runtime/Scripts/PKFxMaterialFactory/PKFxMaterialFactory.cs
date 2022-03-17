@@ -183,6 +183,8 @@ namespace PopcornFX
 		// "baseBindingDirectory/Legacy/version/baseBindingName"
 		protected void ReplaceBindingsWithLegacy()
 		{
+#if UNITY_EDITOR
+
 #if UNITY_2020 || UNITY_2019
 			for (int i = 0; i < m_RenderFeatureBindings.Count; i++)
 			{
@@ -202,6 +204,8 @@ namespace PopcornFX
 				}
 #endif
 			}
+#endif
+
 #endif
 		}
 	}

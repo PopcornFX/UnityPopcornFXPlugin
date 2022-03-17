@@ -3,7 +3,6 @@
 //----------------------------------------------------------------------------
 
 #pragma once
-
 #include <pk_kernel/include/kr_resources.h>
 
 __PK_API_BEGIN

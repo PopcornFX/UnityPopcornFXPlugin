@@ -430,7 +430,7 @@ void			CEffectBaker::Initialize(const char *pKPackPath)
 	}
 
 	// map all known extensions to the appropriate oven:
-	m_BakeContext.m_Cookery.MapOven("fbx", ovenIdMesh);				// FBX mesh
+	m_BakeContext.m_Cookery.MapOven("fbx", ovenIdStraightCopy);		// FBX mesh
 	m_BakeContext.m_Cookery.MapOven("pkmm", ovenIdMesh);			// PopcornFX multi-mesh
 	m_BakeContext.m_Cookery.MapOven("dds", ovenIdTexture);			// dds image
 	m_BakeContext.m_Cookery.MapOven("png", ovenIdTexture);			// png image
@@ -750,6 +750,7 @@ void	CEffectBaker::OutputBakedResourceInCache(const CString path, TStaticCounted
 {
 	if (path.EndsWith(".fbx", CaseInsensitive))
 	{
+		outputs.PushBack(path);
 		outputs.PushBack(CFilePath::StripExtension(path) + ".pkmm");
 		outputs.PushBack(CFilePath::StripExtension(path) + ".pkan");
 		outputs.PushBack(CFilePath::StripExtension(path) + ".pksa");

@@ -1,7 +1,7 @@
-#pragma once
 //----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
+#pragma once
 
 #include <pk_kernel/include/kr_file_watcher.h>
 #include <pk_particles/include/ps_mediums.h>
@@ -275,8 +275,6 @@ protected:
 	CFloat4x4							m_CollisionMeshMatrixWithScale;
 	CFloat4x4							m_CollisionMeshInvMatrixWithScale;
 	bool								m_CollisionMeshUseTransforms;
-
-	TArray<SSceneMeshAssets>			m_SceneMeshAssets;
 
 private:
 	bool										m_IsMediumCollectionInitialized;

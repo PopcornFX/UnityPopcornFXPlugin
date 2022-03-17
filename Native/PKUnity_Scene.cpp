@@ -702,6 +702,9 @@ bool	CPKFXScene::RegisterEventListener(s32 guid, const CStringId &event, u32 uni
 	if (fx == null)
 		return false;
 
+	CEffectID effectId = fx->GetEffectInstance()->EffectID();
+	if (!effectId.Valid())
+		return false;
 	const FastDelegate<CParticleEffect::EventCallback>	broadcastCallback(this, &CPKFXScene::BroadcastEvent);
 
 	if (!fx->RegisterEventCallback(broadcastCallback, event))
@@ -717,14 +720,13 @@ bool	CPKFXScene::RegisterEventListener(s32 guid, const CStringId &event, u32 uni
 		// First listener registered for this event, register it.
 		eventListenerIndex = m_EventListeners.PushBack(event);
 	}
-
 	if (PK_VERIFY(eventListenerIndex.Valid()))
 	{
 		SPopcornFXEventListener	&eventListener = m_EventListeners[eventListenerIndex];
 
 		if (!PK_VERIFY(eventListener.m_EmittersIDs.PushBack(guid).Valid()) ||
 			!PK_VERIFY(eventListener.m_Keys.PushBack(unityKey).Valid()) ||
-			!PK_VERIFY(eventListener.m_EffectIDs.PushBack(fx->GetEffectInstance()->EffectID()).Valid()))
+			!PK_VERIFY(eventListener.m_EffectIDs.PushBack(effectId).Valid()))
 			return false;
 
 		PK_ASSERT(eventListener.m_Keys.Count() == eventListener.m_EffectIDs.Count());

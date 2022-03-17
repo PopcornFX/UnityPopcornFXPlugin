@@ -12,21 +12,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalLibs\pk_upgrader\precompiled.h">
+    <ClInclude Include="..\..\..\ExternalLibs\pk_upgrader\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\pk_upgrader\tests.h">
+    <ClInclude Include="..\..\..\ExternalLibs\pk_upgrader\tests.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\ExternalLibs\pk_upgrader\main.cpp">
+    <ClCompile Include="..\..\..\ExternalLibs\pk_upgrader\main.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\pk_upgrader\precompiled.cpp">
+    <ClCompile Include="..\..\..\ExternalLibs\pk_upgrader\precompiled.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\pk_upgrader\tests.cpp">
+    <ClCompile Include="..\..\..\ExternalLibs\pk_upgrader\tests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

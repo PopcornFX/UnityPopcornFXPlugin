@@ -175,12 +175,14 @@ namespace PopcornFX
 			public string	m_New;
 			public string	m_Old;
 
+#if UNITY_EDITOR
 			public CAssetGUID(string path, GUID newID, GUID oldID)
 			{
 				m_Path = path;
 				m_New = newID.ToString();
 				m_Old = oldID.ToString();
 			}
+#endif
 			public CAssetGUID(string path, string newID, string oldID)
 			{
 				m_Path = path;

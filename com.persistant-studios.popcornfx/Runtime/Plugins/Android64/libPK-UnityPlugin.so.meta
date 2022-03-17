@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3fd6095c6fe743758f2b50e2d2b769a0
+guid: cb4d6599085f415ea77266c0f3205011
 PluginImporter:
   serializedVersion: 2
   isPreloaded: 0
@@ -7,8 +7,8 @@ PluginImporter:
   platformData:
 
   - first:
-      iPhone: iOS
+      Android: Android
     second:
       enabled: 1
       settings:
-        AddToEmbeddedBinaries: false
+        CPU: ARM64

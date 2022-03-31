@@ -20,10 +20,8 @@ intermediate/
 *.gch
 *.mak
 *.ilk
-*.dll
 *.exe
 *.config
-*.a
 #*.manifest ## needed for Atlas Builder
 *.exe.manifest
 *.nul
@@ -85,12 +83,3 @@ last_excludes_*.txt
 # Macos
 .vscode/
 .DS_Store
-
-# Unity
-*.so.meta
-*.so.recipe.meta
-*Android.meta
-*Android64.meta
-*ps4.meta
-*ps5.meta
-*xbox.meta

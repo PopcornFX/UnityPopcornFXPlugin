@@ -198,10 +198,12 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -223,10 +225,12 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -247,11 +251,13 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -272,11 +278,13 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>

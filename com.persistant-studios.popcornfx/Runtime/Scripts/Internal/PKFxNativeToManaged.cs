@@ -946,7 +946,7 @@ namespace PopcornFX
 			if (mesh.GetIndexCount(0) < usedIndexCount)
 			{
 				int[] triangles = new int[reservedIndexCount];			// index
-																		// fix to set the right vertex buffer size on PS4 and UNKNOWN2 : fill the index buffer with vertex ids
+																		// fix to set the right vertex buffer size on PS4 and PS5 : fill the index buffer with vertex ids
 				if (Application.platform == RuntimePlatform.PS4 || Application.platform == RuntimePlatform.PS5)
 				{
 					for (int i = 0; i < mesh.vertexCount; ++i)

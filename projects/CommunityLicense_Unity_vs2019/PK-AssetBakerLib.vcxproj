@@ -55,19 +55,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Debug\PK-AssetBakerLib\</IntDir>
     <TargetName>PK-AssetBakerLib_d</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Release\PK-AssetBakerLib\</IntDir>
     <TargetName>PK-AssetBakerLib_r</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Retail\PK-AssetBakerLib\</IntDir>
     <TargetName>PK-AssetBakerLib_s</TargetName>
     <TargetExt>.lib</TargetExt>
@@ -80,7 +80,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\PK-AssetBakerLib;..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -107,7 +107,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\PK-AssetBakerLib;..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -140,7 +140,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\PK-AssetBakerLib;..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -166,33 +166,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\precompiled.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\precompiled.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO_AttributeHotfix.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\precompiled.cpp">
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO_AttributeHotfix.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\precompiled.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>

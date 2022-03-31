@@ -312,7 +312,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.11.3 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.12.0 for " + m_UnityVersion;
 #if UNITY_EDITOR
 		public static string m_CurrentVersionString = "";
 #endif

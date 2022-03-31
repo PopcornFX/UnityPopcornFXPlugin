@@ -18,10 +18,10 @@ endif
 # Configurations
 # #############################################
 
-PCH = ../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h
+PCH = ../../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include
+INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_rhi/include -I../../../ExternalLibs/Runtime/pk_rhi/src -I../../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../../ExternalLibs/GL/include
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -48,7 +48,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
-TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
+TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
 TARGET = $(TARGETDIR)/libPK-RHI_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Debug/PK-RHI_SDK1
 DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL
@@ -66,7 +66,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
-TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
+TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
 TARGET = $(TARGETDIR)/libPK-RHI_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Debug/PK-RHI_SDK1
 DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL
@@ -84,7 +84,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
-TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
+TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
 TARGET = $(TARGETDIR)/libPK-RHI_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Release/PK-RHI_SDK1
 DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL
@@ -102,7 +102,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
-TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
+TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
 TARGET = $(TARGETDIR)/libPK-RHI_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Release/PK-RHI_SDK1
 DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL
@@ -120,7 +120,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
-TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
+TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
 TARGET = $(TARGETDIR)/libPK-RHI_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Retail/PK-RHI_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL
@@ -138,7 +138,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
-TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
+TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
 TARGET = $(TARGETDIR)/libPK-RHI_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Retail/PK-RHI_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL
@@ -227,7 +227,7 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/glew.o: ../../ExternalLibs/GL/src/glew.c
+$(OBJDIR)/glew.o: ../../../ExternalLibs/GL/src/glew.c
 	@echo $(notdir $<)
 	$(SILENT) $(CC) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

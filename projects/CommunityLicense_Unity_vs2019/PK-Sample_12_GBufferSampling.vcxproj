@@ -15,10 +15,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2940E5DC-E37E-456E-B4B4-F944839A2FFC}</ProjectGuid>
+    <ProjectGuid>{C61ADEEC-E37E-456E-B4B4-F944839A2FFC}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>PK-Sample_08_CustomCollision</RootNamespace>
+    <RootNamespace>PK-Sample_12_GBufferSampling</RootNamespace>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -57,22 +57,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\release\builds\x64_Samples\</OutDir>
-    <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Debug\PK-Sample_08_CustomCollision\</IntDir>
-    <TargetName>PK-Sample_08_CustomCollision_d</TargetName>
+    <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Debug\PK-Sample_12_GBufferSampling\</IntDir>
+    <TargetName>PK-Sample_12_GBufferSampling_d</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\release\builds\x64_Samples\</OutDir>
-    <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Release\PK-Sample_08_CustomCollision\</IntDir>
-    <TargetName>PK-Sample_08_CustomCollision_r</TargetName>
+    <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Release\PK-Sample_12_GBufferSampling\</IntDir>
+    <TargetName>PK-Sample_12_GBufferSampling_r</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\release\builds\x64_Samples\</OutDir>
-    <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Retail\PK-Sample_08_CustomCollision\</IntDir>
-    <TargetName>PK-Sample_08_CustomCollision_s</TargetName>
+    <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Retail\PK-Sample_12_GBufferSampling\</IntDir>
+    <TargetName>PK-Sample_12_GBufferSampling_s</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -82,8 +82,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_08_CustomCollision;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -110,8 +110,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_08_CustomCollision;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -144,8 +144,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_08_CustomCollision;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -277,20 +277,14 @@
     <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_textedit.h" />
     <ClInclude Include="..\..\SDK\Samples\External\imgui\stb_truetype.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision_Scene.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision_SimInterface_Decl.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision_SimInterface_Impl.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling\PK-Sample_12_GBufferSampling.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\GPUContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision_Scene.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision_SimInterface_Decl.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\CustomCollision_SimInterface_Impl.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision\Main.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling\Main.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling\PK-Sample_12_GBufferSampling.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

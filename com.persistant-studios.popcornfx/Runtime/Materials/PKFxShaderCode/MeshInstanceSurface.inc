@@ -1,4 +1,6 @@
-
+//--------------------------------------------------------------------------------------------------------
+// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+//--------------------------------------------------------------------------------------------------------
 sampler2D _MainTex;
 
 struct Input

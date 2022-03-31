@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
 using System.Collections;
@@ -156,7 +156,6 @@ namespace PopcornFX
 			{
 				EditorGUILayout.BeginVertical();
 				Vector4 tmp4 = new Vector4(valueX, valueY, valueZ, valueW);
-				PKFxEditorTools.ColorPicker(GUIContent.none, ref valueX, ref valueY, ref valueZ, ref valueW, true);
 				tmp4 = EditorGUILayout.Vector4Field(GUIContent.none, tmp4);
 				{
 					if (PKFxEditorTools.HasMin(m_MinMaxFlag.intValue))
@@ -177,6 +176,7 @@ namespace PopcornFX
 					valueZ = tmp4.z;
 					valueW = tmp4.w;
 				}
+				PKFxEditorTools.ColorPicker(GUIContent.none, ref valueX, ref valueY, ref valueZ, ref valueW, true);
 				EditorGUILayout.EndVertical();
 			}
 			EditorGUILayout.EndHorizontal();

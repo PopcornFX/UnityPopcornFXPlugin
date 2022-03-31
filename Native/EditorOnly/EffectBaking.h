@@ -20,6 +20,7 @@ class	CResourceHandlerVectorField;
 class	CResourceManager;
 class	CCookery;
 class	COvenBakeConfig_Particle;
+
 namespace	HBO {
 	class	CContext;
 }
@@ -66,17 +67,25 @@ private:
 		const CStringView		m_LibraryDir;
 		const CStringView		m_EditorCacheDir;
 		const CStringView		m_TemplatesDir;
+		CProjectSettingsAssets	*m_AssetSettings;
+		PFilePack				m_Pack;
 
 		bool cmp(const char *rawPath)
 		{
+			CString relPath = CFilePath::Relativize(m_Pack->Path().Data(), rawPath);
 			const CStringView path = CStringView::FromNullTerminatedString(rawPath);
+			if (m_AssetSettings != null &&
+				m_AssetSettings->IsPathIgnored(relPath.View()))
+				return false;
 			return !path.Contains(m_LibraryDir) && !path.Contains(m_EditorCacheDir) && !path.Contains(m_TemplatesDir);
 		}
 
-		SDirectoryValidator(const CString &library, const CString &editor, const CString &templat)
+		SDirectoryValidator(const CString &library, const CString &editor, const CString &templat, CProjectSettingsAssets *assetSettings, PFilePack pack)
 		:	m_LibraryDir(library)
 		,	m_EditorCacheDir(editor)
 		,	m_TemplatesDir(templat)
+		,	m_AssetSettings(assetSettings)
+		,	m_Pack(pack)
 		{
 		}
 	};

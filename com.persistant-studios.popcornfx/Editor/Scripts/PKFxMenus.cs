@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor.VersionControl;
+using System.Linq;
 
 namespace PopcornFX
 {
@@ -53,6 +54,28 @@ namespace PopcornFX
 				fx.ClearAllAttributesAndSamplers();
 			}
 			return true;
+		}
+
+		private static List<string> GetMonobehaviorComponentReferences(Object obj)
+		{
+			List<string> paths = new List<string>();
+			const BindingFlags flags = /*BindingFlags.NonPublic | */BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+			FieldInfo[] fields = obj.GetType().GetFields(flags);
+
+			foreach (FieldInfo fieldInfo in fields)
+			{
+				if (fieldInfo == null)
+					continue;
+				if (fieldInfo.FieldType == typeof(PKFxEffectAsset))
+				{
+					PKFxEffectAsset fxAsset = fieldInfo.GetValue(obj) as PKFxEffectAsset;
+					if (fxAsset != null)
+					{
+						paths.Add(fxAsset.AssetVirtualPath);
+					}
+				}
+			}
+			return paths;
 		}
 
 		private static bool UpdateMonobehaviorComponentReferences(Object obj)
@@ -102,6 +125,119 @@ namespace PopcornFX
 			}
 		}
 
+		public static List<string> GetFxsOnAllScenesAndPrefabs()
+		{
+			List<string> EffectsNames = new List<string>();
+			Scene startingScene = EditorSceneManager.GetActiveScene();
+			string startingScenePath = null;
+
+			if (!string.IsNullOrEmpty(startingScene.path))
+				startingScenePath = startingScene.path;
+
+			string[] folders = { "Assets" };
+
+			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", null);
+			string[] foundPrefabs = AssetDatabase.FindAssets("t:Prefab", folders);
+			string[] foundScripts = AssetDatabase.FindAssets("t:Script", folders);
+
+			foreach (var guid in foundScenes)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+
+				if (path.StartsWith("Assets") || path.Contains("popcornfx"))
+					EditorSceneManager.OpenScene(path);
+				else
+					continue;
+				Object[] objs = Resources.FindObjectsOfTypeAll(typeof(MonoBehaviour));
+
+				foreach (var obj in objs)
+				{
+					if (obj == null)
+						continue;
+					PKFxEmitter emitterComponent = (obj as PKFxEmitter);
+
+					if (emitterComponent != null)
+					{
+						string effectName = emitterComponent.EffectName;
+						string extension = Path.GetExtension(effectName);
+						if (extension == ".asset")
+							effectName = effectName.Substring(0, effectName.Length - extension.Length);
+						if (!EffectsNames.Contains(effectName))
+							EffectsNames.Add(effectName);
+					}
+					else
+					{
+						List<string> monoRefs = GetMonobehaviorComponentReferences(obj);
+						if (monoRefs.Count > 0)
+							EffectsNames = EffectsNames.Union(monoRefs).ToList();
+					}
+				}
+			}
+
+			//restore the starting scene
+			if (startingScenePath != null)
+				EditorSceneManager.OpenScene(startingScenePath);
+
+			foreach (string guid in foundPrefabs)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+
+				Object[] objs = AssetDatabase.LoadAllAssetsAtPath(path);
+				foreach (var obj in objs)
+				{
+					if (obj == null)
+						continue;
+					PKFxEmitter emitterComponent = (obj as PKFxEmitter);
+
+					if (emitterComponent != null)
+					{
+						string effectName = emitterComponent.EffectName;
+						string extension = Path.GetExtension(effectName);
+						if (extension == ".asset")
+							effectName = effectName.Substring(0, effectName.Length - extension.Length);
+						if (!EffectsNames.Contains(effectName))
+							EffectsNames.Add(effectName);
+					}
+					else
+					{
+						List<string> monoRefs = GetMonobehaviorComponentReferences(obj);
+						if (monoRefs.Count > 0)
+							EffectsNames = EffectsNames.Union(monoRefs).ToList();
+					}
+				}
+			}
+
+			foreach (string guid in foundScripts)
+			{
+				string path = AssetDatabase.GUIDToAssetPath(guid);
+				Object[] objs = AssetDatabase.LoadAllAssetsAtPath(path);
+				foreach (var obj in objs)
+				{
+					if (obj == null)
+						continue;
+					PKFxEmitter emitterComponent = (obj as PKFxEmitter);
+
+					if (emitterComponent != null)
+					{
+						string effectName = emitterComponent.EffectName;
+						string extension = Path.GetExtension(effectName);
+						if (extension == ".asset")
+							effectName = effectName.Substring(0, effectName.Length - extension.Length);
+						if (!EffectsNames.Contains(effectName))
+							EffectsNames.Add(effectName);
+					}
+					else
+					{
+						List<string> monoRefs = GetMonobehaviorComponentReferences(obj);
+						if (monoRefs.Count > 0)
+							EffectsNames = EffectsNames.Union(monoRefs).ToList();
+					}
+				}
+			}
+
+			return EffectsNames;
+		}
+		
 		public static void UpdateFxsOnAllScenesAndPrefabs()
 		{
 			Scene startingScene = EditorSceneManager.GetActiveScene();
@@ -343,6 +479,16 @@ namespace PopcornFX
 			if (startingScenePath != null)
 				EditorSceneManager.OpenScene(startingScenePath);
 		}
+
+
+		[MenuItem("Assets/PopcornFX/Log PKFxFX References")]
+		static void LogPKFxFXReferences()
+		{
+			List<string> effectsUsed = GetFxsOnAllScenesAndPrefabs();
+
+			Debug.Log(string.Format("Trying to reimport PKFx Assets:\n {0}", string.Join("\n", effectsUsed)));
+		}
+
 
 		[MenuItem("Assets/PopcornFX/Update PKFxFX References")]
 		static void UpdatePKFxFXReferences()

@@ -162,28 +162,28 @@
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h">
       <Filter>Common\PKFX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h">
+    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
   </ItemGroup>

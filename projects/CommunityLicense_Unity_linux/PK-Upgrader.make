@@ -19,11 +19,11 @@ endif
 # #############################################
 
 RESCOMP = windres
-PCH = ../../ExternalLibs/pk_upgrader/precompiled.h
+PCH = ../../../ExternalLibs/pk_upgrader/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/pk_upgrader -I../../ExternalLibs
-FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
+INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/pk_upgrader -I../../../ExternalLibs
+FORCE_INCLUDE += -include ../../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -41,9 +41,9 @@ OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-Upgrader
 DEFINES += -D_DEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
-LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a -lPK-ParticlesToolbox_d -lPK-Runtime_d -lbfd -ldl -lpthread -lm -lz
-LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a -lPK-ParticlesToolbox_d -lPK-Runtime_d -lbfd -ldl -lpthread -lm -lz
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../../release/application/BinariesGM_linux_x64_r
@@ -52,9 +52,9 @@ OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-Upgrader
 DEFINES += -DNDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
-LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a -lPK-ParticlesToolbox_r -lPK-Runtime_r -lbfd -ldl -lpthread -lm -lz
-LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a -lPK-ParticlesToolbox_r -lPK-Runtime_r -lbfd -ldl -lpthread -lm -lz
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../../release/application/BinariesGM_linux_x64_r
@@ -63,9 +63,9 @@ OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-Upgrader
 DEFINES += -DNDEBUG -DPK_RETAIL
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
-LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a -lPK-ParticlesToolbox_s -lPK-Runtime_s -lbfd -ldl -lpthread -lm -lz
-LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64 -s
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a -lPK-ParticlesToolbox_s -lPK-Runtime_s -lbfd -ldl -lpthread -lm -lz
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64 -s
 
 #else
 #  $(error "invalid configuration $(config)")
@@ -150,13 +150,13 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/main.o: ../../ExternalLibs/pk_upgrader/main.cpp
+$(OBJDIR)/main.o: ../../../ExternalLibs/pk_upgrader/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/precompiled.o: ../../ExternalLibs/pk_upgrader/precompiled.cpp
+$(OBJDIR)/precompiled.o: ../../../ExternalLibs/pk_upgrader/precompiled.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/tests.o: ../../ExternalLibs/pk_upgrader/tests.cpp
+$(OBJDIR)/tests.o: ../../../ExternalLibs/pk_upgrader/tests.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

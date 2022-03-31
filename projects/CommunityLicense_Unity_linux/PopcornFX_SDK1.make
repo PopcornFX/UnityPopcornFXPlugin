@@ -37,6 +37,7 @@ ifeq ($(config),debug_x64)
   PK_Sample_09_AsyncLoading_config = debug_x64
   PK_Sample_10_AsyncRendering_config = debug_x64
   PK_Sample_11_ThreadPool_config = debug_x64
+  PK_Sample_12_GBufferSampling_config = debug_x64
 
 else ifeq ($(config),release_x64)
   PK_Runtime_SDK1_config = release_x64
@@ -67,6 +68,7 @@ else ifeq ($(config),release_x64)
   PK_Sample_09_AsyncLoading_config = release_x64
   PK_Sample_10_AsyncRendering_config = release_x64
   PK_Sample_11_ThreadPool_config = release_x64
+  PK_Sample_12_GBufferSampling_config = release_x64
 
 else ifeq ($(config),retail_x64)
   PK_Runtime_SDK1_config = retail_x64
@@ -95,12 +97,13 @@ else ifeq ($(config),retail_x64)
   PK_Sample_09_AsyncLoading_config = retail_x64
   PK_Sample_10_AsyncRendering_config = retail_x64
   PK_Sample_11_ThreadPool_config = retail_x64
+  PK_Sample_12_GBufferSampling_config = retail_x64
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-AssetBakerLib PK-AssetBaker PK-ImporterLib PK-UpgraderLib PK-Upgrader PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking PK-RenderHelpers_SDK1 PK-RHI_SDK1 PK-SampleLib PK-ShaderTool PK-MCPP PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool
+PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-AssetBakerLib PK-AssetBaker PK-ImporterLib PK-UpgraderLib PK-Upgrader PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking PK-RenderHelpers_SDK1 PK-RHI_SDK1 PK-SampleLib PK-ShaderTool PK-MCPP PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
 .PHONY: all clean help $(PROJECTS) Rendering Runtime Samples Samples/Basic Tools Tools/AssetBaker Tools/Upgrader
 
@@ -110,7 +113,7 @@ Rendering: PK-RHI_SDK1 PK-RenderHelpers_SDK1 PK-SampleLib
 
 Runtime: PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-Runtime_SDK1
 
-Samples: Samples/Basic PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool
+Samples: Samples/Basic PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
 Samples/Basic: PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking
 
@@ -288,6 +291,12 @@ ifneq (,$(PK_Sample_11_ThreadPool_config))
 	@${MAKE} --no-print-directory -C . -f PK-Sample_11_ThreadPool.make config=$(PK_Sample_11_ThreadPool_config)
 endif
 
+PK-Sample_12_GBufferSampling: PK-SampleLib PK-MCPP
+ifneq (,$(PK_Sample_12_GBufferSampling_config))
+	@echo "==== Building PK-Sample_12_GBufferSampling ($(PK_Sample_12_GBufferSampling_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-Sample_12_GBufferSampling.make config=$(PK_Sample_12_GBufferSampling_config)
+endif
+
 clean:
 	@${MAKE} --no-print-directory -C . -f PK-Runtime_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Discretizers_SDK1.make clean
@@ -317,6 +326,7 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-Sample_09_AsyncLoading.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_10_AsyncRendering.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_11_ThreadPool.make clean
+	@${MAKE} --no-print-directory -C . -f PK-Sample_12_GBufferSampling.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -357,5 +367,6 @@ help:
 	@echo "   PK-Sample_09_AsyncLoading"
 	@echo "   PK-Sample_10_AsyncRendering"
 	@echo "   PK-Sample_11_ThreadPool"
+	@echo "   PK-Sample_12_GBufferSampling"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

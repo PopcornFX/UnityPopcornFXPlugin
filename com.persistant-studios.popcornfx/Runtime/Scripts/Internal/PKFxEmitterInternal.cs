@@ -32,15 +32,21 @@ namespace PopcornFX
 
 		private void LoadEvents(List<SEventDesc> eventFromPkfxFile, bool resetAllToDefault)
 		{
-			m_Events.Clear();
+			if (resetAllToDefault)
+				m_Events.Clear();
+			List<PkFxUserEventCallback> newEvents = new List<PkFxUserEventCallback>();
 			foreach (SEventDesc desc in eventFromPkfxFile)
 			{
 				PkFxUserEventCallback existingEvent = m_Events.Find(
 					x => x.m_Desc.ToString().Equals(desc.ToString())
 					);
-				if (existingEvent == null)
-					m_Events.Add(new PkFxUserEventCallback(desc));
+
+				if (existingEvent != null)
+					newEvents.Add(existingEvent);
+				else
+					newEvents.Add(new PkFxUserEventCallback(desc));
 			}
+			m_Events = newEvents;
 		}
 
 		private void LoadAttributes(List<PKFxEffectAsset.AttributeDesc> attributesFromPkfxFile, bool resetAllToDefault)

@@ -430,7 +430,7 @@ void			CEffectBaker::Initialize(const char *pKPackPath)
 	}
 
 	// map all known extensions to the appropriate oven:
-	m_BakeContext.m_Cookery.MapOven("fbx", ovenIdMesh);				// FBX mesh
+	m_BakeContext.m_Cookery.MapOven("fbx", ovenIdStraightCopy);		// FBX mesh
 	m_BakeContext.m_Cookery.MapOven("pkmm", ovenIdMesh);			// PopcornFX multi-mesh
 	m_BakeContext.m_Cookery.MapOven("dds", ovenIdTexture);			// dds image
 	m_BakeContext.m_Cookery.MapOven("png", ovenIdTexture);			// png image
@@ -596,7 +596,7 @@ void	CEffectBaker::GetAllAssetPath()
 	const CString					libraryDir = general->LibraryDir();
 	const CString					editorCacheDir = general->EditorCacheDir();
 	const CString					templatesDir = general->PresetsDir();
-	SDirectoryValidator				directoryValidator(libraryDir, editorCacheDir, templatesDir);
+	SDirectoryValidator				directoryValidator(libraryDir, editorCacheDir, templatesDir, m_ProjectSettings->Assets(), m_PKSourcePack);
 	CPackExplorer::PathValidator	directoryPathValidator = CPackExplorer::PathValidator(&(directoryValidator), &SDirectoryValidator::cmp);
 
 	effectExplorer.SetDirectoryPathValidator(directoryPathValidator);
@@ -750,6 +750,7 @@ void	CEffectBaker::OutputBakedResourceInCache(const CString path, TStaticCounted
 {
 	if (path.EndsWith(".fbx", CaseInsensitive))
 	{
+		outputs.PushBack(path);
 		outputs.PushBack(CFilePath::StripExtension(path) + ".pkmm");
 		outputs.PushBack(CFilePath::StripExtension(path) + ".pkan");
 		outputs.PushBack(CFilePath::StripExtension(path) + ".pksa");

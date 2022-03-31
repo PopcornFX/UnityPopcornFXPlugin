@@ -42,10 +42,7 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	{
 		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(1)))
 			return null;
-		for (u32 i = 0; i < views.Count(); ++i)
-		{
-			rendererCache->m_UnityMeshInfoPerViews[i].Init(deviceType);
-		}
+		rendererCache->m_UnityMeshInfoPerViews[0].Init(deviceType);
 	}
 
 	

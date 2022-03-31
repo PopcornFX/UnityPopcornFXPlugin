@@ -179,7 +179,6 @@ namespace PopcornFX
 						}
 						materialProp.SetVector(m_ColorPropertyName, color);
 						materialProp.SetFloat(m_CursorPropertyName, cursor);
-
 						Graphics.DrawMesh(m, transform, m_Material, 0, null, 0, materialProp, m_CastShadow);
 					}
 				}

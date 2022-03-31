@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------------------------------------------
+// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+//--------------------------------------------------------------------------------------------------------
 struct v2f
 {
 	float4 vertex : SV_POSITION;

@@ -595,6 +595,7 @@ namespace PopcornFX
 			if (m_CurvesArray.Length != 0)
 			{
 				int iKey = 0;
+				//To simplify, cpp code can handle adding keys, no need to keep C# curves sync in key number
 				m_CurvesTimeKeys = new float[m_CurvesArray[0].keys.Length];
 				foreach (var key in m_CurvesArray[0].keys)
 				{

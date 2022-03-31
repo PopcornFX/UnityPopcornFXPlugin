@@ -1,8 +1,8 @@
-#pragma once
-
 //----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
+#pragma once
+
 
 #ifndef __PKUNITY_PLUGINS_H__
 #	define __PKUNITY_PLUGINS_H__

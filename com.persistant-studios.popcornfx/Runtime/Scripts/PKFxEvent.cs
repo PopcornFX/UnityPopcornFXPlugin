@@ -24,7 +24,12 @@ namespace PopcornFX
 			v3 = Convert.ToBoolean(x.b3);
 			v4 = Convert.ToBoolean(x.b4);
 		}
-	
+
+		public void GetFloat3(out Vector3 value)
+		{
+			value = new Vector3(x.f1, y.f1, z.f1);
+		}
+
 		public void GetFloat4(out Vector4 value)
 		{
 			value = new Vector4(x.f1, y.f1, z.f1, w.f1);
@@ -75,7 +80,15 @@ namespace PopcornFX
 	
 			m_Values[index].GetBool4(out value[0], out value[1], out value[2], out value[3]);
 		}
-	
+		public void GetFloat3(out Vector3 value, int index)
+		{
+			Debug.Assert((m_PayloadType == EAttributeType.Float) ||
+						 (m_PayloadType == EAttributeType.Float2) ||
+						 (m_PayloadType == EAttributeType.Float3));
+
+			m_Values[index].GetFloat3(out value);
+		}
+
 		public void GetFloat4(out Vector4 value, int index)
 		{
 			Debug.Assert((m_PayloadType == EAttributeType.Float) ||

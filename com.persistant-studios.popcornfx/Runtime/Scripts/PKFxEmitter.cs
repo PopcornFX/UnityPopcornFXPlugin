@@ -58,10 +58,10 @@ namespace PopcornFX
 		public bool m_TriggerAndForget = false;
 		public bool m_KillEffectOnDestroy = false;
 
-		[SerializeField] private int m_PreWarm = 0;
+		[SerializeField] private float m_PreWarm = 0;
 
 		//Used in editor and startup
-		[SerializeField] private List<PkFxUserEventCallback>					m_Events = null;
+		[SerializeField] private List<PkFxUserEventCallback>					m_Events;
 		[SerializeField] private List<PKFxEffectAsset.AttributeDesc>			m_FxAttributesDesc = null;
 
 		[SerializeField] private List<PKFxRaiseEventCallbackData>				m_DelayedCallbacks;
@@ -85,7 +85,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 		public int FXGUID { get { return m_FXGUID; } }
-		public int PreWarm { get { return m_PreWarm; } set { m_PreWarm = value; } }
+		public float PreWarm { get { return m_PreWarm; } set { m_PreWarm = value; } }
 		public bool Alive { get { return m_IsPlaying; } }
 		public bool Stopped { get { return m_IsStopped; } }
 
@@ -186,39 +186,7 @@ namespace PopcornFX
 					// We are checking if the FX component is up to date (mix and match the attributes and samplers IFN):
 					UpdateEffectAsset(m_FxAsset, false, true);
 
-					foreach (var it in m_DelayedCallbacks)
-					{
-						int unityKey = ("" + m_FXGUID + it.m_EventName).GetHashCode();
-						if (m_Callbacks.ContainsKey(unityKey) == false)
-						{
-							m_Callbacks.Add(unityKey, it);
-						}
-						else
-						{
-							m_Callbacks[unityKey].m_Cb += it.m_Cb;
-							m_Callbacks[unityKey].m_Count += 1;
-						}
-					}
-
-					foreach (var it in m_Callbacks)
-					{
-						if (!PKFxManager.EffectRegisterEvent(m_FXGUID, it.Value.m_EventName, it.Key))
-							Debug.LogError("[PopcornFX]  Error Registering Event :" + it.Value.m_EventName + " in " + EffectName);
-					}
-
-					foreach (PkFxUserEventCallback eventCallback in m_Events)
-					{
-						if (eventCallback.m_Event != null && eventCallback.m_Event.GetPersistentEventCount() > 0)
-						{
-							int unityKey = ("" + m_FXGUID + eventCallback.m_Desc.m_Name).GetHashCode();
-							if (!PKFxManager.EffectRegisterEvent(m_FXGUID, eventCallback.m_Desc.m_Name, unityKey))
-							{
-								Debug.LogError("[PopcornFX]  Error Registering Event :" + eventCallback.m_Desc.m_Name + " in " + EffectName);
-							}
-							eventCallback.m_Key = unityKey;
-						}
-					}
-						
+					EffectUnregisterAllEvents();
 
 					m_AttributesContainer = new PKFxAttributesContainer(m_FxAsset, m_FXGUID);
 					// Setup the default value for the attributes:
@@ -271,6 +239,39 @@ namespace PopcornFX
 				SetPlayingState(true);  // Do that BEFORE the call to StartEffect as it can call inline the OnFxStopped delegate
 				// Start the FX in the native plugin:
 				PKFxManager.StartEffect(m_FXGUID, dt, m_PreWarm);
+
+				foreach (var it in m_DelayedCallbacks)
+				{
+					int unityKey = ("" + m_FXGUID + it.m_EventName).GetHashCode();
+					if (m_Callbacks.ContainsKey(unityKey) == false)
+					{
+						m_Callbacks.Add(unityKey, it);
+					}
+					else
+					{
+						m_Callbacks[unityKey].m_Cb += it.m_Cb;
+						m_Callbacks[unityKey].m_Count += 1;
+					}
+				}
+
+				foreach (var it in m_Callbacks)
+				{
+					if (!PKFxManager.EffectRegisterEvent(m_FXGUID, it.Value.m_EventName, it.Key))
+						Debug.LogError("[PopcornFX]  Error Registering Event :" + it.Value.m_EventName + " in " + EffectName);
+				}
+
+				foreach (PkFxUserEventCallback eventCallback in m_Events)
+				{
+					if (eventCallback.m_Event != null && eventCallback.m_Event.GetPersistentEventCount() > 0)
+					{
+						int unityKey = ("" + m_FXGUID + eventCallback.m_Desc.m_Name).GetHashCode();
+						if (!PKFxManager.EffectRegisterEvent(m_FXGUID, eventCallback.m_Desc.m_Name, unityKey))
+						{
+							Debug.LogError("[PopcornFX]  Error Registering Event :" + eventCallback.m_Desc.m_Name + " in " + EffectName);
+						}
+						eventCallback.m_Key = unityKey;
+					}
+				}
 			}
 		}
 
@@ -1248,6 +1249,11 @@ namespace PopcornFX
 			SetAttributeUnsafe(attribId, valueX, valueY, valueZ, valueW);
 		}
 
+		public void SetAttributeSafe(int attribID, Vector4 value)
+		{
+			SetAttributeSafe(attribID, value.x, value.y, value.z, value.w);
+		}
+
 		public void SetAttributeSafe(int attribId, bool valueX)
 		{
 			if (m_FxAsset.m_AttributeDescs == null || attribId < 0 || attribId >= m_FxAsset.m_AttributeDescs.Count)
@@ -1458,6 +1464,11 @@ namespace PopcornFX
 			}
 		}
 
+		public void SetAttributeUnsafe(int attribId, Vector4 value)
+		{
+			SetAttributeUnsafe(attribId, value.x, value.y, value.z, value.w);
+		}
+
 		public void SetAttributeUnsafe(int attribId, bool valueX)
 		{
 			m_FxAttributesStartValues[attribId * 4].b1 = valueX ? (byte)255 : (byte)0;
@@ -1497,18 +1508,6 @@ namespace PopcornFX
 			if (m_AttributesContainer != null)
 			{
 				m_AttributesContainer.SetAttributeUnsafe(attribId, m_FxAttributesStartValues[attribId * 4].i1);
-			}
-		}
-
-		public void SetAttributeUnsafe(int attribId, Vector4 value)
-		{
-			m_FxAttributesStartValues[attribId * 4 + 0].f1 = value.x;
-			m_FxAttributesStartValues[attribId * 4 + 1].f1 = value.y;
-			m_FxAttributesStartValues[attribId * 4 + 2].f1 = value.z;
-			m_FxAttributesStartValues[attribId * 4 + 3].f1 = value.w;
-			if (m_AttributesContainer != null)
-			{
-				m_AttributesContainer.SetAttributeUnsafe(attribId, value);
 			}
 		}
 

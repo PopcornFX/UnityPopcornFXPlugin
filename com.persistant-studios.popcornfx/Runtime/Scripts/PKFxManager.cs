@@ -20,8 +20,22 @@ namespace PopcornFX
 		public static bool					UseFixedDT = false;
 		public static bool					IsUnitTesting = false;
 
+
 		// PopcornFX General State With Native Interop
 		//----------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+		public static void PublicSetDelegateOnAssetChange(IntPtr delegatePtr)
+		{
+			PKFxManagerImpl.SetDelegateOnAssetChange(delegatePtr);
+		}
+
+		//Should be called only when overriding PublicSetDelegateOnAssetChange
+		public static void PublicOnAssetChange(ref SAssetChangesDesc desc)
+		{
+			PKFxManagerImpl.OnAssetChange(ref desc);
+		}
+#endif
 
 		public enum EPopcornLogLevels
 		{

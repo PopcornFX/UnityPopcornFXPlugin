@@ -1,7 +1,7 @@
-#pragma once
 //----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
+#pragma once
 
 #ifndef	__SINGLE_THREADED_POOL_H__
 #define	__SINGLE_THREADED_POOL_H__

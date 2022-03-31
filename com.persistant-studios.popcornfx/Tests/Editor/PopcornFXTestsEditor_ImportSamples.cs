@@ -14,7 +14,7 @@ public class PopcornFXTestsEditor_ImportSamples
 	public int AssetCount = 0;
 	public static PopcornFXTestsEditor_ImportSamples Instance;
 
-	[MonoPInvokeCallback(typeof(PKFxManagerImpl.AssetChangeCallback))]
+	[MonoPInvokeCallback(typeof(AssetChangeCallback))]
 	public static void OnAssetChangeUnitTest(ref SAssetChangesDesc assetChange)
 	{
 		Instance.AssetCount--;
@@ -39,7 +39,7 @@ public class PopcornFXTestsEditor_ImportSamples
 
 		Assert.IsTrue(AssetCount != 0);
 
-		PKFxManagerImpl.SetDelegateOnAssetChange(PKFxDelegateHandler.Instance.DelegateToFunctionPointer(new PKFxManagerImpl.AssetChangeCallback(OnAssetChangeUnitTest)));
+		PKFxManagerImpl.SetDelegateOnAssetChange(PKFxDelegateHandler.Instance.DelegateToFunctionPointer(new AssetChangeCallback(OnAssetChangeUnitTest)));
 
 		PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
 
@@ -51,7 +51,7 @@ public class PopcornFXTestsEditor_ImportSamples
 		PKFxSettings.UnityPackFxPath = UnityPackFxPath;
 		PKFxSettings.EnableForceDeterminism = EnableForceDeterminism;
 
-		PKFxManagerImpl.SetDelegateOnAssetChange(PKFxDelegateHandler.Instance.DelegateToFunctionPointer(new PKFxManagerImpl.AssetChangeCallback(PKFxManagerImpl.OnAssetChange)));
+		PKFxManagerImpl.SetDelegateOnAssetChange(PKFxDelegateHandler.Instance.DelegateToFunctionPointer(new AssetChangeCallback(PKFxManagerImpl.OnAssetChange)));
 
 		yield return null;
 	}

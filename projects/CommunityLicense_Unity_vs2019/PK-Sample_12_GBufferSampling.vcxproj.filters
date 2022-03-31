@@ -363,7 +363,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.h">
       <Filter>_Common\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_10_AsyncRendering\AsyncRendering.h">
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling\PK-Sample_12_GBufferSampling.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.h">
@@ -377,13 +377,10 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.cpp">
       <Filter>_Common\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_10_AsyncRendering\AsyncRendering.cpp">
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling\Main.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_10_AsyncRendering\AsyncRendering_Thread.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_10_AsyncRendering\Main.cpp">
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_12_GBufferSampling\PK-Sample_12_GBufferSampling.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp">

@@ -15,6 +15,8 @@ using UnityEditor;
 //----------------------------------------------------------------------------
 namespace PopcornFX
 {
+	public delegate void AssetChangeCallback(ref SAssetChangesDesc assetChange);
+
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SRaycastPack
 	{
@@ -966,6 +968,7 @@ namespace PopcornFX
 				hasBeenResized = true;
 			}
 
+#pragma warning disable CS0162
 			if (mesh.GetIndexCount(0) < usedIndexCount)
 			{
 				int[] triangles = new int[reservedIndexCount];			// index
@@ -986,7 +989,7 @@ namespace PopcornFX
 				mesh.triangles = triangles;
 				hasBeenResized = true;
 			}
-
+#pragma warning restore CS0162
 			return hasBeenResized;
 		}
 
@@ -1280,7 +1283,6 @@ namespace PopcornFX
 			PKFxManager.ImportedAssetName = Path.GetFileName(path);
 		}
 
-		internal delegate void AssetChangeCallback(ref SAssetChangesDesc assetChange);
 
 		[MonoPInvokeCallback(typeof(AssetChangeCallback))]
 		public static void OnAssetChange(ref SAssetChangesDesc assetChange)

@@ -30,25 +30,25 @@
     <ClInclude Include="..\..\SDK\Samples\ParticleSample\src\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
+    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
   </ItemGroup>

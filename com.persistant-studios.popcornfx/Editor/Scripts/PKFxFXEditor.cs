@@ -610,6 +610,7 @@ namespace PopcornFX
 		{
 			bool hasChanged = false;
 
+
 			for (int i = 0; i < curvesArray.arraySize; ++i)
 			{
 				Keyframe[] keysCache = curvesArray.GetArrayElementAtIndex(i).animationCurveValue.keys;
@@ -623,16 +624,19 @@ namespace PopcornFX
 		{
 			bool hasChanged = false;
 
-			AnimationCurve curve = currentKeysProp.GetArrayElementAtIndex(curveIndex).animationCurveValue;
+			AnimationCurve[] curves = new AnimationCurve[currentKeysProp.arraySize];
+			for (int i = 0; i < currentKeysProp.arraySize; ++i)
+				curves[i] = new AnimationCurve(currentKeysProp.GetArrayElementAtIndex(i).animationCurveValue.keys);
+
+			AnimationCurve curve = curves[curveIndex];
 			if (curve.keys.Length > 0)
 			{
 				if (curve.keys.Length < 2)
 				{
 					hasChanged = true;
 					curve.keys = oldKeys;
-					currentKeysProp.GetArrayElementAtIndex(curveIndex).animationCurveValue = curve;
 				}
-				currentKeysProp.GetArrayElementAtIndex(curveIndex).animationCurveValue = curve;
+				curves[curveIndex] = curve;
 
 				List<float> changedOldKeys;
 				List<float> changedNewKeys;
@@ -645,12 +649,12 @@ namespace PopcornFX
 
 					if (idx == -1)
 					{
-						MultipleCurvesDeleteKey(currentKeysProp, curveIndex, changedOldKeys[i]);
+						MultipleCurvesDeleteKey(ref curves, currentKeysProp, curveIndex, changedOldKeys[i]);
 						hasChanged = true;
 					}
 					else
 					{
-						MultipleCurvesChangeKey(currentKeysProp, curveIndex, changedOldKeys[i], changedNewKeys[idx]);
+						MultipleCurvesChangeKey(ref curves, currentKeysProp, curveIndex, changedOldKeys[i], changedNewKeys[idx]);
 						hasChanged = true;
 					}
 				}
@@ -659,11 +663,18 @@ namespace PopcornFX
 				{
 					if (!changedOldKeys.Exists(x => x == changedNewKeys[i]))
 					{
-						MultipleCurvesAddKey(currentKeysProp, curveIndex, changedNewKeys[i]);
+						MultipleCurvesAddKey(ref curves, currentKeysProp, curveIndex, changedNewKeys[i]);
 						hasChanged = true;
 					}
 				}
 			}
+
+			if (hasChanged)
+			{
+				for (int i = 0; i < currentKeysProp.arraySize; ++i)
+					currentKeysProp.GetArrayElementAtIndex(i).animationCurveValue = curves[i];
+			}
+
 			return hasChanged;
 		}
 
@@ -700,44 +711,44 @@ namespace PopcornFX
 			newKeys = addedKeys;
 		}
 
-		public void MultipleCurvesAddKey(SerializedProperty curvesArray, int sourceCurveIndex, float time)
+		public void MultipleCurvesAddKey(ref AnimationCurve[] curves, SerializedProperty curvesArray, int sourceCurveIndex, float time)
 		{
 			for (int i = 0; i < curvesArray.arraySize; ++i)
 			{
 				if (i == sourceCurveIndex)
 					continue;
-				AnimationCurve curve = curvesArray.GetArrayElementAtIndex(i).animationCurveValue;
-				curve.AddKey(time, curve.Evaluate(time));
-				curvesArray.GetArrayElementAtIndex(i).animationCurveValue = curve;
+				AnimationCurve curve = curves[i];
+				//Evaluate the curve data on the unmodified version of the curve;
+				AnimationCurve curveData = curvesArray.GetArrayElementAtIndex(i).animationCurveValue;
+				curve.AddKey(time, curveData.Evaluate(time));
 			}
 		}
 
-		public void MultipleCurvesDeleteKey(SerializedProperty curvesArray, int sourceCurveIndex, float time)
+		public void MultipleCurvesDeleteKey(ref AnimationCurve[] curves, SerializedProperty curvesArray, int sourceCurveIndex, float time)
 		{
 			for (int i = 0; i < curvesArray.arraySize; ++i)
 			{
 				if (i == sourceCurveIndex)
 					continue;
-				AnimationCurve curve = curvesArray.GetArrayElementAtIndex(i).animationCurveValue;
+				AnimationCurve curve = curves[i];
 				for (int iKey = 0; iKey < curve.keys.Length; ++iKey)
 				{
 					if (curve.keys[iKey].time == time)
 					{
 						curve.RemoveKey(iKey);
-						curvesArray.GetArrayElementAtIndex(i).animationCurveValue = curve;
 						break;
 					}
 				}
 			}
 		}
 
-		public void MultipleCurvesChangeKey(SerializedProperty curvesArray, int sourceCurveIndex, float oldTime, float newTime)
+		public void MultipleCurvesChangeKey(ref AnimationCurve[] curves, SerializedProperty curvesArray, int sourceCurveIndex, float oldTime, float newTime)
 		{
 			for (int i = 0; i < curvesArray.arraySize; ++i)
 			{
 				if (i == sourceCurveIndex)
 					continue;
-				AnimationCurve curve = curvesArray.GetArrayElementAtIndex(i).animationCurveValue;
+				AnimationCurve curve = curves[i];
 				int iKey;
 				for (iKey = 0; iKey < curve.keys.Length; ++iKey)
 				{
@@ -747,7 +758,6 @@ namespace PopcornFX
 						keyframe.time = newTime;
 						curve.RemoveKey(iKey);
 						curve.AddKey(keyframe);
-						curvesArray.GetArrayElementAtIndex(i).animationCurveValue = curve;
 						break;
 					}
 				}

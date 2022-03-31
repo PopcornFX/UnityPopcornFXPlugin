@@ -18,14 +18,13 @@ endif
 # Configurations
 # #############################################
 
-PCH = ../../SDK/Samples/ParticleSample/src/precompiled.h
+PCH = ../../SDK/Samples/PK-Samples/precompiled/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../SDK/Samples/ParticleSample/src -I../../SDK/Samples/ParticleSample/src/include -I../../Native/Common/PKFX
+INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../SDK/Samples/PK-Samples/PK-Sample_12_GBufferSampling -I../../SDK/Samples/PK-Samples/precompiled -I../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/Scene -I../../SDK/Samples/PK-Samples -I../../../ExternalLibs/GL/include -I../../SDK/Samples/External/imgui
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LDDEPS +=
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -45,12 +44,13 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
 TARGETDIR = ../../../release/builds/Android_Samples
-TARGET = $(TARGETDIR)/PK-Sample_01_BasicStartup_d
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Debug/PK-Sample_01_BasicStartup
-DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=0
+TARGET = $(TARGETDIR)/PK-Sample_12_GBufferSampling_d
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Debug/PK-Sample_12_GBufferSampling
+DEFINES += -D_DEBUG -DPKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_SDL=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon
-LIBS += -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -llog -lPK-ParticlesToolbox_d -lPK-Runtime_d -lEGL -lGLESv3
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android/libPK-SampleLib_d.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PKM_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Discretizers_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lPK-ZLib_d -llog
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android/libPK-SampleLib_d.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android -shared
 
 else ifeq ($(config),debug_android64)
@@ -64,12 +64,13 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
 TARGETDIR = ../../../release/builds/Android64_Samples
-TARGET = $(TARGETDIR)/PK-Sample_01_BasicStartup_d
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Debug/PK-Sample_01_BasicStartup
-DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=0
+TARGET = $(TARGETDIR)/PK-Sample_12_GBufferSampling_d
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Debug/PK-Sample_12_GBufferSampling
+DEFINES += -D_DEBUG -DPKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_SDL=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb
-LIBS += -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -llog -lPK-ParticlesToolbox_d -lPK-Runtime_d -lEGL -lGLESv3
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64/libPK-SampleLib_d.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PKM_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Discretizers_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lPK-ZLib_d -llog
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64/libPK-SampleLib_d.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64 -shared
 
 else ifeq ($(config),release_android)
@@ -83,12 +84,13 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
 TARGETDIR = ../../../release/builds/Android_Samples
-TARGET = $(TARGETDIR)/PK-Sample_01_BasicStartup_r
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Release/PK-Sample_01_BasicStartup
-DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=0
+TARGET = $(TARGETDIR)/PK-Sample_12_GBufferSampling_r
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Release/PK-Sample_12_GBufferSampling
+DEFINES += -DNDEBUG -DPKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_SDL=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon
-LIBS += -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -llog -lPK-ParticlesToolbox_r -lPK-Runtime_r -lEGL -lGLESv3
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android/libPK-SampleLib_r.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PKM_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Discretizers_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lPK-ZLib_r -llog
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android/libPK-SampleLib_r.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android -shared
 
 else ifeq ($(config),release_android64)
@@ -102,12 +104,13 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
 TARGETDIR = ../../../release/builds/Android64_Samples
-TARGET = $(TARGETDIR)/PK-Sample_01_BasicStartup_r
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Release/PK-Sample_01_BasicStartup
-DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=0
+TARGET = $(TARGETDIR)/PK-Sample_12_GBufferSampling_r
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Release/PK-Sample_12_GBufferSampling
+DEFINES += -DNDEBUG -DPKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_SDL=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math
-LIBS += -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -llog -lPK-ParticlesToolbox_r -lPK-Runtime_r -lEGL -lGLESv3
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64/libPK-SampleLib_r.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PKM_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Discretizers_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lPK-ZLib_r -llog
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64/libPK-SampleLib_r.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64 -shared
 
 else ifeq ($(config),retail_android)
@@ -121,12 +124,13 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
 TARGETDIR = ../../../release/builds/Android_Samples
-TARGET = $(TARGETDIR)/PK-Sample_01_BasicStartup_s
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Retail/PK-Sample_01_BasicStartup
-DEFINES += -DNDEBUG -DPK_RETAIL -DPK_USE_RENDER_HELPERS=0
+TARGET = $(TARGETDIR)/PK-Sample_12_GBufferSampling_s
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Retail/PK-Sample_12_GBufferSampling
+DEFINES += -DNDEBUG -DPK_RETAIL -DPKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_SDL=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon
-LIBS += -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -llog -lPK-ParticlesToolbox_s -lPK-Runtime_s -lEGL -lGLESv3
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android/libPK-SampleLib_s.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CodecImage_PKM_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_PVR_s -lPK-Plugin_CodecImage_TGA_s -lPK-Discretizers_s -lPK-ParticlesToolbox_s -lPK-Runtime_s -lPK-ZLib_s -llog
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android/libPK-SampleLib_s.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android -s -shared
 
 else ifeq ($(config),retail_android64)
@@ -140,12 +144,13 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
 TARGETDIR = ../../../release/builds/Android64_Samples
-TARGET = $(TARGETDIR)/PK-Sample_01_BasicStartup_s
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Retail/PK-Sample_01_BasicStartup
-DEFINES += -DNDEBUG -DPK_RETAIL -DPK_USE_RENDER_HELPERS=0
+TARGET = $(TARGETDIR)/PK-Sample_12_GBufferSampling_s
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Retail/PK-Sample_12_GBufferSampling
+DEFINES += -DNDEBUG -DPK_RETAIL -DPKSAMPLE_PROJNAME=PK-Sample_12_GBufferSampling -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_SDL=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math
-LIBS += -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -llog -lPK-ParticlesToolbox_s -lPK-Runtime_s -lEGL -lGLESv3
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64/libPK-SampleLib_s.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CodecImage_PKM_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_PVR_s -lPK-Plugin_CodecImage_TGA_s -lPK-Discretizers_s -lPK-ParticlesToolbox_s -lPK-Runtime_s -lPK-ZLib_s -llog
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64/libPK-SampleLib_s.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64 -s -shared
 
 #else
@@ -162,13 +167,15 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/FxPlatformGeneric.o
-GENERATED += $(OBJDIR)/FxStartup.o
-GENERATED += $(OBJDIR)/ParticleSample_01_BasicStartup.o
+GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/Main.o
+GENERATED += $(OBJDIR)/PK-Sample_12_GBufferSampling.o
+GENERATED += $(OBJDIR)/SampleScene.o
 GENERATED += $(OBJDIR)/precompiled.o
-OBJECTS += $(OBJDIR)/FxPlatformGeneric.o
-OBJECTS += $(OBJDIR)/FxStartup.o
-OBJECTS += $(OBJDIR)/ParticleSample_01_BasicStartup.o
+OBJECTS += $(OBJDIR)/GPUContext.o
+OBJECTS += $(OBJDIR)/Main.o
+OBJECTS += $(OBJDIR)/PK-Sample_12_GBufferSampling.o
+OBJECTS += $(OBJDIR)/SampleScene.o
 OBJECTS += $(OBJDIR)/precompiled.o
 
 # Rules
@@ -179,7 +186,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking PK-Sample_01_BasicStartup
+	@echo Linking PK-Sample_12_GBufferSampling
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -200,7 +207,7 @@ else
 endif
 
 clean:
-	@echo Cleaning PK-Sample_01_BasicStartup
+	@echo Cleaning PK-Sample_12_GBufferSampling
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -233,16 +240,19 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/FxPlatformGeneric.o: ../../Native/Common/PKFX/FxPlatformGeneric.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/ParticleSample_01_BasicStartup.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_01_BasicStartup.cpp
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/precompiled/precompiled.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
+$(OBJDIR)/Main.o: ../../SDK/Samples/PK-Samples/PK-Sample_12_GBufferSampling/Main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PK-Sample_12_GBufferSampling.o: ../../SDK/Samples/PK-Samples/PK-Sample_12_GBufferSampling/PK-Sample_12_GBufferSampling.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GPUContext.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/SampleScene.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/Scene/SampleScene.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

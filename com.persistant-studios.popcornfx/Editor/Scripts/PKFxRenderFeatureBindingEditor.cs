@@ -93,8 +93,9 @@ namespace PopcornFX
 			SerializedProperty	ShaderMask = serializedObject.FindProperty("m_ShaderMask");
 			SerializedProperty	BlendMode = serializedObject.FindProperty("m_BlendMode");
 			SerializedProperty	BillboardingLocation = serializedObject.FindProperty("m_BillboardingLocation");
-			SerializedProperty	MeshColorPropertyName = serializedObject.FindProperty("m_MeshColorPropertyName");
-			SerializedProperty	NormalMapPropertyName = serializedObject.FindProperty("m_NormalMapPropertyName");
+			SerializedProperty MeshColorPropertyName = serializedObject.FindProperty("m_MeshColorPropertyName");
+			SerializedProperty DiffuseTexturePropertyName = serializedObject.FindProperty("m_DiffuseTexturePropertyName");
+			SerializedProperty NormalMapPropertyName = serializedObject.FindProperty("m_NormalMapPropertyName");
 
 			UseShader.boolValue = EditorGUILayout.Toggle("Use Shader", UseShader.boolValue);
 			if (UseShader.boolValue)
@@ -155,8 +156,8 @@ namespace PopcornFX
 					if (RenderTypes.GetArrayElementAtIndex((int)ERendererType.Mesh).boolValue)
 					{
 						MeshColorPropertyName.stringValue = EditorGUILayout.TextField("Mesh Color Property Name: ", MeshColorPropertyName.stringValue);
+						DiffuseTexturePropertyName.stringValue = EditorGUILayout.TextField("Mesh Diffuse Map: ", DiffuseTexturePropertyName.stringValue);
 					}
-
 					if (HasShaderVariationFlag(ShaderMask.intValue, EShaderVariationFlags.Has_Lighting))
 					{
 						NormalMapPropertyName.stringValue = EditorGUILayout.TextField("Normal Map Property Name: ", NormalMapPropertyName.stringValue);

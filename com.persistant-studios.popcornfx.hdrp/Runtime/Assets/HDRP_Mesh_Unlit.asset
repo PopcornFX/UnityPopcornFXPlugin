@@ -19,5 +19,7 @@ MonoBehaviour:
   m_BlendMode: 010101010101
   m_ShaderMask: 16359
   m_BillboardingLocation: 0
+  m_DiffuseTexturePropertyName: _DiffuseMap
   m_MeshColorPropertyName: _BaseColor
+  m_MeshCursorPropertyName: _VATCursor
   m_NormalMapPropertyName: _NormalMap

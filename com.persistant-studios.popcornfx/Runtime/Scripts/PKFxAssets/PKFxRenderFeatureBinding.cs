@@ -20,6 +20,7 @@ namespace PopcornFX
 		public EBillboardLocation		m_BillboardingLocation = EBillboardLocation.CPU;
 
 		//Advanced
+		public string					m_DiffuseTexturePropertyName = null;
 		public string					m_MeshColorPropertyName = "_BaseColor";
 		public string					m_MeshCursorPropertyName = "_VATCursor";
 		public string					m_NormalMapPropertyName = null;

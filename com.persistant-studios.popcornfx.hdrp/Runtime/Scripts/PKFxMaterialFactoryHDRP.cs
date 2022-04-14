@@ -80,6 +80,13 @@ namespace PopcornFX
 				meshRenderer.m_CastShadow = false;
 
 			PKFxEffectAsset.DependencyDesc DepDesc = PKFxManager.GetBuiltAsset().m_Dependencies.Find(x => batchDesc.m_MeshAsset.Contains(x.m_Path));
+
+			if (DepDesc == null && batchDesc.m_MeshAsset.EndsWith(".fbx"))
+			{
+				string majExtention = batchDesc.m_MeshAsset;
+				majExtention = majExtention.Replace(".fbx", ".FBX");
+				DepDesc = PKFxManager.GetBuiltAsset().m_Dependencies.Find(x => majExtention.Contains(x.m_Path));
+			}
 			if (DepDesc != null)
 			{
 				GameObject meshGO = DepDesc.m_Object as GameObject;
@@ -353,6 +360,8 @@ namespace PopcornFX
 			// Set the diffuse texture:
 			Texture diffuseTexture = GetTextureAsset(asset, batchDesc.m_DiffuseMap, false, wrapMode);
 			material.mainTexture = diffuseTexture;
+			if (diffuseTexture != null && binding != null && !string.IsNullOrEmpty(binding.m_DiffuseTexturePropertyName))
+				material.SetTexture(binding.m_DiffuseTexturePropertyName, diffuseTexture);
 
 			// Set the material uniforms:
 			material.SetInt("_RotateUVs", batchDesc.m_RotateUVs ? 1 : 0);

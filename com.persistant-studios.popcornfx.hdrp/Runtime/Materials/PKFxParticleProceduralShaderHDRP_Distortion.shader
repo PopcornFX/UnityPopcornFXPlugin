@@ -16,7 +16,6 @@ Shader "PopcornFX/HDRP/PKFxParticleProceduralShader_Distortion"
 		_DistortionVectorScale("Distortion Vector Scale", Float) = 2
 		_DistortionVectorBias("Distortion Vector Bias", Float) = 1
 		_DistortionBlurScale("Distortion Blur Scale", Float) = 1
-		_ZTestMode("ZTest Mode", Int) = 0
 		_UniformFlags("Uniform Flags", Int) = 0
 		_InvSoftnessDistance("Inverse Softness Distance", Float) = 1
 
@@ -47,7 +46,7 @@ Shader "PopcornFX/HDRP/PKFxParticleProceduralShader_Distortion"
 		
 			Blend [_DistortionSrcBlend] [_DistortionDstBlend], [_DistortionBlurSrcBlend] [_DistortionBlurDstBlend]
 			BlendOp Add, [_DistortionBlurBlendOp]
-			ZTest [_ZTestMode]
+			ZTest LEqual
 			ZWrite off
 			Cull [_CullMode]
 
@@ -78,8 +77,8 @@ Shader "PopcornFX/HDRP/PKFxParticleProceduralShader_Distortion"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
 
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/VertexProceduralInput.inc"
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/VertexOutput.inc"
+			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/VertexProceduralInput.cginc"
+			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/VertexOutput.cginc"
 
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/VaryingMesh.hlsl"
@@ -94,12 +93,12 @@ Shader "PopcornFX/HDRP/PKFxParticleProceduralShader_Distortion"
 			//------------------------------------------------------------------------------------
 			// Vertex shader
 			//------------------------------------------------------------------------------------
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/VertexProceduralShader.inc"
+			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/VertexProceduralShader.cginc"
 
 			//------------------------------------------------------------------------------------
 			// Fragment
 			//------------------------------------------------------------------------------------
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/FragmentUtils.inc"
+			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/FragmentUtils.cginc"
 
 			float4	frag(SVertexOutput i) : SV_Target
 			{ 

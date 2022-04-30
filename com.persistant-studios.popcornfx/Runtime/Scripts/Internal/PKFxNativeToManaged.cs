@@ -103,9 +103,12 @@ namespace PopcornFX
 		public int m_RotateTexture;
 
 		public IntPtr m_DiffuseMap;
+		public IntPtr m_EmissiveMap;
 		public IntPtr m_AlphaRemap;
 		public IntPtr m_DiffuseRampMap;
+		public IntPtr m_EmissiveRampMap;
 		public float m_InvSoftnessDistance;
+		public float m_AlphaClipThreshold;
 
 		public EBillboardMode m_BillboardMode;
 		public int m_DrawOrder;
@@ -125,6 +128,12 @@ namespace PopcornFX
 		public int m_HasMeshAtlas;
 
 		public IntPtr m_DiffuseMap;
+		public IntPtr m_EmissiveMap;
+		public IntPtr m_AlphaRemap;
+		public IntPtr m_DiffuseRampMap;
+		public IntPtr m_EmissiveRampMap;
+		public float m_InvSofnessDistance;
+		public float m_AlphaClipThreshold;
 
 		public IntPtr m_LitRendering;
 		public IntPtr m_VatRendering;
@@ -701,8 +710,10 @@ namespace PopcornFX
 
 			if (mat != null)
 			{
-
-				mat.enableInstancing = true;
+				if (PKFxSettings.UseMeshInstancing)
+					mat.enableInstancing = true;
+				else
+					mat.enableInstancing = false;
 				GameObject renderingObject = GetNewRenderingObject(batchDesc.m_GeneratedName);
 
 				return SetupMeshRenderingObject(renderingObject, batchDesc, mat);
@@ -925,14 +936,16 @@ namespace PopcornFX
 				else if (useLargeIdx == false && mesh.indexFormat == IndexFormat.UInt32)
 					mesh.indexFormat = IndexFormat.UInt16;
 
+				int uvIdxForEmissive = 0;
 				mesh.Clear();
 
-				mesh.vertices = new Vector3[reservedVertexCount];		// positions
+				mesh.vertices = new Vector3[reservedVertexCount];       // positions
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
 				{
 					mesh.colors = new Color[reservedVertexCount];		// color
 				}
+
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
 				{
 					mesh.normals = new Vector3[reservedVertexCount];	// normal
@@ -941,30 +954,42 @@ namespace PopcornFX
 				{
 					mesh.uv = new Vector2[reservedVertexCount];			// uvFactors
 					mesh.uv2 = new Vector2[reservedVertexCount];		// uvScale
-					mesh.uv3 = new Vector2[reservedVertexCount];		// uvOffset
+					mesh.uv3 = new Vector2[reservedVertexCount];        // uvOffset
+					uvIdxForEmissive = 3;
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
-						mesh.uv4 = new Vector2[reservedVertexCount];	// alpha cursor
+						mesh.uv4 = new Vector2[reservedVertexCount];    // alpha cursor
+						uvIdxForEmissive = 4;
+
 					}
 				}
 				else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
 				{
 					mesh.uv = new Vector2[reservedVertexCount];			// uv0
 					mesh.uv2 = new Vector2[reservedVertexCount];		// uv1
-					mesh.uv3 = new Vector2[reservedVertexCount];		// atlas id and if Has_AlphaRemap, alpha cursor
+					mesh.uv3 = new Vector2[reservedVertexCount];        // atlas id and if Has_AlphaRemap, alpha cursor
+					uvIdxForEmissive = 3;
 				}
 				else
 				{
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) ||
 						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 					{
-						mesh.uv = new Vector2[reservedVertexCount];		// uv0
+						mesh.uv = new Vector2[reservedVertexCount];     // uv0
+						uvIdxForEmissive = 1;
 					}
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
-						mesh.uv2 = new Vector2[reservedVertexCount];	// alpha cursor
+						mesh.uv2 = new Vector2[reservedVertexCount];    // alpha cursor
+						uvIdxForEmissive = 2;
 					}
 				}
+
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
+				{
+					mesh.SetUVs(uvIdxForEmissive, new Vector3[reservedVertexCount]);       // emissive color
+				}
+
 				hasBeenResized = true;
 			}
 

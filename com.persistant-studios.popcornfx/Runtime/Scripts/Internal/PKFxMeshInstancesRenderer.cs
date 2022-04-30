@@ -32,8 +32,11 @@ namespace PopcornFX
 
 		private IntPtr[] m_PerInstanceBuffer;
 
-		public string m_ColorPropertyName;
-		public string m_CursorPropertyName = "_VATCursor";
+		public int		m_ShaderVariation = 0;
+		public string	m_DiffuseColorPropertyName;
+		public string	m_EmissiveColorPropertyName;
+		public string	m_AlphaRemapCursorPropertyName;
+		public string	m_VATCursorPropertyName = "_VATCursor";
 
 		// Job adding two floating point values together
 		public struct MeshData : IJobParallelFor
@@ -47,24 +50,50 @@ namespace PopcornFX
 			public IntPtr buffer;
 			[ReadOnly]
 			public int count;
+			[ReadOnly]
+			public int m_ShaderVariation;
 
 
 			public NativeArray<Matrix4x4> transforms;
-			public NativeArray<Vector4> colors;
-			public NativeArray<float> cursors;
+			public NativeArray<Vector4> diffuseColors;
+			public NativeArray<Vector4> emissiveColors;
+			public NativeArray<float> alphaCursors;
+			public NativeArray<float> vatCursors;
 
 			public void Execute(int h)
 			{
 				unsafe
 				{
-					Matrix4x4* instanceTransform = (Matrix4x4*)buffer.ToPointer();
-					Vector4* instanceColor = (Vector4*)(instanceTransform + count);
-					float* instanceCursor = (float*)(instanceColor + count);
+					void* currentPtr = buffer.ToPointer();
 
+					Matrix4x4* instanceTransform = (Matrix4x4*)currentPtr;
+					currentPtr = instanceTransform + count;
 					//Matrix4x4 Multiply is 90% of the task
 					transforms[h] = instanceTransform[offset + h] * meshTransform;
-					colors[h] = instanceColor[offset + h];
-					cursors[h] = instanceCursor[offset + h];
+
+					Vector4* instanceColor = (Vector4*)currentPtr;
+					diffuseColors[h] = instanceColor[offset + h];
+					currentPtr = instanceColor + count;
+
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
+					{
+						Vector3* instanceEmissiveColor = (Vector3*)currentPtr;
+						emissiveColors[h] = instanceEmissiveColor[offset + h];
+						currentPtr = instanceEmissiveColor + count;
+					}
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)
+					{
+						float* instanceAlphaCursor = (float*)currentPtr;
+						alphaCursors[h] = instanceAlphaCursor[offset + h];
+						currentPtr = instanceAlphaCursor + count;
+					}
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_FluidVAT) != 0 ||
+						(m_ShaderVariation & (int)EShaderVariationFlags.Has_RigidVAT) != 0 ||
+						(m_ShaderVariation & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
+					{
+						float* instanceCursor = (float*)currentPtr;
+						vatCursors[h] = instanceCursor[offset + h];
+					}
 				}
 			}
 		}
@@ -93,7 +122,7 @@ namespace PopcornFX
 
 		private void Start()
 		{
-			if (m_ColorPropertyName == null || m_ColorPropertyName.Length == 0)
+			if (m_DiffuseColorPropertyName == null || m_DiffuseColorPropertyName.Length == 0)
 			{
 				Debug.LogError("[PopcornFX] Error : Mesh Color Property Name is empty, set it in MaterialFactory");
 			}
@@ -110,8 +139,10 @@ namespace PopcornFX
 				{
 					MaterialPropertyBlock materialProp = new MaterialPropertyBlock();
 					NativeArray<Matrix4x4> transforms = new NativeArray<Matrix4x4>(1023, Allocator.TempJob);
-					NativeArray<Vector4> colors = new NativeArray<Vector4>(1023, Allocator.TempJob);
-					NativeArray<float> cursors = new NativeArray<float>(1023, Allocator.TempJob);
+					NativeArray<Vector4> diffuseColors = new NativeArray<Vector4>(1023, Allocator.TempJob);
+					NativeArray<Vector4> emissiveColors = new NativeArray<Vector4>(1023, Allocator.TempJob);
+					NativeArray<float> alphaCursors = new NativeArray<float>(1023, Allocator.TempJob);
+					NativeArray<float> vatCursors = new NativeArray<float>(1023, Allocator.TempJob);
 
 					for (int j = 0; j < m_Meshes.Length; ++j)
 					{
@@ -124,16 +155,20 @@ namespace PopcornFX
 							{
 								MeshData job = new MeshData();
 								//Out
-								job.colors = colors;
 								job.transforms = transforms;
-								job.cursors = cursors;
+								job.diffuseColors = diffuseColors;
+								job.emissiveColors = emissiveColors;
+								job.alphaCursors = alphaCursors;
+								job.vatCursors = vatCursors;
 								//In data
 								job.meshTransform = t;
 								job.offset = i;
 								job.buffer = m_PerInstanceBuffer[j];
 								job.count = m_InstancesCount[j];
+								job.m_ShaderVariation = m_ShaderVariation;
 
 								int dataLeft = Math.Min(m_InstancesCount[j] - i, 1023);
+								bool isLit = false;
 
 								// Schedule the job with one Execute per index in the results array and only 1 item per processing batch
 								JobHandle handle = job.Schedule(Math.Min(dataLeft, 1023), 1);
@@ -142,15 +177,43 @@ namespace PopcornFX
 								handle.Complete();
 
 								generalOffset += dataLeft;
-								materialProp.SetVectorArray(m_ColorPropertyName, colors.ToArray());
-								materialProp.SetFloatArray(m_CursorPropertyName, cursors.ToArray());
-								Graphics.DrawMeshInstanced(m, 0, m_Material, transforms.ToArray(), dataLeft, materialProp, m_CastShadow ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off);
+								materialProp.SetVectorArray(m_DiffuseColorPropertyName, diffuseColors.ToArray());
+								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
+								{
+									materialProp.SetVectorArray(m_EmissiveColorPropertyName, emissiveColors.ToArray());
+								}
+								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)
+								{
+									materialProp.SetFloatArray(m_AlphaRemapCursorPropertyName, alphaCursors.ToArray());
+								}
+								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_FluidVAT) != 0 ||
+									(m_ShaderVariation & (int)EShaderVariationFlags.Has_RigidVAT) != 0 ||
+									(m_ShaderVariation & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
+								{
+									materialProp.SetFloatArray(m_VATCursorPropertyName, vatCursors.ToArray());
+								}
+								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Lighting) != 0)
+								{
+									isLit = true;
+								}
+								Graphics.DrawMeshInstanced(
+									m,
+									0,
+									m_Material,
+									transforms.ToArray(),
+									dataLeft,
+									materialProp,
+									m_CastShadow ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off,
+									isLit
+								);
 							}
 						}
 					}
 					transforms.Dispose();
-					colors.Dispose();
-					cursors.Dispose();
+					diffuseColors.Dispose();
+					emissiveColors.Dispose();
+					alphaCursors.Dispose();
+					vatCursors.Dispose();
 				}
 			}
 			else
@@ -161,25 +224,57 @@ namespace PopcornFX
 					Mesh m = m_Meshes[j];
 					Matrix4x4 t = m_MeshesImportTransform[j];
 
-					for (int i = 0; i < m_InstancesCount[j]; i++)
+					unsafe
 					{
-						Matrix4x4 transform;
-						Vector4 color;
-						float cursor;
+						Matrix4x4* instanceTransform = null;
+						Vector4* instanceDiffuseColor = null;
+						Vector3* instanceEmissiveColor = null;
+						float* instanceAlphaCursor = null;
+						float* instanceVATCursor = null;
 
-						unsafe
+						void* currentPtr = m_PerInstanceBuffer[j].ToPointer();
+						int instanceCount = m_InstancesCount[j];
+						bool isLit = false;
+
+						instanceTransform = (Matrix4x4*)currentPtr;
+						currentPtr = instanceTransform + instanceCount;
+						instanceDiffuseColor = (Vector4*)currentPtr;
+						currentPtr = instanceDiffuseColor + instanceCount;
+
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
 						{
-							Matrix4x4* instanceTransform = (Matrix4x4*)m_PerInstanceBuffer[j].ToPointer();
-							Vector4* instanceColor = (Vector4*)(instanceTransform + m_InstancesCount[j]);
-							float* instanceCursor = (float*)(instanceColor + m_InstancesCount[j]);
-
-							transform = instanceTransform[i] * t;
-							color = instanceColor[i];
-							cursor = instanceCursor[i];
+							instanceEmissiveColor = (Vector3*)currentPtr;
+							currentPtr = instanceEmissiveColor + instanceCount;
 						}
-						materialProp.SetVector(m_ColorPropertyName, color);
-						materialProp.SetFloat(m_CursorPropertyName, cursor);
-						Graphics.DrawMesh(m, transform, m_Material, 0, null, 0, materialProp, m_CastShadow);
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)
+						{
+							instanceAlphaCursor = (float*)currentPtr;
+							currentPtr = instanceAlphaCursor + instanceCount;
+						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_FluidVAT) != 0 ||
+							(m_ShaderVariation & (int)EShaderVariationFlags.Has_RigidVAT) != 0 ||
+							(m_ShaderVariation & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
+						{
+							instanceVATCursor = (float*)currentPtr;
+							currentPtr = instanceVATCursor + instanceCount;
+						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Lighting) != 0)
+						{
+							isLit = true;
+						}
+
+						for (int i = 0; i < m_InstancesCount[j]; i++)
+						{
+							Matrix4x4 meshTransform = instanceTransform[i] * t;
+							materialProp.SetVector(m_DiffuseColorPropertyName, instanceDiffuseColor[i]);
+							if (instanceEmissiveColor != null && !string.IsNullOrEmpty(m_EmissiveColorPropertyName))
+								materialProp.SetVector(m_EmissiveColorPropertyName, instanceEmissiveColor[i]);
+							if (instanceAlphaCursor != null && !string.IsNullOrEmpty(m_AlphaRemapCursorPropertyName))
+								materialProp.SetFloat(m_AlphaRemapCursorPropertyName, instanceAlphaCursor[i]);
+							if (instanceVATCursor != null && !string.IsNullOrEmpty(m_VATCursorPropertyName))
+								materialProp.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
+							Graphics.DrawMesh(m, meshTransform, m_Material, 0, null, 0, materialProp, m_CastShadow, isLit);
+						}
 					}
 				}
 			}

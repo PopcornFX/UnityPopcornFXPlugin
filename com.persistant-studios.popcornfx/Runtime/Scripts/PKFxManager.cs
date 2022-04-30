@@ -102,7 +102,11 @@ namespace PopcornFX
 
 		public static bool IsSupportedTextureExtension(string extension)
 		{
-			return PKFxUtils.ArrayContains(PKFxManagerImpl.s_TexFileTypes, extension);
+			return PKFxUtils.ArrayContains(PKFxManagerImpl.s_TexFileTypes, extension.ToLower());
+		}
+		public static bool IsSupportedMeshExtension(string extension)
+		{
+			return PKFxUtils.ArrayContains(PKFxManagerImpl.s_MeshFileTypes, extension.ToLower());
 		}
 
 		public static void ClearAllCallbacks()

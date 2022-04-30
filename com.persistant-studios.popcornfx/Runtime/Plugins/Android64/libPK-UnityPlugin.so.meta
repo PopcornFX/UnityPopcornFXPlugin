@@ -1,27 +1,14 @@
 fileFormatVersion: 2
-guid: cd57fe34b0ad42e2973b7767c51430bc
+guid: dca9eb0b861a4f19a8fdfbba84a485df
 PluginImporter:
-  externalObjects: {}
   serializedVersion: 2
-  iconMap: {}
-  executionOrder: {}
-  defineConstraints: []
   isPreloaded: 0
-  isOverridable: 1
-  isExplicitlyReferenced: 0
-  validateReferences: 1
+  isOverridable: 0
   platformData:
+
   - first:
-      Any: 
+      Android: Android
     second:
       enabled: 1
-      settings: {}
-  - first:
-      Editor: Editor
-    second:
-      enabled: 0
       settings:
-        DefaultValueInitialized: true
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+        CPU: ARM64

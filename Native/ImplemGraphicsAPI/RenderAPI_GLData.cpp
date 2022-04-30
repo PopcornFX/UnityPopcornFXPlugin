@@ -65,8 +65,9 @@ void	GLData::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff)
 		return;
 
 	GLenum	buffType = isIdxBuff ? GL_ELEMENT_ARRAY_BUFFER : GL_ARRAY_BUFFER;
+	unsigned long long buffer = (unsigned long long)bufferHandle.m_Buffer->m_DeviceLocal;
 
-	glBindBuffer(buffType, (uintptr_t)bufferHandle.m_Buffer->m_DeviceLocal); GLERR;
+	glBindBuffer(buffType, (GLuint)(buffer)); GLERR;
 	glUnmapBuffer(buffType); GLERR;
 }
 

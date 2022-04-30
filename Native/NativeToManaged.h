@@ -58,9 +58,12 @@ extern "C"
 		ManagedBool					m_RotateUvs;
 
 		const char					*m_DiffuseMap;
+		const char					*m_EmissiveMap;
 		const char					*m_AlphaRemap;
 		const char					*m_DiffuseRampMap;
+		const char					*m_EmissiveRampMap;
 		float						m_InvSoftnessDistance;
+		float						m_AlphaClipThreshold;
 
 		int							m_BillboardMode;
 		int							m_DrawOrder;
@@ -70,16 +73,20 @@ extern "C"
 		int							m_CameraID;
 
 		SPopcornRendererDesc()
-			: m_ShaderVariationFlags(0)
-			, m_BlendMode(0)
-			, m_RotateUvs(ManagedBool_False)
-			, m_DiffuseMap(null)
-			, m_AlphaRemap(null)
-			, m_InvSoftnessDistance(0)
-			, m_BillboardMode(0)
-			, m_DrawOrder(0)
-			, m_LitRendering(null)
-			, m_CameraID(0)
+		:	m_ShaderVariationFlags(0)
+		,	m_BlendMode(0)
+		,	m_RotateUvs(ManagedBool_False)
+		,	m_DiffuseMap(null)
+		,	m_EmissiveMap(null)
+		,	m_AlphaRemap(null)
+		,	m_DiffuseRampMap(null)
+		,	m_EmissiveRampMap(null)
+		,	m_InvSoftnessDistance(0)
+		,	m_AlphaClipThreshold(0)
+		,	m_BillboardMode(0)
+		,	m_DrawOrder(0)
+		,	m_LitRendering(null)
+		,	m_CameraID(0)
 		{
 		}
 	};
@@ -127,6 +134,12 @@ extern "C"
 		ManagedBool					m_HasMeshAtlas;
 
 		const char					*m_DiffuseMap;
+		const char					*m_EmissiveMap;
+		const char					*m_AlphaRemap;
+		const char					*m_DiffuseRampMap;
+		const char					*m_EmissiveRampMap;
+		float						m_InvSoftnessDistance;
+		float						m_AlphaClipThreshold;
 
 		SRenderingFeatureLitDesc	*m_LitRendering;
 		SRenderingFeatureVATDesc	*m_VatRendering;
@@ -137,6 +150,12 @@ extern "C"
 			, m_BlendMode(0)
 			, m_HasMeshAtlas(ManagedBool_False)
 			, m_DiffuseMap(null)
+			, m_EmissiveMap(null)
+			, m_AlphaRemap(null)
+			, m_DiffuseRampMap(null)
+			, m_EmissiveRampMap(null)
+			, m_InvSoftnessDistance(0)
+			, m_AlphaClipThreshold(0)
 			, m_LitRendering(null)
 			, m_VatRendering(null)
 		{

@@ -22,7 +22,8 @@ namespace PopcornFX
 			public string		m_BatchDescName;
 			public int			m_InternalId;
 
-			public Material		m_CustomMaterial;
+			public Material					m_CustomMaterial;
+			public PKFxShaderInputBindings	m_CustomMaterialBindings;
 		}
 
 		public abstract void		SetupRenderer(SBatchDesc batchDesc, GameObject gameObject, MeshRenderer meshRenderer);
@@ -35,15 +36,14 @@ namespace PopcornFX
 		public Shader DistortionShader;
 		public Shader BlurShader;
 
-		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingFallback;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUBillboardingFallback;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_TransparentMeshFallback;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_OpaqueMeshFallback;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_MeshVATFluidFallback;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_MeshVATSoftFallback;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_MeshVATRigidFallback;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingOpaque;
-		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUBillboardingOpaque;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUBillboardingDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUBillboardingOpaqueDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingOpaqueDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_TransparentMeshUnlitDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_OpaqueMeshUnlitDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_TransparentMeshLitDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_OpaqueMeshLitDefault;
 
 		public List<PKFxRenderFeatureBinding>	m_RenderFeatureBindings = new List<PKFxRenderFeatureBinding>();
 
@@ -112,14 +112,16 @@ namespace PopcornFX
 		}
 #endif
 
-		public Material TryFindAndInstantiateCustomMaterial(PKFxEffectAsset asset, SBatchDesc batchDesc, TextureWrapMode wrapMode)
+		public Material TryFindAndInstantiateCustomMaterial(PKFxEffectAsset asset, SBatchDesc batchDesc)
 		{
 			CustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
 			if (curMat != null)
 			{
 				if (curMat.m_CustomMaterial != null)
 				{
-					return new Material(curMat.m_CustomMaterial);
+					Material material = new Material(curMat.m_CustomMaterial);
+					curMat.m_CustomMaterialBindings.SetMaterialKeywords(batchDesc, material);
+					curMat.m_CustomMaterialBindings.BindMaterialProperties(batchDesc, material, asset);
 				}
 				else
 				{
@@ -154,7 +156,7 @@ namespace PopcornFX
 
 				if (texture == null)
 				{
-					Debug.LogError("[PopcornFX] Error while trying to create diffuse texture. Try to reimport \"" + rawPath + "\" and \"" + asset.AssetVirtualPath + "\" check if its format is compatible with Unity.", asset);
+					Debug.LogError("[PopcornFX] Error while trying to create texture. Try to reimport \"" + rawPath + "\" and \"" + asset.AssetVirtualPath + "\" check if its format is compatible with Unity.", asset);
 					return null;
 				}
 
@@ -207,6 +209,57 @@ namespace PopcornFX
 #endif
 
 #endif
+		}
+
+		protected void _SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)
+		{
+			if (batchDesc.m_LitFeature != null)
+				meshRenderer.m_CastShadow = batchDesc.m_LitFeature.m_CastShadows;
+			else
+				meshRenderer.m_CastShadow = false;
+
+			PKFxEffectAsset.DependencyDesc DepDesc = PKFxManager.GetBuiltAsset().m_Dependencies.Find(x => batchDesc.m_MeshAsset.Contains(x.m_Path));
+
+			if (DepDesc == null && batchDesc.m_MeshAsset.EndsWith(".fbx"))
+			{
+				string majExtention = batchDesc.m_MeshAsset;
+				majExtention = majExtention.Replace(".fbx", ".FBX");
+				DepDesc = PKFxManager.GetBuiltAsset().m_Dependencies.Find(x => majExtention.Contains(x.m_Path));
+			}
+			if (DepDesc != null)
+			{
+				GameObject meshGO = DepDesc.m_Object as GameObject;
+				List<Mesh> meshes = new List<Mesh>();
+				List<Matrix4x4> trans = new List<Matrix4x4>();
+				MeshFilter meshFilter = meshGO.GetComponent<MeshFilter>();
+				if (meshFilter != null)
+				{
+					meshes.Add(meshFilter.sharedMesh);
+					trans.Add(meshGO.transform.localToWorldMatrix);
+				}
+				if (meshes.Count == 0)
+				{
+					MeshFilter[] meshFilters = meshGO.GetComponentsInChildren<MeshFilter>();
+					for (int i = 0; i < meshFilters.Length; ++i)
+					{
+						meshes.Add(meshFilters[i].sharedMesh);
+						trans.Add(meshGO.transform.localToWorldMatrix);
+					}
+				}
+				meshRenderer.m_MeshesImportTransform = trans.ToArray();
+				meshRenderer.Meshes = meshes.ToArray();
+
+				PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
+				meshRenderer.m_ShaderVariation = batchDesc.m_ShaderVariationFlags;
+				meshRenderer.m_DiffuseColorPropertyName = binding.m_MeshDiffuseColorPropertyName;
+				meshRenderer.m_EmissiveColorPropertyName = binding.m_MeshEmissiveColorPropertyName;
+				meshRenderer.m_AlphaRemapCursorPropertyName = binding.m_MeshAlphaCursorPropertyName;
+				meshRenderer.m_VATCursorPropertyName = binding.m_MeshVATCursorPropertyName;
+			}
+			else
+			{
+				Debug.LogError("Could not find mesh '" + batchDesc.m_MeshAsset + "'");
+			}
 		}
 	}
 }

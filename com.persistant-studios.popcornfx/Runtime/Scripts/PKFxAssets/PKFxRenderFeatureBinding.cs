@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace PopcornFX
 {
-	public class PKFxRenderFeatureBinding : ScriptableObject
+	public class PKFxRenderFeatureBinding : PKFxShaderInputBindings
 	{
 		public bool						m_UseShader = true;
 		public Shader					m_Shader = null;
@@ -18,12 +18,6 @@ namespace PopcornFX
 		public bool[]					m_BlendMode;
 		public EShaderVariationFlags	m_ShaderMask = 0;
 		public EBillboardLocation		m_BillboardingLocation = EBillboardLocation.CPU;
-
-		//Advanced
-		public string					m_DiffuseTexturePropertyName = null;
-		public string					m_MeshColorPropertyName = "_BaseColor";
-		public string					m_MeshCursorPropertyName = "_VATCursor";
-		public string					m_NormalMapPropertyName = null;
 
 		public PKFxRenderFeatureBinding()
 		{
@@ -90,27 +84,6 @@ namespace PopcornFX
 					return null;
 				return new Material(m_Material);
 			}
-		}
-
-		public string GetMeshColorPropertyName()
-		{
-			if (m_MeshColorPropertyName == null || m_MeshColorPropertyName.Length == 0)
-				return null;
-			return m_MeshColorPropertyName;
-		}
-
-		public string GetMeshVATCursorPropertyName()
-		{
-			if (m_MeshCursorPropertyName == null || m_MeshCursorPropertyName.Length == 0)
-				return null;
-			return m_MeshCursorPropertyName;
-		}
-
-		public string GetNormalMapPropertyName()
-		{
-			if (m_NormalMapPropertyName == null || m_NormalMapPropertyName.Length == 0)
-				return null;
-			return m_NormalMapPropertyName;
 		}
 	}
 }

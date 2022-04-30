@@ -70,7 +70,9 @@ namespace	ShaderVariationFlags
 		Has_FluidVAT			= (1 << 14),
 		Has_SoftVAT				= (1 << 15),
 		Has_RigidVAT			= (1 << 16),
-		ShaderVariation_Count	= 16,
+		Has_Emissive			= (1 << 17),
+		Has_EmissiveRamp		= (1 << 18),
+		ShaderVariation_Count	= 19
 	};
 }
 
@@ -137,6 +139,7 @@ public:
 	CStringId					m_DiffuseMap;
 	CStringId					m_AlphaMap;
 	float						m_InvSoftnessDistance;
+	float						m_AlphaThreshold;
 
 	// Ribbon alignment mode:
 	u32							m_RibbonAlignment;
@@ -149,6 +152,8 @@ public:
 	float						m_Metalness;
 
 	CStringId					m_DiffuseRampMap;
+	CStringId					m_EmissiveMap;
+	CStringId					m_EmissiveRampMap;
 
 	CParticleMaterialDescBillboard();
 
@@ -192,6 +197,14 @@ public:
 	CFloat2									m_Vat_BoundsPosition;
 	bool									m_Vat_PadToPowerOf2;
 	CFloat2									m_Vat_PaddedRatio;
+
+	CStringId								m_DiffuseRampMap;
+	CStringId								m_EmissiveMap;
+	CStringId								m_EmissiveRampMap;
+	CStringId								m_AlphaMap;
+
+	float									m_InvSoftnessDistance;
+	float									m_AlphaThreshold;
 
 	CParticleMaterialDescMesh();
 

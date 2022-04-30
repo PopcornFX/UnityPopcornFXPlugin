@@ -43,7 +43,9 @@ namespace PopcornFX
 		Has_DiffuseRamp = (1 << 13),
 		Has_FluidVAT = (1 << 14),
 		Has_SoftVAT = (1 << 15),
-		Has_RigidVAT = (1 << 16)
+		Has_RigidVAT = (1 << 16),
+		Has_Emissive = (1 << 17),
+		Has_EmissiveRamp = (1 << 18)
 	};
 
 	public enum EBlendMode : int
@@ -234,15 +236,18 @@ namespace PopcornFX
 		public bool					m_RotateUVs;
 		public int					m_DrawOrder;
 		public string				m_DiffuseMap;
+		public string				m_EmissiveMap;
 		// Billboards/Ribbons:
 		public string				m_AlphaRemap;
 		public string				m_DiffuseRampMap;
+		public string				m_EmissiveRampMap;
 		public EBillboardMode		m_BillboardMode;
 		//  For meshes:
 		public string				m_MeshAsset;
 		public string				m_SpecularMap;
 		public bool					m_HasMeshAtlas;
 		public float				m_InvSoftnessDistance;
+		public float				m_AlphaClipThreshold;
 		public string				m_GeneratedName;
 		public SBatchVatFeatureDesc m_VatFeature;
 
@@ -255,15 +260,21 @@ namespace PopcornFX
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc, int idx)
 		{
 			string diffuseStr = null;
+			string emissiveStr = null;
 			string diffuseRampStr = null;
+			string emissiveRampStr = null;
 			string alphaRemapStr = null;
 
 			if (desc.m_DiffuseMap != IntPtr.Zero)
 				diffuseStr = Marshal.PtrToStringAnsi(desc.m_DiffuseMap);
+			if (desc.m_EmissiveMap != IntPtr.Zero)
+				emissiveStr = Marshal.PtrToStringAnsi(desc.m_EmissiveMap);
 			if (desc.m_AlphaRemap != IntPtr.Zero)
 				alphaRemapStr = Marshal.PtrToStringAnsi(desc.m_AlphaRemap);
 			if (desc.m_DiffuseRampMap != IntPtr.Zero)
 				diffuseRampStr = Marshal.PtrToStringAnsi(desc.m_DiffuseRampMap);
+			if (desc.m_EmissiveRampMap != IntPtr.Zero)
+				emissiveRampStr = Marshal.PtrToStringAnsi(desc.m_EmissiveRampMap);
 
 			m_Type = type;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
@@ -271,10 +282,13 @@ namespace PopcornFX
 			m_RotateUVs = desc.m_RotateTexture != 0 ? true : false;
 			m_DrawOrder = desc.m_DrawOrder;
 			m_DiffuseMap = diffuseStr;
+			m_EmissiveMap = emissiveStr;
 			m_DiffuseRampMap = diffuseRampStr;
+			m_EmissiveRampMap = emissiveRampStr;
 			m_AlphaRemap = alphaRemapStr;
 			m_BillboardMode = desc.m_BillboardMode;
 			m_InvSoftnessDistance = desc.m_InvSoftnessDistance;
+			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
 
 			m_VatFeature = null;
 
@@ -297,22 +311,40 @@ namespace PopcornFX
 		{
 			string diffuseStr = null;
 			string meshAssetStr = null;
+			string emissiveStr = null;
+			string diffuseRampStr = null;
+			string emissiveRampStr = null;
+			string alphaRemapStr = null;
 
 			if (desc.m_DiffuseMap != IntPtr.Zero)
 				diffuseStr = Marshal.PtrToStringAnsi(desc.m_DiffuseMap);
 			if (desc.m_MeshAsset != IntPtr.Zero)
 				meshAssetStr = Path.ChangeExtension(Marshal.PtrToStringAnsi(desc.m_MeshAsset), ".fbx");
+			if (desc.m_EmissiveMap != IntPtr.Zero)
+				emissiveStr = Marshal.PtrToStringAnsi(desc.m_EmissiveMap);
+			if (desc.m_AlphaRemap != IntPtr.Zero)
+				alphaRemapStr = Marshal.PtrToStringAnsi(desc.m_AlphaRemap);
+			if (desc.m_DiffuseRampMap != IntPtr.Zero)
+				diffuseRampStr = Marshal.PtrToStringAnsi(desc.m_DiffuseRampMap);
+			if (desc.m_EmissiveRampMap != IntPtr.Zero)
+				emissiveRampStr = Marshal.PtrToStringAnsi(desc.m_EmissiveRampMap);
 
 			m_Type = ERendererType.Mesh;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
 			m_BlendMode = desc.m_BlendMode;
 			m_RotateUVs = false;
 			m_DiffuseMap = diffuseStr;
+			m_DiffuseRampMap = diffuseRampStr;
+			m_EmissiveMap = emissiveStr;
+			m_EmissiveRampMap = emissiveRampStr;
+			m_AlphaRemap = alphaRemapStr;
+			m_InvSoftnessDistance = desc.m_InvSofnessDistance;
+			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
+
 			m_SpecularMap = null;
 			m_MeshAsset = meshAssetStr;
 			m_HasMeshAtlas = desc.m_HasMeshAtlas == 1 ? true : false;
 			
-
 			unsafe
 			{
 				SRenderingFeatureVATDesc* vatDesc = (SRenderingFeatureVATDesc*)desc.m_VatRendering.ToPointer();
@@ -418,6 +450,8 @@ namespace PopcornFX
 			finalName += " ";
 			finalName += m_DiffuseMap == null ? "(none)" : m_DiffuseMap;
 			finalName += " ";
+			finalName += m_EmissiveMap == null ? "(none)" : m_EmissiveMap;
+			finalName += " ";
 			finalName += m_LitFeature == null ? "(none)" : m_LitFeature.GetGeneratedName();
 			finalName += " ";
 			finalName += m_VatFeature == null ? "(none)" : m_VatFeature.GetGeneratedName();
@@ -427,6 +461,8 @@ namespace PopcornFX
 				finalName += m_AlphaRemap == null ? "(none)" : m_AlphaRemap;
 				finalName += " ";
 				finalName += m_DiffuseRampMap == null ? "(none)" : m_DiffuseRampMap;
+				finalName += " ";
+				finalName += m_EmissiveRampMap == null ? "(none)" : m_EmissiveRampMap;
 				finalName += " ";
 				finalName += m_InvSoftnessDistance;
 			}

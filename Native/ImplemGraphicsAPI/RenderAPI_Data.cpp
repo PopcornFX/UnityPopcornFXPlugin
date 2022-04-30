@@ -46,8 +46,6 @@ extern class	IRenderAPIData* CreateGNMData();
 #include <ImplemGraphicsAPI/RenderAPI_AGCData.h>
 extern class	IRenderAPIData* UNKNOWN2Data();
 #endif
-#define	SHOULD_NOT_HAVE_FLAG	(1U << 31)
-#define	SHOULD_NOT_HAVE(x)		(((unsigned int)x << ShaderVariationFlags::ShaderVariation_Count) | SHOULD_NOT_HAVE_FLAG)
 
 //-------------------------------------------------------------------------------------
 
@@ -122,30 +120,38 @@ bool SBufferHandles::Init(UnityGfxRenderer deviceType)
 }
 
 
-u32		flagsToUseSemantic[__Semantic_Count] =
+struct	SFlagsToUseSemantic
 {
-	0U,																																				// Semantic_Position			// Always
-	ShaderVariationFlags::Has_Lighting,																												// Semantic_Normal
-	ShaderVariationFlags::Has_Color,																												// Semantic_Color
-	ShaderVariationFlags::Has_CorrectDeformation,																									// Semantic_UvFactors
-	ShaderVariationFlags::Has_CorrectDeformation,																									// Semantic_UvScaleAndOffset
-	SHOULD_NOT_HAVE(ShaderVariationFlags::Has_CorrectDeformation) | ShaderVariationFlags::Has_DiffuseMap | ShaderVariationFlags::Has_DistortionMap,	// Semantic_Uv0
-	ShaderVariationFlags::Has_AnimBlend,																											// Semantic_Uv1
-	ShaderVariationFlags::Has_AnimBlend,																											// Semantic_AtlasId
-	ShaderVariationFlags::Has_AlphaRemap,																											// Semantic_AlphaCursor
+	u32		m_Forbidden;
+	u32		m_Required;
+};
+
+SFlagsToUseSemantic		flagsToUseSemantic[__Semantic_Count] =
+{
+	{ 0U, 0U },																															// Semantic_Position			// Always
+	{ 0U, ShaderVariationFlags::Has_Lighting },																							// Semantic_Normal
+	{ 0U, ShaderVariationFlags::Has_Color },																							// Semantic_Color0
+	{ 0U, ShaderVariationFlags::Has_CorrectDeformation },																				// Semantic_UvFactors
+	{ 0U, ShaderVariationFlags::Has_CorrectDeformation },																				// Semantic_UvScaleAndOffset
+	{ ShaderVariationFlags::Has_CorrectDeformation, ShaderVariationFlags::Has_DiffuseMap | ShaderVariationFlags::Has_DistortionMap },	// Semantic_Uv0
+	{ 0U, ShaderVariationFlags::Has_AnimBlend },																						// Semantic_Uv1
+	{ 0U, ShaderVariationFlags::Has_AnimBlend },																						// Semantic_AtlasId
+	{ 0U, ShaderVariationFlags::Has_AlphaRemap },																						// Semantic_AlphaCursor
+	{ 0U, ShaderVariationFlags::Has_Emissive }																							// Semantic_EmissiveColor
 };
 
 u32		semanticSize[__Semantic_Count] =
 {
 	3 * sizeof(float),									// Semantic_Position
 	3 * sizeof(float),									// Semantic_Normal
-	4 * sizeof(float),									// Semantic_Color
+	4 * sizeof(float),									// Semantic_Color0
 	2 * sizeof(float),									// Semantic_UvFactors
 	4 * sizeof(float),									// Semantic_UvScaleAndOffset
 	2 * sizeof(float),									// Semantic_Uv0
 	2 * sizeof(float),									// Semantic_Uv1
 	sizeof(float),										// Semantic_AtlasId
 	sizeof(float),										// Semantic_AlphaCursor
+	3 * sizeof(float),									// Semantic_EmissiveColor
 };
 
 //----------------------------------------------------------------------------
@@ -216,18 +222,16 @@ IRenderAPIData *IRenderAPIData::GetRenderAPISpecificData(UnityGfxRenderer device
 
 //----------------------------------------------------------------------------
 
-static	bool	AreFlagsCompatible(u32 flagToUseSemantic, u32 materialFlags)
+static	bool	AreFlagsCompatible(const SFlagsToUseSemantic &flagToUseSemantic, u32 materialFlags)
 {
+	bool	hasForbiddenFlags = (flagToUseSemantic.m_Forbidden & materialFlags) != 0;
+	bool	hasOneRequiredFlag = (flagToUseSemantic.m_Required & materialFlags) != 0;
+	if (hasForbiddenFlags)
+		return false;
 	// flag is 0 == always
-	if (flagToUseSemantic == 0)
+	if (flagToUseSemantic.m_Required == 0 || hasOneRequiredFlag)
 		return true;
-	// otherwise it should have all the flags
-	if ((flagToUseSemantic & materialFlags) == 0)
-		return false;
-	if ((flagToUseSemantic & SHOULD_NOT_HAVE_FLAG) != 0 &&
-		((materialFlags << ShaderVariationFlags::ShaderVariation_Count) & flagToUseSemantic) != 0)
-		return false;
-	return true;
+	return false;
 }
 
 //----------------------------------------------------------------------------

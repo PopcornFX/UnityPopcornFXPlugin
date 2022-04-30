@@ -67,6 +67,7 @@ u32	CParticleMaterialDescFlags::CombineFlags()
 
 CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 :	m_InvSoftnessDistance(1)
+,	m_AlphaThreshold(0.5f)
 ,	m_RibbonAlignment(0)
 //Feature Lit
 ,	m_NormalMap(CStringId::Null)
@@ -76,6 +77,8 @@ CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 ,	m_Roughness(1.0f)
 ,	m_Metalness(0.0f)
 ,	m_DiffuseRampMap(CStringId::Null)
+,	m_EmissiveMap(CStringId::Null)
+,	m_EmissiveRampMap(CStringId::Null)
 {
 }
 
@@ -113,6 +116,13 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	const SRendererFeaturePropertyValue	*diffuseRamp = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_DiffuseRamp());
 	const SRendererFeaturePropertyValue	*diffuseRampMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_DiffuseRamp_RampMap());
 
+	const SRendererFeaturePropertyValue *emissive = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Emissive());
+	const CGuid							emissiveColor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Emissive_EmissiveColor());
+	const SRendererFeaturePropertyValue *emissiveMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Emissive_EmissiveMap());
+
+	const SRendererFeaturePropertyValue *emissiveRamp = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_EmissiveRamp());
+	const SRendererFeaturePropertyValue *emissiveRampMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_EmissiveRamp_RampMap());
+
 	// For ribbons only:
 	const SRendererFeaturePropertyValue	*correctDeformation = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_CorrectDeformation());
 
@@ -139,8 +149,12 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
 	if (diffuseRamp != null && diffuseRamp->ValueB() && diffuseRampMap != null && !diffuseRampMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseRamp;
+	if (emissiveRamp != null && emissiveRamp->ValueB() && emissiveRampMap != null && !emissiveRampMap->ValuePath().Empty())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_EmissiveRamp;
 	if (correctDeformation != null && correctDeformation->ValueB())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_CorrectDeformation;
+	if (emissive != null && emissive->ValueB() && emissiveColor.Valid() && emissiveMap != null && !emissiveMap->ValuePath().Empty())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Emissive;
 
 	//-----------------------------
 	// Choose the blending mode:
@@ -150,6 +164,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	const SRendererFeaturePropertyValue	*transparentType = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Transparent_Type());
 	const SRendererFeaturePropertyValue	*opaque = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Opaque());
 	const SRendererFeaturePropertyValue	*opaqueType = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Opaque_Type());
+	const SRendererFeaturePropertyValue	*alphaThreshold = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Opaque_MaskThreshold());
 
 	// Default blend mode is solid:
 	m_Flags.m_BlendMode = BlendMode::Solid;
@@ -203,6 +218,10 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		else if (opaqueType->ValueI().x() == BasicRendererProperties::Masked)
 		{
 			m_Flags.m_BlendMode = BlendMode::Masked;
+			if (alphaThreshold != null)
+			{
+				m_AlphaThreshold = alphaThreshold->ValueF().x();
+			}
 		}
 	}
 
@@ -220,6 +239,10 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_InvSoftnessDistance = 1.0f / softnessDistance->ValueF().x();
 	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_DiffuseRamp) != 0)
 		m_DiffuseRampMap = CStringId(diffuseRampMap->ValuePath());
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive && emissiveMap != null && !emissiveMap->ValuePath().Empty()) != 0)
+		m_EmissiveMap = CStringId(emissiveMap->ValuePath());
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_EmissiveRamp) != 0)
+		m_EmissiveRampMap = CStringId(emissiveRampMap->ValuePath());
 
 	//-----------------------------
 	// Get the UV generation flags:
@@ -245,7 +268,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	if (isUVFlipped)
 	{
 		PK_ASSERT(renderer.m_RendererType == Renderer_Billboard);
-		m_Flags.m_UVGenerationFlags |= UVGeneration::FlipU;
+		// m_Flags.m_UVGenerationFlags |= UVGeneration::FlipU;
 		m_Flags.m_UVGenerationFlags |= UVGeneration::FlipV;
 	}
 
@@ -317,7 +340,9 @@ bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBil
 			m_NormalBendingFactor == oth.m_NormalBendingFactor &&
 			m_Roughness == oth.m_Roughness &&
 			m_Metalness == oth.m_Metalness &&
-			m_DiffuseRampMap == oth.m_DiffuseRampMap;
+			m_DiffuseRampMap == oth.m_DiffuseRampMap &&
+			m_EmissiveMap == oth.m_EmissiveMap &&
+			m_EmissiveRampMap == oth.m_EmissiveRampMap;
 }
 
 //----------------------------------------------------------------------------
@@ -346,6 +371,12 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_Vat_BoundsPosition{}
 ,	m_Vat_PadToPowerOf2(false)
 ,	m_Vat_PaddedRatio{}
+,	m_DiffuseRampMap(CStringId::Null)
+,	m_EmissiveMap(CStringId::Null)
+,	m_EmissiveRampMap(CStringId::Null)
+,	m_AlphaMap(CStringId::Null)
+,	m_InvSoftnessDistance(0.0f)
+,	m_AlphaThreshold(0.5f)
 {
 }
 
@@ -357,21 +388,42 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	// Choose the shader variation:
 	//-----------------------------
 
-	// For billboards and ribbons:
+	// For Meshes:
 	const SRendererFeaturePropertyValue	*diffuse = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse());
 	const SRendererFeaturePropertyValue	*diffuseMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse_DiffuseMap());
-
 	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());
 	const SRendererFeaturePropertyValue	*lit = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Lit());
 	const SRendererFeaturePropertyValue	*litLegacy = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_LegacyLit());
+	const SRendererFeaturePropertyValue	*alphaRemap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap());
+	const SRendererFeaturePropertyValue	*alphaRemapAlphaMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap_AlphaMap());
+	const CGuid							alphaRemapCursor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_AlphaRemap_Cursor());
+	const SRendererFeaturePropertyValue	*diffuseRamp = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_DiffuseRamp());
+	const SRendererFeaturePropertyValue	*diffuseRampMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_DiffuseRamp_RampMap());
+	const SRendererFeaturePropertyValue	*emissive = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Emissive());
+	const CGuid							emissiveColor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Emissive_EmissiveColor());
+	const SRendererFeaturePropertyValue	*emissiveMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Emissive_EmissiveMap());
+	const SRendererFeaturePropertyValue	*emissiveRamp = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_EmissiveRamp());
+	const SRendererFeaturePropertyValue	*emissiveRampMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_EmissiveRamp_RampMap());
+	const SRendererFeaturePropertyValue	*softParticles = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_SoftParticles());
+	const SRendererFeaturePropertyValue	*softnessDistance = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_SoftParticles_SoftnessDistance());
 
 	m_Flags.m_ShaderVariationFlags = 0;
 	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseMap;
+	if (alphaRemap != null && alphaRemap->ValueB() && alphaRemapAlphaMap != null && !alphaRemapAlphaMap->ValuePath().Empty() && alphaRemapCursor.Valid())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AlphaRemap;
+	if (diffuseRamp != null && diffuseRamp->ValueB() && diffuseRampMap != null && !diffuseRampMap->ValuePath().Empty())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseRamp;
+	if (emissive != null && emissive->ValueB() && emissiveColor.Valid() && emissiveMap != null &&  !emissiveMap->ValuePath().Empty())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Emissive;
+	if (emissiveRamp != null && emissiveRamp->ValueB() && emissiveRampMap != null && !emissiveRampMap->ValuePath().Empty())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_EmissiveRamp;
 	if ((lit != null && lit->ValueB()))
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Lighting;
 	if ((litLegacy != null && litLegacy->ValueB()))
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_LightingLegacy;
+	if (softParticles != null && softParticles->ValueB() && softnessDistance != null && softnessDistance->ValueF().x() != 0.0f)
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Soft;
 
 	if (diffuseColorInput.Valid())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
@@ -384,6 +436,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue	*transparentType = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Transparent_Type());
 	const SRendererFeaturePropertyValue	*opaque = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Opaque());
 	const SRendererFeaturePropertyValue	*opaqueType = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Opaque_Type());
+	const SRendererFeaturePropertyValue	*alphaThreshold = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Opaque_MaskThreshold());
 
 	// Default blend mode is solid:
 	m_Flags.m_BlendMode = BlendMode::Solid;
@@ -416,6 +469,10 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		else if (opaqueType->ValueI().x() == BasicRendererProperties::Masked)
 		{
 			m_Flags.m_BlendMode = BlendMode::Masked;
+			if (alphaThreshold != null)
+			{
+				m_AlphaThreshold = alphaThreshold->ValueF().x();
+			}
 		}
 	}
 
@@ -437,6 +494,16 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		m_HasMeshAtlas = false;
 	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_DiffuseMap) != 0)
 		m_DiffuseMap = CStringId(CFilePath::Purified(diffuseMap->ValuePath()));
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+		m_AlphaMap = CStringId(alphaRemapAlphaMap->ValuePath());
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_DiffuseRamp) != 0)
+		m_DiffuseRampMap = CStringId(diffuseRampMap->ValuePath());
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive && emissiveMap != null && !emissiveMap->ValuePath().Empty()) != 0)
+		m_EmissiveMap = CStringId(emissiveMap->ValuePath());
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_EmissiveRamp) != 0)
+		m_EmissiveRampMap = CStringId(emissiveRampMap->ValuePath());
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Soft) != 0)
+		m_InvSoftnessDistance = 1.0f / softnessDistance->ValueF().x();
 
 	//-----------------------------
 	// VAT features
@@ -705,11 +772,14 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 	desc.m_RotateUvs = m_MaterialDescBillboard.m_Flags.HasUVGenerationFlags(UVGeneration::RotateUV) &&
 		m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_CorrectDeformation) ? ManagedBool_True : ManagedBool_False;
 	desc.m_DiffuseMap = m_MaterialDescBillboard.m_DiffuseMap.ToStringData();
+	desc.m_EmissiveMap = m_MaterialDescBillboard.m_EmissiveMap.ToStringData();
 	desc.m_AlphaRemap = m_MaterialDescBillboard.m_AlphaMap.ToStringData();
 	desc.m_DiffuseRampMap = m_MaterialDescBillboard.m_DiffuseRampMap.ToStringData();
+	desc.m_EmissiveRampMap = m_MaterialDescBillboard.m_EmissiveRampMap.ToStringData();
 	desc.m_InvSoftnessDistance = m_MaterialDescBillboard.m_InvSoftnessDistance;
 	desc.m_BillboardMode = m_RendererType == ERendererClass::Renderer_Billboard ? m_BillboardBR.m_Mode : 0;
 	desc.m_DrawOrder = m_MaterialDescBillboard.m_Flags.m_DrawOrder;
+	desc.m_AlphaClipThreshold = m_MaterialDescBillboard.m_AlphaThreshold;
 
 	if ((m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
 	{
@@ -740,6 +810,8 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	desc.m_BlendMode = m_MaterialDescMesh.m_Flags.m_BlendMode;
 	desc.m_HasMeshAtlas = m_MaterialDescMesh.m_HasMeshAtlas ? ManagedBool_True : ManagedBool_False;
 	desc.m_DiffuseMap = m_MaterialDescMesh.m_DiffuseMap.ToStringData();
+	desc.m_InvSoftnessDistance = m_MaterialDescMesh.m_InvSoftnessDistance;
+	desc.m_AlphaClipThreshold = m_MaterialDescMesh.m_AlphaThreshold;
 
 	bool fluidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0;
 	bool softVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0;
@@ -805,6 +877,15 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	}
 	else
 		desc.m_LitRendering = null;
+
+	if (!m_MaterialDescMesh.m_DiffuseRampMap.Empty())
+		desc.m_DiffuseRampMap = m_MaterialDescMesh.m_DiffuseRampMap.ToStringData();
+	if (!m_MaterialDescMesh.m_EmissiveMap.Empty())
+		desc.m_EmissiveMap = m_MaterialDescMesh.m_EmissiveMap.ToStringData();
+	if (!m_MaterialDescMesh.m_EmissiveRampMap.Empty())
+		desc.m_EmissiveRampMap = m_MaterialDescMesh.m_EmissiveRampMap.ToStringData();
+	if (!m_MaterialDescMesh.m_AlphaMap.Empty())
+		desc.m_AlphaRemap = m_MaterialDescMesh.m_AlphaMap.ToStringData();
 	return true;
 	//GetRendererLitFeatureInfo(&desc.m_LitRendering);
 }

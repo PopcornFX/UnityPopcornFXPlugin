@@ -17,8 +17,9 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_RenderTypes: 01010001
   m_BlendMode: 000000000101
-  m_ShaderMask: 16383
+  m_ShaderMask: 409599
   m_BillboardingLocation: 0
   m_MeshColorPropertyName: _BaseColor
   m_MeshCursorPropertyName: _VATCursor
   m_NormalMapPropertyName: 
+  m_EmissiveMapPropertyName: _EmissiveMap

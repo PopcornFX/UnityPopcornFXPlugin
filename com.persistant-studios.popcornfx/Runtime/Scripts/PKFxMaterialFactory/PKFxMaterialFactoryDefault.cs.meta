@@ -6,23 +6,21 @@ MonoImporter:
   defaultReferences:
   - DistortionShader: {fileID: 4800000, guid: d148465e45222432f85a1d3e92677308, type: 3}
   - BlurShader: {fileID: 4800000, guid: 0dc1a323808c03945a1db3a1cfacef2a, type: 3}
-  - m_VertexBillboardingFallback: {fileID: 11400000, guid: 0b7d6fe980a45e646a51602b5365cf20,
+  - m_CPUBillboardingDefault: {fileID: 11400000, guid: 42c4cd98ec9966142ba5118051d18f5e,
       type: 2}
-  - m_CPUBillboardingFallback: {fileID: 11400000, guid: 42c4cd98ec9966142ba5118051d18f5e,
+  - m_CPUBillboardingOpaqueDefault: {fileID: 11400000, guid: 55f3db6beebff084da8144594da18bab,
       type: 2}
-  - m_TransparentMeshFallback: {fileID: 11400000, guid: 3e76fa7382ea14b4387a542d8ce07547,
+  - m_VertexBillboardingDefault: {fileID: 11400000, guid: 0b7d6fe980a45e646a51602b5365cf20,
       type: 2}
-  - m_OpaqueMeshFallback: {fileID: 11400000, guid: 2ed0a31622b4bde4fa94fcc3efb0fca3,
+  - m_VertexBillboardingOpaqueDefault: {fileID: 11400000, guid: d19a42aac00a18d4a8d50480e52271a7,
       type: 2}
-  - m_MeshVATFluidFallback: {fileID: 11400000, guid: f54ce8df91b089e4caf42e962afc27fa,
+  - m_TransparentMeshUnlitDefault: {fileID: 11400000, guid: a392e4f345378aa4bb33f88e071ec137,
       type: 2}
-  - m_MeshVATSoftFallback: {fileID: 11400000, guid: dab802d84246cdb4885ed185ab4878b7,
+  - m_OpaqueMeshUnlitDefault: {fileID: 11400000, guid: 27274e83a9bc4a7448cf68edb7b86a09,
       type: 2}
-  - m_MeshVATRigidFallback: {fileID: 11400000, guid: aa12ac4816b3b1a4baa25f3f9c86cae7,
+  - m_TransparentMeshLitDefault: {fileID: 11400000, guid: a98023d19a4a6574b8f75f9d29ab8030,
       type: 2}
-  - m_VertexBillboardingOpaque: {fileID: 11400000, guid: d19a42aac00a18d4a8d50480e52271a7,
-      type: 2}
-  - m_CPUBillboardingOpaque: {fileID: 11400000, guid: 55f3db6beebff084da8144594da18bab,
+  - m_OpaqueMeshLitDefault: {fileID: 11400000, guid: 0d4953015b897e8489adc654d76a17a0,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

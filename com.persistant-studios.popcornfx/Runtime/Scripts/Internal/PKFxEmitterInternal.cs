@@ -215,8 +215,7 @@ namespace PopcornFX
 					for (int i = 0; i < vertexCount; ++i)
 						uvs[i] = srcUvs[i];
 				}
-				// Colors (could be copied using Marshal.Copy but does not handle Vector4[]):
-				if (colors != null)
+				if (colors != null)// Colors (could be copied using Marshal.Copy but does not handle Vector4[]):
 				{
 					Color[] srcColors = mesh.colors;
 					for (int i = 0; i < vertexCount; ++i)

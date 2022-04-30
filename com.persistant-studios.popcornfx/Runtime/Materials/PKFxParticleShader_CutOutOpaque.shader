@@ -11,7 +11,6 @@ Shader "PopcornFX/PKFxParticleShader_CutOutOpaque"
 		_DiffuseRampMap("Diffuse Ramp Texture", 2D) = "white" {}
 		_SrcBlendMode("Src Blend Mode", Int) = 0
 		_DstBlendMode("Dst Blend Mode", Int) = 0
-		_ZTestMode("ZTest Mode", Int) = 0
 		_UniformFlags("Uniform Flags", Int) = 0
 		_InvSoftnessDistance("Inverse Softness Distance", Float) = 1
 		_RotateUVs("Rotate UVs (only used in shader for correct deformation ribbons)", Int) = 0
@@ -32,7 +31,7 @@ Shader "PopcornFX/PKFxParticleShader_CutOutOpaque"
 		Lighting Off
 		ZWrite On
 		Blend Off
-		ZTest [_ZTestMode]
+		ZTest LEqual
 
 		Pass
 		{
@@ -46,16 +45,13 @@ Shader "PopcornFX/PKFxParticleShader_CutOutOpaque"
 			// Material variations:
 			//------------------------------------------------------------------------------------
 			#define PK_HAS_COLOR 1
+			#pragma multi_compile_local PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
 			#pragma multi_compile_local _ PK_HAS_ALPHA_REMAP
 			#pragma multi_compile_local _ PK_HAS_DIFFUSE_RAMP
-			//------------------------------------------------------------------------------------
-	
-			//------------------------------------------------------------------------------------
-			// Billboarding variations:
-			//------------------------------------------------------------------------------------
-			#pragma multi_compile_local BB_FeatureC0 BB_FeatureC1 BB_FeatureC1_Capsule BB_FeatureC2
-			#pragma multi_compile_local _ BB_SizeFloat2
-			#pragma multi_compile_local _ BB_Feature_Atlas PK_HAS_ANIM_BLEND
+			#pragma multi_compile_local _ PK_HAS_SOFT
+			#pragma multi_compile_local _ PK_HAS_LIGHTING PK_HAS_DISTORTION
+			// Bug on opengles: SV_VertexID not working so need to remove the PK_HAS_RIBBON_COMPLEX variation...
+			#pragma multi_compile_local _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
 			//------------------------------------------------------------------------------------
 			
 			#define	USE_HDRP		0
@@ -65,7 +61,7 @@ Shader "PopcornFX/PKFxParticleShader_CutOutOpaque"
 			//------------------------------------------------------------------------------------
 			// Particle shader
 			//------------------------------------------------------------------------------------
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/ParticleShader.inc"
+			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/ParticleShader.cginc"
 
 			ENDHLSL
 		}

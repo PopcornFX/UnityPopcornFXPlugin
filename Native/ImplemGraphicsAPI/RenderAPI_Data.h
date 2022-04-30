@@ -90,6 +90,7 @@ enum	EVertexSemantic
 	Semantic_AtlasId,
 
 	Semantic_AlphaCursor,
+	Semantic_EmissiveColor,
 
 	__Semantic_Count
 };
@@ -142,6 +143,20 @@ PK_INLINE void	FillColors(void * const stream, volatile void * const dstPtr, con
 	col_s.StoreUnaligned(dst);
 #else
 	*(CFloat4*)dst = *(const CFloat4*)stream;
+#endif
+}
+
+//-------------------------------------------------------------------------------------
+
+PK_INLINE void	FillEmissiveColors(void *const stream, volatile void *const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void *dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_EmissiveColor]);
+#if	(SIMDFY != 0)
+	const SIMD::Float4 norm_s = SIMD::Float4::LoadAligned16(stream);
+
+	norm_s.StoreFloat3(dst);
+#else
+	*(CFloat3 *)dst = *(const CFloat3 *)stream;
 #endif
 }
 

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
+  m_Name: URP_Mesh_UnlitOpaque
+  m_EditorClassIdentifier: 
+  m_SourceBlendPropertyName: _SrcBlendMode
+  m_DestinationBlendPropertyName: _DstBlendMode
+  m_MaskThresholdPropertyName: _CutOutAlpha
+  m_RotateUVsPropertyName: 
+  m_DiffuseMapPropertyName: _MainTex
+  m_DistortionMapPropertyName: _MainTex
+  m_EmissiveMapPropertyName: _EmissiveMap
+  m_EmissiveRampMapPropertyName: _EmissiveRampMap
+  m_AlphaRemapPropertyName: _AlphaMap
+  m_DiffuseRampMapPropertyName: _DiffuseRampMap
+  m_InvSoftnessDistancePropertyName: 
+  m_NormalMapPropertyName: _NormalMap
+  m_RoughMetalMapPropertyName: 
+  m_RoughnessPropertyName: _Roughness
+  m_MetalnessPropertyName: _Metalness
+  m_MeshDiffuseColorPropertyName: _BaseColor
+  m_MeshEmissiveColorPropertyName: _EmissiveColor
+  m_MeshAlphaCursorPropertyName: _AlphaCursor
+  m_MeshVATCursorPropertyName: _VATCursor
+  m_VATPositionMapPropertyName: _VATPositionMap
+  m_VATNormalMapPropertyName: _VATNormalMap
+  m_VATColorMapPropertyName: _VATColorMap
+  m_VATRotationMapPropertyName: _VATRotationMap
+  m_VATNumFramesPropertyName: _VATNumFrames
+  m_VATPackedDataPropertyName: _VATPackedData
+  m_VATColorPropertyName: 
+  m_VATBoundsPivotPropertyName: _VATPivot
+  m_VATNormalizedDataPropertyName: _VATNormalizedData
+  m_VATBoundsPositionPropertyName: _VATBounds
+  m_VATPadToPowerOf2PropertyName: _VATPadToPowerOf2
+  m_VATPaddedRatioPropertyName: _VATPaddedRatio
+  m_UseShader: 1
+  m_Shader: {fileID: -6465566751694194690, guid: c90d6bfccf20ae94db208d50a406083e,
+    type: 3}
+  m_Material: {fileID: 0}
+  m_RenderTypes: 00000100
+  m_BlendMode: 000000000101
+  m_ShaderMask: 524215
+  m_BillboardingLocation: 0

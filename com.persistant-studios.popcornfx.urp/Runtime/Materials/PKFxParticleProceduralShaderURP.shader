@@ -11,7 +11,6 @@ Shader "PopcornFX/URP/PKFxParticleProceduralShader"
 		_DiffuseRampMap("Diffuse Ramp Texture", 2D) = "white" {}
 		_SrcBlendMode("Src Blend Mode", Int) = 0
 		_DstBlendMode("Dst Blend Mode", Int) = 0
-		_ZTestMode("ZTest Mode", Int) = 0
 		_UniformFlags("Uniform Flags", Int) = 0
 		_InvSoftnessDistance("Inverse Softness Distance", Float) = 1
 		_RotateUVs("Rotate UVs (only used in shader for correct deformation ribbons)", Int) = 0
@@ -30,7 +29,7 @@ Shader "PopcornFX/URP/PKFxParticleProceduralShader"
 		Cull Off
 		Lighting Off
 		ZWrite Off
-		ZTest [_ZTestMode]
+		ZTest LEqual
 		Blend [_SrcBlendMode] [_DstBlendMode]
 
 		Pass
@@ -65,7 +64,7 @@ Shader "PopcornFX/URP/PKFxParticleProceduralShader"
 			//------------------------------------------------------------------------------------
 			// Particle shader
 			//------------------------------------------------------------------------------------
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/ParticleProceduralShader.inc"
+			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/ParticleProceduralShader.cginc"
 
 			ENDHLSL
 		}

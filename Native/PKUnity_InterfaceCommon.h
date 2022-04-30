@@ -27,7 +27,7 @@
 #endif
 
 // We replace the booleans by this to make them 32 bits:
-enum	ManagedBool : int
+enum ManagedBool : int
 {
 	ManagedBool_False = 0,
 	ManagedBool_True = 1,

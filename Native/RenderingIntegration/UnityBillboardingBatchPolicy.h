@@ -224,6 +224,7 @@ private:
 
 		// Additional fields that we handle:
 		SSizedBuffer<CFloat4>	m_Colors;
+		SSizedBuffer<CFloat3>	m_EmissiveColors;
 		SSizedBuffer<float>		m_AlphaCursor;
 
 		// View on the additional fields, all are null except for color and alpha cursor:
@@ -244,6 +245,7 @@ private:
 			m_AtlasId.FreeIFN();
 			m_UVRemap.FreeIFN();
 			m_Colors.FreeIFN();
+			m_EmissiveColors.FreeIFN();
 			m_AlphaCursor.FreeIFN();
 		}
 	};
@@ -258,6 +260,8 @@ private:
 
 		TStridedMemoryView<CFloat4x4>			m_Transforms;
 		TStridedMemoryView<CFloat4>				m_Colors;
+		TStridedMemoryView<CFloat3>				m_EmissiveColors;
+		TStridedMemoryView<float>				m_AlphaRemapCursor;
 		TStridedMemoryView<float>				m_Cursors;
 
 		SMeshParticleBuffers()
@@ -300,6 +304,7 @@ private:
 		float					*m_AtlasId;
 		CFloat4					*m_UVRemap;
 		CFloat4					*m_Colors;
+		CFloat3					*m_EmissiveColors;
 		float					*m_AlphaCursor;
 
 		SParticleSourceBuffers()
@@ -331,6 +336,7 @@ private:
 			m_AtlasId = buffers.m_AtlasId.m_Ptr;
 			m_UVRemap = buffers.m_UVRemap.m_Ptr;
 			m_Colors = buffers.m_Colors.m_Ptr;
+			m_EmissiveColors = buffers.m_EmissiveColors.m_Ptr;
 			m_AlphaCursor = buffers.m_AlphaCursor.m_Ptr;
 
 			if (buffers.m_PerViewGeom.Count() > viewIdx)

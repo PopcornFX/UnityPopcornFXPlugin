@@ -9,11 +9,9 @@ Shader "PopcornFX/URP/PKFxParticleShader_CutOutOpaque"
 		_MainTex("Sprite Texture", 2D) = "white" {}
 		_AlphaMap("Alpha Remap Texture", 2D) = "white" {}
 		_DiffuseRampMap("Diffuse Ramp Texture", 2D) = "white" {}
-		_SrcBlendMode("Src Blend Mode", Int) = 0
-		_DstBlendMode("Dst Blend Mode", Int) = 0
-		_ZTestMode("ZTest Mode", Int) = 0
+		_EmissiveMap("Emissive Texture", 2D) = "white" {}
+		_EmissiveRampMap("Emissive Ramp Texture", 2D) = "white" {}
 		_UniformFlags("Uniform Flags", Int) = 0
-		_InvSoftnessDistance("Inverse Softness Distance", Float) = 1
 		_RotateUVs("Rotate UVs (only used in shader for correct deformation ribbons)", Int) = 0
 		_CutOutAlpha("Cutout Alpha", Float) = 0.5
 	}
@@ -32,7 +30,7 @@ Shader "PopcornFX/URP/PKFxParticleShader_CutOutOpaque"
 		Lighting Off
 		ZWrite On
 		Blend Off
-		ZTest [_ZTestMode]
+		ZTest LEqual
 
 		Pass
 		{
@@ -46,17 +44,11 @@ Shader "PopcornFX/URP/PKFxParticleShader_CutOutOpaque"
 			// Material variations:
 			//------------------------------------------------------------------------------------
 			#define PK_HAS_COLOR 1
+			#pragma multi_compile_local PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
 			#pragma multi_compile_local _ PK_HAS_ALPHA_REMAP
 			#pragma multi_compile_local _ PK_HAS_DIFFUSE_RAMP
-			// No distortion in URP
-			//------------------------------------------------------------------------------------
-	
-			//------------------------------------------------------------------------------------
-			// Billboarding variations:
-			//------------------------------------------------------------------------------------
-			#pragma multi_compile_local BB_FeatureC0 BB_FeatureC1 BB_FeatureC1_Capsule BB_FeatureC2
-			#pragma multi_compile_local _ BB_SizeFloat2
-			#pragma multi_compile_local _ BB_Feature_Atlas PK_HAS_ANIM_BLEND
+			#pragma multi_compile_local _ PK_HAS_LIGHTING
+			#pragma multi_compile_local _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
 			//------------------------------------------------------------------------------------
 
 			#define	USE_HDRP		0
@@ -66,7 +58,7 @@ Shader "PopcornFX/URP/PKFxParticleShader_CutOutOpaque"
 			//------------------------------------------------------------------------------------
 			// Particle shader
 			//------------------------------------------------------------------------------------
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/ParticleShader.inc"
+			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/ParticleShader.cginc"
 
 			ENDHLSL
 		}

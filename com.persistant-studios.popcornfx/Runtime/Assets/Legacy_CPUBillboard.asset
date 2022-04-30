@@ -12,13 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
   m_Name: Legacy_CPUBillboard
   m_EditorClassIdentifier: 
+  m_SourceBlendPropertyName: _SrcBlendMode
+  m_DestinationBlendPropertyName: _DstBlendMode
+  m_MaskThresholdPropertyName: _CutOutAlpha
+  m_RotateUVsPropertyName: _RotateUVs
+  m_DiffuseMapPropertyName: _MainTex
+  m_DistortionMapPropertyName: _MainTex
+  m_EmissiveMapPropertyName: _EmissiveMap
+  m_EmissiveRampMapPropertyName: _EmissiveRampMap
+  m_AlphaRemapPropertyName: _AlphaMap
+  m_DiffuseRampMapPropertyName: _DiffuseRampMap
+  m_InvSoftnessDistancePropertyName: _InvSoftnessDistance
+  m_NormalMapPropertyName: 
+  m_RoughMetalMapPropertyName: 
+  m_RoughnessPropertyName: _Roughness
+  m_MetalnessPropertyName: _Metalness
+  m_MeshDiffuseColorPropertyName: _BaseColor
+  m_MeshEmissiveColorPropertyName: _EmissiveColor
+  m_MeshAlphaCursorPropertyName: _AlphaCursor
+  m_MeshVATCursorPropertyName: _VATCursor
+  m_VATPositionMapPropertyName: _PositionMap
+  m_VATNormalMapPropertyName: _NormalMap
+  m_VATColorMapPropertyName: _ColorMap
+  m_VATRotationMapPropertyName: _RotationMap
+  m_VATNumFramesPropertyName: _NumFrames
+  m_VATPackedDataPropertyName: _PackedData
+  m_VATColorPropertyName: 
+  m_VATBoundsPivotPropertyName: _Pivot
+  m_VATNormalizedDataPropertyName: _NormalizedData
+  m_VATBoundsPositionPropertyName: _Bounds
+  m_VATPadToPowerOf2PropertyName: _PadToPowerOf2
+  m_VATPaddedRatioPropertyName: _PaddedRatio
   m_UseShader: 1
   m_Shader: {fileID: 4800000, guid: ad0ae35fb4dc10e4e9e4847dce76e721, type: 3}
   m_Material: {fileID: 0}
   m_RenderTypes: 01010001
-  m_BlendMode: 010101010101
-  m_ShaderMask: 16383
+  m_BlendMode: 010101010000
+  m_ShaderMask: 409599
   m_BillboardingLocation: 0
-  m_MeshColorPropertyName: _BaseColor
-  m_MeshCursorPropertyName: _Cursor
-  m_NormalMapPropertyName: 

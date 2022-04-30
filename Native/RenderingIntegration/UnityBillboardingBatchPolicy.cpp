@@ -660,7 +660,42 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData)
 {
 	(void)renderApiData;
+	u32		perMeshDataSize = sizeof(CFloat4x4);
+	bool	hasDiffuseColor = false;
+	bool	hasEmissiveColor = false;
+	bool	hasAlphaRemap = false;
+	bool	hasVAT = false;
+
 	PK_ASSERT((allocBuffers.m_ToGenerate.m_GeneratedInputs & Drawers::GenInput_Matrices) != 0);
+	for (u32 i = 0; i < allocBuffers.m_ToGenerate.m_AdditionalGeneratedInputs.Count(); ++i)
+	{
+		const SRendererFeatureFieldDefinition	&addInput = allocBuffers.m_ToGenerate.m_AdditionalGeneratedInputs[i];
+
+		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		{
+			perMeshDataSize += sizeof(CFloat4);
+			hasDiffuseColor = true;
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		{
+			perMeshDataSize += sizeof(CFloat3);
+			hasEmissiveColor = true;
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		{
+			perMeshDataSize += sizeof(float);
+			hasAlphaRemap = true;
+		}
+		else if ((addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_Cursor()
+				|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_Cursor()
+				|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_Cursor())
+				&& addInput.m_Type == BaseType_Float)
+		{
+			perMeshDataSize += sizeof(float);
+			hasVAT = true;
+		}
+	}
+
 	m_MeshIsValid = true;
 	int	rdrGUID = m_UnityMeshInfoPerViews[0].m_RendererGUID;
 
@@ -676,7 +711,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 		if (meshBuff.m_InstanceCount < particleCount)
 		{
 			u32			overEstimatedInstanceCount = Mem::Align(particleCount, 0x100);
-			u32			buffSize = overEstimatedInstanceCount * (sizeof(CFloat4x4) + sizeof(CFloat4) + sizeof(float));
+			u32			buffSize = overEstimatedInstanceCount * perMeshDataSize;
 
 			meshBuff.m_InstanceCount = overEstimatedInstanceCount;
 			// Lets say that we only handle meshes transform, color and cursor for VAT (float4x4, float4 and float):
@@ -702,12 +737,35 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 				}
 			}
 		}
-		meshBuff.m_Transforms = TMemoryView<CFloat4x4>(static_cast<CFloat4x4*>(meshBuff.m_RawPerInstanceBuffer), particleCount);
-		void	*colorBuff = Mem::AdvanceRawPointer(meshBuff.m_RawPerInstanceBuffer, particleCount * sizeof(CFloat4x4));
-		meshBuff.m_Colors = TMemoryView<CFloat4>(static_cast<CFloat4*>(colorBuff), particleCount);
 
-		void	*cursorBuff = Mem::AdvanceRawPointer(colorBuff, particleCount * sizeof(CFloat4));
-		meshBuff.m_Cursors = TMemoryView<float>(static_cast<float*>(cursorBuff), particleCount);
+		void	*currentBuffPtr = meshBuff.m_RawPerInstanceBuffer;
+		// Transform matrices:
+		meshBuff.m_Transforms = TMemoryView<CFloat4x4>(static_cast<CFloat4x4*>(currentBuffPtr), particleCount);
+		currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(CFloat4x4));
+		if (hasDiffuseColor)
+		{
+			// Diffuse colors:
+			meshBuff.m_Colors = TMemoryView<CFloat4>(static_cast<CFloat4*>(currentBuffPtr), particleCount);
+			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(CFloat4));
+		}
+		if (hasEmissiveColor)
+		{
+			// Emissive colors:
+			meshBuff.m_EmissiveColors = TMemoryView<CFloat3>(static_cast<CFloat3*>(currentBuffPtr), particleCount);
+			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(CFloat3));
+		}
+		if (hasAlphaRemap)
+		{
+			// Alpharemap cursor:
+			meshBuff.m_AlphaRemapCursor = TMemoryView<float>(static_cast<float*>(currentBuffPtr), particleCount);
+			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(float));
+		}
+		if (hasVAT)
+		{
+			// VAT cursor:
+			meshBuff.m_Cursors = TMemoryView<float>(static_cast<float*>(currentBuffPtr), particleCount);
+			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(float));
+		}
 
 		if (m_MaterialDescMesh.m_HasMeshAtlas)
 		{
@@ -803,13 +861,11 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 		m_ParticleBuffers.m_UVRemap.ResizeIFN(Drawers::GenInput_UVRemap, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
 
 		if (_FindAdditionalInput(BasicRendererProperties::SID_Diffuse_Color(), BaseType_Float4, genInputs))
-		{
-			m_ParticleBuffers.m_Colors.ResizeIFN(m_VertexCount);
-		}
+				m_ParticleBuffers.m_Colors.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float3, genInputs))
+				m_ParticleBuffers.m_EmissiveColors.ResizeIFN(m_VertexCount);
 		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_Cursor(), BaseType_Float, genInputs))
-		{
 			m_ParticleBuffers.m_AlphaCursor.ResizeIFN(m_VertexCount);
-		}
 
 		m_ParticleBuffers.m_GeneratedInputs = genInputs.m_GeneratedInputs;
 	}
@@ -881,7 +937,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 	}
 
 	// Map only the color and alpha cursor
-	// We only handle max 2 additional fields:
+	// We only handle max 8 additional fields:
 	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2))
 		return false;
 	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
@@ -894,9 +950,21 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 				return false;
 			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
 			field.m_AdditionalInputIndex = i;
+
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(CFloat4);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc &field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(CFloat3);
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -1009,7 +1077,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersGeomBillboards(con
 	}
 	// Additional inputs:
 	// Map only the color and alpha cursor
-	// We only handle max 2 additional fields:
+	// We only handle max 8 additional fields:
 	// We Add a third input for Atlases
 	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2 + 1))
 		return false;
@@ -1123,7 +1191,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 	}
 
 	// Map only the color and alpha cursor
-	// We only handle max 2 additional fields:
+	// We only handle max 8 additional fields:
 	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2))
 		return false;
 	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
@@ -1139,6 +1207,16 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(CFloat4);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc& field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(CFloat3);
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -1218,7 +1296,21 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
 			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_Colors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
-		else if ((addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_Cursor() 
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AlphaRemapCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_EmissiveColors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if ((addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_Cursor()
 				|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_Cursor()
 				|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_Cursor()) 
 				&& addInput.m_Type == BaseType_Float)
@@ -1285,7 +1377,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 
 	// Additional inputs:
 	// Map only the color and alpha cursor
-	// We only handle max 2 additional fields:
+	// We only handle max 8 additional fields:
 	if (!m_ParticleBuffers.m_AdditionalFieldsBuffers.Reserve(2))
 		return false;
 	for (u32 i = 0; i < toMap.m_AdditionalGeneratedInputs.Count(); ++i)
@@ -1301,6 +1393,16 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(CFloat4);
+		}
+		if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc &field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(CFloat3);
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -1408,6 +1510,11 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
 		{
 			FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0)
+		{
+			FillEmissiveColors(&(m_ParticleBuffers.m_EmissiveColors[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
 		bfPtr = Mem::AdvanceRawPointer(bfPtr, m_VertexStride);
 	}

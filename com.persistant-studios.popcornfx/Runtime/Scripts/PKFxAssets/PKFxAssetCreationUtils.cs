@@ -277,6 +277,16 @@ namespace PopcornFX
 		private static void ApplyPKImportSetting(PKFxEffectAsset.DependencyDesc dependency, string path)
 		{
 			string fExt = Path.GetExtension(path);
+
+			if (PKFxManager.IsSupportedMeshExtension(fExt))
+			{
+				AssetImporter assetImporter = AssetImporter.GetAtPath(path);
+				ModelImporter modelImporter = assetImporter as ModelImporter;
+
+				modelImporter.isReadable = true;
+				modelImporter.bakeAxisConversion = true;
+				modelImporter.SaveAndReimport();
+			}
 			if (PKFxManager.IsSupportedTextureExtension(fExt))
 			{
 				AssetImporter assetImporter = AssetImporter.GetAtPath(path);

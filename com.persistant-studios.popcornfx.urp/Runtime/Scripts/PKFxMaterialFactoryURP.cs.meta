@@ -6,28 +6,29 @@ MonoImporter:
   defaultReferences:
   - DistortionShader: {fileID: 4800000, guid: d148465e45222432f85a1d3e92677308, type: 3}
   - BlurShader: {fileID: 4800000, guid: 0dc1a323808c03945a1db3a1cfacef2a, type: 3}
-  - m_VertexBillboardingFallback: {fileID: 11400000, guid: aca9aef425f77a0449dfb339cfa7a245,
+  - m_CPUBillboardingDefault: {fileID: 11400000, guid: 0424bb726ab77574d9b199426f7abb38,
       type: 2}
-  - m_CPUBillboardingFallback: {fileID: 11400000, guid: 0424bb726ab77574d9b199426f7abb38,
+  - m_CPUBillboardingOpaqueDefault: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
       type: 2}
-  - m_TransparentMeshFallback: {fileID: 11400000, guid: 4376f5d22082bc943a29f6b66c76a25a,
+  - m_VertexBillboardingDefault: {fileID: 11400000, guid: aca9aef425f77a0449dfb339cfa7a245,
       type: 2}
-  - m_OpaqueMeshFallback: {fileID: 11400000, guid: c506fc2477e1e9d4987c2d86e10c0606,
+  - m_VertexBillboardingOpaqueDefault: {fileID: 11400000, guid: 78047b4352375684a9d26590a82cf9db,
       type: 2}
-  - m_MeshVATFluidFallback: {instanceID: 0}
-  - m_MeshVATSoftFallback: {instanceID: 0}
-  - m_MeshVATRigidFallback: {instanceID: 0}
-  - m_VertexBillboardingOpaque: {fileID: 11400000, guid: 78047b4352375684a9d26590a82cf9db,
+  - m_TransparentMeshUnlitDefault: {fileID: 11400000, guid: cc08dd3254da5034eb19c14432b63a08,
       type: 2}
-  - m_CPUBillboardingOpaque: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
+  - m_OpaqueMeshUnlitDefault: {fileID: 11400000, guid: 41bbba4cd50bba04482e9b14afb8aaa5,
       type: 2}
-  - m_OpaqueLitMeshFallback: {fileID: 11400000, guid: ae062c3deb9ca0e48a9c4867fc8da578,
+  - m_TransparentMeshLitDefault: {fileID: 11400000, guid: 2627064787a8bb241ab1c02182d135c6,
       type: 2}
-  - m_OpaqueLitMeshFallback2020: {fileID: 11400000, guid: 9b4246bcd705b4c4ea8607ffb9702a6f,
+  - m_OpaqueMeshLitDefault: {fileID: 11400000, guid: 51a736b97c31cc245a9f8741c69c9de1,
       type: 2}
-  - m_OpaqueMeshFallback2020: {fileID: 11400000, guid: 8302134102371f3458b94a24f20b68f7,
+  - m_TransparentMeshUnlit2020: {fileID: 11400000, guid: 5f97069cae9ee2c45955649abd3f8dd6,
       type: 2}
-  - m_TransparentMeshFallback2020: {fileID: 11400000, guid: a536485ade7a1074c97a58c4f6768bb6,
+  - m_OpaqueMeshUnlit2020: {fileID: 11400000, guid: 8302134102371f3458b94a24f20b68f7,
+      type: 2}
+  - m_TransparentMeshLit2020: {fileID: 11400000, guid: b1a53680d51c8834fa0729df59373d10,
+      type: 2}
+  - m_OpaqueMeshLit2020: {fileID: 11400000, guid: 9541e66461dfd5a4cb9e8d276351a749,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

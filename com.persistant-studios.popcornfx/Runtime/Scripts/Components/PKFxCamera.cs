@@ -119,7 +119,7 @@ namespace PopcornFX
 			m_RenderingPlugin = rendering[0];
 			m_CameraID = GetUniqueID;
 			m_CurrentCameraID = m_CameraID;
-#if !UNITY_SWITCH && !UNITY_XBOXONE && !UNITY_GAMECORE_UNKNOWN1
+#if !UNITY_SWITCH && !UNITY_XBOXONE && !UNITY_GAMECORE_SCARLETT
 
 			if (Application.platform != RuntimePlatform.IPhonePlayer && UnityEngine.XR.XRSettings.enabled)
 			{

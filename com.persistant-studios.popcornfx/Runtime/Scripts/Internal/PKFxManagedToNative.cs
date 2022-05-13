@@ -141,6 +141,7 @@ namespace PopcornFX
 #elif UNITY_XBOXONE && !UNITY_EDITOR
 	private const string kPopcornPluginName = "PK-UnityPlugin_XBoxOne";
 #elif UNITY_GAMECORE_SCARLETT && !UNITY_EDITOR
+	private const string kPopcornPluginName = "PK-UnityPlugin_XBoxSeries";
 #else
 		private const string kPopcornPluginName = "PK-UnityPlugin";
 #endif
@@ -304,7 +305,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.9.21 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.9.22 for " + m_UnityVersion;
 #if UNITY_EDITOR
 		public static string m_CurrentVersionString = "";
 #endif

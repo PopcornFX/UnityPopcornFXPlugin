@@ -210,7 +210,7 @@ namespace PopcornFX
 	}
 
 
-		[Serializable]
+	[Serializable]
 	public class SEventDesc
 	{
 		public int		m_Slot;
@@ -255,6 +255,7 @@ namespace PopcornFX
 		public SBatchLitFeatureDesc	m_LitFeature;
 
 		//Internal
+		[SerializeField]
 		internal int				m_InternalId;
 		internal int				m_CameraId;
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc, int idx)

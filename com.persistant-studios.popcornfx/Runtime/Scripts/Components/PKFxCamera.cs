@@ -59,6 +59,9 @@ namespace PopcornFX
 
 		bool SetupDistortionPassIFN()
 		{
+			if (GraphicsSettings.renderPipelineAsset != null &&
+				GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset")
+				return false; // No need for that in HDRP, we are using distortion builtin shaders
 			if (PKFxSettings.EnableSoftParticles == false)
 				return false;
 			if (m_CommandBuffer == null)
@@ -66,7 +69,7 @@ namespace PopcornFX
 				m_CommandBuffer = new CommandBuffer();
 				if (m_CommandBuffer == null)
 					return false;
-				m_CommandBuffer.name = "PopcornFX Distortion and Blur";
+				m_CommandBuffer.name = "PopcornFX Distortion and Blur " + m_CameraID;
 				m_DistortionRt = new RenderTexture(m_Camera.pixelWidth, m_Camera.pixelHeight, 0, RenderTextureFormat.DefaultHDR);
 				if (m_DistortionRt == null)
 					return false;
@@ -162,8 +165,6 @@ namespace PopcornFX
 			}
 #endif
 			m_Camera = GetComponent<Camera>();
-			// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
-			m_Camera.cullingMask &= ~(1 << PKFxManagerImpl.m_DistortionLayer);
 			//Enable depth texture on mobile
 			if (PKFxSettings.EnableSoftParticles)
 				m_Camera.depthTextureMode = DepthTextureMode.Depth;
@@ -181,6 +182,16 @@ namespace PopcornFX
 			int targetMask = LayerMask.GetMask(targetMaskName);  // << PK Mask to flip to one
 
 			m_Camera.cullingMask = (cull & (~pKMask)) | targetMask;
+
+			if (GraphicsSettings.renderPipelineAsset == null ||
+				GraphicsSettings.renderPipelineAsset.name != "HDRenderPipelineAsset")
+			{
+				// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
+				m_Camera.cullingMask &= ~(1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer));
+
+			}
+			else
+				m_Camera.cullingMask |= 1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
 		}
 
 		//----------------------------------------------------------------------------

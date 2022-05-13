@@ -28,7 +28,6 @@ namespace PopcornFX
 		}
 
 		public int m_RenderQueue = 3500;
-		public bool m_UseSortingLayers = false;
 
 #if UNITY_EDITOR
 		[MenuItem("Assets/Create/PopcornFX/Material Factory/URP")]
@@ -70,21 +69,6 @@ namespace PopcornFX
 			ReplaceBindingsWithLegacy();
 		}
 
-		public override void SetupRenderer(SBatchDesc batchDesc, GameObject gameObject, MeshRenderer meshRenderer)
-		{
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
-			{
-				gameObject.layer = PKFxManager.DistortionLayer;
-			}
-			if (m_UseSortingLayers)
-			{
-				meshRenderer.sortingLayerName = "PopcornFX";
-			}
-			int layer = 0;
-			PKFxSettings.Instance.GetRenderingLayerForBatchDesc(batchDesc, out layer);
-			gameObject.layer = layer;
-		}
-
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)
 		{
 			_SetupMeshRenderer(batchDesc, gameObject, meshRenderer);
@@ -99,22 +83,7 @@ namespace PopcornFX
 				Debug.LogError("[PopcornFX] Trying to resolve material from null PKFxEffectAsset");
 				return null;
 			}
-			TextureWrapMode wrapMode = batchDesc.m_Type == ERendererType.Ribbon ? TextureWrapMode.Repeat : TextureWrapMode.Clamp;
-			Material material = TryFindAndInstantiateCustomMaterial(asset, batchDesc);
-
-			PKFxRenderFeatureBinding binding = null;
-			if (material == null)
-			{
-				binding = ResolveBatchBinding(batchDesc);
-				if (binding)
-					material = binding.GetMaterial();
-			}
-			if (material == null)
-				return null;
-
-			binding.SetMaterialKeywords(batchDesc, material);
-			binding.BindMaterialProperties(batchDesc, material, asset);
-
+			Material material = GetRuntimeMaterial(asset, batchDesc);
 			if (batchDesc.m_Type != ERendererType.Mesh)
 				material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
 			return material;

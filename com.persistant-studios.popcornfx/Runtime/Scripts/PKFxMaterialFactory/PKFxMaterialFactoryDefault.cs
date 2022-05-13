@@ -16,7 +16,6 @@ namespace PopcornFX
 	public class PKFxMaterialFactoryDefault : PKFxMaterialFactory
 	{
 		public int m_RenderQueue = 3500;
-		public bool m_UseSortingLayers = false;
 
 #if UNITY_EDITOR
 		[MenuItem("Assets/Create/PopcornFX/Material Factory/Default")]
@@ -62,24 +61,11 @@ namespace PopcornFX
 			m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
 		}
 
-		public override void SetupRenderer(SBatchDesc batchDesc, GameObject gameObject, MeshRenderer meshRenderer)
-		{
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
-				gameObject.layer = PKFxManagerImpl.m_DistortionLayer;
-			if (m_UseSortingLayers)
-			{
-				meshRenderer.sortingLayerName = "PopcornFX";
-			}
-			int layer = 0;
-			PKFxSettings.Instance.GetRenderingLayerForBatchDesc(batchDesc, out layer);
-			gameObject.layer = layer;
-		}
-
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)
 		{
 			_SetupMeshRenderer(batchDesc, gameObject, meshRenderer);
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
-				gameObject.layer = PKFxManagerImpl.m_DistortionLayer;
+				gameObject.layer = LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
 		}
 
 		public override Material ResolveParticleMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null)
@@ -91,20 +77,7 @@ namespace PopcornFX
 				Debug.LogError("[PopcornFX] Trying to resolve material from null PKFxFxAsset");
 				return null;
 			}
-			Material customMat = TryFindAndInstantiateCustomMaterial(asset, batchDesc);
-
-			if (customMat != null)
-				return customMat;
-
-			Material					material = null;
-			PKFxRenderFeatureBinding	binding = ResolveBatchBinding(batchDesc);
-			if (binding)
-				material = binding.GetMaterial();
-			if (material == null)
-				return null;
-
-			binding.SetMaterialKeywords(batchDesc, material);
-			binding.BindMaterialProperties(batchDesc, material, asset);
+			Material material = GetRuntimeMaterial(asset, batchDesc);
 			// Set the render queue:
 			material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
 			return material;

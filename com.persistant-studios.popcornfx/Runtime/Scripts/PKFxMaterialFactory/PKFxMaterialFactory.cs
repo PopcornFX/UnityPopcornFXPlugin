@@ -15,23 +15,14 @@ namespace PopcornFX
 	[Serializable]
 	public abstract class PKFxMaterialFactory : ScriptableObject
 	{
-		[Serializable]
-		public class CustomMaterialInfo
-		{
-			public string		m_AssetVirtualPath;
-			public string		m_BatchDescName;
-			public int			m_InternalId;
+		public bool m_UseSortingLayers = false;
 
-			public Material					m_CustomMaterial;
-			public PKFxShaderInputBindings	m_CustomMaterialBindings;
-		}
-
-		public abstract void		SetupRenderer(SBatchDesc batchDesc, GameObject gameObject, MeshRenderer meshRenderer);
 		public abstract void		SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer);
 		public abstract Material	ResolveParticleMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null);
 
-
-		public List<CustomMaterialInfo>			m_CustomMaterials = new List<CustomMaterialInfo>();
+		[HideInInspector]
+		[SerializeField]
+		private List<PKFxCustomMaterialInfo>			m_CustomMaterials = new List<PKFxCustomMaterialInfo>();
 
 		public Shader DistortionShader;
 		public Shader BlurShader;
@@ -49,7 +40,24 @@ namespace PopcornFX
 
 		public abstract void SetupFallBackFeatureBinding();
 
-		public CustomMaterialInfo FindCustomMaterialInfo(SBatchDesc batchDesc, PKFxEffectAsset asset)
+		public void SetupRenderer(SBatchDesc batchDesc, GameObject gameObject, MeshRenderer meshRenderer)
+		{
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
+				gameObject.layer = LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
+			else
+			{
+				int layer = 0;
+
+				PKFxSettings.Instance.GetRenderingLayerForBatchDesc(batchDesc, out layer);
+				gameObject.layer = layer;
+			}
+			if (m_UseSortingLayers)
+			{
+				meshRenderer.sortingLayerName = "PopcornFX";
+			}
+		}
+
+		public PKFxCustomMaterialInfo FindCustomMaterialInfo(SBatchDesc batchDesc, PKFxEffectAsset asset)
 		{
 			if (m_CustomMaterials == null || asset == null)
 				return null;
@@ -75,61 +83,151 @@ namespace PopcornFX
 			return path;
 		}
 
+		public void DrawEditorCustomMaterialList()
+		{
+			m_CustomMaterials.RemoveAll(delegate (PKFxCustomMaterialInfo a) { return a == null; });
+			List<PKFxCustomMaterialInfo> materials = new List<PKFxCustomMaterialInfo>(m_CustomMaterials);
+			materials.Sort(delegate (PKFxCustomMaterialInfo a, PKFxCustomMaterialInfo b)
+			{
+				int assetPathDiff = a.m_AssetVirtualPath.CompareTo(b.m_AssetVirtualPath);
+				if (assetPathDiff == 0)
+					return a.m_InternalId - b.m_InternalId;
+				return assetPathDiff;
+			});
+			int materialIdx = 0;
+			while (materialIdx < materials.Count)
+			{
+				bool showObjectFieldFX = true;
+				string assetVirtualPath = materials[materialIdx].m_AssetVirtualPath;
+
+				GUILayout.Space(15);
+				Rect rect = EditorGUILayout.GetControlRect(false, 1);
+				rect.height = 1;
+				EditorGUI.DrawRect(rect, new Color(0.2f, 0.2f, 0.2f, 1.0f));
+				GUILayout.Space(15);
+				while (	materialIdx < materials.Count &&
+						materials[materialIdx].m_AssetVirtualPath == assetVirtualPath)
+				{
+					PKFxCustomMaterialInfo info = materials[materialIdx];
+					DrawEditorCustomMaterial(info, showObjectFieldFX);
+					showObjectFieldFX = false;
+					++materialIdx;
+				}
+			}
+			EditorGUI.EndDisabledGroup();
+		}
+
+		public static void DrawEditorCustomMaterial(PKFxCustomMaterialInfo customMat, bool showFx)
+		{
+			EditorGUI.BeginDisabledGroup(true);
+			string assetVirtualPath = customMat.m_AssetVirtualPath;
+			string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + assetVirtualPath + ".asset";
+			PKFxEffectAsset curAsset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
+			if (showFx)
+			{
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.LabelField("Effect Asset");
+				EditorGUILayout.ObjectField(curAsset, typeof(PKFxEffectAsset), false);
+				EditorGUILayout.EndHorizontal();
+			}
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.LabelField("Renderer #" + customMat.m_InternalId + " Material");
+			EditorGUILayout.ObjectField(customMat.m_CustomMaterial, typeof(Material), false);
+			EditorGUILayout.EndHorizontal();
+			EditorGUI.EndDisabledGroup();
+			SBatchDesc customMatBatchDesc = curAsset.m_RendererDescs.Find(delegate (SBatchDesc desc)
+			{
+				return desc.m_GeneratedName == customMat.m_BatchDescName &&
+						desc.m_InternalId == customMat.m_InternalId;
+			});
+			EditorGUI.indentLevel += 1;
+			customMat.DrawEditorShaderInputBindings(customMatBatchDesc);
+			EditorGUI.indentLevel -= 1;
+		}
+
 		public void AddCustomMaterial(PKFxEffectAsset asset, SBatchDesc sBatchDesc, Material newMat, int id)
 		{
 			if (m_CustomMaterials == null)
-				m_CustomMaterials = new List<CustomMaterialInfo>();
+				m_CustomMaterials = new List<PKFxCustomMaterialInfo>();
 
-			CustomMaterialInfo customRule = FindCustomMaterialInfo(sBatchDesc, asset);
+			PKFxCustomMaterialInfo customRule = FindCustomMaterialInfo(sBatchDesc, asset);
 
 			if (customRule == null)
 			{
-				customRule = new CustomMaterialInfo();
+				customRule = ScriptableObject.CreateInstance<PKFxCustomMaterialInfo>();
 				customRule.m_AssetVirtualPath = asset.AssetVirtualPath;
 				customRule.m_BatchDescName = sBatchDesc.m_GeneratedName;
 				customRule.m_InternalId = id;
+				string assetName = asset.AssetVirtualPath + " [" + id + "]";
+				customRule.name = assetName;
+				AssetDatabase.AddObjectToAsset(customRule, this);
 				m_CustomMaterials.Add(customRule);
+				AssetDatabase.SaveAssets();
 			}
 			if (customRule != null)
 			{
 				customRule.m_CustomMaterial = newMat;
 			}
-			EditorUtility.SetDirty(this);
-			AssetDatabase.SaveAssets();
 		}
 
 		public Material ResetParticleMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null)
 		{
 			if (batchDesc != null && asset != null)
 			{
-				CustomMaterialInfo customRule = FindCustomMaterialInfo(batchDesc, asset);
+				PKFxCustomMaterialInfo customRule = FindCustomMaterialInfo(batchDesc, asset);
 				if (customRule != null)
 				{
+					AssetDatabase.RemoveObjectFromAsset(customRule);
 					m_CustomMaterials.Remove(customRule);
 				}
 			}
+			AssetDatabase.SaveAssets();
 			return ResolveParticleMaterial(batchDesc, asset);
 		}
-#endif
 
-		public Material TryFindAndInstantiateCustomMaterial(PKFxEffectAsset asset, SBatchDesc batchDesc)
+		public void ResetAllCustomMaterials()
 		{
-			CustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
-			if (curMat != null)
+			foreach (PKFxCustomMaterialInfo info in m_CustomMaterials)
 			{
-				if (curMat.m_CustomMaterial != null)
-				{
-					Material material = new Material(curMat.m_CustomMaterial);
-					curMat.m_CustomMaterialBindings.SetMaterialKeywords(batchDesc, material);
-					curMat.m_CustomMaterialBindings.BindMaterialProperties(batchDesc, material, asset);
-				}
-				else
-				{
-					Debug.LogWarning("[PopcornFX] Custom Material is missing, remember to set it in \"PKFXSettings > Material Factory > Custom Materials\"", asset);
-				}
+				AssetDatabase.RemoveObjectFromAsset(info);
 			}
-			return null;
+			AssetDatabase.SaveAssets();
+			m_CustomMaterials.Clear();
 		}
+
+		public virtual Material EditorResolveMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null)
+		{
+			PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
+			if (curMat != null && curMat.m_CustomMaterial != null)
+				return curMat.m_CustomMaterial;
+			else
+			{
+				PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
+				Material material;
+				if (binding == null)
+					return null;
+				if (binding.m_UseShader)
+					material = new Material(binding.m_Shader);
+				else
+					material = binding.m_Material;
+				return material;
+			}
+		}
+
+		public virtual PKFxShaderInputBindings EditorResolveBindings(SBatchDesc batchDesc, PKFxEffectAsset asset = null)
+		{
+			PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
+			if (curMat != null && curMat.m_CustomMaterial != null)
+			{
+				return curMat;
+			}
+			else
+			{
+				PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
+				return binding;
+			}
+		}
+#endif
 
 		public static Texture GetTextureAsset(PKFxEffectAsset asset, string rawPath, bool isLinear, TextureWrapMode wrapMode)
 		{
@@ -171,13 +269,57 @@ namespace PopcornFX
 				if (binding != null)
 				{
 					if (binding.IsMatchingRendererDesc(batchDesc))
-					{
 						return binding;
-					}
 				}
 			}
 			Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName);
 			return null;
+		}
+
+		protected Material	GetRuntimeMaterial(PKFxEffectAsset asset, SBatchDesc batchDesc)
+		{
+			PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
+			if (curMat != null)
+			{
+				if (curMat.m_CustomMaterial != null)
+				{
+					Material material = new Material(curMat.m_CustomMaterial);
+					curMat.SetMaterialKeywords(batchDesc, material);
+					curMat.BindMaterialProperties(batchDesc, material, asset);
+					return material;
+				}
+				else
+				{
+					Debug.LogWarning("[PopcornFX] Custom Material is missing, remember to set it in \"PKFXSettings > Material Factory > Custom Materials\"", asset);
+				}
+			}
+			{
+				PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
+				Material material;
+				if (binding == null)
+					return null;
+				if (binding.m_UseShader)
+					material = new Material(binding.m_Shader);
+				else
+					material = new Material(binding.m_Material);
+				binding.SetMaterialKeywords(batchDesc, material);
+				binding.BindMaterialProperties(batchDesc, material, asset);
+				return material;
+			}
+		}
+
+		protected PKFxShaderInputBindings GetRuntimeShaderInputBindings(SBatchDesc batchDesc, PKFxEffectAsset asset = null)
+		{
+			PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
+			if (curMat != null && curMat.m_CustomMaterial != null)
+			{
+				return curMat;
+			}
+			else
+			{
+				PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
+				return binding;
+			}
 		}
 
 		// Replace bindings with legacy ones, if it exists.
@@ -249,7 +391,7 @@ namespace PopcornFX
 				meshRenderer.m_MeshesImportTransform = trans.ToArray();
 				meshRenderer.Meshes = meshes.ToArray();
 
-				PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
+				PKFxShaderInputBindings binding = GetRuntimeShaderInputBindings(batchDesc, PKFxManager.GetBuiltAsset());
 				meshRenderer.m_ShaderVariation = batchDesc.m_ShaderVariationFlags;
 				meshRenderer.m_DiffuseColorPropertyName = binding.m_MeshDiffuseColorPropertyName;
 				meshRenderer.m_EmissiveColorPropertyName = binding.m_MeshEmissiveColorPropertyName;

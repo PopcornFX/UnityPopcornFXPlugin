@@ -18,7 +18,6 @@ namespace PopcornFX
 		public Material		m_DoubleSidedDistortionMaterial;
 		public Shader		m_ParticleProceduralShader_Distortion;
 		public int			m_RenderQueue = 3050; // In HDRP, the objects > 3100 are not drawn
-		public bool			m_UseSortingLayers = false;
 
 
 #if UNITY_EDITOR
@@ -54,17 +53,6 @@ namespace PopcornFX
 			m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
 		}
 
-		public override void SetupRenderer(SBatchDesc batchDesc, GameObject gameObject, MeshRenderer meshRenderer)
-		{
-			if (m_UseSortingLayers)
-			{
-				meshRenderer.sortingLayerName = "PopcornFX";
-			}
-			int layer = 0;
-			PKFxSettings.Instance.GetRenderingLayerForBatchDesc(batchDesc, out layer);
-			gameObject.layer = layer;
-		}
-
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)
 		{
 			_SetupMeshRenderer(batchDesc, gameObject, meshRenderer);
@@ -80,11 +68,8 @@ namespace PopcornFX
 				return null;
 			}
 			TextureWrapMode wrapMode = batchDesc.m_Type == ERendererType.Ribbon ? TextureWrapMode.Repeat : TextureWrapMode.Clamp;
-			Material material = TryFindAndInstantiateCustomMaterial(asset, batchDesc);
-			bool isCustom = true;
-
 			// First we handle the distortion with the material directly:
-			if (material == null && batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 			{
 				Material distoMat = null;
 				Texture distoTexture = GetTextureAsset(asset, batchDesc.m_DiffuseMap, true, wrapMode);
@@ -116,20 +101,7 @@ namespace PopcornFX
 
 				return distoMat;
 			}
-			PKFxRenderFeatureBinding binding = null;
-			if (material == null)
-			{
-				binding = ResolveBatchBinding(batchDesc);
-				if (binding)
-					material = binding.GetMaterial();
-				isCustom = false;
-			}
-			if (material == null)
-				return null;
-
-			binding.SetMaterialKeywords(batchDesc, material);
-			binding.BindMaterialProperties(batchDesc, material, asset);
-
+			Material material = GetRuntimeMaterial(asset, batchDesc);
 			if (batchDesc.m_Type != ERendererType.Mesh)
 				material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
 			return material;

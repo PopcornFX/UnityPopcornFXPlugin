@@ -13,7 +13,8 @@ namespace PopcornFX
 	{
 		public static string ImportedAssetName { get; set; }
 		public static string ImportedAssetPath { get; set; }
-		public static int DistortionLayer { get { return PKFxManagerImpl.m_DistortionLayer; } }
+		public static string DistortionLayer { get { return PKFxManagerImpl.m_DistortionLayer; } }
+		public static int DistortionLayerID { get { return LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer); } }
 
 		public static float					TimeMultiplier = 1.0f;
 

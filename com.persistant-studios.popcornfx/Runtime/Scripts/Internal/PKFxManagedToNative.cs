@@ -312,12 +312,12 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.12.2 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.12.3 for " + m_UnityVersion;
 #if UNITY_EDITOR
 		public static string m_CurrentVersionString = "";
 #endif
-		public static bool m_IsStarted = false;
-		public static int m_DistortionLayer = 31;
+		public static bool		m_IsStarted = false;
+		public static string	m_DistortionLayer = "PopcornFX_Disto";
 
 		public static GameObject m_RenderersRoot = null;
 		public static int m_CurrentRenderersGUID = 0;

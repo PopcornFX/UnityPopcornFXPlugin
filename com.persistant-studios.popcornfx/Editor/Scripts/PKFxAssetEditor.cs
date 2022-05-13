@@ -92,7 +92,7 @@ namespace PopcornFX
 						//|| generatedName.Contains("Distortion")))
 						{
 							EditorGUILayout.Space();
-							Material mat = PKFxSettings.MaterialFactory.ResolveParticleMaterial(renderers[i], asset);
+							Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset);
 							Material newMat = EditorGUILayout.ObjectField(mat, typeof(Material), false) as Material;
 
 							if (mat != newMat)
@@ -105,6 +105,12 @@ namespace PopcornFX
 							PKFxSettings.MaterialFactory.ResetParticleMaterial(renderers[i], asset);
 						}
 						EditorGUILayout.EndHorizontal();
+						PKFxCustomMaterialInfo customMatInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(renderers[i], asset);
+						if (customMatInfo != null)
+						{
+							customMatInfo.DrawEditorShaderInputBindings(renderers[i]);
+						}
+						EditorGUILayout.Space();
 					}
 					EditorGUI.indentLevel--;
 				}

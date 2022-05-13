@@ -52,7 +52,7 @@ namespace PopcornFX
 		[SerializeField] private bool m_EnableHotreloadInPlayMode = false;
 		[SerializeField] private bool m_EnableFileLogs = false;
 
-		[SerializeField] public string[]	m_PopcornLayerName = new string[4];
+		[SerializeField] public string[]	m_PopcornLayerName = new string[5];
 		
 
 		public static bool GeneralCategory

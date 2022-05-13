@@ -69,21 +69,5 @@ namespace PopcornFX
 		{
 			return false;
 		}
-
-		public Material GetMaterial()
-		{
-			if (m_UseShader)
-			{
-				if (m_Shader == null)
-					return null;
-				return new Material(m_Shader);
-			}
-			else
-			{
-				if (m_Material == null)
-					return null;
-				return new Material(m_Material);
-			}
-		}
 	}
 }

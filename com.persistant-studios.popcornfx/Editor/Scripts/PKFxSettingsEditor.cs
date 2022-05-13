@@ -72,7 +72,10 @@ namespace PopcornFX
 			SerializedObject	tagsAndLayersManager = new SerializedObject(tagManager[0]);
 			SerializedProperty	layersProp = tagsAndLayersManager.FindProperty("layers");
 
-			List<string>		cameraLayerName = new List<string>(new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" });
+			List<string>		cameraLayerName = new List<string>(new string[] {"PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3", "PopcornFX_Disto" });
+
+			if (PKFxSettings.Instance.m_PopcornLayerName.Count() < cameraLayerName.Count())
+				PKFxSettings.Instance.m_PopcornLayerName = new string[cameraLayerName.Count()];
 
 			//serch if the sorting layer already exist
 			for (int i = 0; i < layersProp.arraySize; ++i)
@@ -84,6 +87,7 @@ namespace PopcornFX
 					if (cameraLayerName.Contains(layer.stringValue))
 					{
 						int idx = cameraLayerName.IndexOf(layer.stringValue);
+
 						PKFxSettings.Instance.m_PopcornLayerName[cameraLayerName.IndexOf(layer.stringValue)] = layer.stringValue;
 						cameraLayerName[idx] = "";
 					}
@@ -407,10 +411,7 @@ namespace PopcornFX
 					{
 						if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetAllAssetPath())
 						{
-							if (PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList))
-							{
-
-							}
+							PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
 						}
 					}
 

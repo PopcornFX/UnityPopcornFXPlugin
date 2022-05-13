@@ -1078,7 +1078,7 @@ namespace PopcornFX
 					batchDesc = new SBatchDesc(*desc, idx);
 				}
 
-				PKFxMaterialFactory.CustomMaterialInfo matInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(batchDesc, m_CurrentlyBuildAsset);
+				PKFxCustomMaterialInfo matInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(batchDesc, m_CurrentlyBuildAsset);
 
 				if (matInfo == null)
 					*hasCustomMat = 0;
@@ -1113,7 +1113,7 @@ namespace PopcornFX
 
 					if (hasCustomMat != null)
 					{
-						PKFxMaterialFactory.CustomMaterialInfo matInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(renderer.m_BatchDesc, m_CurrentlyBuildAsset);
+						PKFxCustomMaterialInfo matInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(renderer.m_BatchDesc, m_CurrentlyBuildAsset);
 						if (matInfo == null)
 							*hasCustomMat = 0;
 						else

@@ -48,5 +48,5 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_RenderTypes: 01010001
   m_BlendMode: 010101010000
-  m_ShaderMask: -1
+  m_ShaderMask: 524223
   m_BillboardingLocation: 0

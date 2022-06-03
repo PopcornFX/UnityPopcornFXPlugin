@@ -35,8 +35,12 @@ namespace PopcornFX
 		[HideInInspector]public PKFxRenderFeatureBinding			m_OpaqueMeshUnlitDefault;
 		[HideInInspector]public PKFxRenderFeatureBinding			m_TransparentMeshLitDefault;
 		[HideInInspector]public PKFxRenderFeatureBinding			m_OpaqueMeshLitDefault;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUBillboardingDistortion;
+		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingDistortion;
 
 		public List<PKFxRenderFeatureBinding>	m_RenderFeatureBindings = new List<PKFxRenderFeatureBinding>();
+
+		private PKFxRenderingPlugin				m_RenderingPlugin = null;
 
 		public abstract void SetupFallBackFeatureBinding();
 
@@ -61,7 +65,8 @@ namespace PopcornFX
 		{
 			if (m_CustomMaterials == null || asset == null)
 				return null;
-			return m_CustomMaterials.Find(x => (asset.AssetVirtualPath == x.m_AssetVirtualPath &&
+			return m_CustomMaterials.Find(x =>	(x != null &&
+												asset.AssetVirtualPath == x.m_AssetVirtualPath &&
 												batchDesc.m_GeneratedName == x.m_BatchDescName &&
 												batchDesc.m_InternalId == x.m_InternalId));
 		}
@@ -264,11 +269,20 @@ namespace PopcornFX
 		}
 		protected PKFxRenderFeatureBinding ResolveBatchBinding(SBatchDesc batchDesc)
 		{
+			if (m_RenderingPlugin == null)
+			{
+				PKFxRenderingPlugin[] rendering = FindObjectsOfType<PKFxRenderingPlugin>();
+				if (rendering.Length != 0)
+					m_RenderingPlugin = rendering[0];
+			}
+			bool	noDistortion = false;
+			if (m_RenderingPlugin != null)
+				noDistortion = !m_RenderingPlugin.m_EnableBlur && !m_RenderingPlugin.m_EnableDistortion;
 			foreach (PKFxRenderFeatureBinding binding in m_RenderFeatureBindings)
 			{
 				if (binding != null)
 				{
-					if (binding.IsMatchingRendererDesc(batchDesc))
+					if (binding.IsMatchingRendererDesc(batchDesc, noDistortion))
 						return binding;
 				}
 			}

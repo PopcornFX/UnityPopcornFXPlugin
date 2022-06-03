@@ -84,6 +84,8 @@ namespace PopcornFX
 				return null;
 			}
 			Material material = GetRuntimeMaterial(asset, batchDesc);
+			if (material == null)
+				return null;
 			if (batchDesc.m_Type != ERendererType.Mesh)
 				material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
 			return material;

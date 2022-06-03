@@ -7,20 +7,13 @@ Shader "PopcornFX/HDRP/PKFxParticleProceduralShader_Distortion"
 	{
 		_MainTex("Sprite Texture", 2D) = "white" {}
 		_AlphaMap("Alpha Remap Texture", 2D) = "white" {}
-		_DistortionSrcBlend("Distortion Blend Src", Int) = 0
-		_DistortionDstBlend("Distortion Blend Dst", Int) = 0
-		_DistortionBlurSrcBlend("Distortion Blur Blend Src", Int) = 0
-		_DistortionBlurDstBlend("Distortion Blur Blend Dst", Int) = 0
-		_DistortionBlurBlendOp("Distortion Blur Blend Mode", Int) = 0
 		_DistortionScale("Distortion Scale", Float) = 35
 		_DistortionVectorScale("Distortion Vector Scale", Float) = 2
 		_DistortionVectorBias("Distortion Vector Bias", Float) = 1
 		_DistortionBlurScale("Distortion Blur Scale", Float) = 1
 		_UniformFlags("Uniform Flags", Int) = 0
 		_InvSoftnessDistance("Inverse Softness Distance", Float) = 1
-
 		[HideInInspector] _StencilRefDistortionVec("_StencilRefDistortionVec", Int) = 64 // StencilBitMask.DistortionVectors
-		[HideInInspector] _CullMode("__cullmode", Float) = 0.0
 	}
 	SubShader
 	{
@@ -44,11 +37,11 @@ Shader "PopcornFX/HDRP/PKFxParticleProceduralShader_Distortion"
 				Pass Replace
 			}
 		
-			Blend [_DistortionSrcBlend] [_DistortionDstBlend], [_DistortionBlurSrcBlend] [_DistortionBlurDstBlend]
-			BlendOp Add, [_DistortionBlurBlendOp]
+			Blend One One, One One
+			BlendOp Add, Add
 			ZTest LEqual
 			ZWrite off
-			Cull [_CullMode]
+			Cull Off
 
 			HLSLPROGRAM
 

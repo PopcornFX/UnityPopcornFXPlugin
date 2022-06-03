@@ -125,7 +125,7 @@ namespace PopcornFX
 			}
 		}
 
-		public static List<string> GetFxsOnAllScenesAndPrefabs()
+		public static List<string> GetFxsOnAllScenesAndPrefabs(string rootPath)
 		{
 			List<string> EffectsNames = new List<string>();
 			Scene startingScene = EditorSceneManager.GetActiveScene();
@@ -134,9 +134,9 @@ namespace PopcornFX
 			if (!string.IsNullOrEmpty(startingScene.path))
 				startingScenePath = startingScene.path;
 
-			string[] folders = { "Assets" };
+			string[] folders = { rootPath };
 
-			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", null);
+			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", folders);
 			string[] foundPrefabs = AssetDatabase.FindAssets("t:Prefab", folders);
 			string[] foundScripts = AssetDatabase.FindAssets("t:Script", folders);
 
@@ -238,7 +238,7 @@ namespace PopcornFX
 			return EffectsNames;
 		}
 		
-		public static void UpdateFxsOnAllScenesAndPrefabs()
+		public static void UpdateFxsOnAllScenesAndPrefabs(string rootPath)
 		{
 			Scene startingScene = EditorSceneManager.GetActiveScene();
 			string startingScenePath = null;
@@ -250,9 +250,9 @@ namespace PopcornFX
 				startingScenePath = startingScene.path;
 
 
-			string[] folders = { "Assets" };
+			string[] folders = { rootPath };
 
-			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", null);
+			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", folders);
 			string[] foundPrefabs = AssetDatabase.FindAssets("t:Prefab", folders);
 			string[] foundScripts = AssetDatabase.FindAssets("t:Script", folders);
 
@@ -392,6 +392,15 @@ namespace PopcornFX
 		[MenuItem("Assets/PopcornFX/Update PKFxFXAsset GUID (experimental)")]
 		static void UpdatePKFxFXReferencesInScene()
 		{
+			string rootPath;
+			if (Selection.activeObject != null)
+				rootPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+			else
+				rootPath = "Assets";
+			if (!string.IsNullOrEmpty(rootPath) && File.Exists(rootPath))
+			{
+				rootPath = Path.GetDirectoryName(rootPath);
+			}
 
 			Scene startingScene = EditorSceneManager.GetActiveScene();
 			string startingScenePath = null;
@@ -404,7 +413,7 @@ namespace PopcornFX
 
 			int referenceUpdateCount = 0;
 
-			string[] folders = { "Assets" };
+			string[] folders = { rootPath };
 
 			string[] foundScenes = AssetDatabase.FindAssets("t:SceneAsset", folders);
 			string[] foundPrefabs = AssetDatabase.FindAssets("t:Prefab", folders);
@@ -482,18 +491,40 @@ namespace PopcornFX
 
 
 		[MenuItem("Assets/PopcornFX/Log PKFxFX References")]
-		static void LogPKFxFXReferences()
+		static void LogPKFxFXReferences(MenuCommand menuCommand)
 		{
-			List<string> effectsUsed = GetFxsOnAllScenesAndPrefabs();
+			string path;
+			if (Selection.activeObject != null)
+				path = AssetDatabase.GetAssetPath(Selection.activeObject);
+			else
+				path = "Assets";
+			if (!string.IsNullOrEmpty(path) && File.Exists(path))
+			{
+				path = Path.GetDirectoryName(path);
+			}
 
-			Debug.Log(string.Format("Trying to reimport PKFx Assets:\n {0}", string.Join("\n", effectsUsed)));
+			List<string> effectsUsed = GetFxsOnAllScenesAndPrefabs(path);
+
+			if (effectsUsed.Count != 0)
+				Debug.Log(string.Format("Trying to reimport from {0} found PKFx Assets:\n {1}", path, string.Join("\n", effectsUsed)));
+			else
+				Debug.Log("No PKFx Assets found in " + path);
 		}
-
 
 		[MenuItem("Assets/PopcornFX/Update PKFxFX References")]
 		static void UpdatePKFxFXReferences()
 		{
-			UpdateFxsOnAllScenesAndPrefabs();
+			string path;
+			if (Selection.activeObject != null)
+				path = AssetDatabase.GetAssetPath(Selection.activeObject);
+			else
+				path = "Assets";
+			if (!string.IsNullOrEmpty(path) && File.Exists(path))
+			{
+				path = Path.GetDirectoryName(path);
+			}
+
+			UpdateFxsOnAllScenesAndPrefabs(path);
 		}
 
 		[MenuItem("Assets/PopcornFX/Import Effect Pack")]

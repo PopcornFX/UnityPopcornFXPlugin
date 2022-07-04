@@ -615,6 +615,9 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_d3d.h">
+      <Filter>Kernel\Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_details.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>

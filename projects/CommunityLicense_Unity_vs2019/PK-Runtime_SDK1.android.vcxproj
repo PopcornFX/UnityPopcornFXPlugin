@@ -507,6 +507,7 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_performance_monitor.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_plugins.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_d3d.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_details.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_hazards.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_instrumentation.h" />

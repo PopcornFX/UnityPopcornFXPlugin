@@ -385,6 +385,7 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ShaderModule.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ShaderProgram.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12Texture.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12XRHI.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3DCommon\D3DCompileShader.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3DCommon\D3DPopcornEnumConversion.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\EnumHelper.h" />

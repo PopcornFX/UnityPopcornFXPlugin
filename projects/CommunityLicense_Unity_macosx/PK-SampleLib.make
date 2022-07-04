@@ -117,6 +117,7 @@ GENERATED += $(OBJDIR)/MetalContextFactory.o
 GENERATED += $(OBJDIR)/MetalShaderGenerator.o
 GENERATED += $(OBJDIR)/NSGLContext.o
 GENERATED += $(OBJDIR)/OffscreenContext.o
+GENERATED += $(OBJDIR)/PKPix.o
 GENERATED += $(OBJDIR)/PKSampleInit.o
 GENERATED += $(OBJDIR)/ParticleShaderGenerator.o
 GENERATED += $(OBJDIR)/PipelineCacheHelper.o
@@ -181,6 +182,7 @@ OBJECTS += $(OBJDIR)/MetalContextFactory.o
 OBJECTS += $(OBJDIR)/MetalShaderGenerator.o
 OBJECTS += $(OBJDIR)/NSGLContext.o
 OBJECTS += $(OBJDIR)/OffscreenContext.o
+OBJECTS += $(OBJDIR)/PKPix.o
 OBJECTS += $(OBJDIR)/PKSampleInit.o
 OBJECTS += $(OBJDIR)/ParticleShaderGenerator.o
 OBJECTS += $(OBJDIR)/PipelineCacheHelper.o
@@ -327,6 +329,9 @@ $(OBJDIR)/Gizmo.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/Gizmo.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ImguiRhiImplem.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/ImguiRhiImplem.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PKPix.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/PKPix.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/PKSampleInit.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/PKSampleInit.cpp

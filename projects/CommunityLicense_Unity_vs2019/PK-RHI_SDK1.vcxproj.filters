@@ -207,6 +207,9 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12Texture.h">
       <Filter>Headers\D3D12</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12XRHI.h">
+      <Filter>Headers\D3D12</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\D3DCommon\D3DCompileShader.h">
       <Filter>Headers\D3DCommon</Filter>
     </ClInclude>

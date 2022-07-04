@@ -228,9 +228,6 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_parser.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_stats.h">
-      <Filter>Compiler\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
@@ -613,6 +610,9 @@
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler.h">
+      <Filter>Kernel\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_d3d.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_details.h">

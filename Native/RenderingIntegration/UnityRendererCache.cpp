@@ -365,12 +365,12 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_Vat_RotationMap(CStringId::Null)
 ,	m_Vat_NumFrames(0)
 ,	m_Vat_PackedData(false)
-,	m_Vat_Color{}
-,	m_Vat_BoundsPivot{}
+,	m_Vat_Color(CFloat4::ZERO)
+,	m_Vat_BoundsPivot(CFloat2::ZERO)
 ,	m_Vat_NormalizedData(false)
-,	m_Vat_BoundsPosition{}
+,	m_Vat_BoundsPosition(CFloat2::ZERO)
 ,	m_Vat_PadToPowerOf2(false)
-,	m_Vat_PaddedRatio{}
+,	m_Vat_PaddedRatio(CFloat2::ZERO)
 ,	m_DiffuseRampMap(CStringId::Null)
 ,	m_EmissiveMap(CStringId::Null)
 ,	m_EmissiveRampMap(CStringId::Null)

@@ -81,7 +81,7 @@
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;..\..\SDK\Samples\External\winpixeventruntime.1.0.220124001\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -104,6 +104,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>..\..\SDK\Samples\External\winpixeventruntime.1.0.220124001\bin\x64\WinPixEventRuntime.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -113,7 +116,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;..\..\SDK\Samples\External\winpixeventruntime.1.0.220124001\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -137,6 +140,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>..\..\SDK\Samples\External\winpixeventruntime.1.0.220124001\bin\x64\WinPixEventRuntime.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
     <ClCompile>
@@ -308,6 +314,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\DebugHelper.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Gizmo.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKPix.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSample.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSampleInit.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PipelineCacheHelper.h" />
@@ -376,6 +383,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\DebugHelper.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Gizmo.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKPix.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSampleInit.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PipelineCacheHelper.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PopcornStartup\PopcornStartup.cpp" />

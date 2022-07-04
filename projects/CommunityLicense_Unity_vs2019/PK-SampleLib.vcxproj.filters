@@ -555,6 +555,9 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKPix.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSample.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -747,6 +750,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKPix.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSampleInit.cpp">

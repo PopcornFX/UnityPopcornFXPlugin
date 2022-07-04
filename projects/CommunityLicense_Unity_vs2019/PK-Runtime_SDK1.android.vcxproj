@@ -378,7 +378,6 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_native_invoker.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_nodes.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_parser.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_stats.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config_dump.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_init.h" />
@@ -507,6 +506,7 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_performance_monitor.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_plugins.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_d3d.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_details.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_hazards.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_instrumentation.h" />

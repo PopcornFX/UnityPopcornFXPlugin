@@ -390,6 +390,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\DebugHelper.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Gizmo.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKPix.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSample.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSampleInit.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PipelineCacheHelper.h" />
@@ -461,6 +462,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\DebugHelper.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Gizmo.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ImguiRhiImplem.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKPix.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PKSampleInit.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PipelineCacheHelper.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\PopcornStartup\PopcornStartup.cpp" />

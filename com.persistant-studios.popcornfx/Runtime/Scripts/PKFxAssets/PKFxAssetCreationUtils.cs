@@ -89,6 +89,18 @@ namespace PopcornFX
 						dependency.m_Object = obj;
 						ApplyPKImportSetting(dependency, path);
 					}
+					if (PKFxManager.IsSupportedTextureExtension(Path.GetExtension(path)))
+					{
+						for (int i = 0; i < asset.m_RendererDescs.Count; ++i)
+						{
+							SBatchDesc rdr = asset.m_RendererDescs[i];
+
+							PKFxRenderFeatureBinding binding = PKFxSettings.MaterialFactory.ResolveBatchBinding(rdr);
+
+							if (asset.m_Materials.Count > rdr.MaterialIdx)
+								binding.BindMaterialProperties(rdr, asset.m_Materials[rdr.MaterialIdx], asset);
+						}
+					}
 				}
 				DependenciesLoading.Remove(key);
 			}

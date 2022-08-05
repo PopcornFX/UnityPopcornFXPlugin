@@ -19,7 +19,9 @@ SVertexOutput	vert(SVertexInput v)
 		o.vertex = float4(outVarying.positionCS);
 		o.ProjPos = float4(outVarying.positionCS);
 	#elif USE_URP
-		o.vertex = o.ProjPos;
+		VertexPositionInputs vertexInput = GetVertexPositionInputs(o.vertex.xyz);
+		o.vertex = vertexInput.positionCS;
+		o.ProjPos = o.vertex;
 	#else
 		// Generic outputs for all variations:
 		// Vertex position:

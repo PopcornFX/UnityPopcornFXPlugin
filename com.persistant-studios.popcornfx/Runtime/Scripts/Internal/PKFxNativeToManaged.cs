@@ -515,6 +515,7 @@ namespace PopcornFX
 		[MonoPInvokeCallback(typeof(EffectRendererFoundCallback))]
 		private static void OnEffectRendererFound(IntPtr RendererDescPtr, int type, int idx)
 		{
+#if UNITY_EDITOR
 			if (RendererDescPtr == IntPtr.Zero)
 				return;
 
@@ -544,7 +545,7 @@ namespace PopcornFX
 					m_CurrentlyImportedAsset.AddRenderer(etype, *nativeRendererDesc, idx);
 				}
 			}
-
+#endif
 		}
 
 		public delegate void EffectEventFoundCallback(IntPtr eventDescPtr);
@@ -553,6 +554,7 @@ namespace PopcornFX
 		[MonoPInvokeCallback(typeof(EffectEventFoundCallback))]
 		private static void OnEffectEventFound(IntPtr EventDescPtr)
 		{
+#if UNITY_EDITOR
 			if (EventDescPtr == IntPtr.Zero)
 				return;
 
@@ -562,6 +564,7 @@ namespace PopcornFX
 				m_CurrentlyImportedAsset.AddEvent(*nativeEventDesc);
 
 			}
+#endif
 		}
 
 		//----------------------------------------------------------------------------

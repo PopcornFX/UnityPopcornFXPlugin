@@ -77,7 +77,7 @@ namespace PopcornFX
 				Debug.LogError("[PopcornFX] Trying to resolve material from null PKFxFxAsset");
 				return null;
 			}
-			Material material = GetRuntimeMaterial(asset, batchDesc);
+			Material material = asset.m_Materials[batchDesc.MaterialIdx];
 			if (material == null)
 				return null;
 			// Set the render queue:

@@ -329,12 +329,8 @@ float4	proj_position(float3 position)
 		VaryingsMeshType outVarying = VertMesh(coreVertexInput);
 		return float4(outVarying.positionCS);
 	#elif	USE_URP
-		return UnityObjectToClipPos(position);
-		//Transforming vertex with URP
-		///Attributes coreVertexInput;
-		///coreVertexInput.positionOS = float4(position.xyz, 1);
-		///Varyings outVarying = LightweightVertexMeta(coreVertexInput);
-		///return float4(outVarying.positionCS);
+		VertexPositionInputs vertexInput = GetVertexPositionInputs(position);
+		return float4(vertexInput.positionCS);
 	#else
 		return UnityObjectToClipPos(position);
 	#endif

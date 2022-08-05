@@ -490,6 +490,26 @@ namespace PopcornFX
 		}
 
 
+		[MenuItem("Assets/PopcornFX/Create PKFxFX Materials If necessary")]
+		static void CreatePKFxFXMaterialsIFN(MenuCommand menuCommand)
+		{
+			string [] pkfxEffectAssets = AssetDatabase.FindAssets("t:PKFxEffectAsset");
+
+
+			PKFxMaterialFactory factory = PKFxSettings.MaterialFactory;
+			foreach (string assetGUID in pkfxEffectAssets)
+			{
+				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetGUID), typeof(PKFxEffectAsset));
+
+				foreach (SBatchDesc batch in asset.m_RendererDescs)
+				{
+					factory.EditorResolveMaterial(batch, asset);
+				}
+			}
+			AssetDatabase.SaveAssets();
+		}
+		
+		
 		[MenuItem("Assets/PopcornFX/Log PKFxFX References")]
 		static void LogPKFxFXReferences(MenuCommand menuCommand)
 		{

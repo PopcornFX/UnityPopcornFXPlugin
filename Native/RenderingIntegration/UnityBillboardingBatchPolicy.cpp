@@ -625,6 +625,10 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMesh(const SBuffers
 
 void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers)
 {
+	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
+	if (m_RendererType == Renderer_Mesh)
+		return;
+
 	CAABB	bbox = CAABB::DEGENERATED;
 
 	for (u32 i = 0; i < allocBuffers.m_DrawRequests.Count(); ++i)

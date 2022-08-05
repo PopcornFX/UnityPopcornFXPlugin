@@ -191,7 +191,6 @@ public:
 	CStringId								m_Vat_RotationMap;
 	int										m_Vat_NumFrames;
 	bool									m_Vat_PackedData;
-	CFloat4									m_Vat_Color;
 	CFloat2									m_Vat_BoundsPivot;
 	bool									m_Vat_NormalizedData;
 	CFloat2									m_Vat_BoundsPosition;

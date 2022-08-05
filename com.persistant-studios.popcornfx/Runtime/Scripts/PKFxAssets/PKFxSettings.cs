@@ -96,6 +96,8 @@ namespace PopcornFX
 				{
 					Instance.m_UnityPackFxPath = value;
 #if UNITY_EDITOR
+					if (!AssetDatabase.IsValidFolder("Assets" + Instance.m_UnityPackFxPath + "/UnityMaterials"))
+						AssetDatabase.CreateFolder("Assets" + Instance.m_UnityPackFxPath, "UnityMaterials");
 					PKFxManager.StartupPopcornFileWatcher(EnableEffectHotreload);
 #endif
 				}

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_VATBoundsPositionPropertyName: _VATBounds
   m_VATPadToPowerOf2PropertyName: _VATPadToPowerOf2
   m_VATPaddedRatioPropertyName: _VATPaddedRatio
-  m_UseShader: 0
+  m_UseShader: 1
   m_Shader: {fileID: -6465566751694194690, guid: 050e926732b8f2b4b9cd35af257305b8,
     type: 3}
   m_Material: {fileID: 2100000, guid: 2530b703d96f5f2449b700997da3b0f6, type: 2}

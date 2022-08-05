@@ -12,7 +12,7 @@
 #include "UnityGraphicsAPI/IUnityGraphicsD3D12.h"
 //----------------------------------------------------------------------------
 
-#if defined(PK_DURANGO) || defined(PK_UNKNOWN1)
+#if defined(PK_DURANGO) || defined(PK_SCARLETT)
 #define	PK_UNITY_IID_PPV_ARGS(ppType) IID_GRAPHICS_PPV_ARGS(ppType)
 #else
 #define	PK_UNITY_IID_PPV_ARGS(ppType) IID_PPV_ARGS(ppType)

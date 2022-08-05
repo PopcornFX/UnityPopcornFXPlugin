@@ -12,7 +12,7 @@
 
 #if	defined(PK_DURANGO)
 #	include <d3d12_x.h>
-#elif defined(PK_UNKNOWN1)
+#elif defined(PK_SCARLETT)
 #	include <d3d12_xs.h>
 #else
 #	include <d3d12.h>

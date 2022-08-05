@@ -73,6 +73,7 @@ namespace PopcornFX
 	[Serializable]
 	public class SBatchLitFeatureDesc
 	{
+		public bool m_Activated = false;
 		public string m_NormalMap;
 		public string m_RoughMetalMap;
 
@@ -84,6 +85,7 @@ namespace PopcornFX
 
 		public SBatchLitFeatureDesc(SRenderingFeatureLitDesc desc)
 		{
+			m_Activated = true;
 			string normalStr = null, roughtMetalStr = null;
 
 			if (desc.m_NormalMap != IntPtr.Zero)
@@ -112,6 +114,20 @@ namespace PopcornFX
 			m_Metalness = desc.m_Metalness;
 		}
 
+		internal string GetGeneratedShortName()
+		{
+			string name = "Lit_";
+
+			name += (m_NormalMap == null || m_NormalMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_NormalMap) +"_";
+			name += (m_RoughMetalMap == null || m_RoughMetalMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_RoughMetalMap) + "_";
+			name += m_CastShadows ? "S_" : "";
+			name += String.Format("{0:0.##}", m_NormalBendingFactor) + "_";
+			name += String.Format("{0:0.##}", m_Roughness) + "_";
+			name += String.Format("{0:0.##}", m_Metalness)  + "_";
+
+			return name;
+		}
+
 		internal string GetGeneratedName()
 		{
 			string name = "[Lit:";
@@ -123,11 +139,11 @@ namespace PopcornFX
 			name += " ";
 			name += m_CastShadows ? "Shadows" : "noShadows";
 			name += " ";
-			name += m_NormalBendingFactor;
+			name += String.Format("{0:0.##}", m_NormalBendingFactor);
 			name += " ";
-			name += m_Roughness;
+			name += String.Format("{0:0.##}", m_Roughness);
 			name += " ";
-			name += m_Metalness;
+			name += String.Format("{0:0.##}", m_Metalness);
 
 			name += "]";
 			return name;
@@ -137,13 +153,13 @@ namespace PopcornFX
 	[Serializable]
 	public class SBatchVatFeatureDesc
 	{
+		public bool m_Activated = false;
 		public string m_PositionMap = null;
 		public string m_NormalMap = null;
 		public string m_ColorMap = null;
 		public string m_RotationMap = null;
 		public int m_NumFrames;
 		public bool m_PackedData;
-		public Vector4 m_Color;
 		public Vector2 m_BoundsPivot;
 		public bool m_NormalizedData;
 		public Vector2 m_BoundsPosition;
@@ -152,6 +168,7 @@ namespace PopcornFX
 
 		public SBatchVatFeatureDesc(SRenderingFeatureVATDesc desc)
 		{
+			m_Activated = true;
 			if (desc.m_PositionMap != IntPtr.Zero)
 			{
 				m_PositionMap = Marshal.PtrToStringAnsi(desc.m_PositionMap);
@@ -171,7 +188,6 @@ namespace PopcornFX
 
 			m_NumFrames = desc.m_NumFrames;
 			m_PackedData = desc.m_PackedData != 0 ? true : false;
-			m_Color = desc.m_Color;
 			m_BoundsPivot = desc.m_BoundsPivot;
 			m_NormalizedData = desc.m_NormalizedData != 0 ? true : false;
 			m_BoundsPosition = desc.m_BoundsPosition;
@@ -179,6 +195,21 @@ namespace PopcornFX
 			m_PaddedRatio = desc.m_PaddedRatio;
 		}
 
+		internal string GetGeneratedShortName()
+		{
+			string name = "VAT_";
+
+			name += (m_PositionMap == null || m_PositionMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_PositionMap);
+			name += (m_NormalMap == null || m_NormalMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_NormalMap);
+			name += (m_ColorMap == null || m_ColorMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_ColorMap);
+			name += (m_RotationMap == null || m_RotationMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_RotationMap);
+			name += m_NumFrames;
+			name += m_PackedData ? "P" : "UP";
+			name += m_BoundsPivot.ToString("F2");
+			name += m_NormalizedData ? "N" : "U";
+			name += m_BoundsPosition.ToString("F2");
+			return name;
+		}
 		internal string GetGeneratedName()
 		{
 			string name = "[Vat:";
@@ -196,13 +227,11 @@ namespace PopcornFX
 			name += " ";
 			name += m_PackedData ? "Packed Data" : "Unpacked Data";
 			name += " ";
-			name += m_Color;
-			name += " ";
-			name += m_BoundsPivot;
+			name += m_BoundsPivot.ToString("F2");
 			name += " ";
 			name += m_NormalizedData ? "Normalized Data" : "notNormalized Data";
 			name += " ";
-			name += m_BoundsPosition;
+			name += m_BoundsPosition.ToString("F2");
 
 			name += "]";
 			return name;
@@ -249,15 +278,19 @@ namespace PopcornFX
 		public float				m_InvSoftnessDistance;
 		public float				m_AlphaClipThreshold;
 		public string				m_GeneratedName;
-		public SBatchVatFeatureDesc m_VatFeature;
+		public string PathGeneratedName { get { return GenerateShortNameFromDescription(); } }
+		public SBatchVatFeatureDesc m_VatFeature = null;
 
 		//Lit Feature
-		public SBatchLitFeatureDesc	m_LitFeature;
+		public SBatchLitFeatureDesc	m_LitFeature = null;
 
 		//Internal
 		[SerializeField]
 		internal int				m_InternalId;
 		internal int				m_CameraId;
+
+		public int MaterialIdx { get { return m_InternalId; } }
+
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc, int idx)
 		{
 			string diffuseStr = null;
@@ -453,9 +486,9 @@ namespace PopcornFX
 			finalName += " ";
 			finalName += m_EmissiveMap == null ? "(none)" : m_EmissiveMap;
 			finalName += " ";
-			finalName += m_LitFeature == null ? "(none)" : m_LitFeature.GetGeneratedName();
+			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated)? "(none)" : m_LitFeature.GetGeneratedName();
 			finalName += " ";
-			finalName += m_VatFeature == null ? "(none)" : m_VatFeature.GetGeneratedName();
+			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "(none)" : m_VatFeature.GetGeneratedName();
 			if (m_Type != ERendererType.Mesh)
 			{
 				finalName += " ";
@@ -471,6 +504,100 @@ namespace PopcornFX
 			{
 				finalName += " ";
 				finalName += m_SpecularMap == null ? "(none)" : m_SpecularMap;
+			}
+			return finalName;
+		}
+		public static string BlendModeToShortString(EBlendMode blendMode)
+		{
+			string finalName = "";
+			if (blendMode == EBlendMode.Additive)
+				finalName += "Add";
+			if (blendMode == EBlendMode.AdditiveNoAlpha)
+				finalName += "AddNA";
+			if (blendMode == EBlendMode.AlphaBlend)
+				finalName += "AB";
+			if (blendMode == EBlendMode.PremultipliedAlpha)
+				finalName += "PreA";
+			if (blendMode == EBlendMode.Solid)
+				finalName += "So";
+			if (blendMode == EBlendMode.Masked)
+				finalName += "M";
+			finalName += "_";
+			return finalName;
+		}
+
+
+		// All of those functions are used to generate a description for the renderer:
+		public static string MaterialFlagsToShortString(int materialFlags)
+		{
+			string finalName = "";
+
+			if ((materialFlags & (int)EShaderVariationFlags.Has_RibbonComplex) != 0)
+				finalName += "RC";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_Atlas) != 0)
+				finalName += "At";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_AnimBlend) != 0)
+				finalName += "AB";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)
+				finalName += "AR";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_DiffuseRamp) != 0)
+				finalName += "DR";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_Lighting) != 0)
+				finalName += "L";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_Soft) != 0)
+				finalName += "S";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_DistortionMap) != 0)
+				finalName += "D";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_Color) != 0)
+				finalName += "C";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_DiffuseMap) != 0)
+				finalName += "Di";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_DoubleSided) != 0)
+				finalName += "DS";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_CastShadow) != 0)
+				finalName += "CS";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_FluidVAT) != 0)
+				finalName += "FVAT";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
+				finalName += "SVAT";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_RigidVAT) != 0)
+				finalName += "RVAT";
+			return finalName.Length == 0 ? "U_" : finalName + "_";
+		}
+
+		public string GenerateShortNameFromDescription()
+		{
+
+			string finalName;
+
+			if (m_Type == ERendererType.Billboard)
+				finalName = "B";
+			else if (m_Type == ERendererType.Ribbon)
+				finalName = "R";
+			else if (m_Type == ERendererType.Mesh)
+				finalName = "M";
+			else if (m_Type == ERendererType.Triangle)
+				finalName = "T";
+			else
+				finalName = "U";
+			finalName += "_";
+			finalName += MaterialFlagsToShortString(m_ShaderVariationFlags);
+			finalName += BlendModeToShortString(m_BlendMode);
+			finalName += m_RotateUVs ? "RUV_" : "UV_";
+			finalName += (m_DiffuseMap == null || m_DiffuseMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_DiffuseMap) + "_";
+			finalName += (m_EmissiveMap == null || m_EmissiveMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_EmissiveMap) + "_";
+			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "U_" : m_LitFeature.GetGeneratedShortName();
+			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "U_" : m_VatFeature.GetGeneratedShortName();
+			if (m_Type != ERendererType.Mesh)
+			{
+				finalName += (m_AlphaRemap == null || m_AlphaRemap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaRemap) + "_";
+				finalName += (m_DiffuseRampMap == null || m_DiffuseRampMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_DiffuseRampMap) + "_";
+				finalName += (m_EmissiveRampMap == null || m_EmissiveRampMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_EmissiveRampMap) + "_";
+				finalName += String.Format("{0:0.##}", m_InvSoftnessDistance);
+			}
+			else
+			{
+				finalName += m_SpecularMap == null ? "U_" : Path.GetFileName(m_SpecularMap) + "_";
 			}
 			return finalName;
 		}

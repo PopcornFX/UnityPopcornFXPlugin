@@ -365,7 +365,6 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_Vat_RotationMap(CStringId::Null)
 ,	m_Vat_NumFrames(0)
 ,	m_Vat_PackedData(false)
-,	m_Vat_Color(CFloat4::ZERO)
 ,	m_Vat_BoundsPivot(CFloat2::ZERO)
 ,	m_Vat_NormalizedData(false)
 ,	m_Vat_BoundsPosition(CFloat2::ZERO)
@@ -540,10 +539,6 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		const SRendererFeaturePropertyValue	*fluid_PackedData = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_PackedData());
 		if (fluid_PackedData != null)
 			m_Vat_PackedData = fluid_PackedData->ValueB();
-
-		const SRendererFeaturePropertyValue	*fluid_Color = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_Color());
-		if (fluid_Color != null)
-			m_Vat_Color = fluid_Color->ValueF();
 	}
 	else if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0)
 	{
@@ -842,9 +837,6 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 		}
 
 		desc.m_VatRendering->m_NumFrames = m_MaterialDescMesh.m_Vat_NumFrames;
-
-		if (fluidVAT)
-			desc.m_VatRendering->m_Color = m_MaterialDescMesh.m_Vat_Color;
 
 		if (rigidVAT)
 		{

@@ -83,7 +83,11 @@ namespace PopcornFX
 				Debug.LogError("[PopcornFX] Trying to resolve material from null PKFxEffectAsset");
 				return null;
 			}
-			Material material = GetRuntimeMaterial(asset, batchDesc);
+			Material material = null;
+			if (batchDesc.MaterialIdx < asset.m_Materials.Count)
+				material = asset.m_Materials[batchDesc.MaterialIdx];
+			else
+				Debug.LogError("[PopcornFX] Trying to resolve material from PKFxEffectAsset that is not holding materials");
 			if (material == null)
 				return null;
 			if (batchDesc.m_Type != ERendererType.Mesh)

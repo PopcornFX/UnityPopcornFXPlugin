@@ -159,7 +159,7 @@ namespace PopcornFX
 			{
 				material.SetFloat(m_InvSoftnessDistancePropertyName, batchDesc.m_InvSoftnessDistance);
 			}
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && batchDesc.m_LitFeature != null)
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
 			{
 				if (!string.IsNullOrEmpty(m_NormalMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_LitFeature.m_NormalMap))
 				{
@@ -185,7 +185,7 @@ namespace PopcornFX
 				bool hasFluidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_FluidVAT);
 				bool hasSoftVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SoftVAT);
 				bool hasRigidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT);
-				bool hasVAT = (hasFluidVAT || hasSoftVAT || hasRigidVAT) && batchDesc.m_VatFeature != null;
+				bool hasVAT = (hasFluidVAT || hasSoftVAT || hasRigidVAT) && (batchDesc.m_VatFeature != null && batchDesc.m_VatFeature.m_Activated);
 
 				if (hasVAT)
 				{
@@ -250,33 +250,59 @@ namespace PopcornFX
 				{
 					material.DisableKeyword("PK_HAS_VAT_NONE");
 					material.EnableKeyword("PK_HAS_VAT_FLUID");
+					material.SetFloat("PK_HAS_VAT", 1.0f);
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT))
 				{
 					material.DisableKeyword("PK_HAS_VAT_NONE");
 					material.EnableKeyword("PK_HAS_VAT_RIGID");
+					material.SetFloat("PK_HAS_VAT", 1.0f);
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SoftVAT))
 				{
 					material.DisableKeyword("PK_HAS_VAT_NONE");
 					material.EnableKeyword("PK_HAS_VAT_SOFT");
+					material.SetFloat("PK_HAS_VAT", 1.0f);
 				}
 				else
-					material.EnableKeyword("PK_HAS_VAT_NONE");
+				{
+					material.DisableKeyword("PK_HAS_VAT_FLUID");
+					material.DisableKeyword("PK_HAS_VAT_NONE");
+					material.EnableKeyword("PK_HAS_VAT_SOFT");
+					material.SetFloat("PK_HAS_VAT", 0.0f);
+				}
 			}
 			// Set the shader variation:
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
+			{
 				material.EnableKeyword("PK_HAS_DIFFUSE_RAMP");
+				material.SetFloat("PK_HAS_DIFFUSE_RAMP", 1.0f);
+			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
+			{
 				material.EnableKeyword("PK_HAS_ALPHA_REMAP");
+				material.SetFloat("PK_HAS_ALPHA_REMAP", 1.0f);
+			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
+			{
 				material.EnableKeyword("PK_HAS_ANIM_BLEND");
+				material.SetFloat("PK_HAS_ANIM_BLEND", 1.0f);
+			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
+			{
 				material.EnableKeyword("PK_HAS_DISTORTION");
+				material.SetFloat("PK_HAS_DISTORTION", 1.0f);
+			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
+			{
 				material.EnableKeyword("PK_HAS_LIGHTING");
+				material.SetFloat("PK_HAS_LIGHTING", 1.0f);
+			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
+			{
 				material.EnableKeyword("PK_HAS_RIBBON_COMPLEX");
+				material.SetFloat("PK_HAS_RIBBON_COMPLEX", 1.0f);
+			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 			{
 				material.DisableKeyword("PK_HAS_EMISSIVE_NONE");
@@ -284,13 +310,21 @@ namespace PopcornFX
 					material.EnableKeyword("PK_HAS_EMISSIVE_WITH_RAMP");
 				else
 					material.EnableKeyword("PK_HAS_EMISSIVE_BASIC");
+				material.SetFloat("PK_HAS_EMISSIVE", 1.0f);
 			}
 			else
 			{
+				material.DisableKeyword("PK_HAS_EMISSIVE_BASIC");
+				material.DisableKeyword("PK_HAS_EMISSIVE_WITH_RAMP");
 				material.EnableKeyword("PK_HAS_EMISSIVE_NONE");
+				material.SetFloat("PK_HAS_EMISSIVE", 0.0f);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Soft) && PKFxSettings.EnableSoftParticles)
+			{
 				material.EnableKeyword("PK_HAS_SOFT");
+				material.SetFloat("PK_HAS_SOFT", 1.0f);
+			}
+			
 		}
 
 #if UNITY_EDITOR

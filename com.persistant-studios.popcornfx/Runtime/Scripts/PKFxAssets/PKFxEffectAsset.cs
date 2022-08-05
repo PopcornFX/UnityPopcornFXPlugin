@@ -26,6 +26,7 @@ namespace PopcornFX
 		public int m_AttributeDescsHash = 0;
 		public List<SamplerDesc> m_SamplerDescs = new List<SamplerDesc>();
 		public List<SBatchDesc> m_RendererDescs = new List<SBatchDesc>();
+		public List<Material> m_Materials = new List<Material>();
 		public List<SEventDesc> m_EventDescs = new List<SEventDesc>();
 		public int m_SamplerDescsHash = 0;
 		public int m_RendererDescsHash = 0;
@@ -178,20 +179,36 @@ namespace PopcornFX
 			}
 		}
 
+#if UNITY_EDITOR
 		public void AddRenderer(ERendererType type, SPopcornRendererDesc renderer, int idx)
 		{
 			m_RendererDescs.Add(new SBatchDesc(type, renderer, idx));
+			Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(m_RendererDescs[m_RendererDescs.Count - 1], this);
+			if (mat == null)
+			{
+				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName);
+				return;
+			}
+			m_Materials.Add(mat);
 		}
 
 		public void AddRenderer(ERendererType type, SMeshRendererDesc renderer, int idx)
 		{
 			m_RendererDescs.Add(new SBatchDesc(renderer, idx));
+			Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(m_RendererDescs[m_RendererDescs.Count - 1], this);
+			if (mat == null)
+			{
+				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName);
+				return;
+			}
+			m_Materials.Add(mat);
 		}
 
 		public void AddEvent(SNativeEventDesc eventdesc)
 		{
 			m_EventDescs.Add(new SEventDesc(eventdesc));
 		}
+#endif
 
 		public void ComputePropertiesHash()
 		{
@@ -241,6 +258,7 @@ namespace PopcornFX
 			m_AttributeDescs = new List<AttributeDesc>();
 			m_SamplerDescs = new List<SamplerDesc>();
 			m_RendererDescs = new List<SBatchDesc>();
+			m_Materials = new List<Material>();
 			m_Dependencies = new List<DependencyDesc>();
 			m_EventDescs = new List<SEventDesc>();
 			m_AttributeDescsHash = 0;

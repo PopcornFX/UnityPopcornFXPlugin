@@ -99,7 +99,6 @@ extern "C"
 		const char*		m_RotationMap;
 		int				m_NumFrames;
 		ManagedBool		m_PackedData;
-		CFloat4			m_Color;
 		CFloat2			m_BoundsPivot;
 		ManagedBool		m_NormalizedData;
 		CFloat2			m_BoundsPosition;
@@ -113,7 +112,6 @@ extern "C"
 			, m_RotationMap(null)
 			, m_NumFrames(0)
 			, m_PackedData(ManagedBool_False)
-			, m_Color{}
 			, m_BoundsPivot{}
 			, m_NormalizedData(ManagedBool_False)
 			, m_BoundsPosition{}

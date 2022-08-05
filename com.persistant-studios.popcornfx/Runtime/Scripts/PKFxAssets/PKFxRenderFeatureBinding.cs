@@ -11,8 +11,10 @@ namespace PopcornFX
 	public class PKFxRenderFeatureBinding : PKFxShaderInputBindings
 	{
 		public bool						m_UseShader = true;
+#if UNITY_EDITOR
 		public Shader					m_Shader = null;
 		public Material					m_Material = null;
+#endif
 
 		public bool[]					m_RenderTypes;
 		public bool[]					m_BlendMode;

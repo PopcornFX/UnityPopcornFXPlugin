@@ -48,7 +48,7 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	
 	renderer->m_RendererCache = rendererCache;
 
-	bool succeeded = true;
+	bool succeeded = false;
 
 	if (renderer->m_RendererType == Renderer_Billboard)
 	{
@@ -107,6 +107,7 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 					::OnRetrieveCustomMaterialInfo(renderer->m_RendererType, &desc, rendererCount, &hasCustomMaterial, &customMaterialID);
 
 				}
+
 				rendererCache->m_HasCustomMat = (hasCustomMaterial == ManagedBool_True ? true : false);
 				rendererCache->m_CustomMatID = customMaterialID;
 				//Check if a batchable renderer cache exist

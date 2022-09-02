@@ -145,7 +145,7 @@ namespace PopcornFX
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) &&
 				!string.IsNullOrEmpty(m_AlphaRemapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_AlphaRemap))
 			{
-				Texture alphaRemap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_AlphaRemap, false, TextureWrapMode.Clamp);
+				Texture alphaRemap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_AlphaRemap, true, TextureWrapMode.Clamp);
 				material.SetTexture(m_AlphaRemapPropertyName, alphaRemap);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp) &&

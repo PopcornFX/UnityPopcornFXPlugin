@@ -5,6 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Serialization;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace PopcornFX
 {
@@ -82,24 +85,35 @@ namespace PopcornFX
 
 				m_Curves = new AnimationCurve[dimension];
 
+				Keyframe[][] keys = new Keyframe[dimension][];
+
+				for (int c = 0; c < dimension; ++c)
+					keys[c] = new Keyframe[keyCount];
+				for (int k = 0; k < keyCount; ++k)
+				{
+					for (int c = 0; c < dimension; ++c)
+					{
+						float time = curveTimesPtr[k];
+						float value = *floatValuesPtr;
+						float tan1 = floatTangentsPtr[c + 0];
+						float tan2 = floatTangentsPtr[c + dimension];
+
+						keys[c][k] = new Keyframe(curveTimesPtr[k], value, tan1, tan2);
+
+						floatValuesPtr += 1;
+					}
+					floatTangentsPtr += dimension * 2;
+				}
 				for (int c = 0; c < dimension; ++c)
 				{
-					if (keyCount == 0)
+					for (int k = 0; k < keyCount; ++k)
 					{
-						m_Curves[c] = AnimationCurve.Linear(0, 0, 1, 0);
+						if (k > 0)
+							keys[c][k].inTangent = keys[c][k].inTangent / (keys[c][k].time - keys[c][k - 1].time);
+						if (k < keyCount - 1)
+							keys[c][k].outTangent = keys[c][k].outTangent / (keys[c][k + 1].time - keys[c][k].time);
 					}
-					else
-					{
-						m_Curves[c] = new AnimationCurve();
-						for (int k = 0; k < keyCount; ++k)
-						{
-							Keyframe keyframe = new Keyframe(curveTimesPtr[k], *floatValuesPtr, floatTangentsPtr[0], floatTangentsPtr[1]);
-							m_Curves[c].AddKey(keyframe);
-
-							floatValuesPtr += 1;
-							floatTangentsPtr += 2;
-						}
-					}
+					m_Curves[c] = new AnimationCurve(keys[c]);
 				}
 			}
 		}
@@ -184,7 +198,7 @@ namespace PopcornFX
 		public override string ToString()
 		{
 			// Just the type and the name are taken into account when mix and matching the samplers:
-			return m_Type.ToString() + ";" + m_Name + ";" + m_UsageFlags + ";";
+			return m_Type.ToString() + ";" + m_Name + ";" + m_UsageFlags.ToString() + ";";
 		}
 
 		public override int GetHashCode()

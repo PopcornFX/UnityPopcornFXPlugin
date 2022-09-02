@@ -36,6 +36,8 @@ namespace PopcornFX
 		GUIContent splitDrawCallsOfSoubleSidedParticlesLabel = new GUIContent(" Split the draw calls of the particles that require disabling the back-face culling");
 		GUIContent disableDynamicEffectBoundsLabel = new GUIContent(" Disable dynamic effect bounds");
 		GUIContent materialFactoryLabel = new GUIContent(" Material Factory");
+		GUIContent useHashAsMaterialNameLabel = new GUIContent(" Use hashes as material name");
+		GUIContent useHashAsMaterialNameDialogMessageLabel = new GUIContent("Warning, this action will delete all existing generated materials and recreate them. \nContinue ?");
 
 		GUIContent enableLocalizedPages = new GUIContent(" Enable Localized Pages");
 		GUIContent enableLocalizedPagesByDefault = new GUIContent(" Enable Localized Pages By Default");
@@ -237,7 +239,7 @@ namespace PopcornFX
 				PKFxSettings.GeneralCategory = category.IsExpanded();
 				if (category.IsExpanded())
 				{
-					DisplayGeneralCategory();
+					DisplayGeneralCategory(category);
 				}
 			}
 			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(PKFxSettings.RenderingCategory, "Rendering")))
@@ -245,7 +247,7 @@ namespace PopcornFX
 				PKFxSettings.RenderingCategory = category.IsExpanded();
 				if (category.IsExpanded())
 				{
-					DisplayRenderingCategory();
+					DisplayRenderingCategory(category);
 				}
 			}
 			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(PKFxSettings.ThreadingCategory, "Multithreading")))
@@ -319,7 +321,7 @@ namespace PopcornFX
 				EditorUtility.SetDirty(settings);
 		}
 
-		private void DisplayGeneralCategory()
+		private void DisplayGeneralCategory(PKFxEditorCategory category)
 		{
 			GUIStyle boldStyleRed = new GUIStyle();
 			boldStyleRed.fontStyle = FontStyle.Bold;
@@ -375,44 +377,56 @@ namespace PopcornFX
 				{
 					if (GUILayout.Button("Source Effects Pack"))
 					{
-						string from = Directory.Exists(PKFxSettings.PopcornPackFxPath) ? PKFxSettings.PopcornPackFxPath : "";
-						string path = EditorUtility.OpenFilePanelWithFilters("Choose PopcornFx Asset Folder", from, new[] { "PopcornFX Project", "pkproj" });
-						if (File.Exists(path))
+						category.EndCb = () =>
 						{
-							string folderPath = path.Remove(path.LastIndexOf('/'));
-							Uri fileUri = new Uri(folderPath);
-							Uri referenceUri = new Uri(Application.dataPath);
-							Uri relative = referenceUri.MakeRelativeUri(fileUri);
-							string Srcpath = referenceUri.MakeRelativeUri(fileUri).ToString();
+							string from = Directory.Exists(PKFxSettings.PopcornPackFxPath) ? PKFxSettings.PopcornPackFxPath : "";
+							string path = EditorUtility.OpenFilePanelWithFilters("Choose PopcornFx Asset Folder", from, new[] { "PopcornFX Project", "pkproj" });
+							if (File.Exists(path))
+							{
+								string folderPath = path.Remove(path.LastIndexOf('/'));
+								Uri fileUri = new Uri(folderPath);
+								Uri referenceUri = new Uri(Application.dataPath);
+								Uri relative = referenceUri.MakeRelativeUri(fileUri);
+								string Srcpath = referenceUri.MakeRelativeUri(fileUri).ToString();
 
-							PKFxSettings.PopcornPackFxPath = Uri.UnescapeDataString(Srcpath);
+								PKFxSettings.PopcornPackFxPath = Uri.UnescapeDataString(Srcpath);
 
-						}
+							}
+						};
 					}
 
 					if (GUILayout.Button("Baked Effects Path"))
 					{
-						string path = EditorUtility.OpenFolderPanel("Choose Unity Fx Assets Folder", "Resources", "");
-						if (Directory.Exists(path))
+						category.EndCb = () =>
 						{
-							PKFxSettings.UnityPackFxPath = path.Substring(Application.dataPath.Length);
-						}
+							string path = EditorUtility.OpenFolderPanel("Choose Unity Fx Assets Folder", "Resources", "");
+							if (Directory.Exists(path))
+							{
+								PKFxSettings.UnityPackFxPath = path.Substring(Application.dataPath.Length);
+							}
+						};
 					}
 
 					if (GUILayout.Button("Choose files"))
 					{
-						if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetAllAssetPath())
+						category.EndCb = () =>
 						{
-							ImportPKFxListEditor window = EditorWindow.GetWindow<ImportPKFxListEditor>();
-							window.ShowUtility();
-						}
+							if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetAllAssetPath())
+							{
+								ImportPKFxListEditor window = EditorWindow.GetWindow<ImportPKFxListEditor>();
+								window.ShowUtility();
+							}
+						};
 					}
 					if (GUILayout.Button("All"))
 					{
-						if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetAllAssetPath())
+						category.EndCb = () =>
 						{
-							PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
-						}
+							if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetAllAssetPath())
+							{
+								PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
+							}
+						};
 					}
 
 				}
@@ -444,11 +458,30 @@ namespace PopcornFX
 			EditorGUILayout.EndHorizontal();
 		}
 
-		private void DisplayRenderingCategory()
+		private void DisplayRenderingCategory(PKFxEditorCategory category)
 		{
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.MaterialFactory = EditorGUILayout.ObjectField(materialFactoryLabel, PKFxSettings.MaterialFactory, typeof(PKFxMaterialFactory), false) as PKFxMaterialFactory;
 			EditorGUILayout.EndHorizontal();
+
+			EditorGUILayout.BeginHorizontal();
+			bool value = EditorGUILayout.ToggleLeft(useHashAsMaterialNameLabel, PKFxSettings.UseHashesAsMaterialName);
+			EditorGUILayout.EndHorizontal();
+
+			if (PKFxSettings.UseHashesAsMaterialName != value)
+			{
+				category.EndCb = () =>
+				{
+					if (EditorUtility.DisplayDialog(useHashAsMaterialNameLabel.text, useHashAsMaterialNameDialogMessageLabel.text, "Yes", "No"))
+					{
+						PKFxSettings.UseHashesAsMaterialName = value;
+
+						if (AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
+							AssetDatabase.DeleteAsset("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials");
+						PKFxMenus.CreatePKFxFXMaterialsIFN();
+					}
+				};
+			}
 
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.DebugEffectsBoundingBoxes = EditorGUILayout.ToggleLeft(debugEffectsBoundingBoxes, PKFxSettings.DebugEffectsBoundingBoxes);
@@ -519,6 +552,7 @@ namespace PopcornFX
 				EditorGUI.indentLevel--;
 			}
 			DisplayPopcornFxRenderers();
+
 		}
 
 		private void DisplayThreadingCategory()

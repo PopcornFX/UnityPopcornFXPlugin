@@ -6,7 +6,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if		UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEditor;
 #endif
 
@@ -39,8 +39,6 @@ namespace PopcornFX
 		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingDistortion;
 
 		public List<PKFxRenderFeatureBinding>	m_RenderFeatureBindings = new List<PKFxRenderFeatureBinding>();
-
-		private PKFxRenderingPlugin				m_RenderingPlugin = null;
 
 		public abstract void SetupFallBackFeatureBinding();
 
@@ -215,7 +213,17 @@ namespace PopcornFX
 				return null;
 			}
 
-			Material assetMat = (Material)AssetDatabase.LoadAssetAtPath("Assets/" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + batchDesc.PathGeneratedName + ".mat", typeof(Material));
+			string matName;
+			if (PKFxSettings.UseHashesAsMaterialName)
+			{
+				Hash128 hash = new Hash128();
+				hash.Append(batchDesc.PathGeneratedName);
+				matName = hash.ToString();
+			}
+			else
+				matName = batchDesc.PathGeneratedName;
+
+			Material assetMat = (Material)AssetDatabase.LoadAssetAtPath("Assets/" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat", typeof(Material));
 			if (assetMat == null)
 			{
 				if (binding.m_UseShader)
@@ -224,7 +232,7 @@ namespace PopcornFX
 					material = new Material(binding.m_Material);
 				binding.SetMaterialKeywords(batchDesc, material);
 				binding.BindMaterialProperties(batchDesc, material, asset);
-				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + batchDesc.PathGeneratedName + ".mat");
+				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat");
 				AssetDatabase.SaveAssets();
 			}
 			else
@@ -233,6 +241,8 @@ namespace PopcornFX
 		}
 		public virtual Material EditorResolveMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null)
 		{
+			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath))
+				AssetDatabase.CreateFolder("Assets", PKFxSettings.UnityPackFxPath.Substring(1));
 			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
 				AssetDatabase.CreateFolder("Assets" + PKFxSettings.UnityPackFxPath, "UnityMaterials");
 			PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
@@ -262,20 +272,11 @@ namespace PopcornFX
 		
 		public PKFxRenderFeatureBinding ResolveBatchBinding(SBatchDesc batchDesc)
 		{
-			if (m_RenderingPlugin == null)
-			{
-				PKFxRenderingPlugin[] rendering = FindObjectsOfType<PKFxRenderingPlugin>();
-				if (rendering.Length != 0)
-					m_RenderingPlugin = rendering[0];
-			}
-			bool noDistortion = false;
-			if (m_RenderingPlugin != null)
-				noDistortion = !m_RenderingPlugin.m_EnableBlur && !m_RenderingPlugin.m_EnableDistortion;
 			foreach (PKFxRenderFeatureBinding binding in m_RenderFeatureBindings)
 			{
 				if (binding != null)
 				{
-					if (binding.IsMatchingRendererDesc(batchDesc, noDistortion))
+					if (binding.IsMatchingRendererDesc(batchDesc))
 						return binding;
 				}
 			}

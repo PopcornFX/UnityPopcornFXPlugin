@@ -489,12 +489,9 @@ namespace PopcornFX
 				EditorSceneManager.OpenScene(startingScenePath);
 		}
 
-
-		[MenuItem("Assets/PopcornFX/Create PKFxFX Materials If necessary")]
-		static void CreatePKFxFXMaterialsIFN(MenuCommand menuCommand)
+		public static void CreatePKFxFXMaterialsIFN()
 		{
-			string [] pkfxEffectAssets = AssetDatabase.FindAssets("t:PKFxEffectAsset");
-
+			string[] pkfxEffectAssets = AssetDatabase.FindAssets("t:PKFxEffectAsset");
 
 			PKFxMaterialFactory factory = PKFxSettings.MaterialFactory;
 			foreach (string assetGUID in pkfxEffectAssets)
@@ -507,6 +504,12 @@ namespace PopcornFX
 				}
 			}
 			AssetDatabase.SaveAssets();
+		}
+
+		[MenuItem("Assets/PopcornFX/Create PKFxFX Materials If necessary")]
+		static void _CreatePKFxFXMaterialsIFN(MenuCommand menuCommand)
+		{
+			CreatePKFxFXMaterialsIFN();
 		}
 		
 		

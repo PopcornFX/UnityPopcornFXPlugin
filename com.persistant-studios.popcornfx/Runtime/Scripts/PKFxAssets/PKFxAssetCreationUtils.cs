@@ -42,13 +42,16 @@ namespace PopcornFX
 		public static bool UpdatePKFXAsset(PKFxEffectAsset fxAsset, string path)
 		{
 			PKFxEffectAsset newAsset = ScriptableObject.CreateInstance<PKFxEffectAsset>();
+			newAsset.name = Path.GetFileName(path);
 			newAsset.AssetVirtualPath = path;
 			string fullPath = newAsset.AssetFullPath + ".asset";
 			newAsset.m_Data = fxAsset.m_Data; // Copy the old asset content in the new one
-			AssetDatabase.DeleteAsset(fullPath); // Delete previous asset
 			if (ProcessAssetChangeData(newAsset, path) == false)
 				return false;
-			AssetDatabase.CreateAsset(newAsset, fullPath); // Re-create the asset with the new object
+
+			PKFxEffectAsset oldAsset = AssetDatabase.LoadAssetAtPath<PKFxEffectAsset>(fullPath);
+
+			EditorUtility.CopySerialized(newAsset, oldAsset);
 			return true;
 		}
 
@@ -57,13 +60,15 @@ namespace PopcornFX
 		public static bool UpdateAndRenamePKFXAsset(PKFxEffectAsset fxAsset, string oldPath, string newPath)
 		{
 			PKFxEffectAsset newAsset = ScriptableObject.CreateInstance<PKFxEffectAsset>();
+			newAsset.name = Path.GetFileName(newPath);
 			newAsset.AssetVirtualPath = newPath;
 			string fullPath = newAsset.AssetFullPath + ".asset";
 			newAsset.m_Data = fxAsset.m_Data; // Copy the old asset content in the new one
-			AssetDatabase.DeleteAsset(fullPath); // Delete previous asset
-			if (ProcessAssetChangeData(fxAsset, oldPath) == false)
+			if (ProcessAssetChangeData(newAsset, oldPath) == false)
 				return false;
-			AssetDatabase.CreateAsset(newAsset, fullPath); // Re-create the asset with the new object
+			PKFxEffectAsset oldAsset = AssetDatabase.LoadAssetAtPath<PKFxEffectAsset>(fullPath);
+
+			EditorUtility.CopySerialized(newAsset, oldAsset);
 			return true;
 		}
 
@@ -170,27 +175,6 @@ namespace PopcornFX
 				return false;
 			}
 			fxAsset.ComputePropertiesHash();
-
-			// Fix all references in the current scene:
-			bool sceneHasChanged = false;
-			UnityEngine.Object[] effects = UnityEngine.Object.FindObjectsOfType(typeof(PKFxEmitter));
-
-			foreach (UnityEngine.Object obj in effects)
-			{
-				PKFxEmitter effect = obj as PKFxEmitter;
-
-				if (effect.EffectName == fxPathToPatch) // Sometimes the effect.m_FxAsset is null here, so we test against the m_FxName
-				{
-					if (effect.UpdateEffectAsset(fxAsset, false, false))
-						sceneHasChanged = true;
-				}
-			}
-
-			if (sceneHasChanged)
-			{
-				Scene currentScene = SceneManager.GetActiveScene();
-				EditorSceneManager.MarkSceneDirty(currentScene);
-			}
 
 			PKFxManager.SetImportedAsset(null);
 			handle.Free();
@@ -318,6 +302,7 @@ namespace PopcornFX
 					if (dependency.HasUsageFlag(EUseInfoFlag.IsVatTexture))
 					{
 						textureImporter.sRGBTexture = false;
+						textureImporter.wrapMode = TextureWrapMode.Clamp;
 						textureImporter.npotScale = TextureImporterNPOTScale.None;
 						textureImporter.mipmapEnabled = false;
 						textureImporter.textureCompression = TextureImporterCompression.Uncompressed;
@@ -328,6 +313,7 @@ namespace PopcornFX
 					}
 					else if (textureImporter.sRGBTexture == depIsLinearTexture)
 					{
+						textureImporter.wrapMode = TextureWrapMode.Clamp;
 						textureImporter.sRGBTexture = !depIsLinearTexture;
 						reimport = true;
 					}
@@ -341,11 +327,29 @@ namespace PopcornFX
 				}
 				else if (ddsImporter != null)
 				{
-					if (depIsLinearTexture)
-						Debug.LogWarning("[PopcornFX] Please verify import settings for texture '" + path + "' as DDS Importer does not allow to set gamma space.", AssetDatabase.LoadAssetAtPath<Texture>(path));
-					if (dependency.HasUsageFlag(EUseInfoFlag.IsTextureSampler))
+					string metaFilePath = AssetDatabase.GetTextMetaFilePathFromAssetPath(path);
+					if (metaFilePath != null)
 					{
-						ddsImporter.isReadable = true;
+						string metaData = File.ReadAllText(metaFilePath);
+						if (depIsLinearTexture)
+						{
+							metaData = metaData.Replace("sRGBTexture: 1", "sRGBTexture: 0");
+							metaData = metaData.Replace("wrapU: 0", "wrapU: 1");
+							metaData = metaData.Replace("wrapV: 0", "wrapV: 1");
+							metaData = metaData.Replace("wrapW: 0", "wrapW: 1");
+						}
+						if (dependency.HasUsageFlag(EUseInfoFlag.IsTextureSampler))
+						{
+							metaData = metaData.Replace("isReadable: 0", "isReadable: 1");
+						}
+						File.WriteAllText(metaFilePath, metaData);
+					}
+					else
+					{
+						if (depIsLinearTexture)
+							Debug.LogWarning("[PopcornFX] Please verify import settings for texture '" + path + "' as DDS Importer does not allow to set gamma space.", AssetDatabase.LoadAssetAtPath<Texture>(path));
+						if (dependency.HasUsageFlag(EUseInfoFlag.IsTextureSampler))
+							ddsImporter.isReadable = true;
 						ddsImporter.SaveAndReimport();
 					}
 				}

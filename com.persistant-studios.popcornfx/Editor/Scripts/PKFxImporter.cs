@@ -3,10 +3,7 @@
 //----------------------------------------------------------------------------
 using UnityEngine;
 using System.IO;
-using UnityEngine.SceneManagement;
 using UnityEditor.AssetImporters;
-using UnityEditor.Experimental.AssetImporters;
-using UnityEditor;
 
 namespace PopcornFX
 {

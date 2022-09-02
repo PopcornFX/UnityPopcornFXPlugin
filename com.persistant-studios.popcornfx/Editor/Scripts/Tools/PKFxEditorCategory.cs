@@ -26,6 +26,8 @@ namespace PopcornFX
 		private SerializedProperty m_FoldoutProperty;
 		private bool m_IsExpanded;
 
+		public Action EndCb = null;
+
 		public Rect RectArea { get; private set; }
 
 		public PKFxEditorCategory(SerializedProperty foldoutProperty, string categoryName)
@@ -80,6 +82,8 @@ namespace PopcornFX
 
 			--EditorGUI.indentLevel;
 			EditorGUILayout.EndVertical();
+			if (EndCb != null)
+				EndCb();
 		}
 
 		private void SetPropertyExpanded(bool isExpanded)

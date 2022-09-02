@@ -7,6 +7,10 @@ using UnityEngine.Serialization;
 using System;
 using System.Runtime.InteropServices;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace PopcornFX
 {
 	public class PKFxEffectAsset : PKFxAsset
@@ -186,7 +190,10 @@ namespace PopcornFX
 			Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(m_RendererDescs[m_RendererDescs.Count - 1], this);
 			if (mat == null)
 			{
-				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName);
+				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
+				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
+				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
+				m_Materials.Add(null);
 				return;
 			}
 			m_Materials.Add(mat);
@@ -198,7 +205,10 @@ namespace PopcornFX
 			Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(m_RendererDescs[m_RendererDescs.Count - 1], this);
 			if (mat == null)
 			{
-				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName);
+				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
+				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
+				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
+				m_Materials.Add(null);
 				return;
 			}
 			m_Materials.Add(mat);

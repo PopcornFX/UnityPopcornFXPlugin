@@ -69,15 +69,15 @@ namespace PopcornFX
 			// Upgrade if material wasn't set in import (2.12.7 ++)
 			if (mats.arraySize < rdrsListSize)
 			{
-				for (int i = 0; i < rdrsListSize; i++)
-				{
-					mats.InsertArrayElementAtIndex(i);
-					Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset);
-					SerializedProperty newMatProp = mats.GetArrayElementAtIndex(i);
-					//AssetDatabase.AddObjectToAsset(asset, mat);
-					newMatProp.objectReferenceValue = mat;
-				}
-				serializedObject.ApplyModifiedProperties();
+					for (int i = 0; i < rdrsListSize; i++)
+					{
+						mats.InsertArrayElementAtIndex(i);
+						Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset);
+						SerializedProperty newMatProp = mats.GetArrayElementAtIndex(i);
+						//AssetDatabase.AddObjectToAsset(asset, mat);
+						newMatProp.objectReferenceValue = mat;
+					}
+					serializedObject.ApplyModifiedProperties();
 			}
 
 			for (int i = 0; i < rdrsListSize; i++)
@@ -105,7 +105,6 @@ namespace PopcornFX
 
 						EditorGUILayout.BeginHorizontal();
 						using (new EditorGUI.DisabledScope(rdrType.intValue == (int)ERendererType.Ribbon))
-						//|| generatedName.Contains("Distortion")))
 						{
 							EditorGUILayout.Space();
 

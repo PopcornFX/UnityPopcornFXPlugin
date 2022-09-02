@@ -677,6 +677,12 @@ bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies)
 				CLog::Log(PK_ERROR, "Asset Dependency of '%s' is a gr2 file and is not supported by the plugin", path.Data());
 				return false;
 			}
+			if (m_BakeContext.m_Cookery.FileController()->VirtualToPhysical(dependency, IFileSystem::Access_Read).Empty())
+			{
+				// Effect can compile, log a warn and don't try to bake this dependency.
+				CLog::Log(PK_WARN, "Asset Dependency of '%s' does not exist:	'%s'", path.Data(), dependency.Data());
+				continue;
+			}
 			if (BakeAsset(dependency, false) == false)
 			{
 				CLog::Log(PK_ERROR, "Asset Dependency of '%s' failed baking:	'%s'", path.Data(), dependency.Data());

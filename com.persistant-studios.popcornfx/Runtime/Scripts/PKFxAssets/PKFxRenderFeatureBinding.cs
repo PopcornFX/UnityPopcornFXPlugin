@@ -50,7 +50,7 @@ namespace PopcornFX
 		}
 
 
-		public bool IsMatchingRendererDesc(SBatchDesc desc, bool noDistortion)
+		public bool IsMatchingRendererDesc(SBatchDesc desc)
 		{
 			if (!m_RenderTypes[(int)desc.m_Type])
 				return false;
@@ -62,9 +62,6 @@ namespace PopcornFX
 				return false;
 
 			int shaderMask = (int)m_ShaderMask;
-
-			if (noDistortion)
-				shaderMask &= ~((int)EShaderVariationFlags.Has_DistortionMap);
 
 			if ((shaderMask & desc.m_ShaderVariationFlags) != desc.m_ShaderVariationFlags)
 				return false;

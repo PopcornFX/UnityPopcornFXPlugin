@@ -32,12 +32,13 @@ float4	SampleSpriteTexture(float2 uv)
 // Alpha remap sampling
 //------------------------------------------
 #if	PK_HAS_ALPHA_REMAP
-	sampler2D	_AlphaMap;
+	Texture2D _AlphaMap;
+	SamplerState linear_clamp_sampler;
 
 	float4	SampleAlphaRemapTexture(float2 uv)
 	{
 		uv.y = 1 - uv.y;
-		float4 color = tex2D(_AlphaMap, uv);
+		float4 color = _AlphaMap.Sample(linear_clamp_sampler, uv);
 		return color;
 	}
 #endif

@@ -204,7 +204,7 @@ namespace PopcornFX
 #if UNITY_EDITOR
 		public static bool GetAllAssetPath()
 		{
-			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0)
+			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0 || !Directory.Exists(Instance.m_PopcornPackFxPath))
 			{
 				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
 				return false;
@@ -288,6 +288,7 @@ namespace PopcornFX
 		[SerializeField] private float m_VertexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private float m_IndexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private List<SParticleMeshDefaultSize> m_MeshesDefaultSize = new List<SParticleMeshDefaultSize>();
+		[SerializeField] private bool m_UseHashesAsMaterialName = false;
 
 		public static bool RenderingCategory
 		{
@@ -422,6 +423,12 @@ namespace PopcornFX
 		{
 			get { return Instance.m_ThreadsAffinity; }
 			set { Instance.m_ThreadsAffinity = value; }
+		}
+
+		public static bool UseHashesAsMaterialName
+		{
+			get { return Instance.m_UseHashesAsMaterialName; }
+			set { Instance.m_UseHashesAsMaterialName = value; }
 		}
 
 		public void Setup()

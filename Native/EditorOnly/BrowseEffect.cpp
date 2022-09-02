@@ -93,6 +93,8 @@ struct	SUnityDependencyAppendHelper
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == BasicRendererProperties::SID_LegacyLit_NormalMap())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
+					else if (property->m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == BasicRendererProperties::SID_Lit_NormalMap())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_PositionMap())
@@ -318,6 +320,7 @@ bool	BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataBillboard);
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
+				++rendererCount;
 			}
 			else if (renderer->m_RendererType == Renderer_Ribbon)
 			{
@@ -327,6 +330,7 @@ bool	BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataRibbon);
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
+				++rendererCount;
 			}
 			else if (renderer->m_RendererType == Renderer_Mesh)
 			{
@@ -336,6 +340,7 @@ bool	BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataMesh);
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
+				++rendererCount;
 			}
 			else if (renderer->m_RendererType == Renderer_Triangle)
 			{
@@ -345,9 +350,8 @@ bool	BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataTriangle);
 				dummyCache.GetRendererInfo(unityTriangleDesc);
 				::OnEffectRendererFound(&unityTriangleDesc, renderer->m_RendererType, rendererCount);
+				++rendererCount;
 			}
-
-			++rendererCount;
 			++it;
 		}
 	}

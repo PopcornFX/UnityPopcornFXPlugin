@@ -126,7 +126,7 @@ namespace PopcornFX
 			{
 				using (var changeCheck = new EditorGUI.ChangeCheckScope())
 				{
-					EditorGUILayout.PropertyField(m_FxAsset);
+					EditorGUILayout.PropertyField(m_FxAsset, new GUIContent("Effect Asset"));
 					if (changeCheck.changed)
 					{
 						serializedObject.ApplyModifiedProperties();
@@ -609,8 +609,6 @@ namespace PopcornFX
 		public bool MultipleCurvesEditor(SerializedProperty curvesArray)
 		{
 			bool hasChanged = false;
-
-
 			for (int i = 0; i < curvesArray.arraySize; ++i)
 			{
 				Keyframe[] keysCache = curvesArray.GetArrayElementAtIndex(i).animationCurveValue.keys;
@@ -756,8 +754,7 @@ namespace PopcornFX
 					{
 						Keyframe keyframe = curve.keys[iKey];
 						keyframe.time = newTime;
-						curve.RemoveKey(iKey);
-						curve.AddKey(keyframe);
+						curve.MoveKey(iKey, keyframe);
 						break;
 					}
 				}

@@ -126,6 +126,8 @@ namespace PopcornFX
 			string assetVirtualPath = customMat.m_AssetVirtualPath;
 			string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + assetVirtualPath + ".asset";
 			PKFxEffectAsset curAsset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
+			if (curAsset == null)
+				return;
 			if (showFx)
 			{
 				EditorGUILayout.BeginHorizontal();
@@ -196,7 +198,8 @@ namespace PopcornFX
 			foreach (PKFxCustomMaterialInfo info in m_CustomMaterials)
 			{
 				PKFxEffectAsset asset = AssetDatabase.LoadAssetAtPath("Assets/" + PKFxSettings.UnityPackFxPath + "/" + info.m_AssetVirtualPath, typeof(PKFxEffectAsset)) as PKFxEffectAsset;
-				asset.m_Materials[info.m_InternalId] = EditorGetDefaultMaterial(asset.m_RendererDescs[info.m_InternalId], asset);
+				if (asset != null)
+					asset.m_Materials[info.m_InternalId] = EditorGetDefaultMaterial(asset.m_RendererDescs[info.m_InternalId], asset);
 				AssetDatabase.RemoveObjectFromAsset(info);
 			}
 			AssetDatabase.SaveAssets();
@@ -247,7 +250,11 @@ namespace PopcornFX
 				AssetDatabase.CreateFolder("Assets" + PKFxSettings.UnityPackFxPath, "UnityMaterials");
 			PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batchDesc, asset);
 			if (curMat != null && curMat.m_CustomMaterial != null)
+			{
+				curMat.SetMaterialKeywords(batchDesc, curMat.m_CustomMaterial);
+				curMat.BindMaterialProperties(batchDesc, curMat.m_CustomMaterial, asset);
 				return curMat.m_CustomMaterial;
+			}
 			else
 			{
 				return EditorGetDefaultMaterial(batchDesc, asset);

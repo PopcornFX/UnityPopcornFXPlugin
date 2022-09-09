@@ -141,6 +141,11 @@ public:
 	float						m_InvSoftnessDistance;
 	float						m_AlphaThreshold;
 
+	//Atlas
+	CStringId					m_AtlasMap;
+	u32							m_AtlasSubdivX;
+	u32							m_AtlasSubdivY;
+
 	// Ribbon alignment mode:
 	u32							m_RibbonAlignment;
 	// Lit Feature

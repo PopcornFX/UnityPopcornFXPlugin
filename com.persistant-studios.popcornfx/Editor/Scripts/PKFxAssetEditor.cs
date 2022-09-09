@@ -135,7 +135,12 @@ namespace PopcornFX
 						PKFxCustomMaterialInfo customMatInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(renderers[i], asset);
 						if (customMatInfo != null)
 						{
-							customMatInfo.DrawEditorShaderInputBindings(renderers[i]);
+							if (customMatInfo.DrawEditorShaderInputBindings(renderers[i])) // Change in the bindings, update materials
+							{
+								customMatInfo.SetMaterialKeywords(renderers[i], customMatInfo.m_CustomMaterial);
+								customMatInfo.BindMaterialProperties(renderers[i], customMatInfo.m_CustomMaterial, asset);
+							}
+
 						}
 						EditorGUILayout.Space();
 					}

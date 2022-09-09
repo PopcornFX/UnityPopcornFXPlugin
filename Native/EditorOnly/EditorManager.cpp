@@ -6,6 +6,7 @@
 #include "EditorOnly/EditorManager.h"
 #include "EditorOnly/FileWatcher.h"
 #include "EditorOnly/EffectBaking.h"
+#include "EditorOnly/BrowseEffect.h"
 #include "EditorOnly/MeshBaking.h"
 
 __PK_API_BEGIN
@@ -48,6 +49,13 @@ bool				CEditorManager::InitializeInstanceIFN()
 
 		m_Instance->m_EffectBaker = PK_NEW(CEffectBaker());
 		if (!PK_VERIFY(m_Instance->m_EffectBaker != null))
+		{
+			PK_SAFE_DELETE(m_Instance);
+			CLog::Log(PK_ERROR, "Could not allocate CEffectBaker");
+			return false;
+		}
+		m_Instance->m_EffectBrowser = PK_NEW(CEffectBrowser());
+		if (!PK_VERIFY(m_Instance->m_EffectBrowser != null))
 		{
 			PK_SAFE_DELETE(m_Instance);
 			CLog::Log(PK_ERROR, "Could not allocate CEffectBaker");
@@ -132,6 +140,14 @@ CMeshBaker			*CEditorManager::GetMeshBaker() const
 CEffectBaker		*CEditorManager::GetEffectBaker() const
 {
 	return m_EffectBaker.Get();
+}
+
+//----------------------------------------------------------------------------
+
+CEffectBrowser *CEditorManager::GetEffectBrowser() const
+{
+	m_EffectBrowser->InitializeIFN();
+	return m_EffectBrowser.Get();
 }
 
 //----------------------------------------------------------------------------

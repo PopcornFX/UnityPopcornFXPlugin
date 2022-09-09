@@ -339,6 +339,12 @@ namespace PopcornFX
 			string path = Marshal.PtrToStringAnsi(pathHandler);
 			string ext = Path.GetExtension(path);
 
+			if (ext.ToLower() == ".fbx")
+			{
+				ext = ".pkmm";
+				path = Path.ChangeExtension(path, ext);
+			}
+
 			if (m_Dependencies != null)
 			{
 				if (PKFxUtils.ArrayContains(s_CustomFileTypes, ext))

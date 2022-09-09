@@ -35,7 +35,10 @@ extern "C"
 		NEED_PK_RUNTIME_AND_EDITOR_STARTED(return ManagedBool_False);
 		if (!PK_VERIFY(pkfxContentPtr != null))
 			return ManagedBool_False;
-		return LoadAndBrowseEffect(pkfxContentPtr, contentByteSize, path) ? ManagedBool_True : ManagedBool_False;
+
+		CEffectBrowser *effectBrowser = CEditorManager::Instance().GetEffectBrowser();
+
+		return effectBrowser->LoadAndBrowseEffect(pkfxContentPtr, contentByteSize, path) ? ManagedBool_True : ManagedBool_False;
 	}
 
 	//--------------------------------------------------------------------------

@@ -8,6 +8,7 @@ __PK_API_BEGIN
 
 PK_FORWARD_DECLARE(FileWatcherUnity);
 PK_FORWARD_DECLARE(EffectBaker);
+PK_FORWARD_DECLARE(EffectBrowser);
 PK_FORWARD_DECLARE(MeshBaker);
 
 class	CEditorManager : public CNonCopyable
@@ -32,11 +33,13 @@ public:
 	CFileWatcherUnity		*GetFileWatcher() const;
 	CMeshBaker				*GetMeshBaker() const;
 	CEffectBaker			*GetEffectBaker() const;
+	CEffectBrowser			*GetEffectBrowser() const;
 
 private:
 	PFileWatcherUnity		m_FileWatcher;
 	PMeshBaker				m_MeshBaker;
 	PEffectBaker			m_EffectBaker;
+	PEffectBrowser			m_EffectBrowser;
 
 	static CEditorManager	*m_Instance;
 };

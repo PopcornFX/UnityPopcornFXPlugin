@@ -199,28 +199,41 @@ namespace PopcornFX
 					string originalFileName = Path.GetFileNameWithoutExtension(dependency.m_Path).Replace("_linear", "");
 					string originalPath = Path.GetDirectoryName(dependency.m_Path) + "/" + originalFileName + Path.GetExtension(dependency.m_Path);
 					string sourceFile = m_TempBakeDirectory + originalPath;
-					CreateDependencyAsset(fxAsset, dependency.m_Path, sourceFile);
+					CreateDependencyAsset(fxAsset, dependency, sourceFile);
 				}
 				else if (dependency.HasUsageFlag(EUseInfoFlag.IsMeshRenderer))
 				{
-					string sourceFile = PKFxSettings.PopcornPackFxPath + "/" + dependency.m_Path;
-					CreateDependencyAsset(fxAsset, dependency.m_Path, sourceFile);
+					string sourceFile = m_TempBakeDirectory + dependency.m_Path;
+					CreateDependencyAsset(fxAsset, dependency, sourceFile);
+				}
+				else if (dependency.HasUsageFlag(EUseInfoFlag.IsMeshSampler))
+				{
+					string sourceFile = m_TempBakeDirectory + dependency.m_Path;
+					CreateDependencyAsset(fxAsset, dependency, sourceFile);
+
+					string outputName = Path.ChangeExtension(dependency.m_Path, ".pkmm");
+					dependency.m_Path = outputName;
+					sourceFile = m_TempBakeDirectory + dependency.m_Path;
+					CreateDependencyAsset(fxAsset, dependency, sourceFile);
 				}
 				else
 				{
 					string sourceFile = m_TempBakeDirectory + dependency.m_Path;
-					CreateDependencyAsset(fxAsset, dependency.m_Path, sourceFile);
+					CreateDependencyAsset(fxAsset, dependency, sourceFile);
 				}
 			}
 		}
 
 		//----------------------------------------------------------------------------
 
-		private static void CreateDependencyAsset(PKFxEffectAsset fxAsset, string dstVirtualPath, string srcFile)
+		private static void CreateDependencyAsset(PKFxEffectAsset fxAsset, PKFxEffectAsset.DependencyDesc dependencyDesc, string srcFile)
 		{
 			if (!File.Exists(srcFile))
+			{
 				return;
+			}
 
+			string dstVirtualPath = dependencyDesc.m_Path;
 			string dstPackPath = "Assets" + PKFxSettings.UnityPackFxPath;
 			string dstFullPath = dstPackPath + "/" + dstVirtualPath;
 

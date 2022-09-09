@@ -445,7 +445,6 @@ namespace PopcornFX
 
 
 #endif
-
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.EnableForceDeterminism = EditorGUILayout.ToggleLeft(forceDeterminismLabel, PKFxSettings.EnableForceDeterminism);
 			EditorGUILayout.EndHorizontal();
@@ -500,8 +499,23 @@ namespace PopcornFX
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
-			PKFxSettings.UseGPUBillboarding = EditorGUILayout.ToggleLeft(useGPUBillboarding, PKFxSettings.UseGPUBillboarding);
+			value = EditorGUILayout.ToggleLeft(useGPUBillboarding, PKFxSettings.UseGPUBillboarding);
 			EditorGUILayout.EndHorizontal();
+
+			if (PKFxSettings.UseGPUBillboarding != value)
+			{
+				category.EndCb = () =>
+				{
+					if (EditorUtility.DisplayDialog(useHashAsMaterialNameLabel.text, useHashAsMaterialNameDialogMessageLabel.text, "Yes", "No"))
+					{
+						PKFxSettings.UseGPUBillboarding = value;
+
+						if (AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
+							AssetDatabase.DeleteAsset("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials");
+						PKFxMenus.CreatePKFxFXMaterialsIFN();
+					}
+				};
+			}
 
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.UseMeshInstancing = EditorGUILayout.ToggleLeft(useMeshInstancingLabel, PKFxSettings.UseMeshInstancing);

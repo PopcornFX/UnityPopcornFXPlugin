@@ -139,11 +139,93 @@ struct	SUnityDependencyAppendHelper
 // End Internal functions
 //----------------------------------------------------------------------------
 
-bool	LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSize, const char *path)
+CEffectBrowser::CEffectBrowser()
+{
+
+}
+
+CEffectBrowser::~CEffectBrowser()
+{
+	Destroy();
+}
+
+bool	CEffectBrowser::InitializeIFN()
+{
+	if (m_Initialized)
+		return true;
+
+	PK_ASSERT(m_BrowseResourceMeshHandler == null);
+	PK_ASSERT(m_BrowseResourceImageHandler == null);
+	PK_ASSERT(m_BrowseResourceVectorFieldHandler == null);
+	PK_ASSERT(m_BrowseResourceFontMetricsHandler == null);
+	PK_ASSERT(m_BrowseResourceRectangleListHandler == null);
+	PK_ASSERT(m_BrowseFSController == null);
+	PK_ASSERT(m_BrowseResourceManager == null);
+
+	m_BrowseResourceImageHandler = PK_NEW(CResourceHandlerDummy);
+	m_BrowseResourceMeshHandler = PK_NEW(CResourceHandlerDummy);
+	m_BrowseResourceVectorFieldHandler = PK_NEW(CResourceHandlerDummy);
+	m_BrowseResourceRectangleListHandler = PK_NEW(CResourceHandlerDummy);
+	m_BrowseResourceFontMetricsHandler = PK_NEW(CResourceHandlerDummy);
+
+	if (!PK_VERIFY(m_BrowseResourceMeshHandler != null) ||
+		!PK_VERIFY(m_BrowseResourceImageHandler != null) ||
+		!PK_VERIFY(m_BrowseResourceRectangleListHandler != null) ||
+		!PK_VERIFY(m_BrowseResourceFontMetricsHandler != null) ||
+		!PK_VERIFY(m_BrowseResourceVectorFieldHandler != null))
+		return false;
+
+	m_BrowseFSController = File::NewInternalFileSystem();
+	if (!PK_VERIFY(m_BrowseFSController != null))
+		return false;
+
+	m_BrowseResourceManager = PK_NEW(PopcornFX::CResourceManager(m_BrowseFSController));
+	if (!PK_VERIFY(m_BrowseResourceManager != null))
+		return false;
+	m_BrowseResourceManager->RegisterHandler<PopcornFX::CResourceMesh>(m_BrowseResourceMeshHandler);
+	m_BrowseResourceManager->RegisterHandler<PopcornFX::CImage>(m_BrowseResourceImageHandler);
+	m_BrowseResourceManager->RegisterHandler<PopcornFX::CRectangleList>(m_BrowseResourceRectangleListHandler);
+	m_BrowseResourceManager->RegisterHandler<PopcornFX::CFontMetrics>(m_BrowseResourceFontMetricsHandler);
+	m_BrowseResourceManager->RegisterHandler<PopcornFX::CVectorField>(m_BrowseResourceVectorFieldHandler);
+
+	m_BrowseContext = PK_NEW(PopcornFX::HBO::CContext(m_BrowseResourceManager));
+	if (!PK_VERIFY(m_BrowseContext != null))
+		return false;
+	m_Initialized = true;
+	return true;
+}
+
+void	CEffectBrowser::Destroy()
+{
+	if (m_BrowseResourceManager != null)
+	{
+		if (m_BrowseResourceMeshHandler != null)
+			m_BrowseResourceManager->UnregisterHandler<PopcornFX::CResourceHandlerDummy>(m_BrowseResourceMeshHandler);
+		if (m_BrowseResourceImageHandler != null)
+			m_BrowseResourceManager->UnregisterHandler<PopcornFX::CResourceHandlerDummy>(m_BrowseResourceImageHandler);
+		if (m_BrowseResourceRectangleListHandler != null)
+			m_BrowseResourceManager->UnregisterHandler<PopcornFX::CResourceHandlerDummy>(m_BrowseResourceRectangleListHandler);
+		if (m_BrowseResourceFontMetricsHandler != null)
+			m_BrowseResourceManager->UnregisterHandler<PopcornFX::CResourceHandlerDummy>(m_BrowseResourceFontMetricsHandler);
+		if (m_BrowseResourceVectorFieldHandler != null)
+			m_BrowseResourceManager->UnregisterHandler<PopcornFX::CResourceHandlerDummy>(m_BrowseResourceVectorFieldHandler);
+	}
+	PK_SAFE_DELETE(m_BrowseResourceMeshHandler);
+	PK_SAFE_DELETE(m_BrowseResourceImageHandler);
+	PK_SAFE_DELETE(m_BrowseResourceVectorFieldHandler);
+	PK_SAFE_DELETE(m_BrowseResourceFontMetricsHandler);
+	PK_SAFE_DELETE(m_BrowseResourceRectangleListHandler);
+	PK_SAFE_DELETE(m_BrowseContext);
+	PK_SAFE_DELETE(m_BrowseFSController);
+	PK_SAFE_DELETE(m_BrowseResourceManager);
+	m_Initialized = false;
+}
+
+bool	CEffectBrowser::LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSize, const char *path)
 {
 	CConstMemoryStream	memStream(pkfxContentPtr, contentByteSize);
 	CStringView			pathView = CStringView(path, SNativeStringUtils::Length(path));
-	PBaseObjectFile		file = HBO::g_Context->LoadFileFromStream_Pure(memStream, pathView, false);
+	PBaseObjectFile		file = m_BrowseContext->LoadFileFromStream_Pure(memStream, pathView, false);
 
 	if (!PK_VERIFY(file != null))
 	{
@@ -169,7 +251,7 @@ bool	LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSize, const char *
 	return ret;
 }
 
-bool	BrowseEffect(const PParticleEffect &particleEffect)
+bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect)
 {
 	bool	usesMeshRenderer = false;
 
@@ -217,7 +299,7 @@ bool	BrowseEffect(const PParticleEffect &particleEffect)
 
 //----------------------------------------------------------------------------
 
-bool	BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &usesMeshRenderer)
+bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &usesMeshRenderer)
 {
 	const u32	dependencyCount = dependencies.Count();
 
@@ -282,7 +364,7 @@ bool	BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool
 
 //----------------------------------------------------------------------------
 
-bool	BrowseRenderers(CParticleEffect *particleEffect)
+bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 {
 	if (!PK_VERIFY(particleEffect != null))
 		return false;
@@ -358,7 +440,7 @@ bool	BrowseRenderers(CParticleEffect *particleEffect)
 	return true;
 }
 
-bool	BrowseExportedEvents(CParticleEffect *particleEffect)
+bool	CEffectBrowser::BrowseExportedEvents(CParticleEffect *particleEffect)
 {
 	// List all the exported events
 	PCEventConnectionMap		connectionMap = particleEffect->EventConnectionMap();
@@ -382,7 +464,7 @@ bool	BrowseExportedEvents(CParticleEffect *particleEffect)
 
 //----------------------------------------------------------------------------
 
-bool	BrowseAttributes(const CParticleAttributeList::_TypeOfAttributeList &attributeList, const TMemoryView<const u32> &remapIds)
+bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList::_TypeOfAttributeList &attributeList, const TMemoryView<const u32> &remapIds)
 {
 	CFloat4			fMin(TNumericTraits<float>::kMin);
 	CFloat4			fMax(TNumericTraits<float>::kMax);
@@ -449,7 +531,7 @@ bool	BrowseAttributes(const CParticleAttributeList::_TypeOfAttributeList &attrib
 
 //----------------------------------------------------------------------------
 
-bool	BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerList)
+bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerList)
 {
 	for (u32 i = 0; i < samplerList.Count(); ++i)
 	{

@@ -330,16 +330,16 @@ namespace PopcornFX
 #if UNITY_EDITOR
 		private bool m_ShowBindings = false;
 
-		public void		DrawEditorShaderInputBindings(SBatchDesc batchDesc, bool headerGroup = false)
+		public bool	DrawEditorShaderInputBindings(SBatchDesc batchDesc, bool headerGroup = false)
 		{
-			DrawEditorShaderInputBindings(	batchDesc.m_ShaderVariationFlags,
-											batchDesc.m_BlendMode != EBlendMode.Solid && batchDesc.m_BlendMode != EBlendMode.Masked,
-											batchDesc.m_BlendMode != EBlendMode.Masked,
-											batchDesc.m_Type == ERendererType.Mesh,
-											headerGroup);
+			return DrawEditorShaderInputBindings(	batchDesc.m_ShaderVariationFlags,
+													batchDesc.m_BlendMode != EBlendMode.Solid && batchDesc.m_BlendMode != EBlendMode.Masked,
+													batchDesc.m_BlendMode != EBlendMode.Masked,
+													batchDesc.m_Type == ERendererType.Mesh,
+													headerGroup);
 		}
 
-		public void DrawEditorShaderInputBindings(	int shaderVariationFlags,
+		public bool	DrawEditorShaderInputBindings(	int shaderVariationFlags,
 													bool bindingHasTransparent,
 													bool bindingHasMasked,
 													bool bindingHasMeshRenderer,
@@ -460,7 +460,12 @@ namespace PopcornFX
 			}
 			if (headerGroup)
 				EditorGUILayout.EndFoldoutHeaderGroup();
-			serializedObject.ApplyModifiedProperties();
+			if (serializedObject.hasModifiedProperties)
+			{
+				serializedObject.ApplyModifiedProperties();
+				return true;
+			}
+			return false;
 		}
 
 		private bool HasShaderVariationFlag(int mask, EShaderVariationFlags flag)

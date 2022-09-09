@@ -68,6 +68,9 @@ u32	CParticleMaterialDescFlags::CombineFlags()
 CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 :	m_InvSoftnessDistance(1)
 ,	m_AlphaThreshold(0.5f)
+,	m_AtlasMap(CStringId::Null)
+,	m_AtlasSubdivX(0)
+,	m_AtlasSubdivY(0)
 ,	m_RibbonAlignment(0)
 //Feature Lit
 ,	m_NormalMap(CStringId::Null)
@@ -102,6 +105,11 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 
 	const SRendererFeaturePropertyValue	*atlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
 	const SRendererFeaturePropertyValue	*atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
+
+	const SRendererFeaturePropertyValue *atlasSource = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Source());
+	const SRendererFeaturePropertyValue *atlasDefinition = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Definition());
+	const SRendererFeaturePropertyValue *atlasSubDiv = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_SubDiv());
+
 	const SRendererFeaturePropertyValue	*alphaRemap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap());
 	const SRendererFeaturePropertyValue	*alphaRemapAlphaMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap_AlphaMap());
 	const CGuid							alphaRemapCursor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_AlphaRemap_Cursor());
@@ -133,6 +141,21 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Size2;
 	if (atlas != null && atlas->ValueB())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Atlas;
+	if (atlasSource == null || atlasSource->ValueI().x() == 0)
+	{
+		if (atlasDefinition != null && atlasDefinition->m_Type == PropertyType_TextureAtlasPath && !atlasDefinition->ValuePath().Empty())
+		{
+			m_AtlasMap = CStringId(atlasDefinition->ValuePath());
+		}
+	}
+	else
+	{
+		if (atlasSubDiv != null && atlasSubDiv->ValueI().x() > 0 && atlasSubDiv->ValueI().y() > 0)
+		{
+			m_AtlasSubdivX = atlasSubDiv->ValueI().x();
+			m_AtlasSubdivY = atlasSubDiv->ValueI().y();
+		}
+	}
 	if (atlasBlending != null && atlasBlending->ValueI().x() == 1)
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AnimBlend;
 	if (alphaRemap != null && alphaRemap->ValueB() && alphaRemapAlphaMap != null && !alphaRemapAlphaMap->ValuePath().Empty() && alphaRemapCursor.Valid())
@@ -342,7 +365,10 @@ bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBil
 			m_Metalness == oth.m_Metalness &&
 			m_DiffuseRampMap == oth.m_DiffuseRampMap &&
 			m_EmissiveMap == oth.m_EmissiveMap &&
-			m_EmissiveRampMap == oth.m_EmissiveRampMap;
+			m_EmissiveRampMap == oth.m_EmissiveRampMap &&
+			m_AtlasMap == oth.m_AtlasMap &&
+			m_AtlasSubdivX == oth.m_AtlasSubdivX &&
+			m_AtlasSubdivY == oth.m_AtlasSubdivY;
 }
 
 //----------------------------------------------------------------------------

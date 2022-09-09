@@ -498,9 +498,11 @@ namespace PopcornFX
 			{
 				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetGUID), typeof(PKFxEffectAsset));
 
+				int count = 0;
 				foreach (SBatchDesc batch in asset.m_RendererDescs)
 				{
-					factory.EditorResolveMaterial(batch, asset);
+					asset.m_Materials[count] = factory.EditorResolveMaterial(batch, asset);
+					++count;
 				}
 			}
 			AssetDatabase.SaveAssets();

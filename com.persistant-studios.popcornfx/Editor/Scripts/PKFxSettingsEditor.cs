@@ -499,16 +499,16 @@ namespace PopcornFX
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
-			value = EditorGUILayout.ToggleLeft(useGPUBillboarding, PKFxSettings.UseGPUBillboarding);
+			bool GPUvalue = EditorGUILayout.ToggleLeft(useGPUBillboarding, PKFxSettings.UseGPUBillboarding);
 			EditorGUILayout.EndHorizontal();
 
-			if (PKFxSettings.UseGPUBillboarding != value)
+			if (PKFxSettings.UseGPUBillboarding != GPUvalue)
 			{
 				category.EndCb = () =>
 				{
 					if (EditorUtility.DisplayDialog(useHashAsMaterialNameLabel.text, useHashAsMaterialNameDialogMessageLabel.text, "Yes", "No"))
 					{
-						PKFxSettings.UseGPUBillboarding = value;
+						PKFxSettings.UseGPUBillboarding = GPUvalue;
 
 						if (AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
 							AssetDatabase.DeleteAsset("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials");

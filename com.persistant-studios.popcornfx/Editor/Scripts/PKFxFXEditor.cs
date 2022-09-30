@@ -229,6 +229,15 @@ namespace PopcornFX
 
 		private void DrawAttributes()
 		{
+			PKFxEmitter fx = target as PKFxEmitter;
+
+			//Asset as been updated by reimport.
+			if (fx.EffectAsset.m_SamplerDescsHash != fx.FXSamplersDescHash ||
+				fx.EffectAsset.m_AttributeDescsHash != fx.FXAttributesDescHash)
+			{
+				fx.UpdateEffectAsset(fx.EffectAsset, false);
+				m_RequiresApplyModifiedProperties = true;
+			}
 			if (m_FxAttributesDesc.arraySize == 0 && m_FxSamplers.arraySize == 0)
 				return;
 			using (var category = new PKFxEditorCategory(DrawAttributesHeader))
@@ -241,7 +250,6 @@ namespace PopcornFX
 
 					if (serializedObject.targetObjects.Length == 1)
 					{
-						PKFxEmitter fx = target as PKFxEmitter;
 						PKFxAttributesContainer attribContainer = fx.AttributesContainer;
 
 						PKFxEmitter inspectedObject = m_FxAttributesStartValues.serializedObject.targetObject as PKFxEmitter;

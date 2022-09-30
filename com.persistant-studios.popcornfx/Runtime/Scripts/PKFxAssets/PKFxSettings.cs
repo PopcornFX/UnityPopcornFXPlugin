@@ -288,7 +288,7 @@ namespace PopcornFX
 		[SerializeField] private float m_VertexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private float m_IndexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private List<SParticleMeshDefaultSize> m_MeshesDefaultSize = new List<SParticleMeshDefaultSize>();
-		[SerializeField] private bool m_UseHashesAsMaterialName = false;
+		[SerializeField] private bool m_UseHashesAsMaterialName = true;
 
 		public static bool RenderingCategory
 		{

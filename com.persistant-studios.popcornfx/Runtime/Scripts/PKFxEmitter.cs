@@ -70,10 +70,12 @@ namespace PopcornFX
 
 		[SerializeField] private PKFxAttributesContainer m_AttributesContainer = null;
 		[SerializeField] private int m_FxAttributesDescHash = 0;
+		public int FXAttributesDescHash { get { return m_FxAttributesDescHash; } }
 		[SerializeField] private SGenericTypedValueContainer[] m_FxAttributesStartValues = null; // New version of the attributes
 
 		public List<Sampler> m_FxSamplersList = new List<Sampler>();
-		public int m_FxSamplersDescHash = 0;
+		[SerializeField] private int m_FxSamplersDescHash = 0;
+		public int FXSamplersDescHash { get { return m_FxSamplersDescHash; } }
 
 		public delegate void OnFxStoppedDelegate(PKFxEmitter component);
 		public OnFxStoppedDelegate m_OnFxStopped = null;

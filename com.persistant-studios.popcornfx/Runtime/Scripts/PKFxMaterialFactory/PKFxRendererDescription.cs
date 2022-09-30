@@ -278,7 +278,6 @@ namespace PopcornFX
 		public float				m_InvSoftnessDistance;
 		public float				m_AlphaClipThreshold;
 		public string				m_GeneratedName;
-		public string PathGeneratedName { get { return GenerateShortNameFromDescription(); } }
 		public SBatchVatFeatureDesc m_VatFeature = null;
 
 		//Lit Feature

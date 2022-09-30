@@ -220,11 +220,11 @@ namespace PopcornFX
 			if (PKFxSettings.UseHashesAsMaterialName)
 			{
 				Hash128 hash = new Hash128();
-				hash.Append(batchDesc.PathGeneratedName);
+				hash.Append(batchDesc.m_GeneratedName);
 				matName = hash.ToString();
 			}
 			else
-				matName = batchDesc.PathGeneratedName;
+				matName = batchDesc.GenerateShortNameFromDescription();
 
 			Material assetMat = (Material)AssetDatabase.LoadAssetAtPath("Assets/" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat", typeof(Material));
 			if (assetMat == null)

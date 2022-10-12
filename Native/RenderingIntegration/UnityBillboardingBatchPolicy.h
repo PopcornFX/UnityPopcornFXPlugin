@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <pk_kernel/include/kr_refcounted_buffer.h>
 #include "FrameCollectorUnityTypes.h"
 #include "UnityRendererCache.h"
 #include "PKUnity_InterfaceCommon.h"
@@ -117,6 +118,8 @@ private:
 
 	// Can we fill the buffer?
 	bool							m_MeshIsValid;
+	bool							m_UseSkeletalAnimData;
+	bool							m_UseSkeletalAnimInterpolTracksData;
 
 	u32								m_UnusedFrameCount;
 
@@ -255,31 +258,23 @@ private:
 
 	struct		SMeshParticleBuffers
 	{
-		u32		m_InstanceCount;
-		void	*m_RawPerInstanceBuffer;
-
 		TStridedMemoryView<CFloat4x4>			m_Transforms;
 		TStridedMemoryView<CFloat4>				m_Colors;
 		TStridedMemoryView<CFloat3>				m_EmissiveColors;
 		TStridedMemoryView<float>				m_AlphaRemapCursor;
-		TStridedMemoryView<float>				m_Cursors;
+		TStridedMemoryView<float>				m_VATCursors;
 
-		SMeshParticleBuffers()
-		:	m_InstanceCount(0)
-		,	m_RawPerInstanceBuffer(null)
-		{
-		}
-
-		~SMeshParticleBuffers()
-		{
-			PK_FREE(m_RawPerInstanceBuffer);
-			m_InstanceCount = 0;
-			m_RawPerInstanceBuffer = null;
-		}
+		// Skeletal anim:
+		TStridedMemoryView<u32>					m_AnimIdx0;
+		TStridedMemoryView<float>				m_AnimCursor0;
+		TStridedMemoryView<u32>					m_AnimIdx1;
+		TStridedMemoryView<float>				m_AnimCursor1;
+		TStridedMemoryView<float>				m_TransitionCursor;
 	};
 
 	TArray<Drawers::SCopyFieldDescPerMesh>	m_MeshAdditionalField;
 	TArray<SMeshParticleBuffers>			m_PerMeshBuffers;
+	PRefCountedMemoryBuffer					m_MeshBillboardingBuffer;
 
 	// Mapped Unity buffers:
 	TArray<void*>				m_MappedVtxBuffer;

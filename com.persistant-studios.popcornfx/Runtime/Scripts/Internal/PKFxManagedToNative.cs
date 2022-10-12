@@ -268,6 +268,8 @@ namespace PopcornFX
 		public static extern void UnloadFx(string path);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void ClearAllCallbacks();
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern IntPtr GetRuntimeVersion();
 
 #if UNITY_EDITOR
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -275,8 +277,7 @@ namespace PopcornFX
 		// Browse an effect content to create the Unity asset:
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool BrowseEffectContent(IntPtr pkfxContentPtr, int contentByteSize, string path);
-		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
-		public static extern IntPtr GetRuntimeVersion();
+
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 
 		public static extern bool SetPackSettings(ref SMirrorPackFxSettings settings);
@@ -312,10 +313,8 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.13.4 for " + m_UnityVersion;
-#if UNITY_EDITOR
+		public const string m_PluginVersion = "2.14.0 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
-#endif
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
 
@@ -539,6 +538,7 @@ namespace PopcornFX
 			SetDelegateOnRetrieveRendererBufferInfo(delegateHandler.DelegateToFunctionPointer(new RetrieveRendererBufferInfoCallback(OnRetrieveRendererBufferInfo)));
 			SetDelegateOnUpdateRendererBounds(delegateHandler.DelegateToFunctionPointer(new RendererBoundsUpdateCallback(OnRendererBoundsUpdate)));
 			SetDelegateOnGetMeshCount(delegateHandler.DelegateToFunctionPointer(new GetMeshCountCallback(OnGetMeshCount)));
+			SetDelegateOnGetMeshLODsCount(delegateHandler.DelegateToFunctionPointer(new GetMeshLODsCountCallback(OnGetMeshLODsCount)));
 			SetDelegateOnGetMeshBounds(delegateHandler.DelegateToFunctionPointer(new GetMeshBoundsCallback(OnGetMeshBounds)));
 #if UNITY_EDITOR
 			SetDelegateOnEffectAboutToBake(delegateHandler.DelegateToFunctionPointer(new EffectAboutToBakeCallback(OnEffectAboutToBake)));
@@ -555,9 +555,7 @@ namespace PopcornFX
 #endif
 			m_Samples = new float[1024];
 			m_SamplesHandle = GCHandle.Alloc(m_Samples, GCHandleType.Pinned);
-#if UNITY_EDITOR
 			m_CurrentVersionString = Marshal.PtrToStringAnsi(GetRuntimeVersion());
-#endif
 			m_IsStarted = true;
 		}
 
@@ -822,7 +820,7 @@ namespace PopcornFX
 				return -1;
 
 			var filter = renderingObject.AddComponent<MeshFilter>();
-			filter.mesh = renderer.Meshes[0];
+			filter.mesh = renderer.Meshes[0].m_Mesh;
 
 			m_Renderers.Add(new SMeshDesc(filter, mat, batchDesc, renderer, renderingObject));
 			Debug.Assert(m_Renderers[newId].m_Slice.mesh == filter.mesh);

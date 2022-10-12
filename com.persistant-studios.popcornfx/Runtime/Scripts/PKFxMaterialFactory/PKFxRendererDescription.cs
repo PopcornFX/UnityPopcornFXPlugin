@@ -45,7 +45,10 @@ namespace PopcornFX
 		Has_SoftVAT = (1 << 15),
 		Has_RigidVAT = (1 << 16),
 		Has_Emissive = (1 << 17),
-		Has_EmissiveRamp = (1 << 18)
+		Has_EmissiveRamp = (1 << 18),
+		Has_SkeletalAnim = (1 << 19),
+		Has_SkeletalInterpol = (1 << 20),
+		Has_SkeletalTrackInterpol = (1 << 21)
 	};
 
 	public enum EBlendMode : int
@@ -232,12 +235,93 @@ namespace PopcornFX
 			name += m_NormalizedData ? "Normalized Data" : "notNormalized Data";
 			name += " ";
 			name += m_BoundsPosition.ToString("F2");
-
 			name += "]";
 			return name;
 		}
 	}
 
+	[Serializable]
+	public class SBatchSkeletalAnimFeatureDesc
+	{
+		public bool m_Activated = false;
+		public string m_AnimTextureMap = null;
+		public int m_TextureResolX;
+		public int m_TextureResolY;
+		public int m_AnimCount;
+		public bool m_UseBoneScale;
+		public Vector3 m_TranslationBoundsMin;
+		public Vector3 m_TranslationBoundsMax;
+		public Vector3 m_ScaleBoundsMin;
+		public Vector3 m_ScaleBoundsMax;
+
+		public SBatchSkeletalAnimFeatureDesc(SRenderingFeatureSkeletalAnimDesc desc)
+		{
+			m_Activated = true;
+			if (desc.m_AnimTextureMap != IntPtr.Zero)
+			{
+				m_AnimTextureMap = Marshal.PtrToStringAnsi(desc.m_AnimTextureMap);
+			}
+			m_TextureResolX = desc.m_TextureResolX;
+			m_TextureResolY = desc.m_TextureResolY;
+			m_AnimCount = desc.m_AnimCount;
+			m_UseBoneScale = desc.m_UseBoneScale != 0 ? true : false;
+			m_TranslationBoundsMin = desc.m_TranslationBoundsMin;
+			m_TranslationBoundsMax = desc.m_TranslationBoundsMax;
+			m_ScaleBoundsMin = desc.m_ScaleBoundsMin;
+			m_ScaleBoundsMax = desc.m_ScaleBoundsMax;
+		}
+
+		internal string GetGeneratedName()
+		{
+			string name = "[Skeletal Anim:";
+
+			name += " ";
+			name += m_AnimTextureMap == null ? "none" : m_AnimTextureMap;
+			name += " ";
+			name += m_AnimCount;
+			name += " ";
+			name += m_TextureResolX;
+			name += " ";
+			name += m_TextureResolY;
+			name += " ";
+			name += m_AnimCount;
+			name += " ";
+			name += m_UseBoneScale;
+			name += " ";
+			name += m_TranslationBoundsMin;
+			name += " ";
+			name += m_TranslationBoundsMax;
+			name += " ";
+			name += m_ScaleBoundsMin;
+			name += " ";
+			name += m_ScaleBoundsMax;
+			name += "]";
+			return name;
+		}
+		internal string GetGeneratedShortName()
+		{
+			string name = "BAT_";
+
+			name += (m_AnimTextureMap == null || m_AnimTextureMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AnimTextureMap);
+			name += m_AnimCount;
+			name += "_";
+			name += m_TextureResolX;
+			name += "_";
+			name += m_TextureResolY;
+			name += "_";
+			name += m_AnimCount;
+			name += "_";
+			name += m_UseBoneScale ? "UBS" : "NBS";
+			name += m_TranslationBoundsMin;
+			name += "_";
+			name += m_TranslationBoundsMax;
+			name += "_";
+			name += m_ScaleBoundsMin;
+			name += "_";
+			name += m_ScaleBoundsMax;
+			return name;
+		}
+	}
 
 	[Serializable]
 	public class SEventDesc
@@ -278,10 +362,12 @@ namespace PopcornFX
 		public float				m_InvSoftnessDistance;
 		public float				m_AlphaClipThreshold;
 		public string				m_GeneratedName;
+		// VAT:
 		public SBatchVatFeatureDesc m_VatFeature = null;
-
-		//Lit Feature
+		// Lit:
 		public SBatchLitFeatureDesc	m_LitFeature = null;
+		// Skeletal anim:
+		public SBatchSkeletalAnimFeatureDesc m_SkeletalAnimFeature = null;
 
 		//Internal
 		[SerializeField]
@@ -324,6 +410,7 @@ namespace PopcornFX
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
 
 			m_VatFeature = null;
+			m_SkeletalAnimFeature = null;
 
 			m_CameraId = desc.m_CameraId;
 
@@ -394,6 +481,15 @@ namespace PopcornFX
 					m_LitFeature = new SBatchLitFeatureDesc(*litDesc);
 				else
 					m_LitFeature = null;
+			}
+
+			unsafe
+			{
+				SRenderingFeatureSkeletalAnimDesc *skeletonAnimDesc = (SRenderingFeatureSkeletalAnimDesc*)desc.m_SkeletalAnim.ToPointer();
+				if (skeletonAnimDesc != null)
+					m_SkeletalAnimFeature = new SBatchSkeletalAnimFeatureDesc(*skeletonAnimDesc);
+				else
+					m_SkeletalAnimFeature = null;
 			}
 			m_GeneratedName = GenerateNameFromDescription();
 			m_InternalId = idx;
@@ -488,6 +584,8 @@ namespace PopcornFX
 			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated)? "(none)" : m_LitFeature.GetGeneratedName();
 			finalName += " ";
 			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "(none)" : m_VatFeature.GetGeneratedName();
+			finalName += " ";
+			finalName += (m_SkeletalAnimFeature == null || !m_SkeletalAnimFeature.m_Activated) ? "(none)" : m_SkeletalAnimFeature.GetGeneratedName();
 			if (m_Type != ERendererType.Mesh)
 			{
 				finalName += " ";
@@ -587,6 +685,7 @@ namespace PopcornFX
 			finalName += (m_EmissiveMap == null || m_EmissiveMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_EmissiveMap) + "_";
 			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "U_" : m_LitFeature.GetGeneratedShortName();
 			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "U_" : m_VatFeature.GetGeneratedShortName();
+			finalName += (m_SkeletalAnimFeature == null || !m_SkeletalAnimFeature.m_Activated) ? "U_" : m_SkeletalAnimFeature.GetGeneratedShortName();
 			if (m_Type != ERendererType.Mesh)
 			{
 				finalName += (m_AlphaRemap == null || m_AlphaRemap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaRemap) + "_";

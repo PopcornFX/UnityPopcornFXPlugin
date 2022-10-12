@@ -328,6 +328,8 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void								UnloadFx(const char *path);
 
+	MANAGED_TO_POPCORN_CONVENTION const char						*GetRuntimeVersion();
+
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop
 #endif

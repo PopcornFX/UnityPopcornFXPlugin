@@ -211,7 +211,6 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers_curve.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers_low_discrepancy.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_transforms_helper.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_units.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_collidable_object.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_colliders.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_colliders.inl" />

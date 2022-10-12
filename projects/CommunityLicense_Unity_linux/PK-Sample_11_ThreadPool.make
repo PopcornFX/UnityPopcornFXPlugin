@@ -81,14 +81,14 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/GPUContext_D3D.o
 GENERATED += $(OBJDIR)/Main.o
 GENERATED += $(OBJDIR)/SampleScene.o
 GENERATED += $(OBJDIR)/ThreadPool.o
 GENERATED += $(OBJDIR)/ThreadPool_Default.o
 GENERATED += $(OBJDIR)/ThreadPool_Mono.o
 GENERATED += $(OBJDIR)/precompiled.o
-OBJECTS += $(OBJDIR)/GPUContext.o
+OBJECTS += $(OBJDIR)/GPUContext_D3D.o
 OBJECTS += $(OBJDIR)/Main.o
 OBJECTS += $(OBJDIR)/SampleScene.o
 OBJECTS += $(OBJDIR)/ThreadPool.o
@@ -173,7 +173,7 @@ $(OBJDIR)/ThreadPool_Default.o: ../../SDK/Samples/PK-Samples/PK-Sample_11_Thread
 $(OBJDIR)/ThreadPool_Mono.o: ../../SDK/Samples/PK-Samples/PK-Sample_11_ThreadPool/ThreadPool_Mono.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/GPUContext.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext.cpp
+$(OBJDIR)/GPUContext_D3D.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext_D3D.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/SampleScene.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/Scene/SampleScene.cpp

@@ -48,7 +48,10 @@ namespace PopcornFX
 			"SoftVAT",
 			"RigidVAT",
 			"Emissive",
-			"EmissiveRampMap"
+			"EmissiveRampMap",
+			"SkeletonAnimation",
+			"SkeletonAnimationInterpolate",
+			"SkeletonAnimationInterpolateTracks"
 		};
 
 		public static string GetSelectedPathOrFallback()

@@ -281,7 +281,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\GPUContext.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\GPUContext_D3D.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_07_LOD\LOD.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_07_LOD\Main.cpp" />

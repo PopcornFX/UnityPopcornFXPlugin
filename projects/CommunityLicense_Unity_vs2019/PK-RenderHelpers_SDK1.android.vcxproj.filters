@@ -4,9 +4,6 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\basic_renderer_properties">
-      <UniqueIdentifier>{94D8D18B-0047-270B-4930-E20AB5DD1CA7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\batch_jobs">
       <UniqueIdentifier>{5F763A5A-4B5A-FBAF-B4BA-F502A0BDE531}</UniqueIdentifier>
     </Filter>
@@ -28,6 +25,9 @@
     <Filter Include="Headers\frame_collector\legacy">
       <UniqueIdentifier>{A57E694B-91A4-33B2-7AEA-B87D66AF587E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\render_features">
+      <UniqueIdentifier>{8E8F6F95-FAC6-B72C-03D1-1B506F87DE25}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\resource_manager">
       <UniqueIdentifier>{9294F164-7EB9-40E5-A704-267593883F03}</UniqueIdentifier>
     </Filter>
@@ -36,12 +36,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_basic_renderer_properties.h">
-      <Filter>Headers\basic_renderer_properties</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_vertex_animation_renderer_properties.h">
-      <Filter>Headers\basic_renderer_properties</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs.h">
       <Filter>Headers\batch_jobs</Filter>
     </ClInclude>
@@ -263,6 +257,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h">
       <Filter>Headers\frame_collector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_basic.h">
+      <Filter>Headers\render_features</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_skeletal.h">
+      <Filter>Headers\render_features</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_static.h">
+      <Filter>Headers\render_features</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.h">
       <Filter>Headers\resource_manager</Filter>

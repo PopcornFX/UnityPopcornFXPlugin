@@ -172,8 +172,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_basic_renderer_properties.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_vertex_animation_renderer_properties.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_cpu.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_gpu.h" />
@@ -248,6 +246,9 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_particle_render_data_factory.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_render_medium.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_basic.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_skeletal.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_static.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.inl" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\rh_init.h" />
@@ -257,8 +258,6 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_basic_renderer_properties.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_vertex_animation_renderer_properties.cpp" />
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_cpu.cpp" />
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_gpu.cpp" />
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_decal_cpu.cpp" />
@@ -312,6 +311,9 @@
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_basic.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_vat_skeletal.cpp" />
+    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_vat_static.cpp" />
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_init.cpp" />
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_main.cpp" />
   </ItemGroup>

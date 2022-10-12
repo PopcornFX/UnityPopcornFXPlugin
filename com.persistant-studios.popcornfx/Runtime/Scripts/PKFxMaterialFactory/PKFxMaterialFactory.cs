@@ -3,9 +3,10 @@
 //----------------------------------------------------------------------------
 using System;
 using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Jobs;
+using Unity.Collections;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -370,6 +371,109 @@ namespace PopcornFX
 
 #endif
 		}
+		private struct SetupMeshBoneInfluences : IJobParallelFor
+		{
+			public NativeArray<Vector4>		m_OutBoneWeights;
+			public NativeArray<Vector4>		m_OutBoneIndices;
+
+			[ReadOnly]
+			public NativeArray<BoneWeight>	m_InBoneWeights;
+			[ReadOnly]
+			public NativeArray<int>			m_ReorderBones;
+
+			public void Execute(int h)
+			{
+				m_OutBoneWeights[h] = new Vector4(	m_InBoneWeights[h].weight0,
+													m_InBoneWeights[h].weight1,
+													m_InBoneWeights[h].weight2,
+													m_InBoneWeights[h].weight3);
+				m_OutBoneIndices[h] = new Vector4(	m_ReorderBones[m_InBoneWeights[h].boneIndex0],
+													m_ReorderBones[m_InBoneWeights[h].boneIndex1],
+													m_ReorderBones[m_InBoneWeights[h].boneIndex2],
+													m_ReorderBones[m_InBoneWeights[h].boneIndex3]);
+			}
+		}
+
+		private bool	_RetrieveBoneWeights(Mesh mesh, int[] reorderBones, out Vector4[] weights, out Vector4[] indices)
+		{
+			// Get the number of bone weights per vertex
+			var bonesPerVertex = mesh.GetBonesPerVertex();
+			if (bonesPerVertex.Length == 0)
+			{
+				weights = null;
+				indices = null;
+				return false;
+			}
+
+			Vector4[]		vBoneWeights = new Vector4[mesh.vertexCount];
+			Vector4[]		vBoneIndices = new Vector4[mesh.vertexCount];
+
+			BoneWeight[]	boneWeights = mesh.boneWeights;
+
+			SetupMeshBoneInfluences job = new SetupMeshBoneInfluences();
+
+			job.m_OutBoneIndices = new NativeArray<Vector4>(mesh.boneWeights.Length, Allocator.Persistent);
+			job.m_OutBoneWeights = new NativeArray<Vector4>(mesh.boneWeights.Length, Allocator.Persistent);
+			job.m_InBoneWeights = new NativeArray<BoneWeight>(mesh.boneWeights.Length, Allocator.TempJob);
+			job.m_InBoneWeights.CopyFrom(mesh.boneWeights);
+			job.m_ReorderBones = new NativeArray<int>(reorderBones.Length, Allocator.TempJob);
+			job.m_ReorderBones.CopyFrom(reorderBones);
+			
+			Unity.Jobs.JobHandle handle = job.Schedule(mesh.boneWeights.Length, 64);
+			handle.Complete();
+
+			weights = job.m_OutBoneWeights.ToArray();
+			indices = job.m_OutBoneIndices.ToArray();
+
+			job.m_OutBoneWeights.Dispose();
+			job.m_OutBoneIndices.Dispose();
+			job.m_InBoneWeights.Dispose();
+			job.m_ReorderBones.Dispose();
+			return true;
+		}
+
+		protected int	_RecursiveGetBoneIdx(Transform boneToFind, Transform currentBoneLevel, Transform[] allBones, ref int currentIdx)
+		{
+			if (currentBoneLevel == boneToFind)
+				return currentIdx;
+
+			List<Transform>		childs = new List<Transform>(currentBoneLevel.childCount);
+
+			for (int childIdx = 0; childIdx < currentBoneLevel.childCount; ++childIdx)
+			{
+				Transform	currentChild = currentBoneLevel.GetChild(childIdx);
+				bool		hasBeenInserted = false;
+
+				for (int i = 0; i < childs.Count && !hasBeenInserted; ++i)
+				{
+					if (childs[i].name.CompareTo(currentChild.name) > 0)
+					{
+						childs.Insert(i, currentChild);
+						hasBeenInserted = true;
+					}
+				}
+				if (!hasBeenInserted)
+					childs.Add(currentChild);
+			}
+			Debug.Assert(currentBoneLevel.childCount == childs.Count);
+			for (int childIdx = 0; childIdx < childs.Count; ++childIdx)
+			{
+				Transform	currentChild = childs[childIdx];
+				// Make sure the current child is actually a bone:
+				foreach (Transform cmp in allBones)
+				{
+					if (cmp == currentChild)
+					{
+						++currentIdx;
+						break;
+					}
+				}
+				int		foundBone = _RecursiveGetBoneIdx(boneToFind, currentChild, allBones, ref currentIdx);
+				if (foundBone != -1)
+					return foundBone;
+			}
+			return -1;
+		}
 
 		protected void _SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)
 		{
@@ -388,17 +492,117 @@ namespace PopcornFX
 			}
 			if (DepDesc != null)
 			{
-				GameObject meshGO = DepDesc.m_Object as GameObject;
-				List<Mesh> meshes = new List<Mesh>();
-				List<Matrix4x4> trans = new List<Matrix4x4>();
-				MeshFilter meshFilter = meshGO.GetComponent<MeshFilter>();
+				GameObject									meshGO = DepDesc.m_Object as GameObject;
+
+				if (meshGO == null)
+					return;
+
+				LODGroup									lodGroup = meshGO.GetComponent<LODGroup>();
+				List<Renderer>								renderers = new List<Renderer>();
+				List<PKFxMeshInstancesRenderer.MeshToDraw>	meshes = new List<PKFxMeshInstancesRenderer.MeshToDraw>();
+				List<SkinnedMeshRenderer>					skinnedMeshes = new List<SkinnedMeshRenderer>();
+				List<Matrix4x4>								trans = new List<Matrix4x4>();
+
+				if (lodGroup != null)
+				{
+					int		lodIdx = 0;
+					meshRenderer.m_PerLODsSubmeshCount = new int[lodGroup.GetLODs().Length];
+					foreach (LOD lod in lodGroup.GetLODs())
+					{
+						meshRenderer.m_PerLODsSubmeshCount[lodIdx] = lod.renderers.Length;
+						foreach (Renderer renderer in lod.renderers)
+						{
+							if (renderers != null)
+								renderers.Add(renderer);
+						}
+						++lodIdx;
+					}
+				}
+				else
+				{
+					meshRenderer.m_PerLODsSubmeshCount = new int[1];
+					Renderer[]		foundRenderers = meshGO.GetComponentsInChildren<Renderer>();
+					meshRenderer.m_PerLODsSubmeshCount[0] = foundRenderers.Length;
+					foreach (Renderer rdr in foundRenderers)
+						renderers.Add(rdr);
+				}
+
+				int lodCurCount = 0;
+				int subMeshIdx = 0;
+				int lodCurIdx = 0;
+
+				foreach (Renderer rdr in renderers)
+				{
+					if (lodCurCount == meshRenderer.m_PerLODsSubmeshCount[lodCurIdx])
+					{
+						lodCurCount = 0;
+						// Update the submesh count to take into account the sharedMesh.subMeshCount:
+						meshRenderer.m_PerLODsSubmeshCount[lodCurIdx] = subMeshIdx;
+						subMeshIdx = 0;
+						++lodCurIdx;
+					}
+					MeshRenderer		unityMeshRdr = rdr as MeshRenderer;
+					SkinnedMeshRenderer	unitySkinnedMeshRdr = rdr as SkinnedMeshRenderer;
+					Mesh				sharedMesh = null;
+
+					if (unityMeshRdr != null)
+					{
+						MeshFilter	meshFilter = unityMeshRdr.gameObject.GetComponent<MeshFilter>();
+						sharedMesh = meshFilter.sharedMesh;
+					}
+					else if (unitySkinnedMeshRdr)
+					{
+						sharedMesh = unitySkinnedMeshRdr.sharedMesh;
+						if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalAnim))
+						{
+							Mesh skinnedMesh = new Mesh();
+
+							int[] reorderBones = new int[unitySkinnedMeshRdr.bones.Length];
+
+							for (int boneIdx = 0; boneIdx < unitySkinnedMeshRdr.bones.Length; ++boneIdx)
+							{
+								// Debug.Log("skinnedMeshes bone " + boneIdx + " name is " + skinnedMeshes[i].bones[boneIdx].name);
+								int currentIdx = 0;
+								reorderBones[boneIdx] = _RecursiveGetBoneIdx(unitySkinnedMeshRdr.bones[boneIdx], unitySkinnedMeshRdr.rootBone, unitySkinnedMeshRdr.bones, ref currentIdx);
+							}
+
+							skinnedMesh.vertices = sharedMesh.vertices;
+							skinnedMesh.triangles = sharedMesh.triangles;
+							skinnedMesh.bounds = sharedMesh.bounds;
+							skinnedMesh.colors = sharedMesh.colors;
+							skinnedMesh.normals = sharedMesh.normals;
+							skinnedMesh.tangents = sharedMesh.tangents;
+							skinnedMesh.uv = sharedMesh.uv;
+							skinnedMesh.uv2 = sharedMesh.uv2;
+							Vector4[] boneWeights;
+							Vector4[] boneIndices;
+							_RetrieveBoneWeights(sharedMesh, reorderBones, out boneWeights, out boneIndices);
+							skinnedMesh.SetUVs(2, boneWeights);
+							skinnedMesh.SetUVs(3, boneIndices);
+							sharedMesh = skinnedMesh;
+						}
+					}
+
+					for (int subMesh = 0; subMesh < sharedMesh.subMeshCount; ++subMesh)
+					{
+						meshes.Add(new PKFxMeshInstancesRenderer.MeshToDraw(sharedMesh,
+																			subMesh,
+																			rdr.gameObject.transform.localToWorldMatrix));
+						++subMeshIdx;
+					}
+					++lodCurCount;
+				}
+
+#if false
 				if (meshFilter != null)
 				{
+					// Has mesh filter at root:
 					meshes.Add(meshFilter.sharedMesh);
 					trans.Add(meshGO.transform.localToWorldMatrix);
 				}
 				if (meshes.Count == 0)
 				{
+					// Has mesh filter in childrens:
 					MeshFilter[] meshFilters = meshGO.GetComponentsInChildren<MeshFilter>();
 					for (int i = 0; i < meshFilters.Length; ++i)
 					{
@@ -406,7 +610,23 @@ namespace PopcornFX
 						trans.Add(meshGO.transform.localToWorldMatrix);
 					}
 				}
+				if (meshes.Count == 0)
+				{
+					// Has skinned mesh renderer in childrens:
+					SkinnedMeshRenderer[] skinnedMeshRenderers = meshGO.GetComponentsInChildren<SkinnedMeshRenderer>();
+					for (int i = 0; i < skinnedMeshRenderers.Length; ++i)
+					{
+						meshes.Add(skinnedMeshRenderers[i].sharedMesh);
+						trans.Add(skinnedMeshRenderers[i].transform.localToWorldMatrix);
+						skinnedMeshes.Add(skinnedMeshRenderers[i]);
+
+						int bonesOffset = 1;
+						for (GameObject curGo = skinnedMeshRenderers[i].gameObject; curGo != meshGO; curGo = curGo.transform.parent.gameObject)
+							++bonesOffset;
+					}
+				}
 				meshRenderer.m_MeshesImportTransform = trans.ToArray();
+#endif
 				meshRenderer.Meshes = meshes.ToArray();
 
 				PKFxShaderInputBindings binding = GetRuntimeShaderInputBindings(batchDesc, PKFxManager.GetBuiltAsset());
@@ -415,6 +635,15 @@ namespace PopcornFX
 				meshRenderer.m_EmissiveColorPropertyName = binding.m_MeshEmissiveColorPropertyName;
 				meshRenderer.m_AlphaRemapCursorPropertyName = binding.m_MeshAlphaCursorPropertyName;
 				meshRenderer.m_VATCursorPropertyName = binding.m_MeshVATCursorPropertyName;
+				meshRenderer.m_SkeletalAnimCursor0PropertyName = binding.m_SkeletalAnimCursor0PropertyName;
+				meshRenderer.m_SkeletalAnimCursor1PropertyName = binding.m_SkeletalAnimCursor1PropertyName;
+				meshRenderer.m_SkeletalAnimIdx0PropertyName = binding.m_SkeletalAnimIdx0PropertyName;
+				meshRenderer.m_SkeletalAnimIdx1PropertyName = binding.m_SkeletalAnimIdx1PropertyName;
+				meshRenderer.m_SkeletalAnimTransitionPropertyName = binding.m_SkeletalAnimTransitionPropertyName;
+				meshRenderer.m_SkeletalMeshTransformRow0 = binding.m_MeshTransformRow0PropertyName;
+				meshRenderer.m_SkeletalMeshTransformRow1 = binding.m_MeshTransformRow1PropertyName;
+				meshRenderer.m_SkeletalMeshTransformRow2 = binding.m_MeshTransformRow2PropertyName;
+				meshRenderer.m_SkeletalMeshTransformRow3 = binding.m_MeshTransformRow3PropertyName;
 			}
 			else
 			{

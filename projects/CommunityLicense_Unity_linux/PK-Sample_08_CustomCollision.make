@@ -85,7 +85,7 @@ GENERATED += $(OBJDIR)/CustomCollision.o
 GENERATED += $(OBJDIR)/CustomCollision_Scene.o
 GENERATED += $(OBJDIR)/CustomCollision_SimInterface_Decl.o
 GENERATED += $(OBJDIR)/CustomCollision_SimInterface_Impl.o
-GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/GPUContext_D3D.o
 GENERATED += $(OBJDIR)/Main.o
 GENERATED += $(OBJDIR)/SampleScene.o
 GENERATED += $(OBJDIR)/precompiled.o
@@ -93,7 +93,7 @@ OBJECTS += $(OBJDIR)/CustomCollision.o
 OBJECTS += $(OBJDIR)/CustomCollision_Scene.o
 OBJECTS += $(OBJDIR)/CustomCollision_SimInterface_Decl.o
 OBJECTS += $(OBJDIR)/CustomCollision_SimInterface_Impl.o
-OBJECTS += $(OBJDIR)/GPUContext.o
+OBJECTS += $(OBJDIR)/GPUContext_D3D.o
 OBJECTS += $(OBJDIR)/Main.o
 OBJECTS += $(OBJDIR)/SampleScene.o
 OBJECTS += $(OBJDIR)/precompiled.o
@@ -178,7 +178,7 @@ $(OBJDIR)/CustomCollision_SimInterface_Impl.o: ../../SDK/Samples/PK-Samples/PK-S
 $(OBJDIR)/Main.o: ../../SDK/Samples/PK-Samples/PK-Sample_08_CustomCollision/Main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/GPUContext.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext.cpp
+$(OBJDIR)/GPUContext_D3D.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext_D3D.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/SampleScene.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/Scene/SampleScene.cpp

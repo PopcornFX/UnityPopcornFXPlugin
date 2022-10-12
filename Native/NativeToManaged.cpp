@@ -43,7 +43,8 @@ extern "C"
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveRendererBufferInfo)(int rendererGUID, const SRetrieveRendererInfo *info) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnUpdateRendererBounds)(int rendererGUID, const SUpdateRendererBounds *bounds) = null;
 
-	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnGetMeshCount)(int rendererGUID) = null;
+	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnGetMeshCount)(int rendererGUID, int lod) = null;
+	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnGetMeshLODsCount)(int rendererGUID) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnGetMeshBounds)(int rendererGUID, int submesh, void* bbox) = null;
 
 	//----------------------------------------------------------------------------
@@ -149,7 +150,12 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshCount(void *delegatePtr)
 	{
-		_OnGetMeshCount = (int (POPCORN_TO_MANAGED_CONVENTION *)(int rendererGUID))delegatePtr;
+		_OnGetMeshCount = (int (POPCORN_TO_MANAGED_CONVENTION *)(int rendererGUID, int lod))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshLODsCount(void* delegatePtr)
+	{
+		_OnGetMeshLODsCount = (int (POPCORN_TO_MANAGED_CONVENTION*)(int rendererGUID))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshBounds(void *delegatePtr)
@@ -416,7 +422,7 @@ extern "C"
 		}
 	}
 
-	int											OnGetMeshCount(int rendererGUID)
+	int											OnGetMeshCount(int rendererGUID, int lod)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -425,7 +431,21 @@ extern "C"
 		}
 		if (PK_VERIFY(_OnGetMeshCount != null))
 		{
-			return _OnGetMeshCount(rendererGUID);
+			return _OnGetMeshCount(rendererGUID, lod);
+		}
+		return -1;
+	}
+
+	int											OnGetMeshLODsCount(int rendererGUID)
+	{
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnGetMeshLODsCount not called on main thread: callback ignored");
+			return -1;
+		}
+		if (PK_VERIFY(_OnGetMeshLODsCount != null))
+		{
+			return _OnGetMeshLODsCount(rendererGUID);
 		}
 		return -1;
 	}

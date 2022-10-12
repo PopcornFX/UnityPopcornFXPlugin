@@ -93,6 +93,20 @@ namespace PopcornFX
 		public Vector2 m_PaddedRatio;
 	};
 
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SRenderingFeatureSkeletalAnimDesc
+	{
+		public IntPtr m_AnimTextureMap;
+		public int m_TextureResolX;
+		public int m_TextureResolY;
+		public int m_AnimCount;
+		public int m_UseBoneScale;
+		public Vector3 m_TranslationBoundsMin;
+		public Vector3 m_TranslationBoundsMax;
+		public Vector3 m_ScaleBoundsMin;
+		public Vector3 m_ScaleBoundsMax;
+	};
+
 	// Create Renderers:
 	// Billboards and ribbons:
 	[StructLayout(LayoutKind.Sequential)]
@@ -137,6 +151,7 @@ namespace PopcornFX
 
 		public IntPtr m_LitRendering;
 		public IntPtr m_VatRendering;
+		public IntPtr m_SkeletalAnim;
 	};
 
 
@@ -301,6 +316,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnGetMeshCount(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnGetMeshLODsCount(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnGetMeshBounds(IntPtr delegatePtr);
 
 #if UNITY_EDITOR
@@ -338,12 +355,6 @@ namespace PopcornFX
 		{
 			string path = Marshal.PtrToStringAnsi(pathHandler);
 			string ext = Path.GetExtension(path);
-
-			if (ext.ToLower() == ".fbx")
-			{
-				ext = ".pkmm";
-				path = Path.ChangeExtension(path, ext);
-			}
 
 			if (m_Dependencies != null)
 			{
@@ -717,17 +728,18 @@ namespace PopcornFX
 			// Create the material description:
 			Material mat = PKFxSettings.MaterialFactory.ResolveParticleMaterial(batchDesc);
 
-			if (mat != null)
+			if (mat == null)
 			{
-				if (PKFxSettings.UseMeshInstancing)
-					mat.enableInstancing = true;
-				else
-					mat.enableInstancing = false;
-				GameObject renderingObject = GetNewRenderingObject(batchDesc.m_GeneratedName);
-
-				return SetupMeshRenderingObject(renderingObject, batchDesc, mat);
+				Debug.LogError("Could not find the material for renderer " + batchDesc.GenerateNameFromDescription());
+				return -1;
 			}
-			return -1;
+
+			if (PKFxSettings.UseMeshInstancing)
+				mat.enableInstancing = true;
+			else
+				mat.enableInstancing = false;
+			GameObject renderingObject = GetNewRenderingObject(batchDesc.m_GeneratedName);
+			return SetupMeshRenderingObject(renderingObject, batchDesc, mat);
 		}
 
 		//----------------------------------------------------------------------------
@@ -1268,17 +1280,35 @@ namespace PopcornFX
 		}
 
 
-		private delegate int GetMeshCountCallback(int rendererGUID);
+		private delegate int GetMeshCountCallback(int rendererGUID, int lod);
 
 		[MonoPInvokeCallback(typeof(GetMeshCountCallback))]
-		public static int OnGetMeshCount(int rendererGUID)
+		public static int OnGetMeshCount(int rendererGUID, int lod)
 		{
 			if (rendererGUID < 0)
 				return -1;
 			SMeshDesc desc = m_Renderers[rendererGUID];
-			return desc.m_InstancesRenderer.Meshes.Length;
+			if (desc == null ||
+				desc.m_InstancesRenderer == null ||
+				desc.m_InstancesRenderer.m_PerLODsSubmeshCount == null)
+				return -1;
+			return desc.m_InstancesRenderer.m_PerLODsSubmeshCount[lod];
 		}
 
+		private delegate int GetMeshLODsCountCallback(int rendererGUID);
+
+		[MonoPInvokeCallback(typeof(GetMeshCountCallback))]
+		public static int OnGetMeshLODsCount(int rendererGUID)
+		{
+			if (rendererGUID < 0)
+				return -1;
+			SMeshDesc desc = m_Renderers[rendererGUID];
+			if (desc == null ||
+				desc.m_InstancesRenderer == null ||
+				desc.m_InstancesRenderer.m_PerLODsSubmeshCount == null)
+				return -1;
+			return desc.m_InstancesRenderer.m_PerLODsSubmeshCount.Length;
+		}
 
 		private delegate void GetMeshBoundsCallback(int rendererGUID, int submesh, IntPtr bbox);
 
@@ -1288,8 +1318,12 @@ namespace PopcornFX
 			if (rendererGUID < 0)
 				return;
 			SMeshDesc desc = m_Renderers[rendererGUID];
-			Bounds bounds = desc.m_InstancesRenderer.Meshes[submesh].bounds;
-			Matrix4x4 trans = desc.m_InstancesRenderer.m_MeshesImportTransform[submesh];
+			if (desc == null ||
+				desc.m_InstancesRenderer == null ||
+				desc.m_InstancesRenderer.m_PerLODsSubmeshCount == null)
+				return;
+			Bounds bounds = desc.m_InstancesRenderer.Meshes[submesh].m_Mesh.bounds;
+			Matrix4x4 trans = desc.m_InstancesRenderer.Meshes[submesh].m_ImportTransform;
 
 			Vector3 scale = new Vector3(
 				trans.GetColumn(0)[0],

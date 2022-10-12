@@ -23,7 +23,6 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION bool					PopcornFXEditorStartup();
 	MANAGED_TO_POPCORN_CONVENTION ManagedBool			BrowseEffectContent(void *pkfxContentPtr, int contentByteSize, const char *path);
-	MANAGED_TO_POPCORN_CONVENTION const char			*GetRuntimeVersion();
 	MANAGED_TO_POPCORN_CONVENTION bool					SetPackSettings(const SMirrorPackFxSettings *settings);
 	MANAGED_TO_POPCORN_CONVENTION bool					StartPackWatcher();
 	MANAGED_TO_POPCORN_CONVENTION void					PausePackWatcher();

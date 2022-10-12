@@ -50,7 +50,8 @@ namespace PopcornFX
 
 		public static string PopcornFXVersion()
 		{
-			return PKFxManagerImpl.m_PluginVersion;
+			StartupPopcorn(false);
+			return PKFxManagerImpl.m_CurrentVersionString;
 		}
 
 		public static bool IsDllLoaded()

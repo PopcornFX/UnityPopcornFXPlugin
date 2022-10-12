@@ -6,8 +6,9 @@
 #include "RuntimeManager.h"
 #include "UnityBillboardingBatchPolicy.h"
 #include "UnityRenderDataFactory.h"
-#include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
-#include <pk_render_helpers/include/basic_renderer_properties/rh_vertex_animation_renderer_properties.h>
+#include <pk_render_helpers/include/render_features/rh_features_basic.h>
+#include <pk_render_helpers/include/render_features/rh_features_vat_static.h>
+#include <pk_render_helpers/include/render_features/rh_features_vat_skeletal.h>
 
 __PK_API_BEGIN
 //----------------------------------------------------------------------------
@@ -22,7 +23,10 @@ CUnityBillboardingBatchPolicy::CUnityBillboardingBatchPolicy()
 ,	m_ParticleCount(0)
 ,	m_PrevParticleCount(0)
 ,	m_MeshIsValid(false)
+,	m_UseSkeletalAnimData(false)
+,	m_UseSkeletalAnimInterpolTracksData(false)
 ,	m_UnusedFrameCount(0)
+,	m_MeshBillboardingBuffer(null)
 ,	m_MappedIdxBuffer(null)
 ,	m_MappedInfoBillboardBuffer(null)
 ,	m_MappedAtlasesBuffer(null)
@@ -669,6 +673,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 	bool	hasEmissiveColor = false;
 	bool	hasAlphaRemap = false;
 	bool	hasVAT = false;
+	u32		skeletalAnimMask = 0;
 
 	PK_ASSERT((allocBuffers.m_ToGenerate.m_GeneratedInputs & Drawers::GenInput_Matrices) != 0);
 	for (u32 i = 0; i < allocBuffers.m_ToGenerate.m_AdditionalGeneratedInputs.Count(); ++i)
@@ -698,88 +703,96 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			perMeshDataSize += sizeof(float);
 			hasVAT = true;
 		}
+		else if (addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimation_AnimationCursor() && addInput.m_Type == BaseType_Float)
+			skeletalAnimMask |= (1 << 0);
+		else if (addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimation_CurrentAnimTrack() && addInput.m_Type == BaseType_I32)
+			skeletalAnimMask |= (1 << 1);
+		else if (addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks_NextAnimationCursor() && addInput.m_Type == BaseType_Float)
+			skeletalAnimMask |= (1 << 2);
+		else if (addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks_NextAnimTrack() && addInput.m_Type == BaseType_I32)
+			skeletalAnimMask |= (1 << 3);
+		else if (addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks_TransitionRatio() && addInput.m_Type == BaseType_Float)
+			skeletalAnimMask |= (1 << 4);
 	}
 
-	m_MeshIsValid = true;
+	m_UseSkeletalAnimData = (skeletalAnimMask & 0x3) == 0x3;
+	m_UseSkeletalAnimInterpolTracksData = (skeletalAnimMask & 0x1F) == 0x1F;
+
+	if (m_UseSkeletalAnimData)
+		perMeshDataSize += sizeof(CUint2);
+	if (m_UseSkeletalAnimInterpolTracksData)
+		perMeshDataSize += sizeof(CUint3);
+
 	int	rdrGUID = m_UnityMeshInfoPerViews[0].m_RendererGUID;
 
-	if (m_PerMeshBuffers.Count() < allocBuffers.m_PerMeshParticleCount.Count())
-		m_PerMeshBuffers.Resize(allocBuffers.m_PerMeshParticleCount.Count());
+	u32			overEstimatedInstanceCount = Mem::Align(allocBuffers.m_TotalParticleCount, 0x100);
+	u32			buffSize = overEstimatedInstanceCount * perMeshDataSize;
+
+	if (m_MeshBillboardingBuffer == null || m_MeshBillboardingBuffer->DataSizeInBytes() < buffSize)
+		m_MeshBillboardingBuffer = CRefCountedMemoryBuffer::AllocAligned(buffSize, 0x10);
+
+	// Allocations can fail below, if the function returns because of this, m_MeshIsValid will be false
+	m_MeshIsValid = false;
+
+	if (!PK_VERIFY(m_PerMeshBuffers.Resize(allocBuffers.m_PerMeshParticleCount.Count())))
+		return;
+
+	void *currentBuffPtr = m_MeshBillboardingBuffer->Data<void>();
 	for (u32 subMesh = 0; subMesh < allocBuffers.m_PerMeshParticleCount.Count(); ++subMesh)
 	{
-		PK_ASSERT((subMesh < m_PerMeshBuffers.Count()));
-
-		SMeshParticleBuffers	&meshBuff = m_PerMeshBuffers[subMesh];
 		u32						particleCount = allocBuffers.m_PerMeshParticleCount[subMesh];
+		SMeshParticleBuffers	&meshBuff = m_PerMeshBuffers[subMesh];
+		void					*inputOffset = Mem::AdvanceRawPointer(currentBuffPtr, allocBuffers.m_PerMeshBufferOffset[subMesh] * perMeshDataSize);
 
-		if (meshBuff.m_InstanceCount < particleCount)
-		{
-			u32			overEstimatedInstanceCount = Mem::Align(particleCount, 0x100);
-			u32			buffSize = overEstimatedInstanceCount * perMeshDataSize;
-
-			meshBuff.m_InstanceCount = overEstimatedInstanceCount;
-			// Lets say that we only handle meshes transform, color and cursor for VAT (float4x4, float4 and float):
-			if (meshBuff.m_RawPerInstanceBuffer != null)
-				PK_FREE(meshBuff.m_RawPerInstanceBuffer);
-			meshBuff.m_RawPerInstanceBuffer = PK_MALLOC_ALIGNED(buffSize, 0x10);
-			if (!PK_VERIFY(meshBuff.m_RawPerInstanceBuffer != null))
-			{
-				m_MeshIsValid = false;
-				CLog::Log(PK_ERROR, "Could not allocate the mesh instance buffer");
-				m_MeshIsValid = false;
-				return;
-			}
-			if (rdrGUID >= 0)
-			{
-				if (m_MaterialDescMesh.m_HasMeshAtlas)
-				{
-					::OnSetMeshInstancesBuffer(rdrGUID, subMesh, meshBuff.m_RawPerInstanceBuffer);
-				}
-				else
-				{
-					::OnSetMeshInstancesBuffer(rdrGUID, -1, meshBuff.m_RawPerInstanceBuffer);
-				}
-			}
-		}
-
-		void	*currentBuffPtr = meshBuff.m_RawPerInstanceBuffer;
+		::OnSetMeshInstancesBuffer(rdrGUID, subMesh, inputOffset);
 		// Transform matrices:
-		meshBuff.m_Transforms = TMemoryView<CFloat4x4>(static_cast<CFloat4x4*>(currentBuffPtr), particleCount);
-		currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(CFloat4x4));
+		meshBuff.m_Transforms = TMemoryView<CFloat4x4>(static_cast<CFloat4x4*>(inputOffset), particleCount);
+		inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat4x4));
 		if (hasDiffuseColor)
 		{
 			// Diffuse colors:
-			meshBuff.m_Colors = TMemoryView<CFloat4>(static_cast<CFloat4*>(currentBuffPtr), particleCount);
-			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(CFloat4));
+			meshBuff.m_Colors = TMemoryView<CFloat4>(static_cast<CFloat4*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat4));
 		}
 		if (hasEmissiveColor)
 		{
 			// Emissive colors:
-			meshBuff.m_EmissiveColors = TMemoryView<CFloat3>(static_cast<CFloat3*>(currentBuffPtr), particleCount);
-			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(CFloat3));
+			meshBuff.m_EmissiveColors = TMemoryView<CFloat3>(static_cast<CFloat3*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat3));
 		}
 		if (hasAlphaRemap)
 		{
 			// Alpharemap cursor:
-			meshBuff.m_AlphaRemapCursor = TMemoryView<float>(static_cast<float*>(currentBuffPtr), particleCount);
-			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(float));
+			meshBuff.m_AlphaRemapCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
 		}
 		if (hasVAT)
 		{
 			// VAT cursor:
-			meshBuff.m_Cursors = TMemoryView<float>(static_cast<float*>(currentBuffPtr), particleCount);
-			currentBuffPtr = Mem::AdvanceRawPointer(currentBuffPtr, particleCount * sizeof(float));
+			meshBuff.m_VATCursors = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
 		}
-
-		if (m_MaterialDescMesh.m_HasMeshAtlas)
+		if (m_UseSkeletalAnimData)
 		{
-			::OnSetMeshInstancesCount(rdrGUID, subMesh, particleCount);
+			meshBuff.m_AnimIdx0 = TMemoryView<u32>(static_cast<u32*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(u32));
+			meshBuff.m_AnimCursor0 = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
 		}
-		else
+		if (m_UseSkeletalAnimInterpolTracksData)
 		{
-			::OnSetMeshInstancesCount(rdrGUID, -1, particleCount);
+			meshBuff.m_AnimIdx1 = TMemoryView<u32>(static_cast<u32*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(u32));
+			meshBuff.m_AnimCursor1 = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+			meshBuff.m_TransitionCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
 		}
+		::OnSetMeshInstancesCount(rdrGUID, subMesh, particleCount);
 	}
+
+	// Restore m_MeshIsValid
+	m_MeshIsValid = true;
 
 	if (m_PrevParticleCount == 0 && m_ParticleCount != 0)
 	{
@@ -1315,14 +1328,49 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_EmissiveColors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
 		else if ((addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_Cursor()
-				|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_Cursor()
-				|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_Cursor()) 
-				&& addInput.m_Type == BaseType_Float)
+			|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_Cursor()
+			|| addInput.m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_Cursor())
+			&& addInput.m_Type == BaseType_Float)
 		{
 			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
 				return false;
 			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
-			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_Cursors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_VATCursors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_UseSkeletalAnimData && addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimation_AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AnimCursor0), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_UseSkeletalAnimData && addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimation_CurrentAnimTrack() && addInput.m_Type == BaseType_I32)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AnimIdx0), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_UseSkeletalAnimInterpolTracksData && addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks_NextAnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AnimCursor1), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_UseSkeletalAnimInterpolTracksData && addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks_NextAnimTrack() && addInput.m_Type == BaseType_I32)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AnimIdx1), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_UseSkeletalAnimInterpolTracksData && addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks_TransitionRatio() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_TransitionCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
 	}
 	meshBatch->m_Exec_Matrices.m_MatricesPerMesh = TStridedMemoryView<TStridedMemoryView<CFloat4x4> >(&m_PerMeshBuffers.First().m_Transforms, m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));

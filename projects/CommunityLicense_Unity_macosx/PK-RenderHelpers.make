@@ -86,7 +86,6 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/rh_basic_renderer_properties.o
 GENERATED += $(OBJDIR)/rh_batch_drawer.o
 GENERATED += $(OBJDIR)/rh_batch_jobs_billboard_cpu.o
 GENERATED += $(OBJDIR)/rh_batch_jobs_billboard_gpu.o
@@ -122,6 +121,9 @@ GENERATED += $(OBJDIR)/rh_decal.o
 GENERATED += $(OBJDIR)/rh_decal_cpu.o
 GENERATED += $(OBJDIR)/rh_decal_cpu_tasks.o
 GENERATED += $(OBJDIR)/rh_draw_requests.o
+GENERATED += $(OBJDIR)/rh_features_basic.o
+GENERATED += $(OBJDIR)/rh_features_vat_skeletal.o
+GENERATED += $(OBJDIR)/rh_features_vat_static.o
 GENERATED += $(OBJDIR)/rh_frame_collector.o
 GENERATED += $(OBJDIR)/rh_init.o
 GENERATED += $(OBJDIR)/rh_light.o
@@ -140,8 +142,6 @@ GENERATED += $(OBJDIR)/rh_sound.o
 GENERATED += $(OBJDIR)/rh_triangle.o
 GENERATED += $(OBJDIR)/rh_triangle_cpu.o
 GENERATED += $(OBJDIR)/rh_triangle_cpu_tasks.o
-GENERATED += $(OBJDIR)/rh_vertex_animation_renderer_properties.o
-OBJECTS += $(OBJDIR)/rh_basic_renderer_properties.o
 OBJECTS += $(OBJDIR)/rh_batch_drawer.o
 OBJECTS += $(OBJDIR)/rh_batch_jobs_billboard_cpu.o
 OBJECTS += $(OBJDIR)/rh_batch_jobs_billboard_gpu.o
@@ -177,6 +177,9 @@ OBJECTS += $(OBJDIR)/rh_decal.o
 OBJECTS += $(OBJDIR)/rh_decal_cpu.o
 OBJECTS += $(OBJDIR)/rh_decal_cpu_tasks.o
 OBJECTS += $(OBJDIR)/rh_draw_requests.o
+OBJECTS += $(OBJDIR)/rh_features_basic.o
+OBJECTS += $(OBJDIR)/rh_features_vat_skeletal.o
+OBJECTS += $(OBJDIR)/rh_features_vat_static.o
 OBJECTS += $(OBJDIR)/rh_frame_collector.o
 OBJECTS += $(OBJDIR)/rh_init.o
 OBJECTS += $(OBJDIR)/rh_light.o
@@ -195,7 +198,6 @@ OBJECTS += $(OBJDIR)/rh_sound.o
 OBJECTS += $(OBJDIR)/rh_triangle.o
 OBJECTS += $(OBJDIR)/rh_triangle_cpu.o
 OBJECTS += $(OBJDIR)/rh_triangle_cpu_tasks.o
-OBJECTS += $(OBJDIR)/rh_vertex_animation_renderer_properties.o
 
 # Rules
 # #############################################
@@ -260,12 +262,6 @@ endif
 # #############################################
 
 $(OBJDIR)/rh_precompiled.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/precompiled/rh_precompiled.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_basic_renderer_properties.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/basic_renderer_properties/rh_basic_renderer_properties.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_vertex_animation_renderer_properties.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/basic_renderer_properties/rh_vertex_animation_renderer_properties.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_batch_jobs_billboard_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_billboard_cpu.cpp
@@ -416,6 +412,15 @@ $(OBJDIR)/rh_render_medium.o: ../../../ExternalLibs/Runtime/pk_render_helpers/sr
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_renderers_walker.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_renderers_walker.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rh_features_basic.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_basic.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rh_features_vat_skeletal.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_vat_skeletal.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rh_features_vat_static.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_vat_static.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_init.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/rh_init.cpp

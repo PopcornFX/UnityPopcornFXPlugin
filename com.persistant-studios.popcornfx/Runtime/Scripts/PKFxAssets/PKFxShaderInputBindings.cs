@@ -60,6 +60,26 @@ namespace PopcornFX
 		public string 			m_VATBoundsPositionPropertyName = "_VATBounds";
 		public string 			m_VATPadToPowerOf2PropertyName = "_VATPadToPowerOf2";
 		public string 			m_VATPaddedRatioPropertyName = "_VATPaddedRatio";
+		// --------------------------------------
+		// Skeletal anim render feature:
+		// --------------------------------------
+		public string 			m_SkeletalAnimTexturePropertyName = "_SkeletalAnimTexture";
+		public string 			m_SkeletalAnimTextureResolPropertyName = "_SkeletalAnimTextureResol";
+		public string 			m_SkeletalAnimCountPropertyName = "_SkeletalAnimCount";
+		public string			m_SkeletalAnimUseBoneScalePropertyName = "_SkeletalAnimUseBoneScale";
+		public string			m_SkeletalAnimCursor0PropertyName = "_SkeletalAnimCursor0";
+		public string			m_SkeletalAnimIdx0PropertyName = "_SkeletalAnimIdx0";
+		public string			m_SkeletalAnimCursor1PropertyName = "_SkeletalAnimCursor1";
+		public string			m_SkeletalAnimIdx1PropertyName = "_SkeletalAnimIdx1";
+		public string			m_SkeletalAnimTransitionPropertyName = "_SkeletalAnimTransition";
+		public string			m_SkeletalAnimTranslationBoundsMinPropertyName = "_SkeletalAnimTranslationBoundsMin";
+		public string			m_SkeletalAnimTranslationBoundsMaxPropertyName = "_SkeletalAnimTranslationBoundsMax";
+		public string			m_SkeletalAnimScaleBoundsMinPropertyName = "_SkeletalAnimScaleBoundsMin";
+		public string			m_SkeletalAnimScaleBoundsMaxPropertyName = "_SkeletalAnimScaleBoundsMax";
+		public string			m_MeshTransformRow0PropertyName = "_SkeletalMeshTransform0";
+		public string			m_MeshTransformRow1PropertyName = "_SkeletalMeshTransform1";
+		public string			m_MeshTransformRow2PropertyName = "_SkeletalMeshTransform2";
+		public string			m_MeshTransformRow3PropertyName = "_SkeletalMeshTransform3";
 
 		public void BindMaterialProperties(SBatchDesc batchDesc, Material material, PKFxEffectAsset asset)
 		{
@@ -186,6 +206,7 @@ namespace PopcornFX
 				bool hasSoftVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SoftVAT);
 				bool hasRigidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT);
 				bool hasVAT = (hasFluidVAT || hasSoftVAT || hasRigidVAT) && (batchDesc.m_VatFeature != null && batchDesc.m_VatFeature.m_Activated);
+				bool hasSkeletalAnim = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalAnim);
 
 				if (hasVAT)
 				{
@@ -239,6 +260,43 @@ namespace PopcornFX
 						material.SetVector(m_VATPaddedRatioPropertyName, batchDesc.m_VatFeature.m_PaddedRatio);
 					}
 				}
+				if (hasSkeletalAnim)
+				{
+					if (!string.IsNullOrEmpty(m_SkeletalAnimTexturePropertyName))
+					{
+						Texture animMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_SkeletalAnimFeature.m_AnimTextureMap, true, TextureWrapMode.Clamp);
+						material.SetTexture(m_SkeletalAnimTexturePropertyName, animMap);
+					}
+					if (!string.IsNullOrEmpty(m_SkeletalAnimTextureResolPropertyName))
+					{
+						Vector2 texResol = new Vector2((float)batchDesc.m_SkeletalAnimFeature.m_TextureResolX, (float)batchDesc.m_SkeletalAnimFeature.m_TextureResolY);
+						material.SetVector(m_SkeletalAnimTextureResolPropertyName, texResol);
+					}
+					if (!string.IsNullOrEmpty(m_SkeletalAnimCountPropertyName))
+					{
+						material.SetFloat(m_SkeletalAnimCountPropertyName, (float)batchDesc.m_SkeletalAnimFeature.m_AnimCount);
+					}
+					if (!string.IsNullOrEmpty(m_SkeletalAnimUseBoneScalePropertyName))
+					{
+						material.SetInt(m_SkeletalAnimUseBoneScalePropertyName, batchDesc.m_SkeletalAnimFeature.m_UseBoneScale ? 1 : 0);
+					}
+					if (!string.IsNullOrEmpty(m_SkeletalAnimTranslationBoundsMinPropertyName))
+					{
+						material.SetVector(m_SkeletalAnimTranslationBoundsMinPropertyName, batchDesc.m_SkeletalAnimFeature.m_TranslationBoundsMin);
+					}
+					if (!string.IsNullOrEmpty(m_SkeletalAnimTranslationBoundsMaxPropertyName))
+					{
+						material.SetVector(m_SkeletalAnimTranslationBoundsMaxPropertyName, batchDesc.m_SkeletalAnimFeature.m_TranslationBoundsMax);
+					}
+					if (!string.IsNullOrEmpty(m_SkeletalAnimScaleBoundsMinPropertyName))
+					{
+						material.SetVector(m_SkeletalAnimScaleBoundsMinPropertyName, batchDesc.m_SkeletalAnimFeature.m_ScaleBoundsMin);
+					}
+					if (!string.IsNullOrEmpty(m_SkeletalAnimScaleBoundsMaxPropertyName))
+					{
+						material.SetVector(m_SkeletalAnimScaleBoundsMaxPropertyName, batchDesc.m_SkeletalAnimFeature.m_ScaleBoundsMax);
+					}
+				}
 			}
 		}
 
@@ -271,6 +329,30 @@ namespace PopcornFX
 					material.EnableKeyword("PK_HAS_VAT_SOFT");
 					material.SetFloat("PK_HAS_VAT", 0.0f);
 				}
+
+				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalAnim))
+				{
+					material.SetFloat("PK_HAS_SKELETAL_ANIM", 1.0f);
+					material.EnableKeyword("PK_HAS_SKELETAL_ANIM");
+				}
+				else
+					material.SetFloat("PK_HAS_SKELETAL_ANIM", 0.0f);
+
+				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalInterpol))
+				{
+					material.EnableKeyword("PK_HAS_SKELETAL_ANIM_INTERPOL");
+					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL", 1.0f);
+				}
+				else
+					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL", 0.0f);
+
+				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalTrackInterpol))
+				{
+					material.EnableKeyword("PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS");
+					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS", 1.0f);
+				}
+				else
+					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS", 0.0f);
 			}
 			// Set the shader variation:
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
@@ -455,6 +537,49 @@ namespace PopcornFX
 							SerializedProperty VATBoundsPivotPropertyName = serializedObject.FindProperty("m_VATBoundsPivotPropertyName");
 							VATBoundsPivotPropertyName.stringValue = EditorGUILayout.TextField("VAT bounds pivot (Vec2): ", VATBoundsPivotPropertyName.stringValue);
 						}
+					}
+					if (HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_SkeletalAnim))
+					{
+						SerializedProperty skeletalAnimTexturePropertyName = serializedObject.FindProperty("m_SkeletalAnimTexturePropertyName");
+						skeletalAnimTexturePropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation texture (Texture2D): ", skeletalAnimTexturePropertyName.stringValue);
+						SerializedProperty skeletalAnimTextureResolPropertyName = serializedObject.FindProperty("m_SkeletalAnimTextureResolPropertyName");
+						skeletalAnimTextureResolPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation texture resolutuion (Vec2): ", skeletalAnimTextureResolPropertyName.stringValue);
+						SerializedProperty skeletalAnimCountPropertyName = serializedObject.FindProperty("m_SkeletalAnimCountPropertyName");
+						skeletalAnimCountPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation count (Int): ", skeletalAnimCountPropertyName.stringValue);
+						SerializedProperty skeletalAnimUseBoneScalePropertyName = serializedObject.FindProperty("m_SkeletalAnimUseBoneScalePropertyName");
+						skeletalAnimUseBoneScalePropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation uses bones scale (Int 0 or 1): ", skeletalAnimUseBoneScalePropertyName.stringValue);
+						SerializedProperty skeletalAnimCursor0PropertyName = serializedObject.FindProperty("m_SkeletalAnimCursor0PropertyName");
+						skeletalAnimCursor0PropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation cursor current (Float): ", skeletalAnimCursor0PropertyName.stringValue);
+						SerializedProperty skeletalAnimIdx0PropertyName = serializedObject.FindProperty("m_SkeletalAnimIdx0PropertyName");
+						skeletalAnimIdx0PropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation idx current (Int): ", skeletalAnimIdx0PropertyName.stringValue);
+
+						SerializedProperty skeletalAnimTranslationBoundsMinPropertyName = serializedObject.FindProperty("m_SkeletalAnimTranslationBoundsMinPropertyName");
+						skeletalAnimTranslationBoundsMinPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation positions bounds min (Vec3): ", skeletalAnimTranslationBoundsMinPropertyName.stringValue);
+						SerializedProperty skeletalAnimTranslationBoundsMaxPropertyName = serializedObject.FindProperty("m_SkeletalAnimTranslationBoundsMaxPropertyName");
+						skeletalAnimTranslationBoundsMaxPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation positions bounds max (Vec3): ", skeletalAnimTranslationBoundsMaxPropertyName.stringValue);
+						SerializedProperty skeletalAnimScaleBoundsMinPropertyName = serializedObject.FindProperty("m_SkeletalAnimScaleBoundsMinPropertyName");
+						skeletalAnimScaleBoundsMinPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation scales bounds min (Vec3): ", skeletalAnimScaleBoundsMinPropertyName.stringValue);
+						SerializedProperty skeletalAnimScaleBoundsMaxPropertyName = serializedObject.FindProperty("m_SkeletalAnimScaleBoundsMaxPropertyName");
+						skeletalAnimScaleBoundsMaxPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation scales bounds max (Vec3): ", skeletalAnimScaleBoundsMaxPropertyName.stringValue);
+
+
+						SerializedProperty meshTransformRow0PropertyName = serializedObject.FindProperty("m_MeshTransformRow0PropertyName");
+						meshTransformRow0PropertyName.stringValue = EditorGUILayout.TextField("Mesh import transform matrix row 0 (Vec4): ", meshTransformRow0PropertyName.stringValue);
+						SerializedProperty meshTransformRow1PropertyName = serializedObject.FindProperty("m_MeshTransformRow1PropertyName");
+						meshTransformRow1PropertyName.stringValue = EditorGUILayout.TextField("Mesh import transform matrix row 1 (Vec4): ", meshTransformRow1PropertyName.stringValue);
+						SerializedProperty meshTransformRow2PropertyName = serializedObject.FindProperty("m_MeshTransformRow2PropertyName");
+						meshTransformRow2PropertyName.stringValue = EditorGUILayout.TextField("Mesh import transform matrix row 2 (Vec4): ", meshTransformRow2PropertyName.stringValue);
+						SerializedProperty meshTransformRow3PropertyName = serializedObject.FindProperty("m_MeshTransformRow3PropertyName");
+						meshTransformRow3PropertyName.stringValue = EditorGUILayout.TextField("Mesh import transform matrix row 3 (Vec4): ", meshTransformRow3PropertyName.stringValue);
+					}
+					if (HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_SkeletalTrackInterpol))
+					{
+						SerializedProperty skeletalAnimIdx1PropertyName = serializedObject.FindProperty("m_SkeletalAnimIdx1PropertyName");
+						skeletalAnimIdx1PropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation idx next (Int): ", skeletalAnimIdx1PropertyName.stringValue);
+						SerializedProperty skeletalAnimCursor1PropertyName = serializedObject.FindProperty("m_SkeletalAnimCursor1PropertyName");
+						skeletalAnimCursor1PropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation cursor next (Float): ", skeletalAnimCursor1PropertyName.stringValue);
+						SerializedProperty skeletalAnimTransitionPropertyName = serializedObject.FindProperty("m_SkeletalAnimTransitionPropertyName");
+						skeletalAnimTransitionPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation transition (Float): ", skeletalAnimTransitionPropertyName.stringValue);
 					}
 				}
 			}

@@ -25,6 +25,7 @@
 #include <pk_kernel/include/kr_streams_memory.h>
 
 #include <cstdio>
+#include <pk_version.h>
 
 PK_LOG_MODULE_DECLARE();
 
@@ -186,6 +187,16 @@ extern "C"
 		// Load the effect pack:
 		CRuntimeManager::Instance().LoadPack();
 		return true;
+	}
+
+	//--------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION const char	*GetRuntimeVersion()
+	{
+		NEED_PK_RUNTIME_STARTED(return "Runtime not started");
+		PK_SCOPEDPROFILE();
+
+		return PK_VERSION_CURRENT_STRING;
 	}
 
 	//----------------------------------------------------------------------------

@@ -182,6 +182,8 @@ GENERATED += $(OBJDIR)/core_upgrader_2_11_0_11056.o
 GENERATED += $(OBJDIR)/core_upgrader_2_12_0_12548.o
 GENERATED += $(OBJDIR)/core_upgrader_2_12_0_12698.o
 GENERATED += $(OBJDIR)/core_upgrader_2_13_0_13590.o
+GENERATED += $(OBJDIR)/core_upgrader_2_14_0_14494.o
+GENERATED += $(OBJDIR)/core_upgrader_2_14_0_14605.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53244.o
 GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
@@ -204,6 +206,8 @@ GENERATED += $(OBJDIR)/core_upgrades_generated.o
 GENERATED += $(OBJDIR)/manifest.o
 GENERATED += $(OBJDIR)/manifest1.o
 GENERATED += $(OBJDIR)/upg_builder.o
+GENERATED += $(OBJDIR)/upg_data_AnimatedMesh.vert.o
+GENERATED += $(OBJDIR)/upg_data_Animated_Mesh.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Basic.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Basic.pkfx1.o
 GENERATED += $(OBJDIR)/upg_data_BillboardMaterial.pkfx.o
@@ -313,6 +317,7 @@ GENERATED += $(OBJDIR)/upg_data_Legacy_2.9.0.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_LightMaterial.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Light_Default.frag.o
 GENERATED += $(OBJDIR)/upg_data_Light_Default.vert.o
+GENERATED += $(OBJDIR)/upg_data_MeshAnim.pkri.o
 GENERATED += $(OBJDIR)/upg_data_MeshMaterial.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_NMap_Flat.dds.o
 GENERATED += $(OBJDIR)/upg_data_NMap_Flat.dds1.o
@@ -336,6 +341,7 @@ GENERATED += $(OBJDIR)/upg_data_SampleLibSettings.pkbo.o
 GENERATED += $(OBJDIR)/upg_data_SampleLibSettings.pkbo1.o
 GENERATED += $(OBJDIR)/upg_data_Samplers.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Samplers_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_SkeletalAnimationTexture.pkri.o
 GENERATED += $(OBJDIR)/upg_data_SoundMaterial.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Sphere.fbx.o
 GENERATED += $(OBJDIR)/upg_data_Trails.pkfx.o
@@ -380,6 +386,7 @@ GENERATED += $(OBJDIR)/upg_upgrades_v2.10.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.11.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.12.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.13.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.14.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.2.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
@@ -410,6 +417,8 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_11_0_11056.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_12_0_12548.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_12_0_12698.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_13_0_13590.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_14_0_14494.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_14_0_14605.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53244.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
@@ -432,6 +441,8 @@ OBJECTS += $(OBJDIR)/core_upgrades_generated.o
 OBJECTS += $(OBJDIR)/manifest.o
 OBJECTS += $(OBJDIR)/manifest1.o
 OBJECTS += $(OBJDIR)/upg_builder.o
+OBJECTS += $(OBJDIR)/upg_data_AnimatedMesh.vert.o
+OBJECTS += $(OBJDIR)/upg_data_Animated_Mesh.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Basic.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Basic.pkfx1.o
 OBJECTS += $(OBJDIR)/upg_data_BillboardMaterial.pkfx.o
@@ -541,6 +552,7 @@ OBJECTS += $(OBJDIR)/upg_data_Legacy_2.9.0.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_LightMaterial.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Light_Default.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Light_Default.vert.o
+OBJECTS += $(OBJDIR)/upg_data_MeshAnim.pkri.o
 OBJECTS += $(OBJDIR)/upg_data_MeshMaterial.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_NMap_Flat.dds.o
 OBJECTS += $(OBJDIR)/upg_data_NMap_Flat.dds1.o
@@ -564,6 +576,7 @@ OBJECTS += $(OBJDIR)/upg_data_SampleLibSettings.pkbo.o
 OBJECTS += $(OBJDIR)/upg_data_SampleLibSettings.pkbo1.o
 OBJECTS += $(OBJDIR)/upg_data_Samplers.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Samplers_2.9.0.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_SkeletalAnimationTexture.pkri.o
 OBJECTS += $(OBJDIR)/upg_data_SoundMaterial.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Sphere.fbx.o
 OBJECTS += $(OBJDIR)/upg_data_Trails.pkfx.o
@@ -608,6 +621,7 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.10.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.11.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.12.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.13.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.14.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.2.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
@@ -755,6 +769,12 @@ $(OBJDIR)/core_upgrader_2_12_0_12698.o: ../../../ExternalLibs/pk_upgraderlib/src
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_13_0_13590.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.13.0.13590/core_upgrader_2_13_0_13590.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14494.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14494/core_upgrader_2_14_0_14494.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14605.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14605/core_upgrader_2_14_0_14605.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
@@ -1009,6 +1029,15 @@ $(OBJDIR)/upg_data_Editor_2.9.0.pkri.o: ../../../ExternalLibs/pk_upgraderlib/src
 $(OBJDIR)/upg_data_Experimental.pkri.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_Experimental.pkri.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_MeshAnim.pkri.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_MeshAnim.pkri.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_SkeletalAnimationTexture.pkri.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_SkeletalAnimationTexture.pkri.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Animated_Mesh.pkma.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Animated_Mesh.pkma.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Default_Decal.pkma.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Default_Decal.pkma.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -1151,6 +1180,9 @@ $(OBJDIR)/upg_data_Light_Default.vert.o: ../../../ExternalLibs/pk_upgraderlib/sr
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Particle_Master.frag.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Experimental/upg_data_Particle_Master.frag.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_AnimatedMesh.vert.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_AnimatedMesh.vert.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Default_Decal.frag.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Default_Decal.frag.cpp
@@ -1304,6 +1336,9 @@ $(OBJDIR)/upg_upgrades_v2.12.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgra
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.13.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.13.0.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.14.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.14.0.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.2.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp

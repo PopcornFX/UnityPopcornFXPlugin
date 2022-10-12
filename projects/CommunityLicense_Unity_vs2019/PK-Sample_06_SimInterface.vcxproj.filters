@@ -380,7 +380,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\GPUContext.cpp">
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\GPUContext_D3D.cpp">
       <Filter>_Common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.cpp">

@@ -4,9 +4,6 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\basic_renderer_properties">
-      <UniqueIdentifier>{94D8D18B-0047-270B-4930-E20AB5DD1CA7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\batch_jobs">
       <UniqueIdentifier>{5F763A5A-4B5A-FBAF-B4BA-F502A0BDE531}</UniqueIdentifier>
     </Filter>
@@ -28,6 +25,9 @@
     <Filter Include="Headers\frame_collector\legacy">
       <UniqueIdentifier>{A57E694B-91A4-33B2-7AEA-B87D66AF587E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\render_features">
+      <UniqueIdentifier>{8E8F6F95-FAC6-B72C-03D1-1B506F87DE25}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\resource_manager">
       <UniqueIdentifier>{9294F164-7EB9-40E5-A704-267593883F03}</UniqueIdentifier>
     </Filter>
@@ -36,9 +36,6 @@
     </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\basic_renderer_properties">
-      <UniqueIdentifier>{5C828A56-C8F0-DFD5-11DA-9AD57D87D571}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\batch_jobs">
       <UniqueIdentifier>{27C96BB5-13AD-2C0B-7C0D-275E6810178D}</UniqueIdentifier>
@@ -64,17 +61,14 @@
     <Filter Include="Sources\include">
       <UniqueIdentifier>{FCF66EC6-6882-DC8A-7193-5F7FDD9D388B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\render_features">
+      <UniqueIdentifier>{56DFCBB0-C216-1448-CB20-786B37D73A41}</UniqueIdentifier>
+    </Filter>
     <Filter Include="_Natvis">
       <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_basic_renderer_properties.h">
-      <Filter>Headers\basic_renderer_properties</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\basic_renderer_properties\rh_vertex_animation_renderer_properties.h">
-      <Filter>Headers\basic_renderer_properties</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs.h">
       <Filter>Headers\batch_jobs</Filter>
     </ClInclude>
@@ -297,6 +291,15 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h">
       <Filter>Headers\frame_collector</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_basic.h">
+      <Filter>Headers\render_features</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_skeletal.h">
+      <Filter>Headers\render_features</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_static.h">
+      <Filter>Headers\render_features</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.h">
       <Filter>Headers\resource_manager</Filter>
     </ClInclude>
@@ -320,12 +323,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_basic_renderer_properties.cpp">
-      <Filter>Sources\basic_renderer_properties</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\basic_renderer_properties\rh_vertex_animation_renderer_properties.cpp">
-      <Filter>Sources\basic_renderer_properties</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_cpu.cpp">
       <Filter>Sources\batch_jobs</Filter>
     </ClCompile>
@@ -478,6 +475,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.cpp">
       <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_basic.cpp">
+      <Filter>Sources\render_features</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_vat_skeletal.cpp">
+      <Filter>Sources\render_features</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_vat_static.cpp">
+      <Filter>Sources\render_features</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_init.cpp">
       <Filter>Sources</Filter>

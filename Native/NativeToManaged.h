@@ -121,6 +121,30 @@ extern "C"
 		}
 	};
 
+	struct SRenderingFeatureSkeletalAnimDesc
+	{
+		const char		*m_AnimTexture;
+		CUint2			m_TextureResol;
+		u32				m_AnimCount;
+		ManagedBool		m_UseBoneScale;
+		CFloat3			m_TranslationBoundsMin;
+		CFloat3			m_TranslationBoundsMax;
+		CFloat3			m_ScaleBoundsMin;
+		CFloat3			m_ScaleBoundsMax;
+
+		SRenderingFeatureSkeletalAnimDesc()
+			: m_AnimTexture(null)
+			, m_TextureResol(CUint2::ZERO)
+			, m_AnimCount(0)
+			, m_UseBoneScale(ManagedBool_False)
+			, m_TranslationBoundsMin(CFloat3::ZERO)
+			, m_TranslationBoundsMax(CFloat3::ZERO)
+			, m_ScaleBoundsMin(CFloat3::ZERO)
+			, m_ScaleBoundsMax(CFloat3::ZERO)
+		{
+		}
+	};
+
 	// Meshes:
 	struct SMeshRendererDesc
 	{
@@ -139,8 +163,9 @@ extern "C"
 		float						m_InvSoftnessDistance;
 		float						m_AlphaClipThreshold;
 
-		SRenderingFeatureLitDesc	*m_LitRendering;
-		SRenderingFeatureVATDesc	*m_VatRendering;
+		SRenderingFeatureLitDesc			*m_LitRendering;
+		SRenderingFeatureVATDesc			*m_VatRendering;
+		SRenderingFeatureSkeletalAnimDesc	*m_AnimDescRendering;
 
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
@@ -156,6 +181,7 @@ extern "C"
 			, m_AlphaClipThreshold(0)
 			, m_LitRendering(null)
 			, m_VatRendering(null)
+			, m_AnimDescRendering(null)
 		{
 		}
 
@@ -268,7 +294,10 @@ extern "C"
 	void										OnUpdateRendererBounds(int rendererGUID, const SUpdateRendererBounds *bounds);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshCount(void *delegatePtr);
-	int											OnGetMeshCount(int rendererGUID);
+	int											OnGetMeshCount(int rendererGUID, int lod);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshLODsCount(void* delegatePtr);
+	int											OnGetMeshLODsCount(int rendererGUID);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetMeshBounds(void *delegatePtr);
 	void										OnGetMeshBounds(int rendererGUID, int submesh, void* bbox);

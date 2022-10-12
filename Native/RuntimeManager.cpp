@@ -46,8 +46,9 @@
 //#include <pk_geometrics/include/ge_billboards.h>	// for CBillboarderConfig
 
 #include <pk_render_helpers/include/rh_init.h>
-#include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
-#include <pk_render_helpers/include/basic_renderer_properties/rh_vertex_animation_renderer_properties.h>
+#include <pk_render_helpers/include/render_features/rh_features_basic.h>
+#include <pk_render_helpers/include/render_features/rh_features_vat_skeletal.h>
+#include <pk_render_helpers/include/render_features/rh_features_vat_static.h>
 
 #if	(PK_BUILD_WITH_D3D11_SUPPORT != 0)
 #	include "UnityGraphicsAPI/IUnityGraphicsD3D11.h"
@@ -1887,6 +1888,7 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup()
 
 		CCoordinateFrame::SetGlobalFrame(Frame_LeftHand_Y_Up);
 
+		SkeletalAnimationTexture::Startup();
 		BasicRendererProperties::Startup();
 		VertexAnimationRendererProperties::Startup();
 
@@ -1907,6 +1909,7 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXShutdown()
 	PK_SAFE_DELETE(m_ImageHandler);
 
 	BasicRendererProperties::Shutdown();
+	SkeletalAnimationTexture::Shutdown();
 
 	PK_LOG_MODULE_RELEASE_START;
 	PK_LOG_MODULE_RELEASE_END;

@@ -5,11 +5,12 @@
 #include "precompiled.h"
 #include "UnityRendererCache.h"
 #include "UnityRenderDataFactory.h"
-#include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
-#include <pk_render_helpers/include/basic_renderer_properties/rh_vertex_animation_renderer_properties.h>
+#include <pk_render_helpers/include/render_features/rh_features_basic.h>
+#include <pk_render_helpers/include/render_features/rh_features_vat_static.h>
 
 #include "NativeToManaged.h"
 #include "RuntimeManager.h"
+#include <pk_render_helpers/include/render_features/rh_features_vat_skeletal.h>
 
 #include <pk_kernel/include/kr_resources.h>
 #include <pk_geometrics/include/ge_mesh_resource.h>
@@ -68,9 +69,6 @@ u32	CParticleMaterialDescFlags::CombineFlags()
 CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 :	m_InvSoftnessDistance(1)
 ,	m_AlphaThreshold(0.5f)
-,	m_AtlasMap(CStringId::Null)
-,	m_AtlasSubdivX(0)
-,	m_AtlasSubdivY(0)
 ,	m_RibbonAlignment(0)
 //Feature Lit
 ,	m_NormalMap(CStringId::Null)
@@ -105,11 +103,6 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 
 	const SRendererFeaturePropertyValue	*atlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
 	const SRendererFeaturePropertyValue	*atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
-
-	const SRendererFeaturePropertyValue *atlasSource = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Source());
-	const SRendererFeaturePropertyValue *atlasDefinition = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Definition());
-	const SRendererFeaturePropertyValue *atlasSubDiv = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_SubDiv());
-
 	const SRendererFeaturePropertyValue	*alphaRemap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap());
 	const SRendererFeaturePropertyValue	*alphaRemapAlphaMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap_AlphaMap());
 	const CGuid							alphaRemapCursor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_AlphaRemap_Cursor());
@@ -141,21 +134,6 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Size2;
 	if (atlas != null && atlas->ValueB())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Atlas;
-	if (atlasSource == null || atlasSource->ValueI().x() == 0)
-	{
-		if (atlasDefinition != null && atlasDefinition->m_Type == PropertyType_TextureAtlasPath && !atlasDefinition->ValuePath().Empty())
-		{
-			m_AtlasMap = CStringId(atlasDefinition->ValuePath());
-		}
-	}
-	else
-	{
-		if (atlasSubDiv != null && atlasSubDiv->ValueI().x() > 0 && atlasSubDiv->ValueI().y() > 0)
-		{
-			m_AtlasSubdivX = atlasSubDiv->ValueI().x();
-			m_AtlasSubdivY = atlasSubDiv->ValueI().y();
-		}
-	}
 	if (atlasBlending != null && atlasBlending->ValueI().x() == 1)
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AnimBlend;
 	if (alphaRemap != null && alphaRemap->ValueB() && alphaRemapAlphaMap != null && !alphaRemapAlphaMap->ValuePath().Empty() && alphaRemapCursor.Valid())
@@ -365,10 +343,7 @@ bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBil
 			m_Metalness == oth.m_Metalness &&
 			m_DiffuseRampMap == oth.m_DiffuseRampMap &&
 			m_EmissiveMap == oth.m_EmissiveMap &&
-			m_EmissiveRampMap == oth.m_EmissiveRampMap &&
-			m_AtlasMap == oth.m_AtlasMap &&
-			m_AtlasSubdivX == oth.m_AtlasSubdivX &&
-			m_AtlasSubdivY == oth.m_AtlasSubdivY;
+			m_EmissiveRampMap == oth.m_EmissiveRampMap;
 }
 
 //----------------------------------------------------------------------------
@@ -396,6 +371,14 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_Vat_BoundsPosition(CFloat2::ZERO)
 ,	m_Vat_PadToPowerOf2(false)
 ,	m_Vat_PaddedRatio(CFloat2::ZERO)
+,	m_SkeletalAnimationTexture(CStringId::Null)
+,	m_SkeletalAnimUseBoneScale(false)
+,	m_SkeletalAnimTextureResol(CUint2::ZERO)
+,	m_SkeletalAnimCount(1)
+,	m_SkeletalAnimTranslationBoundsMin(CFloat3::ZERO)
+,	m_SkeletalAnimTranslationBoundsMax(CFloat3::ZERO)
+,	m_SkeletalAnimScaleBoundsMin(CFloat3::ZERO)
+,	m_SkeletalAnimScaleBoundsMax(CFloat3::ZERO)
 ,	m_DiffuseRampMap(CStringId::Null)
 ,	m_EmissiveMap(CStringId::Null)
 ,	m_EmissiveRampMap(CStringId::Null)
@@ -452,6 +435,28 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 
 	if (diffuseColorInput.Valid())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
+
+	// Animated mesh:
+	const SRendererFeaturePropertyValue	*skeletalAnim = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimation());
+	const SRendererFeaturePropertyValue	*skeletalAnimTexResol = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimation_AnimTextureResolution());
+	const SRendererFeaturePropertyValue	*skeletalAnimTex = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimation_AnimationTexture());
+	const SRendererFeaturePropertyValue	*skeletalAnimInterpolate = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimationInterpolate());
+	const SRendererFeaturePropertyValue	*skeletalAnimInterpolateTracks = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks());
+	const SRendererFeaturePropertyValue	*skeletalAnimUseBonesScale = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimationUseBonesScale());
+	const SRendererFeaturePropertyValue	*skeletalAnimBonesTranslateBoundsMin = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimation_AnimPositionsBoundsMin());
+	const SRendererFeaturePropertyValue	*skeletalAnimBonesTranslateBoundsMax = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimation_AnimPositionsBoundsMax());
+	const SRendererFeaturePropertyValue	*skeletalAnimBonesScaleBoundsMin = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimationUseBonesScale_AnimScalesBoundsMin());
+	const SRendererFeaturePropertyValue	*skeletalAnimBonesScaleBoundsMax = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimationUseBonesScale_AnimScalesBoundsMax());
+	const SRendererFeaturePropertyValue* skeletalAnimCount = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimation_AnimTracksCount());
+
+	if (skeletalAnim != null && skeletalAnim->ValueB() && skeletalAnimTexResol != null)
+	{
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_SkeletalAnim;
+		if (skeletalAnimInterpolate != null && skeletalAnimInterpolate->ValueB())
+			m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_SkeletalInterpol;
+		if (skeletalAnimInterpolateTracks != null && skeletalAnimInterpolateTracks->ValueB())
+			m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_SkeletalTrackInterpol;
+	}
 
 	//-----------------------------
 	// Choose the blending mode:
@@ -511,6 +516,24 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		m_MeshPath = CStringId(CFilePath::Purified(mesh->ValuePath()));
 	else
 		return false;
+
+	// Skeletal anim:
+	if (skeletalAnim != null && skeletalAnim->ValueB() && skeletalAnimTexResol != null && skeletalAnimTex != null &&
+		skeletalAnimBonesTranslateBoundsMin != null && skeletalAnimBonesTranslateBoundsMax != null && skeletalAnimCount != null)
+	{
+		m_SkeletalAnimationTexture = CStringId(CFilePath::Purified(skeletalAnimTex->ValuePath()));
+		m_SkeletalAnimTextureResol = skeletalAnimTexResol->ValueI().xy();
+		m_SkeletalAnimTranslationBoundsMin = skeletalAnimBonesTranslateBoundsMin->ValueF().xyz();
+		m_SkeletalAnimTranslationBoundsMax = skeletalAnimBonesTranslateBoundsMax->ValueF().xyz();
+		m_SkeletalAnimCount = (u32)skeletalAnimCount->ValueI().x();
+		if (skeletalAnimUseBonesScale != null && skeletalAnimUseBonesScale->ValueB() &&
+			skeletalAnimBonesScaleBoundsMin != null && skeletalAnimBonesScaleBoundsMax != null)
+		{
+			m_SkeletalAnimUseBoneScale = true;
+			m_SkeletalAnimScaleBoundsMin = skeletalAnimBonesScaleBoundsMin->ValueF().xyz();
+			m_SkeletalAnimScaleBoundsMax = skeletalAnimBonesScaleBoundsMax->ValueF().xyz();
+		}
+	}
 
 	const bool hasMeshAtlas = (meshAtlas != null) ? meshAtlas->ValueB() : false;
 	if (hasMeshAtlas)
@@ -884,8 +907,8 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	if ((m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
 	{
 		desc.m_LitRendering = PK_NEW(SRenderingFeatureLitDesc);
-		PK_ASSERT(desc.m_LitRendering != null);
-
+		if (!PK_VERIFY(desc.m_LitRendering != null))
+			return false;
 		desc.m_LitRendering->m_NormalMap = m_MaterialDescMesh.m_NormalMap.ToStringData();
 		desc.m_LitRendering->m_RoughMetalMap = m_MaterialDescMesh.m_RoughMetalMap.ToStringData();
 		desc.m_LitRendering->m_CastShadows = m_MaterialDescMesh.m_CastShadows ? ManagedBool_True : ManagedBool_False;
@@ -896,6 +919,21 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	else
 		desc.m_LitRendering = null;
 
+	if ((m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SkeletalAnim) != 0)
+	{
+		desc.m_AnimDescRendering = PK_NEW(SRenderingFeatureSkeletalAnimDesc);
+		if (!PK_VERIFY(desc.m_AnimDescRendering != null))
+			return false;
+		desc.m_AnimDescRendering->m_AnimTexture = m_MaterialDescMesh.m_SkeletalAnimationTexture.ToStringData();
+		desc.m_AnimDescRendering->m_TextureResol = m_MaterialDescMesh.m_SkeletalAnimTextureResol;
+		desc.m_AnimDescRendering->m_AnimCount = m_MaterialDescMesh.m_SkeletalAnimCount;
+		desc.m_AnimDescRendering->m_UseBoneScale = m_MaterialDescMesh.m_SkeletalAnimUseBoneScale ? ManagedBool_True : ManagedBool_False;
+		desc.m_AnimDescRendering->m_TranslationBoundsMin = m_MaterialDescMesh.m_SkeletalAnimTranslationBoundsMin;
+		desc.m_AnimDescRendering->m_TranslationBoundsMax = m_MaterialDescMesh.m_SkeletalAnimTranslationBoundsMax;
+		desc.m_AnimDescRendering->m_ScaleBoundsMin = m_MaterialDescMesh.m_SkeletalAnimScaleBoundsMin;
+		desc.m_AnimDescRendering->m_ScaleBoundsMax = m_MaterialDescMesh.m_SkeletalAnimScaleBoundsMax;
+	}
+
 	if (!m_MaterialDescMesh.m_DiffuseRampMap.Empty())
 		desc.m_DiffuseRampMap = m_MaterialDescMesh.m_DiffuseRampMap.ToStringData();
 	if (!m_MaterialDescMesh.m_EmissiveMap.Empty())
@@ -905,7 +943,6 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	if (!m_MaterialDescMesh.m_AlphaMap.Empty())
 		desc.m_AlphaRemap = m_MaterialDescMesh.m_AlphaMap.ToStringData();
 	return true;
-	//GetRendererLitFeatureInfo(&desc.m_LitRendering);
 }
 
 void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
@@ -1023,15 +1060,28 @@ void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 			if (m_UnityMeshInfoPerViews[i].m_RendererGUID < 0)
 				return;
 
-			m_MeshCount = ::OnGetMeshCount(m_UnityMeshInfoPerViews[i].m_RendererGUID);
-			m_GlobalMeshBound.Degenerate();
-			for (u32 iMeshCount = 0; iMeshCount < m_MeshCount; ++iMeshCount)
+			const s32	meshLODsCount = ::OnGetMeshLODsCount(m_UnityMeshInfoPerViews[i].m_RendererGUID);
+
+			if (!PK_VERIFY(m_PerLODMeshCount.Resize(meshLODsCount)))
+				return;
+			u32	totalMeshCount = 0;
+			for (s32 lodIdx = 0; lodIdx < meshLODsCount; ++lodIdx)
+			{
+				s32		meshCount = ::OnGetMeshCount(m_UnityMeshInfoPerViews[i].m_RendererGUID, lodIdx);
+				if (meshCount < 0)
+					return;
+				m_PerLODMeshCount[lodIdx] = static_cast<u32>(meshCount);
+				totalMeshCount += m_PerLODMeshCount[lodIdx];
+			}
+			if (!PK_VERIFY(m_SubMeshBounds.Resize(totalMeshCount)))
+				return;
+			m_GlobalMeshBounds.Degenerate();
+			for (u32 iMeshCount = 0; iMeshCount < totalMeshCount; ++iMeshCount)
 			{
 				CFloat3 bb;
-
 				::OnGetMeshBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, iMeshCount, &bb);
-				m_SubMeshBounds.PushBack(bb);
-				m_GlobalMeshBound.Add(bb);
+				m_SubMeshBounds[iMeshCount] = bb;
+				m_GlobalMeshBounds.Add(bb);
 			}
 			::OnRetrieveRendererBufferInfo(m_UnityMeshInfoPerViews[i].m_RendererGUID, &rendererInfo);
 			m_HasCustomMat = hasCustomMat == ManagedBool_True ? true : false;

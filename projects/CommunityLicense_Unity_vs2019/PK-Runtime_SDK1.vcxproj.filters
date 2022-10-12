@@ -252,9 +252,6 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_transforms_helper.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_units.h">
-      <Filter>EngineUtils\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_collidable_object.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>

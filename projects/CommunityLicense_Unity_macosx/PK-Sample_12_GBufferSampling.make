@@ -87,12 +87,12 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/GPUContext_D3D.o
 GENERATED += $(OBJDIR)/Main.o
 GENERATED += $(OBJDIR)/PK-Sample_12_GBufferSampling.o
 GENERATED += $(OBJDIR)/SampleScene.o
 GENERATED += $(OBJDIR)/precompiled.o
-OBJECTS += $(OBJDIR)/GPUContext.o
+OBJECTS += $(OBJDIR)/GPUContext_D3D.o
 OBJECTS += $(OBJDIR)/Main.o
 OBJECTS += $(OBJDIR)/PK-Sample_12_GBufferSampling.o
 OBJECTS += $(OBJDIR)/SampleScene.o
@@ -172,7 +172,7 @@ $(OBJDIR)/Main.o: ../../SDK/Samples/PK-Samples/PK-Sample_12_GBufferSampling/Main
 $(OBJDIR)/PK-Sample_12_GBufferSampling.o: ../../SDK/Samples/PK-Samples/PK-Sample_12_GBufferSampling/PK-Sample_12_GBufferSampling.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/GPUContext.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext.cpp
+$(OBJDIR)/GPUContext_D3D.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext_D3D.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/SampleScene.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/Scene/SampleScene.cpp

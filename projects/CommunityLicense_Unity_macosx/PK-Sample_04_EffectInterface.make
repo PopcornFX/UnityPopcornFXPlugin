@@ -95,7 +95,7 @@ GENERATED += $(OBJDIR)/AttributeSampler_GeometryProxy.o
 GENERATED += $(OBJDIR)/AttributeSampler_GeometryShape.o
 GENERATED += $(OBJDIR)/EffectInstance.o
 GENERATED += $(OBJDIR)/EffectInterface.o
-GENERATED += $(OBJDIR)/GPUContext.o
+GENERATED += $(OBJDIR)/GPUContext_D3D.o
 GENERATED += $(OBJDIR)/Main.o
 GENERATED += $(OBJDIR)/SampleScene.o
 GENERATED += $(OBJDIR)/SkinnedMesh.o
@@ -108,7 +108,7 @@ OBJECTS += $(OBJDIR)/AttributeSampler_GeometryProxy.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryShape.o
 OBJECTS += $(OBJDIR)/EffectInstance.o
 OBJECTS += $(OBJDIR)/EffectInterface.o
-OBJECTS += $(OBJDIR)/GPUContext.o
+OBJECTS += $(OBJDIR)/GPUContext_D3D.o
 OBJECTS += $(OBJDIR)/Main.o
 OBJECTS += $(OBJDIR)/SampleScene.o
 OBJECTS += $(OBJDIR)/SkinnedMesh.o
@@ -212,7 +212,7 @@ $(OBJDIR)/Main.o: ../../SDK/Samples/PK-Samples/PK-Sample_04_EffectInterface/Main
 $(OBJDIR)/SkinnedMesh.o: ../../SDK/Samples/PK-Samples/PK-Sample_04_EffectInterface/SkinnedMesh.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/GPUContext.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext.cpp
+$(OBJDIR)/GPUContext_D3D.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/GPUContext_D3D.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/SampleScene.o: ../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration/Scene/SampleScene.cpp

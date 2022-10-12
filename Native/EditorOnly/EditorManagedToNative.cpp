@@ -43,16 +43,6 @@ extern "C"
 
 	//--------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION const char	*GetRuntimeVersion()
-	{
-		NEED_PK_RUNTIME_AND_EDITOR_STARTED(return "Runtime not started");
-		PK_SCOPEDPROFILE();
-
-		return PK_VERSION_CURRENT_STRING;
-	}
-
-	//--------------------------------------------------------------------------
-
 	MANAGED_TO_POPCORN_CONVENTION bool	SetPackSettings(const SMirrorPackFxSettings *settings)
 	{
 		NEED_PK_RUNTIME_AND_EDITOR_STARTED(return false);

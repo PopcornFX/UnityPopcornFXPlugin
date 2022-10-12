@@ -33,8 +33,9 @@
 
 #include "RenderingIntegration/UnityRendererCache.h"
 
-#include <pk_render_helpers/include/basic_renderer_properties/rh_basic_renderer_properties.h>
-#include <pk_render_helpers/include/basic_renderer_properties/rh_vertex_animation_renderer_properties.h>
+#include <pk_render_helpers/include/render_features/rh_features_basic.h>
+#include <pk_render_helpers/include/render_features/rh_features_vat_static.h>
+#include <pk_render_helpers/include/render_features/rh_features_vat_skeletal.h>
 #include <pk_render_helpers/include/draw_requests/rh_billboard.h>
 
 __PK_API_BEGIN
@@ -112,6 +113,8 @@ struct	SUnityDependencyAppendHelper
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_PositionMap())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_RotationMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+					else if (property->m_Name == SkeletalAnimationTexture::SID_SkeletalAnimation_AnimationTexture())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
 					else
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_sRGB;

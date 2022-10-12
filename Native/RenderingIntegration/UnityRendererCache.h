@@ -53,26 +53,29 @@ namespace	ShaderVariationFlags
 	// This will actually change which shader variation is used to draw the particles:
 	enum	EShaderVariationFlags
 	{
-		Has_CorrectDeformation	= (1 << 0),
-		Has_AnimBlend			= (1 << 1),
-		Has_AlphaRemap			= (1 << 2),
-		Has_Lighting			= (1 << 3),
-		Has_LightingLegacy		= (1 << 4),
-		Has_Soft				= (1 << 5),
-		Has_DistortionMap		= (1 << 6),
-		Has_Color				= (1 << 7),
-		Has_DiffuseMap			= (1 << 8),
-		Has_DoubleSided			= (1 << 9),
-		Has_CastShadow			= (1 << 10),
-		Has_Atlas				= (1 << 11),
-		Has_Size2				= (1 << 12),
-		Has_DiffuseRamp			= (1 << 13),
-		Has_FluidVAT			= (1 << 14),
-		Has_SoftVAT				= (1 << 15),
-		Has_RigidVAT			= (1 << 16),
-		Has_Emissive			= (1 << 17),
-		Has_EmissiveRamp		= (1 << 18),
-		ShaderVariation_Count	= 19
+		Has_CorrectDeformation		= (1 << 0),
+		Has_AnimBlend				= (1 << 1),
+		Has_AlphaRemap				= (1 << 2),
+		Has_Lighting				= (1 << 3),
+		Has_LightingLegacy			= (1 << 4),
+		Has_Soft					= (1 << 5),
+		Has_DistortionMap			= (1 << 6),
+		Has_Color					= (1 << 7),
+		Has_DiffuseMap				= (1 << 8),
+		Has_DoubleSided				= (1 << 9),
+		Has_CastShadow				= (1 << 10),
+		Has_Atlas					= (1 << 11),
+		Has_Size2					= (1 << 12),
+		Has_DiffuseRamp				= (1 << 13),
+		Has_FluidVAT				= (1 << 14),
+		Has_SoftVAT					= (1 << 15),
+		Has_RigidVAT				= (1 << 16),
+		Has_Emissive				= (1 << 17),
+		Has_EmissiveRamp			= (1 << 18),
+		Has_SkeletalAnim			= (1 << 19),
+		Has_SkeletalInterpol		= (1 << 20),
+		Has_SkeletalTrackInterpol	= (1 << 21),
+		ShaderVariation_Count		= 22
 	};
 }
 
@@ -201,6 +204,16 @@ public:
 	CFloat2									m_Vat_BoundsPosition;
 	bool									m_Vat_PadToPowerOf2;
 	CFloat2									m_Vat_PaddedRatio;
+
+	// Skeletal anim:
+	CStringId								m_SkeletalAnimationTexture;
+	bool									m_SkeletalAnimUseBoneScale;
+	CUint2									m_SkeletalAnimTextureResol;
+	u32										m_SkeletalAnimCount;
+	CFloat3									m_SkeletalAnimTranslationBoundsMin;
+	CFloat3									m_SkeletalAnimTranslationBoundsMax;
+	CFloat3									m_SkeletalAnimScaleBoundsMin;
+	CFloat3									m_SkeletalAnimScaleBoundsMax;
 
 	CStringId								m_DiffuseRampMap;
 	CStringId								m_EmissiveMap;

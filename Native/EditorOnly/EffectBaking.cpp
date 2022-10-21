@@ -642,7 +642,7 @@ bool	CEffectBaker::BakeAssetOrAddToRetryStack(SAssetChange &assetInfo)
 		return false;
 	}
 	if (logger != null)
-		logger->ValidateLogs();
+		logger->ValidateLogsAtLevel(CLog::ELogLevel::Level_Info, "Baking report for: " + assetInfo.m_EffectPath);
 	return true;
 }
 

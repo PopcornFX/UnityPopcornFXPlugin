@@ -202,6 +202,33 @@ namespace PopcornFX
 		}
 
 #if UNITY_EDITOR
+
+		public static bool GetProjetAssetPath()
+		{
+
+			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0 || !Directory.Exists(Instance.m_PopcornPackFxPath))
+			{
+				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
+				return false;
+			}
+			const int assetsOffsets = 7;// "Assets/".Length;
+			string[] assetsGUID = AssetDatabase.FindAssets("t:PKFxEffectAsset");
+			if (PKFxSettings.AssetPathList == null)
+				PKFxSettings.AssetPathList = new List<string>();
+			else
+				PKFxSettings.AssetPathList.Clear();
+			foreach (string guid in assetsGUID)
+			{
+				GUID id = new GUID(guid);
+				string assetPath = AssetDatabase.GUIDToAssetPath(id);
+				assetPath = assetPath.Substring(assetsOffsets + Instance.m_UnityPackFxPath.Length);
+				assetPath = assetPath.Substring(0, assetPath.LastIndexOf(".asset"));
+				PKFxSettings.AssetPathList.Add(assetPath);
+
+			}
+			return true;
+		}
+
 		public static bool GetAllAssetPath()
 		{
 			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0 || !Directory.Exists(Instance.m_PopcornPackFxPath))

@@ -1741,19 +1741,16 @@ void	CRuntimeManager::_ExecUpdateCamDesc(int camID, SCamDesc desc, bool update)
 
 	SUnitySceneView	&sceneView = sceneViews[camID];
 	CFloat4x4	camTransform = desc.m_ViewMatrix.Inverse();
-	CFloat3		axisForward = camTransform.StrippedXAxis().Cross(camTransform.StrippedYAxis());
-	camTransform.StrippedZAxis() = axisForward;
 
+	const CFloat4x4 &camV2W = camTransform;
 	const CFloat4x4	&camW2V = camTransform.Inverse();
-	const CFloat4x4	&camV2W = camTransform;
-	const CFloat4x4	&camV2P = desc.m_ProjectionMatrix;
-	const CFloat4x4	&camP2V = desc.m_ProjectionMatrix.Inverse();
+	const CFloat4x4 &camV2P = desc.m_ProjectionMatrix;
+	const CFloat4x4 &camP2V = desc.m_ProjectionMatrix.Inverse();
 	const CFloat4x4	camW2P = camW2V * camV2P;
 	const CFloat4x4	camP2W = camP2V * camV2W;
 
 	sceneView.m_InvViewMatrix = camV2W;
-	// Draw procedural seem to render front to back ? not sure
-	sceneView.m_InvViewMatrix.StrippedZAxis() *= -1;
+
 
 	// We update the "view" namespace in the script
 	if (sceneView.m_UserData.m_CamSlotIdxInMedCol.Valid())

@@ -76,18 +76,16 @@ void	CUnityLog::StartLogs()
 
 //----------------------------------------------------------------------------
 
-void	CUnityLog::ValidateLogs()
+void	CUnityLog::ValidateLogsAtLevel(CLog::ELogLevel level, const CString &header)
 {
 	PK_SCOPEDLOCK(m_Lock);
 
 	SPopcornLogData		mergedLogs;
-
-	mergedLogs.m_Level = CLog::Level_Debug;
+	mergedLogs.m_Level = level;
+	mergedLogs.m_Message += GetPrefixFromLogLevel(level) + header + "\n";
 	// Get the highest log level:
 	for (u32 i = 0; i < m_LogStackTmp.Count(); ++i)
 	{
-		if (mergedLogs.m_Level < m_LogStackTmp[i].m_Level)
-			mergedLogs.m_Level = m_LogStackTmp[i].m_Level;
 		mergedLogs.m_Message += GetPrefixFromLogLevel(m_LogStackTmp[i].m_Level) + m_LogStackTmp[i].m_Message + "\n";
 	}
 	m_LogStackTmp.Clear();
@@ -95,6 +93,39 @@ void	CUnityLog::ValidateLogs()
 	while (m_CurrentLogWrite->Count() >= m_MaxLogsCount && m_CurrentLogWrite->Count() != 0)
 		m_CurrentLogWrite->PopFrontAndDiscard();
 	m_CurrentLogWrite->PushBack(mergedLogs);
+}
+
+//----------------------------------------------------------------------------
+
+void	CUnityLog::ValidateLogs()
+{
+	PK_SCOPEDLOCK(m_Lock);
+
+	TArray<SPopcornLogData>		mergedLogs;
+
+	// Get the highest log level:
+	for (u32 i = 0; i < m_LogStackTmp.Count(); ++i)
+	{
+		if (mergedLogs.Empty())
+		{
+			mergedLogs.PushBack();
+			mergedLogs[mergedLogs.Count() - 1].m_Level = m_LogStackTmp[i].m_Level;
+		}
+		u32	idx = mergedLogs.Count() - 1;
+		if (mergedLogs[idx].m_Level != m_LogStackTmp[i].m_Level)
+		{
+			mergedLogs.PushBack();
+			idx = mergedLogs.Count() - 1;
+			mergedLogs[idx].m_Level = m_LogStackTmp[i].m_Level;
+		}
+		mergedLogs[idx].m_Message += GetPrefixFromLogLevel(m_LogStackTmp[i].m_Level) +  m_LogStackTmp[i].m_Message + "\n";
+	}
+	m_LogStackTmp.Clear();
+	m_CurrentLogWrite = &m_LogStackMain;
+	while (m_CurrentLogWrite->Count() >= m_MaxLogsCount && m_CurrentLogWrite->Count() != 0)
+		m_CurrentLogWrite->PopFrontAndDiscard();
+	while (mergedLogs.Count() != 0)
+		m_CurrentLogWrite->PushBack(mergedLogs.PopFront());
 }
 
 //----------------------------------------------------------------------------

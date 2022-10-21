@@ -533,7 +533,6 @@ namespace PopcornFX
 		
 		//----------------------------------------------------------------------------
 
-
 		public void UpdateSamplers(bool forceUpdate)
 		{
 			for (int i = 0; i < m_FxSamplersList.Count; i++)
@@ -724,7 +723,31 @@ namespace PopcornFX
 			return -1;
 		}
 
-#region GetAttribute
+		public EAttributeType GetAttributeType(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return EAttributeType.Bool;
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			return attributeDesc.m_Type;
+		}
+
+		public string GetAttributeName(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return string.Empty;
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			return attributeDesc.m_Name;
+		}
+
+		#region GetAttribute
 
 		#region GetAttributeFloat
 
@@ -820,6 +843,91 @@ namespace PopcornFX
 								m_FxAttributesStartValues[attributeIdx * 4 + 1].f1,
 								m_FxAttributesStartValues[attributeIdx * 4 + 2].f1,
 								m_FxAttributesStartValues[attributeIdx * 4 + 3].f1);
+		}
+
+
+		public Tuple<float, float> GetAttributeFloatRange(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<float, float>(0, 0);
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Float)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<float, float>(0, 0);
+			}
+
+			return new Tuple<float, float>(attributeDesc.HasMin() ? attributeDesc.m_MinValue.x.f1 : float.MinValue,
+											attributeDesc.HasMax() ? attributeDesc.m_MaxValue.x.f1 : float.MaxValue);
+		}
+
+		public Tuple<Vector2, Vector2> GetAttributeFloat2Range(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<Vector2, Vector2>(Vector2.zero, Vector2.zero);
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Float2)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<Vector2, Vector2>(Vector2.zero, Vector2.zero);
+			}
+
+			Vector2 min = attributeDesc.HasMin() ? new Vector2(attributeDesc.m_MinValue.x.f1, attributeDesc.m_MinValue.y.f1)
+												 : new Vector2(float.MinValue, float.MinValue);
+			Vector2 max = attributeDesc.HasMax() ? new Vector2(attributeDesc.m_MaxValue.x.f1, attributeDesc.m_MaxValue.y.f1)
+												 : new Vector2(float.MaxValue, float.MaxValue);
+			return new Tuple<Vector2, Vector2>(min, max);
+		}
+
+		public Tuple<Vector3, Vector3> GetAttributeFloat3Range(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<Vector3, Vector3>(Vector3.zero, Vector3.zero);
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Float3)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<Vector3, Vector3>(Vector3.zero, Vector3.zero);
+			}
+
+			Vector3 min = attributeDesc.HasMin() ? new Vector3(attributeDesc.m_MinValue.x.f1, attributeDesc.m_MinValue.y.f1, attributeDesc.m_MinValue.z.f1)
+												 : new Vector3(float.MinValue, float.MinValue, float.MinValue);
+			Vector3 max = attributeDesc.HasMax() ? new Vector3(attributeDesc.m_MaxValue.x.f1, attributeDesc.m_MaxValue.y.f1, attributeDesc.m_MaxValue.z.f1)
+												 : new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+			return new Tuple<Vector3, Vector3>(min, max);
+		}
+
+		public Tuple<Vector4, Vector4> GetAttributeFloat4Range(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<Vector4, Vector4>(Vector4.zero, Vector4.zero);
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Float4)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<Vector4, Vector4>(Vector4.zero, Vector4.zero);
+			}
+			Vector4 min = attributeDesc.HasMin() ? new Vector4(attributeDesc.m_MinValue.x.f1, attributeDesc.m_MinValue.y.f1, attributeDesc.m_MinValue.z.f1, attributeDesc.m_MinValue.w.f1)
+												 : new Vector4(float.MinValue, float.MinValue, float.MinValue, float.MinValue);
+			Vector4 max = attributeDesc.HasMax() ? new Vector4(attributeDesc.m_MaxValue.x.f1, attributeDesc.m_MaxValue.y.f1, attributeDesc.m_MaxValue.z.f1, attributeDesc.m_MaxValue.w.f1)
+												 : new Vector4(float.MaxValue, float.MaxValue, float.MaxValue, float.MaxValue);
+			return new Tuple<Vector4, Vector4>(min, max);
 		}
 
 		#endregion
@@ -920,6 +1028,91 @@ namespace PopcornFX
 											m_FxAttributesStartValues[attributeIdx * 4 + 3].i1);
 		}
 
+		public Tuple<int, int> GetAttributeIntRange(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<int, int>(0, 0);
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Int)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<int, int>(0, 0);
+			}
+
+			return new Tuple<int, int>(attributeDesc.HasMin() ? attributeDesc.m_MinValue.x.i1 : int.MinValue,
+										attributeDesc.HasMax() ? attributeDesc.m_MaxValue.x.i1 : int.MaxValue);
+		}
+
+		public Tuple<Vector2Int, Vector2Int> GetAttributeInt2Range(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<Vector2Int, Vector2Int>(Vector2Int.zero, Vector2Int.zero);
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Int2)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<Vector2Int, Vector2Int>(Vector2Int.zero, Vector2Int.zero);
+			}
+
+			Vector2Int min = attributeDesc.HasMin() ? new Vector2Int(attributeDesc.m_MinValue.x.i1, attributeDesc.m_MinValue.y.i1)
+													: new Vector2Int(int.MinValue, int.MinValue);
+			Vector2Int max = attributeDesc.HasMax() ? new Vector2Int(attributeDesc.m_MaxValue.x.i1, attributeDesc.m_MaxValue.y.i1)
+													: new Vector2Int(int.MaxValue, int.MaxValue);
+			return new Tuple<Vector2Int, Vector2Int>(min, max);
+		}
+
+		public Tuple<Vector3Int, Vector3Int> GetAttributeInt3Range(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<Vector3Int, Vector3Int>(Vector3Int.zero, Vector3Int.zero);
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Int3)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<Vector3Int, Vector3Int>(Vector3Int.zero, Vector3Int.zero);
+			}
+
+			Vector3Int min = attributeDesc.HasMin() ? new Vector3Int(attributeDesc.m_MinValue.x.i1, attributeDesc.m_MinValue.y.i1, attributeDesc.m_MinValue.z.i1)
+													: new Vector3Int(int.MinValue, int.MinValue, int.MinValue);
+			Vector3Int max = attributeDesc.HasMax() ? new Vector3Int(attributeDesc.m_MaxValue.x.i1, attributeDesc.m_MaxValue.y.i1, attributeDesc.m_MaxValue.z.i1)
+													: new Vector3Int(int.MaxValue, int.MaxValue, int.MaxValue);
+			return new Tuple<Vector3Int, Vector3Int>(min, max);
+		}
+
+		public Tuple<Vector4Int, Vector4Int> GetAttributeInt4Range(int attributeIdx)
+		{
+			if (attributeIdx < 0 || attributeIdx >= m_FxAttributesDesc.Count)
+			{
+				Debug.LogError("[PopcornFX] Get Attribute with invalid ID.");
+				return new Tuple<Vector4Int, Vector4Int>(new Vector4Int(0), new Vector4Int(0));
+			}
+
+			PKFxEffectAsset.AttributeDesc attributeDesc = m_FxAsset.m_AttributeDescs[attributeIdx];
+			if (attributeDesc.m_Type != EAttributeType.Int4)
+			{
+				Debug.LogError("[PopcornFX] Type mismatch for the attribute", this);
+				return new Tuple<Vector4Int, Vector4Int>(new Vector4Int(0), new Vector4Int(0));
+			}
+
+			Vector4Int min = attributeDesc.HasMin() ? new Vector4Int(attributeDesc.m_MinValue.x.i1, attributeDesc.m_MinValue.y.i1, attributeDesc.m_MinValue.z.i1, attributeDesc.m_MinValue.w.i1)
+													: new Vector4Int(int.MinValue, int.MinValue, int.MinValue, int.MinValue);
+			Vector4Int max = attributeDesc.HasMax() ? new Vector4Int(attributeDesc.m_MaxValue.x.i1, attributeDesc.m_MaxValue.y.i1, attributeDesc.m_MaxValue.z.i1, attributeDesc.m_MaxValue.w.i1)
+													: new Vector4Int(int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue);
+			return new Tuple<Vector4Int, Vector4Int>(min, max);
+		}
+
 		#endregion
 
 		#region GetAttributeBool
@@ -1018,9 +1211,9 @@ namespace PopcornFX
 
 		#endregion
 
-#endregion
+		#endregion
 
-#region SetAttribute
+		#region SetAttribute
 
 		#region SetAttributeSafe from name
 		public void SetAttributeSafe(string name, float valueX)

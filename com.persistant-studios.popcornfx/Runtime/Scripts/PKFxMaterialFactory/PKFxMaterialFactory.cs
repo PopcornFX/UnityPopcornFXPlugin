@@ -531,6 +531,9 @@ namespace PopcornFX
 				int subMeshIdx = 0;
 				int lodCurIdx = 0;
 
+				Transform rootBone = null;
+				Transform[] bones = null;
+
 				foreach (Renderer rdr in renderers)
 				{
 					if (lodCurCount == meshRenderer.m_PerLODsSubmeshCount[lodCurIdx])
@@ -557,15 +560,19 @@ namespace PopcornFX
 						{
 							Mesh skinnedMesh = new Mesh();
 
-							int[] reorderBones = new int[unitySkinnedMeshRdr.bones.Length];
+							if (bones == null)
+							{
+								rootBone = unitySkinnedMeshRdr.rootBone;
+								bones = unitySkinnedMeshRdr.bones;
+							}
+
+							int[]	reorderBones = new int[unitySkinnedMeshRdr.bones.Length];
 
 							for (int boneIdx = 0; boneIdx < unitySkinnedMeshRdr.bones.Length; ++boneIdx)
 							{
-								// Debug.Log("skinnedMeshes bone " + boneIdx + " name is " + skinnedMeshes[i].bones[boneIdx].name);
 								int currentIdx = 0;
-								reorderBones[boneIdx] = _RecursiveGetBoneIdx(unitySkinnedMeshRdr.bones[boneIdx], unitySkinnedMeshRdr.rootBone, unitySkinnedMeshRdr.bones, ref currentIdx);
+								reorderBones[boneIdx] = _RecursiveGetBoneIdx(unitySkinnedMeshRdr.bones[boneIdx], rootBone, bones, ref currentIdx);
 							}
-
 							skinnedMesh.vertices = sharedMesh.vertices;
 							skinnedMesh.triangles = sharedMesh.triangles;
 							skinnedMesh.bounds = sharedMesh.bounds;

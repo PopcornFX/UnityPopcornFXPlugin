@@ -188,30 +188,33 @@ namespace PopcornFX
 		{
 			m_RendererDescs.Add(new SBatchDesc(type, renderer, idx));
 			Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(m_RendererDescs[m_RendererDescs.Count - 1], this);
+			while (idx >= m_Materials.Count)
+				m_Materials.Add(null);
 			if (mat == null)
 			{
 				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
 				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
 				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
-				m_Materials.Add(null);
+				
 				return;
 			}
-			m_Materials.Add(mat);
+			m_Materials[idx] = mat;
 		}
 
 		public void AddRenderer(ERendererType type, SMeshRendererDesc renderer, int idx)
 		{
 			m_RendererDescs.Add(new SBatchDesc(renderer, idx));
 			Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(m_RendererDescs[m_RendererDescs.Count - 1], this);
+			while (idx >= m_Materials.Count)
+				m_Materials.Add(null);
 			if (mat == null)
 			{
 				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
 				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
 				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
-				m_Materials.Add(null);
 				return;
 			}
-			m_Materials.Add(mat);
+			m_Materials[idx] = mat;
 		}
 
 		public void AddEvent(SNativeEventDesc eventdesc)

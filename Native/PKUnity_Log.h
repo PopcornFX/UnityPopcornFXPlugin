@@ -28,6 +28,7 @@ public:
 	void			ClearLogs();
 
 	void			StartLogs();
+	void			ValidateLogsAtLevel(CLog::ELogLevel level, const CString &header);
 	void			ValidateLogs();
 	void			InvalidateLogs();
 

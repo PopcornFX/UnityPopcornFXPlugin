@@ -155,12 +155,10 @@ namespace PopcornFX
 
 		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 		{
-			AssetDatabase.StartAssetEditing();
 			foreach (string str in importedAssets)
 			{
 				PKFxAssetCreationUtils.NotifyAssetPostProcess(str);
 			}
-			AssetDatabase.StopAssetEditing();
 		}
 	}
 }

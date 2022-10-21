@@ -245,7 +245,7 @@ namespace PopcornFX
 			else
 				projectionMatrix = m_Camera.GetStereoProjectionMatrix(eye);
 
-			m_CameraDescription.m_ProjectionMatrix = GL.GetGPUProjectionMatrix(projectionMatrix, false);
+			m_CameraDescription.m_ProjectionMatrix = projectionMatrix;
 		}
 
 		//----------------------------------------------------------------------------

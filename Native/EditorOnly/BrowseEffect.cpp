@@ -405,7 +405,6 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataBillboard);
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
-				++rendererCount;
 			}
 			else if (renderer->m_RendererType == Renderer_Ribbon)
 			{
@@ -415,7 +414,6 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataRibbon);
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
-				++rendererCount;
 			}
 			else if (renderer->m_RendererType == Renderer_Mesh)
 			{
@@ -425,7 +423,6 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataMesh);
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
-				++rendererCount;
 			}
 			else if (renderer->m_RendererType == Renderer_Triangle)
 			{
@@ -435,8 +432,8 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 				dummyCache.GameThread_SetupRenderer(dataTriangle);
 				dummyCache.GetRendererInfo(unityTriangleDesc);
 				::OnEffectRendererFound(&unityTriangleDesc, renderer->m_RendererType, rendererCount);
-				++rendererCount;
 			}
+			++rendererCount;
 			++it;
 		}
 	}

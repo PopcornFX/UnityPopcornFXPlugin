@@ -20,6 +20,8 @@ namespace PopcornFX
 			Debug.LogWarning("[PopcornFX] Settings : For this setting to take effect, you'll need to re-open your project.");
 		}
 
+		//----------------------------------------------------------------------------
+
 		private static bool UpdatePKFXReference(PKFxEmitter fx)
 		{
 			bool loadingFailed = false;
@@ -56,6 +58,8 @@ namespace PopcornFX
 			return true;
 		}
 
+		//----------------------------------------------------------------------------
+
 		private static List<string> GetMonobehaviorComponentReferences(Object obj)
 		{
 			List<string> paths = new List<string>();
@@ -77,6 +81,8 @@ namespace PopcornFX
 			}
 			return paths;
 		}
+
+		//----------------------------------------------------------------------------
 
 		private static bool UpdateMonobehaviorComponentReferences(Object obj)
 		{
@@ -111,6 +117,8 @@ namespace PopcornFX
 			return fieldsPatched;
 		}
 
+		//----------------------------------------------------------------------------
+
 		private static bool UpdateAssetsReferences(Object obj)
 		{
 			PKFxEmitter emitterComponent = (obj as PKFxEmitter);
@@ -124,6 +132,8 @@ namespace PopcornFX
 				return UpdateMonobehaviorComponentReferences(obj);
 			}
 		}
+
+		//----------------------------------------------------------------------------
 
 		public static List<string> GetFxsOnAllScenesAndPrefabs(string rootPath)
 		{
@@ -237,7 +247,8 @@ namespace PopcornFX
 
 			return EffectsNames;
 		}
-		
+
+		//----------------------------------------------------------------------------
 		public static void UpdateFxsOnAllScenesAndPrefabs(string rootPath)
 		{
 			Scene startingScene = EditorSceneManager.GetActiveScene();
@@ -368,6 +379,8 @@ namespace PopcornFX
 			Debug.Log("[PopcornFX] " + referenceUpdateCount + " PKFxFX references updated.");
 		}
 
+		//----------------------------------------------------------------------------
+
 		static bool UpdatePKFXAssetsGUID(string path)
 		{
 			var GUIDLookup = PKFxSettings.AssetGUID;
@@ -388,6 +401,8 @@ namespace PopcornFX
 				File.WriteAllText(path, contents);
 			return updated;
 		}
+
+		//----------------------------------------------------------------------------
 
 		[MenuItem("Assets/PopcornFX/Update PKFxFXAsset GUID (experimental)")]
 		static void UpdatePKFxFXReferencesInScene()
@@ -489,6 +504,8 @@ namespace PopcornFX
 				EditorSceneManager.OpenScene(startingScenePath);
 		}
 
+		//----------------------------------------------------------------------------
+
 		public static void CreatePKFxFXMaterialsIFN()
 		{
 			string[] pkfxEffectAssets = AssetDatabase.FindAssets("t:PKFxEffectAsset");
@@ -498,23 +515,22 @@ namespace PopcornFX
 			{
 				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetGUID), typeof(PKFxEffectAsset));
 
-				int count = 0;
 				foreach (SBatchDesc batch in asset.m_RendererDescs)
-				{
-					asset.m_Materials[count] = factory.EditorResolveMaterial(batch, asset);
-					++count;
-				}
+					asset.m_Materials[batch.MaterialIdx] = factory.EditorResolveMaterial(batch, asset);
 			}
 			AssetDatabase.SaveAssets();
 		}
+
+		//----------------------------------------------------------------------------
 
 		[MenuItem("Assets/PopcornFX/Create PKFxFX Materials If necessary")]
 		static void _CreatePKFxFXMaterialsIFN(MenuCommand menuCommand)
 		{
 			CreatePKFxFXMaterialsIFN();
 		}
-		
-		
+
+		//----------------------------------------------------------------------------
+
 		[MenuItem("Assets/PopcornFX/Log PKFxFX References")]
 		static void LogPKFxFXReferences(MenuCommand menuCommand)
 		{
@@ -536,6 +552,8 @@ namespace PopcornFX
 				Debug.Log("No PKFx Assets found in " + path);
 		}
 
+		//----------------------------------------------------------------------------
+
 		[MenuItem("Assets/PopcornFX/Update PKFxFX References")]
 		static void UpdatePKFxFXReferences()
 		{
@@ -552,6 +570,8 @@ namespace PopcornFX
 			UpdateFxsOnAllScenesAndPrefabs(path);
 		}
 
+		//----------------------------------------------------------------------------
+
 		[MenuItem("Assets/PopcornFX/Import Effect Pack")]
 		static void ImportEffectPack()
 		{
@@ -562,6 +582,8 @@ namespace PopcornFX
 				window.ShowUtility();
 			}
 		}
+
+		//----------------------------------------------------------------------------
 
 		[MenuItem("Assets/PopcornFX/Create Mesh Data")]
 		static void CreateMeshData()
@@ -592,6 +614,8 @@ namespace PopcornFX
 				}
 			}
 		}
+
+		//----------------------------------------------------------------------------
 
 		[MenuItem("GameObject/PopcornFX/Effect", false, 10)]
 		static void CreateEmptyFX(MenuCommand menuCommand)

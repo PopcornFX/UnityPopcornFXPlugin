@@ -185,10 +185,8 @@ namespace PopcornFX
 
 				instance = CreateInstance<PKFxSettings>();
 
-
-				Directory.CreateDirectory(fullPath);
+				AssetDatabase.CreateFolder("Assets/", "Resources");
 				AssetDatabase.CreateAsset(instance, fullPath);
-
 				AssetDatabase.SaveAssets();
 			}
 
@@ -418,6 +416,18 @@ namespace PopcornFX
 							}
 						};
 					}
+
+					if (GUILayout.Button("All effects in project"))
+					{
+						category.EndCb = () =>
+						{
+							if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetProjetAssetPath())
+							{
+								PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
+							}
+						};
+					}
+
 					if (GUILayout.Button("All"))
 					{
 						category.EndCb = () =>
@@ -460,7 +470,15 @@ namespace PopcornFX
 		private void DisplayRenderingCategory(PKFxEditorCategory category)
 		{
 			EditorGUILayout.BeginHorizontal();
-			PKFxSettings.MaterialFactory = EditorGUILayout.ObjectField(materialFactoryLabel, PKFxSettings.MaterialFactory, typeof(PKFxMaterialFactory), false) as PKFxMaterialFactory;
+			PKFxMaterialFactory factory = EditorGUILayout.ObjectField(materialFactoryLabel, PKFxSettings.MaterialFactory, typeof(PKFxMaterialFactory), false) as PKFxMaterialFactory;
+			if (factory != PKFxSettings.MaterialFactory)
+			{
+				PKFxSettings.MaterialFactory = factory;
+				if (AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
+					AssetDatabase.DeleteAsset("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials");
+				PKFxMenus.CreatePKFxFXMaterialsIFN();
+			}
+
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();

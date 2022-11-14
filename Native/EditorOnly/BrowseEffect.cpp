@@ -309,7 +309,6 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 	for (u32 i = 0; i < dependencyCount; ++i)
 	{
 		SResourceDependency	&dependency = dependencies[i];
-		u32					dependencyMask = 0;
 		CString				path = dependency.m_Path;
 
 		if (dependency.m_Type == SResourceDependency::Type_Material)
@@ -317,6 +316,7 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 
 		if (dependency.m_Usage & SResourceDependency::UsageFlags_UsedInRender)
 		{
+			u32					dependencyMask = 0;
 			if (dependency.m_Type == SResourceDependency::Type_Mesh)
 			{
 				dependencyMask |= IsMeshRenderer;
@@ -337,11 +337,12 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 					dependencyMask |= IsTextureRenderer;
 				}
 			}
+			::OnEffectDependencyFound(path.Data(), dependencyMask);
 		}
-		else if (dependency.m_Usage & SResourceDependency::UsageFlags_UsedInSimulation)
+		if (dependency.m_Usage & SResourceDependency::UsageFlags_UsedInSimulation)
 		{
-			if (dependency.m_Type == SResourceDependency::Type_Mesh &&
-				(dependency.m_Usage & SResourceDependency::UsageFlags_Mesh_Sample))
+			u32					dependencyMask = 0;
+			if (dependency.m_Type == SResourceDependency::Type_Mesh) // && (dependency.m_Usage & SResourceDependency::UsageFlags_Mesh_Sample))
 			{
 				dependencyMask |= IsMeshSampler;
 			}
@@ -355,12 +356,12 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 			{
 				path = PatchPathForAnimTrack(path); // GOOD
 			}
+			::OnEffectDependencyFound(path.Data(), dependencyMask);
 		}
 		else //SResourceDependency::UsageFlags_Custom // Not supported
 		{
 
 		}
-		::OnEffectDependencyFound(path.Data(), dependencyMask);
 	}
 	return true;
 }

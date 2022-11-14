@@ -145,7 +145,7 @@ namespace PopcornFX
 
 							if (matProp.objectReferenceValue != newMat)
 							{
-								PKFxSettings.MaterialFactory.AddCustomMaterial(asset, renderers[i], newMat, i);
+								PKFxSettings.MaterialFactory.AddCustomMaterial(asset, renderers[i], newMat, renderers[i].MaterialIdx);
 								matProp.objectReferenceValue = newMat;
 								serializedObject.ApplyModifiedProperties();
 							}
@@ -191,7 +191,7 @@ namespace PopcornFX
 							AssetDatabase.CreateAsset(matOverride, "Assets/Resources/" + Path.GetFileNameWithoutExtension(asset.name) + "_" + idxCpy + ".mat");
 							SerializedProperty matProp = mats.GetArrayElementAtIndex(idxCpy);
 
-							PKFxSettings.MaterialFactory.AddCustomMaterial(asset, renderers[idxCpy], matOverride, idxCpy);
+							PKFxSettings.MaterialFactory.AddCustomMaterial(asset, renderers[idxCpy], matOverride, renderers[idxCpy].MaterialIdx);
 							matProp.objectReferenceValue = matOverride;
 							serializedObject.ApplyModifiedProperties();
 						});

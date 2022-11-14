@@ -480,6 +480,12 @@ namespace PopcornFX
 			else
 				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshRenderer;
 
+			bool isMeshSampler = (useInfoFlags & (int)EUseInfoFlag.IsMeshSampler) != 0;
+			if (isMeshSampler && Path.GetExtension(depDesc.m_Path).CompareTo(".fbx") == 0)
+				depDesc.m_Path = Path.ChangeExtension(depDesc.m_Path, ".pkmm");
+			else
+				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshSampler;
+
 			bool isLinearTexture = (useInfoFlags & (int)EUseInfoFlag.IsLinearTextureRenderer) != 0;
 			
 			if (isLinearTexture)

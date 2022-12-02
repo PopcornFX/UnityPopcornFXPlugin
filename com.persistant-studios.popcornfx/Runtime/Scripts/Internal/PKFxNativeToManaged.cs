@@ -481,7 +481,7 @@ namespace PopcornFX
 				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshRenderer;
 
 			bool isMeshSampler = (useInfoFlags & (int)EUseInfoFlag.IsMeshSampler) != 0;
-			if (isMeshSampler && Path.GetExtension(depDesc.m_Path).CompareTo(".fbx") == 0)
+			if (isMeshSampler && Path.GetExtension(depDesc.m_Path).ToLower().CompareTo(".fbx") == 0)
 				depDesc.m_Path = Path.ChangeExtension(depDesc.m_Path, ".pkmm");
 			else
 				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshSampler;
@@ -1107,7 +1107,7 @@ namespace PopcornFX
 
 				PKFxCustomMaterialInfo matInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(batchDesc, m_CurrentlyBuildAsset);
 
-				if (matInfo == null)
+				if (matInfo == null || matInfo.m_CustomMaterial == null)
 					*hasCustomMat = 0;
 				else
 				{

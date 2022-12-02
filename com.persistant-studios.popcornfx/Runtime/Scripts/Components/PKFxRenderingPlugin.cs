@@ -109,6 +109,12 @@ namespace PopcornFX
 				gameObject.SetActive(false);
 				return;
 			}
+			if (!PKFxManager.IsDllLoaded())
+			{
+				gameObject.SetActive(false);
+				Debug.LogWarning("[PopcornFX] Unable to load the PopcornFX native plugin, check that the library is present and its import settings.");
+				return;
+			}
 			PKFxManager.StartupPopcorn(false);
 			PKFxManager.SetMaxCameraCount(m_MaxCameraSupport);
 
@@ -118,6 +124,11 @@ namespace PopcornFX
 				Debug.LogWarning("[PopcornFX] No main camera in the scene! No PopcornFX particles will be rendered. Make sure at least one of the camera with the PKFxCamera component on it is tagged as the MainCamera.");
 			else if (Camera.main.GetComponent<PKFxCamera>() == null)
 				Debug.LogWarning("[PopcornFX] No PKFxCamera in the scene! No PopcornFX particles will be rendered. Make sure at least one of the camera with the PKFxCamera component on it is tagged as the MainCamera.");
+		}
+
+		public void UpdateSimulation()
+		{
+			_LateUpdate();
 		}
 
 		//----------------------------------------------------------------------------
@@ -137,7 +148,16 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		void LateUpdate()
+		private void LateUpdate()
+		{
+			if (PKFxSettings.UpdateSimManually)
+				return;
+			_LateUpdate();
+		}
+
+		//----------------------------------------------------------------------------
+
+		void _LateUpdate()
 		{
 			if (g_LastFrameCount != Time.frameCount)
 			{
@@ -151,9 +171,13 @@ namespace PopcornFX
 					}
 				}
 			}
-			PKFxSoundManager.DeleteSoundsIFN();
 
+			PKFxManager.DrawMeshRenderers();
+
+			PKFxSoundManager.DeleteSoundsIFN();
 		}
+
+		//----------------------------------------------------------------------------
 
 		internal int RegisterCamera(PKFxCamera PKFxCamera)
 		{
@@ -169,6 +193,8 @@ namespace PopcornFX
 			}
 			return -1;
 		}
+
+		//----------------------------------------------------------------------------
 
 		internal bool UnRegisterCamera(PKFxCamera PKFxCamera)
 		{

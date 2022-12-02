@@ -18,9 +18,13 @@
 #if	PK_UNITY_EDITOR
 	// Only used for asset baking:
 #	define USE_IMAGE_PLUGINS	1
-#	if	defined(PK_CPU_64BITS)
-		// only works for 64bits CPU
-#		define USE_FBX_PLUGIN	1
+#	if	defined(PK_CPU_64BITS) 
+#		if defined(PK_LINUX)
+#			define USE_FBX_PLUGIN	0
+#		else
+			// only works for 64bits CPU
+#			define USE_FBX_PLUGIN	1
+#		endif
 #	endif
 #else
 #	define USE_IMAGE_PLUGINS	0

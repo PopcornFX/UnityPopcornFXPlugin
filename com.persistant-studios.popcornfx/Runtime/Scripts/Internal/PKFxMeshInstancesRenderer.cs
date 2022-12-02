@@ -222,9 +222,9 @@ namespace PopcornFX
 			m_AnimTransition.Dispose();
 		}
 
-		void LateUpdate()
+		public void DrawMeshes()
 		{
-			if (m_Meshes == null || m_Meshes.Length == 0)
+			if (!gameObject.activeSelf || m_Meshes == null || m_Meshes.Length == 0)
 				return;
 			int generalOffset = 0;
 			if (PKFxSettings.UseMeshInstancing)

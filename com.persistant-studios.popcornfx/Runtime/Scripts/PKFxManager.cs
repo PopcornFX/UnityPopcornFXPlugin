@@ -80,6 +80,8 @@ namespace PopcornFX
 
 		public static int GetPopcornFXLog(ref string log, ref EPopcornLogLevels level)
 		{
+			if (!PKFxManagerImpl._IsDllLoaded())
+				return 0;
 			const int bufferSize = 0x1000;
 			StringBuilder sb = new StringBuilder(bufferSize);
 
@@ -576,6 +578,15 @@ namespace PopcornFX
 		internal static void SetAttributesDirty(int fxGuid)
 		{
 			PKFxManagerImpl.EffectUpdateAttributes(fxGuid);
+		}
+
+		public static void DrawMeshRenderers()
+		{
+			foreach (var renderer in PKFxManagerImpl.m_Renderers)
+			{
+				if (renderer.m_InstancesRenderer != null)
+					renderer.m_InstancesRenderer.DrawMeshes();
+			}
 		}
 	}
 }

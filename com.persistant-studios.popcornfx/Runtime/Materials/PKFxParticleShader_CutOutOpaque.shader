@@ -61,7 +61,7 @@ Shader "PopcornFX/PKFxParticleShader_CutOutOpaque"
 			//------------------------------------------------------------------------------------
 			// Particle shader
 			//------------------------------------------------------------------------------------
-			#include "Packages/com.persistant-studios.popcornfx/Runtime/Materials/PKFxShaderCode/ParticleShader.cginc"
+			#include "PKFxShaderCode/ParticleShader.cginc"
 
 			ENDHLSL
 		}

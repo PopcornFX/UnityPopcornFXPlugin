@@ -42,6 +42,8 @@ namespace PopcornFX
 		GUIContent enableLocalizedPages = new GUIContent(" Enable Localized Pages");
 		GUIContent enableLocalizedPagesByDefault = new GUIContent(" Enable Localized Pages By Default");
 
+		GUIContent updateSimManually = new GUIContent(" Call particle simulation update manually");
+
 		GUIContent freeUnusedBactchesLabel = new GUIContent(" Free unused batches");
 		GUIContent frameCountBeforeFreeUnusedBactchesLabel = new GUIContent(" Frame count before freeing unused batches");
 
@@ -546,6 +548,10 @@ namespace PopcornFX
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.EnableLocalizedByDefault = EditorGUILayout.ToggleLeft(enableLocalizedPagesByDefault, PKFxSettings.EnableLocalizedByDefault);
 			EditorGUILayout.EndHorizontal();
+
+			EditorGUILayout.BeginHorizontal();
+			PKFxSettings.UpdateSimManually = EditorGUILayout.ToggleLeft(updateSimManually, PKFxSettings.UpdateSimManually);
+			EditorGUILayout.EndHorizontal(); 
 
 			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.FreeUnusedBatches = EditorGUILayout.ToggleLeft(freeUnusedBactchesLabel, PKFxSettings.FreeUnusedBatches);

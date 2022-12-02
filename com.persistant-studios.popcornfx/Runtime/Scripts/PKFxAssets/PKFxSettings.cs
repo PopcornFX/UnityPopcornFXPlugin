@@ -317,6 +317,8 @@ namespace PopcornFX
 		[SerializeField] private List<SParticleMeshDefaultSize> m_MeshesDefaultSize = new List<SParticleMeshDefaultSize>();
 		[SerializeField] private bool m_UseHashesAsMaterialName = true;
 
+		[SerializeField] private bool m_UpdateSimManually = false;
+
 		public static bool RenderingCategory
 		{
 			get { return Instance.m_RenderingCategory; }
@@ -456,6 +458,12 @@ namespace PopcornFX
 		{
 			get { return Instance.m_UseHashesAsMaterialName; }
 			set { Instance.m_UseHashesAsMaterialName = value; }
+		}
+
+		public static bool UpdateSimManually
+		{
+			get { return Instance.m_UpdateSimManually; }
+			set { Instance.m_UpdateSimManually = value; }
 		}
 
 		public void Setup()

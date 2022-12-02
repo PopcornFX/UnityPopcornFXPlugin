@@ -1,17 +1,6 @@
 //----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
-#if	SHADER_API_D3D11 || SHADER_API_D3D9 || SHADER_API_XBOXONE || SHADER_API_METAL || SHADER_API_PSSL || SHADER_API_SWITCH
-	#define	CLIP_Y_REVERSED		1
-#else
-	#define	CLIP_Y_REVERSED		0
-#endif
-
-#if	SHADER_API_D3D11 || SHADER_API_D3D9 || SHADER_API_XBOXONE || SHADER_API_METAL || SHADER_API_PSSL || SHADER_API_SWITCH
-	#define	CLIP_Z_BETWEEN_MINUS_ONE_AND_ONE		0
-#else
-	#define	CLIP_Z_BETWEEN_MINUS_ONE_AND_ONE		1
-#endif
 
 //------------------------------------------
 // Diffuse texture sampling
@@ -120,7 +109,7 @@ float4	SampleSpriteTexture(float2 uv)
 			depthTexcoord = uv;
 		#endif
 		
-		#if	CLIP_Y_REVERSED && !USE_URP
+		#if	UNITY_UV_STARTS_AT_TOP
 			depthTexcoord.y = 1 - depthTexcoord.y;
 		#endif
 		#if	USE_HDRP
@@ -129,9 +118,6 @@ float4	SampleSpriteTexture(float2 uv)
 			float depth = SAMPLE_TEXTURE2D_X(_CameraDepthTexture, _pointClampSampler, depthTexcoord).r;
 		#else
 			float depth = UNITY_SAMPLE_SCREENSPACE_TEXTURE(_CameraDepthTexture, depthTexcoord).r;
-		#endif
-		#if !UNITY_REVERSED_Z
-			depth = 1.0 - depth;
 		#endif
 		return depth;
 	}

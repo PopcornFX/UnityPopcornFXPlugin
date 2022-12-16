@@ -369,6 +369,8 @@ namespace PopcornFX
 		// Skeletal anim:
 		public SBatchSkeletalAnimFeatureDesc m_SkeletalAnimFeature = null;
 
+		public Texture2D			m_AtlasSubRects = null;
+
 		//Internal
 		[SerializeField]
 		internal int				m_InternalId;
@@ -491,6 +493,29 @@ namespace PopcornFX
 				else
 					m_SkeletalAnimFeature = null;
 			}
+
+			unsafe
+			{
+				// The atlas is null when the effect is imported at first
+				// This texture is only setup at runtime when the effect is preloaded
+				if (desc.m_TextureAtlasCount == 0 || desc.m_TextureAtlas == null)
+				{
+					m_AtlasSubRects = new Texture2D(1, 1, TextureFormat.RGBAFloat, false, true);
+					m_AtlasSubRects.SetPixel(0, 0, new Vector4(1, 1, 0, 0));
+				}
+				else
+				{
+					m_AtlasSubRects = new Texture2D(desc.m_TextureAtlasCount, 1, TextureFormat.RGBAFloat, false, true);
+					Vector4		*subRects = (Vector4*)desc.m_TextureAtlas.ToPointer();
+					for (int i = 0; i < desc.m_TextureAtlasCount; ++i)
+					{
+						Vector4 curCol = subRects[i];
+						m_AtlasSubRects.SetPixel(i, 0, curCol);
+					}
+				}
+				m_AtlasSubRects.Apply();
+			}
+
 			m_GeneratedName = GenerateNameFromDescription();
 			m_InternalId = idx;
 		}

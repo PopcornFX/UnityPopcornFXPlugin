@@ -60,7 +60,8 @@ namespace PopcornFX
 		bool SetupDistortionPassIFN()
 		{
 			if (GraphicsSettings.renderPipelineAsset != null &&
-				GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset")
+				(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
+				 GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset"))
 				return false; // No need for that in HDRP, we are using distortion builtin shaders
 			if (PKFxSettings.EnableSoftParticles == false)
 				return false;
@@ -184,7 +185,8 @@ namespace PopcornFX
 			m_Camera.cullingMask = (cull & (~pKMask)) | targetMask;
 
 			if (GraphicsSettings.renderPipelineAsset == null ||
-				GraphicsSettings.renderPipelineAsset.name != "HDRenderPipelineAsset")
+				!(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
+				  GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset"))
 			{
 				// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
 				m_Camera.cullingMask &= ~(1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer));

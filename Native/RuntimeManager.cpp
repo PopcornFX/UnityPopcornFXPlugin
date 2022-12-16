@@ -1740,10 +1740,9 @@ void	CRuntimeManager::_ExecUpdateCamDesc(int camID, SCamDesc desc, bool update)
 		return;
 
 	SUnitySceneView	&sceneView = sceneViews[camID];
-	CFloat4x4	camTransform = desc.m_ViewMatrix.Inverse();
 
-	const CFloat4x4 &camV2W = camTransform;
-	const CFloat4x4	&camW2V = camTransform.Inverse();
+	const CFloat4x4 &camV2W = desc.m_ViewMatrix.Inverse();
+	const CFloat4x4	&camW2V = desc.m_ViewMatrix;
 	const CFloat4x4 &camV2P = desc.m_ProjectionMatrix;
 	const CFloat4x4 &camP2V = desc.m_ProjectionMatrix.Inverse();
 	const CFloat4x4	camW2P = camW2V * camV2P;

@@ -68,6 +68,10 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	}
 	rendererCache->SetAssetName(particleDesc->ParentEffect()->HandlerName());
 
+	CResourceManager	*resourceManager = particleDesc->ParentEffect()->Context()->ResourceManager();
+
+	succeeded &= rendererCache->UpdateThread_LoadRendererAtlas(renderer, resourceManager);
+
 	if (!succeeded)
 		return null;
 

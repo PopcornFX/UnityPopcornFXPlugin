@@ -46,12 +46,24 @@ namespace PopcornFX
 			newAsset.AssetVirtualPath = path;
 			string fullPath = newAsset.AssetFullPath + ".asset";
 			newAsset.m_Data = fxAsset.m_Data; // Copy the old asset content in the new one
+
+			UnityEngine.Object[] data = AssetDatabase.LoadAllAssetsAtPath(fullPath);
+			foreach (UnityEngine.Object asset in data)
+			{
+				PKFxCustomMaterialInfo info = asset as PKFxCustomMaterialInfo;
+				if (info != null)
+				{
+					newAsset.m_CustomMaterials.Add(info);
+				}
+			}
+
 			if (ProcessAssetChangeData(newAsset, path) == false)
 				return false;
 
 			PKFxEffectAsset oldAsset = AssetDatabase.LoadAssetAtPath<PKFxEffectAsset>(fullPath);
-
 			EditorUtility.CopySerialized(newAsset, oldAsset);
+
+
 			return true;
 		}
 
@@ -102,8 +114,13 @@ namespace PopcornFX
 
 							PKFxRenderFeatureBinding binding = PKFxSettings.MaterialFactory.ResolveBatchBinding(rdr);
 
-							if (asset.m_Materials.Count > rdr.MaterialIdx)
-								binding.BindMaterialProperties(rdr, asset.m_Materials[rdr.MaterialIdx], asset);
+							if (binding != null)
+							{
+								if (asset.m_Materials.Count > rdr.MaterialIdx)
+									binding.BindMaterialProperties(rdr, asset.m_Materials[rdr.MaterialIdx], asset);
+							}
+							else
+								Debug.LogWarning("[PopcornFX] No material binding found for batch descriptor: " + rdr.m_GeneratedName);
 						}
 					}
 				}

@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PopcornFX
 {
@@ -18,7 +19,9 @@ namespace PopcornFX
 
 		public bool[]					m_RenderTypes;
 		public bool[]					m_BlendMode;
-		public EShaderVariationFlags	m_ShaderMask = 0;
+		[FormerlySerializedAs("m_ShaderMask")]
+		public EShaderVariationFlags	m_SupportedShaderMask = 0;
+		public EShaderVariationFlags	m_MandatoryShaderMask = 0;
 		public EBillboardLocation		m_BillboardingLocation = EBillboardLocation.CPU;
 
 		public PKFxRenderFeatureBinding()
@@ -61,9 +64,12 @@ namespace PopcornFX
 			if (!m_BlendMode[(int)desc.m_BlendMode])
 				return false;
 
-			int shaderMask = (int)m_ShaderMask;
+			int supportedShaderMask = (int)m_SupportedShaderMask;
+			int mandatoryShaderMask = (int)m_MandatoryShaderMask;
 
-			if ((shaderMask & desc.m_ShaderVariationFlags) != desc.m_ShaderVariationFlags)
+			if ((supportedShaderMask & desc.m_ShaderVariationFlags) != desc.m_ShaderVariationFlags)
+				return false;
+			if ((mandatoryShaderMask & desc.m_ShaderVariationFlags) != mandatoryShaderMask)
 				return false;
 
 			return true;

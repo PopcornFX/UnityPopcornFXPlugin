@@ -15,11 +15,19 @@ namespace PopcornFX
 	[Serializable]
 	public class PKFxMaterialFactoryURP : PKFxMaterialFactory
 	{
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitSkinned2020;
 
-		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentMeshUnlit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshUnlit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentMeshLit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueParticleUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentParticleUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_AdditiveParticleUnlit2020;
+
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueParticleLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentParticleLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_AdditiveParticleLit2020;
 
 		public enum SurfaceType
 		{
@@ -51,22 +59,79 @@ namespace PopcornFX
 
 		public override void SetupFallBackFeatureBinding()
 		{
-			m_RenderFeatureBindings.Add(m_CPUBillboardingDefault);
-			m_RenderFeatureBindings.Add(m_CPUBillboardingOpaqueDefault);
-			m_RenderFeatureBindings.Add(m_VertexBillboardingDefault);
-			m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueDefault);
 #if UNITY_2021_1_OR_NEWER
-			m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDefault);
-			m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
-			m_RenderFeatureBindings.Add(m_TransparentMeshLitDefault);
-			m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
+			// Meshes:
+			if (m_TransparentMeshUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDefault);
+			if (m_OpaqueMeshUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
+			if (m_TransparentMeshLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitDefault);
+			if (m_OpaqueMeshLitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
+			if (m_OpaqueMeshLitSkinnedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDefault);
+			// Particles Unlit:
+			if (m_OpaqueParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
+			if (m_TransparentParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
+			if (m_AdditiveParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitDefault);
+			if (m_OpaqueCorrectDeformationUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitDefault);
+			if (m_TransparentCorrectDeformationUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitDefault);
+			if (m_AdditiveCorrectDeformationUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationUnlitDefault);
+			// Particles Lit:
+			if (m_OpaqueParticleLitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleLitDefault);
+			if (m_TransparentParticleLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleLitDefault);
+			if (m_AdditiveParticleLitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleLitDefault);
+			if (m_OpaqueCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitDefault);
+			if (m_TransparentCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitDefault);
+			if (m_AdditiveCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitDefault);
 #elif UNITY_2020_3_OR_NEWER
-			m_RenderFeatureBindings.Add(m_TransparentMeshUnlit2020);
-			m_RenderFeatureBindings.Add(m_OpaqueMeshUnlit2020);
-			m_RenderFeatureBindings.Add(m_TransparentMeshLit2020);
-			m_RenderFeatureBindings.Add(m_OpaqueMeshLit2020);
+			// Meshes:
+			if (m_TransparentMeshUnlit2020 != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlit2020);
+			if (m_OpaqueMeshUnlit2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlit2020);
+			if (m_TransparentMeshLit2020 != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLit2020);
+			if (m_OpaqueMeshLit2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLit2020);
+			if (m_OpaqueMeshLitSkinned2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinned2020);
+			// Particles Unlit:
+			if (m_OpaqueParticleUnlit2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlit2020);
+			if (m_TransparentParticleUnlit2020 != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleUnlit2020);
+			if (m_AdditiveParticleUnlit2020 != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlit2020);
+			// Particles Lit:
+			if (m_OpaqueParticleLit2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleLit2020);
+			if (m_TransparentParticleLit2020 != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleLit2020);
+			if (m_AdditiveParticleLit2020 != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleLit2020);
 #endif
-			ReplaceBindingsWithLegacy();
+			if (m_CPUParticleDefault != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleDefault);
+			if (m_CPUParticleOpaqueDefault != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleOpaqueDefault);
+			if (m_VertexBillboardingDefault != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingDefault);
+			if (m_VertexBillboardingOpaqueDefault != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueDefault);
 		}
 
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)

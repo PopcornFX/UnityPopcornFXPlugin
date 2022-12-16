@@ -68,22 +68,37 @@ float4	frag(SVertexOutput i) : SV_Target
 	
 
 	#if	PK_HAS_DISTORTION
-		#if	PK_HAS_COLOR
-			float4	color = i.Color;
-		#else
-			float4	color = float4(1, 1, 1, 1);
+		float4	color = i.Color;
+		
+
+		#if USE_URP		//Forward
+			float3	baseDisto = diffuse.xyz - float3(0.50196, 0.50196, 0.0);
+			#if	PK_HAS_SOFT
+				diffuse.rg = float2(depthfade, depthfade) * baseDisto.xy / (fragDepth);
+			#else
+				diffuse.rg = baseDisto.rg;
+			#endif
+			float2 distoScreenUV = screenUV + (diffuse.xy * _DistortionFactor);
+			#if	UNITY_UV_STARTS_AT_TOP
+				distoScreenUV.y = 1 - distoScreenUV.y;
+			#endif
+			distoScreenUV = UnityStereoTransformScreenSpaceTex(distoScreenUV);
+			diffuse.rgb = SAMPLE_TEXTURE2D_X(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, distoScreenUV).rgb;
+		#else			// Deferred
+
+			float2 distoScreenUV = screenUV + diffuse.xy;
+			float3	baseDisto = color.xyz * (diffuse.xyz * float3(2.0, 2.0, 1.0) - float3(0.50196, 0.50196, 0.0));
+
+			#if	PK_HAS_SOFT
+				baseDisto = float3(depthfade, depthfade, 1) * baseDisto / (fragDepth);
+			#endif
+			diffuse = float4(baseDisto, 1);
 		#endif
 
-		float3	baseDisto = color.xyz * (diffuse.xyz * float3(2.0, 2.0, 1.0) - float3(0.50196, 0.50196, 0.0));
-
-		#if	PK_HAS_SOFT
-			baseDisto = float3(depthfade, depthfade, 1) * baseDisto / (fragDepth);
-		#endif
-		diffuse = float4(baseDisto, 1);
-		float	distDepth = LINEARIZE_DEPTH(PKSampleDepthTexture(screenUV + diffuse.xy ));
+		float	distDepth = LINEARIZE_DEPTH(PKSampleDepthTexture(distoScreenUV));
 		if (fragDepth > distDepth)
 			discard;
-		result = diffuse;
+		result.rgb = diffuse.rgb;
 
 	#elif	PK_HAS_COLOR
 		result = diffuse * i.Color;
@@ -109,9 +124,9 @@ float4	frag(SVertexOutput i) : SV_Target
 		result.rgb += emissiveColor1.rgb;
 	#endif
 	
-	#if CUTOUT_OPAQUE
+#if CUTOUT_OPAQUE
 		return float4((result * depthfade).rgb, 1);
-	#else
+#else
 		return result * depthfade;
-	#endif
+#endif
 }

@@ -430,7 +430,7 @@ void			CEffectBaker::Initialize(const char *pKPackPath)
 	}
 
 	// map all known extensions to the appropriate oven:
-	m_BakeContext.m_Cookery.MapOven("fbx", ovenIdStraightCopy);		// FBX mesh
+	m_BakeContext.m_Cookery.MapOven("fbx", ovenIdMesh);				// FBX mesh
 	m_BakeContext.m_Cookery.MapOven("pkmm", ovenIdMesh);			// PopcornFX multi-mesh
 	m_BakeContext.m_Cookery.MapOven("dds", ovenIdTexture);			// dds image
 	m_BakeContext.m_Cookery.MapOven("png", ovenIdTexture);			// png image
@@ -740,11 +740,18 @@ bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies)
 		// Copy the baked files in the bake directory:
 		for (u32 i = 0; i < outputPaths.Count(); ++i)
 		{
-			const CString	sourcePath = m_BakeContext.m_CacheBakeTarget.m_TargetPath / outputPaths[i]; // Already an absolute path
-			const CString	targetPath = m_BakeContext.m_DstBakeTarget.m_TargetPath / outputPaths[i];
-			const CString	targetDirectory = CFilePath::StripFilename(targetPath);
-			m_BakeContext.m_BakeFSController->CreateDirectoryChainIFN(targetDirectory, true);
-			m_BakeContext.m_BakeFSController->FileCopy(sourcePath, targetPath, true);
+			// Copy from PopcornFX project cache to Unity tmp bake folder:
+			CString	sourcePath = m_BakeContext.m_CacheBakeTarget.m_TargetPath / outputPaths[i];
+			// If cannot find file in PopcornFX project cache, copy from the PopcornFX project:
+			if (!m_BakeContext.m_BakeFSController->Exists(sourcePath, true))
+				sourcePath = m_PKPackPath / outputPaths[i];
+			if (m_BakeContext.m_BakeFSController->Exists(sourcePath, true))
+			{
+				const CString	targetPath = m_BakeContext.m_DstBakeTarget.m_TargetPath / outputPaths[i];
+				const CString	targetDirectory = CFilePath::StripFilename(targetPath);
+				m_BakeContext.m_BakeFSController->CreateDirectoryChainIFN(targetDirectory, true);
+				m_BakeContext.m_BakeFSController->FileCopy(sourcePath, targetPath, true);
+			}
 		}
 	}
 	return true;

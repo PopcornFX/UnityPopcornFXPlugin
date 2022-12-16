@@ -40,16 +40,52 @@ namespace PopcornFX
 #endif
 		public override void SetupFallBackFeatureBinding()
 		{
-			m_RenderFeatureBindings.Add(m_CPUBillboardingDefault);
-			m_RenderFeatureBindings.Add(m_CPUBillboardingOpaqueDefault);
-			m_RenderFeatureBindings.Add(m_VertexBillboardingDefault);
-			m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueDefault);
-			m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDefault);
-			m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
-			m_RenderFeatureBindings.Add(m_TransparentMeshLitDefault);
-			m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
-			m_RenderFeatureBindings.Add(m_CPUBillboardingDistortion);
-			m_RenderFeatureBindings.Add(m_VertexBillboardingDistortion);
+			// Meshes:
+			if (m_TransparentMeshUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDefault);
+			if (m_OpaqueMeshUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
+			if (m_TransparentMeshLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitDefault);
+			if (m_OpaqueMeshLitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
+			if (m_OpaqueMeshLitSkinnedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDefault);
+			// Particles Unlit:
+			if (m_OpaqueParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
+			if (m_TransparentParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
+			if (m_AdditiveParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitDefault);
+			if (m_OpaqueCorrectDeformationUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitDefault);
+			if (m_TransparentCorrectDeformationUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitDefault);
+			if (m_AdditiveCorrectDeformationUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationUnlitDefault);
+			// Particles Lit:
+			if (m_OpaqueParticleLitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleLitDefault);
+			if (m_TransparentParticleLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleLitDefault);
+			if (m_AdditiveParticleLitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleLitDefault);
+			if (m_OpaqueCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitDefault);
+			if (m_TransparentCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitDefault);
+			if (m_AdditiveCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitDefault);
+			// Fallback default:
+			if (m_CPUParticleDefault != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleDefault);
+			if (m_CPUParticleOpaqueDefault != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleOpaqueDefault);
+			if (m_VertexBillboardingDefault != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingDefault);
+			if (m_VertexBillboardingOpaqueDefault != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueDefault);
 		}
 
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)

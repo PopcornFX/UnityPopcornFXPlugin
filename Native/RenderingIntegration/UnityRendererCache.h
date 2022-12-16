@@ -223,6 +223,10 @@ public:
 	float									m_InvSoftnessDistance;
 	float									m_AlphaThreshold;
 
+	// Should break batching (no batching for meshes right now so this is useless):
+	CStringId								m_AtlasPath;
+	CUint2									m_AtlasSubdivs;
+
 	CParticleMaterialDescMesh();
 
 	bool		InitFromRenderer(const CRendererDataMesh &renderer);

@@ -71,7 +71,7 @@ sampler2D _DiffuseRampMap;
 
 #endif
 
-#include "VAT.cginc"
+#include "CustomFunctions/VAT.cginc"
 
 struct Input
 {

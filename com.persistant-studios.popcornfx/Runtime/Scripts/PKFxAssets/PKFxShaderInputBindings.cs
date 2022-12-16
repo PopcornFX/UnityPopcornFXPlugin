@@ -8,6 +8,7 @@ using UnityEngine;
 #if		UNITY_EDITOR
 using UnityEditor;
 #endif
+using UnityEngine.Rendering;
 
 namespace PopcornFX
 {
@@ -80,6 +81,10 @@ namespace PopcornFX
 		public string			m_MeshTransformRow1PropertyName = "_SkeletalMeshTransform1";
 		public string			m_MeshTransformRow2PropertyName = "_SkeletalMeshTransform2";
 		public string			m_MeshTransformRow3PropertyName = "_SkeletalMeshTransform3";
+		// Mesh Texture Atlas:
+		public string			m_TextureAtlasPropertyName = "_AtlasRects";
+		public string 			m_AtlasCountPropertyName = "_AtlasCount";
+		public string 			m_AtlasIdPropertyName = "_AtlasId";
 
 		public void BindMaterialProperties(SBatchDesc batchDesc, Material material, PKFxEffectAsset asset)
 		{
@@ -91,7 +96,10 @@ namespace PopcornFX
 				batchDesc.m_BlendMode == EBlendMode.Additive)
 			{
 				srcMode = (int)UnityEngine.Rendering.BlendMode.SrcAlpha;
-				dstMode = (int)UnityEngine.Rendering.BlendMode.One;
+				if (GraphicsSettings.renderPipelineAsset != null && GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset")
+					dstMode = (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
+				else
+					dstMode = (int)UnityEngine.Rendering.BlendMode.One;
 			}
 			else if (batchDesc.m_BlendMode == EBlendMode.AdditiveNoAlpha)
 			{
@@ -300,113 +308,138 @@ namespace PopcornFX
 			}
 		}
 
+		private void _EnableMaterialKeywords(Material material, string keyword)
+		{
+			material.EnableKeyword(keyword);
+			material.EnableKeyword(keyword + "_ON");
+			material.SetFloat(keyword, 1.0f);
+			material.SetFloat(keyword + "_ON", 1.0f);
+		}
+		private void _DisableMaterialKeywords(Material material, string keyword)
+		{
+			material.DisableKeyword(keyword);
+			material.DisableKeyword(keyword + "_ON");
+			material.SetFloat(keyword, 0.0f);
+			material.SetFloat(keyword + "_ON", 0.0f);
+		}
+
 		public void SetMaterialKeywords(SBatchDesc batchDesc, Material material)
 		{
 			if (batchDesc.m_Type == ERendererType.Mesh)
 			{
+				// VAT enum: PK_HAS_VAT_FLUID PK_HAS_VAT_RIGID PK_HAS_VAT_SOFT PK_HAS_VAT_NONE
 				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_FluidVAT))
 				{
-					material.DisableKeyword("PK_HAS_VAT_NONE");
-					material.EnableKeyword("PK_HAS_VAT_FLUID");
-					material.SetFloat("PK_HAS_VAT", 1.0f);
+					_EnableMaterialKeywords(material, "PK_HAS_VAT_FLUID");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT))
 				{
-					material.DisableKeyword("PK_HAS_VAT_NONE");
-					material.EnableKeyword("PK_HAS_VAT_RIGID");
-					material.SetFloat("PK_HAS_VAT", 1.0f);
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_FLUID");
+					_EnableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SoftVAT))
 				{
-					material.DisableKeyword("PK_HAS_VAT_NONE");
-					material.EnableKeyword("PK_HAS_VAT_SOFT");
-					material.SetFloat("PK_HAS_VAT", 1.0f);
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_FLUID");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
+					_EnableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
 				}
 				else
 				{
-					material.DisableKeyword("PK_HAS_VAT_FLUID");
-					material.DisableKeyword("PK_HAS_VAT_NONE");
-					material.EnableKeyword("PK_HAS_VAT_SOFT");
-					material.SetFloat("PK_HAS_VAT", 0.0f);
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_FLUID");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
+					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
+					_EnableMaterialKeywords(material, "PK_HAS_VAT_NONE");
 				}
 
+				// Skeletal anim: PK_HAS_SKELETAL_ANIM
 				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalAnim))
-				{
-					material.SetFloat("PK_HAS_SKELETAL_ANIM", 1.0f);
-					material.EnableKeyword("PK_HAS_SKELETAL_ANIM");
-				}
+					_EnableMaterialKeywords(material, "PK_HAS_SKELETAL_ANIM");
 				else
-					material.SetFloat("PK_HAS_SKELETAL_ANIM", 0.0f);
-
+					_DisableMaterialKeywords(material, "PK_HAS_SKELETAL_ANIM");
+				// Skeletal anim: PK_HAS_SKELETAL_ANIM_INTERPOL
 				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalInterpol))
-				{
-					material.EnableKeyword("PK_HAS_SKELETAL_ANIM_INTERPOL");
-					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL", 1.0f);
-				}
+					_EnableMaterialKeywords(material, "PK_HAS_SKELETAL_ANIM_INTERPOL");
 				else
-					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL", 0.0f);
-
+					_DisableMaterialKeywords(material, "PK_HAS_SKELETAL_ANIM_INTERPOL");
+				// Skeletal anim: PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS
 				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalTrackInterpol))
-				{
-					material.EnableKeyword("PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS");
-					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS", 1.0f);
-				}
+					_EnableMaterialKeywords(material, "PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS");
 				else
-					material.SetFloat("PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS", 0.0f);
+					_DisableMaterialKeywords(material, "PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS");
 			}
-			// Set the shader variation:
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
-			{
-				material.EnableKeyword("PK_HAS_DIFFUSE_RAMP");
-				material.SetFloat("PK_HAS_DIFFUSE_RAMP", 1.0f);
-			}
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
-			{
-				material.EnableKeyword("PK_HAS_ALPHA_REMAP");
-				material.SetFloat("PK_HAS_ALPHA_REMAP", 1.0f);
-			}
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
-			{
-				material.EnableKeyword("PK_HAS_ANIM_BLEND");
-				material.SetFloat("PK_HAS_ANIM_BLEND", 1.0f);
-			}
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
-			{
-				material.EnableKeyword("PK_HAS_DISTORTION");
-				material.SetFloat("PK_HAS_DISTORTION", 1.0f);
-			}
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
-			{
-				material.EnableKeyword("PK_HAS_LIGHTING");
-				material.SetFloat("PK_HAS_LIGHTING", 1.0f);
-			}
+			// Anim-blend / ribbon-complex : PK_HAS_RIBBON_COMPLEX or PK_HAS_ANIM_BLEND
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
 			{
-				material.EnableKeyword("PK_HAS_RIBBON_COMPLEX");
-				material.SetFloat("PK_HAS_RIBBON_COMPLEX", 1.0f);
+				_EnableMaterialKeywords(material, "PK_HAS_RIBBON_COMPLEX");
 			}
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
+			else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
 			{
-				material.DisableKeyword("PK_HAS_EMISSIVE_NONE");
-				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_EmissiveRamp))
-					material.EnableKeyword("PK_HAS_EMISSIVE_WITH_RAMP");
-				else
-					material.EnableKeyword("PK_HAS_EMISSIVE_BASIC");
-				material.SetFloat("PK_HAS_EMISSIVE", 1.0f);
+				_EnableMaterialKeywords(material, "PK_HAS_ANIM_BLEND");
 			}
 			else
 			{
-				material.DisableKeyword("PK_HAS_EMISSIVE_BASIC");
-				material.DisableKeyword("PK_HAS_EMISSIVE_WITH_RAMP");
-				material.EnableKeyword("PK_HAS_EMISSIVE_NONE");
-				material.SetFloat("PK_HAS_EMISSIVE", 0.0f);
+				_DisableMaterialKeywords(material, "PK_HAS_RIBBON_COMPLEX");
+				_DisableMaterialKeywords(material, "PK_HAS_ANIM_BLEND");
 			}
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Soft) && PKFxSettings.EnableSoftParticles)
+			// Emissive enum: PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP PK_HAS_EMISSIVE_NONE
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 			{
-				material.EnableKeyword("PK_HAS_SOFT");
-				material.SetFloat("PK_HAS_SOFT", 1.0f);
+				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_EmissiveRamp))
+				{
+					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
+					_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_WITH_RAMP");
+					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_BASIC");
+				}
+				else
+				{
+					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
+					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_WITH_RAMP");
+					_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_BASIC");
+				}
 			}
-			
+			else
+			{
+				_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
+				_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_WITH_RAMP");
+				_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_BASIC");
+			}
+			// Diffuse ramp: PK_HAS_DIFFUSE_RAMP
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
+				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE_RAMP");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_RAMP");
+			// Alpha remap: PK_HAS_ALPHA_REMAP
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
+				_EnableMaterialKeywords(material, "PK_HAS_ALPHA_REMAP");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_ALPHA_REMAP");
+			// Distortion: PK_HAS_DISTORTION
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
+			{
+				_EnableMaterialKeywords(material, "PK_HAS_DISTORTION");
+
+				PKFxRenderingPlugin renderingPlugin = FindObjectOfType<PKFxRenderingPlugin>();
+				if (renderingPlugin != null)
+					material.SetFloat("_DistortionFactor", renderingPlugin.m_BlurFactor);
+			}
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_DISTORTION");
+			// Lighting: PK_HAS_LIGHTING
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
+				_EnableMaterialKeywords(material, "PK_HAS_LIGHTING");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_LIGHTING");
+			// Soft particles: PK_HAS_SOFT
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Soft) && PKFxSettings.EnableSoftParticles)
+				_EnableMaterialKeywords(material, "PK_HAS_SOFT");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_SOFT");
 		}
 
 #if UNITY_EDITOR
@@ -414,6 +447,8 @@ namespace PopcornFX
 
 		public bool	DrawEditorShaderInputBindings(SBatchDesc batchDesc, bool headerGroup = false)
 		{
+			if (batchDesc == null)
+				return false;
 			return DrawEditorShaderInputBindings(	batchDesc.m_ShaderVariationFlags,
 													batchDesc.m_BlendMode != EBlendMode.Solid && batchDesc.m_BlendMode != EBlendMode.Masked,
 													batchDesc.m_BlendMode != EBlendMode.Masked,
@@ -434,6 +469,8 @@ namespace PopcornFX
 				m_ShowBindings = EditorGUILayout.Foldout(m_ShowBindings, "Shader Bindings");
 			if (m_ShowBindings)
 			{
+				Material newMat = EditorGUILayout.ObjectField(serializedObject.FindProperty("m_CustomMaterial").objectReferenceValue, typeof(Material), false) as Material;
+				EditorGUILayout.TextField(serializedObject.FindProperty("m_BatchDescName").stringValue);
 				if (bindingHasTransparent)
 				{
 					SerializedProperty SourceBlendPropertyName = serializedObject.FindProperty("m_SourceBlendPropertyName");

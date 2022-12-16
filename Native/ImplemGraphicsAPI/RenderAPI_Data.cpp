@@ -130,6 +130,7 @@ SFlagsToUseSemantic		flagsToUseSemantic[__Semantic_Count] =
 {
 	{ 0U, 0U },																															// Semantic_Position			// Always
 	{ 0U, ShaderVariationFlags::Has_Lighting },																							// Semantic_Normal
+	{ 0U, ShaderVariationFlags::Has_Lighting },																							// Semantic_Tangent
 	{ 0U, ShaderVariationFlags::Has_Color },																							// Semantic_Color0
 	{ 0U, ShaderVariationFlags::Has_CorrectDeformation },																				// Semantic_UvFactors
 	{ 0U, ShaderVariationFlags::Has_CorrectDeformation },																				// Semantic_UvScaleAndOffset
@@ -144,6 +145,7 @@ u32		semanticSize[__Semantic_Count] =
 {
 	3 * sizeof(float),									// Semantic_Position
 	3 * sizeof(float),									// Semantic_Normal
+	4 * sizeof(float),									// Semantic_Tangent
 	4 * sizeof(float),									// Semantic_Color0
 	2 * sizeof(float),									// Semantic_UvFactors
 	4 * sizeof(float),									// Semantic_UvScaleAndOffset
@@ -238,30 +240,30 @@ static	bool	AreFlagsCompatible(const SFlagsToUseSemantic &flagToUseSemantic, u32
 
 u32	FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u32 shaderVariationFlags)
 {
-	u32	vertexStride = 0;
 	u32	vertexOffset = 0;
+	u32 consecutiveScalars = 0;
 
 	for (u32 i = 0; i < __Semantic_Count; ++i)
 	{
 		offsetTable[i] = 0xFFFFFFFF;
 		if (AreFlagsCompatible(flagsToUseSemantic[i], shaderVariationFlags))
 		{
+			// The single floats are packed together:
+			if (semanticSize[i] == sizeof(float))
+				++consecutiveScalars;
+			else
+			{
+				if (consecutiveScalars == 1)
+					vertexOffset += sizeof(float);
+				consecutiveScalars = 0;
+			}
 			offsetTable[i] = vertexOffset;
 			vertexOffset += semanticSize[i];
-			// minimum stride of 2 * sizeof(float), we can pack 2 floats in a float2
-			if (vertexOffset + semanticSize[i] > vertexStride)
-				vertexStride += semanticSize[i];
 		}
 	}
-	const bool	hasAnimBlend = (shaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) != 0;
-	const bool	hasAlphaRemap = (shaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0;
-
-	// Both are single floats, so they require a padding of 1 if they are not present at the same time
-	if (hasAnimBlend != hasAlphaRemap)
-	{
-		vertexStride += sizeof(float);
-	}
-	return vertexStride;
+	if (consecutiveScalars == 1)
+		vertexOffset += sizeof(float);
+	return vertexOffset;
 }
 
 //----------------------------------------------------------------------------

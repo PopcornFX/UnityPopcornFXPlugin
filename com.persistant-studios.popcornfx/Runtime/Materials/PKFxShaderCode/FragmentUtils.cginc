@@ -87,6 +87,7 @@ float4	SampleSpriteTexture(float2 uv)
 //------------------------------------------
 #if	(PK_HAS_DISTORTION || PK_HAS_SOFT)
 	float	_InvSoftnessDistance;
+	float	_DistortionFactor;
 
 	#if	USE_HDRP
 		#define	LINEARIZE_DEPTH(x)		LinearEyeDepth(x, _ZBufferParams)

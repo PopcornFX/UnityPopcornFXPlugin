@@ -221,7 +221,7 @@ bool	CMeshBaker::BakeToFile(const char *outputMeshPath)
 	if (!_AddSubmeshIFP())
 		return false;
 	// get the real path
-	CString		path = "Assets" / CString(outputMeshPath);
+	CString		path = CString(outputMeshPath);
 	CFilePath::Purify(path);
 	if (path.Empty())
 	{

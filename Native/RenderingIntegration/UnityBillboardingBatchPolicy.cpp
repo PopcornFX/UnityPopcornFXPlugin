@@ -690,6 +690,11 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			perMeshDataSize += sizeof(CFloat3);
 			hasEmissiveColor = true;
 		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Atlas_TextureID() && addInput.m_Type == BaseType_Float)
+		{
+			perMeshDataSize += sizeof(float);
+			m_HasAtlas = true;
+		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
 			perMeshDataSize += sizeof(float);
@@ -772,6 +777,12 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			meshBuff.m_VATCursors = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
 			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
 		}
+		if (m_HasAtlas)
+		{
+			// Atlas ID:
+			meshBuff.m_AtlasId = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+		}
 		if (m_UseSkeletalAnimData)
 		{
 			meshBuff.m_AnimIdx0 = TMemoryView<u32>(static_cast<u32*>(inputOffset), particleCount);
@@ -818,6 +829,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocPerViewGeomBuffers(const 
 
 		curViewBuffs.m_Positions.ResizeIFN(Drawers::GenInput_Position, perViewBuff->m_GeneratedInputs, curViewBuffs.m_GeneratedInputs, m_VertexCount);
 		curViewBuffs.m_Normals.ResizeIFN(Drawers::GenInput_Normal, perViewBuff->m_GeneratedInputs, curViewBuffs.m_GeneratedInputs, m_VertexCount);
+		curViewBuffs.m_Tangents.ResizeIFN(Drawers::GenInput_Tangent, perViewBuff->m_GeneratedInputs, curViewBuffs.m_GeneratedInputs, m_VertexCount);
 		// TODO: implem tangents
 		curViewBuffs.m_UVFactors.ResizeIFN(Drawers::GenInput_UVFactors, perViewBuff->m_GeneratedInputs, curViewBuffs.m_GeneratedInputs, m_VertexCount);
 
@@ -869,7 +881,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 		// -----------------------------------------
 		m_ParticleBuffers.m_ViewIndependantGeom.m_Positions.ResizeIFN(Drawers::GenInput_Position, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
 		m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.ResizeIFN(Drawers::GenInput_Normal, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
-		// TODO: implem tangents
+		m_ParticleBuffers.m_ViewIndependantGeom.m_Tangents.ResizeIFN(Drawers::GenInput_Tangent, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
 		m_ParticleBuffers.m_ViewIndependantGeom.m_UVFactors.ResizeIFN(Drawers::GenInput_UVFactors, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
 
 		m_ParticleBuffers.m_TexCoords0.ResizeIFN(Drawers::GenInput_UV0, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
@@ -932,7 +944,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 	}
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
 	{
-		// Not implemented yet...
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Tangents.m_Ptr != null))
+			return false;
+		billboardBatch->m_Exec_PNT.m_Tangents = TStridedMemoryView<CFloat4, 0x10>((CFloat4*)m_ParticleBuffers.m_ViewIndependantGeom.m_Tangents.m_Ptr, m_VertexCount, 0x10);
 	}
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UV0) != 0)
 	{
@@ -1031,7 +1045,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 		}
 		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
 		{
-			// Not implemented yet...
+			if (!PK_VERIFY(src.m_Tangents.m_Ptr != null))
+				return false;
+			dst.m_Exec_PNT.m_Tangents = TStridedMemoryView<CFloat4, 0x10>((CFloat4 *)src.m_Tangents.m_Ptr, m_VertexCount, 0x10);
 		}
 	}
 	return true;
@@ -1192,7 +1208,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 	}
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
 	{
-		// Not implemented yet...
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Tangents.m_Ptr != null))
+			return false;
+		ribbonBatch->m_Exec_PNT.m_Tangents = TStridedMemoryView<CFloat4, 0x10>((CFloat4*)m_ParticleBuffers.m_ViewIndependantGeom.m_Tangents.m_Ptr, m_VertexCount, 0x10);
 	}
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UV0) != 0)
 	{
@@ -1282,7 +1300,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 		}
 		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
 		{
-			// Not implemented yet...
+			if (!PK_VERIFY(src.m_Tangents.m_Ptr != null))
+				return false;
+			dst.m_Exec_PNT.m_Tangents = TStridedMemoryView<CFloat4, 0x10>((CFloat4*)src.m_Tangents.m_Ptr, m_VertexCount, 0x10);
 		}
 		if ((curViewInputs.m_GeneratedInputs & Drawers::GenInput_UVFactors) != 0)
 		{
@@ -1336,6 +1356,13 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 				return false;
 			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
 			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_VATCursors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_HasAtlas && addInput.m_Name == BasicRendererProperties::SID_Atlas_TextureID() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage *>(&m_PerMeshBuffers.First().m_AtlasId), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
 		else if (m_UseSkeletalAnimData && addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimation_AnimationCursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -1401,7 +1428,13 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 	{
 		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr != null))
 			return false;
-		triangleBatch->m_Exec_PNT.m_Normals = TStridedMemoryView<CFloat3, 0x10>((CFloat3*)m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr, m_VertexCount, 0x10);
+		triangleBatch->m_Exec_PNT.m_Normals = TStridedMemoryView<CFloat3, 0x10>((CFloat3 *)m_ParticleBuffers.m_ViewIndependantGeom.m_Normals.m_Ptr, m_VertexCount, 0x10);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Tangent) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Tangents.m_Ptr != null))
+			return false;
+		triangleBatch->m_Exec_PNT.m_Tangents = TStridedMemoryView<CFloat4, 0x10>((CFloat4*)m_ParticleBuffers.m_ViewIndependantGeom.m_Tangents.m_Ptr, m_VertexCount, 0x10);
 	}
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UV0) != 0)
 	{
@@ -1540,6 +1573,8 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
 		{
 			FillNormals(&(m_ParticleBuffers.m_Normals[vertexID]), bfPtr, *m_SemanticOffsets);
+			if (m_ParticleBuffers.m_Tangents != null)
+				FillTangents(&(m_ParticleBuffers.m_Tangents[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
 		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Color) != 0)
 		{

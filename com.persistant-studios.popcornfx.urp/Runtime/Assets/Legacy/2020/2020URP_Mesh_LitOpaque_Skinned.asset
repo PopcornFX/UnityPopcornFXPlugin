@@ -61,10 +61,11 @@ MonoBehaviour:
   m_MeshTransformRow2PropertyName: _SkeletalMeshTransform2
   m_MeshTransformRow3PropertyName: _SkeletalMeshTransform3
   m_UseShader: 0
-  m_Shader: {fileID: -6465566751694194690, guid: 050e926732b8f2b4b9cd35af257305b8,
+  m_Shader: {fileID: -6465566751694194690, guid: 222fba68f2076c84dbbf2c5eff961d7e,
     type: 3}
-  m_Material: {fileID: 2100000, guid: b57f2d00913a7884aa937ccc5df7d56b, type: 2}
+  m_Material: {fileID: 0}
   m_RenderTypes: 00000100
   m_BlendMode: 000000000101
-  m_ShaderMask: 4079599
+  m_SupportedShaderMask: 4079599
+  m_MandatoryShaderMask: 8
   m_BillboardingLocation: 0

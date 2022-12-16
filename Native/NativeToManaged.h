@@ -167,6 +167,9 @@ extern "C"
 		SRenderingFeatureVATDesc			*m_VatRendering;
 		SRenderingFeatureSkeletalAnimDesc	*m_AnimDescRendering;
 
+		int							m_TextureAtlasCount;
+		CFloat4						*m_TextureAtlas;
+
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
 			, m_ShaderVariationFlags(0)
@@ -182,6 +185,8 @@ extern "C"
 			, m_LitRendering(null)
 			, m_VatRendering(null)
 			, m_AnimDescRendering(null)
+			, m_TextureAtlasCount(0)
+			, m_TextureAtlas(null)
 		{
 		}
 
@@ -192,6 +197,12 @@ extern "C"
 
 			PK_SAFE_DELETE(m_VatRendering);
 			m_VatRendering = null;
+
+			PK_SAFE_DELETE(m_AnimDescRendering);
+			m_AnimDescRendering = null;
+
+			PK_FREE(m_TextureAtlas);
+			m_TextureAtlas = null;
 		}
 	};
 

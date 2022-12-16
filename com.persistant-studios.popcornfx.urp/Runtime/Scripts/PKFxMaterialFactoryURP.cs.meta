@@ -6,14 +6,6 @@ MonoImporter:
   defaultReferences:
   - DistortionShader: {fileID: 4800000, guid: d148465e45222432f85a1d3e92677308, type: 3}
   - BlurShader: {fileID: 4800000, guid: 0dc1a323808c03945a1db3a1cfacef2a, type: 3}
-  - m_CPUBillboardingDefault: {fileID: 11400000, guid: 0424bb726ab77574d9b199426f7abb38,
-      type: 2}
-  - m_CPUBillboardingOpaqueDefault: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
-      type: 2}
-  - m_VertexBillboardingDefault: {fileID: 11400000, guid: aca9aef425f77a0449dfb339cfa7a245,
-      type: 2}
-  - m_VertexBillboardingOpaqueDefault: {fileID: 11400000, guid: 78047b4352375684a9d26590a82cf9db,
-      type: 2}
   - m_TransparentMeshUnlitDefault: {fileID: 11400000, guid: cc08dd3254da5034eb19c14432b63a08,
       type: 2}
   - m_OpaqueMeshUnlitDefault: {fileID: 11400000, guid: 41bbba4cd50bba04482e9b14afb8aaa5,
@@ -22,6 +14,42 @@ MonoImporter:
       type: 2}
   - m_OpaqueMeshLitDefault: {fileID: 11400000, guid: 51a736b97c31cc245a9f8741c69c9de1,
       type: 2}
+  - m_OpaqueMeshLitSkinnedDefault: {fileID: 11400000, guid: df4de29e90149464680240164aaa0631,
+      type: 2}
+  - m_OpaqueParticleUnlitDefault: {fileID: 11400000, guid: 1a2e5419c582c37468963b8ebd96ca6b,
+      type: 2}
+  - m_TransparentParticleUnlitDefault: {fileID: 11400000, guid: bd2b4c6e6268ac94f946cdb86d746070,
+      type: 2}
+  - m_AdditiveParticleUnlitDefault: {fileID: 11400000, guid: a1ac7f34f70e96a428085c727600babf,
+      type: 2}
+  - m_OpaqueCorrectDeformationUnlitDefault: {fileID: 11400000, guid: 96f0bc8a857018242a3d2814efb75b7e,
+      type: 2}
+  - m_TransparentCorrectDeformationUnlitDefault: {fileID: 11400000, guid: 17b7748486754e043a4e8ada5f20eab1,
+      type: 2}
+  - m_AdditiveCorrectDeformationUnlitDefault: {fileID: 11400000, guid: 0f08a8378328a1d4dbffd59dd1e691fa,
+      type: 2}
+  - m_OpaqueParticleLitDefault: {fileID: 11400000, guid: cec41497ddb65b2428e85a7807339894,
+      type: 2}
+  - m_TransparentParticleLitDefault: {fileID: 11400000, guid: 46c0b61e9e253104f959d52d8a32c5c9,
+      type: 2}
+  - m_AdditiveParticleLitDefault: {fileID: 11400000, guid: c73ded59bffe89e4083878dab4e38e0b,
+      type: 2}
+  - m_OpaqueCorrectDeformationLitDefault: {fileID: 11400000, guid: bbc3fd6dd37044d42a2b36ae6228a425,
+      type: 2}
+  - m_TransparentCorrectDeformationLitDefault: {fileID: 11400000, guid: 1f2a1bbe02f12cb4a803e8c9839a0566,
+      type: 2}
+  - m_AdditiveCorrectDeformationLitDefault: {fileID: 11400000, guid: 6e502a4a1e21954488d69e9c225bdbae,
+      type: 2}
+  - m_CPUParticleDefault: {fileID: 11400000, guid: 0424bb726ab77574d9b199426f7abb38,
+      type: 2}
+  - m_CPUParticleOpaqueDefault: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
+      type: 2}
+  - m_VertexBillboardingDefault: {fileID: 11400000, guid: aca9aef425f77a0449dfb339cfa7a245,
+      type: 2}
+  - m_VertexBillboardingOpaqueDefault: {fileID: 11400000, guid: 78047b4352375684a9d26590a82cf9db,
+      type: 2}
+  - m_CPUParticleDistortion: {instanceID: 0}
+  - m_VertexBillboardingDistortion: {instanceID: 0}
   - m_TransparentMeshUnlit2020: {fileID: 11400000, guid: 5f97069cae9ee2c45955649abd3f8dd6,
       type: 2}
   - m_OpaqueMeshUnlit2020: {fileID: 11400000, guid: 8302134102371f3458b94a24f20b68f7,
@@ -29,6 +57,17 @@ MonoImporter:
   - m_TransparentMeshLit2020: {fileID: 11400000, guid: b1a53680d51c8834fa0729df59373d10,
       type: 2}
   - m_OpaqueMeshLit2020: {fileID: 11400000, guid: 9541e66461dfd5a4cb9e8d276351a749,
+      type: 2}
+  - m_OpaqueMeshLitSkinned2020: {fileID: 11400000, guid: bf23050381922e54fa1d976a7b3d41a8,
+      type: 2}
+  - m_OpaqueParticleUnlit2020: {instanceID: 0}
+  - m_TransparentParticleUnlit2020: {instanceID: 0}
+  - m_AdditiveParticleUnlit2020: {instanceID: 0}
+  - m_OpaqueParticleLit2020: {fileID: 11400000, guid: 1322216e39779bc4c8ae6eaa0104868c,
+      type: 2}
+  - m_TransparentParticleLit2020: {fileID: 11400000, guid: e30f6286b47299740a5e42c3c6af3093,
+      type: 2}
+  - m_AdditiveParticleLit2020: {fileID: 11400000, guid: 2b667db90a9a7624fa5f6e2d65eebd8a,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

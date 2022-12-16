@@ -152,6 +152,9 @@ namespace PopcornFX
 		public IntPtr m_LitRendering;
 		public IntPtr m_VatRendering;
 		public IntPtr m_SkeletalAnim;
+
+		public int		m_TextureAtlasCount;
+		public IntPtr	m_TextureAtlas;
 	};
 
 
@@ -966,26 +969,26 @@ namespace PopcornFX
 				int uvIdxForEmissive = 0;
 				mesh.Clear();
 
-				mesh.vertices = new Vector3[reservedVertexCount];       // positions
+				mesh.vertices = new Vector3[reservedVertexCount];		// positions
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
 				{
 					mesh.colors = new Color[reservedVertexCount];		// color
 				}
-
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
 				{
 					mesh.normals = new Vector3[reservedVertexCount];	// normal
+					mesh.tangents = new Vector4[reservedVertexCount];	// tangent
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
 				{
 					mesh.uv = new Vector2[reservedVertexCount];			// uvFactors
 					mesh.uv2 = new Vector2[reservedVertexCount];		// uvScale
-					mesh.uv3 = new Vector2[reservedVertexCount];        // uvOffset
+					mesh.uv3 = new Vector2[reservedVertexCount];		// uvOffset
 					uvIdxForEmissive = 3;
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
-						mesh.uv4 = new Vector2[reservedVertexCount];    // alpha cursor
+						mesh.uv4 = new Vector2[reservedVertexCount];	// alpha cursor
 						uvIdxForEmissive = 4;
 
 					}
@@ -994,7 +997,7 @@ namespace PopcornFX
 				{
 					mesh.uv = new Vector2[reservedVertexCount];			// uv0
 					mesh.uv2 = new Vector2[reservedVertexCount];		// uv1
-					mesh.uv3 = new Vector2[reservedVertexCount];        // atlas id and if Has_AlphaRemap, alpha cursor
+					mesh.uv3 = new Vector2[reservedVertexCount];		// atlas id and if Has_AlphaRemap, alpha cursor
 					uvIdxForEmissive = 3;
 				}
 				else
@@ -1002,19 +1005,19 @@ namespace PopcornFX
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) ||
 						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 					{
-						mesh.uv = new Vector2[reservedVertexCount];     // uv0
+						mesh.uv = new Vector2[reservedVertexCount];		// uv0
 						uvIdxForEmissive = 1;
 					}
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
-						mesh.uv2 = new Vector2[reservedVertexCount];    // alpha cursor
+						mesh.uv2 = new Vector2[reservedVertexCount];	// alpha cursor
 						uvIdxForEmissive = 2;
 					}
 				}
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 				{
-					mesh.SetUVs(uvIdxForEmissive, new Vector3[reservedVertexCount]);       // emissive color
+					mesh.SetUVs(uvIdxForEmissive, new Vector3[reservedVertexCount]);	// emissive color
 				}
 
 				hasBeenResized = true;
@@ -1105,7 +1108,7 @@ namespace PopcornFX
 					batchDesc = new SBatchDesc(*desc, idx);
 				}
 
-				PKFxCustomMaterialInfo matInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(batchDesc, m_CurrentlyBuildAsset);
+				PKFxCustomMaterialInfo matInfo = m_CurrentlyBuildAsset.FindCustomMaterialInfo(batchDesc);
 
 				if (matInfo == null || matInfo.m_CustomMaterial == null)
 					*hasCustomMat = 0;
@@ -1140,7 +1143,7 @@ namespace PopcornFX
 
 					if (hasCustomMat != null)
 					{
-						PKFxCustomMaterialInfo matInfo = PKFxSettings.MaterialFactory.FindCustomMaterialInfo(renderer.m_BatchDesc, m_CurrentlyBuildAsset);
+						PKFxCustomMaterialInfo matInfo = m_CurrentlyBuildAsset.FindCustomMaterialInfo(renderer.m_BatchDesc);
 						if (matInfo == null)
 							*hasCustomMat = 0;
 						else

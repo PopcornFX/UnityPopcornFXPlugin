@@ -118,6 +118,7 @@ private:
 
 	// Can we fill the buffer?
 	bool							m_MeshIsValid;
+	bool							m_HasAtlas;
 	bool							m_UseSkeletalAnimData;
 	bool							m_UseSkeletalAnimInterpolTracksData;
 
@@ -189,6 +190,7 @@ private:
 			u32						m_GeneratedInputs;
 			SSizedBuffer<CFloat4>	m_Positions;
 			SSizedBuffer<CFloat4>	m_Normals;
+			SSizedBuffer<CFloat4>	m_Tangents;
 			SSizedBuffer<CFloat2>	m_UVFactors;
 
 			// We do not use Sized buffers for indices as they are void*
@@ -204,6 +206,7 @@ private:
 			{
 				m_Positions.FreeIFN();
 				m_Normals.FreeIFN();
+				m_Tangents.FreeIFN();
 				m_UVFactors.FreeIFN();
 				PK_FREE(m_Indices);
 			}
@@ -264,6 +267,8 @@ private:
 		TStridedMemoryView<float>				m_AlphaRemapCursor;
 		TStridedMemoryView<float>				m_VATCursors;
 
+		TStridedMemoryView<float>				m_AtlasId;
+
 		// Skeletal anim:
 		TStridedMemoryView<u32>					m_AnimIdx0;
 		TStridedMemoryView<float>				m_AnimCursor0;
@@ -293,6 +298,7 @@ private:
 		void 					*m_Indices;
 		CFloat4					*m_Positions;
 		CFloat4					*m_Normals;
+		CFloat4					*m_Tangents;
 		CFloat2					*m_UVFactors;
 		CFloat2					*m_TexCoords0;
 		CFloat2					*m_TexCoords1;
@@ -321,6 +327,10 @@ private:
 				m_Normals = buffers.m_ViewIndependantGeom.m_Normals.m_Ptr;
 			else
 				m_Normals = null;
+			if (buffers.m_GeneratedInputs & Drawers::GenInput_Tangent)
+				m_Tangents = buffers.m_ViewIndependantGeom.m_Tangents.m_Ptr;
+			else
+				m_Tangents = null;
 			if (buffers.m_GeneratedInputs & Drawers::GenInput_UVFactors)
 				m_UVFactors = buffers.m_ViewIndependantGeom.m_UVFactors.m_Ptr;
 			else
@@ -342,6 +352,8 @@ private:
 					m_Positions = buffers.m_PerViewGeom[viewIdx].m_Positions.m_Ptr;
 				if (buffers.m_PerViewGeom[viewIdx].m_GeneratedInputs & Drawers::GenInput_Normal)
 					m_Normals = buffers.m_PerViewGeom[viewIdx].m_Normals.m_Ptr;
+				if (buffers.m_PerViewGeom[viewIdx].m_GeneratedInputs & Drawers::GenInput_Tangent)
+					m_Tangents = buffers.m_PerViewGeom[viewIdx].m_Tangents.m_Ptr;
 				if (buffers.m_PerViewGeom[viewIdx].m_GeneratedInputs & Drawers::GenInput_UVFactors)
 					m_UVFactors = buffers.m_PerViewGeom[viewIdx].m_UVFactors.m_Ptr;
 			}
@@ -352,6 +364,7 @@ private:
 			m_Indices = null;
 			m_Positions = null;
 			m_Normals = null;
+			m_Tangents = null;
 			m_UVFactors = null;
 			m_TexCoords0 = null;
 			m_TexCoords1 = null;

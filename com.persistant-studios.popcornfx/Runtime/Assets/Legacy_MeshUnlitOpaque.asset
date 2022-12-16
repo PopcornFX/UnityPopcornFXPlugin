@@ -43,9 +43,24 @@ MonoBehaviour:
   m_VATBoundsPositionPropertyName: _VATBounds
   m_VATPadToPowerOf2PropertyName: _VATPadToPowerOf2
   m_VATPaddedRatioPropertyName: _VATPaddedRatio
-  m_UseShader: 0
+  m_SkeletalAnimTexturePropertyName: _SkeletalAnimTexture
+  m_SkeletalAnimTextureResolPropertyName: _SkeletalAnimTextureResol
+  m_SkeletalAnimCountPropertyName: _SkeletalAnimCount
+  m_SkeletalAnimUseBoneScalePropertyName: _SkeletalAnimUseBoneScale
+  m_SkeletalAnimCursor0PropertyName: _SkeletalAnimCursor0
+  m_SkeletalAnimIdx0PropertyName: _SkeletalAnimIdx0
+  m_SkeletalAnimCursor1PropertyName: _SkeletalAnimCursor1
+  m_SkeletalAnimIdx1PropertyName: _SkeletalAnimIdx1
+  m_SkeletalAnimTransitionPropertyName: _SkeletalAnimTransition
+  m_SkeletalAnimTranslationBoundsMinPropertyName: _SkeletalAnimTranslationBoundsMin
+  m_SkeletalAnimTranslationBoundsMaxPropertyName: _SkeletalAnimTranslationBoundsMax
+  m_SkeletalAnimScaleBoundsMinPropertyName: _SkeletalAnimScaleBoundsMin
+  m_SkeletalAnimScaleBoundsMaxPropertyName: _SkeletalAnimScaleBoundsMax
+  m_MeshTransformRow0PropertyName: _SkeletalMeshTransform0
+  m_MeshTransformRow1PropertyName: _SkeletalMeshTransform1
+  m_MeshTransformRow2PropertyName: _SkeletalMeshTransform2
+  m_MeshTransformRow3PropertyName: _SkeletalMeshTransform3
   m_Shader: {fileID: 4800000, guid: 2bdba8cc2696bdb4e8b2e730a48b0c6a, type: 3}
-  m_Material: {fileID: 2100000, guid: 3aabf1e34b03885458b5839fc87be5d1, type: 2}
   m_RenderTypes: 00000100
   m_BlendMode: 000001010101
   m_ShaderMask: 524279

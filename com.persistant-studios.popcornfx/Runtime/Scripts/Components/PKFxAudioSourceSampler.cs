@@ -14,12 +14,25 @@ namespace PopcornFX
 	{
 		public string channel;
 
-		private static Dictionary<string, AudioSource> m_AudioSources = new Dictionary<string, AudioSource>();
-		private static float[] m_Samples;
-		private static GCHandle m_SamplesHandle;
-		private bool m_DelegateSet = false;
+		private static Dictionary<string, PKFxAudioSourceSampler> m_AudioSources = new Dictionary<string, PKFxAudioSourceSampler>();
+		private static bool m_DelegateSet = false;
 
-		void Start()
+		private float[] m_Samples;
+		private GCHandle m_SamplesHandle;
+		private AudioSource m_Source;
+		private void Start()
+		{
+			if (!m_DelegateSet)
+			{
+				PKFxManager.RegisterAudioSpectrumData(new PKFxManager.AudioCallback(OnAudioSpectrumData));
+				PKFxManager.RegisterAudioWaveformData(new PKFxManager.AudioCallback(OnAudioWaveformData));
+				m_DelegateSet = true;
+			}
+
+			Init();
+		}
+
+		public void Init()
 		{
 			// Initialize the data buffer. Expected size is 1024.
 			m_Samples = new float[1024];
@@ -28,57 +41,50 @@ namespace PopcornFX
 			string key = channel;
 			if (string.IsNullOrEmpty(key))
 				key = "Master";
-			m_AudioSources.Add(key, GetComponent<AudioSource>());
+			m_Source = GetComponent<AudioSource>();
+			if (m_AudioSources.ContainsKey(key))
+				m_AudioSources[key] = this;
+			else 
+				m_AudioSources.Add(key, this);
 		}
 
 		void Update()
 		{
-			if (!m_DelegateSet)
-			{
-				AudioSource audioSrc = null;
-				if (m_AudioSources.TryGetValue(channel, out audioSrc))
-				{
-					PKFxDelegateHandler delegateHandler = PKFxManagerImpl.DelegateHandlerInstance;
-					PKFxManager.RegisterAudioSpectrumData(new PKFxManager.AudioCallback(OnAudioSpectrumData));
-					PKFxManager.RegisterAudioWaveformData(new PKFxManager.AudioCallback(OnAudioWaveformData));
-				}
-				m_DelegateSet = true;
-			}
 		}
 
 		[MonoPInvokeCallback(typeof(PKFxManager.AudioCallback))]
 		public static IntPtr OnAudioSpectrumData(IntPtr channelName, IntPtr nbSamples)
 		{
 			string name = Marshal.PtrToStringAnsi(channelName);
-			AudioSource audioSrc = null;
+			PKFxAudioSourceSampler audioSrc = null;
 			if (m_AudioSources.TryGetValue(name, out audioSrc))
 			{
-				audioSrc.GetSpectrumData(m_Samples, 0, FFTWindow.Rectangular);
+				audioSrc.m_Source.GetSpectrumData(audioSrc.m_Samples, 0, FFTWindow.Rectangular);
 				// Last value filled by Unity seems wrong...
-				m_Samples[1023] = m_Samples[1022];
+				audioSrc.m_Samples[1023] = audioSrc.m_Samples[1022];
 				// return the address of the pinned object.
-				return m_SamplesHandle.AddrOfPinnedObject();
+				return audioSrc.m_SamplesHandle.AddrOfPinnedObject();
 			}
-			return IntPtr.Zero;
+			return PKFxManagerImpl.OnAudioSpectrumData(channelName, nbSamples);
 		}
 
 		[MonoPInvokeCallback(typeof(PKFxManager.AudioCallback))]
 		public static IntPtr OnAudioWaveformData(IntPtr channelName, IntPtr nbSamples)
 		{
 			string name = Marshal.PtrToStringAnsi(channelName);
-			AudioSource audioSrc = null;
+			PKFxAudioSourceSampler audioSrc = null;
 			if (m_AudioSources.TryGetValue(name, out audioSrc))
 			{
-				audioSrc.GetOutputData(m_Samples, 0);
+				audioSrc.m_Source.GetOutputData(audioSrc.m_Samples, 0);
 				// return the address of the pinned object.
-				return m_SamplesHandle.AddrOfPinnedObject();
+				return audioSrc.m_SamplesHandle.AddrOfPinnedObject();
 			}
-			return IntPtr.Zero;
+			return PKFxManagerImpl.OnAudioWaveformData(channelName, nbSamples);
 		}
 
 		void OnDestroy()
 		{
-			// Unpin the object to allow GC.
+			m_AudioSources.Remove(channel);
 			m_SamplesHandle.Free();
 		}
 	}

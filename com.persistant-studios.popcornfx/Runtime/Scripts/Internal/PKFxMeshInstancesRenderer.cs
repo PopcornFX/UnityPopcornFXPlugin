@@ -51,6 +51,8 @@ namespace PopcornFX
 		public string	m_DiffuseColorPropertyName;
 		public string	m_EmissiveColorPropertyName;
 		public string	m_AlphaRemapCursorPropertyName;
+		public string	m_AtlasIdPropertyName = "_AtlasId";
+		public string	m_TextureAtlasPropertyName = "_AtlasRects";
 		public string	m_VATCursorPropertyName = "_VATCursor";
 		public string	m_SkeletalAnimCursor0PropertyName = "_SkeletalAnimCursor0";
 		public string	m_SkeletalAnimIdx0PropertyName = "_SkeletalAnimIdx0";
@@ -72,6 +74,7 @@ namespace PopcornFX
 		NativeArray<float> m_AnimCursor1;
 		NativeArray<float> m_AnimIdx1;
 		NativeArray<float> m_AnimTransition;
+		NativeArray<float> m_AtlasId;
 
 		// Job adding two floating point values together
 		public struct MeshData : IJobParallelFor
@@ -102,6 +105,8 @@ namespace PopcornFX
 			public NativeArray<float> animIdx1;
 			public NativeArray<float> animTransition;
 
+			public NativeArray<float> atlasId;
+
 			public void Execute(int h)
 			{
 				unsafe
@@ -131,6 +136,12 @@ namespace PopcornFX
 						float* instanceAlphaCursor = (float*)currentPtr;
 						alphaCursors[h] = instanceAlphaCursor[offset + h];
 						currentPtr = instanceAlphaCursor + count;
+					}
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0)
+					{
+						float* instanceAtlasId = (float*)currentPtr;
+						atlasId[h] = instanceAtlasId[offset + h];
+						currentPtr = instanceAtlasId + count;
 					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_FluidVAT) != 0 ||
 						(m_ShaderVariation & (int)EShaderVariationFlags.Has_RigidVAT) != 0 ||
@@ -188,10 +199,6 @@ namespace PopcornFX
 
 		private void Start()
 		{
-			if (m_DiffuseColorPropertyName == null || m_DiffuseColorPropertyName.Length == 0)
-			{
-				Debug.LogError("[PopcornFX] Error : Mesh Color Property Name is empty, set it in MaterialFactory");
-			}
 		}
 
 		public void OnEnable()
@@ -201,6 +208,7 @@ namespace PopcornFX
 			m_EmissiveColors = new NativeArray<Vector4>(1023, Allocator.Persistent);
 			m_AlphaCursors = new NativeArray<float>(1023, Allocator.Persistent);
 			m_VatCursors = new NativeArray<float>(1023, Allocator.Persistent);
+			m_AtlasId = new NativeArray<float>(1023, Allocator.Persistent);
 			m_AnimCursor0 = new NativeArray<float>(1023, Allocator.Persistent);
 			m_AnimIdx0 = new NativeArray<float>(1023, Allocator.Persistent);
 			m_AnimCursor1 = new NativeArray<float>(1023, Allocator.Persistent);
@@ -215,6 +223,7 @@ namespace PopcornFX
 			m_EmissiveColors.Dispose();
 			m_AlphaCursors.Dispose();
 			m_VatCursors.Dispose();
+			m_AtlasId.Dispose();
 			m_AnimCursor0.Dispose();
 			m_AnimIdx0.Dispose();
 			m_AnimCursor1.Dispose();
@@ -254,6 +263,7 @@ namespace PopcornFX
 								job.emissiveColors = m_EmissiveColors;
 								job.alphaCursors = m_AlphaCursors;
 								job.vatCursors = m_VatCursors;
+								job.atlasId = m_AtlasId;
 								job.animCursor0 = m_AnimCursor0;
 								job.animIdx0 = m_AnimIdx0;
 								job.animCursor1 = m_AnimCursor1;
@@ -307,6 +317,10 @@ namespace PopcornFX
 									materialProp.SetFloatArray(m_SkeletalAnimIdx1PropertyName, m_AnimIdx1.ToArray());
 									materialProp.SetFloatArray(m_SkeletalAnimTransitionPropertyName, m_AnimTransition.ToArray());
 								}
+								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0)
+								{
+									materialProp.SetFloatArray(m_AtlasIdPropertyName, m_AtlasId.ToArray());
+								}
 
 								Graphics.DrawMeshInstanced(
 									meshToDraw.m_Mesh,
@@ -339,6 +353,7 @@ namespace PopcornFX
 						Vector3* instanceEmissiveColor = null;
 						float* instanceAlphaCursor = null;
 						float* instanceVATCursor = null;
+						float* atlasId = null;
 
 						float* instanceCurrentAnimCursor = null;
 						uint* instanceCurrentAnimIdx = null;
@@ -371,6 +386,11 @@ namespace PopcornFX
 						{
 							instanceVATCursor = (float*)currentPtr;
 							currentPtr = instanceVATCursor + instanceCount;
+						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0)
+						{
+							atlasId = (float*)currentPtr;
+							currentPtr = atlasId + instanceCount;
 						}
 						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Lighting) != 0)
 						{
@@ -416,6 +436,10 @@ namespace PopcornFX
 								materialProp.SetFloat(m_AlphaRemapCursorPropertyName, instanceAlphaCursor[i]);
 							if (instanceVATCursor != null && !string.IsNullOrEmpty(m_VATCursorPropertyName))
 								materialProp.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
+							if (instanceVATCursor != null && !string.IsNullOrEmpty(m_VATCursorPropertyName))
+								materialProp.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
+							if (atlasId != null && !string.IsNullOrEmpty(m_AtlasIdPropertyName))
+								materialProp.SetFloat(m_AtlasIdPropertyName, atlasId[i]);
 							if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 							{
 								if (instanceCurrentAnimIdx != null && !string.IsNullOrEmpty(m_SkeletalAnimIdx0PropertyName))

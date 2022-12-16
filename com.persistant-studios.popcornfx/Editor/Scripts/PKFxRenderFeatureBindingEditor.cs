@@ -94,7 +94,8 @@ namespace PopcornFX
 			SerializedProperty	Material = serializedObject.FindProperty("m_Material");
 			SerializedProperty	Shader = serializedObject.FindProperty("m_Shader");
 			SerializedProperty	RenderTypes = serializedObject.FindProperty("m_RenderTypes");
-			SerializedProperty	ShaderMask = serializedObject.FindProperty("m_ShaderMask");
+			SerializedProperty	SupportedShaderMask = serializedObject.FindProperty("m_SupportedShaderMask");
+			SerializedProperty	MandatoryShaderMask = serializedObject.FindProperty("m_MandatoryShaderMask");
 			SerializedProperty	BlendMode = serializedObject.FindProperty("m_BlendMode");
 			SerializedProperty	BillboardingLocation = serializedObject.FindProperty("m_BillboardingLocation");
 
@@ -103,7 +104,7 @@ namespace PopcornFX
 				Shader.objectReferenceValue = EditorGUILayout.ObjectField(Shader.objectReferenceValue, typeof(Shader), false) as Shader;
 			else
 				Material.objectReferenceValue = EditorGUILayout.ObjectField(Material.objectReferenceValue, typeof(Material), false) as Material;
-			
+
 			bool	bindingHasMeshRenderer = false;
 			bool	bindingHasTransparent = false;
 			bool	bindingHasMasked = false;
@@ -174,9 +175,11 @@ namespace PopcornFX
 				}
 				EditorGUILayout.EndFoldoutHeaderGroup();
 			}
-			ShaderMask.intValue = EditorGUILayout.MaskField("Shader Variation Mask", ShaderMask.intValue, m_ShaderVarationFlagsString);
+			SupportedShaderMask.intValue = EditorGUILayout.MaskField("Supported Shader Variation Mask", SupportedShaderMask.intValue, m_ShaderVarationFlagsString);
+			MandatoryShaderMask.intValue = EditorGUILayout.MaskField("Mandatory Shader Variation Mask", MandatoryShaderMask.intValue, m_ShaderVarationFlagsString);
+			SupportedShaderMask.intValue |= MandatoryShaderMask.intValue;
 			PKFxShaderInputBindings shaderInputs = serializedObject.targetObject as PKFxShaderInputBindings;
-			shaderInputs.DrawEditorShaderInputBindings(	ShaderMask.intValue,
+			shaderInputs.DrawEditorShaderInputBindings(	SupportedShaderMask.intValue,
 														bindingHasTransparent,
 														bindingHasMasked,
 														bindingHasMeshRenderer,

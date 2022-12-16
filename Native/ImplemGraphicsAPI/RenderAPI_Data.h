@@ -80,6 +80,7 @@ enum	EVertexSemantic
 {
 	Semantic_Position = 0,
 	Semantic_Normal,
+	Semantic_Tangent,
 	Semantic_Color,
 
 	Semantic_UvFactors,
@@ -129,6 +130,20 @@ PK_INLINE void	FillNormals(void * const stream, volatile void * const dstPtr, co
 	norm_s.StoreFloat3(dst);
 #else
 	*(CFloat3*)dst = *(const CFloat3*)stream;
+#endif
+}
+
+//-------------------------------------------------------------------------------------
+
+PK_INLINE void	FillTangents(void * const stream, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_Tangent]);
+#if	(SIMDFY != 0)
+	const SIMD::Float4 norm_s = SIMD::Float4::LoadAligned16(stream);
+
+	norm_s.StoreUnaligned(dst);
+#else
+	*(CFloat4*)dst = *(const CFloat4*)stream;
 #endif
 }
 

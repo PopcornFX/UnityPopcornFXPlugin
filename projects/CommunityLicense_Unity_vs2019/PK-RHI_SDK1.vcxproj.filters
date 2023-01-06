@@ -55,6 +55,9 @@
     <Filter Include="Headers\opengl">
       <UniqueIdentifier>{35158C71-21E3-7F77-0A77-F09DF6E35BDC}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\orbis">
+      <UniqueIdentifier>{0F2B8960-7BEB-0497-4426-4E14B0A54973}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\vulkan">
       <UniqueIdentifier>{41753E82-2D43-3288-16D7-A2AE02440EED}</UniqueIdentifier>
     </Filter>
@@ -464,6 +467,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLTexture.h">
       <Filter>Headers\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\orbis\cs_set_uint_c.h">
+      <Filter>Headers\orbis</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\orbis\pix_clear_p.h">
+      <Filter>Headers\orbis</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanAll.h">
       <Filter>Headers\vulkan</Filter>

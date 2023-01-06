@@ -296,6 +296,8 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLShaderModule.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLShaderProgram.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLTexture.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\orbis\cs_set_uint_c.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\orbis\pix_clear_p.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanAll.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanApiManager.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanBasicContext.h" />

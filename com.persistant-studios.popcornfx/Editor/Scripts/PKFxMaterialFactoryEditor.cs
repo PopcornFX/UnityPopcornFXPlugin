@@ -14,6 +14,7 @@ namespace PopcornFX
 	[CustomEditor(typeof(PKFxMaterialFactory), true)]
 	public class PKFxMaterialFactoryEditor : Editor
 	{
+		private static bool m_ShowCustomMaterials = false;
 		private PKFxMaterialFactory m_MaterialFactory;
 
 		void OnEnable()

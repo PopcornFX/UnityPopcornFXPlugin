@@ -303,20 +303,6 @@ struct		SUnityMeshInfo
 		for (u32 i = 0; i < __Semantic_Count; ++i)
 			m_SemanticOffsets[i] = 0;
 	}
-
-	SUnityMeshInfo(const SUnityMeshInfo &other)
-	{
-		m_VBElemCount = other.m_VBElemCount;
-		m_IBElemCount = other.m_IBElemCount;
-		m_VertexStride = other.m_VertexStride;
-		m_LargeIndices = other.m_LargeIndices;
-		m_MeshBounds = other.m_MeshBounds;
-		m_InfoSize = other.m_InfoSize;
-		m_AtlasesSize = other.m_AtlasesSize;
-		m_IndirectArgsParticleCountMultiplier = other.m_IndirectArgsParticleCountMultiplier;
-		for (u32 i = 0; i < __Semantic_Count; ++i)
-			m_SemanticOffsets[i] = other.m_SemanticOffsets[i];
-	}
 };
 
 class	CUnityRendererCache : public CRendererCacheBase

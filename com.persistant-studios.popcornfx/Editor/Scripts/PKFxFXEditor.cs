@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 
 namespace PopcornFX
 {
@@ -68,7 +69,6 @@ namespace PopcornFX
 		private void ForceSerializedObjectUpdate(PKFxEmitter fx)
 		{
 			SerializedObject updatedObject = new SerializedObject(fx);
-
 
 			serializedObject.CopyFromSerializedProperty(updatedObject.FindProperty("m_FxAsset"));
 			serializedObject.CopyFromSerializedProperty(updatedObject.FindProperty("m_FxName"));
@@ -265,56 +265,79 @@ namespace PopcornFX
 							SetColorBackgroundByParity(numLine);
 
 							SerializedProperty m_Type = attrDesc.FindPropertyRelative("m_Type");
+							SerializedProperty m_DropMode = attrDesc.FindPropertyRelative("m_DropMode");
 							SerializedProperty x, y, z, w;
-							switch ((EAttributeType)m_Type.intValue)
+							if (m_DropMode.intValue == (int)EAttributeDropMode.None)
 							{
-								case EAttributeType.Bool:
-								case EAttributeType.Bool2:
-								case EAttributeType.Bool3:
-								case EAttributeType.Bool4:
-									//To fix
-									x = propertyX.FindPropertyRelative("f1");
+								switch ((EAttributeType)m_Type.intValue)
+								{
+									case EAttributeType.Bool:
+									case EAttributeType.Bool2:
+									case EAttributeType.Bool3:
+									case EAttributeType.Bool4:
+										//To fix
+										x = propertyX.FindPropertyRelative("f1");
 
-									if (PKFxAttributePropertyDrawer.DrawAttributeBool(attrDesc, x))
-									{
-										if (attribContainer != null)
-											attribContainer.SetAttributeUnsafe(i, x.floatValue, 0, 0, 0);
-									}
+										if (PKFxAttributePropertyDrawer.DrawAttributeBool(attrDesc, x))
+										{
+											if (attribContainer != null)
+												attribContainer.SetAttributeUnsafe(i, x.floatValue, 0, 0, 0);
+										}
 
-									break;
-								case EAttributeType.Float:
-								case EAttributeType.Float2:
-								case EAttributeType.Float3:
-								case EAttributeType.Float4:
-									x = propertyX.FindPropertyRelative("f1");
-									y = propertyY.FindPropertyRelative("f1");
-									z = propertyZ.FindPropertyRelative("f1");
-									w = propertyW.FindPropertyRelative("f1");
+										break;
+									case EAttributeType.Float:
+									case EAttributeType.Float2:
+									case EAttributeType.Float3:
+									case EAttributeType.Float4:
+										x = propertyX.FindPropertyRelative("f1");
+										y = propertyY.FindPropertyRelative("f1");
+										z = propertyZ.FindPropertyRelative("f1");
+										w = propertyW.FindPropertyRelative("f1");
 
-									if (PKFxAttributePropertyDrawer.DrawAttributeFloat(attrDesc, x, y, z, w))
-									{
-										if (attribContainer != null)
-											attribContainer.SetAttributeUnsafe(i, x.floatValue, y.floatValue, z.floatValue, w.floatValue);
-									}
-									break;
-								case EAttributeType.Int:
-								case EAttributeType.Int2:
-								case EAttributeType.Int3:
-								case EAttributeType.Int4:
-									x = propertyX.FindPropertyRelative("f1");
-									y = propertyY.FindPropertyRelative("f1");
-									z = propertyZ.FindPropertyRelative("f1");
-									w = propertyW.FindPropertyRelative("f1");
+										if (PKFxAttributePropertyDrawer.DrawAttributeFloat(attrDesc, x, y, z, w))
+										{
+											if (attribContainer != null)
+												attribContainer.SetAttributeUnsafe(i, x.floatValue, y.floatValue, z.floatValue, w.floatValue);
+										}
+										break;
+									case EAttributeType.Int:
+									case EAttributeType.Int2:
+									case EAttributeType.Int3:
+									case EAttributeType.Int4:
+										x = propertyX.FindPropertyRelative("f1");
+										y = propertyY.FindPropertyRelative("f1");
+										z = propertyZ.FindPropertyRelative("f1");
+										w = propertyW.FindPropertyRelative("f1");
 
-									if (PKFxAttributePropertyDrawer.DrawAttributeInt(attrDesc, x, y, z, w))
-									{
-										if (attribContainer != null)
-											attribContainer.SetAttributeUnsafe(i, PKFxUtils.Float2Int(x.floatValue),
-																				  PKFxUtils.Float2Int(y.floatValue),
-																				  PKFxUtils.Float2Int(z.floatValue),
-																				  PKFxUtils.Float2Int(w.floatValue));
-									}
-									break;
+										if (PKFxAttributePropertyDrawer.DrawAttributeInt(attrDesc, x, y, z, w))
+										{
+											if (attribContainer != null)
+												attribContainer.SetAttributeUnsafe(i, PKFxUtils.Float2Int(x.floatValue),
+																					  PKFxUtils.Float2Int(y.floatValue),
+																					  PKFxUtils.Float2Int(z.floatValue),
+																					  PKFxUtils.Float2Int(w.floatValue));
+										}
+										break;
+								}
+
+							}
+							else
+							{
+								SerializedProperty m_DropList = attrDesc.FindPropertyRelative("m_DropNameList");
+
+								++EditorGUI.indentLevel;
+								x = propertyX.FindPropertyRelative("f1");
+								EditorGUILayout.BeginHorizontal();
+								PKFxAttributePropertyDrawer.DrawAttributeName(attrDesc);
+								int newValue = EditorGUILayout.Popup((int)x.floatValue, m_DropList.stringValue.Split('|').Where(x => !string.IsNullOrEmpty(x)).ToArray());
+								if (newValue != (int)x.floatValue)
+								{
+									x.floatValue = newValue;
+									if (attribContainer != null)
+										attribContainer.SetAttributeUnsafe(i, PKFxUtils.Float2Int(newValue));
+								}
+								EditorGUILayout.EndHorizontal();
+								--EditorGUI.indentLevel;
 							}
 							EditorGUILayout.EndVertical();
 							++numLine;
@@ -488,9 +511,11 @@ namespace PopcornFX
 			bool hasChanged = false;
 			SerializedProperty samplerName = sampler.FindPropertyRelative("m_Descriptor.m_Name");
 			SerializedProperty samplerType = sampler.FindPropertyRelative("m_Descriptor.m_Type");
+			SerializedProperty descriptionProp = sampler.FindPropertyRelative("m_Descriptor.m_Description");
+			string description = descriptionProp.stringValue.Replace("\\n", "\n");
 
 			EditorGUI.indentLevel++;
-			sampler.isExpanded = EditorGUILayout.Foldout(sampler.isExpanded, samplerName.stringValue, true);
+			sampler.isExpanded = EditorGUILayout.Foldout(sampler.isExpanded, new GUIContent(samplerName.stringValue, description), true);
 			if (!sampler.isExpanded)
 			{
 				EditorGUI.indentLevel--;

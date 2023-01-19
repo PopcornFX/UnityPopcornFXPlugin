@@ -99,8 +99,8 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 
 	const SRendererFeaturePropertyValue	*size2 = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_EnableSize2D());
 
-	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());
-	const CGuid							distoColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Distortion_Color());
+	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());//a
+	//const CGuid							distoColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Distortion_Color());
 
 	const SRendererFeaturePropertyValue	*atlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
 	const SRendererFeaturePropertyValue	*atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
@@ -403,7 +403,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue	*diffuse = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse());
 	const SRendererFeaturePropertyValue	*diffuseMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse_DiffuseMap());
 	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());
-	const CGuid							distoColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Distortion_Color());
+	//const CGuid							distoColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Distortion_Color());
 	const SRendererFeaturePropertyValue	*lit = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Lit());
 	const SRendererFeaturePropertyValue	*litLegacy = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_LegacyLit());
 	const SRendererFeaturePropertyValue	*alphaRemap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap());

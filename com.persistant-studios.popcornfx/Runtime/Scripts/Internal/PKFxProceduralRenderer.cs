@@ -321,7 +321,7 @@ namespace PopcornFX
 			{
 				for (int i = 0; i < m_RenderingPlugin.m_Cameras.Count; ++i)
 				{
-					if (i < m_RenderingPlugin.m_MaxCameraSupport)
+					if (i < m_RenderingPlugin.MaxCameraSupport())
 					{
 						RenderParticles(m_RenderingPlugin.m_Cameras[i].GetComponent<Camera>());
 					}

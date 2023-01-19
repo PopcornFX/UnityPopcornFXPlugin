@@ -56,18 +56,19 @@ namespace PopcornFX
 		[Serializable]
 		public class AttributeDesc
 		{
-			// Has min, has max, has desc:
+			// Has min, has max:
 			public enum EAttrDescFlag : int
 			{
 				HasMin = 0x01,
 				HasMax = 0x02,
-				HasDesc = 0x04,
 			};
 
-			[FormerlySerializedAs("Type")] public EAttributeType m_Type;
-			[FormerlySerializedAs("MinMaxFlag")] public int m_MinMaxFlag;
-			[FormerlySerializedAs("Name")] public string m_Name;
-			[FormerlySerializedAs("Description")] public string m_Description;
+			[FormerlySerializedAs("Type")]			public EAttributeType		m_Type;
+													public EAttributeDropMode	m_DropMode;
+			[FormerlySerializedAs("MinMaxFlag")]	public int				m_MinMaxFlag;
+			[FormerlySerializedAs("Name")]			public string			m_Name;
+			[FormerlySerializedAs("Description")]	public string			m_Description;
+													public string			m_DropNameList;
 
 			public SAttribContainer_Vector4 m_DefaultValue;
 			public SAttribContainer_Vector4 m_MinValue;
@@ -76,10 +77,14 @@ namespace PopcornFX
 			public AttributeDesc(SNativeAttributeDesc desc)
 			{
 				m_Type = desc.m_AttributeType;
+				m_DropMode = desc.m_AttributeDropMode;
 				m_MinMaxFlag = (int)desc.m_MinMaxFlag;
 				m_Name = Marshal.PtrToStringAnsi(desc.m_AttributeName);
-				//			if ((byte)desc.MinMaxFlag & EAttrDescFlag.HasDesc)
-				m_Description = Marshal.PtrToStringAnsi(desc.m_Description);
+				m_Description = Marshal.PtrToStringUni(desc.m_Description);
+				if (desc.m_DropNameList != IntPtr.Zero)
+					m_DropNameList = Marshal.PtrToStringAnsi(desc.m_DropNameList);
+				else
+					m_DropNameList = "";
 				m_DefaultValue = desc.m_DefaultValue;
 				m_MinValue = desc.m_MinValue;
 				m_MaxValue = desc.m_MaxValue;
@@ -180,8 +185,9 @@ namespace PopcornFX
 				string minval = m_MinValue.x.f1 + ";" + m_MinValue.y.f1 + ";" + m_MinValue.z.f1 + ";" + m_MinValue.w.f1;
 				string maxval = m_MaxValue.x.f1 + ";" + m_MaxValue.y.f1 + ";" + m_MaxValue.z.f1 + ";" + m_MaxValue.w.f1;
 				string dftval = m_DefaultValue.x.f1 + ";" + m_DefaultValue.y.f1 + ";" + m_DefaultValue.z.f1 + ";" + m_DefaultValue.w.f1;
-				// Just the type and the name are taken into account when mix and matching the attributes:
-				return m_Type.ToString() + ";" + m_Name + ";" + m_MinMaxFlag + ";" + minval + ";" + maxval + ";" + dftval;
+				string dropval = m_DropMode.ToString() + ";" + m_DropNameList;
+
+				return m_Type.ToString() + ";" + m_Name + ";" + m_MinMaxFlag + ";" + minval + ";" + maxval + ";" + dftval + ";" + dropval + ";" + m_Description;
 			}
 		}
 

@@ -279,6 +279,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene\SampleScene.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryCustomProxy.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryDefault.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryMeshCollection.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryProcedural.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryProxy.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\EffectInstance.h" />
@@ -292,6 +293,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryCustom.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryCustomProxy.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryDefault.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryMeshCollection.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryProcedural.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryProxy.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryShape.cpp" />

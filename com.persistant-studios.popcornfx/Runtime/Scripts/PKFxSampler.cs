@@ -178,7 +178,7 @@ namespace PopcornFX
 		{
 			m_Type = (ESamplerType)desc.m_SamplerType;
 			m_Name = Marshal.PtrToStringAnsi(desc.m_SamplerName);
-			m_Description = Marshal.PtrToStringAnsi(desc.m_Description);
+			m_Description = Marshal.PtrToStringUni(desc.m_Description);
 			m_UsageFlags = desc.m_SamplerUsageFlags;
 			m_ShapeDefaultTransform = new ShapeTransform(desc.m_ShapePosition, desc.m_ShapeRotation, Vector3.one);
 			m_CurveDefaultValue = new CurveDefaultValue(desc.m_CurveDimension,

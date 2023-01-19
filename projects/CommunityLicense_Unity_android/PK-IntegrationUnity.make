@@ -127,6 +127,7 @@ OBJECTS :=
 GENERATED += $(OBJDIR)/FrameCollectorUnityTypes.o
 GENERATED += $(OBJDIR)/FxEffect.o
 GENERATED += $(OBJDIR)/FxStartup.o
+GENERATED += $(OBJDIR)/ILoopbackCapture.o
 GENERATED += $(OBJDIR)/ManagedToNative.o
 GENERATED += $(OBJDIR)/NativeToManaged.o
 GENERATED += $(OBJDIR)/PKUnity_CImageResourceManager.o
@@ -151,6 +152,7 @@ GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/FrameCollectorUnityTypes.o
 OBJECTS += $(OBJDIR)/FxEffect.o
 OBJECTS += $(OBJDIR)/FxStartup.o
+OBJECTS += $(OBJDIR)/ILoopbackCapture.o
 OBJECTS += $(OBJDIR)/ManagedToNative.o
 OBJECTS += $(OBJDIR)/NativeToManaged.o
 OBJECTS += $(OBJDIR)/PKUnity_CImageResourceManager.o
@@ -241,6 +243,9 @@ $(OBJDIR)/gles_utils.o: ../../Native/Common/GLES/gles_utils.cpp
 $(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ILoopbackCapture.o: ../../Native/AudioApplicationLoopback/ILoopbackCapture.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/FxEffect.o: ../../Native/FxEffect.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

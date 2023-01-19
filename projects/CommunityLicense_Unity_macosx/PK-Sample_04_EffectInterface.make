@@ -90,6 +90,7 @@ OBJECTS :=
 GENERATED += $(OBJDIR)/AttributeSampler_GeometryCustom.o
 GENERATED += $(OBJDIR)/AttributeSampler_GeometryCustomProxy.o
 GENERATED += $(OBJDIR)/AttributeSampler_GeometryDefault.o
+GENERATED += $(OBJDIR)/AttributeSampler_GeometryMeshCollection.o
 GENERATED += $(OBJDIR)/AttributeSampler_GeometryProcedural.o
 GENERATED += $(OBJDIR)/AttributeSampler_GeometryProxy.o
 GENERATED += $(OBJDIR)/AttributeSampler_GeometryShape.o
@@ -103,6 +104,7 @@ GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryCustom.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryCustomProxy.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryDefault.o
+OBJECTS += $(OBJDIR)/AttributeSampler_GeometryMeshCollection.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryProcedural.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryProxy.o
 OBJECTS += $(OBJDIR)/AttributeSampler_GeometryShape.o
@@ -189,6 +191,9 @@ $(OBJDIR)/AttributeSampler_GeometryCustomProxy.o: ../../SDK/Samples/PK-Samples/P
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AttributeSampler_GeometryDefault.o: ../../SDK/Samples/PK-Samples/PK-Sample_04_EffectInterface/AttributeSampler_GeometryDefault.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AttributeSampler_GeometryMeshCollection.o: ../../SDK/Samples/PK-Samples/PK-Sample_04_EffectInterface/AttributeSampler_GeometryMeshCollection.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AttributeSampler_GeometryProcedural.o: ../../SDK/Samples/PK-Samples/PK-Sample_04_EffectInterface/AttributeSampler_GeometryProcedural.cpp

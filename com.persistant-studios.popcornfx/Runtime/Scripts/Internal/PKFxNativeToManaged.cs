@@ -33,11 +33,13 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SNativeAttributeDesc
 	{
-		public EAttributeType m_AttributeType;
+		public EAttributeType		m_AttributeType;
+		public EAttributeDropMode	m_AttributeDropMode;
 		public int m_MinMaxFlag;
 
 		public IntPtr m_AttributeName;
 		public IntPtr m_Description;
+		public IntPtr m_DropNameList;
 
 		public SAttribContainer_Vector4 m_DefaultValue;
 		public SAttribContainer_Vector4 m_MinValue;

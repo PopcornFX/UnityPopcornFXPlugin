@@ -4,21 +4,22 @@
 #if		!defined(PK_UNITY_SHADER_LAB)
 #	define	PK_SAMPLE_TEXTURE2D_LOD(_TexName, _UVs, _LOD) SAMPLE_TEXTURE2D_LOD(UnityBuildTexture2DStructNoScale(_TexName).tex,  UnityBuildSamplerStateStruct(PK_GLUE(sampler, _TexName)).samplerstate, _UVs, 0.);
 #else
-	sampler2D _VATPositionMap;
-	sampler2D _VATColorMap;
-	sampler2D _VATRotationMap;
-	sampler2D _VATNormalMap;
+	sampler2D	_VATPositionMap;
+	sampler2D	_VATColorMap;
+	sampler2D	_VATRotationMap;
+	sampler2D	_VATNormalMap;
+
+	float		_VATNumFrames;
+	bool		_VATPackedData;
+	bool		_VATNormalizedData;
+	bool		_VATPadToPowerOf2;
+	float2		_VATBounds;
+	float4		_VATPaddedRatio;
+	float2		_VATPivot;
 
 #	define	PK_SAMPLE_TEXTURE2D_LOD(_TexName, _UVs, _LOD) tex2Dlod(_TexName,  float4(_UVs, 0, _LOD));
 #endif
 
-int		_VATNumFrames;
-int		_VATPackedData;
-int		_VATNormalizedData;
-int		_VATPadToPowerOf2;
-float2	_VATBounds;
-float4	_VATPaddedRatio;
-float2	_VATPivot;
 
 float3 RotateVector(float3 v, float4 q)
 {
@@ -90,7 +91,7 @@ void VAT_float(float2 inTexCoords0, float2 inTexCoords1, float3 inPosition, floa
 		n = PK_SAMPLE_TEXTURE2D_LOD(_VATNormalMap, samplingUVs, 0.0f);
 	}
 
-	outPosition = inPosition + ConvertSpace(lerp(_VATBounds.x, _VATBounds.y, p.xyz));
+	outPosition = inPosition + ConvertSpace(_VATNormalizedData ? lerp(_VATBounds.x, _VATBounds.y, p.xyz) : p.xyz);
 	outNormal = ConvertSpace(n.xyz);
 	outTangent = normalize(cross(outNormal, float3(1.0, -1.0, 1.0)));
 	outColor = float4(1, 1, 1, 1);
@@ -118,7 +119,7 @@ void VAT_float(float2 inTexCoords0, float2 inTexCoords1, float3 inPosition, floa
 
 	float4	c = PK_SAMPLE_TEXTURE2D_LOD(_VATColorMap, samplingUVs, 0.0f);
 
-	outPosition = ConvertSpace(lerp(_VATBounds.x, _VATBounds.y, p.xyz));
+	outPosition = ConvertSpace(_VATNormalizedData ? lerp(_VATBounds.x, _VATBounds.y, p.xyz) : p.xyz);
 	outNormal = ConvertSpace(n.xyz);
 	outTangent = normalize(cross(outNormal, float3(1.0, -1.0, 1.0)));
 	outColor = c;

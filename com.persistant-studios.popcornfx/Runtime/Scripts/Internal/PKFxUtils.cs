@@ -25,6 +25,13 @@ namespace PopcornFX
 		Quaternion = 36
 	}
 
+	public enum EAttributeDropMode : int
+	{
+		None = 0,
+		SingleSelect,
+		MultiSelect
+	}
+
 	internal struct Int4
 	{
 		public int x;

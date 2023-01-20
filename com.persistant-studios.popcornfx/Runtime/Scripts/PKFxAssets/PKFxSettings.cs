@@ -51,9 +51,9 @@ namespace PopcornFX
 		[SerializeField] private bool m_EnableEffectHotreload = true;
 		[SerializeField] private bool m_EnableHotreloadInPlayMode = false;
 		[SerializeField] private bool m_EnableFileLogs = false;
+		[SerializeField] private bool m_ManualCameraLayer = false;
 
 		[SerializeField] public string[]	m_PopcornLayerName = new string[5];
-		
 
 		public static bool GeneralCategory
 		{
@@ -108,13 +108,8 @@ namespace PopcornFX
 		{
 			Debug.Assert((batchDesc.m_CameraId >= 0 && batchDesc.m_CameraId < m_PopcornLayerName.Length), "[PKFX] Wrong camera ID feeded to materials factory");
 
-
-			layer = LayerMask.NameToLayer(m_PopcornLayerName[batchDesc.m_CameraId]);
-		}
-
-		internal string[] GetRenderingLayerMaskNames()
-		{
-			return m_PopcornLayerName;
+      		PKFxRenderingPlugin renderingPlugin = FindObjectOfType<PKFxRenderingPlugin>();
+    		layer = renderingPlugin.GetLayerForCameraID(batchDesc.m_CameraId);
 		}
 
 		public static bool EnableEffectHotreload
@@ -163,6 +158,23 @@ namespace PopcornFX
 		{
 			get { return Instance.m_EnableFileLogs; }
 			set { Instance.m_EnableFileLogs = value; }
+		}
+
+		public static bool ManualCameraLayer
+		{
+			get { return Instance.m_ManualCameraLayer; }
+			set { Instance.m_ManualCameraLayer = value; }
+		}
+
+		public int GetCameraLayer(int index)
+		{
+			if (ManualCameraLayer)
+				return 0;
+			if (index < m_PopcornLayerName.Length)
+			{
+				return LayerMask.NameToLayer(m_PopcornLayerName[index]);
+			}
+			return 0;
 		}
 
 		public static List<string> AssetPathList
@@ -252,7 +264,7 @@ namespace PopcornFX
 			return true;
 		}
 
-		internal void AddGUIDForAsset(string assetPath, string newGUID)
+		public void AddGUIDForAsset(string assetPath, string newGUID)
 		{
 			CAssetGUID entry = m_AssetGUID.Find(x => x.m_Path.Equals(assetPath));
 			if (entry != null)
@@ -311,6 +323,8 @@ namespace PopcornFX
 		[SerializeField] private bool m_FreeUnusedBatches = false;
 		[SerializeField] private uint m_FrameCountBeforeFreeingUnusedBatches = 240;
 
+		[SerializeField] private bool m_UseApplicationAudioLoopback = false;
+
 		[SerializeField] private bool m_AutomaticMeshResizing = true;
 		[SerializeField] private float m_VertexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private float m_IndexBufferSizeMultiplicator = 0.5f;
@@ -359,6 +373,39 @@ namespace PopcornFX
 		{
 			get { return Instance.m_FrameCountBeforeFreeingUnusedBatches; }
 			set { Instance.m_FrameCountBeforeFreeingUnusedBatches = value; }
+		}
+
+		public static bool UseApplicationAudioLoopback
+		{
+			get { return Instance.m_UseApplicationAudioLoopback; }
+			set { Instance.m_UseApplicationAudioLoopback = value; }
+		}
+
+		[SerializeField][HideInInspector][Tooltip("Enables the distortion particles material, adding a postFX pass.")]
+		private bool m_EnableDistortion = false;
+		[HideInInspector]
+		public static bool EnableDistortion
+		{
+			get { return Instance.m_EnableDistortion; }
+			set { Instance.m_EnableDistortion = value; }
+		}
+
+		[SerializeField][HideInInspector][Tooltip("Enables the distortion blur pass, adding another postFX pass.")]
+		private bool m_EnableBlur = false;
+		[HideInInspector]
+		public static bool EnableBlur
+		{
+			get { return Instance.m_EnableBlur; }
+			set { Instance.m_EnableBlur = value; }
+		}
+
+		[SerializeField][HideInInspector][Tooltip("Blur factor. Adjusts the blur's spread.")]
+		public float m_BlurFactor = 0.2f;
+		[HideInInspector]
+		public static float BlurFactor
+		{
+			get { return Instance.m_BlurFactor; }
+			set { Instance.m_BlurFactor = value; }
 		}
 
 		public static PKFxMaterialFactory MaterialFactory
@@ -469,7 +516,7 @@ namespace PopcornFX
 		public void Setup()
 		{
 #if UNITY_EDITOR
-			if (PopcornPackFxPath == null || !Directory.Exists(PopcornPackFxPath))
+			if (!string.IsNullOrEmpty(PopcornPackFxPath) && !Directory.Exists(PopcornPackFxPath))
 				Debug.Log("[PopcornFX] Valid Source Pack path is required to import your FXs", this);
 #endif
 		}

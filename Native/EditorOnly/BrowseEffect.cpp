@@ -493,7 +493,19 @@ bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList::_TypeOfAttri
 			if (attrib->HasMax())
 				attribDesc.m_MinMaxFlag |= SFxAttributeDesc::EAttrDescFlag::HasMax;
 			attribDesc.m_AttributeName = attrib->ExportedName().Data();
-			attribDesc.m_Description = "";
+			attribDesc.m_Description = attrib->Description().MapDefault().Data();
+
+			attribDesc.m_AttributeDropMode = attrib->DropDownMode();
+			
+			CString dropNameList = CString::EmptyString;
+			for (u32 j = 0; j < attrib->EnumList().Count(); ++j)
+			{
+				dropNameList.Append(attrib->EnumList()[j].Data());
+				dropNameList.Append("|");
+			}
+
+			attribDesc.m_DropNameList = dropNameList.Data();
+
 			if (attribDesc.m_AttributeType == BaseType_Bool ||
 				attribDesc.m_AttributeType == BaseType_Bool2 ||
 				attribDesc.m_AttributeType == BaseType_Bool3 ||
@@ -598,8 +610,7 @@ bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList::_TypeOfSampler
 			}
 			samplerDesc.m_SamplerUsageFlags = sampler->UsageFlags();
 			samplerDesc.m_SamplerName = sampler->ExportedName().Data();
-			// Handle wide-char strings here
-			samplerDesc.m_Description = ""; //  sampler->Description().MapDefault().Data();
+			samplerDesc.m_Description = sampler->Description().MapDefault().Data();
 
 			::OnEffectSamplerFound(&samplerDesc);
 		}

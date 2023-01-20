@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PopcornFX
 {
@@ -12,15 +13,15 @@ namespace PopcornFX
 	[CanEditMultipleObjects]
 	public class PKFxRenderingPluginEditor : Editor
 	{
+		bool		m_SceneMeshCategory;
+		bool		m_PreloadEffectsCategory;
+
 		GUIContent timeMultiplierLabel = new GUIContent(" Time scale for the particle simulation");
-		GUIContent cameraNumberLabel = new GUIContent(" Max number of cameras");
+		GUIContent cameraNumberLabel = new GUIContent(" Max number of camera supported");
 
 		SerializedProperty m_TimeMultiplier;
 		SerializedProperty m_ShowAdvanced;
-		SerializedProperty m_MaxCameraSupport;
-		SerializedProperty m_EnableDistortion;
-		SerializedProperty m_EnableBlur;
-		SerializedProperty m_BlurFactor;
+		SerializedProperty m_CameraLayers;
 		SerializedProperty m_UseSceneMesh;
 		SerializedProperty m_SceneMesh;
 		SerializedProperty m_PreloadEffect;
@@ -30,15 +31,85 @@ namespace PopcornFX
 		SerializedProperty m_MeshGameObjects;
 
 		//----------------------------------------------------------------------------
+		internal void AddCameraLayersIFN(int maxCameraSupport, bool distortionEnabled = true)
+		{
+			if (PKFxSettings.ManualCameraLayer)
+				return;
+			UnityEngine.Object[] tagManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
+
+			if (tagManager.Length == 0)
+				return;
+
+			SerializedObject tagsAndLayersManager = new SerializedObject(tagManager[0]);
+			SerializedProperty layersProp = tagsAndLayersManager.FindProperty("layers");
+
+			List<string> cameraLayerName = new List<string>(new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" });
+			string distortionLayerName = "PopcornFX_Disto";
+
+			PKFxSettings.Instance.m_PopcornLayerName = new string[cameraLayerName.Count() + 1];
+
+			//search if the sorting layer already exist
+			for (int i = 0; i < layersProp.arraySize; ++i)
+			{
+				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
+
+				if (layer != null && layer.stringValue.Length != 0)
+				{
+					if (cameraLayerName.Contains(layer.stringValue))
+					{
+						int idx = cameraLayerName.IndexOf(layer.stringValue);
+						if (idx >= maxCameraSupport)
+							layer.stringValue = "";
+						PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
+						cameraLayerName[idx] = "";
+					}
+					else if (distortionLayerName == layer.stringValue)
+					{
+						if (!distortionEnabled)
+							layer.stringValue = "";
+						PKFxSettings.Instance.m_PopcornLayerName[PKFxSettings.Instance.m_PopcornLayerName.Length - 1] = layer.stringValue;
+						distortionLayerName = "";
+					}
+				}
+			}
+			cameraLayerName.RemoveRange(maxCameraSupport, cameraLayerName.Count - maxCameraSupport);
+			if (distortionEnabled)
+				cameraLayerName.Add(distortionLayerName);
+			cameraLayerName = cameraLayerName.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+
+			if (cameraLayerName.Count == 0 && distortionLayerName == "")
+			{
+				tagsAndLayersManager.ApplyModifiedProperties();
+				return;
+			}
+
+			for (int i = layersProp.arraySize - 1; i >= 0; --i)
+			{
+				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
+
+				if (layer != null && layer.stringValue.Length == 0)
+				{
+					layer.stringValue = cameraLayerName[0];
+
+					int idx = ArrayUtility.IndexOf(PKFxSettings.Instance.m_PopcornLayerName, null);
+
+					PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
+
+					cameraLayerName.RemoveAt(0);
+					if (cameraLayerName.Count == 0)
+						break;
+				}
+			}
+			tagsAndLayersManager.ApplyModifiedProperties();
+		}
+
+		//----------------------------------------------------------------------------
 
 		void OnEnable()
 		{
 			m_TimeMultiplier = serializedObject.FindProperty("m_TimeMultiplier");
-			m_MaxCameraSupport = serializedObject.FindProperty("m_MaxCameraSupport");
-			m_EnableDistortion = serializedObject.FindProperty("m_EnableDistortion");
-			m_EnableBlur = serializedObject.FindProperty("m_EnableBlur");
+			m_CameraLayers = serializedObject.FindProperty("m_CameraLayers");
 			m_PreloadEffect = serializedObject.FindProperty("m_PreloadEffect");
-			m_BlurFactor = serializedObject.FindProperty("m_BlurFactor");
 			m_UseSceneMesh = serializedObject.FindProperty("m_UseSceneMesh");
 			m_SceneMesh = serializedObject.FindProperty("m_SceneMesh");
 			m_OutputPkmmPath = serializedObject.FindProperty("m_OutputPkmmPath");
@@ -71,6 +142,7 @@ namespace PopcornFX
 									 + PKFxManagerImpl.m_CurrentVersionString + ")");
 
 			DrawDefaultInspector();
+			PKFxRenderingPlugin renderingPlugin = target as PKFxRenderingPlugin;
 
 			EditorGUILayout.BeginHorizontal();
 			EditorGUI.BeginChangeCheck();
@@ -83,40 +155,75 @@ namespace PopcornFX
 			EditorGUILayout.EndHorizontal();
 
 			EditorGUI.BeginChangeCheck();
-			int maxCamValue = EditorGUILayout.IntSlider(cameraNumberLabel, m_MaxCameraSupport.intValue, 1, 4);
+			int maxCamValue = EditorGUILayout.IntSlider(cameraNumberLabel, renderingPlugin.MaxCameraSupport(), 1, 4);
 			if (EditorGUI.EndChangeCheck())
 			{
-				m_MaxCameraSupport.intValue = maxCamValue;
-				PKFxManager.SetMaxCameraCount(maxCamValue);
+				int[] prevCameraLayers = renderingPlugin.CameraLayers;
+				int[] newCameraLayers = new int[maxCamValue];
+				m_CameraLayers.arraySize = maxCamValue;
+
+				if (!PKFxSettings.ManualCameraLayer)
+					AddCameraLayersIFN(maxCamValue);
+
+				for (int i = 0; i < maxCamValue; i++) 
+				{
+		  			int cameraLayerID = i < prevCameraLayers.Length ? prevCameraLayers[i] : PKFxSettings.Instance.GetCameraLayer(i);
+		  			m_CameraLayers.GetArrayElementAtIndex(i).intValue = cameraLayerID;
+					newCameraLayers[i] = cameraLayerID;
+				}
+				renderingPlugin.CameraLayers = newCameraLayers;
 			}
 
-			EditorGUILayout.PropertyField(m_EnableDistortion);
-			EditorGUILayout.PropertyField(m_EnableBlur);
-			if (m_EnableBlur.boolValue)
+	  		for (int i = 0; i < renderingPlugin.CameraLayers.Length; i++)
 			{
-				EditorGUI.indentLevel++;
-				EditorGUILayout.PropertyField(m_BlurFactor);
-				m_BlurFactor.floatValue = Mathf.Clamp(m_BlurFactor.floatValue, 0.0f, 1.0f);
-				EditorGUI.indentLevel--;
+				EditorGUI.BeginChangeCheck();
+				int cameraLayerID = EditorGUILayout.LayerField(new GUIContent(" Camera " + i + " layer"), renderingPlugin.CameraLayers[i]);
+				if (EditorGUI.EndChangeCheck())
+				{
+					m_CameraLayers.GetArrayElementAtIndex(i).intValue = cameraLayerID;
+					renderingPlugin.CameraLayers[i] = cameraLayerID;
+					renderingPlugin.UpdateLayerMask();
+				}
 			}
-			HandleSceneMesh();
 
-			PKFxRenderingPlugin renderingPlugin = target as PKFxRenderingPlugin;
-			if (GUILayout.Button("Add all PKFxAssets to preload list"))
+			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(m_PreloadEffectsCategory, "Preload effects setup")))
 			{
-				m_PreloadEffect.ClearArray();
-				List<PKFxEffectAsset> PKFXList = FindAssetsByType<PKFxEffectAsset>();
+				m_PreloadEffectsCategory = category.IsExpanded();
+				if (category.IsExpanded())
+				{
+					if (GUILayout.Button("Add all PKFxAssets to preload list"))
+					{
+						m_PreloadEffect.ClearArray();
+						List<PKFxEffectAsset> PKFXList = FindAssetsByType<PKFxEffectAsset>();
+						Undo.RecordObject(renderingPlugin, "Add all PKFxAssets to preload list");
+						renderingPlugin.m_PreloadEffect = PKFXList;
+					}
 
-				Undo.RecordObject(renderingPlugin, "Add all PKFxAssets to preload list");
-				renderingPlugin.m_PreloadEffect = PKFXList;
+					EditorGUI.indentLevel += 1;
+					EditorGUILayout.PropertyField(m_PreloadEffect);
+					EditorGUI.indentLevel -= 1;
+				}
 			}
-			EditorGUILayout.PropertyField(m_PreloadEffect);
 
 			EditorGUI.BeginDisabledGroup(Application.isPlaying);
-			if (GUILayout.Button("Build meshes"))
+			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(m_SceneMeshCategory, "Scene mesh setup")))
 			{
-				FindMeshes();
-				BuildMeshes();
+				m_SceneMeshCategory = category.IsExpanded();
+				if (category.IsExpanded())
+				{
+					HandleSceneMesh();
+
+					EditorGUILayout.PropertyField(m_OutputPkmmPath);
+
+					EditorGUI.indentLevel += 1;
+					EditorGUILayout.PropertyField(m_MeshGameObjects);
+					EditorGUI.indentLevel -= 1;
+					if (GUILayout.Button("Build meshes"))
+					{
+						FindMeshes();
+						BuildMeshes();
+					}
+				}
 			}
 			EditorGUI.EndDisabledGroup();
 

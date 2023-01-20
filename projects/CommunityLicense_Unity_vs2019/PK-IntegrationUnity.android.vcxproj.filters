@@ -22,6 +22,9 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\AudioApplicationLoopback">
+      <UniqueIdentifier>{E170E346-CDC1-CE88-F625-BD4AE2D561F2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\ImplemGraphicsAPI">
       <UniqueIdentifier>{3FB51BB5-AB77-4F3F-F427-DECB6029281D}</UniqueIdentifier>
     </Filter>
@@ -37,6 +40,9 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\AudioApplicationLoopback">
+      <UniqueIdentifier>{A901CA54-9552-B596-BEB6-A358AA664800}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\ImplemGraphicsAPI">
       <UniqueIdentifier>{0717CB18-73D9-FEA2-BC89-8D2F288BD780}</UniqueIdentifier>
     </Filter>
@@ -51,6 +57,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.h">
+      <Filter>Headers\AudioApplicationLoopback</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Native\DelayedEffectsMethods.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -188,6 +197,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.cpp">
+      <Filter>Sources\AudioApplicationLoopback</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Native\FxEffect.cpp">
       <Filter>Sources</Filter>
     </ClCompile>

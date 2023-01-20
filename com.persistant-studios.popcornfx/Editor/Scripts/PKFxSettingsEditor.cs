@@ -6,7 +6,6 @@ using UnityEditor;
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PopcornFX
 {
@@ -32,11 +31,13 @@ namespace PopcornFX
 		GUIContent enableSoftParticlesLabel = new GUIContent(" Enable soft particles");
 		GUIContent enableUnityConsoleLog = new GUIContent(" Enable PopcornFX Unity console logs");
 		GUIContent enableFileLog = new GUIContent(" Enable PopcornFX file logs");
+		GUIContent useAudioLoopback = new GUIContent(" Enable PopcornFX application audio loopback");
 		GUIContent enableRaycastForCollisionsLabel = new GUIContent(" Enable raycast for collisions");
 		GUIContent splitDrawCallsOfSoubleSidedParticlesLabel = new GUIContent(" Split the draw calls of the particles that require disabling the back-face culling");
 		GUIContent disableDynamicEffectBoundsLabel = new GUIContent(" Disable dynamic effect bounds");
 		GUIContent materialFactoryLabel = new GUIContent(" Material Factory");
 		GUIContent useHashAsMaterialNameLabel = new GUIContent(" Use hashes as material name");
+		GUIContent manualCameraLayerLabel = new GUIContent(" Manual control of rendering layers");
 		GUIContent useHashAsMaterialNameDialogMessageLabel = new GUIContent("Warning, this action will delete all existing generated materials and recreate them. \nContinue ?");
 
 		GUIContent enableLocalizedPages = new GUIContent(" Enable Localized Pages");
@@ -64,66 +65,6 @@ namespace PopcornFX
 		GUIContent indexBufferSizeMultiplicatorLabel = new GUIContent(" Index buffer size multiplicator");
 
 		bool	showBuffers = true;
-
-
-		private static void _AddCameraLayersIFN()
-		{
-			UnityEngine.Object[] tagManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
-
-			if (tagManager.Length == 0)
-				return;
-
-			SerializedObject	tagsAndLayersManager = new SerializedObject(tagManager[0]);
-			SerializedProperty	layersProp = tagsAndLayersManager.FindProperty("layers");
-
-			List<string>		cameraLayerName = new List<string>(new string[] {"PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3", "PopcornFX_Disto" });
-
-			if (PKFxSettings.Instance.m_PopcornLayerName.Count() < cameraLayerName.Count())
-				PKFxSettings.Instance.m_PopcornLayerName = new string[cameraLayerName.Count()];
-
-			//serch if the sorting layer already exist
-			for (int i = 0; i < layersProp.arraySize; ++i)
-			{
-				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
-
-				if (layer != null && layer.stringValue.Length != 0)
-				{
-					if (cameraLayerName.Contains(layer.stringValue))
-					{
-						int idx = cameraLayerName.IndexOf(layer.stringValue);
-
-						PKFxSettings.Instance.m_PopcornLayerName[cameraLayerName.IndexOf(layer.stringValue)] = layer.stringValue;
-						cameraLayerName[idx] = "";
-					}
-						
-				}
-			}
-			cameraLayerName = cameraLayerName.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
-
-			if (cameraLayerName.Count == 0)
-				return;
-
-			for (int i = layersProp.arraySize -1; i >= 0 ; --i)
-			{
-				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
-
-				if (layer != null && layer.stringValue.Length == 0)
-				{
-					layer.stringValue = cameraLayerName[0];
-
-					PKFxSettings.Instance.m_PopcornLayerName[cameraLayerName.IndexOf(layer.stringValue)] = layer.stringValue;
-
-					cameraLayerName.RemoveAt(0);
-					if (cameraLayerName.Count == 0)
-					{
-						break;
-					}
-				}
-			}
-		
-			tagsAndLayersManager.ApplyModifiedProperties();
-
-		}
 
 		private static void _AddSortingLayerIFN(string layerName, bool isFirst)
 		{
@@ -222,7 +163,6 @@ namespace PopcornFX
 
 			GetOrCreateSettingsAsset();
 
-			_AddCameraLayersIFN();
 			_AddSortingLayerIFN("PopcornFX", true);
 			_AddSortingLayerIFN("PopcornFXUI", false);
 
@@ -446,32 +386,23 @@ namespace PopcornFX
 
 			}
 			EditorGUILayout.EndHorizontal();
-
-
-
 #if UNITY_EDITOR_OSX
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.LabelField("Bake of PopcornFX Effects inside Unity MacOS is disabled.", boldStyleRed);
 		EditorGUILayout.EndHorizontal();
 #else
-
-
 #endif
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.EnableForceDeterminism = EditorGUILayout.ToggleLeft(forceDeterminismLabel, PKFxSettings.EnableForceDeterminism);
-			EditorGUILayout.EndHorizontal();
+			PKFxSettings.EnablePopcornFXLogs = EditorGUILayout.ToggleLeft(enableUnityConsoleLog, PKFxSettings.EnablePopcornFXLogs);
+			PKFxSettings.EnableFileLogs = EditorGUILayout.ToggleLeft(enableFileLog, PKFxSettings.EnableFileLogs);
 
 			EditorGUILayout.BeginHorizontal();
-			PKFxSettings.EnablePopcornFXLogs = EditorGUILayout.ToggleLeft(enableUnityConsoleLog, PKFxSettings.EnablePopcornFXLogs);
-			EditorGUILayout.EndHorizontal();
-			EditorGUILayout.BeginHorizontal();
-			PKFxSettings.EnableFileLogs = EditorGUILayout.ToggleLeft(enableFileLog, PKFxSettings.EnableFileLogs);
+			PKFxSettings.UseApplicationAudioLoopback = EditorGUILayout.ToggleLeft(useAudioLoopback, PKFxSettings.UseApplicationAudioLoopback);
 			EditorGUILayout.EndHorizontal();
 		}
 
 		private void DisplayRenderingCategory(PKFxEditorCategory category)
 		{
-			EditorGUILayout.BeginHorizontal();
 			PKFxMaterialFactory factory = EditorGUILayout.ObjectField(materialFactoryLabel, PKFxSettings.MaterialFactory, typeof(PKFxMaterialFactory), false) as PKFxMaterialFactory;
 			if (factory != PKFxSettings.MaterialFactory)
 			{
@@ -481,12 +412,12 @@ namespace PopcornFX
 				PKFxMenus.CreatePKFxFXMaterialsIFN();
 			}
 
-			EditorGUILayout.EndHorizontal();
+			PKFxSettings.EnableDistortion = EditorGUILayout.ToggleLeft("Enable distortion", PKFxSettings.EnableDistortion);
+			PKFxSettings.EnableBlur = EditorGUILayout.ToggleLeft("Enable blur", PKFxSettings.EnableBlur);
+			if (PKFxSettings.EnableBlur)
+				PKFxSettings.BlurFactor = EditorGUILayout.Slider("Blur factor", PKFxSettings.BlurFactor, 0.0f, 1.0f);
 
-			EditorGUILayout.BeginHorizontal();
 			bool value = EditorGUILayout.ToggleLeft(useHashAsMaterialNameLabel, PKFxSettings.UseHashesAsMaterialName);
-			EditorGUILayout.EndHorizontal();
-
 			if (PKFxSettings.UseHashesAsMaterialName != value)
 			{
 				category.EndCb = () =>
@@ -503,25 +434,18 @@ namespace PopcornFX
 			}
 
 			EditorGUILayout.BeginHorizontal();
+			bool cameraLayer = EditorGUILayout.ToggleLeft(manualCameraLayerLabel, PKFxSettings.ManualCameraLayer);
+			if (cameraLayer != PKFxSettings.ManualCameraLayer)
+			{
+				PKFxSettings.ManualCameraLayer = cameraLayer;
+			}
+			EditorGUILayout.EndHorizontal();
+
 			PKFxSettings.DebugEffectsBoundingBoxes = EditorGUILayout.ToggleLeft(debugEffectsBoundingBoxes, PKFxSettings.DebugEffectsBoundingBoxes);
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.DebugEffectsRaycasts = EditorGUILayout.ToggleLeft(debugEffectsRaycasts, PKFxSettings.DebugEffectsRaycasts);
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.EnableSoftParticles = EditorGUILayout.ToggleLeft(enableSoftParticlesLabel, PKFxSettings.EnableSoftParticles);
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.DisableDynamicEffectBounds = EditorGUILayout.ToggleLeft(disableDynamicEffectBoundsLabel, PKFxSettings.DisableDynamicEffectBounds);
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
 			bool GPUvalue = EditorGUILayout.ToggleLeft(useGPUBillboarding, PKFxSettings.UseGPUBillboarding);
-			EditorGUILayout.EndHorizontal();
-
 			if (PKFxSettings.UseGPUBillboarding != GPUvalue)
 			{
 				category.EndCb = () =>
@@ -536,57 +460,27 @@ namespace PopcornFX
 					}
 				};
 			}
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.UseMeshInstancing = EditorGUILayout.ToggleLeft(useMeshInstancingLabel, PKFxSettings.UseMeshInstancing);
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.EnableLocalizedPages = EditorGUILayout.ToggleLeft(enableLocalizedPages, PKFxSettings.EnableLocalizedPages);
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.EnableLocalizedByDefault = EditorGUILayout.ToggleLeft(enableLocalizedPagesByDefault, PKFxSettings.EnableLocalizedByDefault);
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.UpdateSimManually = EditorGUILayout.ToggleLeft(updateSimManually, PKFxSettings.UpdateSimManually);
-			EditorGUILayout.EndHorizontal(); 
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.FreeUnusedBatches = EditorGUILayout.ToggleLeft(freeUnusedBactchesLabel, PKFxSettings.FreeUnusedBatches);
-			EditorGUILayout.EndHorizontal();
-
 			using (new EditorGUI.DisabledScope(!PKFxSettings.FreeUnusedBatches))
 			{
 				EditorGUI.indentLevel++;
-
-				EditorGUILayout.BeginHorizontal();
 				int frameCountBeforeFreeingBatch = (int)PKFxSettings.FrameCountBeforeFreeingUnusedBatches;
 				frameCountBeforeFreeingBatch = EditorGUILayout.IntField(frameCountBeforeFreeUnusedBactchesLabel, frameCountBeforeFreeingBatch);
 				frameCountBeforeFreeingBatch = Math.Max(frameCountBeforeFreeingBatch, 1);
 				PKFxSettings.FrameCountBeforeFreeingUnusedBatches = (uint)frameCountBeforeFreeingBatch;
-				EditorGUILayout.EndHorizontal();
-
 				EditorGUI.indentLevel--;
 			}
-
-			EditorGUILayout.BeginHorizontal();
 			PKFxSettings.AutomaticMeshResizing = EditorGUILayout.ToggleLeft(automaticMeshResizingLabel, PKFxSettings.AutomaticMeshResizing);
-			EditorGUILayout.EndHorizontal();
 
 			using (new EditorGUI.DisabledScope(!PKFxSettings.AutomaticMeshResizing))
 			{
 				EditorGUI.indentLevel++;
-
-				EditorGUILayout.BeginHorizontal();
 				PKFxSettings.VertexBufferSizeMultiplicator = EditorGUILayout.FloatField(vertexBufferSizeMultiplicatorLabel, PKFxSettings.VertexBufferSizeMultiplicator);
-				EditorGUILayout.EndHorizontal();
-
-				EditorGUILayout.BeginHorizontal();
 				PKFxSettings.IndexBufferSizeMultiplicator = EditorGUILayout.FloatField(indexBufferSizeMultiplicatorLabel, PKFxSettings.IndexBufferSizeMultiplicator);
-				EditorGUILayout.EndHorizontal();
-
 				EditorGUI.indentLevel--;
 			}
 			DisplayPopcornFxRenderers();

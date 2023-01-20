@@ -26,14 +26,15 @@ extern "C"
 		{
 			HasMin = 0x01,
 			HasMax = 0x02,
-			HasDesc = 0x04,
 		};
 
 		int				m_AttributeType;
+		int				m_AttributeDropMode;
 		int				m_MinMaxFlag;
 
 		const char		*m_AttributeName;
-		const char		*m_Description;
+		const u16		*m_Description;
+		const char		*m_DropNameList; // List of string `|` separated
 
 		CFloat4			m_DefaultValue;
 		CFloat4			m_MinValue;
@@ -45,7 +46,7 @@ extern "C"
 	{
 		int				m_SamplerType;
 		const char		*m_SamplerName;
-		const char		*m_Description;
+		const u16		*m_Description;
 		int				m_SamplerUsageFlags;
 
 		// For sampler shape:

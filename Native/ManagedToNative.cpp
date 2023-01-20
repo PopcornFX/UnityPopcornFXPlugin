@@ -981,6 +981,19 @@ extern "C"
 
 		HBO::g_Context->UnloadAllFiles();
 	}
+
+	//----------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION void	SetApplicationLoopbackAudioVolume(float volume)
+	{
+		NEED_PK_RUNTIME_STARTED(return);
+		PK_SCOPEDPROFILE();
+		const PLoopbackCapture	&loopback = CRuntimeManager::Instance().m_LoopbackAudio;
+		if (loopback != null)
+			loopback->SetVolumeMultiplier(volume);
+	}
+
+
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop
 #endif

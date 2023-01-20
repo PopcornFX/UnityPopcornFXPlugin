@@ -190,6 +190,7 @@ namespace PopcornFX
 			settings.m_DisableDynamicEffectBounds = PKFxSettings.DisableDynamicEffectBounds;
 			settings.m_EnableGPUBillboarding = PKFxSettings.UseGPUBillboarding;
 			settings.m_IsUnitTesting = isUnitTesting;
+			settings.m_UseApplicationAudioLoopback = PKFxSettings.UseApplicationAudioLoopback;
 
 			settings.m_EnableLocalizedPages = PKFxSettings.EnableLocalizedPages;
 			settings.m_EnableLocalizedByDefault = PKFxSettings.EnableLocalizedByDefault;
@@ -429,6 +430,10 @@ namespace PopcornFX
 			PKFxDelegateHandler delegateHandler = PKFxDelegateHandler.Instance;
 
 			PKFxManagerImpl.SetDelegateOnAudioWaveformData(delegateHandler.DelegateToFunctionPointer(callback));
+		}
+		public static void SetApplicationLoopbackAudioVolume(float volume)
+		{
+			PKFxManagerImpl.SetApplicationLoopbackAudioVolume(volume);
 		}
 
 		// Effect Event Callback

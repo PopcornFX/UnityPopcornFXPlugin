@@ -62,7 +62,8 @@ namespace PopcornFX
 			if (GraphicsSettings.renderPipelineAsset != null &&
 				(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
 				 GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset"))
-				return false; // No need for that in HDRP, we are using distortion builtin shaders
+				return false; // HDRP, we are using distortion builtin shaders
+							  // URP, Distortion is handled as forward rendering
 			if (PKFxSettings.EnableSoftParticles == false)
 				return false;
 			if (m_CommandBuffer == null)
@@ -77,7 +78,7 @@ namespace PopcornFX
 				m_CameraIDRT = Shader.PropertyToID("TemporaryRT" + m_CameraID);
 				m_Camera.AddCommandBuffer(CameraEvent.BeforeImageEffects, m_CommandBuffer);
 			}
-			if (m_RenderingPlugin.m_EnableDistortion)
+			if (PKFxSettings.EnableDistortion)
 			{
 				if (m_DistortionMat == null)
 				{
@@ -87,7 +88,7 @@ namespace PopcornFX
 					m_DistortionMat.SetTexture("_DistortionTex", m_DistortionRt);
 				}
 			}
-			if (m_RenderingPlugin.m_EnableBlur)
+			if (PKFxSettings.EnableBlur)
 			{
 				if (m_BlurMat == null)
 				{
@@ -95,7 +96,7 @@ namespace PopcornFX
 					if (m_BlurMat == null)
 						return false;
 					m_BlurMat.SetTexture("_DistortionTex", m_DistortionRt);
-					m_BlurMat.SetFloat("_BlurFactor", m_RenderingPlugin.m_BlurFactor);
+					m_BlurMat.SetFloat("_BlurFactor", PKFxSettings.BlurFactor);
 				}
 			}
 			return true;
@@ -171,18 +172,12 @@ namespace PopcornFX
 				m_Camera.depthTextureMode = DepthTextureMode.Depth;
 		}
 
-		internal void SetCullingMask(short ID)
+		internal void SetCullingMask(short ID, LayerMask targetMask, LayerMask allPKMask)
 		{
 			m_CurrentCameraID = ID;
-
-			string[] renderingMask = PKFxSettings.Instance.GetRenderingLayerMaskNames();
-			string[] targetMaskName = new string[] { renderingMask[ID] };
-
-			int cull = m_Camera.cullingMask;						// << Origin Mask
-			int pKMask = LayerMask.GetMask(renderingMask);			// << All PK Related Mask
-			int targetMask = LayerMask.GetMask(targetMaskName);  // << PK Mask to flip to one
-
-			m_Camera.cullingMask = (cull & (~pKMask)) | targetMask;
+			int cull = m_Camera.cullingMask;// << Origin Mask
+			m_Camera.cullingMask = (cull & (~allPKMask)) | targetMask;
+			
 
 			if (GraphicsSettings.renderPipelineAsset == null ||
 				!(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
@@ -252,12 +247,15 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		public void UpdateCamera(bool enableDistortion, bool enableBlur)
+		public void UpdateCamera()
 		{
 			m_CurrentFrameID++;
 			UpdateFrame();
 
-			if (enableDistortion || enableBlur)
+			bool enableDistortion = PKFxSettings.EnableDistortion;
+			bool enableBlur = PKFxSettings.EnableBlur;
+
+			if (enableBlur || enableDistortion)
 			{
 				if (SetupDistortionPassIFN())
 				{

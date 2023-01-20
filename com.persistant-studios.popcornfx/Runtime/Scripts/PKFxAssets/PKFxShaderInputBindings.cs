@@ -334,6 +334,7 @@ namespace PopcornFX
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
+					material.SetFloat("PK_HAS_VAT", 3.0f);
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT))
 				{
@@ -341,6 +342,7 @@ namespace PopcornFX
 					_EnableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
+					material.SetFloat("PK_HAS_VAT", 2.0f);
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SoftVAT))
 				{
@@ -348,6 +350,7 @@ namespace PopcornFX
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
 					_EnableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
+					material.SetFloat("PK_HAS_VAT", 1.0f);
 				}
 				else
 				{
@@ -355,6 +358,7 @@ namespace PopcornFX
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
 					_EnableMaterialKeywords(material, "PK_HAS_VAT_NONE");
+					material.SetFloat("PK_HAS_VAT", 0.0f);
 				}
 
 				// Skeletal anim: PK_HAS_SKELETAL_ANIM
@@ -393,21 +397,24 @@ namespace PopcornFX
 				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_EmissiveRamp))
 				{
 					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
-					_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_WITH_RAMP");
 					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_BASIC");
+					_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_WITH_RAMP");
+					material.SetFloat("PK_HAS_EMISSIVE", 2.0f);
 				}
 				else
 				{
 					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
 					_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_WITH_RAMP");
 					_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_BASIC");
+					material.SetFloat("PK_HAS_EMISSIVE", 1.0f);
 				}
 			}
 			else
 			{
-				_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
 				_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_WITH_RAMP");
 				_DisableMaterialKeywords(material, "PK_HAS_EMISSIVE_BASIC");
+				_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
+				material.SetFloat("PK_HAS_EMISSIVE", 0.0f);
 			}
 			// Diffuse ramp: PK_HAS_DIFFUSE_RAMP
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
@@ -423,10 +430,7 @@ namespace PopcornFX
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 			{
 				_EnableMaterialKeywords(material, "PK_HAS_DISTORTION");
-
-				PKFxRenderingPlugin renderingPlugin = FindObjectOfType<PKFxRenderingPlugin>();
-				if (renderingPlugin != null)
-					material.SetFloat("_DistortionFactor", renderingPlugin.m_BlurFactor);
+				material.SetFloat("_DistortionFactor", PKFxSettings.BlurFactor);
 			}
 			else
 				_DisableMaterialKeywords(material, "PK_HAS_DISTORTION");

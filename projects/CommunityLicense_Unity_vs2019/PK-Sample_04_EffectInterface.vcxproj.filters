@@ -369,6 +369,9 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryDefault.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryMeshCollection.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryProcedural.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -402,6 +405,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryDefault.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryMeshCollection.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_04_EffectInterface\AttributeSampler_GeometryProcedural.cpp">

@@ -17,6 +17,8 @@
 #include "UnityGraphicsAPI/IUnityInterface.h"
 #include "FxWindowsGraphicsDefs.h"
 
+#include "AudioApplicationLoopback/ILoopbackCapture.h"
+
 #if	defined(PK_NX)
 struct	IUnityGraphicsNvn;
 #elif defined(PK_DURANGO)
@@ -211,6 +213,9 @@ public:
 	};
 
 	SPopcornFXRuntimeData				*m_PopcornFXRuntimeData;
+
+	PLoopbackCapture					m_LoopbackAudio;
+	bool								m_ReadAudioFromProcessOutput;
 
 private:
 	static IFileSystem					*_CreateCustomFileSystem();

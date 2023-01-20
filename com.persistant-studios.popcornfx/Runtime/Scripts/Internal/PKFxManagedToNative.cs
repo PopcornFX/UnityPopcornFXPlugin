@@ -70,6 +70,7 @@ namespace PopcornFX
 		public uint m_FrameCountBeforeFreeingUnusedBatches;
 
 		public bool m_IsUnitTesting;
+		public bool m_UseApplicationAudioLoopback;
 
 		// Threading
 		public bool m_SingleThreadedExecution;
@@ -270,6 +271,8 @@ namespace PopcornFX
 		public static extern void ClearAllCallbacks();
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern IntPtr GetRuntimeVersion();
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetApplicationLoopbackAudioVolume(float volume);
 
 #if UNITY_EDITOR
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -313,7 +316,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.14.5 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.15.0 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";

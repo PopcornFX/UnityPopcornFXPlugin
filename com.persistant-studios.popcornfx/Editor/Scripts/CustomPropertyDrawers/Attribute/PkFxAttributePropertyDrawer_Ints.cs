@@ -12,23 +12,9 @@ namespace PopcornFX
 	{
 		private static void DrawIntAttribute(SerializedProperty attrDesc, ref int valueX)
 		{
-			//GUIContent content = CreateGUIContentFromAttribute(attrDesc);
-
 			SerializedProperty m_MinMaxFlag = attrDesc.FindPropertyRelative("m_MinMaxFlag");
 			SerializedProperty m_MinValue = attrDesc.FindPropertyRelative("m_MinValue");
 			SerializedProperty m_MaxValue = attrDesc.FindPropertyRelative("m_MaxValue");
-
-
-			//EditorGUILayout.BeginHorizontal();
-			//if (PKFxEditorTools.HasMin(m_MinMaxFlag.intValue) && PKFxEditorTools.HasMax(m_MinMaxFlag.intValue))
-			//	valueX = PKFxEditorTools.IntSlider(valueX, m_MinValue.vector4Value.x, m_MaxValue.vector4Value.x, content);
-			//else if (PKFxEditorTools.HasMin(m_MinMaxFlag.intValue))
-			//	valueX = PKFxEditorTools.MinIntField(valueX, m_MinValue.vector4Value.x, content);
-			//else if (PKFxEditorTools.HasMax(m_MinMaxFlag.intValue))
-			//	valueX = PKFxEditorTools.MaxIntField(valueX, m_MaxValue.vector4Value.x, content);
-			//else
-			//	valueX = PKFxManagerImpl.Int2Float(EditorGUILayout.IntField(content, PKFxManagerImpl.Float2Int(valueX)));
-			//EditorGUILayout.EndHorizontal();
 
 			EditorGUILayout.BeginHorizontal();
 			DrawAttributeName(attrDesc);

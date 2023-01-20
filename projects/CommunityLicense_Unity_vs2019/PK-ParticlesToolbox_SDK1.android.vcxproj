@@ -190,7 +190,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -217,7 +217,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -244,7 +244,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -271,7 +271,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -298,7 +298,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -325,7 +325,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox;..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -358,7 +358,6 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_morph.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_skin.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_overdraw.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_page_state.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler_new.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_seek_interface.h" />

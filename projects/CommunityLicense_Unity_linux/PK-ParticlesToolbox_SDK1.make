@@ -19,7 +19,7 @@ endif
 # #############################################
 
 RESCOMP = windres
-PCH = ../../../ExternalLibs/Runtime/pk_particles_toolbox/precompiled.h
+PCH = ../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
 INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_particles_toolbox -I../../../ExternalLibs/Runtime/pk_particles_toolbox/src/include

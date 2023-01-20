@@ -242,6 +242,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.h" />
     <ClInclude Include="..\..\Native\DelayedEffectsMethods.h" />
     <ClInclude Include="..\..\Native\FxEffect.h" />
     <ClInclude Include="..\..\Native\FxWindowsGraphicsDefs.h" />
@@ -289,6 +290,7 @@
     <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.cpp" />
     <ClCompile Include="..\..\Native\FxEffect.cpp" />
     <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX11Data.cpp" />
     <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX12Data.cpp" />

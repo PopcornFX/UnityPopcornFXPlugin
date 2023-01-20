@@ -391,6 +391,9 @@ void	CRuntimeManager::Update(float dt)
 	}
 	// Update the audio spectrum:
 	{
+		if (m_ReadAudioFromProcessOutput)
+			m_LoopbackAudio->UpdateAudioBuffer(1024);
+
 		PK_SCOPEDLOCK(m_SpectrumLock);
 
 		for (u32 i = 0; i < m_SpectrumDescriptorList.Count(); i++)
@@ -401,7 +404,16 @@ void	CRuntimeManager::Update(float dt)
 			if (desc->m_NeedsSpectrum)
 			{
 				const u32		prevSize = desc->m_SpectrumSize;
-				const float		*data = (const float *)::OnGetAudioSpectrumData(desc->m_RegisteredName.ToString().Data(), (int*)&desc->m_SpectrumSize);
+				const float		*data = null;
+				if (m_ReadAudioFromProcessOutput)
+				{
+					desc->m_SpectrumSize = 1024;
+					data = m_LoopbackAudio->GetAudioSpectrum();
+				}
+				else
+				{
+					data = (const float *)::OnGetAudioSpectrumData(desc->m_RegisteredName.ToString().Data(), (int *)&desc->m_SpectrumSize);
+				}
 				if (data != null)
 				{
 					if (prevSize != desc->m_SpectrumSize)
@@ -423,7 +435,15 @@ void	CRuntimeManager::Update(float dt)
 			if (desc->m_NeedsWaveform)
 			{
 				const u32		prevSize = desc->m_WaveformSize;
-				const float		*data = (const float *)::OnGetAudioWaveformData(desc->m_RegisteredName.ToString().Data(), (int*)&desc->m_WaveformSize);
+				const float		*data;
+
+				if (m_ReadAudioFromProcessOutput)
+				{
+					desc->m_WaveformSize = 1024;
+					data = m_LoopbackAudio->GetAudioWaveform();
+				}
+				else
+					data = (const float *)::OnGetAudioWaveformData(desc->m_RegisteredName.ToString().Data(), (int*)&desc->m_WaveformSize);
 				if (data != null)
 				{
 					if (prevSize != desc->m_WaveformSize)
@@ -453,6 +473,7 @@ const SPopcornFxSettings	*CRuntimeManager::SPopcornFXRuntimeData::m_Settings = n
 
 CRuntimeManager::CRuntimeManager()
 	: m_PopcornFXRuntimeData(null)
+	, m_ReadAudioFromProcessOutput(false)
 	, m_Unloading(false)
 	, m_IsUnitTesting(false)
 	, m_UnityInterfaces(null)
@@ -515,7 +536,20 @@ bool	CRuntimeManager::InitializeInstanceIFN(const SPopcornFxSettings *settings)
 			return false;
 		}
 		if (settings != null)
+		{
 			m_Instance->m_IsUnitTesting = (settings->m_IsUnitTesting == ManagedBool_True);
+			// Setup loopback capture:
+			if (m_Instance->m_LoopbackAudio != null)
+				m_Instance->m_LoopbackAudio->StopCapturing();
+			if (settings->m_UseApplicationAudioLoopback == ManagedBool_True)
+			{
+				if (m_Instance->m_LoopbackAudio == null)
+					m_Instance->m_LoopbackAudio = ILoopbackCapture::CreateLoopbackCapture();
+				m_Instance->m_ReadAudioFromProcessOutput = m_Instance->m_LoopbackAudio != null && m_Instance->m_LoopbackAudio->StartCapturing();
+			}
+			else
+				m_Instance->m_ReadAudioFromProcessOutput = false;
+		}
 		// Setup the runtime data:
 		m_Instance->m_PopcornFXRuntimeData = runtimeData;
 		// Create the scene instance:
@@ -701,7 +735,17 @@ bool	CRuntimeManager::PopcornFXChangeSettings(const SPopcornFxSettings &settings
 		// Notify the user somehow? probably not.
 	}
 #endif	// (PK_LOG_ENABLED != 0)
-
+	// Setup loopback capture:
+	if (m_LoopbackAudio != null)
+		m_LoopbackAudio->StopCapturing();
+	if (settings.m_UseApplicationAudioLoopback == ManagedBool_True)
+	{
+		if (m_LoopbackAudio == null)
+			m_LoopbackAudio = ILoopbackCapture::CreateLoopbackCapture();
+		m_Instance->m_ReadAudioFromProcessOutput = m_LoopbackAudio != null && m_LoopbackAudio->StartCapturing();
+	}
+	else
+		m_ReadAudioFromProcessOutput = false;
 	return m_ParticleScene->PopcornFXChangeSettings(settings);
 }
 

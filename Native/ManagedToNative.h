@@ -37,6 +37,8 @@ extern "C"
 		u32						m_FrameCountBeforeFreeingUnusedBatches;
 
 		ManagedBool				m_IsUnitTesting;
+		ManagedBool				m_UseApplicationAudioLoopback;
+
 		// Threading:
 		ManagedBool				m_SingleThreadedExecution;
 		ManagedBool				m_OverrideThreadPool;
@@ -329,6 +331,8 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void								UnloadFx(const char *path);
 
 	MANAGED_TO_POPCORN_CONVENTION const char						*GetRuntimeVersion();
+
+	MANAGED_TO_POPCORN_CONVENTION void								SetApplicationLoopbackAudioVolume(float volume);
 
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop

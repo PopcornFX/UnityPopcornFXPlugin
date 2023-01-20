@@ -25,6 +25,14 @@ namespace PopcornFX
 			v4 = Convert.ToBoolean(x.b4);
 		}
 
+		public void GetBool4(out Vector4Bool value)
+		{
+			value = new Vector4Bool(Convert.ToBoolean(x.b1),
+									Convert.ToBoolean(x.b2),
+									Convert.ToBoolean(x.b3),
+									Convert.ToBoolean(x.b4));
+		}
+
 		public void GetFloat3(out Vector3 value)
 		{
 			value = new Vector3(x.f1, y.f1, z.f1);
@@ -39,7 +47,12 @@ namespace PopcornFX
 		{
 			value = new Vector4(x.i1, y.i1, z.i1, w.i1);
 		}
-	
+
+		public void GetInt4(out Vector4Int value)
+		{
+			value = new Vector4Int(x.i1, y.i1, z.i1, w.i1);
+		}
+
 		public void GetQuaternion(out Quaternion value)
 		{
 			value = new Quaternion(x.f1, y.f1, z.f1, w.f1);
@@ -80,6 +93,15 @@ namespace PopcornFX
 	
 			m_Values[index].GetBool4(out value[0], out value[1], out value[2], out value[3]);
 		}
+
+		public void GetBool4(out Vector4Bool value, int index)
+		{
+			Debug.Assert((m_PayloadType == EAttributeType.Bool) ||
+						 (m_PayloadType == EAttributeType.Bool2) ||
+						 (m_PayloadType == EAttributeType.Bool3) ||
+						 (m_PayloadType == EAttributeType.Bool4));
+			m_Values[index].GetBool4(out value);
+		}
 		public void GetFloat3(out Vector3 value, int index)
 		{
 			Debug.Assert((m_PayloadType == EAttributeType.Float) ||
@@ -108,7 +130,17 @@ namespace PopcornFX
 	
 			m_Values[index].GetInt4(out value);
 		}
-	
+
+		public void GetInt4(out Vector4Int value, int index)
+		{
+			Debug.Assert((m_PayloadType == EAttributeType.Int) ||
+						 (m_PayloadType == EAttributeType.Int2) ||
+						 (m_PayloadType == EAttributeType.Int3) ||
+						 (m_PayloadType == EAttributeType.Int4));
+
+			m_Values[index].GetInt4(out value);
+		}
+
 		public void GetQuaternion(out Quaternion value, int index)
 		{
 			Debug.Assert((m_PayloadType == EAttributeType.Quaternion));

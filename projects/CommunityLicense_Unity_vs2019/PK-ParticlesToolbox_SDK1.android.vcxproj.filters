@@ -33,9 +33,6 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_overdraw.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_page_state.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler.h">
       <Filter>Headers</Filter>
     </ClInclude>

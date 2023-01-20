@@ -33,11 +33,13 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SNativeAttributeDesc
 	{
-		public EAttributeType m_AttributeType;
+		public EAttributeType		m_AttributeType;
+		public EAttributeDropMode	m_AttributeDropMode;
 		public int m_MinMaxFlag;
 
 		public IntPtr m_AttributeName;
 		public IntPtr m_Description;
+		public IntPtr m_DropNameList;
 
 		public SAttribContainer_Vector4 m_DefaultValue;
 		public SAttribContainer_Vector4 m_MinValue;
@@ -779,6 +781,7 @@ namespace PopcornFX
 		public static bool OnRendererResize(int rendererGUID, int particleCount, int vertexCount, int indexCount)
 		{
 			Debug.Assert(m_Renderers.Count > rendererGUID);
+			Debug.Assert(rendererGUID != -1);
 			SMeshDesc renderer = m_Renderers[rendererGUID];
 			if (renderer.m_Procedural != null)
 				return OnRendererComputeBufferResize(rendererGUID, particleCount, vertexCount, indexCount);
@@ -791,6 +794,7 @@ namespace PopcornFX
 		public static void OnSetParticleCount(int rendererGUID, int particleCount)
 		{
 			Debug.Assert(m_Renderers.Count > rendererGUID);
+			Debug.Assert(rendererGUID != -1);
 			SMeshDesc renderer = m_Renderers[rendererGUID];
 			if (renderer.m_Procedural != null)
 				renderer.m_Procedural.ParticleCount = particleCount;
@@ -799,6 +803,7 @@ namespace PopcornFX
 		public static bool OnRendererComputeBufferResize(int rendererGUID, int particleCount, int vertexCount, int indexCount)
 		{
 			Debug.Assert(m_Renderers.Count > rendererGUID);
+			Debug.Assert(rendererGUID != -1);
 			SMeshDesc renderer = m_Renderers[rendererGUID];
 
 			Debug.Assert(renderer.m_Procedural != null);

@@ -26,16 +26,6 @@ namespace PopcornFX
 		[HideInInspector]
 		public float m_TimeMultiplier = 1.0f;
 
-		[Tooltip("Enables the distortion particles material, adding a postFX pass.")]
-		[HideInInspector]
-		public bool m_EnableDistortion = false;
-		[Tooltip("Enables the distortion blur pass, adding another postFX pass.")]
-		[HideInInspector]
-		public bool m_EnableBlur = false;
-		[Tooltip("Blur factor. Adjusts the blur's spread.")]
-		[HideInInspector]
-		public float m_BlurFactor = 0.2f;
-
 		[HideInInspector]
 		public List<PKFxCamera> m_Cameras = null;
 
@@ -44,8 +34,10 @@ namespace PopcornFX
 
 		//Collision Baking
 		[Tooltip("Output path for the scene mesh, relative to the PackFX directory")]
+		[HideInInspector]
 		public string m_OutputPkmmPath = "Meshes/UnityScene.pkmm";
 		[Tooltip("List of the GameObjects to be searched for potential meshes.")]
+		[HideInInspector]
 		public GameObject[] m_GameObjectsToSearch;
 		[HideInInspector]
 		public GameObject[] m_MeshGameObjects;
@@ -59,21 +51,34 @@ namespace PopcornFX
 			}
 		}
 
-		[HideInInspector]
-		[Tooltip("Max camera that can render particle. WARNING: Heavy performance hit as billboarding will be duplicated for each camera !")]
-		[Range(1, 4)]
-		public int m_MaxCameraSupport = 1;
+		private LayerMask m_AllPopcornFXLayerMask;
 
 		[HideInInspector]
-		public int MaxCameraSupport
+		[Tooltip("The layers for each camera. The size of this array determines the max cameras that can render particles. WARNING: Heavy performance hit as billboarding will be duplicated for each camera !")]
+		public int[] m_CameraLayers = null;
+
+		public int[] CameraLayers
 		{
-			get { return m_MaxCameraSupport; }
-			set { 
-				m_MaxCameraSupport = value;
-				PKFxManager.SetMaxCameraCount(m_MaxCameraSupport);
+			get { return m_CameraLayers; }
+			set 
+			{
+				if (value == null || value.Length == 0)
+				{
+					Debug.LogError("[PopcornFX] A minimum of 1 camera layer is expected.");
+					return;
+				}
+
+				if (value.Length > 4) 
+				{
+					Debug.LogError("[PopcornFX] A maximum of 4 camera layers is expected.");
+					return;
+				}
+				m_CameraLayers = value;
+				PKFxManager.SetMaxCameraCount(MaxCameraSupport());
+
+				UpdateLayerMask();
 			}
 		}
-
 
 		//----------------------------------------------------------------------------
 
@@ -124,7 +129,7 @@ namespace PopcornFX
 				return;
 			}
 			PKFxManager.StartupPopcorn(false);
-			PKFxManager.SetMaxCameraCount(m_MaxCameraSupport);
+			PKFxManager.SetMaxCameraCount(MaxCameraSupport());
 
 			PKFxSoundManager.ClearSounds();
 
@@ -147,9 +152,9 @@ namespace PopcornFX
 
 			for (int i = 0; i < m_Cameras.Count; ++i)
 			{
-				if (i < m_MaxCameraSupport)
+				if (i < MaxCameraSupport())
 				{
-					m_Cameras[i].UpdateCamera(m_EnableDistortion, m_EnableBlur);
+					m_Cameras[i].UpdateCamera();
 				}
 			}
 		}
@@ -173,7 +178,7 @@ namespace PopcornFX
 
 				for (int i = 0; i < m_Cameras.Count; ++i)
 				{
-					if (i < m_MaxCameraSupport)
+					if (i < MaxCameraSupport())
 					{
 						m_Cameras[i].LateUpdateCamera();
 					}
@@ -191,12 +196,17 @@ namespace PopcornFX
 		{
 			if (!m_Cameras.Contains(PKFxCamera))
 			{
-				if (m_Cameras.Count >= m_MaxCameraSupport)
+				UpdateLayerMask();
+				if (m_CameraLayers == null) 
+				{
+					Debug.LogError("[PopcornFX] The PKFxRenderingPlugin's camera layers must be assigned before registering any cameras.");
+					return -1;
+				}
+				if (m_Cameras.Count >= MaxCameraSupport())
 					Debug.LogWarning("[PKFX] All available Cameras slot are registered. Current camera is queue until slot is freed.");
 				m_Cameras.Add(PKFxCamera);
 				int id = m_Cameras.IndexOf(PKFxCamera);
-				PKFxCamera.SetCullingMask((short)id);
-
+				PKFxCamera.SetCullingMask((short)id, 1 << m_CameraLayers[id], m_AllPopcornFXLayerMask);
 				return id;
 			}
 			return -1;
@@ -213,11 +223,35 @@ namespace PopcornFX
 				for (int i = 0; i < m_Cameras.Count; ++i)
 				{
 					m_Cameras[i].m_CameraID = (short)i;
-					m_Cameras[i].SetCullingMask((short)i);
+					m_Cameras[i].SetCullingMask((short)i, m_CameraLayers[i], m_AllPopcornFXLayerMask);
 				}
 				return true;
 			}
 			return false;
+		}
+
+		public int GetLayerForCameraID(int cameraID)
+		{
+			return m_CameraLayers[cameraID];
+		}
+
+		public int MaxCameraSupport()
+		{
+			if (m_CameraLayers == null || m_CameraLayers.Length == 0)
+			{
+				m_CameraLayers = new int[1];
+				m_CameraLayers[0] = PKFxSettings.Instance.GetCameraLayer(0);
+			}
+			return m_CameraLayers.Length;
+		}
+
+		public void UpdateLayerMask()
+		{
+			m_AllPopcornFXLayerMask = 0;
+			for (int i = 0; i < m_CameraLayers.Length; ++i)
+			{
+				m_AllPopcornFXLayerMask |= 1 << m_CameraLayers[i];
+			}
 		}
 
 #if !UNITY_EDITOR

@@ -70,8 +70,13 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 
 	CResourceManager	*resourceManager = particleDesc->ParentEffect()->Context()->ResourceManager();
 
-	succeeded &= rendererCache->UpdateThread_LoadRendererAtlas(renderer, resourceManager);
-
+	if (renderer->m_RendererType == ERendererClass::Renderer_Billboard ||
+		renderer->m_RendererType == ERendererClass::Renderer_Ribbon ||
+		renderer->m_RendererType == ERendererClass::Renderer_Mesh ||
+		renderer->m_RendererType == ERendererClass::Renderer_Decal)
+	{
+		rendererCache->UpdateThread_LoadRendererAtlas(renderer, resourceManager); // Returns false if atlas couldn't be created but was required by rfeature
+	}
 	if (!succeeded)
 		return null;
 

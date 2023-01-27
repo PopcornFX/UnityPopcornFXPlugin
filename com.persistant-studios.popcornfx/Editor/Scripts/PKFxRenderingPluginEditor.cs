@@ -172,6 +172,7 @@ namespace PopcornFX
 					newCameraLayers[i] = cameraLayerID;
 				}
 				renderingPlugin.CameraLayers = newCameraLayers;
+				EditorUtility.SetDirty(renderingPlugin);
 			}
 
 	  		for (int i = 0; i < renderingPlugin.CameraLayers.Length; i++)

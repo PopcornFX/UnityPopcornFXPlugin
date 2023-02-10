@@ -34,7 +34,7 @@ INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/incl
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/macosx_x64 -L../../../ExternalLibs/CodecMesh_FBX/libs/macosx -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -liconv
+ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/macosx_x64 -L../../../ExternalLibs/CodecMesh_FBX/libs/macosx/legacy_clang -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -liconv
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef

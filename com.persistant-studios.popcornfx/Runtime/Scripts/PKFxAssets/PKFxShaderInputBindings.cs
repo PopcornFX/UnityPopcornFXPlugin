@@ -473,8 +473,6 @@ namespace PopcornFX
 				m_ShowBindings = EditorGUILayout.Foldout(m_ShowBindings, "Shader Bindings");
 			if (m_ShowBindings)
 			{
-				Material newMat = EditorGUILayout.ObjectField(serializedObject.FindProperty("m_CustomMaterial").objectReferenceValue, typeof(Material), false) as Material;
-				EditorGUILayout.TextField(serializedObject.FindProperty("m_BatchDescName").stringValue);
 				if (bindingHasTransparent)
 				{
 					SerializedProperty SourceBlendPropertyName = serializedObject.FindProperty("m_SourceBlendPropertyName");

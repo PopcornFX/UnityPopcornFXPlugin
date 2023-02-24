@@ -128,7 +128,7 @@ namespace PopcornFX
 
 				instance = CreateInstance<PKFxSettings>();
 
-				AssetDatabase.CreateFolder("Assets/", "Resources");
+				AssetDatabase.CreateFolder("Assets", "Resources");
 				AssetDatabase.CreateAsset(instance, fullPath);
 				AssetDatabase.SaveAssets();
 			}

@@ -14,6 +14,11 @@ namespace PopcornFX
 		[MonoPInvokeCallback(typeof(RaycastPackCallback))]
 		public static void OnRaycastPack(IntPtr raycastQuery)
 		{
+			if (PKFxSettings.CustomRaycast != null)
+			{
+				PKFxSettings.CustomRaycast(raycastQuery);
+				return;
+			}
 			unsafe
 			{
 				SRaycastPack* raycastPack = (SRaycastPack*)raycastQuery.ToPointer();

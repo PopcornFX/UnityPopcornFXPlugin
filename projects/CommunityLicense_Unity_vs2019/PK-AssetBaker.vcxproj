@@ -78,8 +78,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TIFF_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;PK-Plugin_CodecMesh_FBX_d.lib;PK-Plugin_CodecImage_EXR_d.lib;freetype.lib;libfbxsdk-md_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Debug;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2015\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TIFF_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;PK-Plugin_CodecMesh_FBX_d.lib;PK-Plugin_CodecImage_EXR_d.lib;freetype.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Debug;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -112,8 +112,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TIFF_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;PK-Plugin_CodecMesh_FBX_r.lib;PK-Plugin_CodecImage_EXR_r.lib;freetype.lib;libfbxsdk-md_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2015\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TIFF_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;PK-Plugin_CodecMesh_FBX_r.lib;PK-Plugin_CodecImage_EXR_r.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>

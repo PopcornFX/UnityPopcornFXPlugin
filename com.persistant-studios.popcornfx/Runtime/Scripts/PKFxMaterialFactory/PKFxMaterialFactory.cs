@@ -452,6 +452,11 @@ namespace PopcornFX
 							_RetrieveBoneWeights(sharedMesh, reorderBones, out boneWeights, out boneIndices);
 							skinnedMesh.SetUVs(2, boneWeights);
 							skinnedMesh.SetUVs(3, boneIndices);
+							// For skinned meshes, the import transforms are applied in the shader
+							// so we need to pre-scale the bounds:
+							Bounds bounds = skinnedMesh.bounds;
+							bounds.Expand(rdr.gameObject.transform.localToWorldMatrix.lossyScale);
+							skinnedMesh.bounds = bounds;
 							sharedMesh = skinnedMesh;
 						}
 					}

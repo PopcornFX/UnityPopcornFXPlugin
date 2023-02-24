@@ -333,6 +333,8 @@ namespace PopcornFX
 
 		[SerializeField] private bool m_UpdateSimManually = false;
 
+		private PKFxRaycasts.RaycastPackCallback m_CustomRaycast = null;
+
 		public static bool RenderingCategory
 		{
 			get { return Instance.m_RenderingCategory; }
@@ -511,6 +513,12 @@ namespace PopcornFX
 		{
 			get { return Instance.m_UpdateSimManually; }
 			set { Instance.m_UpdateSimManually = value; }
+		}
+
+		public static PKFxRaycasts.RaycastPackCallback CustomRaycast
+		{
+			get { return Instance.m_CustomRaycast; }
+			set { Instance.m_CustomRaycast = value; }
 		}
 
 		public void Setup()

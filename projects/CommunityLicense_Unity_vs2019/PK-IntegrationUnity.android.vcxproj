@@ -158,7 +158,7 @@
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3;gnustl_shared</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -180,7 +180,7 @@
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3;gnustl_shared</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -208,7 +208,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3;gnustl_shared</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -236,7 +236,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3;gnustl_shared</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>

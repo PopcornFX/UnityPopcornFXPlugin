@@ -20,6 +20,7 @@
 #	include		"EditorOnly/EditorNativeToManaged.h"
 #endif
 
+#include <pk_particles/include/ps_config.h>
 #include <pk_kernel/include/kr_profiler_details.h>
 #include <pk_kernel/include/kr_caps_cpu.h>
 #include <pk_kernel/include/kr_streams_memory.h>
@@ -881,7 +882,6 @@ extern "C"
 			return;
 		profiler->Reset();
 
-		//profiler->BuildReport();
 		CDynamicMemoryStream stream = CDynamicMemoryStream();
 		Profiler::CProfilerReport	report;
 		profiler->BuildReport(&report);
@@ -916,6 +916,37 @@ extern "C"
 		profiler->Activate(enable);
 		profiler->Reset();
 #endif	// (KR_PROFILER_ENABLED != 0)
+	}
+
+	// --------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableFrameStats(bool enable)
+	{
+#if	(PK_PARTICLES_HAS_STATS != 0)
+		CRuntimeManager::Instance().GetProfiler().EnableFrameStats(enable);
+#endif
+	}
+
+	// --------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableEffectsStats(bool enable)
+	{
+#if	(PK_PARTICLES_HAS_STATS != 0)
+		CRuntimeManager::Instance().GetProfiler().EnableEffectsStats(enable);
+#endif
+	}
+
+
+	// --------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION bool 		StatsPullFrameData(const char *reportName, SStatsToFill &data)
+	{
+		(void)data;
+#if	(PK_PARTICLES_HAS_STATS != 0)
+		CRuntimeManager			&manager = CRuntimeManager::Instance();
+		return manager.GetProfiler().FillFrameStats(reportName, data);
+#endif	// (KR_PROFILER_ENABLED != 0)
+		return false;
 	}
 
 	//----------------------------------------------------------------------------
@@ -974,7 +1005,6 @@ extern "C"
 			return;
 
 		// Do not call the Cb when unloading all the effects because the renderers and components are already destroyed on the managed side:
-		CRuntimeManager::Instance().
 		CRuntimeManager::Instance().ClearAllInstances(true);
 		CRuntimeManager::Instance().SceneMeshClear();
 		scene.HardReset();

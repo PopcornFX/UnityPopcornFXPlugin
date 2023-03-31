@@ -160,6 +160,7 @@
     <ClInclude Include="..\..\Native\PKUnity_InterfaceCommon.h" />
     <ClInclude Include="..\..\Native\PKUnity_Log.h" />
     <ClInclude Include="..\..\Native\PKUnity_Plugins.h" />
+    <ClInclude Include="..\..\Native\PKUnity_Profiler.h" />
     <ClInclude Include="..\..\Native\PKUnity_Scene.h" />
     <ClInclude Include="..\..\Native\PKUnity_SkinnedMesh.h" />
     <ClInclude Include="..\..\Native\PKUnity_Tasks.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="..\..\Native\PKUnity_FileSystemController.cpp" />
     <ClCompile Include="..\..\Native\PKUnity_Log.cpp" />
     <ClCompile Include="..\..\Native\PKUnity_Plugins.cpp" />
+    <ClCompile Include="..\..\Native\PKUnity_Profiler.cpp" />
     <ClCompile Include="..\..\Native\PKUnity_Scene.cpp" />
     <ClCompile Include="..\..\Native\PKUnity_SkinnedMesh.cpp" />
     <ClCompile Include="..\..\Native\PKUnity_Tasks.cpp" />

@@ -45,6 +45,7 @@ namespace PopcornFX
 		public string 			m_MeshDiffuseColorPropertyName = "_BaseColor";
 		public string 			m_MeshEmissiveColorPropertyName = "_EmissiveColor";
 		public string 			m_MeshAlphaCursorPropertyName = "_AlphaCursor";
+		public string 			m_MeshCullPropertyName = "_Cull";
 		// --------------------------------------
 		// VAT render feature:
 		// --------------------------------------
@@ -215,6 +216,20 @@ namespace PopcornFX
 				bool hasRigidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT);
 				bool hasVAT = (hasFluidVAT || hasSoftVAT || hasRigidVAT) && (batchDesc.m_VatFeature != null && batchDesc.m_VatFeature.m_Activated);
 				bool hasSkeletalAnim = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalAnim);
+				bool isDoubleSided = batchDesc.m_DoubleSided;
+
+				if (isDoubleSided)
+				{
+					material.SetInt(m_MeshCullPropertyName, (int) UnityEngine.Rendering.CullMode.Off);
+					if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
+						material.doubleSidedGI = true;
+				}
+				else
+				{
+					if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
+						material.doubleSidedGI = false;
+					material.SetInt(m_MeshCullPropertyName, (int) UnityEngine.Rendering.CullMode.Back);
+				}
 
 				if (hasVAT)
 				{

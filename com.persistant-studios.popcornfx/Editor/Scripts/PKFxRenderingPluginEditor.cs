@@ -217,7 +217,7 @@ namespace PopcornFX
 					EditorGUILayout.PropertyField(m_OutputPkmmPath);
 
 					EditorGUI.indentLevel += 1;
-					EditorGUILayout.PropertyField(m_MeshGameObjects);
+					EditorGUILayout.PropertyField(m_GameObjectsToSearch);
 					EditorGUI.indentLevel -= 1;
 					if (GUILayout.Button("Build meshes"))
 					{

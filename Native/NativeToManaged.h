@@ -162,6 +162,7 @@ extern "C"
 		const char					*m_EmissiveRampMap;
 		float						m_InvSoftnessDistance;
 		float						m_AlphaClipThreshold;
+		bool						m_DoubleSided;
 
 		SRenderingFeatureLitDesc			*m_LitRendering;
 		SRenderingFeatureVATDesc			*m_VatRendering;
@@ -182,6 +183,7 @@ extern "C"
 			, m_EmissiveRampMap(null)
 			, m_InvSoftnessDistance(0)
 			, m_AlphaClipThreshold(0)
+			, m_DoubleSided(false)
 			, m_LitRendering(null)
 			, m_VatRendering(null)
 			, m_AnimDescRendering(null)

@@ -150,6 +150,7 @@ namespace PopcornFX
 		public IntPtr m_EmissiveRampMap;
 		public float m_InvSofnessDistance;
 		public float m_AlphaClipThreshold;
+		public bool	m_DoubleSided;
 
 		public IntPtr m_LitRendering;
 		public IntPtr m_VatRendering;

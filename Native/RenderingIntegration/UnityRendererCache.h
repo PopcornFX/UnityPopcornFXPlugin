@@ -192,6 +192,8 @@ public:
 	float									m_Roughness;
 	float									m_Metalness;
 
+	bool									m_DoubleSided;
+
 	// VAT
 	CStringId								m_Vat_PositionMap;
 	CStringId								m_Vat_NormalMap;

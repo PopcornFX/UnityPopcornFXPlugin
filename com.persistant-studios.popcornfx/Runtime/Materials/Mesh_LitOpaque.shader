@@ -17,6 +17,7 @@ Shader "PopcornFX/Mesh_LitOpaque"
 		_VATColorMap("VAT Color map (RGB)", 2D) = "white" {}
 		_VATRotationMap("VAT Rotation map (RGB)", 2D) = "white" {}
 		_VATNormalMap("VAT Normal map (RGB)", 2D) = "white" {}
+		[Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Int) = 0
 		_Roughness("Roughness (Float)", Range(0, 1)) = 0.0
 		_Metalness("Metalness (Float)", Range(0, 1)) = 0.0
 		_NormalMap("Normal map (RGB)", 2D) = "bump" {}
@@ -30,6 +31,7 @@ Shader "PopcornFX/Mesh_LitOpaque"
 			"RenderType" = "Opaque"
 		}
 		LOD 200
+		Cull [_Cull]
 	
 		CGPROGRAM
 		#pragma surface surf Standard vertex:vertMain

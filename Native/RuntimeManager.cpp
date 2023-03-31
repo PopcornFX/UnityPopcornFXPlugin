@@ -1087,6 +1087,30 @@ void	CRuntimeManager::ClearAllInstances(bool managedIsCleared)
 
 //----------------------------------------------------------------------------
 
+u32	CRuntimeManager::GetInstanceCount(const PopcornFX::CParticleEffect *effect)
+{
+	PK_ASSERT(effect != null);
+
+	u32	instanceCount = 0;
+	for (u32 i = 0; i < m_Effects.Count(); ++i)
+	{
+		const CPKFXEffect *emitter = m_Effects[i];
+		if (emitter == null)
+			continue;
+		if (!emitter->GetEffectInstance()->Alive())
+			continue;
+		PParticleEffectInstance		effectInstance = emitter->GetEffectInstance();
+		if (!PK_VERIFY(effectInstance != null))
+			continue;
+		if (effectInstance->ParentEffect() == effect)
+			++instanceCount;
+	}
+
+	return instanceCount;
+}
+
+//----------------------------------------------------------------------------
+
 void	CRuntimeManager::ClearFxInstances(const char *fxPath)
 {
 	CString pathToClear = fxPath;

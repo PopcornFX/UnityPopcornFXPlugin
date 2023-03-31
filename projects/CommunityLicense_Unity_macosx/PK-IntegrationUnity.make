@@ -93,6 +93,7 @@ GENERATED += $(OBJDIR)/PKUnity_CImageResourceManager.o
 GENERATED += $(OBJDIR)/PKUnity_FileSystemController.o
 GENERATED += $(OBJDIR)/PKUnity_Log.o
 GENERATED += $(OBJDIR)/PKUnity_Plugins.o
+GENERATED += $(OBJDIR)/PKUnity_Profiler.o
 GENERATED += $(OBJDIR)/PKUnity_Scene.o
 GENERATED += $(OBJDIR)/PKUnity_SkinnedMesh.o
 GENERATED += $(OBJDIR)/PKUnity_Tasks.o
@@ -126,6 +127,7 @@ OBJECTS += $(OBJDIR)/PKUnity_CImageResourceManager.o
 OBJECTS += $(OBJDIR)/PKUnity_FileSystemController.o
 OBJECTS += $(OBJDIR)/PKUnity_Log.o
 OBJECTS += $(OBJDIR)/PKUnity_Plugins.o
+OBJECTS += $(OBJDIR)/PKUnity_Profiler.o
 OBJECTS += $(OBJDIR)/PKUnity_Scene.o
 OBJECTS += $(OBJDIR)/PKUnity_SkinnedMesh.o
 OBJECTS += $(OBJDIR)/PKUnity_Tasks.o
@@ -275,6 +277,9 @@ $(OBJDIR)/PKUnity_Log.o: ../../Native/PKUnity_Log.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/PKUnity_Plugins.o: ../../Native/PKUnity_Plugins.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PKUnity_Profiler.o: ../../Native/PKUnity_Profiler.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/PKUnity_Scene.o: ../../Native/PKUnity_Scene.cpp

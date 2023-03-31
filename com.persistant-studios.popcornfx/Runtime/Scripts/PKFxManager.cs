@@ -580,6 +580,20 @@ namespace PopcornFX
 			PKFxManagerImpl.WriteProfileReport(path);
 		}
 
+		public static bool InteractiveProfilerPullData(string reportName, ref SStatsToFill dataToFill)
+		{
+			return PKFxManagerImpl.StatsPullFrameData(reportName, ref dataToFill);
+		}
+
+		public static void InteractiveProfilerEnable(bool onOff)
+		{
+			PKFxManagerImpl.StatsEnableFrameStats(onOff);
+			PKFxManagerImpl.StatsEnableEffectsStats(onOff);
+		}
+
+		// Misc
+		//----------------------------------------------------------------------------
+
 		internal static void SetAttributesDirty(int fxGuid)
 		{
 			PKFxManagerImpl.EffectUpdateAttributes(fxGuid);

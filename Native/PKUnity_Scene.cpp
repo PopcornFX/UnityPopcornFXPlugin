@@ -180,6 +180,12 @@ void	CPKFXScene::LaunchUpdate(float dt)
 	PK_TODO("Gore hack for Durango. revise the sample lib locks.");
 	PK_SCOPEDLOCK(m_test);
 #endif
+
+#if	(PK_PARTICLES_HAS_STATS != 0)
+	CLiveProfiler	&profiler = CRuntimeManager::Instance().GetProfiler();
+	profiler.StartFrame();
+#endif // (PK_PARTICLES_HAS_STATS != 0)
+
 	if (UpdateMode() != UpdateMode_NoUpdate)
 	{
 		if (dt != 0.0f)
@@ -190,8 +196,21 @@ void	CPKFXScene::LaunchUpdate(float dt)
 			if (!m_WaitForUpdateOnRenderThread)
 			{
 				PK_ASSERT(m_ParticleMeshMediumCollection == null);
+
+
+#if	(PK_PARTICLES_HAS_STATS != 0)
+				m_ParticleMediumCollection->Stats().Reset();
+				PopcornFX::CTimer	updateTimer;
+				updateTimer.Start();
+#endif // (PK_PARTICLES_HAS_STATS != 0)
 				m_ParticleMediumCollection->Update(dt);
-				while (m_ParticleMediumCollection->UpdateFence(1)) { }
+
+				while (m_ParticleMediumCollection->UpdateFence(1)) {}
+#if	(PK_PARTICLES_HAS_STATS != 0)
+				float bbMediumCollectionTime = (float)updateTimer.Stop();
+				profiler.AddReport("Particles", m_ParticleMediumCollection, bbMediumCollectionTime);
+#endif // (PK_PARTICLES_HAS_STATS != 0)
+
 
 				_PostUpdateEvents();
 
@@ -224,15 +243,28 @@ void	CPKFXScene::LaunchUpdate(float dt)
 					}
 				}
 				CRuntimeManager::Instance().AfterUpdate();
+
+#if	(PK_PARTICLES_HAS_STATS != 0)
+				profiler.EndFrame();
+#endif // (PK_PARTICLES_HAS_STATS != 0)
 			}
 			else
 			{
 				_PostUpdateEvents();
 
 				PK_ASSERT(m_ParticleMeshMediumCollection != null);
+#if	(PK_PARTICLES_HAS_STATS != 0)
+				m_ParticleMeshMediumCollection->Stats().Reset();
+				PopcornFX::CTimer	meshUpdateTimer;
+				meshUpdateTimer.Start();
+#endif // (PK_PARTICLES_HAS_STATS != 0)
 				// Mesh update and collect frame:
 				m_ParticleMeshMediumCollection->Update(dt);
 				m_ParticleMeshMediumCollection->UpdateFence();
+#if	(PK_PARTICLES_HAS_STATS != 0)
+				float meshMediumCollectionTime = (float)meshUpdateTimer.Stop();
+				profiler.AddReport("Meshes", m_ParticleMeshMediumCollection, meshMediumCollectionTime);
+#endif // (PK_PARTICLES_HAS_STATS != 0)
 
 				TMemoryView<SUnitySceneView>		views = m_SceneViews;
 				SUnityDrawOutputs					dummy;
@@ -248,12 +280,16 @@ void	CPKFXScene::LaunchUpdate(float dt)
 						m_ParticleMeshFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kAllStepsMask);
 					}
 				}
-
+#if	(PK_PARTICLES_HAS_STATS != 0)
+				m_ParticleMediumCollection->Stats().Reset();
+				m_UpdateTimer.Start();
+#endif // (PK_PARTICLES_HAS_STATS != 0)
 				// Then other particles update:
 				m_ParticleMediumCollection->Update(dt);
 			}
 		}
 	}
+	
 	m_GameThreadCalled = true;
 }
 
@@ -283,6 +319,9 @@ void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 
 	if (m_WaitForUpdateOnRenderThread)
 	{
+#if	(PK_PARTICLES_HAS_STATS != 0)
+		CLiveProfiler &profiler = CRuntimeManager::Instance().GetProfiler();
+#endif // (PK_PARTICLES_HAS_STATS != 0)
 		if (!m_RenderThreadRegistered)
 		{
 			Threads::PAbstractPool	poolAbstract = Scheduler::ThreadPool();
@@ -296,6 +335,12 @@ void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 		}
 
 		m_ParticleMediumCollection->UpdateFence();
+
+#if	(PK_PARTICLES_HAS_STATS != 0)
+		float bbMediumCollectionTime = (float)m_UpdateTimer.Stop();
+		profiler.AddReport("Particles", m_ParticleMediumCollection, bbMediumCollectionTime);
+#endif // (PK_PARTICLES_HAS_STATS != 0)
+
 		m_ParticleFrameCollector->BuildNewFrame(m_ParticleFrameCollector->UpdateThread_GetLastCollectedFrame());
 		if (m_ParticleFrameCollector->RenderedFrame() != null)
 		{
@@ -303,6 +348,10 @@ void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 			m_ParticleFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kGameThreadGenDrawCallsSteps);
 		}
 		m_RenderDataFactory.CustomStepFlagInactive();
+
+#if	(PK_PARTICLES_HAS_STATS != 0)
+		profiler.EndFrame();
+#endif // (PK_PARTICLES_HAS_STATS != 0)
 	}
 	if (m_ParticleFrameCollector->RenderedFrame() != null)
 	{
@@ -311,6 +360,7 @@ void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 	m_GameThreadCalled = false;
 
 	m_RenderContext.m_RenderApiData->EndFrame();
+
 }
 
 //----------------------------------------------------------------------------

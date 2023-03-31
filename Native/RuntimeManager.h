@@ -8,10 +8,12 @@
 #include <pk_kernel/include/kr_log_listeners_file.h>
 #include <pk_particles/include/ps_mediums.h>
 #include <pk_particles/include/ps_descriptor.h>
+#include <pk_particles/include/ps_config.h>
 
 #include "ManagedToNative.h"
 #include "PKUnity_Scene.h"
 #include "PKUnity_Log.h"
+#include "PKUnity_Profiler.h"
 #include "FxEffect.h"
 
 #include "UnityGraphicsAPI/IUnityInterface.h"
@@ -78,11 +80,11 @@ public:
 	~CRuntimeManager();
 
 	// Handle singleton startup etc...
-	static bool				IsInstanceInitialized();
-	static bool				InitializeInstanceIFN(const SPopcornFxSettings *settings); // Create the scene and startup PopcornFX
+	static bool							IsInstanceInitialized();
+	static bool							InitializeInstanceIFN(const SPopcornFxSettings *settings); // Create the scene and startup PopcornFX
 
-	void					SetMaxCameraCount(int count);
-	static CRuntimeManager	&Instance();
+	void								SetMaxCameraCount(int count);
+	static CRuntimeManager				&Instance();
 
 	static SMeshDataToFill				*CreateMeshDataToFill(int vertexCount, int indexCount, int bonesCount, int vertexAttributes);
 
@@ -127,7 +129,11 @@ public:
 	const TArray<float*>				*GetSpectrum(CStringId name) const;
 	IFileSystem							*GetFileSystem() const;
 
-	bool								IsUnloading() { return m_Unloading; }
+#if	(PK_PARTICLES_HAS_STATS != 0)
+	CLiveProfiler						&GetProfiler() { return m_Profiler; }
+#endif
+
+	bool								IsUnloading() const { return m_Unloading; }
 
 	bool								LoadPack();
 
@@ -136,6 +142,7 @@ public:
 	CPKFXEffect							*FxGet(CGuid guid);
 	void								ClearAllInstances(bool managedIsCleared = false);
 	void								ClearFxInstances(const char *fxPath);
+	u32									GetInstanceCount(const PopcornFX::CParticleEffect *effect);
 
 	TMemoryView<const float * const>	GetSpectrumPyramid(CStringId name, u32 &outBaseCount);
 	TMemoryView<const float * const>	GetWaveformPyramid(CStringId name, u32 &outBaseCount);
@@ -202,7 +209,7 @@ public:
 		bool					PopcornFXShutdown();
 
 		static const SPopcornFxSettings		*m_Settings;
-		CUnityResourceHandlerImage				*m_ImageHandler;
+		CUnityResourceHandlerImage			*m_ImageHandler;
 
 #if	(PK_LOG_ENABLED != 0)
 		CUnityLog							*m_UnityLogger;
@@ -315,6 +322,11 @@ private:
 
 	TAsynchronousJobPool<CBackgroundTask, 0x10>	m_BackgroundTasks;
 	bool										m_HasBackgroundTasksToKick;
+
+
+#if	(PK_PARTICLES_HAS_STATS != 0)
+	CLiveProfiler								m_Profiler;
+#endif
 };
 
 //----------------------------------------------------------------------------

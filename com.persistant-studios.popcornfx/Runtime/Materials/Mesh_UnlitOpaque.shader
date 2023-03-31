@@ -17,6 +17,7 @@ Shader "PopcornFX/Mesh_UnlitOpaque"
 		_VATColorMap("VAT Color map (RGB)", 2D) = "white" {}
 		_VATRotationMap("VAT Rotation map (RGB)", 2D) = "white" {}
 		_VATNormalMap("VAT Normal map (RGB)", 2D) = "white" {}
+		[Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Int) = 0
 	}
 
 	SubShader
@@ -27,6 +28,7 @@ Shader "PopcornFX/Mesh_UnlitOpaque"
 			"RenderType" = "Opaque"
 		}
 		LOD 200
+		Cull [_Cull]
 	
 		CGPROGRAM
 		#pragma surface surf NoLighting noambient vertex:vertMain

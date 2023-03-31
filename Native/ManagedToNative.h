@@ -235,6 +235,28 @@ extern "C"
 	};
 
 	//----------------------------------------------------------------------------
+
+	struct SEffectStatsToFill
+	{
+		unsigned int			m_InstanceCount;
+		unsigned int			m_TotalParticleCount;
+		double					m_TotalTimeAverage;
+		double					m_TotalTimeAverageRaw;
+		const char*				m_Unit;
+	};
+
+	struct SStatsToFill
+	{
+		float					m_CollectionUpdateTimeAverage;
+		unsigned int			m_ParticleCountAverage;
+		unsigned int			m_EffectsUsedCountAverage;
+
+		unsigned int			m_EffectsStatsCount;
+		void*					m_EffectsStats; //SEffectStatsToFill
+		const char				*m_EffectNames;
+	};
+
+	//----------------------------------------------------------------------------
 	// Globals:
 	//----------------------------------------------------------------------------
 
@@ -323,6 +345,11 @@ extern "C"
 	//Profiler
 	MANAGED_TO_POPCORN_CONVENTION void								WriteProfileReport(const char* path);
 	MANAGED_TO_POPCORN_CONVENTION void								ProfilerSetEnable(bool enable);
+
+	//Stats
+	MANAGED_TO_POPCORN_CONVENTION void 								StatsEnableFrameStats(bool enable);
+	MANAGED_TO_POPCORN_CONVENTION void 								StatsEnableEffectsStats(bool enable);
+	MANAGED_TO_POPCORN_CONVENTION bool								StatsPullFrameData(const char *reportName, SStatsToFill &data);
 	// Reset:
 	MANAGED_TO_POPCORN_CONVENTION void								Reset();
 	MANAGED_TO_POPCORN_CONVENTION void								DeepReset();

@@ -362,6 +362,7 @@ namespace PopcornFX
 		public float				m_InvSoftnessDistance;
 		public float				m_AlphaClipThreshold;
 		public string				m_GeneratedName;
+		public bool					m_DoubleSided;
 		// VAT:
 		public SBatchVatFeatureDesc m_VatFeature = null;
 		// Lit:
@@ -462,6 +463,7 @@ namespace PopcornFX
 			m_AlphaRemap = alphaRemapStr;
 			m_InvSoftnessDistance = desc.m_InvSofnessDistance;
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
+			m_DoubleSided = desc.m_DoubleSided;
 
 			m_SpecularMap = null;
 			m_MeshAsset = meshAssetStr;
@@ -626,6 +628,8 @@ namespace PopcornFX
 			{
 				finalName += " ";
 				finalName += m_SpecularMap == null ? "(none)" : m_SpecularMap;
+				finalName += " ";
+				finalName += m_DoubleSided ? "DoubleSided" : "OneSided";
 			}
 			return finalName;
 		}

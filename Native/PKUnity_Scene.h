@@ -310,6 +310,7 @@ private:
 	void										_CollectFrame(CParticleMediumCollection *medCol);
 
 	Threads::CCriticalSection					m_test;
+	PopcornFX::CTimer							m_UpdateTimer;
 };
 PK_DECLARE_REFPTRCLASS(PKFXScene);
 

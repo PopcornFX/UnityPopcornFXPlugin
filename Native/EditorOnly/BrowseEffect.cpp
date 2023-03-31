@@ -68,6 +68,11 @@ static CString	PatchPathForAnimTrack(const CString &path)
 		patchedPath = path.Extract(0, path.Length() - 5);
 		patchedPath += ".pkan";
 	}
+	else if (path.EndsWith(".fbx", CaseInsensitive))
+	{
+		patchedPath = path.Extract(0, path.Length() - 4);
+			patchedPath += ".pkan";
+	}
 	return patchedPath;
 }
 

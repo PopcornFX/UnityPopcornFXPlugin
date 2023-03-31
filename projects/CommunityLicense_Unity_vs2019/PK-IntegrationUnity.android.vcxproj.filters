@@ -105,6 +105,9 @@
     <ClInclude Include="..\..\Native\PKUnity_Plugins.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_Profiler.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Native\PKUnity_Scene.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -240,6 +243,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Native\PKUnity_Plugins.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_Profiler.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Native\PKUnity_Scene.cpp">

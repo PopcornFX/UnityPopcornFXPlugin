@@ -134,6 +134,30 @@ namespace PopcornFX
 		public string m_UnityPackFxPath;
 	}
 
+	//----------------------------------------------------------------------------
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SEffectStatsToFill
+	{
+		public int m_InstanceCount;
+		public int m_TotalParticleCount;
+		public double m_TotalTimeAverage;
+		public double m_TotalTimeAverageRaw;
+		public IntPtr m_Unit;
+	};
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SStatsToFill
+	{
+		public float m_CollectionUpdateTimeAverage;
+		public int m_ParticleCountAverage;
+		public int m_EffectsUsedCountAverage;
+
+		public int m_EffectsStatsCount;
+		public IntPtr m_EffectsStats; //SEffectStatsToFill
+		public IntPtr m_EffectNames;
+	};
+
 	internal partial class PKFxManagerImpl : object
 	{
 		public const UInt32 POPCORN_MAGIC_NUMBER = 0x5AFE0000;
@@ -273,6 +297,12 @@ namespace PopcornFX
 		public static extern IntPtr GetRuntimeVersion();
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetApplicationLoopbackAudioVolume(float volume);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void StatsEnableFrameStats(bool enable);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern int StatsEnableEffectsStats(bool enable);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool StatsPullFrameData(string reportName, ref SStatsToFill data);
 
 #if UNITY_EDITOR
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -316,7 +346,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.15.4 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.15.5 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";

@@ -142,7 +142,7 @@ void surf(Input IN, inout SURF_OUTPUT o)
 	fixed4 diffuse = tex2D(_MainTex, uv) * IN.color;
 
 #if		PK_HAS_ALPHA_REMAP
-	diffuse.a = tex2D(_AlphaMap, float2(diffuse.a, UNITY_ACCESS_INSTANCED_PROP(InstanceProperties, _AlphaCursor))).r;
+	diffuse.a = tex2D(_AlphaMap, float2(diffuse.a, 1.0f - UNITY_ACCESS_INSTANCED_PROP(InstanceProperties, _AlphaCursor))).r;
 #endif
 
 #if		!PK_IS_TRANSPARENT

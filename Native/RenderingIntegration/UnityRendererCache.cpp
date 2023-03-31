@@ -517,6 +517,11 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	}
 
 	//-----------------------------
+	// Choose the culling mode:
+	//-----------------------------
+	m_DoubleSided = renderer.m_Declaration.GetPropertyValue_B(BasicRendererProperties::SID_DoubleSided(), true);
+
+	//-----------------------------
 	// Retrieve the shader uniforms (mesh resource, property values...):
 	//-----------------------------
 	const SRendererFeaturePropertyValue	*mesh = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Mesh());
@@ -866,6 +871,7 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	desc.m_DiffuseMap = m_MaterialDescMesh.m_DiffuseMap.ToStringData();
 	desc.m_InvSoftnessDistance = m_MaterialDescMesh.m_InvSoftnessDistance;
 	desc.m_AlphaClipThreshold = m_MaterialDescMesh.m_AlphaThreshold;
+	desc.m_DoubleSided = m_MaterialDescMesh.m_DoubleSided;
 
 	bool fluidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0;
 	bool softVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0;

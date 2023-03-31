@@ -17,6 +17,7 @@ Shader "PopcornFX/Mesh_UnlitTransparent"
 		_VATColorMap("VAT Color map (RGB)", 2D) = "white" {}
 		_VATRotationMap("VAT Rotation map (RGB)", 2D) = "white" {}
 		_VATNormalMap("VAT Normal map (RGB)", 2D) = "white" {}
+		[Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Int) = 0
 	}
 
 	SubShader
@@ -28,7 +29,7 @@ Shader "PopcornFX/Mesh_UnlitTransparent"
 		}
 		LOD 200
 
-		Cull Off
+		Cull [_Cull]
 		Lighting Off
 		ZWrite Off
 		ZTest LEqual

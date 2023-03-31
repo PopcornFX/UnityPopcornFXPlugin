@@ -85,11 +85,11 @@ namespace PopcornFX
 		void Start()
 		{
 #if UNITY_IOS
-		if (m_EnableDistortion)
-		{
-			Debug.LogWarning("[PopcornFX] Image effects not supported, distortions disabled.", this);
-			m_EnableDistortion = false;
-		}
+			if (PKFxSettings.EnableDistortion)
+			{
+				Debug.LogWarning("[PopcornFX] Image effects not supported, distortions disabled.", this);
+				PKFxSettings.EnableDistortion = false;
+			}
 #endif
 			PKFxManager.TimeMultiplier = TimeMultiplier;
 			if (m_UseSceneMesh && m_SceneMesh != null && !PKFxSettings.EnableRaycastForCollisions)

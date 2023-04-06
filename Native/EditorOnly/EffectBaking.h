@@ -101,7 +101,7 @@ public:
 	void				FileChangedRelativePath(const CString &path);
 	void				FileRenamed(const CString &oldPath, const CString &newPath);
 
-	void				Initialize(const char *pKPackPath);
+	void				Initialize(const char *pKPackPath, const char* targetPlatformName, u32 qualitySettingsCount);
 	void				Clear();
 
 	void				Lock();
@@ -115,7 +115,11 @@ public:
 	void				ReimportAssets(TArray<CString> &paths);
 	void				GetAllAssetPath();
 	bool				BakeAssetOrAddToRetryStack(SAssetChange &path);
-	bool				BakeAsset(const CString &path, bool bakeDependencies);
+	bool				BakeAsset(const CString& path, bool bakeDependencies, bool isThumbnail = false);
+
+	bool				SetTargetPlatform(const CString &platform, u32 qualityLevelCount, bool reload = false);
+	CString				GetTargetPlatform() const;
+	void				UpdateCookeryConfigFile();
 
 	static void			OutputBakedResourceInCache(const CString path, TStaticCountedArray<CString, 4> &outputs);
 
@@ -127,17 +131,21 @@ private:
 	TArray<SAssetChange>		m_ToProcess;
 	TArray<SAssetChange>		m_ToBake;
 	CString						m_PKPackPath;
+	CString						m_PlatformName;
+	u32							m_QualitySettingCount = 0;
 	PFilePack					m_PKSourcePack;
 	PProjectSettings			m_ProjectSettings;
 	CTimer						m_Timer;
 
 	SBakeContext				m_BakeContext;
+	TArray<PopcornFX::CString>	m_TargetBuildVersions;
 
 	Threads::CCriticalSection	m_Lock;
 
 	COvenBakeConfig_Particle	*m_BakeConfigParticle;
 
 	bool						m_ForceDeterminism = false;
+	bool						m_BakeForStandalone = false;
 };
 PK_DECLARE_REFPTRCLASS(EffectBaker);
 

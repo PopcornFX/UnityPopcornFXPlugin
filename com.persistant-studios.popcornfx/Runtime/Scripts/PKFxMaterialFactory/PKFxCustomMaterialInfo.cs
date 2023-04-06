@@ -13,9 +13,9 @@ namespace PopcornFX
 	[Serializable]
 	public class PKFxCustomMaterialInfo : PKFxShaderInputBindings
 	{
-		public string m_AssetVirtualPath;
-		public string m_BatchDescName;
-		public int m_InternalId;
+		public string	m_AssetVirtualPath;
+		public string	m_BatchDescName;
+		public int		m_UID;
 		public Material m_CustomMaterial;
 	}
 }

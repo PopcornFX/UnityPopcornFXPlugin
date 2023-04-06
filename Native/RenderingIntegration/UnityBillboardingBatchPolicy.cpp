@@ -6,9 +6,11 @@
 #include "RuntimeManager.h"
 #include "UnityBillboardingBatchPolicy.h"
 #include "UnityRenderDataFactory.h"
+#include "NativeToManaged.h"
 #include <pk_render_helpers/include/render_features/rh_features_basic.h>
 #include <pk_render_helpers/include/render_features/rh_features_vat_static.h>
 #include <pk_render_helpers/include/render_features/rh_features_vat_skeletal.h>
+
 
 __PK_API_BEGIN
 //----------------------------------------------------------------------------
@@ -115,7 +117,10 @@ void	CUnityBillboardingBatchPolicy::CustomStepFlagInactive()
 	if (m_ParticleCount == 0 && m_PrevParticleCount != 0)
 	{
 		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
-			manager.OnSetRendererActive(m_UnityMeshInfoPerViews[i].m_RendererGUID, ManagedBool_False);
+		{
+			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
+				manager.OnSetRendererActive(m_UnityMeshInfoPerViews[i].m_RendererGUID, ManagedBool_False);
+		}
 	}
 }
 
@@ -140,8 +145,9 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 		m_RendererType = rendererCache->m_RendererType;
 		m_MaterialDescBillboard = rendererCache->m_MaterialDescBillboard;
 		m_MaterialDescMesh = rendererCache->m_MaterialDescMesh;
-
-		u32 viewCount = m_RendererType == Renderer_Mesh ? 1 : views.Count();
+		u32 viewCount = 1;
+		if (m_RendererType != Renderer_Mesh && m_RendererType != Renderer_Light)
+			viewCount = views.Count();
 
 		PK_ASSERT(viewCount > 0);
 		if (!PK_VERIFY(m_Exec_SAO2AOS.Resize(viewCount)) ||
@@ -508,7 +514,6 @@ bool	CUnityBillboardingBatchPolicy::UnmapBuffers(SUnityRenderContext &ctx)
 				ctx.m_RenderApiData->EndModifyNativeBuffer(m_UnityMeshInfoPerViews[i].m_VBHandler, false);
 			}
 		}
-			
 
 		if (!m_GPUBillboarding)
 		{
@@ -561,7 +566,114 @@ bool	CUnityBillboardingBatchPolicy::AreBillboardingBatchable(const PCRendererCac
 
 bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const SDrawCallDesc &toEmit, SUnityDrawOutputs &output)
 {
-	(void)ctx; (void)toEmit; (void)output;
+	if (toEmit.m_Renderer == Renderer_Light)
+	{
+		m_LightDatas.Clear();
+		for (u32 i = 0; i < toEmit.m_DrawRequests.Count(); ++i)
+		{
+			const Drawers::SLight_DrawRequest *lightRequest = static_cast<const Drawers::SLight_DrawRequest *>(toEmit.m_DrawRequests[i]);
+			if (lightRequest != null)
+			{
+				CUnityRendererCache *matCache = static_cast<CUnityRendererCache *>(toEmit.m_RendererCaches[i].Get());
+				if (!PK_VERIFY(matCache != null))
+					return true;
+				_UpdateThread_IssueDrawCallLight(lightRequest, matCache);
+			}
+		}
+	}
+	(void)ctx; (void)output;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallLight(const Drawers::SLight_DrawRequest *lightRequest, CUnityRendererCache *rdrCache)
+{
+	(void)rdrCache;
+
+	const u32		totalParticleCount = lightRequest->RenderedParticleCount();
+
+	PK_ASSERT(!lightRequest->Empty());
+	PK_ASSERT(totalParticleCount > 0);
+
+	if (!m_LightDatas.Reserve(totalParticleCount))
+	{
+		PK_ASSERT_NOT_REACHED();
+		return false;
+	}
+	//CParticleMaterialDescMesh &matDesc = rdrCache->m_MaterialDescLight // If needed ?;
+
+	const PopcornFX::Drawers::SLight_BillboardingRequest &bbRequest = static_cast<const PopcornFX::Drawers::SLight_BillboardingRequest &>(lightRequest->BaseBillboardingRequest());
+	if (lightRequest->StorageClass() != PopcornFX::CParticleStorageManager_MainMemory::DefaultStorageClass())
+	{
+		PK_ASSERT_NOT_REACHED();
+		return false;
+	}
+
+	PK_TODO("renderManager->CullTest");
+
+	const PopcornFX::CParticleStreamToRender_MainMemory *lockedStream = lightRequest->StreamToRender_MainMemory();
+	if (!PK_VERIFY(lockedStream != null)) // Light particles shouldn't handle GPU streams for now
+		return true;
+
+	const PopcornFX::CGuid	volScatteringIntensityStreamId = bbRequest.StreamId(PopcornFX::CStringId("AffectsVolumetricFog.VolumetricScatteringIntensity")); // tmp
+
+	static const float		kMinLightSize = 1e-3f;
+
+	static const float		kLightRadiusMultiplier = 1.0f;
+
+	const u32	pageCount = lockedStream->PageCount();
+	for (u32 pagei = 0; pagei < pageCount; ++pagei)
+	{
+		const PopcornFX::CParticlePageToRender_MainMemory *page = lockedStream->Page(pagei);
+		PK_ASSERT(page != null);
+		const u32	pcount = page == null ? 0 : page->InputParticleCount();
+		if (pcount == 0)
+			continue;
+
+		// Position
+		TStridedMemoryView<const CFloat3>	positions = page->StreamForReading<CFloat3>(bbRequest.m_PositionStreamId);
+		PK_ASSERT(positions.Count() == pcount);
+
+		// Radius
+		TStridedMemoryView<const float>		sizes;
+		PK_ALIGN(0x10) float				defaultSize = 0.0f;
+		if (PK_VERIFY(bbRequest.m_RangeStreamId.Valid()))
+			sizes = page->StreamForReading<float>(bbRequest.m_RangeStreamId);
+		else
+			sizes = TStridedMemoryView<const float>(&defaultSize, pcount, 0);
+
+		// Color
+		TStridedMemoryView<const CFloat3>	colors(&CFloat3::ONE, pcount, 0);
+		if (bbRequest.m_ColorStreamId.Valid())
+			colors = TStridedMemoryView<const CFloat3>::Reinterpret(page->StreamForReading<CFloat4>(bbRequest.m_ColorStreamId));
+
+		if (!PK_VERIFY(!positions.Empty()) ||
+			!PK_VERIFY(!sizes.Empty()) ||
+			!PK_VERIFY(!colors.Empty()))
+			continue;
+
+		const u8						enabledTrue = u8(-1);
+		TStridedMemoryView<const u8>	enabledParticles = (bbRequest.m_EnabledStreamId.Valid()) ? page->StreamForReading<bool>(bbRequest.m_EnabledStreamId) : TStridedMemoryView<const u8>(&enabledTrue, pcount, 0);
+
+		for (u32 parti = 0; parti < pcount; ++parti)
+		{
+			if (!enabledParticles[parti])
+				continue;
+
+			const float					radius = sizes[parti] * kLightRadiusMultiplier;
+			if (radius < kMinLightSize)
+				continue;
+
+			PopcornFX::CGuid			ldatai = m_LightDatas.PushBack();
+			SLightInfo					&lightdata = m_LightDatas[ldatai];
+
+			lightdata.m_Position = positions[parti];
+			lightdata.m_Color = CFloat4(colors[parti].Normalized(), 1.0f);
+			lightdata.m_Range = radius;
+			lightdata.m_Intensity = colors[parti].Length();
+		}
+	}
+
+	::OnSetLightsBuffer(m_LightDatas.RawDataPointer(), totalParticleCount);
 	return true;
 }
 
@@ -576,33 +688,39 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMesh(const SBuffers
 	{
 		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
 		{
-			SRetrieveRendererInfo	rendererInfo;
+			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
+			{
+				SRetrieveRendererInfo	rendererInfo;
 
-			rendererInfo.m_VBHandler = &m_UnityMeshInfoPerViews[i].m_VBHandler.m_Buffer->m_DeviceLocal;
-			rendererInfo.m_IBHandler = &m_UnityMeshInfoPerViews[i].m_IBHandler.m_Buffer->m_DeviceLocal;
-			rendererInfo.m_VertexBufferSize = &m_UnityMeshInfo.m_VBElemCount;
-			rendererInfo.m_IndexBufferSize = &m_UnityMeshInfo.m_IBElemCount;
-			rendererInfo.m_IsIndex32 = &m_UnityMeshInfo.m_LargeIndices;
+				rendererInfo.m_VBHandler = &m_UnityMeshInfoPerViews[i].m_VBHandler.m_Buffer->m_DeviceLocal;
+				rendererInfo.m_IBHandler = &m_UnityMeshInfoPerViews[i].m_IBHandler.m_Buffer->m_DeviceLocal;
+				rendererInfo.m_VertexBufferSize = &m_UnityMeshInfo.m_VBElemCount;
+				rendererInfo.m_IndexBufferSize = &m_UnityMeshInfo.m_IBElemCount;
+				rendererInfo.m_IsIndex32 = &m_UnityMeshInfo.m_LargeIndices;
 
-			rendererInfo.m_InfoBSize = &m_UnityMeshInfo.m_InfoSize;
-			rendererInfo.m_InfoBHandler = &m_UnityMeshInfoPerViews[i].m_InfoHandler.m_Buffer->m_DeviceLocal;
-			rendererInfo.m_AtlasesBSize = &m_UnityMeshInfo.m_AtlasesSize;
-			rendererInfo.m_AtlasesBHandler = &m_UnityMeshInfoPerViews[i].m_AtlasesHandler.m_Buffer->m_DeviceLocal;
+				rendererInfo.m_InfoBSize = &m_UnityMeshInfo.m_InfoSize;
+				rendererInfo.m_InfoBHandler = &m_UnityMeshInfoPerViews[i].m_InfoHandler.m_Buffer->m_DeviceLocal;
+				rendererInfo.m_AtlasesBSize = &m_UnityMeshInfo.m_AtlasesSize;
+				rendererInfo.m_AtlasesBHandler = &m_UnityMeshInfoPerViews[i].m_AtlasesHandler.m_Buffer->m_DeviceLocal;
 
-			rendererInfo.m_IndirectArgsBHandler = &m_UnityMeshInfoPerViews[i].m_IndirectArgsHandler.m_Buffer->m_DeviceLocal;
-			rendererInfo.m_IndirectArgsParticleCountMultiplier = &m_UnityMeshInfo.m_IndirectArgsParticleCountMultiplier;
+				rendererInfo.m_IndirectArgsBHandler = &m_UnityMeshInfoPerViews[i].m_IndirectArgsHandler.m_Buffer->m_DeviceLocal;
+				rendererInfo.m_IndirectArgsParticleCountMultiplier = &m_UnityMeshInfo.m_IndirectArgsParticleCountMultiplier;
 
-			// Only checked at creation of renderer cache:
-			rendererInfo.m_UseComputeBuffers = null;
-			rendererInfo.m_HasCustomMaterial = null;
-			m_MeshIsValid = manager.OnResizeRenderer(m_UnityMeshInfoPerViews[i].m_RendererGUID, m_ParticleCount, m_VertexCount, m_IndexCount, &rendererInfo, &m_MeshIsValid);
+				// Only checked at creation of renderer cache:
+				rendererInfo.m_UseComputeBuffers = null;
+				rendererInfo.m_HasCustomMaterial = null;
+				m_MeshIsValid = manager.OnResizeRenderer(m_UnityMeshInfoPerViews[i].m_RendererGUID, m_ParticleCount, m_VertexCount, m_IndexCount, &rendererInfo, &m_MeshIsValid);
+			}
+			else
+				m_MeshIsValid = false;
 		}
 	}
 	else if (m_GPUBillboarding)
 	{
 		if (CCurrentThread::IsMainThread())
 		{
-			::OnSetParticleCount(m_UnityMeshInfoPerViews[0].m_RendererGUID, m_ParticleCount);
+			if (PK_VERIFY(m_UnityMeshInfoPerViews[0].m_RendererGUID != -1))
+				::OnSetParticleCount(m_UnityMeshInfoPerViews[0].m_RendererGUID, m_ParticleCount);
 		}
 		else // is render thread
 		{
@@ -623,14 +741,19 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMesh(const SBuffers
 	if (m_PrevParticleCount == 0 && m_ParticleCount != 0)
 	{
 		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
-			manager.OnSetRendererActive(m_UnityMeshInfoPerViews[i].m_RendererGUID, ManagedBool_True);
+		{
+			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
+				manager.OnSetRendererActive(m_UnityMeshInfoPerViews[i].m_RendererGUID, ManagedBool_True);
+		}
+		
 	}
 }
 
 void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers)
 {
 	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
-	if (m_RendererType == Renderer_Mesh)
+	// No need to update the bounds for the light: Unity handle them itself
+	if (m_RendererType == Renderer_Mesh || m_RendererType == Renderer_Light)
 		return;
 
 	CAABB	bbox = CAABB::DEGENERATED;
@@ -649,7 +772,10 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 		bounds.m_Min = CFloat3::ZERO;
 		bounds.m_Max = CFloat3::ZERO;
 		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
-			manager.OnUpdateRendererBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, &bounds);
+		{
+			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
+				manager.OnUpdateRendererBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, &bounds);
+		}
 		
 		m_BBox = CAABB::ZERO;
 	}
@@ -659,8 +785,11 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 
 		bounds.m_Min = bbox.Min();
 		bounds.m_Max = bbox.Max();
-		for (u32 i = 0 ; i < m_UnityMeshInfoPerViews.Count(); ++i)
-			manager.OnUpdateRendererBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, &bounds);
+		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
+		{
+			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
+				manager.OnUpdateRendererBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, &bounds);
+		}
 		m_BBox = bbox;
 	}
 }
@@ -728,10 +857,12 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 	if (m_UseSkeletalAnimInterpolTracksData)
 		perMeshDataSize += sizeof(CUint3);
 
-	int	rdrGUID = m_UnityMeshInfoPerViews[0].m_RendererGUID;
+	const int	rdrGUID = m_UnityMeshInfoPerViews[0].m_RendererGUID;
+	if (!PK_VERIFY(rdrGUID != -1))
+		return;
 
-	u32			overEstimatedInstanceCount = Mem::Align(allocBuffers.m_TotalParticleCount, 0x100);
-	u32			buffSize = overEstimatedInstanceCount * perMeshDataSize;
+	const u32	overEstimatedInstanceCount = Mem::Align(allocBuffers.m_TotalParticleCount, 0x100);
+	const u32	buffSize = overEstimatedInstanceCount * perMeshDataSize;
 
 	if (m_MeshBillboardingBuffer == null || m_MeshBillboardingBuffer->DataSizeInBytes() < buffSize)
 		m_MeshBillboardingBuffer = CRefCountedMemoryBuffer::AllocAligned(buffSize, 0x10);
@@ -808,9 +939,15 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 	if (m_PrevParticleCount == 0 && m_ParticleCount != 0)
 	{
 		CRuntimeManager	&manager = CRuntimeManager::Instance();
-		manager.OnSetRendererActive(m_UnityMeshInfoPerViews[0].m_RendererGUID, ManagedBool_True);
+
+		if (PK_VERIFY(m_UnityMeshInfoPerViews[0].m_RendererGUID != -1))
+		{
+			manager.OnSetRendererActive(m_UnityMeshInfoPerViews[0].m_RendererGUID, ManagedBool_True);
+		}
 	}
 }
+
+//----------------------------------------------------------------------------
 
 bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocPerViewGeomBuffers(const SGeneratedInputs &genInputs, IRenderAPIData *renderApiData)
 {

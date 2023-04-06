@@ -129,11 +129,18 @@ public:
 	const TArray<float*>				*GetSpectrum(CStringId name) const;
 	IFileSystem							*GetFileSystem() const;
 
+	u32									GetCurrentQualityLevel() const;
+	const CString						GetCurrentQualityLevelName() const;
+	void								SetCurrentQualityLevel(const char *qualityLvl);
+	u32									GetQualityLevelCount() const { return m_QualityLevelNames.Count(); } 
+	const CString						&GetQualityLevel(u32 idx) const { PK_ASSERT(idx < m_QualityLevelNames.Count()); return m_QualityLevelNames[idx]; }
+	const TArray<CString>				&GetQualityLevels() const { return m_QualityLevelNames; }
+	void								SetQualityLevelSettings(const char **qualityLevelNames, unsigned int qualityLevelCount, unsigned int current);
+
+	bool								IsUnloading() { return m_Unloading; }
 #if	(PK_PARTICLES_HAS_STATS != 0)
 	CLiveProfiler						&GetProfiler() { return m_Profiler; }
 #endif
-
-	bool								IsUnloading() const { return m_Unloading; }
 
 	bool								LoadPack();
 
@@ -152,7 +159,7 @@ public:
 	void								SceneMeshClear();
 
 	// CAN BE DELAYED: Managed to native
-	void								PreloadFxIFN(const char *fxPath, bool usesMeshRenderer);
+	void								PreloadFxIFN(const char *fxPath, bool requiresGameThreadCollect);
 	bool								StartFx(int guid, float dt, float prewarm = 0.0f);
 	bool								TerminateFx(int guid);
 	bool								StopFx(int guid);
@@ -200,7 +207,7 @@ public:
 		return true;
 	}
 
-	bool							KickBackgroundTasksIFN();
+	bool								KickBackgroundTasksIFN();
 
 	struct	SPopcornFXRuntimeData
 	{
@@ -217,6 +224,7 @@ public:
 #endif
 
 		bool								m_GPUBillboarding;
+		bool								m_LightRenderer;
 	};
 
 	SPopcornFXRuntimeData				*m_PopcornFXRuntimeData;
@@ -274,7 +282,7 @@ private:
 #endif
 
 	// Managed to native delayed calls:
-	void										_ExecPreloadFxIFN(const char *fxPath, bool usesMeshRenderer);
+	void										_ExecPreloadFxIFN(const char *fxPath, bool requiresGameThreadCollect);
 	bool										_ExecStartFx(int guid, float delay = 0.0f, float prewarm = 0.0f);
 	bool										_ExecTerminateFx(int guid);
 	bool										_ExecStopFx(int guid);
@@ -306,6 +314,9 @@ private:
 	TArray<SOnSetRendererActive>				m_GameThread_OnSetRendererActive;
 	TArray<SOnUpdateRendererBounds>				m_GameThread_OnUpdateRendererBounds;
 	TArray<SOnFxStopped>						m_GameThread_OnFxStopped;
+
+	u32											m_CurrentQualityLevel = 0;
+	TArray<CString>								m_QualityLevelNames;
 
 	// We keep a job pool here to set the samplers in asynchronous tasks:
 	class	CBackgroundTask : public CAsynchronousPooledJob

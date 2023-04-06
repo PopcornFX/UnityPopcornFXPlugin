@@ -334,6 +334,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHITypePolicy.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.h" />
@@ -400,6 +401,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIParticleRenderDataFactory.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.cpp" />

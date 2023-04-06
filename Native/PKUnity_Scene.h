@@ -84,7 +84,7 @@ public:
 	const TArray<SUnitySceneView>	&SceneViews() const { return this->m_SceneViews; };
 	TArray<SUnitySceneView>&		SceneViewsForUpdate()  { return this->m_SceneViews; };
 	EUpdateMode						UpdateMode() const { return m_UpdateMode; }
-	CParticleMediumCollection		*GetParticleMediumCollection(bool useMeshRenderer) const;
+	CParticleMediumCollection		*GetParticleMediumCollection(bool requiresGameThreadCollect) const;
 
 	// Setup medium collection
 	bool						InitializeInstanceIFN(const SPopcornFxSettings *settings);
@@ -286,9 +286,9 @@ private:
 	// For regular particles:
 	CParticleMediumCollection					*m_ParticleMediumCollection;
 	CUnityFrameCollector						*m_ParticleFrameCollector;
-	// For mesh particles when the wait on render thread option is enabled:
-	CParticleMediumCollection					*m_ParticleMeshMediumCollection;
-	CUnityFrameCollector						*m_ParticleMeshFrameCollector;
+	// For mesh/Light particles when the wait on render thread option is enabled:
+	CParticleMediumCollection					*m_GameThreadMediumCollection;
+	CUnityFrameCollector						*m_GameThreadFrameCollector;
 
 	EUpdateMode									m_UpdateMode;
 

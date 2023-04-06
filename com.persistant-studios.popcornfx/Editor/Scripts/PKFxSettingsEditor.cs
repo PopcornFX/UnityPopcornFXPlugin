@@ -6,6 +6,7 @@ using UnityEditor;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using UnityEditor.Build.Reporting;
 
 namespace PopcornFX
 {
@@ -32,12 +33,19 @@ namespace PopcornFX
 		GUIContent enableUnityConsoleLog = new GUIContent(" Enable PopcornFX Unity console logs");
 		GUIContent enableFileLog = new GUIContent(" Enable PopcornFX file logs");
 		GUIContent useAudioLoopback = new GUIContent(" Enable PopcornFX application audio loopback");
+		GUIContent useThumbnailsInBuilds = new GUIContent(" Use effects thumbnails in builds");
+		GUIContent useAnimatedThumbnailsInBuilds = new GUIContent(" Use effects animated thumbnails in builds");
 		GUIContent enableRaycastForCollisionsLabel = new GUIContent(" Enable raycast for collisions");
 		GUIContent splitDrawCallsOfSoubleSidedParticlesLabel = new GUIContent(" Split the draw calls of the particles that require disabling the back-face culling");
 		GUIContent disableDynamicEffectBoundsLabel = new GUIContent(" Disable dynamic effect bounds");
 		GUIContent materialFactoryLabel = new GUIContent(" Material Factory");
 		GUIContent useHashAsMaterialNameLabel = new GUIContent(" Use hashes as material name");
 		GUIContent manualCameraLayerLabel = new GUIContent(" Manual control of rendering layers");
+		GUIContent reimportMaterialsTriggeredByAction = new GUIContent("Warning, this action will delete all existing generated materials and recreate them. \nContinue ?");
+		GUIContent reimportAssetsTriggeredByAction = new GUIContent("Warning, this action will reimport all existing assets and recreate them. \nContinue ?");
+		GUIContent PlatformVersionLabel = new GUIContent(" Enable asset version on standalone builds");
+		GUIContent PlatformPopupLabel = new GUIContent("Current Platform: ");
+		GUIContent reimportAllEffectDialogMessageLabel = new GUIContent("Warning, this action will reimport all existing effects. \nContinue ?");
 		GUIContent useHashAsMaterialNameDialogMessageLabel = new GUIContent("Warning, this action will delete all existing generated materials and recreate them. \nContinue ?");
 
 		GUIContent enableLocalizedPages = new GUIContent(" Enable Localized Pages");
@@ -49,12 +57,13 @@ namespace PopcornFX
 		GUIContent frameCountBeforeFreeUnusedBactchesLabel = new GUIContent(" Frame count before freeing unused batches");
 
 #if UNITY_2017 || UNITY_2018
-	GUIContent useGPUBillboarding = new GUIContent(" Enable GPU Billboarding -- Not compatible with your Unity version --");
+		GUIContent useGPUBillboarding = new GUIContent(" Enable GPU Billboarding -- Not compatible with your Unity version --");
 #else
 		GUIContent useGPUBillboarding = new GUIContent(" Enable GPU Billboarding (experimental)");
 #endif
 
 		GUIContent useMeshInstancingLabel = new GUIContent(" Enable Mesh Instancing (per instance color in not supported by URP/HDRP yet)");
+		GUIContent enablePopcornFXLightsLabel = new GUIContent(" Enable Light from PopcornFX Effects");
 
 		GUIContent singleThreadedExecLabel = new GUIContent(" Run PopcornFX on a single thread to avoid visual studio hangs");
 		GUIContent splitUpdateInComponentsLabel = new GUIContent(" Splits the update in 3 components");
@@ -256,9 +265,43 @@ namespace PopcornFX
 					EditorGUILayout.EndVertical();
 				}
 			}
-
+			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(PKFxSettings.QualityCategory, "Quality Settings")))
+			{
+				PKFxSettings.QualityCategory = category.IsExpanded();
+				if (category.IsExpanded())
+				{
+					if (GUILayout.Button("Update Quality level settings"))
+					{
+						PKFxManager.SetQualityLevelSettings();
+					}
+					EditorGUILayout.LabelField("Current Quality Level:\t\t" + PKFxSettings.CurrentQualityVersionName);
+					EditorGUILayout.LabelField("Stored Unity quality levels:\t" + string.Join(":", PKFxSettings.QualityVersionNames));
+				}
+			}
 			if (GUI.changed)
 				EditorUtility.SetDirty(settings);
+		}
+
+		bool _displaySupportedPlatform(Enum v)
+		{
+			BuildTarget value = (BuildTarget)v;
+			if (value == BuildTarget.NoTarget ||
+				value == BuildTarget.iOS ||
+				value == BuildTarget.Android ||
+				value == BuildTarget.PS4 ||
+				value == BuildTarget.PS5 ||
+				value == BuildTarget.StandaloneWindows ||
+				value == BuildTarget.StandaloneWindows64 ||
+				value == BuildTarget.StandaloneOSX ||
+				value == BuildTarget.StandaloneLinux64 ||
+				value == BuildTarget.Switch ||
+				value == BuildTarget.XboxOne ||
+				value == BuildTarget.GameCoreXboxOne ||
+				value == BuildTarget.GameCoreXboxSeries)
+			{
+				return true;
+			}
+			return false;
 		}
 
 		private void DisplayGeneralCategory(PKFxEditorCategory category)
@@ -365,7 +408,7 @@ namespace PopcornFX
 						{
 							if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetProjetAssetPath())
 							{
-								PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
+								PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList, PKFxSettings.CurrentPlatformName);
 							}
 						};
 					}
@@ -376,7 +419,7 @@ namespace PopcornFX
 						{
 							if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetAllAssetPath())
 							{
-								PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
+								PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList, PKFxSettings.CurrentPlatformName);
 							}
 						};
 					}
@@ -395,10 +438,39 @@ namespace PopcornFX
 			PKFxSettings.EnableForceDeterminism = EditorGUILayout.ToggleLeft(forceDeterminismLabel, PKFxSettings.EnableForceDeterminism);
 			PKFxSettings.EnablePopcornFXLogs = EditorGUILayout.ToggleLeft(enableUnityConsoleLog, PKFxSettings.EnablePopcornFXLogs);
 			PKFxSettings.EnableFileLogs = EditorGUILayout.ToggleLeft(enableFileLog, PKFxSettings.EnableFileLogs);
+			PKFxSettings.UseApplicationAudioLoopback = EditorGUILayout.ToggleLeft(useAudioLoopback, PKFxSettings.UseApplicationAudioLoopback);
+			PKFxSettings.UseThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useThumbnailsInBuilds, PKFxSettings.UseThumbnailsInBuilds);
+			PKFxSettings.UseAnimatedThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useAnimatedThumbnailsInBuilds, PKFxSettings.UseAnimatedThumbnailsInBuilds);
 
 			EditorGUILayout.BeginHorizontal();
-			PKFxSettings.UseApplicationAudioLoopback = EditorGUILayout.ToggleLeft(useAudioLoopback, PKFxSettings.UseApplicationAudioLoopback);
+			bool enableAssetPlatformVersion = EditorGUILayout.ToggleLeft(PlatformVersionLabel, PKFxSettings.EnableAssetPlatformVersion);
 			EditorGUILayout.EndHorizontal();
+
+			if (enableAssetPlatformVersion != PKFxSettings.EnableAssetPlatformVersion)
+			{
+				PKFxSettings.EnableAssetPlatformVersion = enableAssetPlatformVersion;
+				if (!PKFxSettings.EnableAssetPlatformVersion && PKFxSettings.CurrentPlatform != BuildTarget.NoTarget)
+				{
+					PKFxSettings.CurrentPlatform = BuildTarget.NoTarget;
+					PKFxManager.SetTargetPlatformForAssets(PKFxSettings.CurrentPlatformName);
+
+				}
+			}
+			if (PKFxSettings.EnableAssetPlatformVersion)
+			{
+				using (new EditorGUI.DisabledScope(Application.isPlaying))
+				{
+					BuildTarget target = (BuildTarget)EditorGUILayout.EnumPopup(PlatformPopupLabel, PKFxSettings.CurrentPlatform, _displaySupportedPlatform, false);
+					if (target != PKFxSettings.CurrentPlatform)
+					{
+						if (EditorUtility.DisplayDialog("Reimport All ?", reimportAllEffectDialogMessageLabel.text, "Yes", "No"))
+						{
+							PKFxSettings.CurrentPlatform = target;
+							PKFxManager.SetTargetPlatformForAssets(PKFxSettings.CurrentPlatformName);
+						}
+					}
+				}
+			}
 		}
 
 		private void DisplayRenderingCategory(PKFxEditorCategory category)
@@ -422,7 +494,7 @@ namespace PopcornFX
 			{
 				category.EndCb = () =>
 				{
-					if (EditorUtility.DisplayDialog(useHashAsMaterialNameLabel.text, useHashAsMaterialNameDialogMessageLabel.text, "Yes", "No"))
+					if (EditorUtility.DisplayDialog(useHashAsMaterialNameLabel.text, reimportMaterialsTriggeredByAction.text, "Yes", "No"))
 					{
 						PKFxSettings.UseHashesAsMaterialName = value;
 
@@ -450,7 +522,7 @@ namespace PopcornFX
 			{
 				category.EndCb = () =>
 				{
-					if (EditorUtility.DisplayDialog(useHashAsMaterialNameLabel.text, useHashAsMaterialNameDialogMessageLabel.text, "Yes", "No"))
+					if (EditorUtility.DisplayDialog(useHashAsMaterialNameLabel.text, reimportMaterialsTriggeredByAction.text, "Yes", "No"))
 					{
 						PKFxSettings.UseGPUBillboarding = GPUvalue;
 
@@ -464,6 +536,29 @@ namespace PopcornFX
 			PKFxSettings.EnableLocalizedPages = EditorGUILayout.ToggleLeft(enableLocalizedPages, PKFxSettings.EnableLocalizedPages);
 			PKFxSettings.EnableLocalizedByDefault = EditorGUILayout.ToggleLeft(enableLocalizedPagesByDefault, PKFxSettings.EnableLocalizedByDefault);
 			PKFxSettings.UpdateSimManually = EditorGUILayout.ToggleLeft(updateSimManually, PKFxSettings.UpdateSimManually);
+			
+			value = EditorGUILayout.ToggleLeft(enablePopcornFXLightsLabel, PKFxSettings.EnablePopcornFXLight);
+			if (PKFxSettings.EnablePopcornFXLight != value)
+			{
+				category.EndCb = () =>
+				{
+					if (EditorUtility.DisplayDialog(enablePopcornFXLightsLabel.text, reimportAssetsTriggeredByAction.text, "Yes", "No"))
+					{
+						PKFxSettings.EnablePopcornFXLight = value;
+						PKFxManager.SetupPopcornFxSettings(false);
+						if (PKFxSettings.UnityPackFxPath.Length != 0 && PKFxSettings.GetProjetAssetPath())
+							PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList, PKFxSettings.CurrentPlatformName);
+						if (AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
+							AssetDatabase.DeleteAsset("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials");
+						PKFxMenus.CreatePKFxFXMaterialsIFN();
+					}
+				};
+			}
+			if (PKFxSettings.EnablePopcornFXLight)
+			{
+				PKFxSettings.MaxPopcornFXLights = EditorGUILayout.IntSlider(PKFxSettings.MaxPopcornFXLights, 0, 256);
+			}
+
 			PKFxSettings.FreeUnusedBatches = EditorGUILayout.ToggleLeft(freeUnusedBactchesLabel, PKFxSettings.FreeUnusedBatches);
 			using (new EditorGUI.DisabledScope(!PKFxSettings.FreeUnusedBatches))
 			{

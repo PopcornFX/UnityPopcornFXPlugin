@@ -56,6 +56,7 @@ namespace PopcornFX
 			return false;
 		}
 
+
 		//----------------------------------------------------------------------------
 
 		static void Update()
@@ -68,47 +69,7 @@ namespace PopcornFX
 					return;
 			}
 
-			PKFxManager.LockPackWatcherChanges();
-
-			int totalChanges = 0;
-			int remainingChanges = 0;
-			bool unstackChangesSuccess = true;
-			List<string> updatedAssets = null;
-
-			try // Need try catch to avoid dead lock!
-			{
-				unstackChangesSuccess = PKFxManager.PullPackWatcherChanges(out totalChanges);
-
-				if (totalChanges > 0)
-					updatedAssets = new List<string>(totalChanges);
-				remainingChanges = totalChanges;
-				while (remainingChanges > 0 && unstackChangesSuccess)
-				{
-					unstackChangesSuccess = PKFxManager.PullPackWatcherChanges(out remainingChanges);
-
-					if (!updatedAssets.Contains(PKFxManager.GetImportedAssetPath()))
-						updatedAssets.Add(PKFxManager.GetImportedAssetPath());
-					if (EditorUtility.DisplayCancelableProgressBar("Baking and importing PopcornFX effects",
-																	"Importing \'" + PKFxManager.GetImportedAssetName() + "\' and its dependencies.",
-																	(float)(totalChanges - remainingChanges) / (float)totalChanges))
-					{
-						remainingChanges = 0;
-						PKFxManager.CancelPackWatcherChanges();
-					}
-				}
-
-				EditorUtility.ClearProgressBar();
-
-				if (unstackChangesSuccess == false)
-					Debug.LogWarning("[PopcornFX] PackWatcher Unstack issue");
-
-			}
-			catch (Exception e)
-			{
-				Debug.LogError("Error in effect importer: " + e.Message);
-			}
-
-			PKFxManager.UnlockPackWatcherChanges();
+			List<string> updatedAssets = PKFxManager.PullEffectChangeIFN();
 
 			// Restart effects from the previous update:
 			foreach (PKFxEmitter effect in m_FxsToRestart)

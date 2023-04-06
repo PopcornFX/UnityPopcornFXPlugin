@@ -385,7 +385,7 @@ namespace PopcornFX
 				if (GUILayout.Button("Import Selected", style))
 				{
 					List<string> path = m_FxTreeView.GetSelectedAssetPath();
-					PKFxSettings.ReimportAssets(path);
+					PKFxSettings.ReimportAssets(path, PKFxSettings.CurrentPlatformName);
 					Close();
 				}
 			}

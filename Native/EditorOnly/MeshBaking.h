@@ -22,7 +22,7 @@ public:
 	bool				NextSubmesh(const CString &name, int vertexAttributes);
 	bool				AppendMeshToBake(SMeshDataToFill *meshToBake, const CFloat4x4 &meshTransform); // transfer ownership of meshToBake pointer
 	bool				BakeToFile(const char *outputMeshPath);
-	bool				SavePkmm(const CString &pkmmVirtualPath, PFilePack pack = null);
+	bool				SavePkmm(const CString &pkmmVirtualPath);
 
 private:
 	bool				_AddSubmeshIFP();

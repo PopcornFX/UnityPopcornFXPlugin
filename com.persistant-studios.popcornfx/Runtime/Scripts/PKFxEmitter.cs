@@ -223,10 +223,10 @@ namespace PopcornFX
 				m_AskedToStart = true;
 				return;
 			}
-
+			if (m_FxAsset == null)
+				return;
 			// instantiate the FX IFN:
 			InstantiateIFN();
-
 			if (m_FXGUID == -1)
 			{
 				Debug.LogWarning("[PopcornFX] Could not start effect as the effect was not instantiated", this);

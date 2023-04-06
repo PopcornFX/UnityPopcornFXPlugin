@@ -170,6 +170,7 @@ GENERATED += $(OBJDIR)/D3D11Context.o
 GENERATED += $(OBJDIR)/D3D12Context.o
 GENERATED += $(OBJDIR)/DebugHelper.o
 GENERATED += $(OBJDIR)/DeferredScene.o
+GENERATED += $(OBJDIR)/DirectionalShadows.o
 GENERATED += $(OBJDIR)/DownSampleTexture.o
 GENERATED += $(OBJDIR)/EGLContext.o
 GENERATED += $(OBJDIR)/EnvironmentMapEntity.o
@@ -232,6 +233,7 @@ OBJECTS += $(OBJDIR)/D3D11Context.o
 OBJECTS += $(OBJDIR)/D3D12Context.o
 OBJECTS += $(OBJDIR)/DebugHelper.o
 OBJECTS += $(OBJDIR)/DeferredScene.o
+OBJECTS += $(OBJDIR)/DirectionalShadows.o
 OBJECTS += $(OBJDIR)/DownSampleTexture.o
 OBJECTS += $(OBJDIR)/EGLContext.o
 OBJECTS += $(OBJDIR)/EnvironmentMapEntity.o
@@ -438,6 +440,9 @@ $(OBJDIR)/RendererCache.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderInteg
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/SoundPoolCache.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderIntegrationRHI/SoundPoolCache.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DirectionalShadows.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/DirectionalShadows.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/DownSampleTexture.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/DownSampleTexture.cpp

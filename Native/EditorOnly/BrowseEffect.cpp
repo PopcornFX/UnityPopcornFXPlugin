@@ -6,11 +6,17 @@
 #include "EditorOnly/BrowseEffect.h"
 
 #include "EditorNativeToManaged.h"
+#include "EditorManager.h"
+#include "EffectBaking.h"
 #include "NativeToManaged.h"
+#include "RuntimeManager.h"
 #include "ResourceHandleDummy.h"
 #include "PKUnity_FileSystemController.h"
+#include "FxEffect.h"
+#include "RuntimeManager.h"
 
-#include <pk_particles/include/ps_descriptor_cache.h>
+#include <pk_particles/include/ps_descriptor_source.h>
+#include <pk_particles/include/ps_nodegraph_frontend.h>
 
 #include <pk_particles/include/ps_resources.h>
 #include <pk_particles/include/ps_event_map.h>
@@ -162,6 +168,7 @@ bool	CEffectBrowser::InitializeIFN()
 	if (m_Initialized)
 		return true;
 
+	ClearForNewEffect();
 	PK_ASSERT(m_BrowseResourceMeshHandler == null);
 	PK_ASSERT(m_BrowseResourceImageHandler == null);
 	PK_ASSERT(m_BrowseResourceVectorFieldHandler == null);
@@ -205,6 +212,7 @@ bool	CEffectBrowser::InitializeIFN()
 
 void	CEffectBrowser::Destroy()
 {
+	ClearForNewEffect();
 	if (m_BrowseResourceManager != null)
 	{
 		if (m_BrowseResourceMeshHandler != null)
@@ -229,8 +237,21 @@ void	CEffectBrowser::Destroy()
 	m_Initialized = false;
 }
 
+void	CEffectBrowser::ClearForNewEffect()
+{
+	m_RendererUIDs.Clear();
+	m_DependenciesUIDs.Clear();
+	m_UniqueRendererCount = 0;
+	m_CurrentQualityLevel = -1;
+}
+
 bool	CEffectBrowser::LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSize, const char *path)
 {
+	ClearForNewEffect();
+
+	CEffectBaker	*effectBaker = CEditorManager::Instance().GetEffectBaker();
+	PFilePack		pKSourcePack = m_BrowseFSController->MountPack(effectBaker->GetPopcornFXPackPath());
+
 	CConstMemoryStream	memStream(pkfxContentPtr, contentByteSize);
 	CStringView			pathView = CStringView(path, SNativeStringUtils::Length(path));
 	PBaseObjectFile		file = m_BrowseContext->LoadFileFromStream_Pure(memStream, pathView, false);
@@ -241,27 +262,56 @@ bool	CEffectBrowser::LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSi
 		return false;
 	}
 
-	PParticleEffect		effect = file->FindFirstOf<CParticleEffect>();
-
-	if (!PK_VERIFY(effect != null))
-	{
-		CLog::Log(PK_ERROR, "Could not find the CParticleEffect object in file for '%s'", path);
-		return false;
-	}
+	SEffectLoadCtl		fxLoadDesc;
+	fxLoadDesc.m_AllowUnbaked = true;
+	fxLoadDesc.m_AllowMismatchingVersions = false;	// Should be upgraded beforehand !
+	fxLoadDesc.m_AllowMismatchingPatches = true;
+	fxLoadDesc.m_AllowMismatchingBuild = true;
+	fxLoadDesc.m_AllowMismatchingCoordSystems = false;
+	fxLoadDesc.m_AutoBuildConnectionMap = false;
+	fxLoadDesc.m_AllowedEffectFileType = SEffectLoadCtl::EffectFileType_Any; // Do not force binary/text files, load any type of effect
 
 	bool	ret = true;
+	bool	requiresGameThreadCollect = false;
 
-	if (!BrowseEffect(effect))
-		ret = false;
+	PParticleEffect		effect = CParticleEffect::Load(file, fxLoadDesc);
+	if (effect == null)
+		return false;
 
-	effect = null;
+	u32		qualityLevelCount = CRuntimeManager::Instance().GetQualityLevelCount();
+	for (u32 i = 0; i < qualityLevelCount; ++i)
+	{
+		Nodegraph::SFrontendBuildOptions	buildOptions;
+
+		m_CurrentQualityLevel = i;
+
+		buildOptions.m_BuildTags.PushBack(CRuntimeManager::Instance().GetQualityLevel(i).Data());
+		Nodegraph::SConnectionMapBuildState	ecmState;
+		CParticleEffect::SBuildConfig		buildConfig;
+		buildConfig.m_SourceBuildOptions = &buildOptions;
+
+		effect->SetBuildConfig(buildConfig);
+		ret = effect->BuildConnectionMapFromSource(ecmState, true);
+
+		if (ret)
+		{
+			effect->SetDefaultConnectionMap(ecmState);
+			ret &= effect->LoadConnectionMap();
+		}
+		if (!BrowseEffect(effect, i == 0, requiresGameThreadCollect))
+			ret = false;
+		if (!ret)
+			break;
+	}
+	::OnGetEffectInfo(requiresGameThreadCollect ? 1 : 0);
 	file->Unload();
+
+	m_BrowseFSController->UnmountPack(pKSourcePack->Path());
 	return ret;
 }
 
-bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect)
+bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect, bool browseAttributes, bool &requiresGameThreadCollect)
 {
-	bool	usesMeshRenderer = false;
 
 	TArray<SResourceDependency>		dependencies;
 	SUnityDependencyAppendHelper	dependenciesAppend(dependencies);
@@ -271,43 +321,44 @@ bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect)
 		return false;
 
 	if (!PK_VERIFY(particleEffect->EventConnectionMap() != null) ||
-		!PK_VERIFY(particleEffect->GatherRuntimeDependencies(FastDelegate<bool(const SResourceDependency &dependency)>(&dependenciesAppend, &SUnityDependencyAppendHelper::Append))))
+		!PK_VERIFY(particleEffect->GatherRuntimeDependencies(FastDelegate<bool(const SResourceDependency & dependency)>(&dependenciesAppend, &SUnityDependencyAppendHelper::Append))))
 	{
 		CLog::Log(PK_WARN, "PopcornFX: Failed to gather dependencies of %s.", particleEffect->File()->Path().Data());
 		return false;
 	}
-	if (!BrowseObjectForDependencies(dependencies, usesMeshRenderer))
+	if (!BrowseObjectForDependencies(dependencies, requiresGameThreadCollect))
 		return false;
 
-	if (!BrowseRenderers(particleEffect.Get()))
+	if (!BrowseRenderers(particleEffect.Get(), requiresGameThreadCollect))
 		return false;
 
 	if (!BrowseExportedEvents(particleEffect.Get()))
 		return false;
 
-	if (PK_VERIFY(particleEffect != null))
+	if (browseAttributes)
 	{
-		const CParticleAttributeList	*allAttribList = particleEffect->AttributeFlatList();
-
-		if (allAttribList != null)
+		if (PK_VERIFY(particleEffect != null))
 		{
-			CParticleAttributeList::_TypeOfAttributeList	attributeList = allAttribList->AttributeList();
-			CParticleAttributeList::_TypeOfSamplerList		samplerList = allAttribList->SamplerList();
-			const TMemoryView<const u32>					attributeRemapIDs = allAttribList->UniqueAttributeIDs();
+			const CParticleAttributeList *allAttribList = particleEffect->AttributeFlatList();
 
-			if (!BrowseAttributes(attributeList, attributeRemapIDs) ||
-				!BrowseSamplers(samplerList))
-				return false;
+			if (allAttribList != null)
+			{
+				CParticleAttributeList::_TypeOfAttributeList	attributeList = allAttribList->AttributeList();
+				CParticleAttributeList::_TypeOfSamplerList		samplerList = allAttribList->SamplerList();
+				const TMemoryView<const u32>					attributeRemapIDs = allAttribList->UniqueAttributeIDs();
+
+				if (!BrowseAttributes(attributeList, attributeRemapIDs) ||
+					!BrowseSamplers(samplerList))
+					return false;
+			}
 		}
 	}
-	::OnGetEffectInfo(usesMeshRenderer ? 1 : 0);
 	return true;
 }
 
-
 //----------------------------------------------------------------------------
 
-bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &usesMeshRenderer)
+bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &requiresGameThreadCollect)
 {
 	const u32	dependencyCount = dependencies.Count();
 
@@ -319,13 +370,17 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 		if (dependency.m_Type == SResourceDependency::Type_Material)
 			continue;
 
+		const u32 UID = ((1 << 16) * dependency.m_Type + CStringId(dependency.m_Path).Id());
+		if (m_DependenciesUIDs.Contains(UID))
+			continue;
+		m_DependenciesUIDs.PushBack(UID);
 		if (dependency.m_Usage & SResourceDependency::UsageFlags_UsedInRender)
 		{
 			u32					dependencyMask = 0;
 			if (dependency.m_Type == SResourceDependency::Type_Mesh)
 			{
 				dependencyMask |= IsMeshRenderer;
-				usesMeshRenderer = true;
+				requiresGameThreadCollect = true;
 			}
 			else if (dependency.m_Type == SResourceDependency::Type_Image)
 			{
@@ -373,7 +428,7 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 
 //----------------------------------------------------------------------------
 
-bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
+bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requiresGameThreadCollect)
 {
 	if (!PK_VERIFY(particleEffect != null))
 		return false;
@@ -392,17 +447,21 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 	const PCEventConnectionMap eventConnectionMap = particleEffect->EventConnectionMap();
 	if (!PK_VERIFY(eventConnectionMap != null))
 		return false;
-	u32		rendererCount = 0;
-
+	u32 count = 0;
 	for (const CEventConnectionMap::SLayerDefinition	&layerDef : eventConnectionMap->m_LayerSlots)
 	{
 		PParticleDescriptor	descriptor = layerDef.m_ParentDescriptor;
-		auto	it = descriptor->Renderers().Begin();
-		while (it != descriptor->Renderers().End())
+		for (const PRendererDataBase &renderer : descriptor->Renderers())
 		{
-			const PRendererDataBase			&renderer = *it;
-			CUnityRendererCache				dummyCache(null);
-
+			CUnityRendererCache			dummyCache(null);
+			const CGuid					idx = m_RendererUIDs.IndexOfFirst(renderer->m_Declaration.m_RendererUID);
+			const CString				&currentUnityQuality = CRuntimeManager::Instance().GetQualityLevel(m_CurrentQualityLevel);
+			if (idx.Valid())
+			{
+				::OnEffectRendererLink(idx.Get(), currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
+				++count;
+				continue;
+			}
 			if (renderer->m_RendererType == Renderer_Billboard)
 			{
 				SPopcornRendererDesc			unityMeshDesc;
@@ -410,7 +469,10 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 
 				dummyCache.GameThread_SetupRenderer(dataBillboard);
 				dummyCache.GetRendererInfo(unityMeshDesc);
-				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
+				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
+				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
 			}
 			else if (renderer->m_RendererType == Renderer_Ribbon)
 			{
@@ -419,7 +481,10 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 
 				dummyCache.GameThread_SetupRenderer(dataRibbon);
 				dummyCache.GetRendererInfo(unityMeshDesc);
-				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
+				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
+				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
 			}
 			else if (renderer->m_RendererType == Renderer_Mesh)
 			{
@@ -428,7 +493,11 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 
 				dummyCache.GameThread_SetupRenderer(dataMesh);
 				dummyCache.GetRendererInfo(unityMeshDesc);
-				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, rendererCount);
+				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
+				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
+				requiresGameThreadCollect = true;
 			}
 			else if (renderer->m_RendererType == Renderer_Triangle)
 			{
@@ -437,10 +506,18 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect)
 
 				dummyCache.GameThread_SetupRenderer(dataTriangle);
 				dummyCache.GetRendererInfo(unityTriangleDesc);
-				::OnEffectRendererFound(&unityTriangleDesc, renderer->m_RendererType, rendererCount);
+				::OnEffectRendererFound(&unityTriangleDesc, renderer->m_RendererType, m_UniqueRendererCount);
+				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
 			}
-			++rendererCount;
-			++it;
+			else if (renderer->m_RendererType == Renderer_Light && CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_LightRenderer)
+			{
+				requiresGameThreadCollect = true;
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
+			}
+			++count;
 		}
 	}
 	return true;

@@ -15,11 +15,22 @@ namespace PopcornFX
 	[Serializable]
 	public class PKFxMaterialFactoryURP : PKFxMaterialFactory
 	{
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitSkinnedDoubleSidedDefault;
+
 		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlit2020;
 		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlit2020;
 		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLit2020;
 		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLit2020;
 		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitSkinned2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitSkinnedDoubleSided2020;
 
 		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueParticleUnlit2020;
 		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentParticleUnlit2020;
@@ -71,6 +82,16 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
 			if (m_OpaqueMeshLitSkinnedDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDefault);
+			if (m_TransparentMeshUnlitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDoubleSidedDefault);
+			if (m_OpaqueMeshUnlitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDoubleSidedDefault);
+			if (m_TransparentMeshLitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitDoubleSidedDefault);
+			if (m_OpaqueMeshLitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDoubleSidedDefault);
+			if (m_OpaqueMeshLitSkinnedDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDoubleSidedDefault);
 			// Particles Unlit:
 			if (m_OpaqueParticleUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
@@ -109,6 +130,16 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLit2020);
 			if (m_OpaqueMeshLitSkinned2020 != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinned2020);
+			if (m_TransparentMeshUnlitDoubleSided2020 != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDoubleSided2020);
+			if (m_OpaqueMeshUnlitDoubleSided2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDoubleSided2020);
+			if (m_TransparentMeshLitDoubleSided2020 != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitDoubleSided2020);
+			if (m_OpaqueMeshLitDoubleSided2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDoubleSided2020);
+			if (m_OpaqueMeshLitSkinnedDoubleSided2020 != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDoubleSided2020);
 			// Particles Unlit:
 			if (m_OpaqueParticleUnlit2020 != null)
 				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlit2020);
@@ -149,8 +180,9 @@ namespace PopcornFX
 				return null;
 			}
 			Material material = null;
-			if (batchDesc.MaterialIdx < asset.m_Materials.Count)
-				material = asset.m_Materials[batchDesc.MaterialIdx];
+			PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == batchDesc.m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
+			if (index.m_Idx != -1)
+				material = asset.m_Materials[index.m_Idx];
 			else
 				Debug.LogError("[PopcornFX] Trying to resolve material from PKFxEffectAsset that is not holding materials");
 			if (material == null)

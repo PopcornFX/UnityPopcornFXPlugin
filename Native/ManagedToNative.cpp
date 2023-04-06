@@ -18,6 +18,7 @@
 #if		PK_UNITY_EDITOR
 #	include		"EditorOnly/EffectBaking.h"
 #	include		"EditorOnly/EditorNativeToManaged.h"
+#	include		"EditorOnly/EditorManager.h"
 #endif
 
 #include <pk_particles/include/ps_config.h>
@@ -230,7 +231,7 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION int	UnstackLog(char *dstBuffer, int dstSize, int &logSeverity)
 	{
-		// DO NOT LOG AIN THIS FUNCTION! INFINITE LOOP...
+		// DO NOT LOG ANYTHING IN THIS FUNCTION! INFINITE LOOP...
 		if (!CRuntimeManager::IsInstanceInitialized())
 			return -1;
 
@@ -250,6 +251,7 @@ extern "C"
 		return -1;
 	}
 
+	//----------------------------------------------------------------------------
 
 	MANAGED_TO_POPCORN_CONVENTION void	SetMaxCameraCount(int count)
 	{
@@ -260,13 +262,19 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	MANAGED_TO_POPCORN_CONVENTION void	SetCurrentQualityLevel(const char *qualityLvl)
+	{
+		CRuntimeManager::Instance().SetCurrentQualityLevel(qualityLvl);
+	}
+	
+	//----------------------------------------------------------------------------
+
 	MANAGED_TO_POPCORN_CONVENTION void	UpdateCamDesc(int camID, const SCamDesc *desc, ManagedBool update)
 	{
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return);
 		if (!PK_VERIFY(desc != null))
 			return;
 		PK_SCOPEDPROFILE();
-
 
 		CRuntimeManager::Instance().UpdateCamDesc(camID, *desc, update == ManagedBool_True);
 	}
@@ -315,14 +323,11 @@ extern "C"
 			return;
 		}
 
-		const u32					camID = renderEvent;
+		const u32						camID = renderEvent;
 		const TArray<SUnitySceneView>	&sceneViews = scene.SceneViews();
 
-		if (camID >= sceneViews.Count())
-		{
-			CLog::Log(PK_ERROR, "CamID %d out of bounds (%d). Check for scene reset.", camID, sceneViews.Count());
-			return;
-		}
+		if (camID >= sceneViews.Count()) 
+			return; // Can happen at startup or on scene load, skip this frame
 
 		if (camID == 0)
 			scene.BuildDrawCalls(sceneViews[camID]);
@@ -367,7 +372,7 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION void	PreloadFxIFN(const char *path, ManagedBool usesMeshRenderer)
+	MANAGED_TO_POPCORN_CONVENTION void	PreloadFxIFN(const char *path, ManagedBool requiresGameThreadCollect)
 	{
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return);
 		if (!PK_VERIFY(path != null))
@@ -380,7 +385,7 @@ extern "C"
 		if (!PK_VERIFY(scene.GameThread_WaitForUpdateEnd()))
 			return;
 
-		CRuntimeManager::Instance().PreloadFxIFN(path, usesMeshRenderer != 0);
+		CRuntimeManager::Instance().PreloadFxIFN(path, requiresGameThreadCollect != 0);
 	}
 
 	//----------------------------------------------------------------------------
@@ -402,7 +407,7 @@ extern "C"
 		}
 
 		// Delete handled by fxmanager
-		CPKFXEffect	*fx = PK_NEW(CPKFXEffect(desc->m_UsesMeshRenderer == ManagedBool_True, desc->m_Transforms));
+		CPKFXEffect	*fx = PK_NEW(CPKFXEffect(desc->m_RequiresGameThreadCollect == ManagedBool_True, desc->m_Transforms));
 		if (fx != null)
 		{
 			const CGuid	fxGUID = fx->LoadFX(desc->m_EffectPath);
@@ -1023,6 +1028,21 @@ extern "C"
 			loopback->SetVolumeMultiplier(volume);
 	}
 
+	//--------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION void	SetQualityLevelSettings(const char **qualityLevelNames, int qualityLevelCount, int current, bool updateCookery)
+	{
+		CRuntimeManager::Instance().SetQualityLevelSettings(qualityLevelNames, qualityLevelCount, current);
+
+		if (updateCookery)
+		{
+#if		PK_UNITY_EDITOR
+			CEffectBaker *effectBaker = CEditorManager::Instance().GetEffectBaker();
+			if (effectBaker->SetTargetPlatform(effectBaker->GetTargetPlatform(), (u32)qualityLevelCount), true)
+				effectBaker->UpdateCookeryConfigFile();
+#endif
+		}
+	}
 
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop

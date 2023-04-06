@@ -8,6 +8,7 @@
 #include "FrameCollectorUnityTypes.h"
 #include "UnityRendererCache.h"
 #include "PKUnity_InterfaceCommon.h"
+#include "ManagedToNative.h"
 #include "ImplemGraphicsAPI/RenderAPI_Data.h"
 
 struct	SParticleBuffers;
@@ -15,6 +16,7 @@ class	CFrameCollector;
 class	CUnityRenderDataFactory;
 
 __PK_API_BEGIN
+
 //----------------------------------------------------------------------------
 
 class	CUnityBillboardingBatchPolicy
@@ -47,6 +49,7 @@ public:
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPURibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SMeshBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, STriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPUTriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SBillboard_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch);
@@ -75,6 +78,8 @@ private:
 	void		_UpdateThread_ResizeUnityMesh(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData);
 	void		_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers);
 
+	bool		_UpdateThread_IssueDrawCallLight(const Drawers::SLight_DrawRequest *lightRequest, CUnityRendererCache *rdrCache);
+
 	void		_UpdateThread_ResizeUnityMeshInstanceCount(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData);
 
 	bool		_RenderThread_AllocPerViewGeomBuffers(const SGeneratedInputs &genInputs, IRenderAPIData *renderApiData);
@@ -88,11 +93,14 @@ private:
 
 	bool		_PrepareCopySOA2AOS(const SUnityRenderContext &ctx, u32 idx);
 
+
 	CUnityRenderDataFactory			*m_RenderDataFactory;
 
 	// ----------------------------------------------------------------------------
 	// FILLED ON GAME THREAD - ALLOC UNITY BUFFERS:
 	// ----------------------------------------------------------------------------
+
+	TArray<SLightInfo>				m_LightDatas;
 
 	// --------------------------------------
 	// We keep a local copy of the reference material description for this mesh:

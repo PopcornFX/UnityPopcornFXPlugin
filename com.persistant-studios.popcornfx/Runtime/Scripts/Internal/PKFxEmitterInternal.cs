@@ -339,7 +339,7 @@ namespace PopcornFX
 			}
 			PKFxManager.SetBuiltAsset(fxAsset);
 			PKFxManager.PreloadEffectDependencies(fxAsset);
-			PKFxManager.PreloadEffectIFN(fxAsset.AssetVirtualPath, fxAsset.m_UsesMeshRenderer);
+			PKFxManager.PreloadEffectIFN(fxAsset.AssetVirtualPath, fxAsset.m_RequiresGameThreadCollect);
 			PKFxManager.SetBuiltAsset(null);
 		}
 
@@ -351,7 +351,7 @@ namespace PopcornFX
 				return -1;
 			}
 			PKFxManager.SetBuiltAsset(fxAsset);
-			int res = CreateEffect(fxAsset.AssetVirtualPath, t.localToWorldMatrix, fxAsset.m_UsesMeshRenderer);
+			int res = CreateEffect(fxAsset.AssetVirtualPath, t.localToWorldMatrix, fxAsset.m_RequiresGameThreadCollect);
 			PKFxManager.SetBuiltAsset(null);
 			return res;
 		}
@@ -363,7 +363,7 @@ namespace PopcornFX
 			PKFxManager.SetBuiltAsset(fxAsset);
 			Matrix4x4 m = Matrix4x4.identity;
 			m.SetTRS(position, rotation, scale);
-			int res = CreateEffect(fxAsset.AssetVirtualPath, m, fxAsset.m_UsesMeshRenderer);
+			int res = CreateEffect(fxAsset.AssetVirtualPath, m, fxAsset.m_RequiresGameThreadCollect);
 			PKFxManager.SetBuiltAsset(null);
 			return res;
 		}
@@ -375,20 +375,20 @@ namespace PopcornFX
 			if (fxAsset == null)
 				return -1;
 			PKFxManager.SetBuiltAsset(fxAsset);
-			int res = CreateEffect(fxAsset.AssetVirtualPath, m, fxAsset.m_UsesMeshRenderer);
+			int res = CreateEffect(fxAsset.AssetVirtualPath, m, fxAsset.m_RequiresGameThreadCollect);
 			PKFxManager.SetBuiltAsset(null);
 			return res;
 		}
 
 		//----------------------------------------------------------------------------
 
-		private static int CreateEffect(string path, Matrix4x4 m, bool usesMeshRenderer)
+		private static int CreateEffect(string path, Matrix4x4 m, bool requiresGameThreadCollect)
 		{
 			SFxDesc		desc;
 
 			desc.m_Transforms = m;
 			desc.m_FxPath = path;
-			desc.m_UsesMeshRenderer = usesMeshRenderer;
+			desc.m_RequiresGameThreadCollect = requiresGameThreadCollect;
 			return PKFxManager.InstantiateEffect(ref desc);
 		}
 

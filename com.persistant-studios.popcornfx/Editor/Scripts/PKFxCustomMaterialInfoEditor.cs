@@ -32,6 +32,7 @@ namespace PopcornFX
 		{
 			PKFxCustomMaterialInfo  customMat = serializedObject.targetObject as PKFxCustomMaterialInfo;
 			EditorGUILayout.LabelField(customMat.m_BatchDescName);
+			EditorGUILayout.LabelField("Renderer UID: " + customMat.m_UID);
 			PKFxEffectAsset.DrawEditorCustomMaterial(customMat, true);
 		}
 	}

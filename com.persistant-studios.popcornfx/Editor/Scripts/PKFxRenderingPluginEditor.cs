@@ -286,6 +286,7 @@ namespace PopcornFX
 					if (PKFxSettings.AutomaticMeshResizing)
 						EditorUtility.SetDirty(PKFxSettings.Instance);
 					PKFxManager.StartupPopcorn(true);
+					PKFxManager.SetQualityLevelSettings();
 					PKFxManager.RestartPackWatcher();
 				}
 				else if (state == PlayModeStateChange.EnteredPlayMode)
@@ -335,6 +336,7 @@ namespace PopcornFX
 				return;
 			}
 			PKFxManager.StartupPopcorn(false);
+			PKFxManager.SetQualityLevelSettings();
 			PKFxManager.SetSceneMesh(null);
 
 			// We just need the positions and the normal for the scene mesh:

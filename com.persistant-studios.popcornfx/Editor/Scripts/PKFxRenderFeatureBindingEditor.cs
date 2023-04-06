@@ -14,6 +14,7 @@ namespace PopcornFX
 	{
 		bool m_RendererFoldout = true;
 		bool m_BlendFoldout = true;
+		bool m_ShaderGraphFoldout = true;
 
 		//bool m_ShaderBindingFoldout = true;
 
@@ -94,6 +95,7 @@ namespace PopcornFX
 			SerializedProperty	Material = serializedObject.FindProperty("m_Material");
 			SerializedProperty	Shader = serializedObject.FindProperty("m_Shader");
 			SerializedProperty	RenderTypes = serializedObject.FindProperty("m_RenderTypes");
+			SerializedProperty	doubleSided = serializedObject.FindProperty("m_DoubleSided");
 			SerializedProperty	SupportedShaderMask = serializedObject.FindProperty("m_SupportedShaderMask");
 			SerializedProperty	MandatoryShaderMask = serializedObject.FindProperty("m_MandatoryShaderMask");
 			SerializedProperty	BlendMode = serializedObject.FindProperty("m_BlendMode");
@@ -174,7 +176,9 @@ namespace PopcornFX
 					}
 				}
 				EditorGUILayout.EndFoldoutHeaderGroup();
+
 			}
+
 			SupportedShaderMask.intValue = EditorGUILayout.MaskField("Supported Shader Variation Mask", SupportedShaderMask.intValue, m_ShaderVarationFlagsString);
 			MandatoryShaderMask.intValue = EditorGUILayout.MaskField("Mandatory Shader Variation Mask", MandatoryShaderMask.intValue, m_ShaderVarationFlagsString);
 			SupportedShaderMask.intValue |= MandatoryShaderMask.intValue;
@@ -184,6 +188,19 @@ namespace PopcornFX
 														bindingHasMasked,
 														bindingHasMeshRenderer,
 														true);
+			bool usesShaderGraphs = (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null) && (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline.name == "UniversalRenderPipelineAsset" || UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline.name == "HDRenderPipelineAsset");
+			if (bindingHasMeshRenderer && usesShaderGraphs)
+			{
+				m_ShaderGraphFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(m_ShaderGraphFoldout, "Shader Graph Integration");
+				if (m_ShaderGraphFoldout)
+				{
+					EditorGUILayout.BeginHorizontal();
+					EditorGUILayout.LabelField("DoubleSided");
+					doubleSided.boolValue = EditorGUILayout.Toggle(doubleSided.boolValue);
+					EditorGUILayout.EndHorizontal();
+				}
+				EditorGUILayout.EndFoldoutHeaderGroup();
+			}
 			serializedObject.ApplyModifiedProperties();
 		}
 

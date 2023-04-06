@@ -38,7 +38,7 @@ PK_FORWARD_DECLARE(FileStreamFS_Unity);
 class	CPKFXEffect : public CNonCopyable
 {
 public:
-	CPKFXEffect(bool usesMeshRenderer, const CFloat4x4 &transforms = CFloat4x4::IDENTITY);
+	CPKFXEffect(bool requiresGameThreadCollect, const CFloat4x4 &transforms = CFloat4x4::IDENTITY);
 	virtual	~CPKFXEffect();
 
 	PK_FORCEINLINE const CAABB		&Bounds() const { return m_Bounds; }

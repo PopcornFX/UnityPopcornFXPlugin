@@ -51,7 +51,7 @@ namespace
 
 //----------------------------------------------------------------------------
 
-CPKFXEffect::CPKFXEffect(bool usesMeshRenderer, const CFloat4x4 &transforms /*= CFloat4x4::IDENTITY*/)
+CPKFXEffect::CPKFXEffect(bool requiresGameThreadCollect, const CFloat4x4 &transforms /*= CFloat4x4::IDENTITY*/)
 :	m_WorldVelCurrent(CFloat3::ZERO)
 ,	m_WorldVelPrevious(CFloat3::ZERO)
 ,	m_Effect(null)
@@ -64,7 +64,7 @@ CPKFXEffect::CPKFXEffect(bool usesMeshRenderer, const CFloat4x4 &transforms /*= 
 	m_Bounds.SetMin(CFloat3(-0.1f));
 	m_Bounds.SetMax(CFloat3(0.1f));
 
-	m_MediumCollection = CRuntimeManager::Instance().GetScene().GetParticleMediumCollection(usesMeshRenderer);
+	m_MediumCollection = CRuntimeManager::Instance().GetScene().GetParticleMediumCollection(requiresGameThreadCollect);
 }
 
 //----------------------------------------------------------------------------
@@ -87,8 +87,13 @@ int	CPKFXEffect::LoadFX(const CString &fx)
 {
 	// get the spawner
 	m_Emitter = null;
-	m_Effect = CParticleEffect::Load(fx);
 
+	SEffectLoadCtl	effectLoadCtl = PopcornFX::SEffectLoadCtl::kDefault;
+	effectLoadCtl.m_AllowedEffectFileType = PopcornFX::SEffectLoadCtl::EffectFileType_Any; // Can be text in shipping builds if debug baked effect is enabled. Keep as is
+
+	const CString	&qualityLevelName = CRuntimeManager::Instance().GetCurrentQualityLevelName();
+	CStringView		quality = CStringView(qualityLevelName);
+	m_Effect = PopcornFX::CParticleEffect::Load(fx, effectLoadCtl, HBO::g_Context, quality);
 	if (m_Effect == null)
 	{
 		CLog::Log(PK_ERROR, "Effect could not be loaded.");

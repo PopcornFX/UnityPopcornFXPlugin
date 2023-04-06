@@ -38,6 +38,7 @@ extern "C"
 
 		ManagedBool				m_IsUnitTesting;
 		ManagedBool				m_UseApplicationAudioLoopback;
+		ManagedBool				m_LightRendererEnabled;
 
 		// Threading:
 		ManagedBool				m_SingleThreadedExecution;
@@ -114,7 +115,7 @@ extern "C"
 	{
 		const char	*m_EffectPath;
 		CFloat4x4	m_Transforms;
-		ManagedBool	m_UsesMeshRenderer;
+		ManagedBool	m_RequiresGameThreadCollect;
 	};
 
 	//----------------------------------------------------------------------------
@@ -236,6 +237,16 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	struct SLightInfo
+	{
+		CFloat3	m_Position;
+		CFloat4	m_Color;
+		float	m_Range;
+		float	m_Intensity;
+	};
+
+	//----------------------------------------------------------------------------
+
 	struct SEffectStatsToFill
 	{
 		unsigned int			m_InstanceCount;
@@ -292,6 +303,7 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION int								UnstackLog(char *dstBuffer, int dstSize, int &logSeverity);
 	// Update and rendering:
 	MANAGED_TO_POPCORN_CONVENTION void								SetMaxCameraCount(int number);
+	MANAGED_TO_POPCORN_CONVENTION void								SetCurrentQualityLevel(const char *qualityLvl);
 	MANAGED_TO_POPCORN_CONVENTION void								UpdateCamDesc(int camID, const SCamDesc *desc, ManagedBool update); // Update camera
 	MANAGED_TO_POPCORN_CONVENTION void								UpdateParticles(float dt); // Update evolve
 	void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API					OnRenderEvent(int eventID); // Render function
@@ -299,7 +311,7 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void								SyncParticlesSimulation();
 	MANAGED_TO_POPCORN_CONVENTION void								TransformAllParticles(CFloat3 worldOffset);
 	MANAGED_TO_POPCORN_CONVENTION void								GetStats(SStats *stats);
-	MANAGED_TO_POPCORN_CONVENTION void								PreloadFxIFN(const char *path, ManagedBool usesMeshRenderer);
+	MANAGED_TO_POPCORN_CONVENTION void								PreloadFxIFN(const char *path, ManagedBool requiresGameThreadCollect);
 	MANAGED_TO_POPCORN_CONVENTION int								InstantiateFx(const SFxDesc *desc);
 	MANAGED_TO_POPCORN_CONVENTION bool								StartFx(int guid, float dt, float prewarm);
 	MANAGED_TO_POPCORN_CONVENTION bool								TerminateFx(int guid);
@@ -360,6 +372,8 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION const char						*GetRuntimeVersion();
 
 	MANAGED_TO_POPCORN_CONVENTION void								SetApplicationLoopbackAudioVolume(float volume);
+
+	MANAGED_TO_POPCORN_CONVENTION void								SetQualityLevelSettings(const char **qualityLevelNames, int qualityLevelCount, int current, bool updateCookery);
 
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop

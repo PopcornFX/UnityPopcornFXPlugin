@@ -374,10 +374,12 @@ namespace PopcornFX
 
 		//Internal
 		[SerializeField]
-		internal int				m_InternalId;
+		//internal int				m_InternalId;
 		internal int				m_CameraId;
 
-		public int MaterialIdx { get { return m_InternalId; } }
+		public int					m_UID;
+
+		//public int MaterialIdx { get { return m_InternalId; } }
 
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc, int idx)
 		{
@@ -416,6 +418,7 @@ namespace PopcornFX
 			m_SkeletalAnimFeature = null;
 
 			m_CameraId = desc.m_CameraId;
+			m_UID = desc.m_UID;
 
 			unsafe
 			{
@@ -427,7 +430,6 @@ namespace PopcornFX
 			}
 
 			m_GeneratedName = GenerateNameFromDescription();
-			m_InternalId = idx;
 		}
 
 		public SBatchDesc(SMeshRendererDesc desc, int idx)
@@ -468,7 +470,9 @@ namespace PopcornFX
 			m_SpecularMap = null;
 			m_MeshAsset = meshAssetStr;
 			m_HasMeshAtlas = desc.m_HasMeshAtlas == 1 ? true : false;
-			
+
+			m_UID = desc.m_UID;
+
 			unsafe
 			{
 				SRenderingFeatureVATDesc* vatDesc = (SRenderingFeatureVATDesc*)desc.m_VatRendering.ToPointer();
@@ -519,7 +523,6 @@ namespace PopcornFX
 			}
 
 			m_GeneratedName = GenerateNameFromDescription();
-			m_InternalId = idx;
 		}
 
 		public bool HasShaderVariationFlag(EShaderVariationFlags flag)

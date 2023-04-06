@@ -129,6 +129,9 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Billboard.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Mesh.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Ribbon.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -147,6 +150,9 @@
       <Filter>_Common\Gl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Billboard.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Mesh.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Ribbon.cpp">

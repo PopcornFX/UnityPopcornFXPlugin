@@ -575,7 +575,7 @@ void	CRuntimeManager::SetMaxCameraCount(int count)
 		return;
 	CParticleMediumCollection		*medCol = m_ParticleScene->GetParticleMediumCollection(false);
 	CParticleMediumCollection		*medColMeshes = m_ParticleScene->GetParticleMediumCollection(true);
-	TArray<SUnitySceneView>				&sceneViews = m_ParticleScene->SceneViewsForUpdate();
+	TArray<SUnitySceneView>			&sceneViews = m_ParticleScene->SceneViewsForUpdate();
 
 	for (u32 i = 0; i < sceneViews.Count(); ++i)
 	{
@@ -696,11 +696,50 @@ CPKFXScene	&CRuntimeManager::GetScene() const
 
 //----------------------------------------------------------------------------
 
+u32	CRuntimeManager::GetCurrentQualityLevel() const
+{
+	return m_CurrentQualityLevel;
+}
+
+//----------------------------------------------------------------------------
+
+const CString	CRuntimeManager::GetCurrentQualityLevelName() const
+{
+	return m_QualityLevelNames[m_CurrentQualityLevel];
+}
+
+//----------------------------------------------------------------------------
+
+void	CRuntimeManager::SetCurrentQualityLevel(const char *qualityLvl)
+{
+	m_CurrentQualityLevel = 0;
+	for (u32 i = 0; i < m_QualityLevelNames.Count(); ++i)
+	{
+		if (m_QualityLevelNames[i].Compare(qualityLvl))
+			m_CurrentQualityLevel = i;
+	}
+}
+//----------------------------------------------------------------------------
+
+void	CRuntimeManager::SetQualityLevelSettings(const char **qualityLevelNames, unsigned int qualityLevelCount, unsigned int current)
+{
+	m_CurrentQualityLevel = current;
+
+	m_QualityLevelNames.Clear();
+	for (u32 i = 0; i < qualityLevelCount; ++i)
+	{
+		m_QualityLevelNames.PushBack(CString(qualityLevelNames[i]));
+	}
+}
+
+//----------------------------------------------------------------------------
+
 bool	CRuntimeManager::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 {
 	settings.PrettyPrintSettings();
 	CRuntimeManager::SPopcornFXRuntimeData::m_Settings = &settings;
 	m_PopcornFXRuntimeData->m_GPUBillboarding = settings.m_EnableGPUBillboarding == ManagedBool_True ? true : false;
+	m_PopcornFXRuntimeData->m_LightRenderer = settings.m_LightRendererEnabled == ManagedBool_True ? true : false;
 	Scheduler::SetThreadPool(_CreateCustomThreadPool());
 	CRuntimeManager::SPopcornFXRuntimeData::m_Settings = null;
 
@@ -1097,10 +1136,8 @@ u32	CRuntimeManager::GetInstanceCount(const PopcornFX::CParticleEffect *effect)
 		const CPKFXEffect *emitter = m_Effects[i];
 		if (emitter == null)
 			continue;
-		if (!emitter->GetEffectInstance()->Alive())
-			continue;
-		PParticleEffectInstance		effectInstance = emitter->GetEffectInstance();
-		if (!PK_VERIFY(effectInstance != null))
+		const PParticleEffectInstance	effectInstance = emitter->GetEffectInstance();
+		if (effectInstance == null || !effectInstance->Alive())
 			continue;
 		if (effectInstance->ParentEffect() == effect)
 			++instanceCount;
@@ -1136,18 +1173,18 @@ void	CRuntimeManager::SceneMeshClear()
 
 //----------------------------------------------------------------------------
 
-void	CRuntimeManager::PreloadFxIFN(const char *fxPath, bool usesMeshRenderer)
+void	CRuntimeManager::PreloadFxIFN(const char *fxPath, bool requiresGameThreadCollect)
 {
 	if (!m_ParticleScene->GetParticleMediumCollection(false)->UpdatePending())
 	{
-		_ExecPreloadFxIFN(fxPath, usesMeshRenderer);
+		_ExecPreloadFxIFN(fxPath, requiresGameThreadCollect);
 	}
 	else
 	{
 		SPreloadFx		callback;
 
 		callback.m_Path = fxPath;
-		callback.m_UsesMeshRenderer = usesMeshRenderer;
+		callback.m_RequiresGameThreadCollect = requiresGameThreadCollect;
 		m_ToPreload.PushBack(callback);
 	}
 }
@@ -1235,7 +1272,7 @@ void	CRuntimeManager::ExecDelayedManagedToNativeMethods()
 
 	PK_FOREACH(it, m_ToPreload)
 	{
-		_ExecPreloadFxIFN(it->m_Path.Data(), it->m_UsesMeshRenderer);
+		_ExecPreloadFxIFN(it->m_Path.Data(), it->m_RequiresGameThreadCollect);
 	}
 	m_ToPreload.Clear();
 
@@ -1712,19 +1749,21 @@ Threads::PAbstractPool	CRuntimeManager::_CreateCustomThreadPool()
 
 //----------------------------------------------------------------------------
 
-void	CRuntimeManager::_ExecPreloadFxIFN(const char *fxPath, bool usesMeshRenderer)
+void	CRuntimeManager::_ExecPreloadFxIFN(const char *fxPath, bool requiresGameThreadCollect)
 {
 	const CString	pathStr = fxPath;
 	const CStringId	pathId = CStringId(pathStr);
 
 	if (!m_PreloadedFx.Contains(CStringId(pathId))) // Fx not loaded yet.
 	{
-		PBaseObjectFile		file = HBO::g_Context->FindFile(pathStr);
-		PParticleEffect		effect = CParticleEffect::Load(pathStr);
+		PopcornFX::SEffectLoadCtl		effectLoadCtl = PopcornFX::SEffectLoadCtl::kDefault;
+		effectLoadCtl.m_AllowedEffectFileType = PopcornFX::SEffectLoadCtl::EffectFileType_Any; // Can be text in shipping builds if debug baked effect is enabled. Keep as is
+		const CString					&qualityLevelName = CRuntimeManager::Instance().GetCurrentQualityLevelName();
+		PParticleEffect					effect = CParticleEffect::Load(pathStr, effectLoadCtl, HBO::g_Context, CStringView(qualityLevelName));
 
 		if (effect != null)
 		{
-			CParticleMediumCollection	*medCol = m_ParticleScene->GetParticleMediumCollection(usesMeshRenderer);
+			CParticleMediumCollection	*medCol = m_ParticleScene->GetParticleMediumCollection(requiresGameThreadCollect);
 
 			if (effect->Install(medCol))
 			{
@@ -1801,7 +1840,7 @@ void	CRuntimeManager::_ExecUpdateCamDesc(int camID, SCamDesc desc, bool update)
 	(void)update;
 	CParticleMediumCollection		*medCol = m_ParticleScene->GetParticleMediumCollection(false);
 	CParticleMediumCollection		*medColMeshes = m_ParticleScene->GetParticleMediumCollection(true);
-	TArray<SUnitySceneView>				&sceneViews = m_ParticleScene->SceneViewsForUpdate();
+	TArray<SUnitySceneView>			&sceneViews = m_ParticleScene->SceneViewsForUpdate();
 
 	PK_ASSERT(s32(sceneViews.Count()) >= camID);
 	if (sceneViews.Count() < (u32)(camID + 1))
@@ -1895,6 +1934,12 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup()
 	if (m_Settings != null)
 	{
 		m_GPUBillboarding = m_Settings->m_EnableGPUBillboarding == ManagedBool_True ? true : false;
+		m_LightRenderer = m_Settings->m_LightRendererEnabled == ManagedBool_True ? true : false;
+	}
+	else
+	{
+		m_GPUBillboarding = false;
+		m_LightRenderer = false;
 	}
 	SDllVersion			engineVersion(PK_VERSION_MAJOR, PK_VERSION_MINOR, PK_VERSION_PATCH, PK_VERSION_REVID, debugMode);
 	CPKKernel::Config	configKernel;

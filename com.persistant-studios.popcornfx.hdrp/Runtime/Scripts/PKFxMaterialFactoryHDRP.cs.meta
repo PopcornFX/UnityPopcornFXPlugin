@@ -14,6 +14,7 @@ MonoImporter:
       type: 2}
   - m_OpaqueMeshLitDefault: {fileID: 11400000, guid: d18f18e58d6d72d40b79263d3232298d,
       type: 2}
+  - m_OpaqueMeshLitSkinnedDefault: {instanceID: 0}
   - m_OpaqueParticleUnlitDefault: {instanceID: 0}
   - m_TransparentParticleUnlitDefault: {instanceID: 0}
   - m_AdditiveParticleUnlitDefault: {instanceID: 0}
@@ -21,8 +22,7 @@ MonoImporter:
   - m_TransparentCorrectDeformationUnlitDefault: {instanceID: 0}
   - m_AdditiveCorrectDeformationUnlitDefault: {instanceID: 0}
   - m_OpaqueParticleLitDefault: {instanceID: 0}
-  - m_TransparentParticleLitDefault: {fileID: 11400000, guid: 20ffab86f38ff2a469e774a57c399097,
-      type: 2}
+  - m_TransparentParticleLitDefault: {instanceID: 0}
   - m_AdditiveParticleLitDefault: {instanceID: 0}
   - m_OpaqueCorrectDeformationLitDefault: {instanceID: 0}
   - m_TransparentCorrectDeformationLitDefault: {instanceID: 0}
@@ -39,6 +39,15 @@ MonoImporter:
       type: 2}
   - m_VertexBillboardingDistortion: {fileID: 11400000, guid: e75b4eb5b4889b949990ffd5ab8eae06,
       type: 2}
+  - m_TransparentMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: 16ef58c9d1a82fd44a520ea7b7348b96,
+      type: 2}
+  - m_OpaqueMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: d9d219e8a322c144283414064a6402e6,
+      type: 2}
+  - m_TransparentMeshLitDoubleSidedDefault: {fileID: 11400000, guid: f0466275546cb4642971172939b0e2fc,
+      type: 2}
+  - m_OpaqueMeshLitDoubleSidedDefault: {fileID: 11400000, guid: 02bd4aca7f0877a44aff73d0a20f813b,
+      type: 2}
+  - m_OpaqueMeshLitSkinnedDoubleSidedDefault: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

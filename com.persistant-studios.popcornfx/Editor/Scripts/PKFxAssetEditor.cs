@@ -1,11 +1,12 @@
 //----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
-using System.Collections;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 namespace PopcornFX
 {
@@ -14,6 +15,16 @@ namespace PopcornFX
 	{
 		private MaterialEditor	m_MaterialEditor = null;
 		GUIStyle				m_BGColor = new GUIStyle();
+
+		static bool[]			m_ShowQualities = null;
+
+		private double			m_LastFrameEditorTime;
+		private float			m_CurrentTime;
+		private Material		m_AnimatedThumbnailMaterial;
+		static readonly int		s_ShaderColorMask = Shader.PropertyToID("_ColorMaskBits");
+		static readonly int		s_ShaderSliceIndex = Shader.PropertyToID("_SliceIndex");
+		static readonly int		s_ShaderToSrgb = Shader.PropertyToID("_ToSRGB");
+		static readonly int		s_ShaderIsNormalMap = Shader.PropertyToID("_IsNormalMap");
 
 		//----------------------------------------------------------------------------
 
@@ -27,13 +38,6 @@ namespace PopcornFX
 		public static float AttrBoundsGetFloatValueSerialized(SerializedProperty bound, string variable)
 		{
 			return bound.FindPropertyRelative(variable).FindPropertyRelative("f1").floatValue;
-		}
-
-		//----------------------------------------------------------------------------
-
-		public override void OnInteractivePreviewGUI(Rect rect, GUIStyle background)
-		{
-			//Handles.DrawCamera(r, previewCamera_);
 		}
 
 		//----------------------------------------------------------------------------
@@ -53,8 +57,95 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		public override Texture2D RenderStaticPreview(string assetPath, UnityEngine.Object[] subAssets, int width, int height)
+		{
+			PKFxEffectAsset asset = target as PKFxEffectAsset;
+
+			if (asset == null || asset.m_EditorThumbnail == null)
+				return null;
+
+			// asset.m_EditorThumbnail must be a supported format: ARGB32, RGBA32, RGB24,
+			// Alpha8 or one of float formats
+			Texture2D tex = new Texture2D(width, height);
+			EditorUtility.CopySerialized(asset.m_EditorThumbnail, tex);
+
+			return tex;
+		}
+
+		//----------------------------------------------------------------------------
+
+		public override void OnPreviewGUI(Rect r, GUIStyle background)
+		{
+			Event evt = Event.current;
+
+			if (evt.type != EventType.Repaint)
+				return;
+
+			PKFxEffectAsset asset = target as PKFxEffectAsset;
+
+			if (asset == null)
+				return;
+
+			if (asset.m_EditorAnimatedThumbnail != null)
+			{
+				if (m_AnimatedThumbnailMaterial == null)
+					m_AnimatedThumbnailMaterial = (Material)EditorGUIUtility.LoadRequired("Previews/Preview2DTextureArrayMaterial.mat");
+
+				double timeSinceStartup = EditorApplication.timeSinceStartup;
+				float deltaTime = (float)(timeSinceStartup - m_LastFrameEditorTime);
+				m_LastFrameEditorTime = timeSinceStartup;
+				m_CurrentTime = Mathf.Repeat(m_CurrentTime + deltaTime, 4.0f); // 4sec
+				int slice = Mathf.FloorToInt(m_CurrentTime * 12.0f); //12 fps
+
+				m_AnimatedThumbnailMaterial.mainTexture = asset.m_EditorAnimatedThumbnail;
+				m_AnimatedThumbnailMaterial.SetFloat(s_ShaderSliceIndex, (float)slice);
+				m_AnimatedThumbnailMaterial.SetFloat(s_ShaderToSrgb, QualitySettings.activeColorSpace == ColorSpace.Linear ? 1.0f : 0.0f);
+				m_AnimatedThumbnailMaterial.SetFloat(s_ShaderIsNormalMap, 0.0f);
+				m_AnimatedThumbnailMaterial.SetFloat(s_ShaderColorMask, (float)7);
+
+				EditorGUI.DrawPreviewTexture(r, asset.m_EditorAnimatedThumbnail, m_AnimatedThumbnailMaterial, ScaleMode.ScaleToFit, 0, 0, UnityEngine.Rendering.ColorWriteMask.All);
+			}
+			else if (asset.m_EditorThumbnail != null)
+			{
+				EditorGUI.DrawPreviewTexture(r, asset.m_EditorThumbnail, null, ScaleMode.ScaleToFit, 0, 0, UnityEngine.Rendering.ColorWriteMask.All);
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
+		public override bool HasPreviewGUI()
+		{
+			PKFxEffectAsset asset = target as PKFxEffectAsset;
+			return asset != null && (asset.m_EditorAnimatedThumbnail != null || asset.m_EditorThumbnail != null);
+		}
+
+		//----------------------------------------------------------------------------
+
+		public override bool RequiresConstantRepaint()
+		{
+			PKFxEffectAsset asset = target as PKFxEffectAsset;
+			return asset != null && (asset.m_EditorAnimatedThumbnail != null);
+		}
+
+		//----------------------------------------------------------------------------
+
+		[ExecuteInEditMode]
+		public void OnEnable()
+		{
+			if (PKFxManager.QualitiesLevelDescription != null && (m_ShowQualities == null || m_ShowQualities.Length != PKFxManager.QualitiesLevelDescription.Length))
+			{
+				m_ShowQualities = new bool[PKFxManager.QualitiesLevelDescription.Length];
+				m_ShowQualities[Array.FindIndex(PKFxManager.QualitiesLevelDescription, ele => ele == PKFxManager.StoredQualityLevel)] = true;
+			}
+		}
+
 		public override void OnInspectorGUI()
 		{
+			if (PKFxManager.QualitiesLevelDescription != null && (m_ShowQualities == null || m_ShowQualities.Length != PKFxManager.QualitiesLevelDescription.Length))
+			{
+				m_ShowQualities = new bool[PKFxManager.QualitiesLevelDescription.Length];
+				m_ShowQualities[Array.FindIndex(PKFxManager.QualitiesLevelDescription, ele => ele == PKFxManager.StoredQualityLevel)] = true;
+			}
 			m_BGColor.normal.background = EditorGUIUtility.whiteTexture;
 			EditorStyles.textField.wordWrap = true;
 
@@ -67,20 +158,10 @@ namespace PopcornFX
 			{
 				if (GUILayout.Button("Reimport"))
 				{
-					PKFxManager.ReimportAssets(new List<string> { serializedObject.FindProperty("m_AssetVirtualPath").stringValue });
+					PKFxManager.ReimportAssets(new List<string> { serializedObject.FindProperty("m_AssetVirtualPath").stringValue }, PKFxSettings.CurrentPlatformName);
 				}
 			}
 			EditorGUILayout.EndHorizontal();
-
-			SerializedProperty useMeshRenderer = serializedObject.FindProperty("m_UsesMeshRenderer");
-
-			EditorGUILayout.LabelField("Effect info : ");
-			EditorGUI.indentLevel++;
-			if (useMeshRenderer.boolValue)
-				EditorGUILayout.LabelField("Uses at least one mesh renderer");
-			else
-				EditorGUILayout.LabelField("Does not use any mesh renderer");
-			EditorGUI.indentLevel--;
 
 			SerializedProperty rdrs = serializedObject.FindProperty("m_RendererDescs");
 			SerializedProperty mats = serializedObject.FindProperty("m_Materials");
@@ -102,126 +183,150 @@ namespace PopcornFX
 				serializedObject.ApplyModifiedProperties();
 			}
 
-			GUIStyle		alernatingColors = new GUIStyle();
-			Color			backgroundColor = EditorGUIUtility.isProSkin ? new Color32(56, 56, 56, 255) : new Color32(194, 194, 194, 255);
+			GUIStyle alernatingColors = new GUIStyle();
+			Color backgroundColor = EditorGUIUtility.isProSkin ? new Color32(56, 56, 56, 255) : new Color32(194, 194, 194, 255);
 
-			Texture2D[]		colors = new Texture2D[] { MakeGUITexture(backgroundColor * 1.2f), MakeGUITexture(backgroundColor * 1.35f) };
+			Texture2D[] colors = new Texture2D[] { MakeGUITexture(backgroundColor * 1.2f), MakeGUITexture(backgroundColor * 1.35f) };
 
-			for (int i = 0; i < rdrsListSize; i++)
+			for (int q = 0; q < PKFxManager.QualitiesLevelDescription.Length; ++q) // Quality level counts
 			{
-				alernatingColors.normal.background = colors[i % 2];
-				EditorGUILayout.BeginHorizontal(alernatingColors);
-				SerializedProperty rdrDesc = rdrs.GetArrayElementAtIndex(i);
-				SerializedProperty rdrType = rdrDesc.FindPropertyRelative("m_Type");
+				m_ShowQualities[q] = EditorGUILayout.Foldout(m_ShowQualities[q], PKFxManager.QualitiesLevelDescription[q]);
+				if (!m_ShowQualities[q])
+					continue;
 
-				object targetObject = rdrs.serializedObject.targetObject;
-				System.Type targetObjectClassType = targetObject.GetType();
-				var field = targetObjectClassType.GetField(rdrs.propertyPath);
-				if (field != null)
+				int qualityRendererCount = 0;
+				for (int i = 0; i < rdrsListSize; i++)
 				{
-					SerializedProperty matProp = mats.GetArrayElementAtIndex(renderers[i].MaterialIdx);
-					if (matProp.objectReferenceValue == null)
-					{
-						Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset, false);
-						matProp.objectReferenceValue = mat;
-						serializedObject.ApplyModifiedProperties();
-					}
-					Material matForName = matProp.objectReferenceValue as Material;
+					alernatingColors.normal.background = colors[i % 2];
+					EditorGUILayout.BeginHorizontal(alernatingColors);
+					SerializedProperty rdrDesc = rdrs.GetArrayElementAtIndex(i);
+					SerializedProperty rdrType = rdrDesc.FindPropertyRelative("m_Type");
 
-					EditorGUILayout.BeginVertical(GUILayout.MaxWidth(64));
+					object targetObject = rdrs.serializedObject.targetObject;
+					System.Type targetObjectClassType = targetObject.GetType();
+					var field = targetObjectClassType.GetField(rdrs.propertyPath);
+					if (field != null)
 					{
-						if (rdrType.intValue == (int)ERendererType.Billboard)
-							EditorGUILayout.LabelField("Billboards", GUILayout.Width(64));
-						else if (rdrType.intValue == (int)ERendererType.Ribbon)
-							EditorGUILayout.LabelField("Ribbons", GUILayout.Width(64));
-						else if (rdrType.intValue == (int)ERendererType.Mesh)
-							EditorGUILayout.LabelField("Meshs", GUILayout.Width(64));
-						else if (rdrType.intValue == (int)ERendererType.Triangle)
-							EditorGUILayout.LabelField("Triangles", GUILayout.Width(64));
-
-						if (m_MaterialEditor != null)
-							DestroyImmediate(m_MaterialEditor);
-						m_MaterialEditor = (MaterialEditor)CreateEditor(asset.m_Materials[renderers[i].MaterialIdx]);
-						if (m_MaterialEditor != null)
-							m_MaterialEditor.OnInteractivePreviewGUI(GUILayoutUtility.GetRect(64, 64), m_BGColor);
-					}
-					EditorGUILayout.EndVertical();
-
-					EditorGUILayout.BeginVertical();
-					{
+						PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == renderers[i].m_UID && item.m_Quality == PKFxManager.QualitiesLevelDescription[q]);
+						if (index != null && index.m_Idx < mats.arraySize)
 						{
-							string generatedName = rdrDesc.FindPropertyRelative("m_GeneratedName").stringValue;
-							EditorGUILayout.LabelField("Name: " + generatedName);
-
-							if (matForName != null && matForName.shader != null)
-								EditorGUILayout.LabelField(matForName.shader.name);
-							Material newMat = EditorGUILayout.ObjectField(matProp.objectReferenceValue, typeof(Material), false) as Material;
-
-							if (matProp.objectReferenceValue != newMat)
+							SerializedProperty matProp = mats.GetArrayElementAtIndex(index.m_Idx);
+							if (matProp.objectReferenceValue == null)
 							{
-								asset.AddCustomMaterial(customMats, renderers[i], newMat, renderers[i].MaterialIdx);
-								matProp.objectReferenceValue = newMat;
+								Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset, false);
+								matProp.objectReferenceValue = mat;
 								serializedObject.ApplyModifiedProperties();
 							}
-						}
-						EditorGUI.indentLevel++;
-						PKFxCustomMaterialInfo customMatInfo = asset.FindCustomMaterialInfo(renderers[i]);
-						if (customMatInfo != null)
-						{
-							if (customMatInfo.DrawEditorShaderInputBindings(renderers[i])) // Change in the bindings, update materials
+							Material matForName = matProp.objectReferenceValue as Material;
+
+							EditorGUILayout.BeginVertical(GUILayout.MaxWidth(64));
 							{
-								customMatInfo.SetMaterialKeywords(renderers[i], customMatInfo.m_CustomMaterial);
-								customMatInfo.BindMaterialProperties(renderers[i], customMatInfo.m_CustomMaterial, asset);
+								if (rdrType.intValue == (int)ERendererType.Billboard)
+									EditorGUILayout.LabelField("Billboards", GUILayout.Width(64));
+								else if (rdrType.intValue == (int)ERendererType.Ribbon)
+									EditorGUILayout.LabelField("Ribbons", GUILayout.Width(64));
+								else if (rdrType.intValue == (int)ERendererType.Mesh)
+									EditorGUILayout.LabelField("Meshs", GUILayout.Width(64));
+								else if (rdrType.intValue == (int)ERendererType.Triangle)
+									EditorGUILayout.LabelField("Triangles", GUILayout.Width(64));
+
+								if (m_MaterialEditor != null)
+									DestroyImmediate(m_MaterialEditor);
+								m_MaterialEditor = (MaterialEditor)CreateEditor(asset.m_Materials[index.m_Idx]);
+								if (m_MaterialEditor != null)
+									m_MaterialEditor.OnInteractivePreviewGUI(GUILayoutUtility.GetRect(64, 64), m_BGColor);
+
 							}
+							EditorGUILayout.EndVertical();
+
+							EditorGUILayout.BeginVertical();
+							{
+								{
+									string generatedName = rdrDesc.FindPropertyRelative("m_GeneratedName").stringValue;
+									EditorGUILayout.LabelField("Name: " + generatedName);
+
+									if (matForName != null && matForName.shader != null)
+										EditorGUILayout.LabelField(matForName.shader.name);
+									Material newMat = EditorGUILayout.ObjectField(matProp.objectReferenceValue, typeof(Material), false) as Material;
+
+									if (matProp.objectReferenceValue != newMat)
+									{
+										asset.AddCustomMaterial(customMats, renderers[i], newMat, index.m_UID);
+										matProp.objectReferenceValue = newMat;
+										serializedObject.ApplyModifiedProperties();
+									}
+								}
+								EditorGUI.indentLevel++;
+								PKFxCustomMaterialInfo customMatInfo = asset.FindCustomMaterialInfo(renderers[i]);
+								if (customMatInfo != null)
+								{
+									if (customMatInfo.DrawEditorShaderInputBindings(renderers[i])) // Change in the bindings, update materials
+									{
+										customMatInfo.SetMaterialKeywords(renderers[i], customMatInfo.m_CustomMaterial);
+										customMatInfo.BindMaterialProperties(renderers[i], customMatInfo.m_CustomMaterial, asset);
+									}
+								}
+								EditorGUI.indentLevel--;
+
+								++qualityRendererCount;
+							}
+							EditorGUILayout.EndVertical();
 						}
-						EditorGUI.indentLevel--;
 					}
-					EditorGUILayout.EndVertical();
-				}
+					EditorGUILayout.EndHorizontal();
 
-				EditorGUILayout.EndHorizontal();
-				Rect clickArea = GUILayoutUtility.GetLastRect();
-				Event current = Event.current;
-				int idxCpy = i;
-
-				if (rdrType.intValue != (int)ERendererType.Ribbon)
-				{
-					if (clickArea.Contains(current.mousePosition) && current.type == EventType.ContextClick)
+					//-Event
+					Rect clickArea = GUILayoutUtility.GetLastRect();
+					Event current = Event.current;
+					int idxCpy = i;
+					if (rdrType.intValue != (int)ERendererType.Ribbon)
 					{
-						GenericMenu menu = new GenericMenu();
-
-						menu.AddItem(new GUIContent("Reset"), false, () =>
+						if (clickArea.Contains(current.mousePosition) && current.type == EventType.ContextClick)
 						{
-							int					customMatIdx = asset.ResetParticleMaterial(renderers[idxCpy]);
-							SerializedProperty	matProp = mats.GetArrayElementAtIndex(customMatIdx);
+							GenericMenu menu = new GenericMenu();
 
-							matProp.objectReferenceValue = asset.m_Materials[renderers[idxCpy].MaterialIdx];
-							if (customMatIdx >= 0)
-								customMats.DeleteArrayElementAtIndex(customMatIdx);
-							serializedObject.ApplyModifiedProperties();
-							Repaint();
-						});
-						menu.AddItem(new GUIContent("Create material Override"), false, () =>
-						{
-							Material matOverride = new Material(asset.m_Materials[renderers[idxCpy].MaterialIdx]);
+							menu.AddItem(new GUIContent("Reset"), false, () =>
+							{
+								int customMatIdx = asset.ResetParticleMaterial(renderers[idxCpy]);
+								if (customMatIdx != -1)
+								{
+									SerializedProperty matProp = mats.GetArrayElementAtIndex(customMatIdx);
+									PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == renderers[idxCpy].m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
+									matProp.objectReferenceValue = asset.m_Materials[index.m_Idx];
+									if (customMatIdx >= 0)
+										customMats.DeleteArrayElementAtIndex(customMatIdx);
+									serializedObject.ApplyModifiedProperties();
+									Repaint();
+								}
+							});
+							menu.AddItem(new GUIContent("Create material Override"), false, () =>
+							{
+								PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == renderers[idxCpy].m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
+								Material matOverride = new Material(asset.m_Materials[index.m_Idx]);
 
-							AssetDatabase.CreateAsset(matOverride, "Assets/Resources/" + Path.GetFileNameWithoutExtension(asset.name) + "_" + idxCpy + ".mat");
-							SerializedProperty matProp = mats.GetArrayElementAtIndex(renderers[idxCpy].MaterialIdx);
+								AssetDatabase.CreateAsset(matOverride, "Assets/Resources/" + Path.GetFileNameWithoutExtension(asset.name) + "_" + idxCpy + ".mat");
+								SerializedProperty matProp = mats.GetArrayElementAtIndex(index.m_Idx);
 
-							asset.AddCustomMaterial(customMats, renderers[idxCpy], matOverride, renderers[idxCpy].MaterialIdx);
-							matProp.objectReferenceValue = matOverride;
-							serializedObject.ApplyModifiedProperties();
-							Repaint();
-						});
-						menu.ShowAsContext();
+								asset.AddCustomMaterial(customMats, renderers[idxCpy], matOverride, index.m_UID);
+								matProp.objectReferenceValue = matOverride;
+								serializedObject.ApplyModifiedProperties();
+								Repaint();
+							});
+							menu.ShowAsContext();
 
-						current.Use();
+							current.Use();
 
+						}
 					}
 				}
+				if (qualityRendererCount == 0)
+					EditorGUILayout.LabelField("No renderer for this Quality level.");
+
 			}
 			EditorGUI.indentLevel--;
-			using (new EditorGUI.DisabledScope(asset.m_CustomMaterials.Count == 0))
+
+			UnityEngine.Object[] data = AssetDatabase.LoadAllAssetsAtPath("Assets/" + PKFxSettings.UnityPackFxPath + "/" + asset.AssetVirtualPath + ".asset");
+			using (new EditorGUI.DisabledScope(asset.m_CustomMaterials.Count == 0 && data.Length > 1))
 			{
 				if (GUILayout.Button("Reset all customs materials"))
 				{
@@ -231,157 +336,191 @@ namespace PopcornFX
 				}
 			}
 
-			EditorGUI.indentLevel++;
+			//Effect Dependencies
+			SerializedProperty deps = serializedObject.FindProperty("m_Dependencies");
+			int depsListSize = deps.arraySize;
+			if (depsListSize > 0)
+			{
+				EditorGUILayout.LabelField("Dependencies : ");
+				EditorGUI.indentLevel++;
+
+				for (int i = 0; i < depsListSize; i++)
+				{
+					SerializedProperty depDesc = deps.GetArrayElementAtIndex(i);
+					SerializedProperty depPath = depDesc.FindPropertyRelative("m_Path");
+					SerializedProperty depUsageProp = depDesc.FindPropertyRelative("m_UsageFlags");
+					int depUsage = depUsageProp.intValue;
+					SerializedProperty depObject = depDesc.FindPropertyRelative("m_Object");
+
+					EditorGUILayout.LabelField(depPath.stringValue);
+					EditorGUI.indentLevel++;
+
+					if ((depUsage & (int)EUseInfoFlag.IsLinearTextureRenderer) != 0)
+						EditorGUILayout.LabelField("isLinearTexture");
+					if ((depUsage & (int)EUseInfoFlag.IsTextureRenderer) != 0)
+						EditorGUILayout.LabelField("IsTextureRenderer");
+					if ((depUsage & (int)EUseInfoFlag.IsMeshRenderer) != 0)
+						EditorGUILayout.LabelField("IsMeshRenderer");
+					if ((depUsage & (int)EUseInfoFlag.IsMeshSampler) != 0)
+						EditorGUILayout.LabelField("IsMeshSampler");
+					if ((depUsage & (int)EUseInfoFlag.IsTextureSampler) != 0)
+						EditorGUILayout.LabelField("IsTextureSampler");
+
+					using (new EditorGUI.DisabledScope(true))
+						EditorGUILayout.ObjectField(depObject);
+					EditorGUI.indentLevel--;
+				}
+				EditorGUI.indentLevel--;
+			}
+
+			//Effect Attributes
+			SerializedProperty attrs = serializedObject.FindProperty("m_AttributeDescs");
+			int attrsListSize = attrs.arraySize;
+			if (attrsListSize > 0)
+			{
+				EditorGUILayout.LabelField("Attributes : ");
+				EditorGUI.indentLevel++;
+
+				for (int i = 0; i < attrsListSize; i++)
+				{
+					SerializedProperty attrDesc = attrs.GetArrayElementAtIndex(i);
+					SerializedProperty attrName = attrDesc.FindPropertyRelative("m_Name");
+					SerializedProperty attrType = attrDesc.FindPropertyRelative("m_Type");
+					SerializedProperty minMaxFlag = attrDesc.FindPropertyRelative("m_MinMaxFlag");
+					EAttributeType baseType = (EAttributeType)attrType.intValue;
+
+					bool showMinMax = false;
+					string minValDesc = "";
+					string maxValDesc = "";
+					string defaultValStr = "";
+
+					if (baseType == EAttributeType.Bool ||
+						baseType == EAttributeType.Bool2 ||
+						baseType == EAttributeType.Bool3 ||
+						baseType == EAttributeType.Bool4)
+					{
+						showMinMax = false;
+					}
+					else
+					{
+						showMinMax = true;
+						if ((minMaxFlag.intValue & (int)PKFxEffectAsset.AttributeDesc.EAttrDescFlag.HasMin) != 0)
+						{
+							SerializedProperty minValProp = attrDesc.FindPropertyRelative("m_MinValue");
+							Vector4 minVal = new Vector4(minValProp.FindPropertyRelative("x").FindPropertyRelative("f1").floatValue,
+														 minValProp.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
+														 minValProp.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
+														 minValProp.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
+							minValDesc = FormatLimitValue(minVal, baseType);
+						}
+						else
+						{
+							minValDesc = "[-infinity]";
+						}
+						if ((minMaxFlag.intValue & (int)PKFxEffectAsset.AttributeDesc.EAttrDescFlag.HasMax) != 0)
+						{
+							SerializedProperty maxValProp = attrDesc.FindPropertyRelative("m_MaxValue");
+							Vector4 maxVal = new Vector4(maxValProp.FindPropertyRelative("x").FindPropertyRelative("f1").floatValue,
+														 maxValProp.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
+														 maxValProp.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
+														 maxValProp.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
+							maxValDesc = FormatLimitValue(maxVal, baseType);
+						}
+						else
+						{
+							maxValDesc = "[+infinity]";
+						}
+					}
+
+					SerializedProperty defaultValue = attrDesc.FindPropertyRelative("m_DefaultValue");
+					Vector4 defaultVectorValue = new Vector4(defaultValue.FindPropertyRelative("x").FindPropertyRelative("f1").floatValue,
+															 defaultValue.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
+															 defaultValue.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
+															 defaultValue.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
+					defaultValStr = FormatLimitValue(defaultVectorValue, baseType);
+
+					EditorGUI.indentLevel++;
+					EditorGUILayout.LabelField(attrName.stringValue);
+					EditorGUI.indentLevel++;
+					EditorGUILayout.LabelField(attrType.enumNames[attrType.enumValueIndex]);
+					if (showMinMax)
+					{
+						EditorGUILayout.LabelField("Min/Max: " + minValDesc + "-" + maxValDesc);
+					}
+					EditorGUILayout.LabelField("Default: " + defaultValStr);
+					EditorGUI.indentLevel--;
+					EditorGUI.indentLevel--;
+				}
+				EditorGUI.indentLevel--;
+			}
+
+			//Effect Samplers
+			SerializedProperty smplrs = serializedObject.FindProperty("m_SamplerDescs");
+			int smplrsListSize = smplrs.arraySize;
+			if (smplrs.arraySize > 0)
+			{
+				EditorGUILayout.LabelField("Samplers : ");
+				EditorGUI.indentLevel++;
+
+				for (int i = 0; i < smplrsListSize; i++)
+				{
+					SerializedProperty smplrsDesc = smplrs.GetArrayElementAtIndex(i);
+					SerializedProperty smplrsName = smplrsDesc.FindPropertyRelative("m_Name");
+					SerializedProperty smplrsType = smplrsDesc.FindPropertyRelative("m_Type");
+					SerializedProperty usageFlags = smplrsDesc.FindPropertyRelative("m_UsageFlags");
+
+					EditorGUI.indentLevel++;
+					EditorGUILayout.LabelField(smplrsType.enumNames[smplrsType.enumValueIndex] + " " + smplrsName.stringValue);
+					EditorGUILayout.LabelField("Usage: " + SamplerDesc.UsageFlagsToString(usageFlags.intValue));
+					EditorGUI.indentLevel--;
+				}
+				EditorGUI.indentLevel--;
+			}
+
+			//Effect Broadcasted Event
 			SerializedProperty events = serializedObject.FindProperty("m_EventDescs");
 			int eventsListSize = events.arraySize;
 			if (eventsListSize > 0)
+			{
+				EditorGUI.indentLevel++;
 				EditorGUILayout.LabelField("Broadcasted events : ");
-			for (int i = 0; i < eventsListSize; i++)
-			{
-				SerializedProperty eventDesc = events.GetArrayElementAtIndex(i);
-
-				string name = eventDesc.FindPropertyRelative("m_Name").stringValue;
-
-				int slot = eventDesc.FindPropertyRelative("m_Slot").intValue;
-
-				EditorGUI.indentLevel++;
-				EditorGUILayout.BeginHorizontal();
-				EditorGUILayout.LabelField("Event Name: " + name);
-				EditorGUILayout.Space();
-				EditorGUILayout.LabelField("Slot: " + slot);
-				EditorGUILayout.EndHorizontal();
-				EditorGUI.indentLevel--;
-			}
-			EditorGUI.indentLevel--;
-
-			EditorGUILayout.LabelField("Dependencies : ");
-			EditorGUI.indentLevel++;
-			SerializedProperty deps = serializedObject.FindProperty("m_Dependencies");
-			int depsListSize = deps.arraySize;
-
-			for (int i = 0; i < depsListSize; i++)
-			{
-				SerializedProperty depDesc = deps.GetArrayElementAtIndex(i);
-				SerializedProperty depPath = depDesc.FindPropertyRelative("m_Path");
-				SerializedProperty depUsageProp = depDesc.FindPropertyRelative("m_UsageFlags");
-				int depUsage = depUsageProp.intValue;
-				SerializedProperty depObject = depDesc.FindPropertyRelative("m_Object");
-
-				EditorGUILayout.LabelField(depPath.stringValue);
-				EditorGUI.indentLevel++;
-
-				if ((depUsage & (int)EUseInfoFlag.IsLinearTextureRenderer) != 0)
-					EditorGUILayout.LabelField("isLinearTexture");
-				if ((depUsage & (int)EUseInfoFlag.IsTextureRenderer) != 0)
-					EditorGUILayout.LabelField("IsTextureRenderer");
-				if ((depUsage & (int)EUseInfoFlag.IsMeshRenderer) != 0)
-					EditorGUILayout.LabelField("IsMeshRenderer");
-				if ((depUsage & (int)EUseInfoFlag.IsMeshSampler) != 0)
-					EditorGUILayout.LabelField("IsMeshSampler");
-				if ((depUsage & (int)EUseInfoFlag.IsTextureSampler) != 0)
-					EditorGUILayout.LabelField("IsTextureSampler");
-
-				using (new EditorGUI.DisabledScope(true))
-					EditorGUILayout.ObjectField(depObject);
-				EditorGUI.indentLevel--;
-			}
-			EditorGUI.indentLevel--;
-
-			EditorGUILayout.LabelField("Attributes : ");
-			EditorGUI.indentLevel++;
-			SerializedProperty attrs = serializedObject.FindProperty("m_AttributeDescs");
-			int attrsListSize = attrs.arraySize;
-
-			for (int i = 0; i < attrsListSize; i++)
-			{
-				SerializedProperty attrDesc = attrs.GetArrayElementAtIndex(i);
-				SerializedProperty attrName = attrDesc.FindPropertyRelative("m_Name");
-				SerializedProperty attrType = attrDesc.FindPropertyRelative("m_Type");
-				SerializedProperty minMaxFlag = attrDesc.FindPropertyRelative("m_MinMaxFlag");
-				EAttributeType baseType = (EAttributeType)attrType.intValue;
-
-				bool showMinMax = false;
-				string minValDesc = "";
-				string maxValDesc = "";
-				string defaultValStr = "";
-
-				if (baseType == EAttributeType.Bool ||
-					baseType == EAttributeType.Bool2 ||
-					baseType == EAttributeType.Bool3 ||
-					baseType == EAttributeType.Bool4)
+				for (int i = 0; i < eventsListSize; i++)
 				{
-					showMinMax = false;
-				}
-				else
-				{
-					showMinMax = true;
-					if ((minMaxFlag.intValue & (int)PKFxEffectAsset.AttributeDesc.EAttrDescFlag.HasMin) != 0)
-					{
-						SerializedProperty minValProp = attrDesc.FindPropertyRelative("m_MinValue");
-						Vector4 minVal = new Vector4(minValProp.FindPropertyRelative("x").FindPropertyRelative("f1").floatValue,
-													 minValProp.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
-													 minValProp.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
-													 minValProp.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
-						minValDesc = FormatLimitValue(minVal, baseType);
-					}
-					else
-					{
-						minValDesc = "[-infinity]";
-					}
-					if ((minMaxFlag.intValue & (int)PKFxEffectAsset.AttributeDesc.EAttrDescFlag.HasMax) != 0)
-					{
-						SerializedProperty maxValProp = attrDesc.FindPropertyRelative("m_MaxValue");
-						Vector4 maxVal = new Vector4(maxValProp.FindPropertyRelative("x").FindPropertyRelative("f1").floatValue,
-													 maxValProp.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
-													 maxValProp.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
-													 maxValProp.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
-						maxValDesc = FormatLimitValue(maxVal, baseType);
-					}
-					else
-					{
-						maxValDesc = "[+infinity]";
-					}
-				}
+					SerializedProperty eventDesc = events.GetArrayElementAtIndex(i);
 
-				SerializedProperty defaultValue = attrDesc.FindPropertyRelative("m_DefaultValue");
-				Vector4 defaultVectorValue = new Vector4(defaultValue.FindPropertyRelative("x").FindPropertyRelative("f1").floatValue,
-														 defaultValue.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
-														 defaultValue.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
-														 defaultValue.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
-				defaultValStr = FormatLimitValue(defaultVectorValue, baseType);
+					string name = eventDesc.FindPropertyRelative("m_Name").stringValue;
 
-				EditorGUI.indentLevel++;
-				EditorGUILayout.LabelField(attrName.stringValue);
-				EditorGUI.indentLevel++;
-				EditorGUILayout.LabelField(attrType.enumNames[attrType.enumValueIndex]);
-				if (showMinMax)
-				{
-					EditorGUILayout.LabelField("Min/Max: " + minValDesc + "-" + maxValDesc);
+					int slot = eventDesc.FindPropertyRelative("m_Slot").intValue;
+
+					EditorGUI.indentLevel++;
+					EditorGUILayout.BeginHorizontal();
+					EditorGUILayout.LabelField("Event Name: " + name);
+					EditorGUILayout.Space();
+					EditorGUILayout.LabelField("Slot: " + slot);
+					EditorGUILayout.EndHorizontal();
+					EditorGUI.indentLevel--;
 				}
-				EditorGUILayout.LabelField("Default: " + defaultValStr);
-				EditorGUI.indentLevel--;
 				EditorGUI.indentLevel--;
 			}
-			EditorGUI.indentLevel--;
 
-			EditorGUILayout.LabelField("Samplers : ");
-			EditorGUI.indentLevel++;
-			SerializedProperty smplrs = serializedObject.FindProperty("m_SamplerDescs");
-			int smplrsListSize = smplrs.arraySize;
 
-			for (int i = 0; i < smplrsListSize; i++)
+			//Effect Info
 			{
-				SerializedProperty smplrsDesc = smplrs.GetArrayElementAtIndex(i);
-				SerializedProperty smplrsName = smplrsDesc.FindPropertyRelative("m_Name");
-				SerializedProperty smplrsType = smplrsDesc.FindPropertyRelative("m_Type");
-				SerializedProperty usageFlags = smplrsDesc.FindPropertyRelative("m_UsageFlags");
+				SerializedProperty useMeshRenderer = serializedObject.FindProperty("m_UsesMeshRenderer");
 
+				EditorGUILayout.LabelField("Effect info : ");
 				EditorGUI.indentLevel++;
-				EditorGUILayout.LabelField(smplrsType.enumNames[smplrsType.enumValueIndex] + " " + smplrsName.stringValue);
-				EditorGUILayout.LabelField("Usage: " + SamplerDesc.UsageFlagsToString(usageFlags.intValue));
+
+				int meshCount = asset.m_RendererDescs.Where(b => b != null && b.m_Type == ERendererType.Mesh).Count();
+				EditorGUILayout.LabelField(" " + meshCount + " mesh renderer(s)");
+				EditorGUILayout.LabelField(" " + (asset.m_RendererDescs.Count - meshCount) + " billboard/ribbon/triangle renderer(s)");
+				EditorGUILayout.LabelField(" " + depsListSize + " Asset dependencies");
+				EditorGUILayout.LabelField(" " + attrsListSize + " Attribute(s)");
+				EditorGUILayout.LabelField(" " + smplrsListSize + " Attribute(s) sampler(s)");
+				EditorGUILayout.LabelField(" " + eventsListSize + " Broadcasted event(s)");
+
 				EditorGUI.indentLevel--;
 			}
-			EditorGUI.indentLevel--;
 		}
 
 		//----------------------------------------------------------------------------

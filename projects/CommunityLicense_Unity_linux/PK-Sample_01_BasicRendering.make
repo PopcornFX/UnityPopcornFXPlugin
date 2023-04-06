@@ -82,6 +82,7 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/BasicBatchDrawer_Billboard.o
+GENERATED += $(OBJDIR)/BasicBatchDrawer_Mesh.o
 GENERATED += $(OBJDIR)/BasicBatchDrawer_Ribbon.o
 GENERATED += $(OBJDIR)/BasicRendererCache.o
 GENERATED += $(OBJDIR)/PK-Sample_01_BasicRendering.o
@@ -89,6 +90,7 @@ GENERATED += $(OBJDIR)/ParticleSampleGLglfw3.o
 GENERATED += $(OBJDIR)/gl_utils.o
 GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/BasicBatchDrawer_Billboard.o
+OBJECTS += $(OBJDIR)/BasicBatchDrawer_Mesh.o
 OBJECTS += $(OBJDIR)/BasicBatchDrawer_Ribbon.o
 OBJECTS += $(OBJDIR)/BasicRendererCache.o
 OBJECTS += $(OBJDIR)/PK-Sample_01_BasicRendering.o
@@ -162,6 +164,9 @@ $(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/precompiled/precompiled.cp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/BasicBatchDrawer_Billboard.o: ../../SDK/Samples/PK-Samples/PK-Sample_01_BasicRendering/BasicBatchDrawer_Billboard.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BasicBatchDrawer_Mesh.o: ../../SDK/Samples/PK-Samples/PK-Sample_01_BasicRendering/BasicBatchDrawer_Mesh.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/BasicBatchDrawer_Ribbon.o: ../../SDK/Samples/PK-Samples/PK-Sample_01_BasicRendering/BasicBatchDrawer_Ribbon.cpp

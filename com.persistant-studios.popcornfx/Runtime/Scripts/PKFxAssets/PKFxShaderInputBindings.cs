@@ -45,7 +45,7 @@ namespace PopcornFX
 		public string 			m_MeshDiffuseColorPropertyName = "_BaseColor";
 		public string 			m_MeshEmissiveColorPropertyName = "_EmissiveColor";
 		public string 			m_MeshAlphaCursorPropertyName = "_AlphaCursor";
-		public string 			m_MeshCullPropertyName = "_Cull";
+		public string 			m_MeshCullingModePropertyName = "";
 		// --------------------------------------
 		// VAT render feature:
 		// --------------------------------------
@@ -218,18 +218,20 @@ namespace PopcornFX
 				bool hasSkeletalAnim = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalAnim);
 				bool isDoubleSided = batchDesc.m_DoubleSided;
 
-				if (isDoubleSided)
+				if (!string.IsNullOrEmpty(m_MeshCullingModePropertyName))
 				{
-					material.SetInt(m_MeshCullPropertyName, (int) UnityEngine.Rendering.CullMode.Off);
-					if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
-						material.doubleSidedGI = true;
+					if (isDoubleSided)
+					{
+						material.SetInt(m_MeshCullingModePropertyName, (int) UnityEngine.Rendering.CullMode.Off);
+					}
+					else
+					{
+						material.SetInt(m_MeshCullingModePropertyName, (int) UnityEngine.Rendering.CullMode.Back);
+					}
 				}
-				else
-				{
-					if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
-						material.doubleSidedGI = false;
-					material.SetInt(m_MeshCullPropertyName, (int) UnityEngine.Rendering.CullMode.Back);
-				}
+
+				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
+					material.doubleSidedGI = isDoubleSided;
 
 				if (hasVAT)
 				{
@@ -557,6 +559,8 @@ namespace PopcornFX
 					MeshEmissiveColorPropertyName.stringValue = EditorGUILayout.TextField("Mesh emissive color (Vec4): ", MeshEmissiveColorPropertyName.stringValue);
 					SerializedProperty MeshAlphaCursorPropertyName = serializedObject.FindProperty("m_MeshAlphaCursorPropertyName");
 					MeshAlphaCursorPropertyName.stringValue = EditorGUILayout.TextField("Mesh alpha cursor (Float): ", MeshAlphaCursorPropertyName.stringValue);
+					SerializedProperty MeshCullingModePropertyName = serializedObject.FindProperty("m_MeshCullingModePropertyName");
+					MeshCullingModePropertyName.stringValue = EditorGUILayout.TextField("Mesh culling mode (Int): ", MeshCullingModePropertyName.stringValue);
 
 					if (HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_FluidVAT) ||
 						HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_SoftVAT) ||

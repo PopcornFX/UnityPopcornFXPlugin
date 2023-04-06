@@ -627,8 +627,8 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_fields.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_properties.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_set.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_light.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_material.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_mesh.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_ribbon.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_sound.h" />

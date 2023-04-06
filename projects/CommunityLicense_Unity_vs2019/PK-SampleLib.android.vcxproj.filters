@@ -309,6 +309,9 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.h">
       <Filter>Headers\RenderPasses</Filter>
     </ClInclude>
@@ -496,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.cpp">
       <Filter>Sources\RenderIntegrationRHI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.cpp">
+      <Filter>Sources\RenderPasses</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.cpp">
       <Filter>Sources\RenderPasses</Filter>

@@ -41,7 +41,7 @@ public class PopcornFXTestsEditor_ImportSamples
 
 		PKFxManagerImpl.SetDelegateOnAssetChange(PKFxDelegateHandler.Instance.DelegateToFunctionPointer(new AssetChangeCallback(OnAssetChangeUnitTest)));
 
-		PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
+		PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList, PKFxSettings.CurrentPlatformName);
 
 		while (AssetCount != 0)
 		{

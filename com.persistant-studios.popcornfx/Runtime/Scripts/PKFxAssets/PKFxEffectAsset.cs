@@ -25,6 +25,21 @@ namespace PopcornFX
 			}
 		}
 
+		[Serializable]
+		public class MaterialUIDToIndex
+		{
+			public int		m_UID = -1;
+			public int		m_Idx = -1;
+			public string	m_Quality = "Medium";
+
+			public MaterialUIDToIndex(int uid = -1, int idx = -1, string quality = "Medium")
+			{
+				m_UID = uid;
+				m_Idx = idx;
+				m_Quality = quality;
+			}
+		}
+
 		public List<DependencyDesc> m_Dependencies = new List<DependencyDesc>();
 		public List<AttributeDesc> m_AttributeDescs = new List<AttributeDesc>();
 		public int m_AttributeDescsHash = 0;
@@ -32,13 +47,22 @@ namespace PopcornFX
 		public List<SBatchDesc> m_RendererDescs = new List<SBatchDesc>();
 		public List<Material> m_Materials = new List<Material>();
 
+		public List<MaterialUIDToIndex> m_MaterialIndexes = new List<MaterialUIDToIndex>();
+
 		public List<PKFxCustomMaterialInfo> m_CustomMaterials = new List<PKFxCustomMaterialInfo>();
 		public List<SEventDesc> m_EventDescs = new List<SEventDesc>();
 		public int m_SamplerDescsHash = 0;
 		public int m_RendererDescsHash = 0;
 		public int m_EventDescsHash = 0;
 
-		public bool m_UsesMeshRenderer = false;
+		public bool m_RequiresGameThreadCollect = false;
+
+#if UNITY_EDITOR
+		public Texture2D m_EditorThumbnail = null;
+		public Texture2DArray m_EditorAnimatedThumbnail = null;
+#endif
+		public Texture2D m_Thumbnail = null;
+		public Texture2DArray m_AnimatedThumbnail = null;
 
 		[Serializable]
 		public class DependencyDesc
@@ -208,13 +232,13 @@ namespace PopcornFX
 		{
 			if (m_CustomMaterials == null)
 				return null;
-			int idx = m_CustomMaterials.FindIndex(x => x.m_InternalId == batchDesc.m_InternalId);
+			int idx = m_CustomMaterials.FindIndex(x => x.m_UID == batchDesc.m_UID);
 			if (idx >= 0)
 			{
 				PKFxCustomMaterialInfo info = m_CustomMaterials[idx];
 				if (AssetVirtualPath == info.m_AssetVirtualPath &&
 					batchDesc.m_GeneratedName == info.m_BatchDescName &&
-					batchDesc.m_InternalId == info.m_InternalId)
+					batchDesc.m_UID == info.m_UID)
 					return info;
 			}
 			return null;
@@ -225,14 +249,14 @@ namespace PopcornFX
 		{
 			if (m_CustomMaterials == null)
 				return;
-			int idx = m_CustomMaterials.FindIndex(x => x.m_InternalId == batchDesc.m_InternalId);
+			int idx = m_CustomMaterials.FindIndex(x => x.m_UID == batchDesc.m_UID);
 			
 			if (idx >= 0)
 			{
 				PKFxCustomMaterialInfo info = m_CustomMaterials[idx];
 				if (AssetVirtualPath == info.m_AssetVirtualPath &&
 					batchDesc.m_GeneratedName == info.m_BatchDescName &&
-					batchDesc.m_InternalId == info.m_InternalId)
+					batchDesc.m_UID == info.m_UID)
 					return;
 				AssetDatabase.RemoveObjectFromAsset(info);
 				m_CustomMaterials.RemoveAt(idx);
@@ -256,14 +280,14 @@ namespace PopcornFX
 				EditorGUILayout.EndHorizontal();
 			}
 			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.LabelField("Renderer #" + customMat.m_InternalId + " Material");
+			EditorGUILayout.LabelField("Renderer #" + customMat.m_UID + " Material");
 			EditorGUILayout.ObjectField(customMat.m_CustomMaterial, typeof(Material), false);
 			EditorGUILayout.EndHorizontal();
 			EditorGUI.EndDisabledGroup();
 			SBatchDesc customMatBatchDesc = curAsset.m_RendererDescs.Find(delegate (SBatchDesc desc)
 			{
 				return desc.m_GeneratedName == customMat.m_BatchDescName &&
-						desc.m_InternalId == customMat.m_InternalId;
+						desc.m_UID == customMat.m_UID;
 			});
 			EditorGUI.indentLevel += 1;
 			customMat.DrawEditorShaderInputBindings(customMatBatchDesc);
@@ -292,19 +316,21 @@ namespace PopcornFX
 				so = new SerializedObject(customRule);
 				so.FindProperty("m_AssetVirtualPath").stringValue = AssetVirtualPath;
 				so.FindProperty("m_BatchDescName").stringValue = sBatchDesc.m_GeneratedName;
-				so.FindProperty("m_InternalId").intValue = id;
+				so.FindProperty("m_UID").intValue = id;
 				so.FindProperty("m_CustomMaterial").objectReferenceValue = newMat;
 			}
 			else
 				so = new SerializedObject(customRule);
 
-			int idx = m_CustomMaterials.FindIndex(x => x.m_InternalId == sBatchDesc.m_InternalId);
+			int idx = m_CustomMaterials.FindIndex(x => x.m_UID == sBatchDesc.m_UID);
 			if (idx >= 0)
 			{
 				so.FindProperty("m_CustomMaterial").objectReferenceValue = newMat;
 				prop.GetArrayElementAtIndex(idx).objectReferenceValue = customRule;
 				m_Materials[idx] = newMat;
 			}
+			customRule.SetMaterialKeywords(sBatchDesc, newMat);
+			customRule.BindMaterialProperties(sBatchDesc, newMat, this);
 
 			so.ApplyModifiedProperties();
 		}
@@ -320,10 +346,12 @@ namespace PopcornFX
 					AssetDatabase.RemoveObjectFromAsset(customRule);
 					idx = m_CustomMaterials.IndexOf(customRule);
 					m_CustomMaterials.RemoveAt(idx);
+
+					PKFxEffectAsset.MaterialUIDToIndex index = m_MaterialIndexes.Find(item => item.m_UID == batchDesc.m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
+					m_Materials[index.m_Idx] = PKFxSettings.MaterialFactory.EditorResolveMaterial(batchDesc, this);
+					AssetDatabase.SaveAssets();
 				}
 			}
-			m_Materials[batchDesc.MaterialIdx] = PKFxSettings.MaterialFactory.EditorResolveMaterial(batchDesc, this);
-			AssetDatabase.SaveAssets();
 			return idx;
 		}
 
@@ -335,24 +363,20 @@ namespace PopcornFX
 				PKFxCustomMaterialInfo info = asset as PKFxCustomMaterialInfo;
 				if (info != null)
 				{
-					foreach (SBatchDesc desc in m_RendererDescs)
-					{
-						if (desc.MaterialIdx == info.m_InternalId)
-						{
-							m_Materials[info.m_InternalId] = PKFxSettings.MaterialFactory.EditorGetDefaultMaterial(desc, this);
-							AssetDatabase.RemoveObjectFromAsset(info);
-							mats.GetArrayElementAtIndex(info.m_InternalId).objectReferenceValue = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
-							break;
-						}
-
-					}
+					AssetDatabase.RemoveObjectFromAsset(info);
 				}
+			}
+			foreach (SBatchDesc desc in m_RendererDescs)
+			{
+				PKFxEffectAsset.MaterialUIDToIndex index = m_MaterialIndexes.Find(item => item.m_UID == desc.m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
+				m_Materials[index.m_Idx] = PKFxSettings.MaterialFactory.EditorGetDefaultMaterial(desc, this);
+				mats.GetArrayElementAtIndex(index.m_Idx).objectReferenceValue = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
+				break;
 			}
 			AssetDatabase.SaveAssets();
 			m_CustomMaterials.Clear();
 
 			CustomMats.ClearArray();
-
 		}
 
 		public void AddRenderer(ERendererType type, SPopcornRendererDesc renderer, int idx)
@@ -402,8 +426,6 @@ namespace PopcornFX
 			else
 				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this);
 
-			while (idx >= m_Materials.Count)
-				m_Materials.Add(null);
 			if (mat == null)
 			{
 				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
@@ -411,7 +433,22 @@ namespace PopcornFX
 				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + " in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
 				return;
 			}
-			m_Materials[idx] = mat;
+			m_Materials.Add(mat);
+		}
+
+		public void LinkRenderer(int GlobalIdx, string qualityLevel, int UID)
+		{
+			MaterialUIDToIndex index = m_MaterialIndexes.Find(item => item.m_UID == UID && item.m_Quality == qualityLevel);
+			if (index == null)
+			{
+				MaterialUIDToIndex lookup = new MaterialUIDToIndex();
+				lookup.m_Idx = GlobalIdx;
+				lookup.m_UID = UID;
+				lookup.m_Quality = qualityLevel;
+				m_MaterialIndexes.Add(lookup);
+			}
+			else
+				index.m_Idx = GlobalIdx;
 		}
 
 		public void AddEvent(SNativeEventDesc eventdesc)
@@ -469,12 +506,13 @@ namespace PopcornFX
 			m_SamplerDescs = new List<SamplerDesc>();
 			m_RendererDescs = new List<SBatchDesc>();
 			m_Materials = new List<Material>();
+			m_MaterialIndexes = new List<MaterialUIDToIndex>();
 			m_Dependencies = new List<DependencyDesc>();
 			m_EventDescs = new List<SEventDesc>();
 			m_AttributeDescsHash = 0;
 			m_SamplerDescsHash = 0;
 			m_RendererDescsHash = 0;
-			m_UsesMeshRenderer = false;
+			m_RequiresGameThreadCollect = false;
 		}
 	}
 }

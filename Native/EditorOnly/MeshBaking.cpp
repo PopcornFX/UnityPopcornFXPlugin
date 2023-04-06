@@ -221,7 +221,7 @@ bool	CMeshBaker::BakeToFile(const char *outputMeshPath)
 	if (!_AddSubmeshIFP())
 		return false;
 	// get the real path
-	CString		path = CString(outputMeshPath);
+	CString		path = "Assets" / CString(outputMeshPath);
 	CFilePath::Purify(path);
 	if (path.Empty())
 	{
@@ -229,17 +229,14 @@ bool	CMeshBaker::BakeToFile(const char *outputMeshPath)
 		return false;
 	}
 	// Save the mesh
-	if (!PK_VERIFY(!File::DefaultFileSystem()->PrioritizedPacks().Empty()))
-		return false;
-	PFilePack	pack = File::DefaultFileSystem()->PrioritizedPacks().First();
-	bool		success = SavePkmm(path, pack);
+	bool		success = SavePkmm(path);
 	Clear();
 	return success;
 }
 
 //----------------------------------------------------------------------------
 
-bool	CMeshBaker::SavePkmm(const CString &pkmmPath, PFilePack pack)
+bool	CMeshBaker::SavePkmm(const CString &pkmmPath)
 {
 	PK_ASSERT(CCurrentThread::IsMainThread());
 
@@ -256,12 +253,12 @@ bool	CMeshBaker::SavePkmm(const CString &pkmmPath, PFilePack pack)
 		return false;
 	}
 	CMessageStream	outReport(true);	// true: auto-dump to CLog::Log()
-	if (!PK_VERIFY(m_Mesh.WriteToFile(File::DefaultFileSystem(), pkmmPath, outReport, &writeSettings, pack)))
+	if (!PK_VERIFY(m_Mesh.WriteToFile(File::DefaultFileSystem(), pkmmPath, outReport, &writeSettings)))
 	{
-		CLog::Log(PK_ERROR, "[MeshBaker] save to \"%s//%s\": FAILED to write mesh", pack != null ? pack->Path().Data() : "", pkmmPath.Data());
+		CLog::Log(PK_ERROR, "[MeshBaker] save to \"%s\": FAILED to write mesh", pkmmPath.Data());
 		return false;
 	}
-	CLog::Log(PK_INFO, "[MeshBaker] save to \"%s//%s\": OK", pack != null ? pack->Path().Data() : "", pkmmPath.Data());
+	CLog::Log(PK_INFO, "[MeshBaker] save to \"%s\": OK", pkmmPath.Data());
 	return true;
 }
 

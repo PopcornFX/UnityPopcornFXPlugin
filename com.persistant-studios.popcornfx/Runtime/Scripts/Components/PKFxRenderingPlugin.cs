@@ -42,10 +42,13 @@ namespace PopcornFX
 		[HideInInspector]
 		public GameObject[] m_MeshGameObjects;
 
+		private PKFxLightPool m_LightPool;
+
 		public float TimeMultiplier
 		{
 			get { return m_TimeMultiplier; }
-			set {
+			set
+			{
 				m_TimeMultiplier = value;
 				PKFxManager.TimeMultiplier = m_TimeMultiplier;
 			}
@@ -60,7 +63,7 @@ namespace PopcornFX
 		public int[] CameraLayers
 		{
 			get { return m_CameraLayers; }
-			set 
+			set
 			{
 				if (value == null || value.Length == 0)
 				{
@@ -68,7 +71,7 @@ namespace PopcornFX
 					return;
 				}
 
-				if (value.Length > 4) 
+				if (value.Length > 4)
 				{
 					Debug.LogError("[PopcornFX] A maximum of 4 camera layers is expected.");
 					return;
@@ -105,7 +108,7 @@ namespace PopcornFX
 					{
 						PKFxManager.SetBuiltAsset(effect);
 						PKFxManager.PreloadEffectDependencies(effect);
-						PKFxManager.PreloadEffectIFN(effect.AssetVirtualPath, effect.m_UsesMeshRenderer);
+						PKFxManager.PreloadEffectIFN(effect.AssetVirtualPath, effect.m_RequiresGameThreadCollect);
 						PKFxManager.SetBuiltAsset(null);
 					}
 				}
@@ -122,16 +125,25 @@ namespace PopcornFX
 				gameObject.SetActive(false);
 				return;
 			}
+			PKFxManager.RenderingPlugin = this;
 			if (!PKFxManager.IsDllLoaded())
 			{
 				gameObject.SetActive(false);
 				Debug.LogWarning("[PopcornFX] Unable to load the PopcornFX native plugin, check that the library is present and its import settings.");
 				return;
 			}
-			PKFxManager.StartupPopcorn(false);
+			PKFxManager.SetQualityLevelSettings();
+			PKFxManager.UpdateQualityLevels();
 			PKFxManager.SetMaxCameraCount(MaxCameraSupport());
+			PKFxManager.StartupPopcorn(false);
 
 			PKFxSoundManager.ClearSounds();
+
+			if (PKFxSettings.EnablePopcornFXLight)
+			{
+				m_LightPool = gameObject.AddComponent<PKFxLightPool>();
+				m_LightPool.m_MaxLightNumber = PKFxSettings.MaxPopcornFXLights;
+			}
 
 			if (Camera.main == null)
 				Debug.LogWarning("[PopcornFX] No main camera in the scene! No PopcornFX particles will be rendered. Make sure at least one of the camera with the PKFxCamera component on it is tagged as the MainCamera.");
@@ -184,6 +196,10 @@ namespace PopcornFX
 					}
 				}
 			}
+			if (PKFxSettings.EnablePopcornFXLight)
+			{
+				m_LightPool.DrawLightRenderers();
+			}
 
 			PKFxManager.DrawMeshRenderers();
 
@@ -197,7 +213,7 @@ namespace PopcornFX
 			if (!m_Cameras.Contains(PKFxCamera))
 			{
 				UpdateLayerMask();
-				if (m_CameraLayers == null) 
+				if (m_CameraLayers == null)
 				{
 					Debug.LogError("[PopcornFX] The PKFxRenderingPlugin's camera layers must be assigned before registering any cameras.");
 					return -1;
@@ -230,10 +246,14 @@ namespace PopcornFX
 			return false;
 		}
 
+		//----------------------------------------------------------------------------
+
 		public int GetLayerForCameraID(int cameraID)
 		{
 			return m_CameraLayers[cameraID];
 		}
+
+		//----------------------------------------------------------------------------
 
 		public int MaxCameraSupport()
 		{
@@ -245,6 +265,8 @@ namespace PopcornFX
 			return m_CameraLayers.Length;
 		}
 
+		//----------------------------------------------------------------------------
+
 		public void UpdateLayerMask()
 		{
 			m_AllPopcornFXLayerMask = 0;
@@ -254,11 +276,23 @@ namespace PopcornFX
 			}
 		}
 
+		//----------------------------------------------------------------------------
+
 #if !UNITY_EDITOR
 		private void OnApplicationQuit()
 		{
 			PKFxManager.ShutdownPopcorn();
 		}
 #endif
+
+		//----------------------------------------------------------------------------
+
+		public void SetLightsBuffer(IntPtr lightsInfos, int count)
+		{
+			if (PKFxSettings.EnablePopcornFXLight)
+			{
+				m_LightPool.SetLightBuffer(lightsInfos, count);
+			}
+		}
 	}
 }

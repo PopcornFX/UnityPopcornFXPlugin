@@ -43,6 +43,7 @@ namespace PopcornFX
 		// General:
 		[SerializeField] private bool m_GeneralCategory = true;
 		[SerializeField] private bool m_AssetCategory = true;
+		[SerializeField] private bool m_QualityCategory = true;
 		[SerializeField] private bool m_EnableRaycastForCollisions = false;
 		[SerializeField] private string m_PopcornPackFxPath = null;
 		[SerializeField] private string m_UnityPackFxPath = "/PopcornFXAssets";
@@ -52,6 +53,11 @@ namespace PopcornFX
 		[SerializeField] private bool m_EnableHotreloadInPlayMode = false;
 		[SerializeField] private bool m_EnableFileLogs = false;
 		[SerializeField] private bool m_ManualCameraLayer = false;
+
+#if UNITY_EDITOR
+		[SerializeField] private bool			m_EnableAssetPlatformVersion = false;
+		[SerializeField] private BuildTarget	m_CurrentPlatform = BuildTarget.NoTarget;
+#endif
 
 		[SerializeField] public string[]	m_PopcornLayerName = new string[5];
 
@@ -64,6 +70,11 @@ namespace PopcornFX
 		{
 			get { return Instance.m_AssetCategory; }
 			set { Instance.m_AssetCategory = value; }
+		}
+		public static bool QualityCategory
+		{
+			get { return Instance.m_QualityCategory; }
+			set { Instance.m_QualityCategory = value; }
 		}
 
 		public static bool EnableRaycastForCollisions
@@ -166,6 +177,30 @@ namespace PopcornFX
 			set { Instance.m_ManualCameraLayer = value; }
 		}
 
+#if UNITY_EDITOR
+		public static bool EnableAssetPlatformVersion
+		{
+			get { return Instance.m_EnableAssetPlatformVersion; }
+			set { Instance.m_EnableAssetPlatformVersion = value; }
+		}
+
+		public static string CurrentPlatformName
+		{
+			get
+			{
+				if (Instance.m_CurrentPlatform == BuildTarget.NoTarget)
+					return "Editor";
+				return Instance.m_CurrentPlatform.ToString();
+			}
+		}
+
+		public static BuildTarget CurrentPlatform
+		{
+			get { return Instance.m_CurrentPlatform; }
+			set { Instance.m_CurrentPlatform = value; }
+		}
+#endif
+
 		public int GetCameraLayer(int index)
 		{
 			if (ManualCameraLayer)
@@ -252,7 +287,7 @@ namespace PopcornFX
 			return true;
 		}
 
-		public static bool ReimportAssets(List<string> assetsList)
+		public static bool ReimportAssets(List<string> assetsList, string platform)
 		{
 			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0)
 			{
@@ -260,7 +295,7 @@ namespace PopcornFX
 				return false;
 			}
 			PKFxManager.SetForceDetermismOnBake(PKFxSettings.EnableForceDeterminism);
-			PKFxManager.ReimportAssets(assetsList);
+			PKFxManager.ReimportAssets(assetsList, platform);
 			return true;
 		}
 
@@ -325,6 +360,9 @@ namespace PopcornFX
 
 		[SerializeField] private bool m_UseApplicationAudioLoopback = false;
 
+		[SerializeField] private bool m_UseThumbnailsInBuilds = false;
+		[SerializeField] private bool m_UseAnimatedThumbnailsInBuilds = false;
+
 		[SerializeField] private bool m_AutomaticMeshResizing = true;
 		[SerializeField] private float m_VertexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private float m_IndexBufferSizeMultiplicator = 0.5f;
@@ -332,7 +370,9 @@ namespace PopcornFX
 		[SerializeField] private bool m_UseHashesAsMaterialName = true;
 
 		[SerializeField] private bool m_UpdateSimManually = false;
-
+		[SerializeField] private bool m_EnablePopcornFXLight = false;
+		[SerializeField] private int m_MaxPopcornFXLights = 16;
+		
 		private PKFxRaycasts.RaycastPackCallback m_CustomRaycast = null;
 
 		public static bool RenderingCategory
@@ -381,6 +421,36 @@ namespace PopcornFX
 		{
 			get { return Instance.m_UseApplicationAudioLoopback; }
 			set { Instance.m_UseApplicationAudioLoopback = value; }
+		}
+
+		public static bool UseThumbnailsInBuilds
+		{
+			get { return Instance.m_UseThumbnailsInBuilds; }
+			set
+			{
+				if (value != Instance.m_UseThumbnailsInBuilds)
+				{
+					Instance.m_UseThumbnailsInBuilds = value;
+#if UNITY_EDITOR
+					PKFxAssetCreationUtils.MoveThumbnails(Instance.m_UseThumbnailsInBuilds, false);
+#endif
+				}
+			}
+		}
+
+		public static bool UseAnimatedThumbnailsInBuilds
+		{
+			get { return Instance.m_UseAnimatedThumbnailsInBuilds; }
+			set
+			{
+				if (value != Instance.m_UseAnimatedThumbnailsInBuilds)
+				{
+					Instance.m_UseAnimatedThumbnailsInBuilds = value;
+#if UNITY_EDITOR
+					PKFxAssetCreationUtils.MoveThumbnails(Instance.m_UseAnimatedThumbnailsInBuilds, true);
+#endif
+				}
+			}
 		}
 
 		[SerializeField][HideInInspector][Tooltip("Enables the distortion particles material, adding a postFX pass.")]
@@ -520,6 +590,17 @@ namespace PopcornFX
 			get { return Instance.m_CustomRaycast; }
 			set { Instance.m_CustomRaycast = value; }
 		}
+		public static bool EnablePopcornFXLight
+		{
+			get { return Instance.m_EnablePopcornFXLight; }
+			set { Instance.m_EnablePopcornFXLight = value; }
+		}
+		public static int MaxPopcornFXLights
+		{
+			get { return Instance.m_MaxPopcornFXLights; }
+			set { Instance.m_MaxPopcornFXLights = value; }
+		}
+		
 
 		public void Setup()
 		{
@@ -528,5 +609,28 @@ namespace PopcornFX
 				Debug.Log("[PopcornFX] Valid Source Pack path is required to import your FXs", this);
 #endif
 		}
+
+		[SerializeField] private string[]	m_QualityVersionNames = new string[0];
+		[SerializeField] private string		m_CurrentQualityVersionName;
+
+
+		public static string[] QualityVersionNames
+		{
+			get { return Instance.m_QualityVersionNames; }
+			set { Instance.m_QualityVersionNames = value; }
+		}
+
+		public static string CurrentQualityVersionName
+		{
+			get { return Instance.m_CurrentQualityVersionName; }
+			set { Instance.m_CurrentQualityVersionName = value; }
+		}
+
+		public void StoreQualityLevelSettings(string[] levels, int currentLevels)
+		{
+			m_QualityVersionNames = levels;
+			m_CurrentQualityVersionName = levels[currentLevels];
+		}
+
 	}
 }

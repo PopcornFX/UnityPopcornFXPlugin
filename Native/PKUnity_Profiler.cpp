@@ -141,7 +141,7 @@ void	CLiveProfiler::AddReport(const char *reportName, CParticleMediumCollection 
 	if (!m_StatsReports.Contains(reportName))
 	{
 		SStatsReport *report = PK_NEW(SStatsReport);
-		PK_ASSERT(report == null);
+		PK_ASSERT(report != null);
 		m_StatsReports.Insert(reportName, report);
 	}
 	SStatsReport	*activeReport = *m_StatsReports[reportName];
@@ -160,9 +160,6 @@ void	CLiveProfiler::AddReport(const char *reportName, CParticleMediumCollection 
 			activeReport->m_CollectionUpdateTimeAverage = activeReport->m_CollectionUpdateTime / m_CurrentFrameNumber;
 			activeReport->m_ParticleCount = activeReport->m_ParticleCountAverage / m_CurrentFrameNumber;
 			activeReport->m_EffectsUsedCountAverage = activeReport->m_EffectsUsedCount / m_CurrentFrameNumber;
-			
-			activeReport->m_CollectionUpdateTime = 0;
-			activeReport->m_EffectsUsedCount = 0;
 		}
 	}
 
@@ -200,19 +197,30 @@ void	CLiveProfiler::AddReport(const char *reportName, CParticleMediumCollection 
 			{
 				effectTimings.m_TotalParticleCount_CPU += medium->ParticleStorage()->ActiveParticleCount();
 				effectTimings.m_TotalTimeAverage += mediumStatsReport.m_PipelineStages[PopcornFX::SEvolveStatsReport::PipelineStage_Total].m_Time;
+				activeReport->m_TotalTimeAverage += mediumStatsReport.m_PipelineStages[PopcornFX::SEvolveStatsReport::PipelineStage_Total].m_Time;
 			}
 		}
 		if (m_CurrentFrameNumber >= m_NumberOfFrameToAverage)
 		{
+			float timeNormalizer = activeReport->m_CollectionUpdateTimeAverage / (activeReport->m_TotalTimeAverage / (float)m_CurrentFrameNumber);
 			activeReport->m_EffectTimingsAverage = activeReport->m_EffectTimings;
 			for (u32 i = 0; i < activeReport->m_EffectTimingsAverage.Count(); ++i)
 			{
 				activeReport->m_EffectTimingsAverage[i].m_TotalParticleCount_CPU = activeReport->m_EffectTimingsAverage[i].m_TotalParticleCount_CPU / m_CurrentFrameNumber;
 				
-				activeReport->m_EffectTimingsAverage[i].m_TotalTimeAverage = activeReport->m_EffectTimingsAverage[i].m_TotalTimeAverage / (float)m_CurrentFrameNumber;
+				activeReport->m_EffectTimingsAverage[i].m_TotalTimeAverage = timeNormalizer * (activeReport->m_EffectTimingsAverage[i].m_TotalTimeAverage / (float)m_CurrentFrameNumber);
 			}
 			activeReport->m_EffectTimings.Clear();
 			activeReport->m_Dirty = true;
+		}
+	}
+	if (m_FrameStatsEnabled)
+	{
+		if (m_CurrentFrameNumber >= m_NumberOfFrameToAverage)
+		{
+			activeReport->m_CollectionUpdateTime = 0;
+			activeReport->m_EffectsUsedCount = 0;
+			activeReport->m_CollectionUpdateTimeAverage = 0;
 		}
 	}
 }

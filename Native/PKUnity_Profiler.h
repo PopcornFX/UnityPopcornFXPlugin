@@ -64,6 +64,8 @@ public:
 		float							m_CollectionUpdateTime = 0.0f;
 		float							m_CollectionUpdateTimeAverage = 0.0f;
 
+		float							m_TotalTimeAverage = 0.0f;
+
 		u32								m_ParticleCount = 0;
 		u32								m_ParticleCountAverage = 0;
 		u32								m_EffectsUsedCount = 0;
@@ -91,8 +93,8 @@ private:
 	u32									m_CurrentFrameNumber = 0;
 	u32									m_NumberOfFrameToAverage = 16;
 
-	 bool								m_FrameStatsEnabled = true;
-	 bool								m_EffectsStatsEnabled = true;
+	 bool								m_FrameStatsEnabled = false;
+	 bool								m_EffectsStatsEnabled = false;
 
 	 THashMap<SStatsReport*, CString>	m_StatsReports;
 

@@ -13,8 +13,11 @@ extern "C"
 
 	struct	SMirrorPackFxSettings
 	{
-		const char	*m_PopcornPackFxPath;
-		const char	*m_UnityPackFxPath;
+		const char		*m_PopcornPackFxPath;
+		const char		*m_UnityPackFxPath;
+
+		const char		*m_PlatformName;
+		unsigned int	m_QualityLevelCount;
 	};
 
 	//----------------------------------------------------------------------------
@@ -33,7 +36,7 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void					UnlockPackWatcher();
 	MANAGED_TO_POPCORN_CONVENTION void					GetAllAssetPath();
 	MANAGED_TO_POPCORN_CONVENTION void					SetForceDeterminismOnBakeNative(bool enable);
-	MANAGED_TO_POPCORN_CONVENTION void					ReimportAssets(int size, const char** paths);
+	MANAGED_TO_POPCORN_CONVENTION void					ReimportAssets(int size, const char **paths, const char *platformName, int qualityLevelCount);
 	MANAGED_TO_POPCORN_CONVENTION SMeshDataToFill		*GetMeshDataToFillFromAttribs(int vtxCount, int idxCount, int meshVertexAttributes);
 	MANAGED_TO_POPCORN_CONVENTION bool					NextSubmeshToBake(const char *name, int meshVertexAttributes);
 	MANAGED_TO_POPCORN_CONVENTION bool					AppendMeshToBake(SMeshDataToFill *mesh, CFloat4x4 transform);

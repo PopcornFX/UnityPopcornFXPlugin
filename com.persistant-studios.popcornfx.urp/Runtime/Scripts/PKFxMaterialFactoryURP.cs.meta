@@ -50,6 +50,16 @@ MonoImporter:
       type: 2}
   - m_CPUParticleDistortion: {instanceID: 0}
   - m_VertexBillboardingDistortion: {instanceID: 0}
+  - m_TransparentMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: 3b9a0723935f4954b9df91a8f39b1e0a,
+      type: 2}
+  - m_OpaqueMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: 63ab276fe8e0e4642a4db91ed5c64f40,
+      type: 2}
+  - m_TransparentMeshLitDoubleSidedDefault: {fileID: 11400000, guid: 51da6e51a56e15e4687f9b38c4efc132,
+      type: 2}
+  - m_OpaqueMeshLitDoubleSidedDefault: {fileID: 11400000, guid: d3876f91d22afa24a8057b7d94f7218f,
+      type: 2}
+  - m_OpaqueMeshLitSkinnedDoubleSidedDefault: {fileID: 11400000, guid: fd0fe8ed8647ecb4ab4807aa1b1e1743,
+      type: 2}
   - m_TransparentMeshUnlit2020: {fileID: 11400000, guid: 5f97069cae9ee2c45955649abd3f8dd6,
       type: 2}
   - m_OpaqueMeshUnlit2020: {fileID: 11400000, guid: 8302134102371f3458b94a24f20b68f7,
@@ -59,6 +69,16 @@ MonoImporter:
   - m_OpaqueMeshLit2020: {fileID: 11400000, guid: 9541e66461dfd5a4cb9e8d276351a749,
       type: 2}
   - m_OpaqueMeshLitSkinned2020: {fileID: 11400000, guid: bf23050381922e54fa1d976a7b3d41a8,
+      type: 2}
+  - m_TransparentMeshUnlitDoubleSided2020: {fileID: 11400000, guid: 4670233dc40591540b43f340fd9d8d46,
+      type: 2}
+  - m_OpaqueMeshUnlitDoubleSided2020: {fileID: 11400000, guid: 16dd3d9fd7d88294a9d395d123e806f3,
+      type: 2}
+  - m_TransparentMeshLitDoubleSided2020: {fileID: 11400000, guid: 7d60b8cae5bac7340a6efcd2076ad82c,
+      type: 2}
+  - m_OpaqueMeshLitDoubleSided2020: {fileID: 11400000, guid: 2ba9ad5420f3f674c831e3afd10df895,
+      type: 2}
+  - m_OpaqueMeshLitSkinnedDoubleSided2020: {fileID: 11400000, guid: d829417c2888e6a4fb5d14b3a277c518,
       type: 2}
   - m_OpaqueParticleUnlit2020: {instanceID: 0}
   - m_TransparentParticleUnlit2020: {instanceID: 0}

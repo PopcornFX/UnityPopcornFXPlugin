@@ -13,7 +13,7 @@ __PK_API_BEGIN
 struct	SPreloadFx
 {
 	CString		m_Path;
-	bool		m_UsesMeshRenderer;
+	bool		m_RequiresGameThreadCollect;
 };
 
 struct	SStartFx

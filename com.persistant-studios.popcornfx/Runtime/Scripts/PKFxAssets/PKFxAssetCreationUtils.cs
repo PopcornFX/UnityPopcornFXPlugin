@@ -27,6 +27,7 @@ namespace PopcornFX
 		public static Dictionary<int, List<PKFxEffectAsset>> DependenciesLoading { get { return m_DependenciesLoading; } }
 
 		public static string	m_TempBakeDirectory = "Temp/PopcornFx/Baked/";
+		public static string	m_ThumbnailsBakeDirectory = "Editor/Thumbnails/";
 
 		//----------------------------------------------------------------------------
 		// Public Methods
@@ -91,7 +92,12 @@ namespace PopcornFX
 			int key = path.GetHashCode();
 			if (DependenciesLoading.ContainsKey(key))
 			{
-				UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object));
+				UnityEngine.Object obj = null;
+				string editorResourcesPath = "Assets/Editor Default Resources/";
+				if (path.StartsWith(editorResourcesPath))
+					obj = EditorGUIUtility.Load(path.Substring(editorResourcesPath.Length));
+				else
+					obj = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object));
 				if (obj == null)
 				{
 					Debug.LogError("[PKFX] Unable to load dependency at " + path);
@@ -106,7 +112,25 @@ namespace PopcornFX
 						dependency.m_Object = obj;
 						ApplyPKImportSetting(dependency, path);
 					}
-					if (PKFxManager.IsSupportedTextureExtension(Path.GetExtension(path)))
+					if (dependency.HasUsageFlag(EUseInfoFlag.IsThumbnail))
+					{
+						asset.m_EditorThumbnail = (Texture2D)obj;
+						if (PKFxSettings.UseThumbnailsInBuilds)
+							asset.m_Thumbnail = (Texture2D)obj;
+						asset.m_Dependencies.Remove(dependency);
+					}
+					else if (dependency.HasUsageFlag(EUseInfoFlag.IsAnimatedThumbnail))
+					{
+						//The animated thumbnails is imported one time as Texture2D and later as Texture2DArray, skip the Texture2D
+						Texture2DArray animatedThumbnail = obj as Texture2DArray;
+						if (animatedThumbnail == null)
+							return;
+						asset.m_EditorAnimatedThumbnail = animatedThumbnail;
+						if (PKFxSettings.UseAnimatedThumbnailsInBuilds)
+							asset.m_AnimatedThumbnail = animatedThumbnail;
+						asset.m_Dependencies.Remove(dependency);
+					}
+					else if (PKFxManager.IsSupportedTextureExtension(Path.GetExtension(path)))
 					{
 						for (int i = 0; i < asset.m_RendererDescs.Count; ++i)
 						{
@@ -116,8 +140,13 @@ namespace PopcornFX
 
 							if (binding != null)
 							{
-								if (asset.m_Materials.Count > rdr.MaterialIdx)
-									binding.BindMaterialProperties(rdr, asset.m_Materials[rdr.MaterialIdx], asset);
+								List<PKFxEffectAsset.MaterialUIDToIndex> indexes = asset.m_MaterialIndexes.FindAll(item => item.m_UID == rdr.m_UID);
+								if (indexes != null)
+								{
+									foreach (PKFxEffectAsset.MaterialUIDToIndex index in indexes)
+										binding.BindMaterialProperties(rdr, asset.m_Materials[index.m_Idx], asset);
+								}
+
 							}
 							else
 								Debug.LogWarning("[PopcornFX] No material binding found for batch descriptor: " + rdr.m_GeneratedName);
@@ -132,17 +161,21 @@ namespace PopcornFX
 		// Private Methods
 		//----------------------------------------------------------------------------
 
-		public static void CreateAssetFolderUpToPath(string path)
+		public static void CreateAssetFolderUpToPath(string path, bool editorOnly = false)
 		{
-			string parentfolderPath = "Assets" + PKFxSettings.UnityPackFxPath;
+			string rootPath = editorOnly ? "Assets/Editor Default Resources" : "Assets";
+			string parentfolderPath = rootPath + PKFxSettings.UnityPackFxPath;
 			char[] separators = { '/', '\\' };
+
+			if (editorOnly && AssetDatabase.IsValidFolder(rootPath) == false)
+				AssetDatabase.CreateFolder("Assets", "Editor Default Resources");
 
 			if (AssetDatabase.IsValidFolder(parentfolderPath) == false)
 			{
-				string root = PKFxSettings.UnityPackFxPath;
-				if (root.StartsWith("/"))
-					root = root.Substring(1);
-				AssetDatabase.CreateFolder("Assets", root);
+				string packPath = PKFxSettings.UnityPackFxPath;
+				if (packPath.StartsWith("/"))
+					packPath = packPath.Substring(1);
+				AssetDatabase.CreateFolder(rootPath, packPath);
 			}
 
 			path = Path.GetDirectoryName(path);
@@ -197,7 +230,46 @@ namespace PopcornFX
 			handle.Free();
 
 			ImportAssetDependencies(fxAsset);
+			ImportThumbnailIfExists(fxAsset, EUseInfoFlag.IsThumbnail);
+			ImportThumbnailIfExists(fxAsset, EUseInfoFlag.IsAnimatedThumbnail);
+
 			return true;
+		}
+
+		//----------------------------------------------------------------------------
+
+		private static void ImportThumbnailIfExists(PKFxEffectAsset fxAsset, EUseInfoFlag usage)
+		{
+			string ext = "";
+			bool editorOnly = true;
+
+			if (usage == EUseInfoFlag.IsThumbnail)
+			{
+				ext = ".png";
+				editorOnly = !PKFxSettings.UseThumbnailsInBuilds;
+			}
+			else if (usage == EUseInfoFlag.IsAnimatedThumbnail)
+			{
+				ext = ".anim.png";
+				editorOnly = !PKFxSettings.UseAnimatedThumbnailsInBuilds;
+			}
+			else
+				return;
+
+			string thumbnailPath = fxAsset.AssetVirtualPath + ext;
+			string thumbnailFullPath = m_TempBakeDirectory + m_ThumbnailsBakeDirectory + thumbnailPath;
+
+			if (File.Exists(thumbnailFullPath))
+			{
+				//Add the thumbnail dependency
+				PKFxEffectAsset.DependencyDesc dependency = new PKFxEffectAsset.DependencyDesc();
+				dependency.m_Path = m_ThumbnailsBakeDirectory + thumbnailPath;
+				dependency.m_UsageFlags = (int)usage;
+				fxAsset.m_Dependencies.Add(dependency);
+
+				CreateAssetFolderUpToPath(dependency.m_Path, editorOnly);
+				CreateDependencyAsset(fxAsset, dependency, thumbnailFullPath, editorOnly);
+			}
 		}
 
 		//----------------------------------------------------------------------------
@@ -243,7 +315,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private static void CreateDependencyAsset(PKFxEffectAsset fxAsset, PKFxEffectAsset.DependencyDesc dependencyDesc, string srcFile)
+		private static void CreateDependencyAsset(PKFxEffectAsset fxAsset, PKFxEffectAsset.DependencyDesc dependencyDesc, string srcFile, bool editorOnly = false)
 		{
 			if (!File.Exists(srcFile))
 			{
@@ -251,7 +323,8 @@ namespace PopcornFX
 			}
 
 			string dstVirtualPath = dependencyDesc.m_Path;
-			string dstPackPath = "Assets" + PKFxSettings.UnityPackFxPath;
+			string rootPath = editorOnly ? "Assets/Editor Default Resources" : "Assets";
+			string dstPackPath = rootPath + PKFxSettings.UnityPackFxPath;
 			string dstFullPath = dstPackPath + "/" + dstVirtualPath;
 
 			try
@@ -299,6 +372,8 @@ namespace PopcornFX
 
 			getWidthAndHeightDelegate.Invoke(importer, ref width, ref height);
 		}
+
+		//----------------------------------------------------------------------------
 
 		private static void ApplyPKImportSetting(PKFxEffectAsset.DependencyDesc dependency, string path)
 		{
@@ -352,6 +427,21 @@ namespace PopcornFX
 						textureImporter.isReadable = true;
 						reimport = true;
 					}
+					if (dependency.HasUsageFlag(EUseInfoFlag.IsThumbnail))
+					{
+						//textureImporter.textureType = TextureImporterType.Sprite;
+						textureImporter.textureCompression = TextureImporterCompression.Uncompressed;
+						reimport = true;
+					}
+					else if (dependency.HasUsageFlag(EUseInfoFlag.IsAnimatedThumbnail))
+					{
+						textureImporter.textureShape = TextureImporterShape.Texture2DArray;
+						TextureImporterSettings settings = new TextureImporterSettings();
+						textureImporter.ReadTextureSettings(settings);
+						settings.flipbookRows = 48;
+						textureImporter.SetTextureSettings(settings);
+						reimport = true;
+					}
 					if (reimport)
 						textureImporter.SaveAndReimport();
 				}
@@ -383,6 +473,83 @@ namespace PopcornFX
 						ddsImporter.SaveAndReimport();
 					}
 				}
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
+		public static void MoveThumbnails(bool fromEditor, bool animated)
+		{
+			string srcPath = (fromEditor ? "Assets/Editor Default Resources" : "Assets") + PKFxSettings.UnityPackFxPath + "/";
+			string dstPath = (fromEditor ? "Assets" : "Assets/Editor Default Resources") + PKFxSettings.UnityPackFxPath + "/";
+			string virtualPath =  m_ThumbnailsBakeDirectory;
+
+			if (!Directory.Exists(srcPath + virtualPath))
+				return;
+
+			string ext = animated ? ".anim.png" : ".png";
+			string searchPattern = "*.pkfx" + ext;
+			string effectRootPath = "Assets" + PKFxSettings.UnityPackFxPath + "/";
+
+			foreach (string file in Directory.EnumerateFiles(srcPath + virtualPath, searchPattern, SearchOption.AllDirectories))
+			{
+				string assetPath = file.Substring(srcPath.Length).Replace("\\", "/");
+
+				CreateAssetFolderUpToPath(assetPath, !fromEditor);
+				AssetDatabase.MoveAsset(srcPath + assetPath, dstPath + assetPath);
+
+				string effectPath = assetPath.Substring(m_ThumbnailsBakeDirectory.Length);
+				effectPath = effectPath.Substring(0, effectPath.Length - ext.Length);
+				effectPath = effectPath + ".asset";
+				PKFxEffectAsset effectAsset = AssetDatabase.LoadAssetAtPath<PKFxEffectAsset>(effectRootPath + effectPath);
+
+				if (effectAsset != null)
+				{
+					if (animated)
+					{
+						if (fromEditor)
+							effectAsset.m_AnimatedThumbnail = effectAsset.m_EditorAnimatedThumbnail;
+						else
+							effectAsset.m_AnimatedThumbnail = null;
+					}
+					else
+					{
+						if (fromEditor)
+							effectAsset.m_Thumbnail = effectAsset.m_EditorThumbnail;
+						else
+							effectAsset.m_Thumbnail = null;
+					}
+					EditorUtility.SetDirty(effectAsset);
+					AssetDatabase.SaveAssetIfDirty(effectAsset);
+				}
+			}
+
+			DeleteEmptyFolders(Path.GetDirectoryName(srcPath + virtualPath));
+		}
+
+		//----------------------------------------------------------------------------
+		public static void DeleteEmptyFolders(string path)
+		{
+			while (AssetDatabase.IsValidFolder(path))
+			{
+				string[] remainingAssets = AssetDatabase.FindAssets("*", new string[] { path });
+				bool onlyDirectories = true;
+				foreach (var guid in remainingAssets)
+				{
+					string assetPath = AssetDatabase.GUIDToAssetPath(guid);
+					if (!AssetDatabase.IsValidFolder(assetPath))
+					{
+						onlyDirectories = false;
+						break;
+					}
+				}
+				if (onlyDirectories)
+				{
+					AssetDatabase.DeleteAsset(path);
+					path = Path.GetDirectoryName(path);
+				}
+				else
+					break;
 			}
 		}
 

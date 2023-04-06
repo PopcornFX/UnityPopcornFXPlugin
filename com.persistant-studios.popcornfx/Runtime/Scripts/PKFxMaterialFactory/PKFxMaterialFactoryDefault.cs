@@ -48,7 +48,6 @@ namespace PopcornFX
 			return materialFactoryDefault;
 		}
 
-
 		public override void SetupFallBackFeatureBinding()
 		{
 			// Meshes:
@@ -113,7 +112,12 @@ namespace PopcornFX
 				Debug.LogError("[PopcornFX] Trying to resolve material from null PKFxFxAsset");
 				return null;
 			}
-			Material material = asset.m_Materials[batchDesc.MaterialIdx];
+			PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == batchDesc.m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
+			if (index == null)
+				return null;
+			if (index.m_Idx == -1)
+				return null;
+			Material material = asset.m_Materials[index.m_Idx];
 			if (material == null)
 				return null;
 			// Set the render queue:

@@ -519,7 +519,9 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	//-----------------------------
 	// Choose the culling mode:
 	//-----------------------------
-	m_DoubleSided = renderer.m_Declaration.GetPropertyValue_B(BasicRendererProperties::SID_DoubleSided(), true);
+	m_DoubleSided = true; // Keep culling off by default
+	if (renderer.m_Declaration.IsFeatureEnabled(BasicRendererProperties::SID_Culling()))
+		m_DoubleSided = renderer.m_Declaration.GetPropertyValue_B(BasicRendererProperties::SID_Culling_DoubleSided(), true);
 
 	//-----------------------------
 	// Retrieve the shader uniforms (mesh resource, property values...):
@@ -840,6 +842,7 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 	desc.m_DrawOrder = m_MaterialDescBillboard.m_Flags.m_DrawOrder;
 	desc.m_AlphaClipThreshold = m_MaterialDescBillboard.m_AlphaThreshold;
 
+	desc.m_UID = m_UID;
 	if ((m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
 	{
 		desc.m_LitRendering = PK_NEW(SRenderingFeatureLitDesc);
@@ -862,6 +865,7 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 
 bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 {
+	desc.m_UID = m_UID;
 	desc.m_MeshAsset = m_MaterialDescMesh.m_MeshPath.ToStringData();
 	if (desc.m_MeshAsset == null)
 		return false;
@@ -1014,6 +1018,7 @@ void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 			{
 				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewTriangleRenderer(&desc, idx);
 			}
+			PK_ASSERT(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1);
 
 			if (m_UnityMeshInfoPerViews[i].m_RendererGUID < 0)
 				return;
@@ -1116,6 +1121,7 @@ void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 template<>
 bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataBillboard>(const CRendererDataBillboard *renderer)
 {
+	m_UID = renderer->m_Declaration.m_RendererUID;
 	m_RendererType = renderer->m_RendererType;
 	if (!PK_VERIFY(m_MaterialDescBillboard.InitFromRenderer(*renderer)) ||
 		!PK_VERIFY(m_BillboardBR.Setup(renderer, null, SParticleStreamDef())))
@@ -1128,6 +1134,7 @@ bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataBillboard>(const
 template<>
 bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataRibbon>(const CRendererDataRibbon *renderer)
 {
+	m_UID = renderer->m_Declaration.m_RendererUID;
 	m_RendererType = renderer->m_RendererType;
 
 	if (!PK_VERIFY(m_MaterialDescBillboard.InitFromRenderer(*renderer)) ||
@@ -1141,6 +1148,7 @@ bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataRibbon>(const CR
 template<>
 bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataMesh>(const CRendererDataMesh *renderer)
 {
+	m_UID = renderer->m_Declaration.m_RendererUID;
 	m_RendererType = renderer->m_RendererType;
 
 	if (!PK_VERIFY(m_MaterialDescMesh.InitFromRenderer(*renderer)) ||
@@ -1154,11 +1162,22 @@ bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataMesh>(const CRen
 template<>
 bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataTriangle>(const CRendererDataTriangle *renderer)
 {
+	m_UID = renderer->m_Declaration.m_RendererUID;
 	m_RendererType = renderer->m_RendererType;
 
 	if (!PK_VERIFY(m_MaterialDescBillboard.InitFromRenderer(*renderer)) ||
 		!PK_VERIFY(m_TriangleBR.Setup(renderer, null, SParticleStreamDef())))
 		return false;
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+template<>
+bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataLight>(const CRendererDataLight *renderer)
+{
+	//nothing material related to setup for lights
+	m_RendererType = renderer->m_RendererType;
 	return true;
 }
 

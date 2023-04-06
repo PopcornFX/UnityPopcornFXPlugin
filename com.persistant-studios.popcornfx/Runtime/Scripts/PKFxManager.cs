@@ -7,6 +7,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace PopcornFX
 {
 	public class PKFxManager
@@ -17,11 +21,16 @@ namespace PopcornFX
 		public static int DistortionLayerID { get { return LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer); } }
 
 		public static float					TimeMultiplier = 1.0f;
-
+		public static int					MaxCameraSupport = 1;
 		public static bool					UseFixedDT = false;
 		public static bool					IsUnitTesting = false;
 
+		public static PKFxRenderingPlugin	RenderingPlugin = null;
 
+		public static string				StoredQualityLevel = "Medium";
+		public static string[]				QualitiesLevelDescription;
+
+		//----------------------------------------------------------------------------
 		// PopcornFX General State With Native Interop
 		//----------------------------------------------------------------------------
 
@@ -194,6 +203,7 @@ namespace PopcornFX
 
 			settings.m_EnableLocalizedPages = PKFxSettings.EnableLocalizedPages;
 			settings.m_EnableLocalizedByDefault = PKFxSettings.EnableLocalizedByDefault;
+			settings.m_LightRendererEnabled = PKFxSettings.EnablePopcornFXLight;
 
 			settings.m_FreeUnusedBatches = PKFxSettings.FreeUnusedBatches;
 			settings.m_FrameCountBeforeFreeingUnusedBatches = PKFxSettings.FrameCountBeforeFreeingUnusedBatches;
@@ -241,14 +251,16 @@ namespace PopcornFX
 
 		public static void SetMaxCameraCount(int count)
 		{
+			MaxCameraSupport = count;
 			PKFxManagerImpl.SetMaxCameraCount(count);
 		}
 
+		//----------------------------------------------------------------------------
 		// Editor Only
 		//----------------------------------------------------------------------------
 		#region editor
-
 #if UNITY_EDITOR
+
 		public static void StartupPopcornFileWatcher(bool enableEffectHotreload)
 		{
 			PKFxManagerImpl.StartupPopcornFileWatcher(enableEffectHotreload);
@@ -294,9 +306,9 @@ namespace PopcornFX
 			PKFxManagerImpl.GetAllAssetPath();
 		}
 
-		public static void ReimportAssets(List<string> assets)
+		public static void ReimportAssets(List<string> assets, string platform)
 		{
-			PKFxManagerImpl.ReimportAssets(assets.Count, assets.ToArray());
+			PKFxManagerImpl.ReimportAssets(assets.Count, assets.ToArray(), platform, QualitySettings.names.Length);
 		}
 
 		public static void SetForceDetermismOnBake(bool enable)
@@ -304,10 +316,68 @@ namespace PopcornFX
 			PKFxManagerImpl.SetForceDetermismOnBake(enable);
 
 		}
+
+		public static List<string> PullEffectChangeIFN()
+		{
+			LockPackWatcherChanges();
+
+			int totalChanges = 0;
+			int remainingChanges = 0;
+			bool unstackChangesSuccess = true;
+			List<string> updatedAssets = null;
+
+			try // Need try catch to avoid dead lock!
+			{
+				unstackChangesSuccess = PKFxManager.PullPackWatcherChanges(out totalChanges);
+
+				if (totalChanges > 0)
+					updatedAssets = new List<string>(totalChanges);
+				remainingChanges = totalChanges;
+				while (remainingChanges > 0 && unstackChangesSuccess)
+				{
+					unstackChangesSuccess = PKFxManager.PullPackWatcherChanges(out remainingChanges);
+
+					if (!updatedAssets.Contains(PKFxManager.GetImportedAssetPath()))
+						updatedAssets.Add(PKFxManager.GetImportedAssetPath());
+					if (EditorUtility.DisplayCancelableProgressBar("Baking and importing PopcornFX effects",
+																	"Importing \'" + PKFxManager.GetImportedAssetName() + "\' and its dependencies.",
+																	(float)(totalChanges - remainingChanges) / (float)totalChanges))
+					{
+						remainingChanges = 0;
+						PKFxManager.CancelPackWatcherChanges();
+					}
+				}
+
+				EditorUtility.ClearProgressBar();
+
+				if (unstackChangesSuccess == false)
+					Debug.LogWarning("[PopcornFX] PackWatcher Unstack issue");
+
+			}
+			catch (Exception e)
+			{
+				Debug.LogError("Error in effect importer: " + e.Message);
+			}
+
+			PKFxManager.UnlockPackWatcherChanges();
+
+			return updatedAssets;
+		}
+
+		public static void SetTargetPlatformForAssets(string targetPlatform)
+		{
+			if (!PKFxSettings.EnableAssetPlatformVersion)
+				return;
+
+			PKFxSettings.GetProjetAssetPath();
+			PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList, targetPlatform);
+			PullEffectChangeIFN();
+		}
+
 #endif
+#endregion editor
 
-		#endregion editor
-
+		//----------------------------------------------------------------------------
 		// Frame Update
 		//----------------------------------------------------------------------------
 		#region FrameUpdateApi
@@ -348,6 +418,7 @@ namespace PopcornFX
 		}
 		#endregion FrameUpdateApi
 
+		//----------------------------------------------------------------------------
 		// Effect Related API With Native Interop
 		//----------------------------------------------------------------------------
 		#region effectsApi
@@ -391,9 +462,9 @@ namespace PopcornFX
 			return PKFxManagerImpl._PreloadFxDependencies(fxAsset);
 		}
 
-		public static void PreloadEffectIFN(string path, bool useMeshRenderer)
+		public static void PreloadEffectIFN(string path, bool requiresGameThreadCollect)
 		{
-			PKFxManagerImpl.PreloadFxIFN(path, useMeshRenderer ? 1 : 0);
+			PKFxManagerImpl.PreloadFxIFN(path, requiresGameThreadCollect ? 1 : 0);
 		}
 
 		public static bool SetEffectTransform(int effectGUID, Transform transform)
@@ -414,6 +485,7 @@ namespace PopcornFX
 		}
 		#endregion effectsApi
 
+		//----------------------------------------------------------------------------
 		//Audio Callback
 		//----------------------------------------------------------------------------
 
@@ -436,6 +508,7 @@ namespace PopcornFX
 			PKFxManagerImpl.SetApplicationLoopbackAudioVolume(volume);
 		}
 
+		//----------------------------------------------------------------------------
 		// Effect Event Callback
 		//----------------------------------------------------------------------------
 		#region Event Callback
@@ -461,6 +534,7 @@ namespace PopcornFX
 		}
 		#endregion
 
+		//----------------------------------------------------------------------------
 		// Attributes Buffers
 		//----------------------------------------------------------------------------
 		#region Attributes Buffers
@@ -471,6 +545,7 @@ namespace PopcornFX
 		#endregion Attributes Buffers
 
 
+		//----------------------------------------------------------------------------
 		// Effect Samplers
 		//----------------------------------------------------------------------------
 		#region Samplers
@@ -567,6 +642,7 @@ namespace PopcornFX
 		}
 		#endregion Get/Set
 
+		//----------------------------------------------------------------------------
 		// Profiler Management
 		//----------------------------------------------------------------------------
 
@@ -606,6 +682,61 @@ namespace PopcornFX
 				if (renderer.m_InstancesRenderer != null)
 					renderer.m_InstancesRenderer.DrawMeshes();
 			}
+		}
+
+		public static void UpdateQualityLevels()
+		{
+			string[] qualitiesLevelDescriptions = QualitySettings.names;
+			for (int i = 0; i < qualitiesLevelDescriptions.Length; ++i)
+				qualitiesLevelDescriptions[i] = qualitiesLevelDescriptions[i].Replace(" ", ""); //No space in quality level from PopcornFX
+			QualitiesLevelDescription = qualitiesLevelDescriptions;
+
+			StoredQualityLevel = QualitySettings.names[QualitySettings.GetQualityLevel()].Replace(" ", ""); //No space in quality level from PopcornFX
+
+			PKFxManagerImpl.SetCurrentQualityLevel(StoredQualityLevel);
+
+			List<PKFxEmitter>				killedEffects = new List<PKFxEmitter>();
+			Dictionary<int, PKFxEmitter>	fxs = new Dictionary<int, PKFxEmitter>(PKFxEmitter.g_ListEffects);
+			// Start by clearing the FXs in the C# so they don't get updated
+			foreach (KeyValuePair<int, PKFxEmitter> effect in fxs)
+			{
+				if (effect.Value.Alive)
+				{
+					killedEffects.Add(effect.Value);
+					effect.Value.KillEffect();
+				}
+			}
+
+			ResetAndUnloadAllEffects();
+			ClearRenderers();
+			SetMaxCameraCount(MaxCameraSupport);
+
+			foreach (PKFxEmitter effect in killedEffects)
+			{
+				effect.StartEffect();
+			}
+		}
+
+		public static void SetQualityLevelSettings()
+		{
+			int			currentQualityLevel = QualitySettings.GetQualityLevel();
+			string[]	qualitiesLevelDescriptions = QualitySettings.names;
+
+			for (int i = 0; i < qualitiesLevelDescriptions.Length; ++i)
+				qualitiesLevelDescriptions[i] = qualitiesLevelDescriptions[i].Replace(" ", ""); //No space in quality level from PopcornFX
+
+			QualitiesLevelDescription = qualitiesLevelDescriptions;
+			StoredQualityLevel = qualitiesLevelDescriptions[currentQualityLevel];
+
+			//Store into Settings:
+			PKFxSettings.Instance.StoreQualityLevelSettings(qualitiesLevelDescriptions, currentQualityLevel);
+			//Broadcast it to Native:
+#if UNITY_EDITOR
+			PKFxManagerImpl.SetQualityLevelSettings(qualitiesLevelDescriptions, qualitiesLevelDescriptions.Length, currentQualityLevel, true);
+#else
+			PKFxManagerImpl.SetQualityLevelSettings(qualitiesLevelDescriptions, qualitiesLevelDescriptions.Length, currentQualityLevel, false);
+#endif
+
 		}
 	}
 }

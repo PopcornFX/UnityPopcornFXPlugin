@@ -421,7 +421,7 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SApiContext.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SComputeState.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SConstantSetLayout.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SDrawIndirectArgs.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SIndirectArgs.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SRenderState.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SShaderBindings.h" />
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractApiManager.h" />

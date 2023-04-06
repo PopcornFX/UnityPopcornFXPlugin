@@ -28,7 +28,7 @@ namespace PopcornFX
 	{
 		public string m_FxPath;
 		public Matrix4x4 m_Transforms;
-		public bool m_UsesMeshRenderer;
+		public bool m_RequiresGameThreadCollect;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -71,6 +71,7 @@ namespace PopcornFX
 
 		public bool m_IsUnitTesting;
 		public bool m_UseApplicationAudioLoopback;
+		public bool m_LightRendererEnabled;
 
 		// Threading
 		public bool m_SingleThreadedExecution;
@@ -130,8 +131,11 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SMirrorPackFxSettings
 	{
-		public string m_PopcornPackFxPath;
-		public string m_UnityPackFxPath;
+		public string		m_PopcornPackFxPath;
+		public string		m_UnityPackFxPath;
+
+		public string		m_PlatformName;
+		public int			m_QualityLevelCount;
 	}
 
 	//----------------------------------------------------------------------------
@@ -200,6 +204,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetMaxCameraCount(int number);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetCurrentQualityLevel(string currentQualityLevel);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void UpdateCamDesc(int camID, ref SCamDesc desc, bool update);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void UpdateParticles(float DT);
@@ -210,7 +216,7 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void GetStats(ref SStats stats);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
-		public static extern void PreloadFxIFN(string path, int usesMeshRenderer);
+		public static extern void PreloadFxIFN(string path, int requiresGameThreadCollect);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern int InstantiateFx(ref SFxDesc fxDesc);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -303,6 +309,8 @@ namespace PopcornFX
 		public static extern int StatsEnableEffectsStats(bool enable);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool StatsPullFrameData(string reportName, ref SStatsToFill data);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetQualityLevelSettings(string[] QualityLevels, int qualityLevelCount, int currentQualityLevel, bool updateCookery);
 
 #if UNITY_EDITOR
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -333,7 +341,7 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetForceDeterminismOnBakeNative(bool enable);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
-		public static extern void ReimportAssets(int size, string[] ar);
+		public static extern void ReimportAssets(int size, string[] ar, string platform, int qualityLevelCount);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern IntPtr GetMeshDataToFillFromAttribs(int vtxCount, int idxCount, int meshVertexAttributes);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -346,7 +354,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.15.5 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.16.0 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
@@ -567,6 +575,7 @@ namespace PopcornFX
 			SetDelegateOnSetRendererActive(delegateHandler.DelegateToFunctionPointer(new SetRendererActiveCallback(OnSetRendererActive)));
 			SetDelegateOnSetMeshInstancesCount(delegateHandler.DelegateToFunctionPointer(new SetMeshInstancesCountCallback(OnSetMeshInstancesCount)));
 			SetDelegateOnSetMeshInstancesBuffer(delegateHandler.DelegateToFunctionPointer(new SetMeshInstancesBufferCallback(OnSetMeshInstancesBuffer)));
+			SetDelegateOnSetLightsBuffer(delegateHandler.DelegateToFunctionPointer(new SetLightsBufferCallback(OnSetLightsBuffer)));
 			SetDelegateOnRetrieveCustomMaterialInfo(delegateHandler.DelegateToFunctionPointer(new RetrieveCustomMaterialInfoCallback(OnRetrieveCustomMaterialInfo)));
 			SetDelegateOnRetrieveRendererBufferInfo(delegateHandler.DelegateToFunctionPointer(new RetrieveRendererBufferInfoCallback(OnRetrieveRendererBufferInfo)));
 			SetDelegateOnUpdateRendererBounds(delegateHandler.DelegateToFunctionPointer(new RendererBoundsUpdateCallback(OnRendererBoundsUpdate)));
@@ -580,6 +589,7 @@ namespace PopcornFX
 			SetDelegateOnEffectAttributeFound(delegateHandler.DelegateToFunctionPointer(new EffectAttributeFoundCallback(OnEffectAttributeFound)));
 			SetDelegateOnEffectSamplerFound(delegateHandler.DelegateToFunctionPointer(new EffectSamplerFoundCallback(OnEffectSamplerFound)));
 			SetDelegateOnEffectRendererFound(delegateHandler.DelegateToFunctionPointer(new EffectRendererFoundCallback(OnEffectRendererFound)));
+			SetDelegateOnEffectRendererLink(delegateHandler.DelegateToFunctionPointer(new EffectRendererLinkCallback(OnEffectRendererLink)));
 			SetDelegateOnEffectEventFound(delegateHandler.DelegateToFunctionPointer(new EffectEventFoundCallback(OnEffectEventFound)));
 			SetDelegateOnGetEffectInfo(delegateHandler.DelegateToFunctionPointer(new GetEffectInfoCallback(OnGetEffectInfo)));
 			SetDelegateOnGetAllAssetPath(delegateHandler.DelegateToFunctionPointer(new GetAllAssetPathCallback(OnGetAllAssetPath)));
@@ -595,6 +605,8 @@ namespace PopcornFX
 #if UNITY_EDITOR
 		public static void StartupPopcornFileWatcher(bool enableEffectHotReload)
 		{
+			PKFxManager.SetQualityLevelSettings();
+
 			SMirrorPackFxSettings packFxSettings;
 
 			if (string.IsNullOrEmpty(PKFxSettings.PopcornPackFxPath))
@@ -605,6 +617,10 @@ namespace PopcornFX
 				packFxSettings.m_UnityPackFxPath = null;
 			else
 				packFxSettings.m_UnityPackFxPath = PKFxSettings.UnityPackFxPath;
+
+			packFxSettings.m_QualityLevelCount = QualitySettings.names.Length;
+			Debug.Assert(packFxSettings.m_QualityLevelCount >= 0);
+			packFxSettings.m_PlatformName = "Editor";
 
 			SetPackSettings(ref packFxSettings);
 

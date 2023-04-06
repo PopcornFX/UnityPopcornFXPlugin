@@ -132,6 +132,7 @@ namespace PopcornFX
 		public IntPtr m_LitRendering;
 
 		public int	m_CameraId;
+		public int	m_UID;
 	};
 
 	// Meshes:
@@ -158,6 +159,7 @@ namespace PopcornFX
 
 		public int		m_TextureAtlasCount;
 		public IntPtr	m_TextureAtlas;
+		public int		m_UID;
 	};
 
 
@@ -255,6 +257,9 @@ namespace PopcornFX
 		IsTextureSampler = (1 << 4),
 
 		IsVatTexture = (1 << 5),
+
+		IsThumbnail = (1 << 6),
+		IsAnimatedThumbnail = (1 << 7),
 	};
 
 	public enum EPrintConsoleType : int
@@ -314,6 +319,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnSetMeshInstancesBuffer(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnSetLightsBuffer(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRetrieveCustomMaterialInfo(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRetrieveRendererBufferInfo(IntPtr delegatePtr);
@@ -333,6 +340,8 @@ namespace PopcornFX
 		public static extern void SetDelegateOnEffectAttributeFound(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnEffectRendererFound(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnEffectRendererLink(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnEffectEventFound(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -577,8 +586,20 @@ namespace PopcornFX
 #endif
 		}
 
-		public delegate void EffectEventFoundCallback(IntPtr eventDescPtr);
+		//----------------------------------------------------------------------------
 
+		public delegate void EffectRendererLinkCallback(int GlobalIdx, string qualityLevel, int UID);
+
+		[MonoPInvokeCallback(typeof(EffectRendererLinkCallback))]
+		private static void OnEffectRendererLink(int globalIdx, string qualityLevel, int UID)
+		{
+#if UNITY_EDITOR
+			m_CurrentlyImportedAsset.LinkRenderer(globalIdx, qualityLevel, UID);
+#endif
+		}
+		
+		//----------------------------------------------------------------------------
+		public delegate void EffectEventFoundCallback(IntPtr eventDescPtr);
 
 		[MonoPInvokeCallback(typeof(EffectEventFoundCallback))]
 		private static void OnEffectEventFound(IntPtr EventDescPtr)
@@ -598,12 +619,12 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		public delegate void GetEffectInfoCallback(int usesMeshRenderer);
+		public delegate void GetEffectInfoCallback(int requiresGameThreadCollect);
 
 		[MonoPInvokeCallback(typeof(GetEffectInfoCallback))]
-		private static void OnGetEffectInfo(int usesMeshRenderer)
+		private static void OnGetEffectInfo(int requiresGameThreadCollect)
 		{
-			m_CurrentlyImportedAsset.m_UsesMeshRenderer = usesMeshRenderer != 0;
+			m_CurrentlyImportedAsset.m_RequiresGameThreadCollect = requiresGameThreadCollect != 0;
 		}
 
 		//----------------------------------------------------------------------------
@@ -1092,6 +1113,19 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		private delegate void SetLightsBufferCallback(IntPtr lightInfos, int count);
+
+		[MonoPInvokeCallback(typeof(SetLightsBufferCallback))]
+		public static void OnSetLightsBuffer(IntPtr lightInfos, int count)
+		{
+			if (PKFxManager.RenderingPlugin != null)
+			{
+				PKFxManager.RenderingPlugin.SetLightsBuffer(lightInfos, count);
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
 		private delegate void RetrieveCustomMaterialInfoCallback(int type, IntPtr rendererDescPtr, int idx, IntPtr hasCustomMaterialPtr, IntPtr customMaterialIdPtr);
 
 		[MonoPInvokeCallback(typeof(RetrieveRendererBufferInfoCallback))]
@@ -1263,7 +1297,7 @@ namespace PopcornFX
 		[MonoPInvokeCallback(typeof(RendererBoundsUpdateCallback))]
 		public static void OnRendererBoundsUpdate(int rendererGUID, ref SUpdateRendererBounds bounds)
 		{
-			if (rendererGUID >= m_Renderers.Count)
+			if (rendererGUID == -1 || rendererGUID >= m_Renderers.Count)
 				return;
 			Bounds b = new Bounds();
 			b.min = new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ);

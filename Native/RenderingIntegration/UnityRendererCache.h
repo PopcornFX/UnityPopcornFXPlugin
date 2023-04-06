@@ -315,6 +315,7 @@ public:
 	,	m_AssetName("")
 	,	m_HasCustomMat(false)
 	,	m_CustomMatID(-1)
+	,	m_UID(-1)
 	{
 	}
 
@@ -362,6 +363,7 @@ public:
 
 	bool										m_HasCustomMat;
 	int											m_CustomMatID;
+	int											m_UID;
 };
 PK_DECLARE_REFPTRCLASS(UnityRendererCache);
 

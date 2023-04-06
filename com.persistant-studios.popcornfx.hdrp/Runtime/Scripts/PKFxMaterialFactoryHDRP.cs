@@ -9,6 +9,7 @@ using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using UnityEngine.Rendering.HighDefinition;
 
 namespace PopcornFX
 {
@@ -16,6 +17,12 @@ namespace PopcornFX
 	public class PKFxMaterialFactoryHDRP : PKFxMaterialFactory
 	{
 		public int			m_RenderQueue = 3050; // In HDRP, the objects > 3100 are not drawn
+
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshUnlitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshUnlitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshLitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitDoubleSidedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitSkinnedDoubleSidedDefault;
 
 #if UNITY_EDITOR
 		[MenuItem("Assets/Create/PopcornFX/Material Factory/HDRP")]
@@ -51,6 +58,16 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
 			if (m_OpaqueMeshLitSkinnedDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDefault);
+			if (m_TransparentMeshUnlitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDoubleSidedDefault);
+			if (m_OpaqueMeshUnlitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDoubleSidedDefault);
+			if (m_TransparentMeshLitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitDoubleSidedDefault);
+			if (m_OpaqueMeshLitDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDoubleSidedDefault);
+			if (m_OpaqueMeshLitSkinnedDoubleSidedDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDoubleSidedDefault);
 			// Particles Unlit:
 			if (m_OpaqueParticleUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
@@ -102,12 +119,37 @@ namespace PopcornFX
 				Debug.LogError("[PopcornFX] Trying to resolve material from null PKFxEffectAsset");
 				return null;
 			}
-			Material material = asset.m_Materials[batchDesc.MaterialIdx];
+			Material material = null;
+			PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == batchDesc.m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
+			if (index.m_Idx != -1)
+				material = asset.m_Materials[index.m_Idx];
+			else
+				Debug.LogError("[PopcornFX] Trying to resolve material from PKFxEffectAsset that is not holding materials");
 			if (material == null)
 				return null;
 			if (batchDesc.m_Type != ERendererType.Mesh)
 				material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
 			return material;
+		}
+
+		public override GameObject GetLightTemplate()
+		{
+			GameObject template = new GameObject("PopcornFX Light");
+			HDAdditionalLightData light = template.AddHDLight(HDLightTypeAndShape.Point);
+			light.EnableColorTemperature(false);
+			light.shapeRadius = 0;
+			return template;
+		}
+
+		public override void SetLightValue(Light light, PKFxLightPool.SLightInfo info)
+		{
+			HDAdditionalLightData data = light.gameObject.GetComponent<HDAdditionalLightData>();
+			
+			data.SetIntensity(info.m_Intensity, LightUnit.Lux);
+			data.luxAtDistance = info.m_Range;
+			data.SetRange(info.m_Range);
+			data.SetColor(info.m_Color * info.m_Intensity);
+			light.transform.position = info.m_Position;
 		}
 	}
 }

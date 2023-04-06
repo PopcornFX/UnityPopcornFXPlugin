@@ -52,7 +52,7 @@ extern "C"
 
 		CEffectBaker		*effectBaker = CEditorManager::Instance().GetEffectBaker();
 
-		effectBaker->Initialize(settings->m_PopcornPackFxPath);
+		effectBaker->Initialize(settings->m_PopcornPackFxPath, settings->m_PlatformName, settings->m_QualityLevelCount);
 		effectBaker->Clear();
 		return true;
 	}
@@ -171,16 +171,20 @@ extern "C"
 
 	//--------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION void	ReimportAssets(int size, const char** paths)
+	MANAGED_TO_POPCORN_CONVENTION void	ReimportAssets(int size, const char** paths, const char *platformName, int qualityLevelCount)
 	{
 		NEED_PK_RUNTIME_AND_EDITOR_STARTED(return);
 
 		CEffectBaker		*effectBaker = CEditorManager::Instance().GetEffectBaker();
 		TArray<CString>		pathArr;
-		for (int i = 0; i< size; i++)
+
+		for (int i = 0; i < size; i++)
 		{
 			pathArr.PushBack(*(paths + i));
 		}
+		
+		if (effectBaker->SetTargetPlatform(platformName, (u32)qualityLevelCount))
+			effectBaker->UpdateCookeryConfigFile();
 		effectBaker->ReimportAssets(pathArr);
 	}
 

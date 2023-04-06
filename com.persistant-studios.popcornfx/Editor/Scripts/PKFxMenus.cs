@@ -516,7 +516,10 @@ namespace PopcornFX
 				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetGUID), typeof(PKFxEffectAsset));
 
 				foreach (SBatchDesc batch in asset.m_RendererDescs)
-					asset.m_Materials[batch.MaterialIdx] = factory.EditorResolveMaterial(batch, asset);
+				{
+					PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == batch.m_UID);
+					asset.m_Materials[index.m_Idx] = factory.EditorResolveMaterial(batch, asset);
+				}
 			}
 			AssetDatabase.SaveAssets();
 		}
@@ -527,6 +530,15 @@ namespace PopcornFX
 		static void _CreatePKFxFXMaterialsIFN(MenuCommand menuCommand)
 		{
 			CreatePKFxFXMaterialsIFN();
+		}
+
+		//----------------------------------------------------------------------------
+
+		[MenuItem("Assets/PopcornFX/Update Quality levels settings")]
+		static public void UpdateQualityLevelSettings()
+		{
+			PKFxManager.SetQualityLevelSettings();
+
 		}
 
 		//----------------------------------------------------------------------------

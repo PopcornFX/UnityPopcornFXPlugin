@@ -23,7 +23,15 @@ class CEffectBrowser : public CRefCountedObject
 	PopcornFX::CResourceManager				*m_BrowseResourceManager = null;
 	PopcornFX::HBO::CContext				*m_BrowseContext = null;
 
+	PFilePack								m_PKSourcePack = null;
+
 	bool									m_Initialized = false;
+
+	TArray<u32>								m_RendererUIDs;
+	TArray<u32>								m_DependenciesUIDs;
+	u32										m_UniqueRendererCount;
+	s32										m_CurrentQualityLevel = -1;
+	
 public:
 			CEffectBrowser();
 			~CEffectBrowser();
@@ -31,10 +39,12 @@ public:
 	bool	InitializeIFN();
 	void	Destroy();
 
+	void	ClearForNewEffect();
 	bool	LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSize, const char *path);
-	bool	BrowseEffect(const PParticleEffect &effectContent);
-	bool	BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &usesMeshRenderer);
-	bool	BrowseRenderers(CParticleEffect *particleEffect);
+
+	bool	BrowseEffect(const PParticleEffect &effectContent, bool browseAttributes, bool &requiresGameThreadCollect);
+	bool	BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &requiresGameThreadCollect);
+	bool	BrowseRenderers(CParticleEffect *particleEffect, bool &requiresGameThreadCollect);
 	bool	BrowseExportedEvents(CParticleEffect *particleEffect);
 	bool	BrowseAttributes(const CParticleAttributeList::_TypeOfAttributeList &attributeList, const TMemoryView<const u32> &remapIds);
 	bool	BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerList);

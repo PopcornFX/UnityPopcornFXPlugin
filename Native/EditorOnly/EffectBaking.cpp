@@ -36,6 +36,7 @@
 __PK_API_BEGIN
 
 #define	BAKE_DESTINATION_PATH	"Temp/PopcornFx/Baked/"
+#define	BAKE_THUMBNAIL_PATH		"Editor/Thumbnails/"
 
 namespace
 {
@@ -83,7 +84,109 @@ namespace
 		CString		m_ProjectSettingsPath;
 	};
 
+	//----------------------------------------------------------------------------
 
+	static const char* kDesktop = "desktop";
+	static const char* kWindows = "windows";
+	static const char* kLinux = "linux";
+	static const char* kMac = "macos";
+	static const char* kConsole = "console";
+
+	static const char* kXOne = "xboxone";
+	static const char* kXSeries = "UNKNOWN1eries";
+	static const char* kPS4 = "ps4";
+	static const char* kUNKNOWN2 = "UNKNOWN2";
+	static const char* kSwitch = "switch"; // console?
+
+	static const char* kMobile = "mobile";
+	static const char* kIOS = "ios";
+	static const char* kAndroid = "android";
+
+	static const char* kEditor = "editor";
+
+	//----------------------------------------------------------------------------
+
+	struct	SBackendAndBuildTags
+	{
+		PopcornFX::CString	m_BuildTags;
+
+		SBackendAndBuildTags()
+		{
+		}
+	};
+
+	//----------------------------------------------------------------------------
+
+	void			UnityPlatformToPkBackendConfig(const CString &platform, SBackendAndBuildTags &outBackendAndBuildTags)
+	{
+		// Keep this an array, allows to do some compile time checks if the list mismatches PopcornFX supported tags
+		TStaticCountedArray<PopcornFX::CString, 5>	buildTags;
+
+		if (platform == "Editor") // Pre-cooked
+		{
+			PK_VERIFY(buildTags.PushBack(kDesktop).Valid());
+			PK_VERIFY(buildTags.PushBack(kWindows).Valid());
+			PK_VERIFY(buildTags.PushBack(kLinux).Valid());
+			PK_VERIFY(buildTags.PushBack(kMac).Valid());
+			PK_VERIFY(buildTags.PushBack(kEditor).Valid());
+		}
+		else if (platform.Contains("Win"))
+		{
+			PK_VERIFY(buildTags.PushBack(kDesktop).Valid());
+			PK_VERIFY(buildTags.PushBack(kWindows).Valid());
+		}
+		else if (platform.Contains("Linux"))
+		{
+			PK_VERIFY(buildTags.PushBack(kDesktop).Valid());
+			PK_VERIFY(buildTags.PushBack(kLinux).Valid());
+		}
+		else if (platform.Contains("OSX"))
+		{
+			PK_VERIFY(buildTags.PushBack(kDesktop).Valid());
+			PK_VERIFY(buildTags.PushBack(kMac).Valid());
+		}
+		else if (platform == "PS4")
+		{
+			PK_VERIFY(buildTags.PushBack(kConsole).Valid());
+			PK_VERIFY(buildTags.PushBack(kPS4).Valid());
+		}
+		else if (platform == "UNKNOWN2")
+		{
+			PK_VERIFY(buildTags.PushBack(kConsole).Valid());
+			PK_VERIFY(buildTags.PushBack(kUNKNOWN2).Valid());
+		}
+		else if (platform.Contains("Xbox One"))
+		{
+			PK_VERIFY(buildTags.PushBack(kConsole).Valid());
+			PK_VERIFY(buildTags.PushBack(kXOne).Valid());
+		}
+		else if (platform == "UNKNOWN1")
+		{
+			PK_VERIFY(buildTags.PushBack(kConsole).Valid());
+			PK_VERIFY(buildTags.PushBack(kXSeries).Valid());
+		}
+		else if (platform == "Switch")
+		{
+			PK_VERIFY(buildTags.PushBack(kConsole).Valid());
+			PK_VERIFY(buildTags.PushBack(kSwitch).Valid());
+		}
+		else if (platform.Contains("Android"))
+		{
+			PK_VERIFY(buildTags.PushBack(kMobile).Valid());
+			PK_VERIFY(buildTags.PushBack(kAndroid).Valid());
+		}
+		else if (platform.Contains("iOS"))
+		{
+			PK_VERIFY(buildTags.PushBack(kMobile).Valid());
+			PK_VERIFY(buildTags.PushBack(kIOS).Valid());
+		}
+
+		for (const PopcornFX::CString &tag : buildTags)
+		{
+			outBackendAndBuildTags.m_BuildTags += tag;
+			outBackendAndBuildTags.m_BuildTags.Append(",");
+		}
+	}
 }
 
 
@@ -97,6 +200,7 @@ SBakeContext::SBakeContext()
 	, m_BakeResourceVectorFieldHandler(null)
 	, m_BakeFSController(null)
 	, m_BakeResourceManager(null)
+	, m_BakeContext(null)
 {
 }
 
@@ -212,7 +316,6 @@ bool	SBakeContext::Reinit()
 }
 
 //----------------------------------------------------------------------------
-
 
 void	SBakeContext::_RemapResourcesPath(CString &path, bool &, CMessageStream &)
 {
@@ -348,7 +451,7 @@ void			CEffectBaker::FileRenamed(const CString &oldPath, const CString &newPath)
 
 //----------------------------------------------------------------------------
 
-void			CEffectBaker::Initialize(const char *pKPackPath)
+void			CEffectBaker::Initialize(const char *pKPackPath, const char *targetPlatformName, u32 qualitySettingsCount)
 {
 	m_BakeContext.m_BakeContext->UnloadAllFiles();
 	m_BakeContext.m_BakeFSController->UnmountAllPacks();
@@ -386,6 +489,7 @@ void			CEffectBaker::Initialize(const char *pKPackPath)
 		CLog::Log(PK_ERROR, "Failed to load project settings file at \"%s\"", projectSettingsFilePath.Data());
 		return;
 	}
+	m_ProjectSettings->ApplyGlobalSettings();
 
 	PProjectSettingsGeneral		general = m_ProjectSettings->General();
 	const CString				relRoot = general->RootDir();
@@ -409,6 +513,8 @@ void			CEffectBaker::Initialize(const char *pKPackPath)
 		CLog::Log(PK_WARN, "Couldn't initialize the cookery, TurnOn Failed.");
 		return;
 	}
+
+	CCoordinateFrame::SetGlobalFrame(Frame_LeftHand_Y_Up);
 
 	const CGuid	ovenIdHBO = m_BakeContext.m_Cookery.RegisterOven(PK_NEW(COven_HBO));
 	const CGuid	ovenIdMesh = m_BakeContext.m_Cookery.RegisterOven(PK_NEW(COven_Mesh));
@@ -460,29 +566,10 @@ void			CEffectBaker::Initialize(const char *pKPackPath)
 	if (!PK_VERIFY(m_BakeContext.m_Cookery.m_DstPackPaths.PushBack(m_BakeContext.m_DstBakeTarget).Valid()))
 		return;
 
-	m_BakeContext.m_Cookery.AddOvenFlags(PopcornFX::COven::Flags_BakeMemoryVersion);
+	m_BakeContext.m_Cookery.AddOvenFlags(COven::Flags_BakeMemoryVersion);
 
-	PopcornFX::PBaseObjectFile	configFile = m_BakeContext.m_Cookery.m_BaseConfigFile;
-	PK_FOREACH(it, configFile->ObjectList())
-	{
-		PopcornFX::COvenBakeConfig_Particle	*config = PopcornFX::HBO::Cast<PopcornFX::COvenBakeConfig_Particle>(*it);
-		if (config != null)
-		{
-			if (m_ForceDeterminism)
-				config->SetCompilerSwitches("--determinism");
-			config->SetCompile(true);
-			config->SetRemoveEditorNodes(true);
-			config->SetBakeMode(PopcornFX::COvenBakeConfig_HBO::Bake_SaveAsBinary);
-
-			m_BakeConfigParticle = config;
-			continue;
-		}
-		PopcornFX::COvenBakeConfig_Base	*configBase = PopcornFX::HBO::Cast<PopcornFX::COvenBakeConfig_Base>(*it);
-		if (configBase != null)
-		{
-			continue;
-		}
-	}
+	SetTargetPlatform(targetPlatformName, qualitySettingsCount);
+	UpdateCookeryConfigFile();
 }
 
 //----------------------------------------------------------------------------
@@ -512,7 +599,8 @@ void			CEffectBaker::SetForceDeterminismFlag(bool enable)
 
 //----------------------------------------------------------------------------
 
-void			CEffectBaker::CancelAllFileChanges()
+
+void	CEffectBaker::CancelAllFileChanges()
 {
 	m_ToBake.Clear();
 	m_ToProcess.Clear();
@@ -520,7 +608,7 @@ void			CEffectBaker::CancelAllFileChanges()
 
 //----------------------------------------------------------------------------
 
-int				CEffectBaker::PopFileChanges()
+int	CEffectBaker::PopFileChanges()
 {
 	SAssetChangesDesc	assetChange;
 
@@ -648,7 +736,7 @@ bool	CEffectBaker::BakeAssetOrAddToRetryStack(SAssetChange &assetInfo)
 
 //----------------------------------------------------------------------------
 
-bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies)
+bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies, bool isThumbnail /*= false*/)
 {
 	if (bakeDependencies)
 	{
@@ -659,7 +747,11 @@ bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies)
 		// That's why we ignore the logs here to avoid the loading errors.
 		if (logger != null)
 			logger->StartIgnoringLogs();
-		m_BakeContext.m_Cookery.GetAssetDependencies(path, dependencies);
+		const TArray<CString> &versions = CRuntimeManager::Instance().GetQualityLevels();
+		TArray<CStringView>	viewVersion;
+		for (u32 i = 0; i < versions.Count(); ++i)
+			viewVersion.PushBack(CStringView(versions[i]));
+		m_BakeContext.m_Cookery.GetAssetDependencies(path, dependencies, viewVersion);
 		if (logger != null)
 			logger->StopIgnoringLogs();
 		for (u32 i = 0; i < dependencies.Count(); i++)
@@ -689,12 +781,39 @@ bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies)
 				return false;
 			}
 		}
+
+		//Add thumbnail dependency if it exists
+		const CString	thumbnailPath = m_ProjectSettings->General()->ThumbnailsDir() / path + ".png";
+		if (!m_BakeContext.m_Cookery.FileController()->VirtualToPhysical(thumbnailPath, IFileSystem::Access_Read).Empty())
+		{
+			if (BakeAsset(thumbnailPath, false, true) == false)
+			{
+				CLog::Log(PK_WARN, "Asset Thumbnail of '%s' failed baking:	'%s'", path.Data(), thumbnailPath.Data());
+			}
+		}
+
+		//Add animated thumbnail dependency if it exists
+		const CString	animatedThumbnailPath = m_ProjectSettings->General()->ThumbnailsDir() / path + ".anim.png";
+		if (!m_BakeContext.m_Cookery.FileController()->VirtualToPhysical(animatedThumbnailPath, IFileSystem::Access_Read).Empty())
+		{
+			if (BakeAsset(animatedThumbnailPath, false, true) == false)
+			{
+				CLog::Log(PK_WARN, "Asset Animated Thumbnail of '%s' failed baking:	'%s'", path.Data(), animatedThumbnailPath.Data());
+			}
+		}
 	}
 
 	bool								needsBaking = false;
 	TStaticCountedArray<CString, 4>		outputPaths;
 
-	OutputBakedResourceInCache(path, outputPaths);
+	if (isThumbnail)
+	{
+		const CString thumbnailDest = BAKE_THUMBNAIL_PATH + CFilePath::Relativize(m_ProjectSettings->General()->ThumbnailsDir().Data(), path.Data());
+		outputPaths.PushBack(thumbnailDest);
+	}
+	else
+		OutputBakedResourceInCache(path, outputPaths);
+
 	if (!outputPaths.Empty())
 	{
 		SFileTimes	srcTimestamp;
@@ -755,6 +874,77 @@ bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies)
 		}
 	}
 	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CEffectBaker::SetTargetPlatform(const CString &platform, u32 qualitySettingCount, bool reload)
+{
+	if (reload || m_PlatformName != platform || m_QualitySettingCount != qualitySettingCount)
+	{
+		m_PlatformName = platform;
+		m_QualitySettingCount = qualitySettingCount;
+
+		if (m_PlatformName == "Editor")
+			m_BakeForStandalone = false;
+		else
+			m_BakeForStandalone = true;
+
+		m_TargetBuildVersions.Clear();
+		if (!PK_VERIFY(m_QualitySettingCount >= 0) ||
+			!PK_VERIFY(m_TargetBuildVersions.Reserve(m_QualitySettingCount)))
+			return false;
+		// Build the final build versions (one per Unity runtime configuration) based on base tags
+		SBackendAndBuildTags	backendAndBuildTags;
+		UnityPlatformToPkBackendConfig(m_PlatformName, backendAndBuildTags);
+		if (!PK_VERIFY(!backendAndBuildTags.m_BuildTags.Empty()))
+			return false; // unrecognized platform
+		for (u32 i = 0; i < m_QualitySettingCount; ++i)
+		{
+			const CString		&level = CRuntimeManager::Instance().GetQualityLevel(i);
+			PK_VERIFY(m_TargetBuildVersions.PushBack(CString::Format("%s:%s%s", level.Data(), backendAndBuildTags.m_BuildTags.Data(), level.Data())).Valid());
+		}
+		return true;
+	}
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
+CString	CEffectBaker::GetTargetPlatform() const
+{
+	return m_PlatformName == null ? "Editor" : m_PlatformName;
+}
+
+
+//----------------------------------------------------------------------------
+void	CEffectBaker::UpdateCookeryConfigFile()
+{
+	PBaseObjectFile	configFile = m_BakeContext.m_Cookery.m_BaseConfigFile;
+	if (configFile == null)
+		return;
+	for (const PBaseObject &obj : configFile->ObjectList())
+	{
+		COvenBakeConfig_Particle *config = HBO::Cast<COvenBakeConfig_Particle>(obj);
+		if (config != null)
+		{
+			if (m_ForceDeterminism)
+				config->SetCompilerSwitches("--determinism");
+			config->SetCompile(true);
+			config->SetRemoveEditorNodes(true);
+
+			config->SetSourceConfig(/*m_BakeForStandalone ? EBakeSourceConfig::Bake_NoSource : */Bake_StandaloneSource);
+			config->SetBakeMode(/*m_BakeForStandalone ? COvenBakeConfig_HBO::EBakeMode::Bake_SaveAsBinary : */COvenBakeConfig_HBO::EBakeMode::Bake_SaveAsText);
+
+			// build versions
+			PopcornFX::COvenBakeConfig_Particle::_TypeOfBuildVersions	buildVersions;
+			buildVersions = m_TargetBuildVersions;
+			config->SetBuildVersions(buildVersions);
+
+			m_BakeConfigParticle = config;
+			continue;
+		}
+	}
 }
 
 //----------------------------------------------------------------------------

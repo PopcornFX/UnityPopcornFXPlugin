@@ -71,6 +71,7 @@ extern "C"
 		SRenderingFeatureLitDesc	*m_LitRendering;
 
 		int							m_CameraID;
+		int							m_UID;
 
 		SPopcornRendererDesc()
 		:	m_ShaderVariationFlags(0)
@@ -87,6 +88,7 @@ extern "C"
 		,	m_DrawOrder(0)
 		,	m_LitRendering(null)
 		,	m_CameraID(0)
+		,	m_UID(-1)
 		{
 		}
 	};
@@ -171,6 +173,8 @@ extern "C"
 		int							m_TextureAtlasCount;
 		CFloat4						*m_TextureAtlas;
 
+		int							m_UID;
+
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
 			, m_ShaderVariationFlags(0)
@@ -189,6 +193,7 @@ extern "C"
 			, m_AnimDescRendering(null)
 			, m_TextureAtlasCount(0)
 			, m_TextureAtlas(null)
+			, m_UID(-1)
 		{
 		}
 
@@ -296,6 +301,9 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetMeshInstancesBuffer(void *delegatePtr);
 	void										OnSetMeshInstancesBuffer(int rendererGUID, int submesh, void *instanceBuffer);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetLightsBuffer(void *delegatePtr);
+	void										OnSetLightsBuffer(void *lightInfos, int count);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr);
 	void										OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID);

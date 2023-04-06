@@ -12,6 +12,8 @@
 #include <pk_render_helpers/include/batches/rh_billboard_batch.h>
 #include <pk_render_helpers/include/batches/rh_mesh_batch.h>
 #include <pk_render_helpers/include/batches/rh_triangle_batch.h>
+#include <pk_render_helpers/include/batches/rh_light_batch.h>
+
 
 #include <pk_particles/include/ps_event_map.h>
 
@@ -28,7 +30,13 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	const TArray<SUnitySceneView>	&views = RTManager.GetScene().SceneViews();
 	UnityGfxRenderer			deviceType = RTManager.GetDeviceType();
 
-	if (renderer->m_RendererType != Renderer_Mesh)
+	if (renderer->m_RendererType == Renderer_Mesh || renderer->m_RendererType == Renderer_Light)
+	{
+		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(1)))
+			return null;
+		rendererCache->m_UnityMeshInfoPerViews[0].Init(deviceType);
+	}
+	else
 	{
 		u32 count = views.Empty() ? 1 : views.Count();
 		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(count)))
@@ -37,12 +45,6 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 		{
 			rendererCache->m_UnityMeshInfoPerViews[i].Init(deviceType);
 		}
-	}
-	else
-	{
-		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(1)))
-			return null;
-		rendererCache->m_UnityMeshInfoPerViews[0].Init(deviceType);
 	}
 
 	
@@ -66,15 +68,18 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	{
 		succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataTriangle*>(renderer.Get()));
 	}
+	else if (renderer->m_RendererType == Renderer_Light)
+	{
+		succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataLight*>(renderer.Get()));
+	}
 	rendererCache->SetAssetName(particleDesc->ParentEffect()->HandlerName());
-
-	CResourceManager	*resourceManager = particleDesc->ParentEffect()->Context()->ResourceManager();
 
 	if (renderer->m_RendererType == ERendererClass::Renderer_Billboard ||
 		renderer->m_RendererType == ERendererClass::Renderer_Ribbon ||
 		renderer->m_RendererType == ERendererClass::Renderer_Mesh ||
 		renderer->m_RendererType == ERendererClass::Renderer_Decal)
 	{
+		CResourceManager	*resourceManager = particleDesc->ParentEffect()->Context()->ResourceManager();
 		rendererCache->UpdateThread_LoadRendererAtlas(renderer, resourceManager); // Returns false if atlas couldn't be created but was required by rfeature
 	}
 	if (!succeeded)
@@ -114,7 +119,6 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 						continue;
 
 					::OnRetrieveCustomMaterialInfo(renderer->m_RendererType, &desc, rendererCount, &hasCustomMaterial, &customMaterialID);
-
 				}
 
 				rendererCache->m_HasCustomMat = (hasCustomMaterial == ManagedBool_True ? true : false);
@@ -160,6 +164,7 @@ CUnityRenderDataFactory::CBillboardingBatchInterface	*CUnityRenderDataFactory::C
 	typedef	TRibbonBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CRibbonBillboardingBatch;
 	typedef	TMeshBatch<		CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CMeshBillboardingBatch;
 	typedef TTriangleBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CTriangleBillboardingBatch;
+	typedef TLightBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CLightBillboardingBatch;
 
 	if (!gpuStorage)
 	{
@@ -197,6 +202,14 @@ CUnityRenderDataFactory::CBillboardingBatchInterface	*CUnityRenderDataFactory::C
 
 			policy = static_cast<CUnityBillboardingBatchPolicy*>(batch);
 			retValue = static_cast<CBillboardingBatchInterface*>(batch);
+		}
+		break;
+		case	Renderer_Light:
+		{
+			CLightBillboardingBatch *batch = PK_NEW(CLightBillboardingBatch);
+
+			policy = static_cast<CUnityBillboardingBatchPolicy *>(batch);
+			retValue = static_cast<CBillboardingBatchInterface *>(batch);
 		}
 		break;
 		default:

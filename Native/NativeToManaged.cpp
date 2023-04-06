@@ -39,6 +39,8 @@ extern "C"
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnSetMeshInstancesCount)(int rendererGUID, int submesh, int instancesCount) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnSetMeshInstancesBuffer)(int rendererGUID, int submesh, void *instanceBuffer) = null;
 
+	void				(POPCORN_TO_MANAGED_CONVENTION *_OnSetLightsBuffer)(void *lightInfos, int count) = null;
+
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveCustomMaterialInfo)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveRendererBufferInfo)(int rendererGUID, const SRetrieveRendererInfo *info) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnUpdateRendererBounds)(int rendererGUID, const SUpdateRendererBounds *bounds) = null;
@@ -133,6 +135,11 @@ extern "C"
 		_OnSetMeshInstancesBuffer = (void (POPCORN_TO_MANAGED_CONVENTION *)(int rendererGUID, int submesh, void *instanceBuffer))delegatePtr;
 	}
 
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetLightsBuffer(void *delegatePtr)
+	{
+		_OnSetLightsBuffer = (void (POPCORN_TO_MANAGED_CONVENTION *)(void *lightInfos, int count))delegatePtr;
+	}
+
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr)
 	{
 		_OnRetrieveCustomMaterialInfo = (void (POPCORN_TO_MANAGED_CONVENTION *)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID))delegatePtr;
@@ -165,7 +172,7 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	unsigned long long							OnResourceLoad(const char *path, void **handler)
+	unsigned long long	OnResourceLoad(const char *path, void **handler)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -179,7 +186,7 @@ extern "C"
 		return 0ULL;
 	}
 
-	unsigned long long							OnResourceWrite(const char *path, const void *data, u64 offset, u64 size)
+	unsigned long long	OnResourceWrite(const char *path, const void *data, u64 offset, u64 size)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -193,7 +200,7 @@ extern "C"
 		return 0ULL;
 	}
 
-	void										OnRaycastPack(const SRaycastPack *raycastPack)
+	void	OnRaycastPack(const SRaycastPack *raycastPack)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -206,7 +213,7 @@ extern "C"
 		}
 	}
 
-	void										OnFxStopped(int guid)
+	void	OnFxStopped(int guid)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -219,7 +226,7 @@ extern "C"
 		}
 	}
 
-	void										OnRaiseEvent(unsigned int guid, unsigned int key, const char* eventName, unsigned int payloadCount, void* payloadDesc, void* payloadValues)
+	void	OnRaiseEvent(unsigned int guid, unsigned int key, const char* eventName, unsigned int payloadCount, void* payloadDesc, void* payloadValues)
 	{
 		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
@@ -233,7 +240,7 @@ extern "C"
 		}
 	}
 
-	void										*OnGetAudioWaveformData(const char *name, int *nbSamples)
+	void	*OnGetAudioWaveformData(const char *name, int *nbSamples)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -247,7 +254,7 @@ extern "C"
 		return null;
 	}
 
-	void										*OnGetAudioSpectrumData(const char *name, int *nbSamples)
+	void	*OnGetAudioSpectrumData(const char *name, int *nbSamples)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -261,7 +268,7 @@ extern "C"
 		return null;
 	}
 
-	int											OnSetupNewBillboardRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
+	int	OnSetupNewBillboardRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -275,7 +282,7 @@ extern "C"
 		return -1;
 	}
 
-	int											OnSetupNewRibbonRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
+	int	OnSetupNewRibbonRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -289,7 +296,7 @@ extern "C"
 		return -1;
 	}
 
-	int											OnSetupNewMeshRenderer(const SMeshRendererDesc *rendererDesc, int idx)
+	int	OnSetupNewMeshRenderer(const SMeshRendererDesc *rendererDesc, int idx)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -303,7 +310,7 @@ extern "C"
 		return -1;
 	}
 
-	int											OnSetupNewTriangleRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
+	int	OnSetupNewTriangleRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -317,7 +324,7 @@ extern "C"
 		return -1;
 	}
 
-	ManagedBool									OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount)
+	ManagedBool	OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -331,7 +338,7 @@ extern "C"
 		return ManagedBool_False;
 	}
 
-	void										OnSetParticleCount(int rendererGUID, int particleCount)
+	void	OnSetParticleCount(int rendererGUID, int particleCount)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -344,7 +351,7 @@ extern "C"
 		}
 	}
 
-	void										OnSetRendererActive(int rendererGUID, ManagedBool active)
+	void	OnSetRendererActive(int rendererGUID, ManagedBool active)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -357,7 +364,7 @@ extern "C"
 		}
 	}
 
-	void										OnSetMeshInstancesCount(int rendererGUID, int submesh, int instancesCount)
+	void	OnSetMeshInstancesCount(int rendererGUID, int submesh, int instancesCount)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -370,7 +377,7 @@ extern "C"
 		}
 	}
 
-	void										OnSetMeshInstancesBuffer(int rendererGUID, int submesh, void *instanceBuffer)
+	void	OnSetMeshInstancesBuffer(int rendererGUID, int submesh, void *instanceBuffer)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -383,7 +390,20 @@ extern "C"
 		}
 	}
 
-	void										OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID)
+	void	OnSetLightsBuffer(void *lightInfos, int count)
+	{
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnSetLightsBuffer not called on main thread: callback ignored");
+			return;
+		}
+		if (PK_VERIFY(_OnSetLightsBuffer != null))
+		{
+			_OnSetLightsBuffer(lightInfos, count);
+		}
+	}
+
+	void	OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int *customMaterialID)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -396,7 +416,7 @@ extern "C"
 		}
 	}
 
-	void										OnRetrieveRendererBufferInfo(int rendererGUID, const SRetrieveRendererInfo *info)
+	void	OnRetrieveRendererBufferInfo(int rendererGUID, const SRetrieveRendererInfo *info)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -409,7 +429,7 @@ extern "C"
 		}
 	}
 
-	void										OnUpdateRendererBounds(int rendererGUID, const SUpdateRendererBounds *bounds)
+	void	OnUpdateRendererBounds(int rendererGUID, const SUpdateRendererBounds *bounds)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -422,7 +442,7 @@ extern "C"
 		}
 	}
 
-	int											OnGetMeshCount(int rendererGUID, int lod)
+	int		OnGetMeshCount(int rendererGUID, int lod)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -436,7 +456,7 @@ extern "C"
 		return -1;
 	}
 
-	int											OnGetMeshLODsCount(int rendererGUID)
+	int	OnGetMeshLODsCount(int rendererGUID)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -450,7 +470,7 @@ extern "C"
 		return -1;
 	}
 
-	void										OnGetMeshBounds(int rendererGUID, int submesh, void* bbox)
+	void	OnGetMeshBounds(int rendererGUID, int submesh, void* bbox)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -463,7 +483,7 @@ extern "C"
 		}
 	}
 
-	void			ClearNativeToManagedCallbacks()
+	void	ClearNativeToManagedCallbacks()
 	{
 		_OnResourceLoad = null;
 		_OnResourceWrite = null;
@@ -481,6 +501,7 @@ extern "C"
 		_OnSetRendererActive = null;
 		_OnSetMeshInstancesCount = null;
 		_OnSetMeshInstancesBuffer = null;
+		_OnSetLightsBuffer = null;
 		_OnRetrieveCustomMaterialInfo = null;
 		_OnRetrieveRendererBufferInfo = null;
 		_OnUpdateRendererBounds = null;

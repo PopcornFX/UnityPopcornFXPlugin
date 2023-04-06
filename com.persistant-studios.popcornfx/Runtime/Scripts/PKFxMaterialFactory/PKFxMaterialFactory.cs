@@ -118,15 +118,19 @@ namespace PopcornFX
 			if (assetMat == null)
 			{
 				material = new Material(binding.m_Shader);
-				binding.SetMaterialKeywords(batchDesc, material);
-				binding.BindMaterialProperties(batchDesc, material, asset);
 				if (batchDesc.m_Type == ERendererType.Mesh)
 					material.enableInstancing = true;
+				binding.SetMaterialKeywords(batchDesc, material);
+				binding.BindMaterialProperties(batchDesc, material, asset);
 				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat");
-				AssetDatabase.SaveAssets();
 			}
 			else
+			{
 				material = assetMat;
+				binding.SetMaterialKeywords(batchDesc, material);
+				binding.BindMaterialProperties(batchDesc, material, asset);
+			}
+			AssetDatabase.SaveAssets();
 			return material;
 		}
 
@@ -532,5 +536,22 @@ namespace PopcornFX
 				Debug.LogError("Could not find mesh '" + batchDesc.m_MeshAsset + "'");
 			}
 		}
+
+		public virtual GameObject GetLightTemplate()
+		{
+			GameObject template = new GameObject("PopcornFX Light");
+			Light light = template.AddComponent<Light>();
+
+			light.bounceIntensity = 0;
+			return template;
+		}
+		public virtual void SetLightValue(Light light, PKFxLightPool.SLightInfo info)
+		{
+			light.range = info.m_Range;
+			light.color = info.m_Color;
+			light.intensity = info.m_Intensity;
+			light.transform.position = info.m_Position;
+		}
+
 	}
 }

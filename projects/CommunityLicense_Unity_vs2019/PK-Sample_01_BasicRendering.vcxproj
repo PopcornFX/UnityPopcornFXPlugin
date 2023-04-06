@@ -202,6 +202,7 @@
     <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h" />
     <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Billboard.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Mesh.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Ribbon.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicRendererCache.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\PK-Sample_01_BasicRendering_ShaderCode.h" />
@@ -210,6 +211,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Native\Common\Gl\gl_utils.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Billboard.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Mesh.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Ribbon.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicRendererCache.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\PK-Sample_01_BasicRendering.cpp" />

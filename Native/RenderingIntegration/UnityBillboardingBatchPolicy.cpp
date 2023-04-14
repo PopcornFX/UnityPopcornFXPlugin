@@ -158,7 +158,7 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 
 	m_ParticleCount = allocBuffers.m_TotalParticleCount;
 
-	_UpdateThread_SetUnityMeshBounds(allocBuffers);
+	_UpdateThread_SetUnityMeshBounds(allocBuffers, views);
 
 	if (rendererType == Renderer_Billboard || rendererType == Renderer_Ribbon || rendererType == Renderer_Triangle)
 	{
@@ -627,7 +627,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMesh(const SBuffers
 	}
 }
 
-void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers)
+void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views)
 {
 	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
 	if (m_RendererType == Renderer_Mesh)
@@ -656,11 +656,20 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 	else if (m_BBox != bbox)
 	{
 		SUpdateRendererBounds	bounds;
+		// Apply the camera offset on unity mesh bounds. This allows to apply the camera sort offset in unity.
+		// It may have repercussions on the culling
+		float cameraSortOffset = allocBuffers.m_DrawRequests.First()->BaseBillboardingRequest().m_CameraSortOffset;
 
-		bounds.m_Min = bbox.Min();
-		bounds.m_Max = bbox.Max();
-		for (u32 i = 0 ; i < m_UnityMeshInfoPerViews.Count(); ++i)
-			manager.OnUpdateRendererBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, &bounds);
+		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
+		{
+			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
+			{
+				const CFloat3 &viewDirection = views[i].m_InvViewMatrix.StrippedZAxis();
+				bounds.m_Min = bbox.Min() - cameraSortOffset * viewDirection;
+				bounds.m_Max = bbox.Max() - cameraSortOffset * viewDirection;
+				manager.OnUpdateRendererBounds(m_UnityMeshInfoPerViews[i].m_RendererGUID, &bounds);
+			}
+		}
 		m_BBox = bbox;
 	}
 }

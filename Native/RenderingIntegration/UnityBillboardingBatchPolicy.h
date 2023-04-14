@@ -73,7 +73,7 @@ public:
 
 private:
 	void		_UpdateThread_ResizeUnityMesh(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData);
-	void		_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers);
+	void		_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views);
 
 	void		_UpdateThread_ResizeUnityMeshInstanceCount(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData);
 

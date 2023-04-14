@@ -15,16 +15,17 @@ namespace PopcornFX
 {
 	public class PKFxManager
 	{
-		public static string ImportedAssetName { get; set; }
-		public static string ImportedAssetPath { get; set; }
-		public static string DistortionLayer { get { return PKFxManagerImpl.m_DistortionLayer; } }
-		public static int DistortionLayerID { get { return LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer); } }
+		public static string	ImportedAssetName { get; set; }
+		public static string	ImportedAssetPath { get; set; }
+		public static string	DistortionLayer { get { return PKFxManagerImpl.m_DistortionLayer; } }
+		public static int		DistortionLayerID { get { return LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer); } }
 
 		public static float					TimeMultiplier = 1.0f;
 		public static int					MaxCameraSupport = 1;
 		public static bool					UseFixedDT = false;
 		public static bool					IsUnitTesting = false;
 
+		public static PKFxLightPool			LightPool = null;
 		public static PKFxRenderingPlugin	RenderingPlugin = null;
 
 		public static string				StoredQualityLevel = "Medium";

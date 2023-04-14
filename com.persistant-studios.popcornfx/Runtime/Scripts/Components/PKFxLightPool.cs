@@ -21,8 +21,8 @@ namespace PopcornFX
 		public List<Light>	m_Light = new List<Light>();
 		public int			m_MaxLightNumber = 0;
 
-		private GameObject m_Template;
-		private GameObject m_LightRoot;
+		private GameObject	m_Template;
+		private GameObject	m_LightRoot;
 
 		private IntPtr		m_Buffer;
 		private int			m_BufferCount;
@@ -30,17 +30,17 @@ namespace PopcornFX
 
 		private PKFxMaterialFactory m_Factory;
 
-		void Start()
+
+		private void Start()
 		{
 			m_LightRoot = new GameObject("PopcornFX Lights Root");
-			DontDestroyOnLoad(m_LightRoot);
+			m_LightRoot.transform.SetParent(gameObject.transform);
 			m_Factory = PKFxSettings.MaterialFactory;
 			m_Template = m_Factory.GetLightTemplate();
 
 			m_Template.transform.SetParent(m_LightRoot.transform);
 
 			m_Template.SetActive(false);
-
 
 			for (int i = 0; i < m_MaxLightNumber; ++i)
 			{
@@ -81,6 +81,9 @@ namespace PopcornFX
 				++i;
 			}
 			m_MaxActive = m_BufferCount;
+
+			m_BufferCount = 0;
 		}
+
 	}
 }

@@ -13,36 +13,32 @@ namespace PopcornFX
 	public class PKFxRenderingPlugin : MonoBehaviour
 	{
 		// Static data
-		private static int g_LastFrameCount = -1;
+		private static int				g_LastFrameCount = -1;
 
 		// Exposed in "Advanced" Editor
 		[Tooltip("Loads a user-defined mesh to be used for particles world collisions.")]
 		[HideInInspector]
-		public bool m_UseSceneMesh = false;
+		public bool						m_UseSceneMesh = false;
 		[Tooltip("Link to the pre-built mesh asset.")]
 		[HideInInspector]
-		public PKFxMeshAsset m_SceneMesh;
-
+		public PKFxMeshAsset			m_SceneMesh;
 		[HideInInspector]
-		public float m_TimeMultiplier = 1.0f;
-
+		public float					m_TimeMultiplier = 1.0f;
 		[HideInInspector]
-		public List<PKFxCamera> m_Cameras = null;
-
+		public List<PKFxCamera>			m_Cameras = null;
 		[HideInInspector]
-		public List<PKFxEffectAsset> m_PreloadEffect;
-
+		public List<PKFxEffectAsset>	m_PreloadEffect;
+		[HideInInspector]
+		private static PKFxLightPool	m_LightPool;
 		//Collision Baking
 		[Tooltip("Output path for the scene mesh, relative to the PackFX directory")]
 		[HideInInspector]
-		public string m_OutputPkmmPath = "Meshes/UnityScene.pkmm";
+		public string					m_OutputPkmmPath = "Meshes/UnityScene.pkmm";
 		[Tooltip("List of the GameObjects to be searched for potential meshes.")]
 		[HideInInspector]
-		public GameObject[] m_GameObjectsToSearch;
+		public GameObject[]				m_GameObjectsToSearch;
 		[HideInInspector]
-		public GameObject[] m_MeshGameObjects;
-
-		private PKFxLightPool m_LightPool;
+		public GameObject[]				m_MeshGameObjects;
 
 		public float TimeMultiplier
 		{
@@ -141,7 +137,13 @@ namespace PopcornFX
 
 			if (PKFxSettings.EnablePopcornFXLight)
 			{
-				m_LightPool = gameObject.AddComponent<PKFxLightPool>();
+				if (PKFxManager.LightPool == null)
+				{
+					GameObject lightPool = new GameObject("PopcornFX Lights Pool");
+					DontDestroyOnLoad(lightPool);
+					PKFxManager.LightPool = lightPool.AddComponent<PKFxLightPool>();
+				}
+				m_LightPool = PKFxManager.LightPool;
 				m_LightPool.m_MaxLightNumber = PKFxSettings.MaxPopcornFXLights;
 			}
 

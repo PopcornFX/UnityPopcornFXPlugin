@@ -76,7 +76,7 @@ public:
 
 private:
 	void		_UpdateThread_ResizeUnityMesh(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData);
-	void		_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers);
+	void		_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views);
 
 	bool		_UpdateThread_IssueDrawCallLight(const Drawers::SLight_DrawRequest *lightRequest, CUnityRendererCache *rdrCache);
 

@@ -27,14 +27,14 @@ endif
 ifeq ($(origin AR), default)
   AR = ar
 endif
-PCH = ../../SDK/Samples/PK-Samples/precompiled/precompiled.h
+PCH = ../../SDK/Samples/ParticleSample/src/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../SDK/Samples/PK-Samples -I../../SDK/Samples/PK-Samples/precompiled -I../../SDK/Samples/PK-Samples/PK-ShaderTool -I../../../ExternalLibs/GL/include
+INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../SDK/Samples/ParticleSample/src -I../../SDK/Samples/ParticleSample/src/include -I../../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/PKFX
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -framework AppKit -framework OpenGL
+ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -45,23 +45,33 @@ endef
 
 ifeq ($(config),debug_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
-TARGET = $(TARGETDIR)/PK-ShaderTool_macosx_d
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-ShaderTool
-DEFINES += -D_DEBUG -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DMACOSX -DPK_BUILD_WITH_SDL=0
+TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_macosx_d
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-Sample_05_Upgrader
+DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=0 -DMACOSX
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
-LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_d.a -framework quartzcore -framework cocoa -framework metal -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PKM_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Plugin_CodecImage_HDR_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Discretizers_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lPK-ZLib_d
-LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_d.a
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_d.a -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-ParticlesToolbox_d -lPK-Runtime_d
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_d.a
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
-TARGET = $(TARGETDIR)/PK-ShaderTool_macosx_r
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-ShaderTool
-DEFINES += -DNDEBUG -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DMACOSX -DPK_BUILD_WITH_SDL=0
+TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_macosx_r
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-Sample_05_Upgrader
+DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=0 -DMACOSX
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
-LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_r.a -framework quartzcore -framework cocoa -framework metal -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PKM_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Plugin_CodecImage_HDR_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Discretizers_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lPK-ZLib_r
-LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_r.a
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_r.a -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-ParticlesToolbox_r -lPK-Runtime_r
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_r.a
+
+else ifeq ($(config),retail_x64)
+TARGETDIR = ../../../release/builds/x64_Samples
+TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_macosx_s
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-Sample_05_Upgrader
+DEFINES += -DNDEBUG -DPK_RETAIL -DPK_USE_RENDER_HELPERS=0 -DMACOSX
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_s.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_s.a -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -lPK-ParticlesToolbox_s -lPK-Runtime_s
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_s.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_s.a
 
 #else
 #  $(error "invalid configuration $(config)")
@@ -77,11 +87,11 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/Main.o
-GENERATED += $(OBJDIR)/ShaderTool.o
+GENERATED += $(OBJDIR)/FxStartup.o
+GENERATED += $(OBJDIR)/ParticleSample_05_Upgrader.o
 GENERATED += $(OBJDIR)/precompiled.o
-OBJECTS += $(OBJDIR)/Main.o
-OBJECTS += $(OBJDIR)/ShaderTool.o
+OBJECTS += $(OBJDIR)/FxStartup.o
+OBJECTS += $(OBJDIR)/ParticleSample_05_Upgrader.o
 OBJECTS += $(OBJDIR)/precompiled.o
 
 # Rules
@@ -92,7 +102,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking PK-ShaderTool
+	@echo Linking PK-Sample_05_Upgrader
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -113,7 +123,7 @@ else
 endif
 
 clean:
-	@echo Cleaning PK-ShaderTool
+	@echo Cleaning PK-Sample_05_Upgrader
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -146,13 +156,13 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/precompiled/precompiled.cpp
+$(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_05_Upgrader.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Main.o: ../../SDK/Samples/PK-Samples/PK-ShaderTool/Main.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/ShaderTool.o: ../../SDK/Samples/PK-Samples/PK-ShaderTool/ShaderTool.cpp
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

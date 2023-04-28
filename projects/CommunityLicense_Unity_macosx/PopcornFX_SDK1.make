@@ -21,6 +21,7 @@ ifeq ($(config),debug_x64)
   PK_Sample_02_BasicEvolve_config = debug_x64
   PK_Sample_03_EngineHooks_config = debug_x64
   PK_Sample_04_Baking_config = debug_x64
+  PK_Sample_05_Upgrader_config = debug_x64
   PK_RenderHelpers_SDK1_config = debug_x64
   PK_RHI_SDK1_config = debug_x64
   PK_SampleLib_config = debug_x64
@@ -52,6 +53,7 @@ else ifeq ($(config),release_x64)
   PK_Sample_02_BasicEvolve_config = release_x64
   PK_Sample_03_EngineHooks_config = release_x64
   PK_Sample_04_Baking_config = release_x64
+  PK_Sample_05_Upgrader_config = release_x64
   PK_RenderHelpers_SDK1_config = release_x64
   PK_RHI_SDK1_config = release_x64
   PK_SampleLib_config = release_x64
@@ -82,6 +84,7 @@ else ifeq ($(config),retail_x64)
   PK_Sample_02_BasicEvolve_config = retail_x64
   PK_Sample_03_EngineHooks_config = retail_x64
   PK_Sample_04_Baking_config = retail_x64
+  PK_Sample_05_Upgrader_config = retail_x64
   PK_RenderHelpers_SDK1_config = retail_x64
   PK_RHI_SDK1_config = retail_x64
   PK_SampleLib_config = retail_x64
@@ -103,7 +106,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-AssetBakerLib PK-AssetBaker PK-ImporterLib PK-UpgraderLib PK-Upgrader PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking PK-RenderHelpers_SDK1 PK-RHI_SDK1 PK-SampleLib PK-ShaderTool PK-MCPP PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
+PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-AssetBakerLib PK-AssetBaker PK-ImporterLib PK-UpgraderLib PK-Upgrader PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking PK-Sample_05_Upgrader PK-RenderHelpers_SDK1 PK-RHI_SDK1 PK-SampleLib PK-ShaderTool PK-MCPP PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
 .PHONY: all clean help $(PROJECTS) Rendering Runtime Samples Samples/Basic Tools Tools/AssetBaker Tools/Upgrader
 
@@ -115,7 +118,7 @@ Runtime: PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-Runtime_SDK1
 
 Samples: Samples/Basic PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
-Samples/Basic: PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking
+Samples/Basic: PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking PK-Sample_05_Upgrader
 
 Tools: Tools/AssetBaker Tools/Upgrader PK-MCPP PK-ShaderTool
 
@@ -147,7 +150,7 @@ ifneq (,$(PK_AssetBakerLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make config=$(PK_AssetBakerLib_config)
 endif
 
-PK-AssetBaker: PK-AssetBakerLib
+PK-AssetBaker: PK-AssetBakerLib PK-UpgraderLib PK-ImporterLib
 ifneq (,$(PK_AssetBaker_config))
 	@echo "==== Building PK-AssetBaker ($(PK_AssetBaker_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-AssetBaker.make config=$(PK_AssetBaker_config)
@@ -193,6 +196,12 @@ PK-Sample_04_Baking: PK-AssetBakerLib
 ifneq (,$(PK_Sample_04_Baking_config))
 	@echo "==== Building PK-Sample_04_Baking ($(PK_Sample_04_Baking_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_04_Baking.make config=$(PK_Sample_04_Baking_config)
+endif
+
+PK-Sample_05_Upgrader: PK-UpgraderLib PK-ImporterLib
+ifneq (,$(PK_Sample_05_Upgrader_config))
+	@echo "==== Building PK-Sample_05_Upgrader ($(PK_Sample_05_Upgrader_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-Sample_05_Upgrader.make config=$(PK_Sample_05_Upgrader_config)
 endif
 
 PK-RenderHelpers_SDK1:
@@ -310,6 +319,7 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-Sample_02_BasicEvolve.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_03_EngineHooks.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_04_Baking.make clean
+	@${MAKE} --no-print-directory -C . -f PK-Sample_05_Upgrader.make clean
 	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-RHI_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-SampleLib.make clean
@@ -351,6 +361,7 @@ help:
 	@echo "   PK-Sample_02_BasicEvolve"
 	@echo "   PK-Sample_03_EngineHooks"
 	@echo "   PK-Sample_04_Baking"
+	@echo "   PK-Sample_05_Upgrader"
 	@echo "   PK-RenderHelpers_SDK1"
 	@echo "   PK-RHI_SDK1"
 	@echo "   PK-SampleLib"

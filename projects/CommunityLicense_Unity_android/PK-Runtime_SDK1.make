@@ -19,7 +19,7 @@ endif
 # #############################################
 
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
+ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS +=
 LDDEPS +=
@@ -49,7 +49,7 @@ TARGET = $(TARGETDIR)/libPK-Runtime_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Debug/PK-Runtime_SDK1
 DEFINES += -D_DEBUG
 INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/android/Debug/PK-Runtime_SDK1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
@@ -68,7 +68,7 @@ TARGET = $(TARGETDIR)/libPK-Runtime_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Debug/PK-Runtime_SDK1
 DEFINES += -D_DEBUG
 INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/android64/Debug/PK-Runtime_SDK1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
@@ -87,7 +87,7 @@ TARGET = $(TARGETDIR)/libPK-Runtime_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Release/PK-Runtime_SDK1
 DEFINES += -DNDEBUG
 INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/android/Release/PK-Runtime_SDK1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
@@ -106,7 +106,7 @@ TARGET = $(TARGETDIR)/libPK-Runtime_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Release/PK-Runtime_SDK1
 DEFINES += -DNDEBUG
 INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/android64/Release/PK-Runtime_SDK1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
@@ -125,7 +125,7 @@ TARGET = $(TARGETDIR)/libPK-Runtime_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Retail/PK-Runtime_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL
 INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/android/Retail/PK-Runtime_SDK1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS) -s
 
@@ -144,7 +144,7 @@ TARGET = $(TARGETDIR)/libPK-Runtime_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Retail/PK-Runtime_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL
 INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/android64/Retail/PK-Runtime_SDK1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MMD -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_LDFLAGS += $(LDFLAGS) -s
 
@@ -196,7 +196,7 @@ ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -rf $(OBJDIR)
 else
 	$(SILENT) if exist $(subst /,\\,$(TARGET)) del $(subst /,\\,$(TARGET))
-	$(SILENT) if exist $(subst /,\\,$(GENERATED)) rmdir /s /q $(subst /,\\,$(GENERATED))
+	$(SILENT) if exist $(subst /,\\,$(GENERATED)) del /s /q $(subst /,\\,$(GENERATED))
 	$(SILENT) if exist $(subst /,\\,$(OBJDIR)) rmdir /s /q $(subst /,\\,$(OBJDIR))
 endif
 

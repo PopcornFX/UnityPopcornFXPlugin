@@ -220,11 +220,12 @@ namespace PopcornFX
 					Debug.LogError("[PopcornFX] The PKFxRenderingPlugin's camera layers must be assigned before registering any cameras.");
 					return -1;
 				}
-				if (m_Cameras.Count >= MaxCameraSupport())
-					Debug.LogWarning("[PKFX] All available Cameras slot are registered. Current camera is queue until slot is freed.");
 				m_Cameras.Add(PKFxCamera);
 				int id = m_Cameras.IndexOf(PKFxCamera);
-				PKFxCamera.SetCullingMask((short)id, 1 << m_CameraLayers[id], m_AllPopcornFXLayerMask);
+				if (m_Cameras.Count > MaxCameraSupport())
+					Debug.LogWarning("[PKFX] All available Cameras slot are registered. Current camera is queue until slot is freed.");
+				else
+					PKFxCamera.SetCullingMask((short)id, 1 << m_CameraLayers[id], m_AllPopcornFXLayerMask);
 				return id;
 			}
 			return -1;

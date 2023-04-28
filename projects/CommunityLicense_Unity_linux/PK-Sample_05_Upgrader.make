@@ -22,11 +22,10 @@ RESCOMP = windres
 PCH = ../../SDK/Samples/ParticleSample/src/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../SDK/Samples/ParticleSample/src -I../../SDK/Samples/ParticleSample/src/include -I../../Native/Common/PKFX
+INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../SDK/Samples/ParticleSample/src -I../../SDK/Samples/ParticleSample/src/include -I../../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/PKFX
 FORCE_INCLUDE += -include ../../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LDDEPS +=
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -37,32 +36,35 @@ endef
 
 ifeq ($(config),debug_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
-TARGET = $(TARGETDIR)/PK-Sample_02_BasicEvolve_linux_d
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-Sample_02_BasicEvolve
+TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_d
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-Sample_05_Upgrader
 DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
-LIBS += -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lbfd -ldl -lpthread -lm -lz
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lbfd -ldl -lpthread -lm -lz
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
-TARGET = $(TARGETDIR)/PK-Sample_02_BasicEvolve_linux_r
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-Sample_02_BasicEvolve
+TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_r
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-Sample_05_Upgrader
 DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
-LIBS += -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lbfd -ldl -lpthread -lm -lz
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lbfd -ldl -lpthread -lm -lz
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
-TARGET = $(TARGETDIR)/PK-Sample_02_BasicEvolve_linux_s
-OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-Sample_02_BasicEvolve
+TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_s
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-Sample_05_Upgrader
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_USE_RENDER_HELPERS=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
-LIBS += -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -lPK-ParticlesToolbox_s -lPK-Runtime_s -lbfd -ldl -lpthread -lm -lz
+LIBS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -lPK-ParticlesToolbox_s -lPK-Runtime_s -lbfd -ldl -lpthread -lm -lz
+LDDEPS += ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64 -s
 
 #else
@@ -79,13 +81,11 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/FxPlatformGeneric.o
 GENERATED += $(OBJDIR)/FxStartup.o
-GENERATED += $(OBJDIR)/ParticleSample_02_BasicEvolve.o
+GENERATED += $(OBJDIR)/ParticleSample_05_Upgrader.o
 GENERATED += $(OBJDIR)/precompiled.o
-OBJECTS += $(OBJDIR)/FxPlatformGeneric.o
 OBJECTS += $(OBJDIR)/FxStartup.o
-OBJECTS += $(OBJDIR)/ParticleSample_02_BasicEvolve.o
+OBJECTS += $(OBJDIR)/ParticleSample_05_Upgrader.o
 OBJECTS += $(OBJDIR)/precompiled.o
 
 # Rules
@@ -96,7 +96,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking PK-Sample_02_BasicEvolve
+	@echo Linking PK-Sample_05_Upgrader
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -117,7 +117,7 @@ else
 endif
 
 clean:
-	@echo Cleaning PK-Sample_02_BasicEvolve
+	@echo Cleaning PK-Sample_05_Upgrader
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -150,13 +150,10 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/FxPlatformGeneric.o: ../../Native/Common/PKFX/FxPlatformGeneric.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/ParticleSample_02_BasicEvolve.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_02_BasicEvolve.cpp
+$(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_05_Upgrader.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp

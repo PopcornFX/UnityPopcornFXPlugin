@@ -360,7 +360,9 @@ namespace PopcornFX
 
 		[SerializeField] private bool m_UseApplicationAudioLoopback = false;
 
+		[SerializeField] private bool m_EnableThumbnails = true;
 		[SerializeField] private bool m_UseThumbnailsInBuilds = false;
+		[SerializeField] private bool m_EnableAnimatedThumbnails = true;
 		[SerializeField] private bool m_UseAnimatedThumbnailsInBuilds = false;
 
 		[SerializeField] private bool m_AutomaticMeshResizing = true;
@@ -423,6 +425,12 @@ namespace PopcornFX
 			set { Instance.m_UseApplicationAudioLoopback = value; }
 		}
 
+		public static bool EnableThumbnails
+		{
+			get { return Instance.m_EnableThumbnails; }
+			set { Instance.m_EnableThumbnails = value; }
+		}
+
 		public static bool UseThumbnailsInBuilds
 		{
 			get { return Instance.m_UseThumbnailsInBuilds; }
@@ -436,6 +444,12 @@ namespace PopcornFX
 #endif
 				}
 			}
+		}
+
+		public static bool EnableAnimatedThumbnails
+		{
+			get { return Instance.m_EnableAnimatedThumbnails; }
+			set { Instance.m_EnableAnimatedThumbnails = value; }
 		}
 
 		public static bool UseAnimatedThumbnailsInBuilds

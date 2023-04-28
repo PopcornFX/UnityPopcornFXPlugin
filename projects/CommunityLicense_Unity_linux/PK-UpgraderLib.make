@@ -720,16 +720,16 @@ $(OBJDIR)/core_upgrader_2_15_0_15714.o: ../../../ExternalLibs/pk_upgraderlib/src
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_16_0_16433.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16433/core_upgrader_2_16_0_16433.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_16_0_16626.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16626/core_upgrader_2_16_0_16626.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_16_0_16685.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16685/core_upgrader_2_16_0_16685.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_16_0_16701.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16701/core_upgrader_2_16_0_16701.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
 	@echo "$(notdir $<)"
@@ -1299,7 +1299,7 @@ $(OBJDIR)/upg_upgrades_v2.15.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgra
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.16.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.16.0.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.2.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp
 	@echo "$(notdir $<)"

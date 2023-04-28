@@ -176,7 +176,7 @@ $(OBJDIR)/BasicBatchDrawer_Billboard.o: ../../SDK/Samples/PK-Samples/PK-Sample_0
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/BasicBatchDrawer_Mesh.o: ../../SDK/Samples/PK-Samples/PK-Sample_01_BasicRendering/BasicBatchDrawer_Mesh.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/BasicBatchDrawer_Ribbon.o: ../../SDK/Samples/PK-Samples/PK-Sample_01_BasicRendering/BasicBatchDrawer_Ribbon.cpp
 	@echo "$(notdir $<)"

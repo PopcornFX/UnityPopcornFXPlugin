@@ -364,7 +364,7 @@ $(OBJDIR)/SoundPoolCache.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderInte
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/DirectionalShadows.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/DirectionalShadows.cpp
-	@echo $(notdir $<)
+	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/DownSampleTexture.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/DownSampleTexture.cpp
 	@echo "$(notdir $<)"

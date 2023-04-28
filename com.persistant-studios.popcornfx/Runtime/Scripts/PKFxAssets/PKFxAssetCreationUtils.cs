@@ -230,8 +230,10 @@ namespace PopcornFX
 			handle.Free();
 
 			ImportAssetDependencies(fxAsset);
-			ImportThumbnailIfExists(fxAsset, EUseInfoFlag.IsThumbnail);
-			ImportThumbnailIfExists(fxAsset, EUseInfoFlag.IsAnimatedThumbnail);
+			if (PKFxSettings.EnableThumbnails)
+				ImportThumbnailIfExists(fxAsset, EUseInfoFlag.IsThumbnail);
+			if (PKFxSettings.EnableAnimatedThumbnails)
+				ImportThumbnailIfExists(fxAsset, EUseInfoFlag.IsAnimatedThumbnail);
 
 			return true;
 		}

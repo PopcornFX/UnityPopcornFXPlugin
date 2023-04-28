@@ -33,7 +33,9 @@ namespace PopcornFX
 		GUIContent enableUnityConsoleLog = new GUIContent(" Enable PopcornFX Unity console logs");
 		GUIContent enableFileLog = new GUIContent(" Enable PopcornFX file logs");
 		GUIContent useAudioLoopback = new GUIContent(" Enable PopcornFX application audio loopback");
+		GUIContent enableThumbnails = new GUIContent(" Enable thumbnails");
 		GUIContent useThumbnailsInBuilds = new GUIContent(" Use effects thumbnails in builds");
+		GUIContent enableAnimatedThumbnails = new GUIContent(" Enable animated thumbnails");
 		GUIContent useAnimatedThumbnailsInBuilds = new GUIContent(" Use effects animated thumbnails in builds");
 		GUIContent enableRaycastForCollisionsLabel = new GUIContent(" Enable raycast for collisions");
 		GUIContent splitDrawCallsOfSoubleSidedParticlesLabel = new GUIContent(" Split the draw calls of the particles that require disabling the back-face culling");
@@ -439,8 +441,20 @@ namespace PopcornFX
 			PKFxSettings.EnablePopcornFXLogs = EditorGUILayout.ToggleLeft(enableUnityConsoleLog, PKFxSettings.EnablePopcornFXLogs);
 			PKFxSettings.EnableFileLogs = EditorGUILayout.ToggleLeft(enableFileLog, PKFxSettings.EnableFileLogs);
 			PKFxSettings.UseApplicationAudioLoopback = EditorGUILayout.ToggleLeft(useAudioLoopback, PKFxSettings.UseApplicationAudioLoopback);
-			PKFxSettings.UseThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useThumbnailsInBuilds, PKFxSettings.UseThumbnailsInBuilds);
-			PKFxSettings.UseAnimatedThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useAnimatedThumbnailsInBuilds, PKFxSettings.UseAnimatedThumbnailsInBuilds);
+			PKFxSettings.EnableThumbnails = EditorGUILayout.ToggleLeft(enableThumbnails, PKFxSettings.EnableThumbnails);
+			using (new EditorGUI.DisabledScope(!PKFxSettings.EnableThumbnails))
+			{
+				EditorGUI.indentLevel++;
+				PKFxSettings.UseThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useThumbnailsInBuilds, PKFxSettings.UseThumbnailsInBuilds);
+				EditorGUI.indentLevel--;
+			}
+			PKFxSettings.EnableAnimatedThumbnails = EditorGUILayout.ToggleLeft(enableAnimatedThumbnails, PKFxSettings.EnableAnimatedThumbnails);
+			using (new EditorGUI.DisabledScope(!PKFxSettings.EnableAnimatedThumbnails))
+			{
+				EditorGUI.indentLevel++;
+				PKFxSettings.UseAnimatedThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useAnimatedThumbnailsInBuilds, PKFxSettings.UseAnimatedThumbnailsInBuilds);
+				EditorGUI.indentLevel--;
+			}
 
 			EditorGUILayout.BeginHorizontal();
 			bool enableAssetPlatformVersion = EditorGUILayout.ToggleLeft(PlatformVersionLabel, PKFxSettings.EnableAssetPlatformVersion);

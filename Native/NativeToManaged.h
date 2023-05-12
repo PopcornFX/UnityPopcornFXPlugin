@@ -15,17 +15,6 @@ extern "C"
 	//----------------------------------------------------------------------------
 
 	// Ray-cast pack:
-	struct	SRaycastPack
-	{
-		const CFloat4	*m_RayOrigins;
-		const CFloat4	*m_RayDirections;
-		CFloat4			*m_OutNormals;
-		CFloat4			*m_OutPositions;
-		float			*m_OutDistances;
-		int				m_FilterLayer;
-		int				m_RayCount;
-	};
-
 	struct SRenderingFeatureLitDesc
 	{
 		const char				*m_NormalMap;
@@ -258,8 +247,15 @@ extern "C"
 	unsigned long long							OnResourceWrite(const char *path, const void *data, u64 offset, u64 size);
 
 	// Particles to Unity interactions:
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastStart(void *delegatePtr);
+	void										OnRaycastStart(int count, void **cmd);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastEnd(void *delegatePtr);
+	void										OnRaycastEnd();
+
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastPack(void *delegatePtr);
-	void										OnRaycastPack(const SRaycastPack *raycastPack);
+	void										OnRaycastPack(void** res);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnFxStopped(void *delegatePtr);
 	void										OnFxStopped(int guid);

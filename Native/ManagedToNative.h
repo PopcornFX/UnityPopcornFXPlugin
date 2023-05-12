@@ -46,6 +46,10 @@ extern "C"
 		int						m_WorkerCount;
 		u32						*m_WorkerAffinities;
 
+		// Raycast structs
+		int						m_RaycastHitSize;
+		int						m_RaycastCommandSize;
+
 		void					PrettyPrintSettings() const
 		{
 			CString	settings = "";

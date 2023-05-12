@@ -96,6 +96,20 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 	// Single threaded:
 	m_IsSingleThreaded = (settings.m_SingleThreadedExecution == ManagedBool_True);
 	m_EnableRaycastCollisions = (settings.m_EnableRaycastForCollisions == ManagedBool_True);
+	if (m_EnableRaycastCollisions)
+	{
+		if (settings.m_RaycastCommandSize != sizeof(RaycastCommand))
+		{
+			CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+			m_EnableRaycastCollisions = false;
+		}
+
+		if (settings.m_RaycastHitSize != sizeof(RaycastHit))
+		{
+			CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+			m_EnableRaycastCollisions = false;
+		}
+	}
 	m_WaitForUpdateOnRenderThread = (!m_IsSingleThreaded && !m_EnableRaycastCollisions); //settings.m_SingleThreadedExecution == 0 && settings.m_EnableRaycastForCollisions == 0;
 
 	// Reset the medium collections:
@@ -430,34 +444,57 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 	{
 		PK_NAMEDSCOPEDPROFILE_C("CParticleSceneInterface: RayTracePacket Dynamic Collision", CFloat3(0.0f, 0.6f, 1.0f));
 
+		void	*cmd = null;
+
+		::OnRaycastStart(packet.m_RayOrigins_Aligned16.Count() , &cmd);
+
+		RaycastCommand	*cmdBuffer = (RaycastCommand*)cmd;
+
 		const CFloat4	*origins = packet.m_RayOrigins_Aligned16.Data();
 		const CFloat4	*directions = packet.m_RayDirectionsAndLengths_Aligned16.Data();
+		s32				layerMask = traceFilter.m_FilterFlags == 0 ? -5/*Physics.DefaultRaycastLayers*/ : (1 << traceFilter.m_FilterFlags);
 
-		SRaycastPack	query;
-
-		query.m_RayCount = packet.m_RayOrigins_Aligned16.Count();
-		query.m_RayOrigins = origins;
-		query.m_RayDirections = directions;
-		query.m_FilterLayer = traceFilter.m_FilterFlags;
-		query.m_OutPositions = results.m_ContactPoints_Aligned16;
-		query.m_OutNormals = results.m_ContactNormals_Aligned16;
-		query.m_OutDistances = results.m_HitTimes_Aligned16;
+		for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+		{
+			cmdBuffer[i].from = origins[i].xyz();
+			cmdBuffer[i].direction = directions[i].xyz();
+			cmdBuffer[i].layerMask = layerMask;
+			cmdBuffer[i].distance = directions[i].w();
+			cmdBuffer[i].maxHits = 1;
+		}
 
 		CGuid	currentThreadId = CCurrentThread::ThreadID();
 
 		if (!currentThreadId.Valid()) // Cannot resolve the ray-cast without a threadID
 			return;
 
-		::OnRaycastPack(&query);
+		void	*res = null;
 
-		if (results.m_ContactObjects_Aligned16 != null)
+		::OnRaycastPack(&res);
+
+		RaycastHit	*resBuffer = (RaycastHit*)res;
+
+		for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
 		{
-			for (u32 i = 0; i < results.Count(); i++)
+			if (resBuffer[i].collider != 0)
 			{
-				if (results.m_HitTimes_Aligned16[i] < packet.m_RayDirectionsAndLengths_Aligned16[i].w())
-					results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
-				else
-					results.m_ContactObjects_Aligned16[i] = null;
+				results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
+				if (results.m_ContactNormals_Aligned16 != null)
+					results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
+				if (results.m_ContactPoints_Aligned16 != null)
+					results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
+
+				if (results.m_ContactObjects_Aligned16 != null)
+				{
+					if (results.m_HitTimes_Aligned16[i] < directions[i].w())
+					{
+						results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
+					}
+					else
+					{
+						results.m_ContactObjects_Aligned16[i] = null;
+					}
+				}
 			}
 		}
 	}

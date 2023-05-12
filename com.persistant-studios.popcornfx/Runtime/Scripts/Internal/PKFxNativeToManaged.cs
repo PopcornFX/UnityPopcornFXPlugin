@@ -20,13 +20,9 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SRaycastPack
 	{
-		public IntPtr m_RayOrigins;
-		public IntPtr m_RayDirections;
 		public IntPtr m_OutNormals;
 		public IntPtr m_OutPositions;
 		public IntPtr m_OutDistances;
-		public int m_FilterLayer;
-		public int m_RayCount;
 	};
 
 	// Attributes:
@@ -287,6 +283,10 @@ namespace PopcornFX
 		public static extern void SetDelegateOnResourceWrite(IntPtr delegatePtr);
 
 		// Not in this file:
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnRaycastStart(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnRaycastEnd(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRaycastPack(IntPtr delegatePtr);
 		//Fx lifetime functions

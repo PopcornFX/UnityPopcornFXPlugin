@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.IO;
 using System.Text;
 using UnityEngine;
+using Unity.Collections.LowLevel.Unsafe;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,6 +19,7 @@ namespace PopcornFX
 	{
 		public static string	ImportedAssetName { get; set; }
 		public static string	ImportedAssetPath { get; set; }
+		public static string 	ExtractedPkkg { get; set; }
 		public static string	DistortionLayer { get { return PKFxManagerImpl.m_DistortionLayer; } }
 		public static int		DistortionLayerID { get { return LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer); } }
 
@@ -243,6 +246,10 @@ namespace PopcornFX
 					settings.m_WorkerAffinities = IntPtr.Zero;
 				}
 			}
+
+			settings.m_RaycastHitSize = UnsafeUtility.SizeOf<RaycastHit>();
+			settings.m_RaycastCommandSize = UnsafeUtility.SizeOf<RaycastCommand>();
+
 			PKFxManagerImpl.PopcornFXStartup(ref settings);
 			if (settings.m_WorkerAffinities != IntPtr.Zero)
 			{
@@ -315,7 +322,26 @@ namespace PopcornFX
 		public static void SetForceDetermismOnBake(bool enable)
 		{
 			PKFxManagerImpl.SetForceDetermismOnBake(enable);
+		}
 
+		public static bool ExtractPkkg(string path, bool runUpgrades)
+		{
+			if (!PKFxManagerImpl.ExtractPkkg(path, runUpgrades))
+			{
+				Debug.Log("[PopcornFX] PKFxManagerImpl.ExtractPkkg failed");
+				return false;
+			}
+
+			if (!string.IsNullOrEmpty(PKFxManager.ExtractedPkkg)) // Pkkg extraction/upgrade success
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public static bool DeleteExtractedPkkg(string path)
+		{
+			return PKFxManagerImpl.DeleteExtractedPkkg(path);
 		}
 
 		public static List<string> PullEffectChangeIFN()

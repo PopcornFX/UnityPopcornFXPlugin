@@ -4,51 +4,144 @@
 using System;
 using AOT;
 using UnityEngine;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.Jobs;
+
+#if UNITY_EDITOR
+using System.Reflection;
+#endif
 
 namespace PopcornFX
 {
 	public class PKFxRaycasts
 	{
-		public delegate void RaycastPackCallback(IntPtr raycastQuery);
+		private class RaycastBuffers
+		{
+			public NativeArray<RaycastHit> m_Results;
+			public NativeArray<RaycastCommand> m_Commands;
+			public int m_Size = 0;
 
+			private RaycastBuffers() { }
+
+			public RaycastBuffers(int count)
+			{
+				m_Size = _NextOrEqualPowerOfTwo(count);
+				m_Results = new NativeArray<RaycastHit>(m_Size, Allocator.Persistent);//, NativeArrayOptions.UninitializedMemory);
+				m_Commands = new NativeArray<RaycastCommand>(m_Size, Allocator.Persistent);//, NativeArrayOptions.UninitializedMemory);
+			}
+
+			~RaycastBuffers()
+			{
+				DisposeIFN();
+			}
+
+			public void DisposeIFN()
+			{
+				if (m_Size > 0)
+				{
+					if (m_Results.Length != 0)
+						m_Results.Dispose();
+					if (m_Commands.Length != 0)
+						m_Commands.Dispose();
+				}
+				m_Size = 0;
+			}
+
+#if UNITY_EDITOR
+			// To debug IFN
+			public static void PrintStructsMemoryLayout()
+			{
+				{
+					string memoryStr = typeof(RaycastCommand).Name + "\n";
+					FieldInfo[] fields = typeof(RaycastCommand).GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+					foreach (var f in fields)
+						memoryStr += f.Name + " " + f.FieldType + "\n";
+					memoryStr += "SizeOf: " + UnsafeUtility.SizeOf<RaycastCommand>() + "\n";
+					memoryStr += "Align: " + UnsafeUtility.AlignOf<RaycastCommand>() + "\n";
+					Debug.Log(memoryStr);
+				}
+
+				{
+					string memoryStr = typeof(RaycastHit).Name + "\n";
+					FieldInfo[] fields = typeof(RaycastHit).GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+					foreach (var f in fields)
+						memoryStr += f.Name + " " + f.FieldType + "\n";
+					memoryStr += "SizeOf: " + UnsafeUtility.SizeOf<RaycastHit>() + "\n";
+					memoryStr += "Align: " + UnsafeUtility.AlignOf<RaycastHit>() + "\n";
+					Debug.Log(memoryStr);
+				}
+			}
+#endif
+
+			private int	_NextOrEqualPowerOfTwo(int value)
+			{
+				value--;
+				for (int i = 1; i < sizeof(int) * 8; i += i)
+				{
+					value |= value >> i;
+				}
+				value++;
+				return value;
+			}
+		}
+
+		static RaycastBuffers	m_Buffers = null;
+		static int				m_Count = 0;
+
+		public static void Clear()
+		{
+			if (m_Buffers != null)
+			{
+				m_Buffers.DisposeIFN();
+				m_Buffers = null;
+			}
+			m_Count = 0;
+		}
+		
+
+		public delegate void RaycastStartCallback(int count, ref IntPtr raycastCommand);
+		[MonoPInvokeCallback(typeof(RaycastStartCallback))]
+		public static void OnRaycastStart(int count, ref IntPtr raycastCommand)
+		{
+			m_Count = count;
+			if (m_Buffers == null || m_Buffers.m_Size < count)
+			{
+				if (m_Buffers != null)
+					m_Buffers.DisposeIFN();
+				m_Buffers = new RaycastBuffers(count);
+			}
+
+			unsafe
+			{
+				raycastCommand = (IntPtr)NativeArrayUnsafeUtility.GetUnsafeBufferPointerWithoutChecks(m_Buffers.m_Commands);
+			}
+		}
+
+
+		public delegate void RaycastEndCallback();
+		[MonoPInvokeCallback(typeof(RaycastEndCallback))]
+		public static void OnRaycastEnd()
+		{
+			//Unused for the time being. Could be useful for more parallelism later
+		}
+
+		public delegate void RaycastPackCallback(ref IntPtr raycastResult);
 		[MonoPInvokeCallback(typeof(RaycastPackCallback))]
-		public static void OnRaycastPack(IntPtr raycastQuery)
+		public static void OnRaycastPack(ref IntPtr raycastResult)
 		{
 			if (PKFxSettings.CustomRaycast != null)
 			{
-				PKFxSettings.CustomRaycast(raycastQuery);
+				PKFxSettings.CustomRaycast(ref raycastResult);
 				return;
 			}
 			unsafe
 			{
-				SRaycastPack* raycastPack = (SRaycastPack*)raycastQuery.ToPointer();
-				Vector4* origins = (Vector4*)raycastPack->m_RayOrigins.ToPointer();
-				Vector4* directions = (Vector4*)raycastPack->m_RayDirections.ToPointer();
-				Vector4* resNormals = (Vector4*)raycastPack->m_OutNormals.ToPointer();
-				Vector4* resPositions = (Vector4*)raycastPack->m_OutPositions.ToPointer();
-				float* resDistance = (float*)raycastPack->m_OutDistances.ToPointer();
+				JobHandle handle = RaycastCommand.ScheduleBatch(m_Buffers.m_Commands, m_Buffers.m_Results, m_Count, default(JobHandle));
 
-				uint raycastsCount = (uint)raycastPack->m_RayCount;
+				handle.Complete();
 
-				int layerMask = raycastPack->m_FilterLayer == 0 ? Physics.DefaultRaycastLayers : (1 << raycastPack->m_FilterLayer);
-
-				for (uint i = 0; i < raycastsCount; ++i)
-				{
-					RaycastHit rayHit;
-					bool hit = Physics.Raycast(origins[i], directions[i], out rayHit, directions[i].w, layerMask);
-
-					if (PKFxSettings.DebugEffectsRaycasts)
-						Debug.DrawRay(origins[i], directions[i] * directions[i].w, Color.red);
-
-					if (resNormals != null)
-						resNormals[i] = rayHit.normal;
-					if (resPositions != null)
-						resPositions[i] = rayHit.point;
-					if (hit)
-						resDistance[i] = rayHit.distance;
-					else
-						resDistance[i] = float.PositiveInfinity;
-				}
+				raycastResult = (IntPtr)NativeArrayUnsafeUtility.GetUnsafeBufferPointerWithoutChecks(m_Buffers.m_Results);
 			}
 		}
 

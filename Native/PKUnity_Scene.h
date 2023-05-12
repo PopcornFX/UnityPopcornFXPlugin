@@ -78,6 +78,25 @@ public:
 		__MaxUpdateModes
 	};
 
+	struct RaycastCommand
+	{
+		CFloat3		from;
+		CFloat3		direction;
+		float		distance;
+		int			layerMask;
+		int			maxHits;
+	};
+
+	struct RaycastHit
+	{
+		CFloat3			point;
+		CFloat3			normal;
+		unsigned int	faceID;
+		float			distance;
+		CFloat2			uv;
+		int				collider;
+	};
+
 public:
 	CPKFXScene();
 	~CPKFXScene();

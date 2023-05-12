@@ -19,7 +19,9 @@ extern "C"
 	unsigned long long	(POPCORN_TO_MANAGED_CONVENTION	*_OnResourceWrite)(const char *path, const void *data, u64 offset, u64 size) = null;
 
 	// Particles to Unity interactions:
-	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastPack)(const SRaycastPack *raycastPack) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastStart)(int count, void **cmd) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastEnd)() = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastPack)(void **res) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnFxStopped)(int guid) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaiseEvent)(int guid, int key, const char *eventName, unsigned int payloadCount, void* payloadDescs, void* payloadValues) = null;
 	void				*(POPCORN_TO_MANAGED_CONVENTION	*_OnGetAudioWaveformData)(const char *name, int *nbSamples) = null;
@@ -63,9 +65,19 @@ extern "C"
 	}
 
 	// Particles to Unity interactions:
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastStart(void *delegatePtr)
+	{
+		_OnRaycastStart = (void (POPCORN_TO_MANAGED_CONVENTION *)(int count, void **cmd))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastEnd(void *delegatePtr)
+	{
+		_OnRaycastEnd = (void (POPCORN_TO_MANAGED_CONVENTION *)())delegatePtr;
+	}
+
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastPack(void *delegatePtr)
 	{
-		_OnRaycastPack = (void (POPCORN_TO_MANAGED_CONVENTION *)(const SRaycastPack *raycastPack))delegatePtr;
+		_OnRaycastPack = (void (POPCORN_TO_MANAGED_CONVENTION *)(void** res))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnFxStopped(void *delegatePtr)
@@ -200,7 +212,33 @@ extern "C"
 		return 0ULL;
 	}
 
-	void	OnRaycastPack(const SRaycastPack *raycastPack)
+	void	OnRaycastStart(int count, void **cmd)
+	{
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
+			return;
+		}
+		if (PK_VERIFY(OnRaycastStart != null))
+		{
+			_OnRaycastStart(count, cmd);
+		}
+	}
+
+	void	OnRaycastEnd()
+	{
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
+			return;
+		}
+		if (PK_VERIFY(_OnRaycastEnd != null))
+		{
+			_OnRaycastEnd();
+		}
+	}
+
+	void	OnRaycastPack(void **res)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
@@ -209,7 +247,7 @@ extern "C"
 		}
 		if (PK_VERIFY(_OnRaycastPack != null))
 		{
-			_OnRaycastPack(raycastPack);
+			_OnRaycastPack(res);
 		}
 	}
 

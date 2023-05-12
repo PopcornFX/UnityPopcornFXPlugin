@@ -276,7 +276,7 @@ namespace PopcornFX
 							effect.Value.KillEffect();
 						}
 					}
-
+					PKFxRaycasts.Clear();
 					// Then clear the native side:
 					PKFxManager.ClearRenderers();
 					PKFxManager.UnregisterSceneAllEvents();

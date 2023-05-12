@@ -284,6 +284,7 @@ namespace PopcornFX
 #if !UNITY_EDITOR
 		private void OnApplicationQuit()
 		{
+			PKFxRaycasts.Clear();
 			PKFxManager.ShutdownPopcorn();
 		}
 #endif

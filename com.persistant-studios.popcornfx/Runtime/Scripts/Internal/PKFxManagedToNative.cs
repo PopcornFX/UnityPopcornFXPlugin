@@ -78,6 +78,10 @@ namespace PopcornFX
 		public bool m_OverrideThreadPool;
 		public int m_WorkerCount;
 		public IntPtr m_WorkerAffinities;
+
+		// Raycast structs
+		public int m_RaycastHitSize;
+		public int m_RaycastCommandSize;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -350,11 +354,15 @@ namespace PopcornFX
 		public static extern bool AppendMeshToBake(IntPtr mesh, Matrix4x4 transform);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool BakeMeshes(string outputPkmmVirtualPath);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool ExtractPkkg(string pkkgPath, bool runUpgrades);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool DeleteExtractedPkkg(string pkkgPath);
 #endif
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.16.2 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.16.3 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
@@ -561,6 +569,8 @@ namespace PopcornFX
 
 			SetDelegateOnResourceLoad(delegateHandler.DelegateToFunctionPointer(new ResourceLoadCallback(OnResourceLoad)));
 			SetDelegateOnResourceWrite(delegateHandler.DelegateToFunctionPointer(new ResourceWriteCallback(OnResourceWrite)));
+			SetDelegateOnRaycastStart(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastStartCallback(PKFxRaycasts.OnRaycastStart)));
+			SetDelegateOnRaycastEnd(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastEndCallback(PKFxRaycasts.OnRaycastEnd)));
 			SetDelegateOnRaycastPack(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastPackCallback(PKFxRaycasts.OnRaycastPack)));
 			SetDelegateOnFxStopped(delegateHandler.DelegateToFunctionPointer(new FxCallback(OnFxStopped)));
 			SetDelegateOnRaiseEvent(delegateHandler.DelegateToFunctionPointer(new RaiseEventCallback(OnRaiseEvent)));
@@ -593,6 +603,7 @@ namespace PopcornFX
 			SetDelegateOnEffectEventFound(delegateHandler.DelegateToFunctionPointer(new EffectEventFoundCallback(OnEffectEventFound)));
 			SetDelegateOnGetEffectInfo(delegateHandler.DelegateToFunctionPointer(new GetEffectInfoCallback(OnGetEffectInfo)));
 			SetDelegateOnGetAllAssetPath(delegateHandler.DelegateToFunctionPointer(new GetAllAssetPathCallback(OnGetAllAssetPath)));
+			SetDelegateOnPkkgExtracted(delegateHandler.DelegateToFunctionPointer(new PkkgExtractedCallback(OnPkkgExtracted)));
 			// Startup the editor manager:
 			PopcornFXEditorStartup();
 #endif

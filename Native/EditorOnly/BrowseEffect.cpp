@@ -7,7 +7,7 @@
 
 #include "EditorNativeToManaged.h"
 #include "EditorManager.h"
-#include "EffectBaking.h"
+#include "AssetBaker.h"
 #include "NativeToManaged.h"
 #include "RuntimeManager.h"
 #include "ResourceHandleDummy.h"

@@ -23,7 +23,7 @@ TARGET = $(TARGETDIR)/libPK-UnityPlugin.a
 PCH = ../../Native/precompiled/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../Native/Common/Gl -I../../Native/Common/GLES -I../../../ExternalLibs/GL/include
+INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/Gl -I../../Native/Common/GLES -I../../../ExternalLibs/GL/include -I../../../ExternalLibs/Runtime/libs/zlib-1.2.8
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -48,7 +48,7 @@ ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Debug/PK-IntegrationUnity
-DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
+DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lPK-ParticlesToolbox_d -lPK-Runtime_d
@@ -70,7 +70,7 @@ ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Debug/PK-IntegrationUnity
-DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
+DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lPK-ParticlesToolbox_d -lPK-Runtime_d
@@ -92,7 +92,7 @@ ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Release/PK-IntegrationUnity
-DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
+DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lPK-ParticlesToolbox_r -lPK-Runtime_r
@@ -114,7 +114,7 @@ ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Release/PK-IntegrationUnity
-DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
+DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=1 -DPK_BUILD_WITH_GLES3_SUPPORT=1 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=0
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lPK-ParticlesToolbox_r -lPK-Runtime_r

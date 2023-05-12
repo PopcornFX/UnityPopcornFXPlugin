@@ -44,12 +44,12 @@ Shader "PopcornFX/HDRP/PKFxParticleShader_CutOutOpaque"
 			// Material variations:
 			//------------------------------------------------------------------------------------
 			#define PK_HAS_COLOR 1
-			#pragma multi_compile_local PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
-			#pragma multi_compile_local _ PK_HAS_ALPHA_REMAP
-			#pragma multi_compile_local _ PK_HAS_DIFFUSE_RAMP
-			#pragma multi_compile_local _ PK_HAS_LIGHTING
+			#pragma shader_feature PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
+			#pragma shader_feature _ PK_HAS_ALPHA_REMAP
+			#pragma shader_feature _ PK_HAS_DIFFUSE_RAMP
+			#pragma shader_feature _ PK_HAS_LIGHTING
 			// Bug on opengles: SV_VertexID not working so need to remove the PK_HAS_RIBBON_COMPLEX variation...
-			#pragma multi_compile_local _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
+			#pragma shader_feature _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
 			//------------------------------------------------------------------------------------
 			
 			#define	USE_HDRP		1

@@ -5,7 +5,7 @@
 #include "precompiled.h"
 #include "EditorOnly/EditorManager.h"
 #include "EditorOnly/FileWatcher.h"
-#include "EditorOnly/EffectBaking.h"
+#include "EditorOnly/AssetBaker.h"
 #include "EditorOnly/BrowseEffect.h"
 #include "EditorOnly/MeshBaking.h"
 

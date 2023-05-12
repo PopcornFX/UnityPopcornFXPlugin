@@ -242,7 +242,7 @@ namespace PopcornFX
 				for (int i = 0; i < m_Cameras.Count; ++i)
 				{
 					m_Cameras[i].m_CameraID = (short)i;
-					m_Cameras[i].SetCullingMask((short)i, m_CameraLayers[i], m_AllPopcornFXLayerMask);
+					m_Cameras[i].SetCullingMask((short)i, 1 << m_CameraLayers[i], m_AllPopcornFXLayerMask);
 				}
 				return true;
 			}

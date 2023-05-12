@@ -45,16 +45,16 @@ Shader "PopcornFX/HDRP/PKFxParticleProceduralShader_CutOutOpaque"
 			// Material variations:
 			//------------------------------------------------------------------------------------
 			#define PK_HAS_COLOR 1
-			#pragma multi_compile_local _ PK_HAS_ALPHA_REMAP
-			#pragma multi_compile_local _ PK_HAS_DIFFUSE_RAMP
+			#pragma shader_feature _ PK_HAS_ALPHA_REMAP
+			#pragma shader_feature _ PK_HAS_DIFFUSE_RAMP
 			//------------------------------------------------------------------------------------
 	
 			//------------------------------------------------------------------------------------
 			// Billboarding variations:
 			//------------------------------------------------------------------------------------
-			#pragma multi_compile_local BB_FeatureC0 BB_FeatureC1 BB_FeatureC1_Capsule BB_FeatureC2
-			#pragma multi_compile_local _ BB_SizeFloat2
-			#pragma multi_compile_local _ BB_Feature_Atlas PK_HAS_ANIM_BLEND
+			#pragma shader_feature BB_FeatureC0 BB_FeatureC1 BB_FeatureC1_Capsule BB_FeatureC2
+			#pragma shader_feature _ BB_SizeFloat2
+			#pragma shader_feature _ BB_Feature_Atlas PK_HAS_ANIM_BLEND
 			//------------------------------------------------------------------------------------
 			
 			#define	USE_HDRP		1

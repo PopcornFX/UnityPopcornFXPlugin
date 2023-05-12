@@ -16,7 +16,7 @@
 #include "UnityGraphicsAPI/IUnityInterface.h"
 
 #if		PK_UNITY_EDITOR
-#	include		"EditorOnly/EffectBaking.h"
+#	include		"EditorOnly/AssetBaker.h"
 #	include		"EditorOnly/EditorNativeToManaged.h"
 #	include		"EditorOnly/EditorManager.h"
 #endif
@@ -927,6 +927,7 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableFrameStats(bool enable)
 	{
+		(void)enable;
 #if	(PK_PARTICLES_HAS_STATS != 0)
 		CRuntimeManager::Instance().GetProfiler().EnableFrameStats(enable);
 #endif
@@ -936,6 +937,7 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableEffectsStats(bool enable)
 	{
+		(void)enable;
 #if	(PK_PARTICLES_HAS_STATS != 0)
 		CRuntimeManager::Instance().GetProfiler().EnableEffectsStats(enable);
 #endif
@@ -946,6 +948,7 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION bool 		StatsPullFrameData(const char *reportName, SStatsToFill &data)
 	{
+		(void)reportName;
 		(void)data;
 #if	(PK_PARTICLES_HAS_STATS != 0)
 		CRuntimeManager			&manager = CRuntimeManager::Instance();

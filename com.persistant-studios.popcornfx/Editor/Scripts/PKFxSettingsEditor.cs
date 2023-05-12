@@ -425,7 +425,6 @@ namespace PopcornFX
 							}
 						};
 					}
-
 				}
 				EditorGUILayout.EndVertical();
 

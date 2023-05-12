@@ -7,8 +7,8 @@
 
 //----------------------------------------------------------------------------
 
-CPackExplorer::CPackExplorer(const CString &pack, IFileSystem *fileSystem)
-:	CFileDirectoryWalker(pack, IgnoreVirtualFS, fileSystem)
+CPackExplorer::CPackExplorer(const CString &pack, IFileSystem *controller)
+:	CFileDirectoryWalker(pack, IgnoreVirtualFS, controller)
 ,	m_Pack(pack)
 {
 }

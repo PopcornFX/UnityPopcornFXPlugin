@@ -13,6 +13,8 @@ ifeq ($(config),debug_x64)
   PK_Discretizers_SDK1_config = debug_x64
   PK_ParticlesToolbox_SDK1_config = debug_x64
   PK_AssetBakerLib_config = debug_x64
+  PK_ImporterLib_config = debug_x64
+  PK_UpgraderLib_config = debug_x64
   PK_RenderHelpers_SDK1_config = debug_x64
   PK_IntegrationUnity_config = debug_x64
 
@@ -21,6 +23,8 @@ else ifeq ($(config),release_x64)
   PK_Discretizers_SDK1_config = release_x64
   PK_ParticlesToolbox_SDK1_config = release_x64
   PK_AssetBakerLib_config = release_x64
+  PK_ImporterLib_config = release_x64
+  PK_UpgraderLib_config = release_x64
   PK_RenderHelpers_SDK1_config = release_x64
   PK_IntegrationUnity_config = release_x64
 
@@ -28,9 +32,9 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-AssetBakerLib PK-RenderHelpers_SDK1 PK-IntegrationUnity
+PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-AssetBakerLib PK-ImporterLib PK-UpgraderLib PK-RenderHelpers_SDK1 PK-IntegrationUnity
 
-.PHONY: all clean help $(PROJECTS) Rendering Runtime Tools Tools/AssetBaker Unity
+.PHONY: all clean help $(PROJECTS) Rendering Runtime Tools Tools/AssetBaker Tools/Upgrader Unity
 
 all: $(PROJECTS)
 
@@ -38,9 +42,11 @@ Rendering: PK-RenderHelpers_SDK1
 
 Runtime: PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-Runtime_SDK1
 
-Tools: Tools/AssetBaker
+Tools: Tools/AssetBaker Tools/Upgrader
 
 Tools/AssetBaker: PK-AssetBakerLib
+
+Tools/Upgrader: PK-ImporterLib PK-UpgraderLib
 
 Unity: PK-IntegrationUnity
 
@@ -68,13 +74,25 @@ ifneq (,$(PK_AssetBakerLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make config=$(PK_AssetBakerLib_config)
 endif
 
+PK-ImporterLib:
+ifneq (,$(PK_ImporterLib_config))
+	@echo "==== Building PK-ImporterLib ($(PK_ImporterLib_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make config=$(PK_ImporterLib_config)
+endif
+
+PK-UpgraderLib:
+ifneq (,$(PK_UpgraderLib_config))
+	@echo "==== Building PK-UpgraderLib ($(PK_UpgraderLib_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make config=$(PK_UpgraderLib_config)
+endif
+
 PK-RenderHelpers_SDK1:
 ifneq (,$(PK_RenderHelpers_SDK1_config))
 	@echo "==== Building PK-RenderHelpers_SDK1 ($(PK_RenderHelpers_SDK1_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers_SDK1.make config=$(PK_RenderHelpers_SDK1_config)
 endif
 
-PK-IntegrationUnity: PK-AssetBakerLib
+PK-IntegrationUnity: PK-UpgraderLib PK-ImporterLib PK-AssetBakerLib
 ifneq (,$(PK_IntegrationUnity_config))
 	@echo "==== Building PK-IntegrationUnity ($(PK_IntegrationUnity_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-IntegrationUnity.make config=$(PK_IntegrationUnity_config)
@@ -85,6 +103,8 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-Discretizers_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-ParticlesToolbox_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make clean
+	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make clean
+	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-IntegrationUnity.make clean
 
@@ -102,6 +122,8 @@ help:
 	@echo "   PK-Discretizers_SDK1"
 	@echo "   PK-ParticlesToolbox_SDK1"
 	@echo "   PK-AssetBakerLib"
+	@echo "   PK-ImporterLib"
+	@echo "   PK-UpgraderLib"
 	@echo "   PK-RenderHelpers_SDK1"
 	@echo "   PK-IntegrationUnity"
 	@echo ""

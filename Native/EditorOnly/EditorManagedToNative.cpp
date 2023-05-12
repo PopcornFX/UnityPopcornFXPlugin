@@ -8,7 +8,7 @@
 #include "EditorNativeToManaged.h"
 #include "RuntimeManager.h"
 #include "EditorManager.h"
-#include "EffectBaking.h"
+#include "AssetBaker.h"
 #include "MeshBaking.h"
 #include "FileWatcher.h"
 #include "PKUnity_FileSystemController.h"
@@ -225,6 +225,26 @@ extern "C"
 
 		CMeshBaker		*meshBaker = CEditorManager::Instance().GetMeshBaker();
 		return meshBaker->BakeToFile(outputMeshPath);
+	}
+
+	//----------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION bool	ExtractPkkg(const char *pkkgPath, bool runUpgrades)
+	{
+		NEED_PK_RUNTIME_AND_EDITOR_STARTED(return false);
+
+		CEffectBaker *effectBaker = CEditorManager::Instance().GetEffectBaker();
+		return effectBaker->ExtrackPkkg(pkkgPath, runUpgrades);
+	}
+
+	//----------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION bool	DeleteExtractedPkkg(const char *extractedPkkgPathDir)
+	{
+		NEED_PK_RUNTIME_AND_EDITOR_STARTED(return false);
+
+		CEffectBaker *effectBaker = CEditorManager::Instance().GetEffectBaker();
+		return effectBaker->DeleteFolderRec(extractedPkkgPathDir);
 	}
 
 //----------------------------------------------------------------------------

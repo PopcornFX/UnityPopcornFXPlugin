@@ -131,7 +131,7 @@ namespace PopcornFX
 
 		public void OnDisable()
 		{
-			if (m_CameraID >= 0)
+			if (m_CameraID >= 0 && m_RenderingPlugin != null)
 				m_RenderingPlugin.UnRegisterCamera(this);
 		}
 
@@ -144,6 +144,7 @@ namespace PopcornFX
 			{
 				if (rendering.Length == 0)
 				{
+					enabled = false;
 					Debug.LogError("[PopcornFX] PopcornFX need a game object with PKFxRenderingPlugin script attached. (Hierarchy > PopcornFX > Rendering Plugin Manager)");
 					return;
 				}

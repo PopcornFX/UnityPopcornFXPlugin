@@ -36,10 +36,10 @@ Shader "PopcornFX/Mesh_LitOpaque"
 		CGPROGRAM
 		#pragma surface surf Standard vertex:vertMain
 
-		#pragma multi_compile PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
-		#pragma multi_compile PK_HAS_VAT_NONE PK_HAS_VAT_SOFT PK_HAS_VAT_RIGID PK_HAS_VAT_FLUID
-		#pragma multi_compile _ PK_HAS_ALPHA_REMAP
-		#pragma multi_compile _ PK_HAS_DIFFUSE_RAMP
+		#pragma shader_feature PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
+		#pragma shader_feature PK_HAS_VAT_NONE PK_HAS_VAT_SOFT PK_HAS_VAT_RIGID PK_HAS_VAT_FLUID
+		#pragma shader_feature _ PK_HAS_ALPHA_REMAP
+		#pragma shader_feature _ PK_HAS_DIFFUSE_RAMP
 
 		#define PK_IS_TRANSPARENT	0
 		#define PK_IS_LIT			1

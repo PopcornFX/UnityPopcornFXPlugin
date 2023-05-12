@@ -62,10 +62,11 @@ namespace PopcornFX
 				gameObject.layer = LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
 			else
 			{
-				int layer = 0;
+				int layer;
 
 				PKFxSettings.Instance.GetRenderingLayerForBatchDesc(batchDesc, out layer);
-				gameObject.layer = layer;
+				if (layer != -1)
+					gameObject.layer = layer;
 			}
 			if (batchDesc.m_Type != ERendererType.Mesh)
 				meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; // Disable shadow casting on particles for now

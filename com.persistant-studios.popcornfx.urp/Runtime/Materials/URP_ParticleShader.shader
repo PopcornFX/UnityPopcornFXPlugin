@@ -47,12 +47,12 @@ Shader "PopcornFX/URP/ParticleShader"
 			// Material variations:
 			//------------------------------------------------------------------------------------
 			#define PK_HAS_COLOR 1
-			#pragma multi_compile_local PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
-			#pragma multi_compile_local _ PK_HAS_ALPHA_REMAP
-			#pragma multi_compile_local _ PK_HAS_DIFFUSE_RAMP
-			#pragma multi_compile_local _ PK_HAS_SOFT
-			#pragma multi_compile_local _ PK_HAS_LIGHTING PK_HAS_DISTORTION
-			#pragma multi_compile_local _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
+			#pragma shader_feature PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
+			#pragma shader_feature _ PK_HAS_ALPHA_REMAP
+			#pragma shader_feature _ PK_HAS_DIFFUSE_RAMP
+			#pragma shader_feature _ PK_HAS_SOFT
+			#pragma shader_feature _ PK_HAS_LIGHTING PK_HAS_DISTORTION
+			#pragma shader_feature _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
 			//------------------------------------------------------------------------------------
 			// Unity defined keywords
 			#pragma multi_compile_instancing

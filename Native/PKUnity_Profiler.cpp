@@ -158,7 +158,7 @@ void	CLiveProfiler::AddReport(const char *reportName, CParticleMediumCollection 
 		if (m_CurrentFrameNumber >= m_NumberOfFrameToAverage)
 		{
 			activeReport->m_CollectionUpdateTimeAverage = activeReport->m_CollectionUpdateTime / m_CurrentFrameNumber;
-			activeReport->m_ParticleCount = activeReport->m_ParticleCountAverage / m_CurrentFrameNumber;
+			activeReport->m_ParticleCountAverage = activeReport->m_ParticleCount / m_CurrentFrameNumber;
 			activeReport->m_EffectsUsedCountAverage = activeReport->m_EffectsUsedCount / m_CurrentFrameNumber;
 		}
 	}
@@ -221,6 +221,7 @@ void	CLiveProfiler::AddReport(const char *reportName, CParticleMediumCollection 
 			activeReport->m_CollectionUpdateTime = 0;
 			activeReport->m_EffectsUsedCount = 0;
 			activeReport->m_CollectionUpdateTimeAverage = 0;
+			activeReport->m_TotalTimeAverage = 0;
 		}
 	}
 }

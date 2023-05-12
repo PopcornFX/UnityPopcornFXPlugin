@@ -2463,7 +2463,7 @@
     "m_OverrideReferenceName": "PK_HAS_ALPHA_REMAP",
     "m_GeneratePropertyBlock": true,
     "m_KeywordType": 0,
-    "m_KeywordDefinition": 1,
+    "m_KeywordDefinition": 0,
     "m_KeywordScope": 0,
     "m_Entries": [],
     "m_Value": 0,
@@ -3328,7 +3328,7 @@
     "m_OverrideReferenceName": "PK_HAS_SOFT",
     "m_GeneratePropertyBlock": true,
     "m_KeywordType": 0,
-    "m_KeywordDefinition": 1,
+    "m_KeywordDefinition": 0,
     "m_KeywordScope": 0,
     "m_Entries": [],
     "m_Value": 0,
@@ -5154,7 +5154,7 @@
     "m_OverrideReferenceName": "PK_HAS_VAT",
     "m_GeneratePropertyBlock": true,
     "m_KeywordType": 1,
-    "m_KeywordDefinition": 1,
+    "m_KeywordDefinition": 0,
     "m_KeywordScope": 0,
     "m_Entries": [
         {
@@ -8306,7 +8306,7 @@
     "m_OverrideReferenceName": "PK_HAS_DIFFUSE_RAMP",
     "m_GeneratePropertyBlock": true,
     "m_KeywordType": 0,
-    "m_KeywordDefinition": 1,
+    "m_KeywordDefinition": 0,
     "m_KeywordScope": 0,
     "m_Entries": [],
     "m_Value": 0,
@@ -10804,7 +10804,7 @@
     "m_OverrideReferenceName": "PK_HAS_EMISSIVE",
     "m_GeneratePropertyBlock": true,
     "m_KeywordType": 1,
-    "m_KeywordDefinition": 1,
+    "m_KeywordDefinition": 0,
     "m_KeywordScope": 0,
     "m_Entries": [
         {

@@ -325,6 +325,8 @@ namespace PopcornFX
 			}
 		}
 
+#if UNITY_EDITOR
+
 		private void _EnableMaterialKeywords(Material material, string keyword)
 		{
 			material.EnableKeyword(keyword);
@@ -463,7 +465,6 @@ namespace PopcornFX
 				_DisableMaterialKeywords(material, "PK_HAS_SOFT");
 		}
 
-#if UNITY_EDITOR
 		private bool m_ShowBindings = false;
 
 		public bool	DrawEditorShaderInputBindings(SBatchDesc batchDesc, bool headerGroup = false)

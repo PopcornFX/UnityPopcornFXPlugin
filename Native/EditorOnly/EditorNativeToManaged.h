@@ -150,6 +150,9 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnGetAllAssetPath(void *delegatePtr);
 	void										OnGetAllAssetPath(const char **pathArray, int size);
 
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnPkkgExtracted(void *delegatePtr);
+	void										OnPkkgExtracted(const char *dirPath);
+
 	void										ClearNativeToManagedEditorCallbacks();
 }
 

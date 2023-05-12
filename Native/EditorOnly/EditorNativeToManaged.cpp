@@ -21,6 +21,7 @@ extern "C"
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnEffectAboutToBake)(const char *effectName) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnAssetChange)(const SAssetChangesDesc *assetChanges) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnGetAllAssetPath)(const char **pathArray, int size) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION *_OnPkkgExtracted)(const char *effectName) = null;
 
 	//----------------------------------------------------------------------------
 
@@ -69,6 +70,12 @@ extern "C"
 	{
 		_OnGetAllAssetPath = (void (POPCORN_TO_MANAGED_CONVENTION *)(const char **pathArray, int size))delegatePtr;
 	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnPkkgExtracted(void *delegatePtr)
+	{
+		_OnPkkgExtracted = (void (POPCORN_TO_MANAGED_CONVENTION *)(const char *dirPath))delegatePtr;
+	}
+
 
 	//----------------------------------------------------------------------------
 
@@ -154,6 +161,15 @@ extern "C"
 		}
 	}
 
+	void										OnPkkgExtracted(const char *dirPath)
+	{
+		PK_ASSERT(CCurrentThread::IsMainThread());
+		if (PK_VERIFY(_OnPkkgExtracted != null))
+		{
+			_OnPkkgExtracted(dirPath);
+		}
+	}
+
 	void										ClearNativeToManagedEditorCallbacks()
 	{
 		_OnEffectDependencyFound = null;
@@ -163,5 +179,6 @@ extern "C"
 		_OnEffectAboutToBake = null;
 		_OnAssetChange = null;
 		_OnGetAllAssetPath = null;
+		_OnPkkgExtracted = null;
 	}
 }

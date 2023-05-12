@@ -38,4 +38,6 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION bool					NextSubmeshToBake(const char *name, int meshVertexAttributes);
 	MANAGED_TO_POPCORN_CONVENTION bool					AppendMeshToBake(SMeshDataToFill *mesh, CFloat4x4 transform);
 	MANAGED_TO_POPCORN_CONVENTION bool					BakeMeshes(const char *outputMeshPath);
+	MANAGED_TO_POPCORN_CONVENTION bool					ExtractPkkg(const char *pkkgPath, bool runUpgrades);
+	MANAGED_TO_POPCORN_CONVENTION bool					DeleteExtractedPkkg(const char *extractedPkkgPathDir);
 }

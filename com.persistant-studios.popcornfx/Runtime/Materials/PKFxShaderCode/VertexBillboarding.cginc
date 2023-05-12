@@ -2,9 +2,9 @@
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
 /* Use this pragma to use different lvl features
-	#pragma multi_compile_local BB_FeatureC0 BB_FeatureC1 BB_FeatureC1_Capsule BB_FeatureC2
-	#pragma multi_compile_local _ BB_SizeFloat2
-	#pragma multi_compile_local _ BB_Feature_Atlas PK_HAS_ANIM_BLEND
+	#pragma shader_feature BB_FeatureC0 BB_FeatureC1 BB_FeatureC1_Capsule BB_FeatureC2
+	#pragma shader_feature _ BB_SizeFloat2
+	#pragma shader_feature _ BB_Feature_Atlas PK_HAS_ANIM_BLEND
 */
 
 // Should match the PKFxProceduralRenderer.EBillboardingInputs:

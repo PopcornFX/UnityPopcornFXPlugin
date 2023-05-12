@@ -70,8 +70,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -98,8 +98,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -139,14 +139,15 @@
     <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\wistd_memory.h" />
     <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\wistd_type_traits.h" />
     <ClInclude Include="..\..\Native\DelayedEffectsMethods.h" />
+    <ClInclude Include="..\..\Native\EditorOnly\AssetBaker.h" />
     <ClInclude Include="..\..\Native\EditorOnly\BrowseEffect.h" />
     <ClInclude Include="..\..\Native\EditorOnly\EditorManagedToNative.h" />
     <ClInclude Include="..\..\Native\EditorOnly\EditorManager.h" />
     <ClInclude Include="..\..\Native\EditorOnly\EditorNativeToManaged.h" />
-    <ClInclude Include="..\..\Native\EditorOnly\EffectBaking.h" />
     <ClInclude Include="..\..\Native\EditorOnly\FileWatcher.h" />
     <ClInclude Include="..\..\Native\EditorOnly\MeshBaking.h" />
     <ClInclude Include="..\..\Native\EditorOnly\PackFxExplorer.h" />
+    <ClInclude Include="..\..\Native\EditorOnly\unzip.h" />
     <ClInclude Include="..\..\Native\FxEffect.h" />
     <ClInclude Include="..\..\Native\FxWindowsGraphicsDefs.h" />
     <ClInclude Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX11Data.h" />
@@ -181,6 +182,17 @@
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityRenderingExtensions.h" />
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityShaderCompilerAccess.h" />
     <ClInclude Include="..\..\Native\precompiled\precompiled.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxRendererSubView.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
     <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h" />
@@ -195,14 +207,17 @@
   <ItemGroup>
     <ClCompile Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.cpp" />
     <ClCompile Include="..\..\Native\AudioApplicationLoopback\Windows\LoopbackCapture.cpp" />
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker.cpp" />
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker_Unzip.cpp" />
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker_Upgrade.cpp" />
     <ClCompile Include="..\..\Native\EditorOnly\BrowseEffect.cpp" />
     <ClCompile Include="..\..\Native\EditorOnly\EditorManagedToNative.cpp" />
     <ClCompile Include="..\..\Native\EditorOnly\EditorManager.cpp" />
     <ClCompile Include="..\..\Native\EditorOnly\EditorNativeToManaged.cpp" />
-    <ClCompile Include="..\..\Native\EditorOnly\EffectBaking.cpp" />
     <ClCompile Include="..\..\Native\EditorOnly\FileWatcher.cpp" />
     <ClCompile Include="..\..\Native\EditorOnly\MeshBaking.cpp" />
     <ClCompile Include="..\..\Native\EditorOnly\PackFxExplorer.cpp" />
+    <ClCompile Include="..\..\Native\EditorOnly\unzip.cpp" />
     <ClCompile Include="..\..\Native\FxEffect.cpp" />
     <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX11Data.cpp" />
     <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX12Data.cpp" />
@@ -241,6 +256,12 @@
     <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="PK-UpgraderLib.vcxproj">
+      <Project>{55ACDBF7-CBA0-4035-B212-68E793243242}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-ImporterLib.vcxproj">
+      <Project>{55ACDBF7-CBA0-4035-B212-68E973234242}</Project>
+    </ProjectReference>
     <ProjectReference Include="PK-AssetBakerLib.vcxproj">
       <Project>{44ECDA8C-CBA0-4035-B212-68E793243242}</Project>
     </ProjectReference>

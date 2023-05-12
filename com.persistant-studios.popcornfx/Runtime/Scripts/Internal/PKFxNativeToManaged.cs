@@ -351,6 +351,8 @@ namespace PopcornFX
 		public static extern void SetDelegateOnRendererNamesAdded(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnPrintUnityConsole(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnPkkgExtracted(IntPtr delegatePtr);
 #endif
 		//----------------------------------------------------------------------------
 
@@ -1427,6 +1429,14 @@ namespace PopcornFX
 				paths.Add(Marshal.PtrToStringAnsi(pathArray[i]));
 			}
 			PKFxSettings.AssetPathList = paths;
+		}
+
+		private delegate void PkkgExtractedCallback(string path);
+
+		[MonoPInvokeCallback(typeof(PkkgExtractedCallback))]
+		public static void OnPkkgExtracted(string path)
+		{
+			PKFxManager.ExtractedPkkg = path;
 		}
 #endif
 	}

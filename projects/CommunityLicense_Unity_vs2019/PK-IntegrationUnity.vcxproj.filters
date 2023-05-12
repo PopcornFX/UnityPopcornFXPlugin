@@ -37,6 +37,9 @@
     <Filter Include="Headers\ImplemGraphicsAPI">
       <UniqueIdentifier>{3FB51BB5-AB77-4F3F-F427-DECB6029281D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\PK-ZLib">
+      <UniqueIdentifier>{89BA71F6-F545-DFBA-FE56-62AF6A613BBB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\RenderingIntegration">
       <UniqueIdentifier>{1251306A-FE0B-2016-A7C3-9860935D6AA6}</UniqueIdentifier>
     </Filter>
@@ -111,6 +114,9 @@
     <ClInclude Include="..\..\Native\DelayedEffectsMethods.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\AssetBaker.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Native\EditorOnly\BrowseEffect.h">
       <Filter>Headers\EditorOnly</Filter>
     </ClInclude>
@@ -123,9 +129,6 @@
     <ClInclude Include="..\..\Native\EditorOnly\EditorNativeToManaged.h">
       <Filter>Headers\EditorOnly</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Native\EditorOnly\EffectBaking.h">
-      <Filter>Headers\EditorOnly</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Native\EditorOnly\FileWatcher.h">
       <Filter>Headers\EditorOnly</Filter>
     </ClInclude>
@@ -133,6 +136,9 @@
       <Filter>Headers\EditorOnly</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Native\EditorOnly\PackFxExplorer.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\unzip.h">
       <Filter>Headers\EditorOnly</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Native\FxEffect.h">
@@ -237,6 +243,39 @@
     <ClInclude Include="..\..\Native\precompiled\precompiled.h">
       <Filter>Headers\precompiled</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Native\Common\PKFX\FxRendererSubView.h">
       <Filter>Common\PKFX</Filter>
     </ClInclude>
@@ -275,6 +314,15 @@
     <ClCompile Include="..\..\Native\AudioApplicationLoopback\Windows\LoopbackCapture.cpp">
       <Filter>Sources\AudioApplicationLoopback\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker_Unzip.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker_Upgrade.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Native\EditorOnly\BrowseEffect.cpp">
       <Filter>Sources\EditorOnly</Filter>
     </ClCompile>
@@ -287,9 +335,6 @@
     <ClCompile Include="..\..\Native\EditorOnly\EditorNativeToManaged.cpp">
       <Filter>Sources\EditorOnly</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Native\EditorOnly\EffectBaking.cpp">
-      <Filter>Sources\EditorOnly</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Native\EditorOnly\FileWatcher.cpp">
       <Filter>Sources\EditorOnly</Filter>
     </ClCompile>
@@ -297,6 +342,9 @@
       <Filter>Sources\EditorOnly</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Native\EditorOnly\PackFxExplorer.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\unzip.cpp">
       <Filter>Sources\EditorOnly</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Native\FxEffect.cpp">

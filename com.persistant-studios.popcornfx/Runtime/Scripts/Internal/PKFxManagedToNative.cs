@@ -342,11 +342,15 @@ namespace PopcornFX
 		public static extern bool AppendMeshToBake(IntPtr mesh, Matrix4x4 transform);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool BakeMeshes(string outputPkmmVirtualPath);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool ExtractPkkg(string pkkgPath, bool runUpgrades);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool DeleteExtractedPkkg(string pkkgPath);
 #endif
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.15.7 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.15.8 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
@@ -583,6 +587,7 @@ namespace PopcornFX
 			SetDelegateOnEffectEventFound(delegateHandler.DelegateToFunctionPointer(new EffectEventFoundCallback(OnEffectEventFound)));
 			SetDelegateOnGetEffectInfo(delegateHandler.DelegateToFunctionPointer(new GetEffectInfoCallback(OnGetEffectInfo)));
 			SetDelegateOnGetAllAssetPath(delegateHandler.DelegateToFunctionPointer(new GetAllAssetPathCallback(OnGetAllAssetPath)));
+			SetDelegateOnPkkgExtracted(delegateHandler.DelegateToFunctionPointer(new PkkgExtractedCallback(OnPkkgExtracted)));
 			// Startup the editor manager:
 			PopcornFXEditorStartup();
 #endif

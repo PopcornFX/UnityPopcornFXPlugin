@@ -108,8 +108,11 @@ namespace PopcornFX
 		{
 			Debug.Assert((batchDesc.m_CameraId >= 0 && batchDesc.m_CameraId < m_PopcornLayerName.Length), "[PKFX] Wrong camera ID feeded to materials factory");
 
-      		PKFxRenderingPlugin renderingPlugin = FindObjectOfType<PKFxRenderingPlugin>();
-    		layer = renderingPlugin.GetLayerForCameraID(batchDesc.m_CameraId);
+			PKFxRenderingPlugin renderingPlugin = FindObjectOfType<PKFxRenderingPlugin>();
+			if (renderingPlugin != null)
+				layer = renderingPlugin.GetLayerForCameraID(batchDesc.m_CameraId);
+			else
+				layer = -1;
 		}
 
 		public static bool EnableEffectHotreload

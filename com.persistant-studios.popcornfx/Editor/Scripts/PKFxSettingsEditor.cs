@@ -380,7 +380,6 @@ namespace PopcornFX
 							}
 						};
 					}
-
 				}
 				EditorGUILayout.EndVertical();
 

@@ -1040,18 +1040,18 @@ void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 			// Set the info if the handlers are compute buffers or not:
 #if		defined(PK_ORBIS)
 
-			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CGNMBufferHandles*)m_UnityMeshInfos[i].m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfoPerViews[i].m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfoPerViews[i].m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfoPerViews[i].m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfoPerViews[i].m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CGNMBufferHandles*)m_UnityMeshInfoPerViews[i].m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
 #elif	defined(PK_UNKNOWN2)
 
-			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
-			((CUNKNOWN2BufferHandles*)m_UnityMeshInfos[i].m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfoPerViews[i].m_VBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfoPerViews[i].m_IBHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfoPerViews[i].m_InfoHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfoPerViews[i].m_AtlasesHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
+			((CUNKNOWN2BufferHandles*)m_UnityMeshInfoPerViews[i].m_IndirectArgsHandler.m_Buffer.Get())->m_IsComputeBuffer = useComputeBuffers;
 #endif	// defined(PK_ORBIS)
 		}
 		else if (m_RendererType == Renderer_Mesh)

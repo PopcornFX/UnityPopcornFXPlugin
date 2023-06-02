@@ -219,7 +219,7 @@ extern "C"
 			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
 			return;
 		}
-		if (PK_VERIFY(OnRaycastStart != null))
+		if (PK_VERIFY(_OnRaycastStart != null))
 		{
 			_OnRaycastStart(count, cmd);
 		}

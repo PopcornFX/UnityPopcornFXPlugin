@@ -614,10 +614,11 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallLight(const Drawe
 	if (!PK_VERIFY(lockedStream != null)) // Light particles shouldn't handle GPU streams for now
 		return true;
 
+#if 0
 	const PopcornFX::CGuid	volScatteringIntensityStreamId = bbRequest.StreamId(PopcornFX::CStringId("AffectsVolumetricFog.VolumetricScatteringIntensity")); // tmp
+#endif
 
 	static const float		kMinLightSize = 1e-3f;
-
 	static const float		kLightRadiusMultiplier = 1.0f;
 
 	const u32	pageCount = lockedStream->PageCount();

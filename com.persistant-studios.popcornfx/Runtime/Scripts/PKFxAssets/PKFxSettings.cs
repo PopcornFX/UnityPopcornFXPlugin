@@ -44,15 +44,8 @@ namespace PopcornFX
 		[SerializeField] private bool m_GeneralCategory = true;
 		[SerializeField] private bool m_AssetCategory = true;
 		[SerializeField] private bool m_QualityCategory = true;
+
 		[SerializeField] private bool m_EnableRaycastForCollisions = false;
-		[SerializeField] private string m_PopcornPackFxPath = null;
-		[SerializeField] private string m_UnityPackFxPath = "/PopcornFXAssets";
-		[SerializeField] private bool m_EnableForceDeterminism = false;
-		[SerializeField] private bool m_EnablePopcornFXLogs = true;
-		[SerializeField] private bool m_EnableEffectHotreload = true;
-		[SerializeField] private bool m_EnableHotreloadInPlayMode = false;
-		[SerializeField] private bool m_EnableFileLogs = false;
-		[SerializeField] private bool m_ManualCameraLayer = false;
 
 #if UNITY_EDITOR
 		[SerializeField] private bool			m_EnableAssetPlatformVersion = false;
@@ -83,36 +76,10 @@ namespace PopcornFX
 			set { Instance.m_EnableRaycastForCollisions = value; }
 		}
 
-		public static string PopcornPackFxPath
+		public static bool UpdateSimManually
 		{
-			get { return Instance.m_PopcornPackFxPath; }
-			set
-			{
-				if (value.CompareTo(Instance.m_PopcornPackFxPath) != 0)
-				{
-					Instance.m_PopcornPackFxPath = value;
-#if UNITY_EDITOR
-					PKFxManager.StartupPopcornFileWatcher(EnableEffectHotreload);
-#endif
-				}
-			}
-		}
-
-		public static string UnityPackFxPath
-		{
-			get { return Instance.m_UnityPackFxPath; }
-			set
-			{
-				if (value.CompareTo(Instance.m_UnityPackFxPath) != 0)
-				{
-					Instance.m_UnityPackFxPath = value;
-#if UNITY_EDITOR
-					if (!AssetDatabase.IsValidFolder("Assets" + Instance.m_UnityPackFxPath + "/UnityMaterials"))
-						AssetDatabase.CreateFolder("Assets" + Instance.m_UnityPackFxPath, "UnityMaterials");
-					PKFxManager.StartupPopcornFileWatcher(EnableEffectHotreload);
-#endif
-				}
-			}
+			get { return Instance.m_UpdateSimManually; }
+			set { Instance.m_UpdateSimManually = value; }
 		}
 
 		public void GetRenderingLayerForBatchDesc(SBatchDesc batchDesc, out int layer)
@@ -124,60 +91,6 @@ namespace PopcornFX
 				layer = renderingPlugin.GetLayerForCameraID(batchDesc.m_CameraId);
 			else
 				layer = -1;
-		}
-
-		public static bool EnableEffectHotreload
-		{
-			get { return Instance.m_EnableEffectHotreload; }
-			set {
-				Instance.m_EnableEffectHotreload = value;
-
-#if UNITY_EDITOR
-				if (!value)
-					PKFxManager.PausePackWatcher();
-				else
-					PKFxManager.RestartPackWatcher();
-#endif
-			}
-		}
-
-		public static bool EnableHotreloadInPlayMode
-		{
-			get { return Instance.m_EnableHotreloadInPlayMode; }
-			set { Instance.m_EnableHotreloadInPlayMode = value; }
-		}
-
-		public static bool EnableForceDeterminism
-		{
-			get { return Instance.m_EnableForceDeterminism; }
-			set
-			{
-				if (Instance.m_EnableForceDeterminism != value)
-				{
-					Instance.m_EnableForceDeterminism = value;
-#if UNITY_EDITOR
-					PKFxManager.SetForceDetermismOnBake(Instance.m_EnableForceDeterminism);
-#endif
-				}
-			}
-		}
-
-		public static bool EnablePopcornFXLogs
-		{
-			get { return Instance.m_EnablePopcornFXLogs; }
-			set { Instance.m_EnablePopcornFXLogs = value; }
-		}
-
-		public static bool EnableFileLogs
-		{
-			get { return Instance.m_EnableFileLogs; }
-			set { Instance.m_EnableFileLogs = value; }
-		}
-
-		public static bool ManualCameraLayer
-		{
-			get { return Instance.m_ManualCameraLayer; }
-			set { Instance.m_ManualCameraLayer = value; }
 		}
 
 #if UNITY_EDITOR
@@ -251,90 +164,6 @@ namespace PopcornFX
 			set { Instance.m_AssetGUID = value; }
 		}
 
-#if UNITY_EDITOR
-
-		public static bool GetProjetAssetPath()
-		{
-
-			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0 || !Directory.Exists(Instance.m_PopcornPackFxPath))
-			{
-				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
-				return false;
-			}
-			const int assetsOffsets = 7;// "Assets/".Length;
-			string[] assetsGUID = AssetDatabase.FindAssets("t:PKFxEffectAsset");
-			if (PKFxSettings.AssetPathList == null)
-				PKFxSettings.AssetPathList = new List<string>();
-			else
-				PKFxSettings.AssetPathList.Clear();
-			foreach (string guid in assetsGUID)
-			{
-				GUID id = new GUID(guid);
-				string assetPath = AssetDatabase.GUIDToAssetPath(id);
-				assetPath = assetPath.Substring(assetsOffsets + Instance.m_UnityPackFxPath.Length);
-				assetPath = assetPath.Substring(0, assetPath.LastIndexOf(".asset"));
-				PKFxSettings.AssetPathList.Add(assetPath);
-
-			}
-			return true;
-		}
-
-		public static bool GetAllAssetPath()
-		{
-			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0 || !Directory.Exists(Instance.m_PopcornPackFxPath))
-			{
-				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
-				return false;
-			}
-			PKFxManager.GetAllAssetPath();
-			return true;
-		}
-
-		public static bool ReimportAssets(List<string> assetsList, string platform)
-		{
-			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0)
-			{
-				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
-				return false;
-			}
-			PKFxManager.SetForceDetermismOnBake(PKFxSettings.EnableForceDeterminism);
-			PKFxManager.ReimportAssets(assetsList, platform);
-			return true;
-		}
-
-		public void AddGUIDForAsset(string assetPath, string newGUID)
-		{
-			CAssetGUID entry = m_AssetGUID.Find(x => x.m_Path.Equals(assetPath));
-			if (entry != null)
-			{
-				if (entry.m_New == newGUID.ToString())
-					return;
-				entry.m_Old = entry.m_New;
-				entry.m_New = newGUID.ToString();
-			}
-			else
-			{
-				m_AssetGUID.Add(new CAssetGUID(assetPath, newGUID, newGUID));
-			}
-		}
-		internal void AddGUIDForAsset(string assetPath, GUID newGUID)
-		{
-			CAssetGUID entry = m_AssetGUID.Find(x => x.m_Path.Equals(assetPath));
-			if (entry != null)
-			{
-				if (entry.m_New == newGUID.ToString())
-					return;
-				entry.m_Old = entry.m_New;
-				entry.m_New = newGUID.ToString();
-			}
-			else
-			{
-				m_AssetGUID.Add(new CAssetGUID(assetPath, newGUID, newGUID));
-			}
-		}
-
-#endif
-
 		// Rendering
 		[System.Serializable]
 		public class SParticleMeshDefaultSize
@@ -347,20 +176,9 @@ namespace PopcornFX
 		}
 
 		[SerializeField] private bool m_RenderingCategory = false;
-		[SerializeField] private bool m_DebugEffectsBoundingBoxes = false;
-		[SerializeField] private bool m_DebugEffectsRaycasts = false;
 		[SerializeField] private PKFxMaterialFactory m_MaterialFactory = null;
 		[SerializeField] private bool m_EnableSoftParticles = true;
 		[SerializeField] private bool m_DisableDynamicEffectBounds = false;
-		[SerializeField] private bool m_UseGPUBillboarding = false;
-		[SerializeField] private bool m_UseMeshInstancing = true;
-
-		[SerializeField] private bool m_EnableLocalizedPages = true;
-		[SerializeField] private bool m_EnableLocalizedByDefault = false;
-
-		[SerializeField] private bool m_FreeUnusedBatches = false;
-		[SerializeField] private uint m_FrameCountBeforeFreeingUnusedBatches = 240;
-
 		[SerializeField] private bool m_UseApplicationAudioLoopback = false;
 
 		[SerializeField] private bool m_EnableThumbnails = true;
@@ -372,12 +190,16 @@ namespace PopcornFX
 		[SerializeField] private float m_VertexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private float m_IndexBufferSizeMultiplicator = 0.5f;
 		[SerializeField] private List<SParticleMeshDefaultSize> m_MeshesDefaultSize = new List<SParticleMeshDefaultSize>();
-		[SerializeField] private bool m_UseHashesAsMaterialName = true;
+		[SerializeField] private bool m_UseMeshInstancing = true;
+		[SerializeField] private bool m_FreeUnusedBatches = false;
+		[SerializeField] private uint m_FrameCountBeforeFreeingUnusedBatches = 240;
+		[SerializeField] private bool m_ManualCameraLayer = false;
 
 		[SerializeField] private bool m_UpdateSimManually = false;
 		[SerializeField] private bool m_EnablePopcornFXLight = false;
 		[SerializeField] private int m_MaxPopcornFXLights = 16;
 		
+
 		private PKFxRaycasts.RaycastPackCallback m_CustomRaycast = null;
 
 		public static bool RenderingCategory
@@ -386,28 +208,10 @@ namespace PopcornFX
 			set { Instance.m_RenderingCategory = value; }
 		}
 
-		public static bool DebugEffectsBoundingBoxes
+		public static bool ManualCameraLayer
 		{
-			get { return Instance.m_DebugEffectsBoundingBoxes; }
-			set { Instance.m_DebugEffectsBoundingBoxes = value; }
-		}
-
-		public static bool DebugEffectsRaycasts
-		{
-			get { return Instance.m_DebugEffectsRaycasts; }
-			set { Instance.m_DebugEffectsRaycasts = value; }
-		}
-
-		public static bool EnableLocalizedPages
-		{
-			get { return Instance.m_EnableLocalizedPages; }
-			set { Instance.m_EnableLocalizedPages = value; }
-		}
-
-		public static bool EnableLocalizedByDefault
-		{
-			get { return Instance.m_EnableLocalizedByDefault; }
-			set { Instance.m_EnableLocalizedByDefault = value; }
+			get { return Instance.m_ManualCameraLayer; }
+			set { Instance.m_ManualCameraLayer = value; }
 		}
 
 		public static bool FreeUnusedBatches
@@ -470,33 +274,6 @@ namespace PopcornFX
 			}
 		}
 
-		[SerializeField][HideInInspector][Tooltip("Enables the distortion particles material, adding a postFX pass.")]
-		private bool m_EnableDistortion = false;
-		[HideInInspector]
-		public static bool EnableDistortion
-		{
-			get { return Instance.m_EnableDistortion; }
-			set { Instance.m_EnableDistortion = value; }
-		}
-
-		[SerializeField][HideInInspector][Tooltip("Enables the distortion blur pass, adding another postFX pass.")]
-		private bool m_EnableBlur = false;
-		[HideInInspector]
-		public static bool EnableBlur
-		{
-			get { return Instance.m_EnableBlur; }
-			set { Instance.m_EnableBlur = value; }
-		}
-
-		[SerializeField][HideInInspector][Tooltip("Blur factor. Adjusts the blur's spread.")]
-		public float m_BlurFactor = 0.2f;
-		[HideInInspector]
-		public static float BlurFactor
-		{
-			get { return Instance.m_BlurFactor; }
-			set { Instance.m_BlurFactor = value; }
-		}
-
 		public static PKFxMaterialFactory MaterialFactory
 		{
 			get
@@ -522,12 +299,6 @@ namespace PopcornFX
 		{
 			get { return Instance.m_DisableDynamicEffectBounds; }
 			set { Instance.m_DisableDynamicEffectBounds = value; }
-		}
-
-		public static bool UseGPUBillboarding
-		{
-			get { return Instance.m_UseGPUBillboarding; }
-			set { Instance.m_UseGPUBillboarding = value; }
 		}
 
 		public static bool UseMeshInstancing
@@ -590,22 +361,318 @@ namespace PopcornFX
 			set { Instance.m_ThreadsAffinity = value; }
 		}
 
+		public static PKFxRaycasts.RaycastPackCallback CustomRaycast
+		{
+			get { return Instance.m_CustomRaycast; }
+			set { Instance.m_CustomRaycast = value; }
+		}
+
+		// Profiler
+
+		[SerializeField] private bool		m_ProfilerCategory = true;
+		[SerializeField] private float		m_ProfilerSceneBudgetInSeconds = 0.002f;
+		[SerializeField] private float		m_ProfilerPerEffectBudgetInSeconds = 0.0005f;
+		[SerializeField] private uint		m_ProfilerSceneParticleBudget = 10000;
+		[SerializeField] private uint		m_ProfilerPerEffectParticleBudget = 1000;
+
+		[SerializeField] private Color		m_ProfilerColorBudgetExceeded = Color.red;
+		[SerializeField] private Color		m_ProfilerColorBudgetNormal = Color.green;
+
+		[SerializeField] private KeyCode	m_ProfilerHideKey = KeyCode.E;
+		[SerializeField] private KeyCode	m_ProfilerPauseKey = KeyCode.R;
+		[SerializeField] private KeyCode	m_ProfilerSortKey = KeyCode.T;
+
+		public static bool ProfilerCategory
+		{
+			get { return Instance.m_ProfilerCategory; }
+			set { Instance.m_ProfilerCategory = value; }
+		}
+
+		public static float ProfilerSceneBudgetInSeconds
+		{
+			get { return Instance.m_ProfilerSceneBudgetInSeconds; }
+			set { Instance.m_ProfilerSceneBudgetInSeconds = value; }
+		}
+
+		public static float ProfilerPerEffectBudgetInSeconds
+		{
+			get { return Instance.m_ProfilerPerEffectBudgetInSeconds; }
+			set { Instance.m_ProfilerPerEffectBudgetInSeconds = value; }
+		}
+
+		public static uint ProfilerSceneParticleBudget
+		{
+			get { return Instance.m_ProfilerSceneParticleBudget; }
+			set { Instance.m_ProfilerSceneParticleBudget = value; }
+		}
+
+		public static uint ProfilerPerEffectParticleBudget
+		{
+			get { return Instance.m_ProfilerPerEffectParticleBudget; }
+			set { Instance.m_ProfilerPerEffectParticleBudget = value; }
+		}
+
+		public static Color ProfilerColorBudgetExceeded
+		{
+			get { return Instance.m_ProfilerColorBudgetExceeded; }
+			set { Instance.m_ProfilerColorBudgetExceeded = value; }
+		}
+
+		public static Color ProfilerColorBudgetNormal
+		{
+			get { return Instance.m_ProfilerColorBudgetNormal; }
+			set { Instance.m_ProfilerColorBudgetNormal = value; }
+		}
+
+		public static KeyCode ProfilerHideKey
+		{
+			get { return Instance.m_ProfilerHideKey; }
+			set { Instance.m_ProfilerHideKey = value; }
+		}
+
+		public static KeyCode ProfilerPauseKey
+		{
+			get { return Instance.m_ProfilerPauseKey; }
+			set { Instance.m_ProfilerPauseKey = value; }
+		}
+
+		public static KeyCode ProfilerSortKey
+		{
+			get { return Instance.m_ProfilerSortKey; }
+			set { Instance.m_ProfilerSortKey = value; }
+		}
+
+		// Feature Set
+
+		[SerializeField] private bool m_UseGPUBillboarding = false;
+		[SerializeField] private bool m_EnableLocalizedPages = true;
+		[SerializeField] private bool m_EnableLocalizedByDefault = false;
+
+		[SerializeField] private bool m_FeatureSetCategory = true;
+
+		public static bool FeatureSetCategory
+		{
+			get { return Instance.m_FeatureSetCategory; }
+			set { Instance.m_FeatureSetCategory = value; }
+		}
+
+		public static bool UseGPUBillboarding
+		{
+			get { return Instance.m_UseGPUBillboarding; }
+			set { Instance.m_UseGPUBillboarding = value; }
+		}
+
+		public static bool EnableLocalizedPages
+		{
+			get { return Instance.m_EnableLocalizedPages; }
+			set { Instance.m_EnableLocalizedPages = value; }
+		}
+
+		public static bool EnableLocalizedByDefault
+		{
+			get { return Instance.m_EnableLocalizedByDefault; }
+			set { Instance.m_EnableLocalizedByDefault = value; }
+		}
+
+		[SerializeField]
+		[HideInInspector]
+		[Tooltip("Enables the distortion particles material, adding a postFX pass.")]
+		private bool m_EnableDistortion = false;
+		[HideInInspector]
+		public static bool EnableDistortion
+		{
+			get { return Instance.m_EnableDistortion; }
+			set { Instance.m_EnableDistortion = value; }
+		}
+
+		[SerializeField]
+		[HideInInspector]
+		[Tooltip("Enables the distortion blur pass, adding another postFX pass.")]
+		private bool m_EnableBlur = false;
+		[HideInInspector]
+		public static bool EnableBlur
+		{
+			get { return Instance.m_EnableBlur; }
+			set { Instance.m_EnableBlur = value; }
+		}
+
+		[SerializeField]
+		[HideInInspector]
+		[Tooltip("Blur factor. Adjusts the blur's spread.")]
+		public float m_BlurFactor = 0.2f;
+		[HideInInspector]
+		public static float BlurFactor
+		{
+			get { return Instance.m_BlurFactor; }
+			set { Instance.m_BlurFactor = value; }
+		}
+
+		// Debug
+
+		[SerializeField] private bool m_DebugCategory = true;
+		[SerializeField] private bool m_EnablePopcornFXLogs = true;
+		[SerializeField] private bool m_EnableFileLogs = false;
+		[SerializeField] private bool m_DebugEffectsBoundingBoxes = false;
+		[SerializeField] private bool m_DebugEffectsRaycasts = false;
+
+		public static bool DebugCategory
+		{
+			get { return Instance.m_DebugCategory; }
+			set { Instance.m_DebugCategory = value; }
+		}
+
+		public static bool DebugEffectsBoundingBoxes
+		{
+			get { return Instance.m_DebugEffectsBoundingBoxes; }
+			set { Instance.m_DebugEffectsBoundingBoxes = value; }
+		}
+
+		public static bool DebugEffectsRaycasts
+		{
+			get { return Instance.m_DebugEffectsRaycasts; }
+			set { Instance.m_DebugEffectsRaycasts = value; }
+		}
+
+		public static bool EnablePopcornFXLogs
+		{
+			get { return Instance.m_EnablePopcornFXLogs; }
+			set { Instance.m_EnablePopcornFXLogs = value; }
+		}
+
+		public static bool EnableFileLogs
+		{
+			get { return Instance.m_EnableFileLogs; }
+			set { Instance.m_EnableFileLogs = value; }
+		}
+
+		// Baking
+
+		[SerializeField] private bool m_BakingCategory = true;
+		[SerializeField] private bool m_EnableEffectHotreload = true;
+		[SerializeField] private bool m_EnableHotreloadInPlayMode = false;
+		[SerializeField] private bool m_UseHashesAsMaterialName = true;
+		[SerializeField] private bool m_EnableForceDeterminism = false;
+
+		[SerializeField] private string m_PopcornPackFxPath = null;
+		[SerializeField] private string m_UnityPackFxPath = "/PopcornFXAssets";
+
+		public static bool BakingCategory
+		{
+			get { return Instance.m_BakingCategory; }
+			set { Instance.m_BakingCategory = value; }
+		}
+
+		public static string PopcornPackFxPath
+		{
+			get { return Instance.m_PopcornPackFxPath; }
+			set
+			{
+				if (value.CompareTo(Instance.m_PopcornPackFxPath) != 0)
+				{
+					Instance.m_PopcornPackFxPath = value;
+#if UNITY_EDITOR
+					PKFxManager.StartupPopcornFileWatcher(EnableEffectHotreload);
+#endif
+				}
+			}
+		}
+
+		public static string UnityPackFxPath
+		{
+			get { return Instance.m_UnityPackFxPath; }
+			set
+			{
+				if (value.CompareTo(Instance.m_UnityPackFxPath) != 0)
+				{
+					Instance.m_UnityPackFxPath = value;
+#if UNITY_EDITOR
+					if (!AssetDatabase.IsValidFolder("Assets" + Instance.m_UnityPackFxPath + "/UnityMaterials"))
+						AssetDatabase.CreateFolder("Assets" + Instance.m_UnityPackFxPath, "UnityMaterials");
+					PKFxManager.StartupPopcornFileWatcher(EnableEffectHotreload);
+#endif
+				}
+			}
+		}
+
+		public static bool EnableEffectHotreload
+		{
+			get { return Instance.m_EnableEffectHotreload; }
+			set
+			{
+				Instance.m_EnableEffectHotreload = value;
+
+#if UNITY_EDITOR
+				if (!value)
+					PKFxManager.PausePackWatcher();
+				else
+					PKFxManager.RestartPackWatcher();
+#endif
+			}
+		}
+
+		public static bool EnableHotreloadInPlayMode
+		{
+			get { return Instance.m_EnableHotreloadInPlayMode; }
+			set { Instance.m_EnableHotreloadInPlayMode = value; }
+		}
+
+		public static bool EnableForceDeterminism
+		{
+			get { return Instance.m_EnableForceDeterminism; }
+			set
+			{
+				if (Instance.m_EnableForceDeterminism != value)
+				{
+					Instance.m_EnableForceDeterminism = value;
+#if UNITY_EDITOR
+					PKFxManager.SetForceDetermismOnBake(Instance.m_EnableForceDeterminism);
+#endif
+				}
+			}
+		}
+
 		public static bool UseHashesAsMaterialName
 		{
 			get { return Instance.m_UseHashesAsMaterialName; }
 			set { Instance.m_UseHashesAsMaterialName = value; }
 		}
 
-		public static bool UpdateSimManually
+#if UNITY_EDITOR
+
+		public static bool GetProjetAssetPath()
 		{
-			get { return Instance.m_UpdateSimManually; }
-			set { Instance.m_UpdateSimManually = value; }
+			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0 || !Directory.Exists(Instance.m_PopcornPackFxPath))
+			{
+				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
+				return false;
+			}
+			const int assetsOffsets = 7;// "Assets/".Length;
+			string[] assetsGUID = AssetDatabase.FindAssets("t:PKFxEffectAsset");
+			if (PKFxSettings.AssetPathList == null)
+				PKFxSettings.AssetPathList = new List<string>();
+			else
+				PKFxSettings.AssetPathList.Clear();
+			foreach (string guid in assetsGUID)
+			{
+				GUID id = new GUID(guid);
+				string assetPath = AssetDatabase.GUIDToAssetPath(id);
+				assetPath = assetPath.Substring(assetsOffsets + Instance.m_UnityPackFxPath.Length);
+				assetPath = assetPath.Substring(0, assetPath.LastIndexOf(".asset"));
+				PKFxSettings.AssetPathList.Add(assetPath);
+
+			}
+			return true;
 		}
 
-		public static PKFxRaycasts.RaycastPackCallback CustomRaycast
+		public static bool GetAllAssetPath()
 		{
-			get { return Instance.m_CustomRaycast; }
-			set { Instance.m_CustomRaycast = value; }
+			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0 || !Directory.Exists(Instance.m_PopcornPackFxPath))
+			{
+				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
+				return false;
+			}
+			PKFxManager.GetAllAssetPath();
+			return true;
 		}
 		public static bool EnablePopcornFXLight
 		{
@@ -618,6 +685,36 @@ namespace PopcornFX
 			set { Instance.m_MaxPopcornFXLights = value; }
 		}
 		
+
+		public static bool ReimportAssets(List<string> assetsList, string platformName)
+		{
+			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0)
+			{
+				Debug.LogWarning("[PopcornFX] Source Pack path is required to import your FXs", Instance);
+				return false;
+			}
+			PKFxManager.SetForceDetermismOnBake(PKFxSettings.EnableForceDeterminism);
+			PKFxManager.ReimportAssets(assetsList, platformName);
+			return true;
+		}
+
+		public void AddGUIDForAsset(string assetPath, string newGUID)
+		{
+			CAssetGUID entry = m_AssetGUID.Find(x => x.m_Path.Equals(assetPath));
+			if (entry != null)
+			{
+				if (entry.m_New == newGUID.ToString())
+					return;
+				entry.m_Old = entry.m_New;
+				entry.m_New = newGUID.ToString();
+			}
+			else
+			{
+				m_AssetGUID.Add(new CAssetGUID(assetPath, newGUID, newGUID));
+			}
+		}
+
+#endif
 
 		public void Setup()
 		{

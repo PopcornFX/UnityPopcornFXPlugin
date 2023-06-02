@@ -38,6 +38,7 @@
 #include <pk_kernel/include/kr_log_listeners_file.h>
 #include <pk_kernel/include/kr_thread_pool_default.h>
 
+#include <pk_particles/include/ps_effect.h>
 #include <pk_particles/include/ps_samplers.h>
 #include <pk_particles/include/ps_samplers_classes.h>
 #include <pk_maths/include/pk_maths_type_converters.h>
@@ -1137,7 +1138,7 @@ u32	CRuntimeManager::GetInstanceCount(const PopcornFX::CParticleEffect *effect)
 		if (emitter == null)
 			continue;
 		const PParticleEffectInstance	effectInstance = emitter->GetEffectInstance();
-		if (effectInstance == null || !effectInstance->Alive())
+		if (!PK_VERIFY(effectInstance != null) || !effectInstance->Alive())
 			continue;
 		if (effectInstance->ParentEffect() == effect)
 			++instanceCount;

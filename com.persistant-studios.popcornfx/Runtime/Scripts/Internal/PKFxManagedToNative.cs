@@ -147,7 +147,7 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SEffectStatsToFill
 	{
-		public int m_InstanceCount;
+		public int m_EmitterCount;
 		public int m_TotalParticleCount;
 		public double m_TotalTimeAverage;
 		public double m_TotalTimeAverageRaw;
@@ -362,7 +362,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.16.3 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.16.4 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";

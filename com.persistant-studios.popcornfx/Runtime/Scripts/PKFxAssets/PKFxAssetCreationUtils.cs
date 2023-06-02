@@ -203,7 +203,7 @@ namespace PopcornFX
 				CreateAssetFolderUpToPath(assetChange.m_Path);
 				AssetDatabase.CreateAsset(fxAsset, fxAsset.AssetFullPath + ".asset");
 #if !(UNITY_2017 || UNITY_2018 || UNITY_2019)
-				PKFxSettings.Instance.AddGUIDForAsset(fxAsset.AssetFullPath + ".asset", AssetDatabase.GUIDFromAssetPath(fxAsset.AssetFullPath + ".asset"));
+				PKFxSettings.Instance.AddGUIDForAsset(fxAsset.AssetFullPath + ".asset", AssetDatabase.GUIDFromAssetPath(fxAsset.AssetFullPath + ".asset").ToString());
 #endif
 			}
 			return true;

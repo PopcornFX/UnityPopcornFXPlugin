@@ -36,6 +36,9 @@ struct	IUnityGraphicsUNKNOWN2;
 #include "ImplemGraphicsAPI/RenderAPI_VulkanData.h"
 #include "UnityGraphicsAPI/IUnityGraphicsVulkan.h"
 #endif
+#if	(PK_BUILD_WITH_D3D12_SUPPORT != 0)
+#include "ImplemGraphicsAPI/RenderAPI_DX12Data.h"
+#endif
 
 __PK_API_BEGIN
 //----------------------------------------------------------------------------
@@ -116,7 +119,6 @@ public:
 #endif
 
 #if	defined(PK_ORBIS)
-
 	IUnityGraphicsPS4					*GetOrbisUnityGraphics();
 	GnmPS4ContextLW						*GetContextPS4() const;
 #elif defined(PK_UNKNOWN2)

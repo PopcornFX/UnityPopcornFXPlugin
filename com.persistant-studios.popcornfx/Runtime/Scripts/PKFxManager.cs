@@ -22,8 +22,9 @@ namespace PopcornFX
 
 		public static bool					UseFixedDT = false;
 		public static bool					IsUnitTesting = false;
+		public static PKFxRenderingPlugin	RenderingPlugin = null;
 
-
+		private static Dictionary<string, AudioClip> m_SoundDependencies = new Dictionary<string, AudioClip>();
 		// PopcornFX General State With Native Interop
 		//----------------------------------------------------------------------------
 
@@ -611,6 +612,21 @@ namespace PopcornFX
 		{
 			PKFxManagerImpl.StatsEnableFrameStats(onOff);
 			PKFxManagerImpl.StatsEnableEffectsStats(onOff);
+		}
+
+		// Sounds
+		//----------------------------------------------------------------------------
+
+		internal static void AddSound(PKFxEffectAsset.DependencyDesc depDesc)
+		{
+			m_SoundDependencies[depDesc.m_Path] = depDesc.m_Object as AudioClip;
+		}
+
+		public static AudioClip GetSoundFromPath(string path)
+		{
+			if (m_SoundDependencies.ContainsKey(path))
+				return m_SoundDependencies[path];
+			return null;
 		}
 
 		// Misc

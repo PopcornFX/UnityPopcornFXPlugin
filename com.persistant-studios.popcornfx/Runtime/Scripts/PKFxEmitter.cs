@@ -649,8 +649,6 @@ namespace PopcornFX
 					{
 						if (curSampler.m_Texture != null)
 						{
-							byte[] textureData = PKFxTextureUtils.GetRawTextureData(curSampler.m_Texture);
-							int textureByteSize = textureData.Length;
 							IntPtr textureToFill = PKFxTextureUtils.GetAndUpdateTextureToFill(curSampler.m_Texture, curSampler.m_TextureTexcoordMode);
 							PKFxManager.SetTextureSampler(m_FXGUID, samplerId, textureToFill);
 						}

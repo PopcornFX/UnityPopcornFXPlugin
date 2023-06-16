@@ -114,6 +114,7 @@ namespace PopcornFX
 			m_DistortionMat = null;
 			m_BlurMat = null;
 		}
+
 		public void OnDestroy()
 		{
 			if (m_CameraID >= 0)
@@ -123,22 +124,33 @@ namespace PopcornFX
 
 		public void OnEnable()
 		{
-			int id = m_RenderingPlugin.RegisterCamera(this);
-			if (id >= 0)
-				m_CameraID = (short)id;
-
+			if (m_Camera != null)
+			{
+				int id = m_RenderingPlugin.RegisterCamera(this);
+				if (id >= 0)
+					m_CameraID = (short)id;
+			}
 		}
 
 		public void OnDisable()
 		{
-			if (m_CameraID >= 0 && m_RenderingPlugin != null)
-				m_RenderingPlugin.UnRegisterCamera(this);
+			if (m_Camera != null)
+			{
+				if (m_CameraID >= 0 && m_RenderingPlugin != null)
+					m_RenderingPlugin.UnRegisterCamera(this);
+			}
 		}
 
 		//----------------------------------------------------------------------------
 
 		void Awake()
 		{
+			m_Camera = GetComponent<Camera>();
+			if (m_Camera == null)
+			{
+				Debug.LogError("[PopcornFX] PopcornFX need a game object with PKFxRenderingPlugin script attached. (Hierarchy > PopcornFX > Rendering Plugin Manager)");
+				return;
+			}
 			PKFxRenderingPlugin[] rendering = FindObjectsOfType<PKFxRenderingPlugin>();
 			if (rendering.Length != 1)
 			{
@@ -167,7 +179,6 @@ namespace PopcornFX
 				}
 			}
 #endif
-			m_Camera = GetComponent<Camera>();
 			//Enable depth texture on mobile
 			if (PKFxSettings.EnableSoftParticles)
 				m_Camera.depthTextureMode = DepthTextureMode.Depth;

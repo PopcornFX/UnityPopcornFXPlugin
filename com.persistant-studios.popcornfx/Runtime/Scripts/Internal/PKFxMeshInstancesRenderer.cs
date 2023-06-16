@@ -76,6 +76,138 @@ namespace PopcornFX
 		NativeArray<float> m_AnimTransition;
 		NativeArray<float> m_AtlasId;
 
+		Matrix4x4[] m_TransformsManagedArray;
+		Matrix4x4[] TransformsManagedArray
+		{
+			get
+			{
+				if (m_TransformsManagedArray == null)
+					m_TransformsManagedArray = new Matrix4x4[m_Transforms.Length];
+				m_Transforms.CopyTo(m_TransformsManagedArray);
+				return m_TransformsManagedArray;
+			}
+		}
+
+		Vector4[] m_DiffuseColorsManagedArray;
+		Vector4[] DiffuseColorsManagedArray
+		{
+			get
+			{
+				if (m_DiffuseColorsManagedArray == null)
+					m_DiffuseColorsManagedArray = new Vector4[m_DiffuseColors.Length];
+				m_DiffuseColors.CopyTo(m_DiffuseColorsManagedArray);
+				return m_DiffuseColorsManagedArray;
+			}
+		}
+
+		Vector4[] m_EmissiveColorsManagedArray;
+		Vector4[] EmissiveColorsManagedArray
+		{
+			get
+			{
+				if (m_EmissiveColorsManagedArray == null)
+					m_EmissiveColorsManagedArray = new Vector4[m_EmissiveColors.Length];
+				m_EmissiveColors.CopyTo(m_EmissiveColorsManagedArray);
+				return m_EmissiveColorsManagedArray;
+			}
+		}
+
+		float[] m_AlphaCursorsManagedArray;
+		float[] AlphaCursorsManagedArray
+		{
+			get
+			{
+				if (m_AlphaCursorsManagedArray == null)
+					m_AlphaCursorsManagedArray = new float[m_AlphaCursors.Length];
+				m_AlphaCursors.CopyTo(m_AlphaCursorsManagedArray);
+				return m_AlphaCursorsManagedArray;
+			}
+		}
+
+		float[] m_VatCursorsManagedArray;
+		float[] VatCursorsManagedArray
+		{
+			get
+			{
+				if (m_VatCursorsManagedArray == null)
+					m_VatCursorsManagedArray = new float[m_VatCursors.Length];
+				m_VatCursors.CopyTo(m_VatCursorsManagedArray);
+				return m_VatCursorsManagedArray;
+			}
+		}
+
+		float[] m_AnimCursor0ManagedArray;
+		float[] AnimCursor0ManagedArray
+		{
+			get
+			{
+				if (m_AnimCursor0ManagedArray == null)
+					m_AnimCursor0ManagedArray = new float[m_AnimCursor0.Length];
+				m_AnimCursor0.CopyTo(m_AnimCursor0ManagedArray);
+				return m_AnimCursor0ManagedArray;
+			}
+		}
+
+		float[] m_AnimIdx0ManagedArray;
+		float[] AnimIdx0ManagedArray
+		{
+			get
+			{
+				if (m_AnimIdx0ManagedArray == null)
+					m_AnimIdx0ManagedArray = new float[m_AnimIdx0.Length];
+				m_AnimIdx0.CopyTo(m_AnimIdx0ManagedArray);
+				return m_AnimIdx0ManagedArray;
+			}
+		}
+
+		float[] m_AnimCursor1ManagedArray;
+		float[] AnimCursor1ManagedArray
+		{
+			get
+			{
+				if (m_AnimCursor1ManagedArray == null)
+					m_AnimCursor1ManagedArray = new float[m_AnimCursor1.Length];
+				m_AnimCursor1.CopyTo(m_AnimCursor1ManagedArray);
+				return m_AnimCursor1ManagedArray;
+			}
+		}
+
+		float[] m_AnimIdx1ManagedArray;
+		float[] AnimIdx1ManagedArray
+		{
+			get
+			{
+				if (m_AnimIdx1ManagedArray == null)
+					m_AnimIdx1ManagedArray = new float[m_AnimIdx1.Length];
+				m_AnimIdx1.CopyTo(m_AnimIdx1ManagedArray);
+				return m_AnimIdx1ManagedArray;
+			}
+		}
+
+		float[] m_AnimTransitionManagedArray;
+		float[] AnimTransitionManagedArray
+		{
+			get
+			{
+				if (m_AnimTransitionManagedArray == null)
+					m_AnimTransitionManagedArray = new float[m_AnimTransition.Length];
+				m_AnimTransition.CopyTo(m_AnimTransitionManagedArray);
+				return m_AnimTransitionManagedArray;
+			}
+		}
+
+		float[] m_AtlasIdManagedArray;
+		float[] AtlasIdManagedArray
+		{
+			get
+			{
+				if (m_AtlasIdManagedArray == null)
+					m_AtlasIdManagedArray = new float[m_AtlasId.Length];
+				m_AtlasId.CopyTo(m_AtlasIdManagedArray);
+				return m_AtlasIdManagedArray;
+			}
+		}
+
 		// Job adding two floating point values together
 		public struct MeshData : IJobParallelFor
 		{
@@ -287,20 +419,20 @@ namespace PopcornFX
 								handle.Complete();
 
 								generalOffset += dataLeft;
-								materialProp.SetVectorArray(m_DiffuseColorPropertyName, m_DiffuseColors.ToArray());
+								materialProp.SetVectorArray(m_DiffuseColorPropertyName, DiffuseColorsManagedArray);
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
 								{
-									materialProp.SetVectorArray(m_EmissiveColorPropertyName, m_EmissiveColors.ToArray());
+									materialProp.SetVectorArray(m_EmissiveColorPropertyName, EmissiveColorsManagedArray);
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)
 								{
-									materialProp.SetFloatArray(m_AlphaRemapCursorPropertyName, m_AlphaCursors.ToArray());
+									materialProp.SetFloatArray(m_AlphaRemapCursorPropertyName, AlphaCursorsManagedArray);
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_FluidVAT) != 0 ||
 									(m_ShaderVariation & (int)EShaderVariationFlags.Has_RigidVAT) != 0 ||
 									(m_ShaderVariation & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
 								{
-									materialProp.SetFloatArray(m_VATCursorPropertyName, m_VatCursors.ToArray());
+									materialProp.SetFloatArray(m_VATCursorPropertyName, VatCursorsManagedArray);
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Lighting) != 0)
 								{
@@ -308,25 +440,25 @@ namespace PopcornFX
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 								{
-									materialProp.SetFloatArray(m_SkeletalAnimCursor0PropertyName, m_AnimCursor0.ToArray());
-									materialProp.SetFloatArray(m_SkeletalAnimIdx0PropertyName, m_AnimIdx0.ToArray());
+									materialProp.SetFloatArray(m_SkeletalAnimCursor0PropertyName, AnimCursor0ManagedArray);
+									materialProp.SetFloatArray(m_SkeletalAnimIdx0PropertyName, AnimIdx0ManagedArray);
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalTrackInterpol) != 0)
 								{
-									materialProp.SetFloatArray(m_SkeletalAnimCursor1PropertyName, m_AnimCursor1.ToArray());
-									materialProp.SetFloatArray(m_SkeletalAnimIdx1PropertyName, m_AnimIdx1.ToArray());
-									materialProp.SetFloatArray(m_SkeletalAnimTransitionPropertyName, m_AnimTransition.ToArray());
+									materialProp.SetFloatArray(m_SkeletalAnimCursor1PropertyName, AnimCursor1ManagedArray);
+									materialProp.SetFloatArray(m_SkeletalAnimIdx1PropertyName, AnimIdx1ManagedArray);
+									materialProp.SetFloatArray(m_SkeletalAnimTransitionPropertyName, AnimTransitionManagedArray);
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0)
 								{
-									materialProp.SetFloatArray(m_AtlasIdPropertyName, m_AtlasId.ToArray());
+									materialProp.SetFloatArray(m_AtlasIdPropertyName, AtlasIdManagedArray);
 								}
 
 								Graphics.DrawMeshInstanced(
 									meshToDraw.m_Mesh,
 									meshToDraw.m_SubMeshId,
 									m_Material,
-									m_Transforms.ToArray(),
+									TransformsManagedArray,
 									dataLeft,
 									materialProp,
 									m_CastShadow ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off,

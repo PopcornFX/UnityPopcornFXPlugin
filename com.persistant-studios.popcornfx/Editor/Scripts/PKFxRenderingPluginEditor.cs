@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PopcornFX
 {
@@ -29,79 +28,6 @@ namespace PopcornFX
 		SerializedProperty m_OutputPkmmPath;
 		SerializedProperty m_GameObjectsToSearch;
 		SerializedProperty m_MeshGameObjects;
-
-		//----------------------------------------------------------------------------
-		internal void AddCameraLayersIFN(int maxCameraSupport, bool distortionEnabled = true)
-		{
-			if (PKFxSettings.ManualCameraLayer)
-				return;
-			UnityEngine.Object[] tagManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
-
-			if (tagManager.Length == 0)
-				return;
-
-			SerializedObject tagsAndLayersManager = new SerializedObject(tagManager[0]);
-			SerializedProperty layersProp = tagsAndLayersManager.FindProperty("layers");
-
-			List<string> cameraLayerName = new List<string>(new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" });
-			string distortionLayerName = "PopcornFX_Disto";
-
-			PKFxSettings.Instance.m_PopcornLayerName = new string[cameraLayerName.Count() + 1];
-
-			//search if the sorting layer already exist
-			for (int i = 0; i < layersProp.arraySize; ++i)
-			{
-				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
-
-				if (layer != null && layer.stringValue.Length != 0)
-				{
-					if (cameraLayerName.Contains(layer.stringValue))
-					{
-						int idx = cameraLayerName.IndexOf(layer.stringValue);
-						if (idx >= maxCameraSupport)
-							layer.stringValue = "";
-						PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
-						cameraLayerName[idx] = "";
-					}
-					else if (distortionLayerName == layer.stringValue)
-					{
-						if (!distortionEnabled)
-							layer.stringValue = "";
-						PKFxSettings.Instance.m_PopcornLayerName[PKFxSettings.Instance.m_PopcornLayerName.Length - 1] = layer.stringValue;
-						distortionLayerName = "";
-					}
-				}
-			}
-			cameraLayerName.RemoveRange(maxCameraSupport, cameraLayerName.Count - maxCameraSupport);
-			if (distortionEnabled)
-				cameraLayerName.Add(distortionLayerName);
-			cameraLayerName = cameraLayerName.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
-
-			if (cameraLayerName.Count == 0 && distortionLayerName == "")
-			{
-				tagsAndLayersManager.ApplyModifiedProperties();
-				return;
-			}
-
-			for (int i = layersProp.arraySize - 1; i >= 0; --i)
-			{
-				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
-
-				if (layer != null && layer.stringValue.Length == 0)
-				{
-					layer.stringValue = cameraLayerName[0];
-
-					int idx = ArrayUtility.IndexOf(PKFxSettings.Instance.m_PopcornLayerName, null);
-
-					PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
-
-					cameraLayerName.RemoveAt(0);
-					if (cameraLayerName.Count == 0)
-						break;
-				}
-			}
-			tagsAndLayersManager.ApplyModifiedProperties();
-		}
 
 		//----------------------------------------------------------------------------
 
@@ -154,28 +80,22 @@ namespace PopcornFX
 			}
 			EditorGUILayout.EndHorizontal();
 
-			EditorGUI.BeginChangeCheck();
-			int maxCamValue = EditorGUILayout.IntSlider(cameraNumberLabel, renderingPlugin.MaxCameraSupport(), 1, 4);
-			if (EditorGUI.EndChangeCheck())
+			if (renderingPlugin.MaxCameraSupport() != PKFxSettings.MaxCameraSupport)
 			{
 				int[] prevCameraLayers = renderingPlugin.CameraLayers;
-				int[] newCameraLayers = new int[maxCamValue];
-				m_CameraLayers.arraySize = maxCamValue;
+				int[] newCameraLayers = new int[PKFxSettings.MaxCameraSupport];
+				m_CameraLayers.arraySize = PKFxSettings.MaxCameraSupport;
 
-				if (!PKFxSettings.ManualCameraLayer)
-					AddCameraLayersIFN(maxCamValue);
-
-				for (int i = 0; i < maxCamValue; i++) 
+				for (int i = 0; i < PKFxSettings.MaxCameraSupport; i++)
 				{
-		  			int cameraLayerID = i < prevCameraLayers.Length ? prevCameraLayers[i] : PKFxSettings.Instance.GetCameraLayer(i);
-		  			m_CameraLayers.GetArrayElementAtIndex(i).intValue = cameraLayerID;
+					int cameraLayerID = i < prevCameraLayers.Length ? prevCameraLayers[i] : PKFxSettings.Instance.GetCameraLayer(i);
+					m_CameraLayers.GetArrayElementAtIndex(i).intValue = cameraLayerID;
 					newCameraLayers[i] = cameraLayerID;
 				}
 				renderingPlugin.CameraLayers = newCameraLayers;
 				EditorUtility.SetDirty(renderingPlugin);
 			}
-
-	  		for (int i = 0; i < renderingPlugin.CameraLayers.Length; i++)
+			for (int i = 0; i < renderingPlugin.CameraLayers.Length; i++)
 			{
 				EditorGUI.BeginChangeCheck();
 				int cameraLayerID = EditorGUILayout.LayerField(new GUIContent(" Camera " + i + " layer"), renderingPlugin.CameraLayers[i]);

@@ -123,6 +123,13 @@ public:
 
 	static void			OutputBakedResourceInCache(const CString path, TStaticCountedArray<CString, 4> &outputs);
 
+	CString				GetTempDir(const char *dirPrefix = null);
+	bool				ExtractPackage(IFileSystem *fs, const CString &srcArchiveAbsPath, const CString &dstDirAbsPath, CString &outPkprojAbsPath);
+	bool				UpgradeProject(IFileSystem *fs, const CString &projectSettingsAbsPath);
+
+	bool				ExtrackPkkg(const CString &srcArchiveAbsPath, bool runUpgrades = false);
+	bool				DeleteFolderRec(const CString &absDirPath);
+
 	SBakeContext		&GetBakeContextData() { return m_BakeContext; }
 	CString				GetPopcornFXPackPath() { return m_PKPackPath; }
 private:
@@ -147,6 +154,10 @@ private:
 	bool						m_ForceDeterminism = false;
 	bool						m_BakeForStandalone = false;
 };
+
+//----------------------------------------------------------------------------
+
+
 PK_DECLARE_REFPTRCLASS(EffectBaker);
 
 //----------------------------------------------------------------------------

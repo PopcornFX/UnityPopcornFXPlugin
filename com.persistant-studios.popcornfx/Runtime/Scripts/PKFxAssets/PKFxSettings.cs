@@ -194,6 +194,7 @@ namespace PopcornFX
 		[SerializeField] private bool m_FreeUnusedBatches = false;
 		[SerializeField] private uint m_FrameCountBeforeFreeingUnusedBatches = 240;
 		[SerializeField] private bool m_ManualCameraLayer = false;
+		[SerializeField] private int m_MaxCameraSupport = 1;
 
 		[SerializeField] private bool m_UpdateSimManually = false;
 		[SerializeField] private bool m_EnablePopcornFXLight = false;
@@ -212,6 +213,11 @@ namespace PopcornFX
 		{
 			get { return Instance.m_ManualCameraLayer; }
 			set { Instance.m_ManualCameraLayer = value; }
+		}
+		public static int MaxCameraSupport
+		{
+			get { return Instance.m_MaxCameraSupport; }
+			set { Instance.m_MaxCameraSupport = value; }
 		}
 
 		public static bool FreeUnusedBatches

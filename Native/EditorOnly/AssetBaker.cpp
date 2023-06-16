@@ -899,8 +899,7 @@ bool	CEffectBaker::SetTargetPlatform(const CString &platform, u32 qualitySetting
 			m_BakeForStandalone = true;
 
 		m_TargetBuildVersions.Clear();
-		if (!PK_VERIFY(m_QualitySettingCount >= 0) ||
-			!PK_VERIFY(m_TargetBuildVersions.Reserve(m_QualitySettingCount)))
+		if (!PK_VERIFY(m_TargetBuildVersions.Reserve(m_QualitySettingCount)))
 			return false;
 		// Build the final build versions (one per Unity runtime configuration) based on base tags
 		SBackendAndBuildTags	backendAndBuildTags;

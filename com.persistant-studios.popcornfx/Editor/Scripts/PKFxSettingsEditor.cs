@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEditor.Build.Reporting;
+using System.Linq;
 
 namespace PopcornFX
 {
@@ -49,6 +50,7 @@ namespace PopcornFX
 		public static GUIContent materialFactoryLabel = new GUIContent(" Material Factory");
 		public static GUIContent useHashAsMaterialNameLabel = new GUIContent(" Use hashes as material name");
 		public static GUIContent manualCameraLayerLabel = new GUIContent(" Manual control of rendering layers");
+		public static GUIContent MaxCameraSupportLabel = new GUIContent(" Max number of cameras supported for billboarding");
 		public static GUIContent useHashAsMaterialNameDialogMessageLabel = new GUIContent("Warning, this action will delete all existing generated materials and recreate them. \nContinue ?");
 
 		public static GUIContent enableLocalizedPages = new GUIContent(" Enable Localized Pages");
@@ -270,6 +272,19 @@ namespace PopcornFX
 			if (cameraLayer != PKFxSettings.ManualCameraLayer)
 			{
 				PKFxSettings.ManualCameraLayer = cameraLayer;
+			}
+			EditorGUILayout.EndHorizontal();
+
+
+			EditorGUILayout.BeginHorizontal();
+			int maxCamValue = EditorGUILayout.IntSlider(MaxCameraSupportLabel, PKFxSettings.MaxCameraSupport, 1, 4);
+			if (maxCamValue != PKFxSettings.MaxCameraSupport)
+			{
+				PKFxSettings.MaxCameraSupport = maxCamValue;
+				if (!PKFxSettings.ManualCameraLayer)
+				{
+					PKFxSettingsEditor._AddCameraLayersIFN(PKFxSettings.MaxCameraSupport, PKFxSettings.EnableDistortion);
+				}
 			}
 			EditorGUILayout.EndHorizontal();
 
@@ -739,6 +754,80 @@ namespace PopcornFX
 			Debug.Log("[PopcornFX] Adding the sorting layer \"" + layerName + "\" " + beforeOrAfter + " \"Default\"");
 		}
 
+		//----------------------------------------------------------------------------
+
+		static internal void _AddCameraLayersIFN(int maxCameraSupport, bool distortionEnabled = true)
+		{
+			if (PKFxSettings.ManualCameraLayer)
+				return;
+			UnityEngine.Object[] tagManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset");
+
+			if (tagManager.Length == 0)
+				return;
+
+			SerializedObject tagsAndLayersManager = new SerializedObject(tagManager[0]);
+			SerializedProperty layersProp = tagsAndLayersManager.FindProperty("layers");
+
+			List<string> cameraLayerName = new List<string>(new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" });
+			string distortionLayerName = "PopcornFX_Disto";
+
+			PKFxSettings.Instance.m_PopcornLayerName = new string[cameraLayerName.Count() + 1];
+
+			//search if the sorting layer already exist
+			for (int i = 0; i < layersProp.arraySize; ++i)
+			{
+				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
+
+				if (layer != null && layer.stringValue.Length != 0)
+				{
+					if (cameraLayerName.Contains(layer.stringValue))
+					{
+						int idx = cameraLayerName.IndexOf(layer.stringValue);
+						if (idx >= maxCameraSupport)
+							layer.stringValue = "";
+						PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
+						cameraLayerName[idx] = "";
+					}
+					else if (distortionLayerName == layer.stringValue)
+					{
+						if (!distortionEnabled)
+							layer.stringValue = "";
+						PKFxSettings.Instance.m_PopcornLayerName[PKFxSettings.Instance.m_PopcornLayerName.Length - 1] = layer.stringValue;
+						distortionLayerName = "";
+					}
+				}
+			}
+			cameraLayerName.RemoveRange(maxCameraSupport, cameraLayerName.Count - maxCameraSupport);
+			if (distortionEnabled)
+				cameraLayerName.Add(distortionLayerName);
+			cameraLayerName = cameraLayerName.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
+
+			if (cameraLayerName.Count == 0 && distortionLayerName == "")
+			{
+				tagsAndLayersManager.ApplyModifiedProperties();
+				return;
+			}
+
+			for (int i = layersProp.arraySize - 1; i >= 0; --i)
+			{
+				SerializedProperty layer = layersProp.GetArrayElementAtIndex(i);
+
+				if (layer != null && layer.stringValue.Length == 0)
+				{
+					layer.stringValue = cameraLayerName[0];
+
+					int idx = ArrayUtility.IndexOf(PKFxSettings.Instance.m_PopcornLayerName, null);
+
+					PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
+
+					cameraLayerName.RemoveAt(0);
+					if (cameraLayerName.Count == 0)
+						break;
+				}
+			}
+			tagsAndLayersManager.ApplyModifiedProperties();
+		}
+
 		private static void _CheckForMultipleSettingsObject(PKFxSettings instance)
 		{
 			string[] guids = AssetDatabase.FindAssets("t:PKFxSettings");
@@ -763,12 +852,13 @@ namespace PopcornFX
 			PKFxSettings instance = Resources.Load<PKFxSettings>(PKFxSettings.kSettingsAssetName);
 
 			_CheckForMultipleSettingsObject(instance);
-
+			bool newInstance = false;
 			if (instance == null)
 			{
 				string fullPath = Path.Combine(settingsPath, PKFxSettings.kSettingsAssetName + PKFxSettings.kSettingsAssetExtension);
 
 				instance = CreateInstance<PKFxSettings>();
+				newInstance = true;
 
 				AssetDatabase.CreateFolder("Assets", "Resources");
 				AssetDatabase.CreateAsset(instance, fullPath);
@@ -776,6 +866,11 @@ namespace PopcornFX
 			}
 
 			PKFxSettings.SetInstance(instance);
+
+			_AddSortingLayerIFN("PopcornFX", newInstance);
+			_AddSortingLayerIFN("PopcornFXUI", newInstance);
+			_AddCameraLayersIFN(PKFxSettings.MaxCameraSupport, PKFxSettings.EnableDistortion);
+
 			PKFxMaterialFactory factory = PKFxSettings.MaterialFactory;
 			if (factory == null)
 			{
@@ -805,8 +900,6 @@ namespace PopcornFX
 
 			GetOrCreateSettingsAsset();
 
-			_AddSortingLayerIFN("PopcornFX", true);
-			_AddSortingLayerIFN("PopcornFXUI", false);
 
 			EditorApplication.update -= OnFirstEditorUpdate;
 		}

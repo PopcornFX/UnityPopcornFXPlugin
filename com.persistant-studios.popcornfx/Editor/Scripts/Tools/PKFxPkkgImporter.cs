@@ -83,8 +83,8 @@ namespace PopcornFX
 				Instance.AssetCount = PKFxSettings.AssetPathList.Count;
 
 				PKFxManagerImpl.SetDelegateOnAssetChange(PKFxDelegateHandler.Instance.DelegateToFunctionPointer(new AssetChangeCallback(OnAssetChangeBatchMode)));
-
-				PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList);
+				
+				PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList, PKFxSettings.CurrentPlatformName);
 
 				// block below Copy pasted from PKFxFilePackManager.Update function as custom asset processor don't seems to be instanciated in batch mode
 				PKFxManager.LockPackWatcherChanges();

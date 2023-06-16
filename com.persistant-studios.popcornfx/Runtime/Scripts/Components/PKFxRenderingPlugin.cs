@@ -133,8 +133,6 @@ namespace PopcornFX
 			PKFxManager.SetMaxCameraCount(MaxCameraSupport());
 			PKFxManager.StartupPopcorn(false);
 
-			PKFxSoundManager.ClearSounds();
-
 			if (PKFxSettings.EnablePopcornFXLight)
 			{
 				if (PKFxManager.LightPool == null)
@@ -146,11 +144,6 @@ namespace PopcornFX
 				m_LightPool = PKFxManager.LightPool;
 				m_LightPool.m_MaxLightNumber = PKFxSettings.MaxPopcornFXLights;
 			}
-
-			if (Camera.main == null)
-				Debug.LogWarning("[PopcornFX] No main camera in the scene! No PopcornFX particles will be rendered. Make sure at least one of the camera with the PKFxCamera component on it is tagged as the MainCamera.");
-			else if (Camera.main.GetComponent<PKFxCamera>() == null)
-				Debug.LogWarning("[PopcornFX] No PKFxCamera in the scene! No PopcornFX particles will be rendered. Make sure at least one of the camera with the PKFxCamera component on it is tagged as the MainCamera.");
 		}
 
 		public void UpdateSimulation()
@@ -204,8 +197,6 @@ namespace PopcornFX
 			}
 
 			PKFxManager.DrawMeshRenderers();
-
-			PKFxSoundManager.DeleteSoundsIFN();
 		}
 
 		//----------------------------------------------------------------------------
@@ -280,6 +271,21 @@ namespace PopcornFX
 		}
 
 		//----------------------------------------------------------------------------
+
+		public void UpdateCameraLayerIFN()
+		{
+			if (MaxCameraSupport() != PKFxSettings.MaxCameraSupport)
+			{
+				int[] prevCameraLayers = CameraLayers;
+				int[] newCameraLayers = new int[PKFxSettings.MaxCameraSupport];
+				for (int i = 0; i < PKFxSettings.MaxCameraSupport; i++)
+				{
+					int cameraLayerID = i < prevCameraLayers.Length ? prevCameraLayers[i] : PKFxSettings.Instance.GetCameraLayer(i);
+					newCameraLayers[i] = cameraLayerID;
+				}
+				CameraLayers = newCameraLayers;
+			}
+		}
 
 #if !UNITY_EDITOR
 		private void OnApplicationQuit()

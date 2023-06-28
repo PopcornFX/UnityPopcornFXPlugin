@@ -330,6 +330,29 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 
 //----------------------------------------------------------------------------
 
+bool	CParticleMaterialDescSound::InitFromRenderer(const CRendererDataSound &renderer)
+{
+	PK_ASSERT(renderer.m_RendererType == Renderer_Sound);
+
+	const SRendererFeaturePropertyValue *soundData = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Sound_SoundData());
+	if (soundData != null && !soundData->ValuePath().Empty())
+	{
+		m_SoundData = CStringId(soundData->ValuePath());
+	}
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CParticleMaterialDescSound::operator == (const CParticleMaterialDescSound &oth) const
+{
+	if (m_SoundData == oth.m_SoundData)
+		return true;
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
 bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBillboard &oth) const
 {
 	return	m_Flags == oth.m_Flags &&
@@ -793,6 +816,10 @@ bool	CUnityRendererCache::operator==(const CUnityRendererCache &oth) const
 		return	m_MaterialDescBillboard == oth.m_MaterialDescBillboard &&
 				Drawers::DefaultBillboardingRequestCompatibilityCheck(m_TriangleBR, oth.m_TriangleBR, Drawers::BillboardingLocation_CPU); // We need to break the batching exactly like the draw requests
 	}
+	if (m_RendererType == Renderer_Sound)
+	{
+		return	m_MaterialDescSound == oth.m_MaterialDescSound;
+	}
 	return false;
 }
 
@@ -1177,6 +1204,17 @@ template<>
 bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataLight>(const CRendererDataLight *renderer)
 {
 	//nothing material related to setup for lights
+	m_RendererType = renderer->m_RendererType;
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+template<>
+bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataSound>(const CRendererDataSound *renderer)
+{
+	if (!PK_VERIFY(m_MaterialDescSound.InitFromRenderer(*renderer)))
+		return false;
 	m_RendererType = renderer->m_RendererType;
 	return true;
 }

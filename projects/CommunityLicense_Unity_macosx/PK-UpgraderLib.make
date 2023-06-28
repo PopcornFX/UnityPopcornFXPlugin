@@ -116,6 +116,9 @@ GENERATED += $(OBJDIR)/core_upgrader_2_16_0_16433.o
 GENERATED += $(OBJDIR)/core_upgrader_2_16_0_16626.o
 GENERATED += $(OBJDIR)/core_upgrader_2_16_0_16685.o
 GENERATED += $(OBJDIR)/core_upgrader_2_16_0_16701.o
+GENERATED += $(OBJDIR)/core_upgrader_2_17_0_17463.o
+GENERATED += $(OBJDIR)/core_upgrader_2_17_0_17579.o
+GENERATED += $(OBJDIR)/core_upgrader_2_17_0_17673.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53244.o
 GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
@@ -321,6 +324,7 @@ GENERATED += $(OBJDIR)/upg_upgrades_v2.13.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.14.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.15.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.16.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.17.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.2.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
@@ -359,6 +363,9 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_16_0_16433.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_16_0_16626.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_16_0_16685.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_16_0_16701.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_17_0_17463.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_17_0_17579.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_17_0_17673.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53244.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
@@ -564,6 +571,7 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.13.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.14.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.15.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.16.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.17.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.2.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
@@ -735,6 +743,15 @@ $(OBJDIR)/core_upgrader_2_16_0_16685.o: ../../../ExternalLibs/pk_upgraderlib/src
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_16_0_16701.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16701/core_upgrader_2_16_0_16701.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17463.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17463/core_upgrader_2_17_0_17463.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17579.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17579/core_upgrader_2_17_0_17579.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17673.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17673/core_upgrader_2_17_0_17673.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
@@ -1305,6 +1322,9 @@ $(OBJDIR)/upg_upgrades_v2.15.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgra
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.16.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.16.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.17.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.17.0.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.2.0.o: ../../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp

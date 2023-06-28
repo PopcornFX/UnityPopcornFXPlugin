@@ -13,6 +13,7 @@
 #include <pk_render_helpers/include/batches/rh_mesh_batch.h>
 #include <pk_render_helpers/include/batches/rh_triangle_batch.h>
 #include <pk_render_helpers/include/batches/rh_light_batch.h>
+#include <pk_render_helpers/include/batches/rh_sound_batch.h>
 
 
 #include <pk_particles/include/ps_event_map.h>
@@ -28,9 +29,9 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	CRuntimeManager			&RTManager = CRuntimeManager::Instance();
 
 	const TArray<SUnitySceneView>	&views = RTManager.GetScene().SceneViews();
-	UnityGfxRenderer			deviceType = RTManager.GetDeviceType();
+	UnityGfxRenderer				deviceType = RTManager.GetDeviceType();
 
-	if (renderer->m_RendererType == Renderer_Mesh || renderer->m_RendererType == Renderer_Light)
+	if (renderer->m_RendererType == Renderer_Mesh || renderer->m_RendererType == Renderer_Light || renderer->m_RendererType == Renderer_Sound)
 	{
 		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(1)))
 			return null;
@@ -72,6 +73,11 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	{
 		succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataLight*>(renderer.Get()));
 	}
+	else if (renderer->m_RendererType == Renderer_Sound)
+	{
+		succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataSound*>(renderer.Get()));
+	}
+
 	rendererCache->SetAssetName(particleDesc->ParentEffect()->HandlerName());
 
 	if (renderer->m_RendererType == ERendererClass::Renderer_Billboard ||
@@ -165,6 +171,7 @@ CUnityRenderDataFactory::CBillboardingBatchInterface	*CUnityRenderDataFactory::C
 	typedef	TMeshBatch<		CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CMeshBillboardingBatch;
 	typedef TTriangleBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CTriangleBillboardingBatch;
 	typedef TLightBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CLightBillboardingBatch;
+	typedef TSoundBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CSoundBillboardingBatch;
 
 	if (!gpuStorage)
 	{
@@ -210,6 +217,14 @@ CUnityRenderDataFactory::CBillboardingBatchInterface	*CUnityRenderDataFactory::C
 
 			policy = static_cast<CUnityBillboardingBatchPolicy *>(batch);
 			retValue = static_cast<CBillboardingBatchInterface *>(batch);
+		}
+		break;
+		case	Renderer_Sound:
+		{
+			CSoundBillboardingBatch *batch = PK_NEW(CSoundBillboardingBatch);
+
+			policy = static_cast<CUnityBillboardingBatchPolicy*>(batch);
+			retValue = static_cast<CBillboardingBatchInterface*>(batch);
 		}
 		break;
 		default:

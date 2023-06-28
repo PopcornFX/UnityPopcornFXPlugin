@@ -111,6 +111,29 @@ namespace PopcornFX
 			return false;
 		}
 
+		public static bool DrawAttributeQuaternion(SerializedProperty attrDesc, SerializedProperty propX, SerializedProperty propY, SerializedProperty propZ, SerializedProperty propW)
+		{
+			Vector4 value = new Vector4(propX.floatValue, propY.floatValue, propZ.floatValue, propW.floatValue);
+			Vector4 Oldvalue = value;
+			SerializedProperty m_Type = attrDesc.FindPropertyRelative("m_Type");
+
+			++EditorGUI.indentLevel;
+			if ((EAttributeType)m_Type.intValue == EAttributeType.Quaternion)
+				DrawQuaternionAttribute(attrDesc, ref value.x, ref value.y, ref value.z, ref value.w);
+					
+			--EditorGUI.indentLevel;
+
+			if (Oldvalue != value)
+			{
+				propX.floatValue = value.x;
+				propY.floatValue = value.y;
+				propZ.floatValue = value.z;
+				propW.floatValue = value.w;
+				return true;
+			}
+			return false;
+		}
+
 		/// <summary>
 		/// Draw attribute name with icon and tooltip
 		/// </summary>
@@ -186,6 +209,9 @@ namespace PopcornFX
 					break;
 				case EAttributeType.Bool4:
 					iconPath = "AttributeB4";
+					break;
+				case EAttributeType.Quaternion:
+					iconPath = "AttributeQuaternion";
 					break;
 				default:
 					return (null);

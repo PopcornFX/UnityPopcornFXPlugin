@@ -30,6 +30,8 @@ namespace PopcornFX
 		public List<PKFxEffectAsset>	m_PreloadEffect;
 		[HideInInspector]
 		private static PKFxLightPool	m_LightPool;
+		[HideInInspector]
+		private static PKFxAudioPool	m_SoundPool;
 		//Collision Baking
 		[Tooltip("Output path for the scene mesh, relative to the PackFX directory")]
 		[HideInInspector]
@@ -141,9 +143,24 @@ namespace PopcornFX
 					DontDestroyOnLoad(lightPool);
 					PKFxManager.LightPool = lightPool.AddComponent<PKFxLightPool>();
 				}
+
 				m_LightPool = PKFxManager.LightPool;
 				m_LightPool.m_MaxLightNumber = PKFxSettings.MaxPopcornFXLights;
 			}
+			if (PKFxSettings.EnablePopcornFXSound)
+			{
+				if (PKFxManager.SoundPool == null)
+				{
+					GameObject soundPool = new GameObject("PopcornFX Sounds Pool");
+					DontDestroyOnLoad(soundPool);
+					PKFxManager.SoundPool = soundPool.AddComponent<PKFxAudioPool>();
+
+				}
+
+				m_SoundPool = PKFxManager.SoundPool;
+				m_SoundPool.m_MaxSoundNumber = PKFxSettings.MaxPopcornFXSounds;
+			}
+
 		}
 
 		public void UpdateSimulation()
@@ -195,7 +212,10 @@ namespace PopcornFX
 			{
 				m_LightPool.DrawLightRenderers();
 			}
-
+			if (PKFxSettings.EnablePopcornFXSound)
+			{
+				m_SoundPool.DrawSoundRenderers();
+			}
 			PKFxManager.DrawMeshRenderers();
 		}
 
@@ -302,6 +322,14 @@ namespace PopcornFX
 			if (PKFxSettings.EnablePopcornFXLight)
 			{
 				m_LightPool.SetLightBuffer(lightsInfos, count);
+			}
+		}
+
+		public void SetSoundsBuffer(IntPtr soundInfos, int count)
+		{
+			if (PKFxSettings.EnablePopcornFXSound)
+			{
+				m_SoundPool.SetSoundBuffer(soundInfos, count);
 			}
 		}
 	}

@@ -166,6 +166,7 @@ public:
 	bool								TerminateFx(int guid);
 	bool								StopFx(int guid);
 	bool								KillFx(int guid);
+	bool								TeleportFx(int guid);
 	void								UpdateCamDesc(int camID, const SCamDesc &desc, bool update);
 
 	void								ExecDelayedManagedToNativeMethods();
@@ -227,6 +228,7 @@ public:
 
 		bool								m_GPUBillboarding;
 		bool								m_LightRenderer;
+		bool								m_SoundRenderer;
 	};
 
 	SPopcornFXRuntimeData				*m_PopcornFXRuntimeData;

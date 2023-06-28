@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Rendering;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -13,6 +14,14 @@ namespace PopcornFX
 {
 	public class PKFxSettings : ScriptableObject
 	{
+		public enum ERenderPipeline
+		{
+			Legacy,
+			URP	  ,
+			HDRP
+		}
+
+
 		public const string kSettingsAssetName = "PKFxSettings";
 		public const string kSettingsAssetExtension = ".asset";
 		private static PKFxSettings g_Instance;
@@ -199,9 +208,13 @@ namespace PopcornFX
 		[SerializeField] private bool m_UpdateSimManually = false;
 		[SerializeField] private bool m_EnablePopcornFXLight = false;
 		[SerializeField] private int m_MaxPopcornFXLights = 16;
-		
+
+		[SerializeField] private bool m_EnablePopcornFXSound = false;
+		[SerializeField] private int  m_MaxPopcornFXSounds	 = 16;
 
 		private PKFxRaycasts.RaycastPackCallback m_CustomRaycast = null;
+
+		public ERenderPipeline RenderPipeline { get => CheckRenderPipeline(); }
 
 		public static bool RenderingCategory
 		{
@@ -335,6 +348,29 @@ namespace PopcornFX
 		{
 			get { return Instance.m_MeshesDefaultSize; }
 			set { Instance.m_MeshesDefaultSize = value; }
+		}
+
+		public static bool EnablePopcornFXLight
+		{
+			get { return Instance.m_EnablePopcornFXLight; }
+			set { Instance.m_EnablePopcornFXLight = value; }
+		}
+		public static int MaxPopcornFXLights
+		{
+			get { return Instance.m_MaxPopcornFXLights; }
+			set { Instance.m_MaxPopcornFXLights = value; }
+		}
+
+		public static bool EnablePopcornFXSound
+		{
+			get { return Instance.m_EnablePopcornFXSound; }
+			set { Instance.m_EnablePopcornFXSound = value; }
+		}
+
+		public static int MaxPopcornFXSounds
+		{
+			get { return Instance.m_MaxPopcornFXSounds; }
+			set { Instance.m_MaxPopcornFXSounds = value; }
 		}
 
 		// Threading:
@@ -680,18 +716,6 @@ namespace PopcornFX
 			PKFxManager.GetAllAssetPath();
 			return true;
 		}
-		public static bool EnablePopcornFXLight
-		{
-			get { return Instance.m_EnablePopcornFXLight; }
-			set { Instance.m_EnablePopcornFXLight = value; }
-		}
-		public static int MaxPopcornFXLights
-		{
-			get { return Instance.m_MaxPopcornFXLights; }
-			set { Instance.m_MaxPopcornFXLights = value; }
-		}
-		
-
 		public static bool ReimportAssets(List<string> assetsList, string platformName)
 		{
 			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0)
@@ -750,6 +774,26 @@ namespace PopcornFX
 		{
 			m_QualityVersionNames = levels;
 			m_CurrentQualityVersionName = levels[currentLevels];
+		}
+
+
+		static public ERenderPipeline CheckRenderPipeline()
+		{
+			if (GraphicsSettings.currentRenderPipeline)
+			{
+				if (GraphicsSettings.currentRenderPipeline.GetType().ToString().Contains("HighDefinition"))
+				{
+					return ERenderPipeline.HDRP;
+				}
+				else
+				{
+					return ERenderPipeline.URP;
+				}
+			}
+			else
+			{
+				return ERenderPipeline.Legacy;
+			}
 		}
 
 	}

@@ -2,14 +2,16 @@
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
 using System;
-using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using UnityEngine;
 //----------------------------------------------------------------------------
 
 namespace PopcornFX
 {
 	public class PKFxLightPool : MonoBehaviour
 	{
+		[StructLayout(LayoutKind.Sequential)]
 		public struct SLightInfo
 		{
 			public Vector3	m_Position;
@@ -84,6 +86,5 @@ namespace PopcornFX
 
 			m_BufferCount = 0;
 		}
-
 	}
 }

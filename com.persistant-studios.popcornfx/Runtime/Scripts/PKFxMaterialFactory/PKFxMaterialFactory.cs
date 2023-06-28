@@ -100,8 +100,7 @@ namespace PopcornFX
 
 			if (binding == null)
 			{
-				if (logError)
-					Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName + "in effect: " + asset.name);
+				Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName + "in effect: " + asset.name);
 				return null;
 			}
 
@@ -122,7 +121,7 @@ namespace PopcornFX
 				if (batchDesc.m_Type == ERendererType.Mesh)
 					material.enableInstancing = true;
 				binding.SetMaterialKeywords(batchDesc, material);
-				binding.BindMaterialProperties(batchDesc, material, asset);
+				binding.BindMaterialProperties(batchDesc, material, asset, logError);
 				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat");
 			}
 			else
@@ -553,6 +552,5 @@ namespace PopcornFX
 			light.intensity = info.m_Intensity;
 			light.transform.position = info.m_Position;
 		}
-
 	}
 }

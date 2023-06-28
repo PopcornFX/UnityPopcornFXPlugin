@@ -33,6 +33,8 @@
 #include "PK-AssetBakerLib/AssetBaker_Oven_Texture.h"
 #include "PK-AssetBakerLib/AssetBaker_Oven_StraightCopy.h"
 
+#include "pk_particles_toolbox/include/pt_file_helpers.h"
+
 #include "pk_engine_utils/include/eu_random.h"
 #include "pk_maths/include/pk_maths_random.h"
 
@@ -994,7 +996,7 @@ bool CEffectBaker::ExtrackPkkg(const CString &srcArchiveAbsPath, bool runUpgrade
 	}
 	// It's a path to a package.
 	// We need to extract it and upgrade it to the latest version
-	CString		tmpDir = CEffectBaker::GetTempDir("PopcornFXUnity-PKKG-");
+	CString		tmpDir = ParticleToolbox::GetTempDirectory("PopcornFXUnity-PKKG-");
 	CString		pkprojAbsPath;
 	if (!PK_VERIFY(ExtractPackage(m_BakeContext.m_BakeFSController, srcArchiveAbsPath, tmpDir, pkprojAbsPath)))
 	{
@@ -1016,30 +1018,6 @@ bool CEffectBaker::ExtrackPkkg(const CString &srcArchiveAbsPath, bool runUpgrade
 
 //----------------------------------------------------------------------------
 
-class	CRecursiveDirectoryDeleter : public CFileDirectoryWalker
-{
-public:
-	CRecursiveDirectoryDeleter(const CString &path, IFileSystem *fs) : CFileDirectoryWalker(path, IgnoreVirtualFS, fs), m_FileSystem(fs) {}
-	~CRecursiveDirectoryDeleter() { m_FileSystem->DirectoryDelete(Path(), true); }
-
-	virtual void		FileNotifier(const CFilePack *pack, const char *fullPath, u32 fileFirstCharPos) override
-	{
-		(void)pack; (void)fileFirstCharPos;
-		m_FileSystem->FileDelete(fullPath, true);
-	}
-	virtual bool		DirectoryNotifier(const CFilePack *pack, const char *fullPath, u32 directoryFirstCharPos) override
-	{
-		(void)pack; (void)directoryFirstCharPos;
-		CRecursiveDirectoryDeleter	deleter(fullPath, m_FileSystem);
-		deleter.Walk();
-		return false;	// will not recurse
-	}
-protected:
-	IFileSystem *m_FileSystem;
-};
-
-//----------------------------------------------------------------------------
-
 bool	CEffectBaker::DeleteFolderRec(const CString &absDirPath)
 {
 	if (m_PKPackPath == absDirPath)
@@ -1047,107 +1025,13 @@ bool	CEffectBaker::DeleteFolderRec(const CString &absDirPath)
 		m_BakeContext.m_BakeContext->UnloadAllFiles();
 		m_BakeContext.m_BakeFSController->UnmountAllPacks();
 	}
-	CRecursiveDirectoryDeleter	deleter(absDirPath, m_BakeContext.m_BakeFSController);
-	deleter.Walk();
-	if (!m_BakeContext.m_BakeFSController->DirectoryDelete(absDirPath, true))
+	if (!m_BakeContext.m_BakeFSController->DirectoryDeleteRecursive(absDirPath, true))
 	{
-		CLog::Log(PK_WARN, "Directory Delete failed at \"%s\"", absDirPath.Data());
+		CLog::Log(PK_WARN, "Delete directory recursive failed at \"%s\"", absDirPath.Data());
 		return false;
 	}
 	
 	return true;
-}
-
-//----------------------------------------------------------------------------
-//
-//	Helpers
-//
-//----------------------------------------------------------------------------
-
-CString	CEffectBaker::GetTempDir(const char *dirPrefix)
-{
-	if (dirPrefix == null)
-		dirPrefix = "";
-
-	// FIXME: Move this into a common helper (see TODO below), currently duped from 'pt_compile.cpp'
-	CString		tmpBakePath;
-
-	// Grab a temp directory to write bake temp files into:
-	// TODO(Julien): Move this out into a helper in IFileSystem or CFilePath, or equivalent ?
-#if	defined(PK_WINDOWS)
-	{
-		WCHAR		tempPath[MAX_PATH];
-		const DWORD	len = ::GetTempPathW(MAX_PATH, tempPath);
-
-		if (len != 0)
-		{
-			WCHAR		tempPathLong[MAX_PATH];
-			const DWORD	lenLong = ::GetLongPathNameW(tempPath, tempPathLong, MAX_PATH);
-
-			const CStringUnicode	pathUTF16 = (lenLong && lenLong < MAX_PATH) ? CStringUnicode::FromWChar(tempPathLong) : CStringUnicode::FromWChar(tempPath);
-			tmpBakePath = pathUTF16.ToUTF8();
-		}
-	}
-#elif defined(PK_LINUX) || defined(PK_MACOSX)
-	{
-		// ISO/IEC 9945 (POSIX)
-		const char *kTmpDirEnvSearch[] =
-		{
-			"TMPDIR",
-			"TMP",
-			"TEMP",
-			"TEMPDIR"
-		};
-		const char *tmpDirPath = null;
-		for (u32 tsidx = 0; tsidx < PK_ARRAY_COUNT(kTmpDirEnvSearch); tsidx++)
-		{
-			tmpDirPath = getenv(kTmpDirEnvSearch[tsidx]);
-			if (tmpDirPath != null)
-				break;
-		}
-
-		if (tmpDirPath == null)
-			tmpDirPath = "/tmp";
-
-		tmpBakePath = tmpDirPath;
-	}
-#endif
-
-	// If we got a temp dir path, create 'dirPrefix' sub-directory inside it:
-	if (!tmpBakePath.Empty())
-	{
-		CFilePath::Purify(tmpBakePath);
-		CString	testPath;
-		do
-		{
-			testPath = tmpBakePath / CString::Format("%s%08X", dirPrefix, Random::DefaultGenerator()->RandomU32());
-			if (!m_BakeContext.m_BakeFSController->Exists(testPath, true))
-			{
-				// Try creating it: if it exists already, bail out, it means another asset-baker is running in parallel and was faster than us.
-#if defined(PK_WINDOWS)
-				const CString					pathForWin = ("\\\\?\\" + testPath).Replace('/', '\\');	// \\?\ : break 256-char limit
-				const SWin32FilePath_MBCSToWide	widenedPath(pathForWin.Data());
-				const BOOL	res = ::CreateDirectoryW(widenedPath.m_WidePath, null);
-				const DWORD	err = ::GetLastError();
-				if (res != 0)
-					break;		// Succeeded !
-				if (err == ERROR_ALREADY_EXISTS)
-					continue;	// Already exists: Retry
-#elif defined(PK_LINUX) || defined(PK_MACOSX)
-				if (mkdir(testPath.Data(), 0777) == 0)
-					break;		// Succeeded !
-				if (errno == EEXIST)
-					continue;	// Already exists: Retry
-#endif
-				// Any other error: Fail (most likely permission denied, nothing we can do about it,
-				// but should never happen on windows at least, 'GetTempPathW' should have returned a writeable directory)
-				return null;
-			}
-		} while (true);
-		tmpBakePath = testPath;
-	}
-
-	return tmpBakePath;
 }
 
 //----------------------------------------------------------------------------

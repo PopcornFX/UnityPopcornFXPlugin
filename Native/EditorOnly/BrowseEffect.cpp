@@ -517,6 +517,12 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 				++m_UniqueRendererCount;
 				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
 			}
+			else if (renderer->m_RendererType == Renderer_Sound && CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_SoundRenderer)
+			{
+				requiresGameThreadCollect = true;
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
+			}
 			++count;
 		}
 	}

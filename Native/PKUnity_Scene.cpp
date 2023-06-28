@@ -200,6 +200,10 @@ void	CPKFXScene::LaunchUpdate(float dt)
 	profiler.StartFrame();
 #endif // (PK_PARTICLES_HAS_STATS != 0)
 
+	//ResetSoundBuffer
+	m_TotalSoundParticleCount = 0;
+	m_SoundDatas.Clear();
+
 	if (UpdateMode() != UpdateMode_NoUpdate)
 	{
 		if (dt != 0.0f)
@@ -301,7 +305,8 @@ void	CPKFXScene::LaunchUpdate(float dt)
 			}
 		}
 	}
-	
+	// SetSoundBuffer
+	::OnSetSoundsBuffer(m_SoundDatas.RawDataPointer(), m_TotalSoundParticleCount);
 	m_GameThreadCalled = true;
 }
 
@@ -1008,6 +1013,10 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 	u32	enabledRenderer = (1U << Renderer_Mesh);
 	if (CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_LightRenderer)
 		enabledRenderer = enabledRenderer | (1U << Renderer_Light);
+
+	if(CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_SoundRenderer)
+		enabledRenderer = enabledRenderer | (1U << Renderer_Sound);
+
 	CUnityFrameCollector::SFrameCollectorInit	init_Meshes(&m_RenderDataFactory, enabledRenderer);
 	PK_VERIFY(m_GameThreadFrameCollector->UpdateThread_Initialize(init_Meshes));
 

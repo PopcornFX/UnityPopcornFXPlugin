@@ -597,6 +597,30 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		[MenuItem("Assets/PopcornFX/Import Pkkg file")]
+		static void ImportPkkg()
+		{
+			string path = EditorUtility.OpenFilePanelWithFilters("Choose PopcornFX Package", "", new[] { "PopcornFX Package", "pkkg" }); ;
+			if (File.Exists(path))
+			{
+				PKFxManager.ExtractPkkg(path, true);
+
+				if (!string.IsNullOrEmpty(PKFxManager.ExtractedPkkg)) // Pkkg extraction/upgrade success
+				{
+					System.Uri fileUri = new System.Uri(PKFxManager.ExtractedPkkg);
+					System.Uri referenceUri = new System.Uri(Application.dataPath);
+					System.Uri relative = referenceUri.MakeRelativeUri(fileUri);
+					string Srcpath = referenceUri.MakeRelativeUri(fileUri).ToString();
+
+					PKFxSettings.PopcornPackFxPath = System.Uri.UnescapeDataString(Srcpath);
+					PKFxSettings.GetAllAssetPath();
+					PKFxSettings.ReimportAssets(PKFxSettings.AssetPathList, PKFxSettings.CurrentPlatformName);
+				}
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
 		[MenuItem("Assets/PopcornFX/Create Mesh Data")]
 		static void CreateMeshData()
 		{

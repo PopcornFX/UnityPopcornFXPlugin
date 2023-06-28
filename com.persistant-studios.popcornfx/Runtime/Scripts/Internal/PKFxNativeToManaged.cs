@@ -321,6 +321,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnSetLightsBuffer(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnSetSoundsBuffer(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRetrieveCustomMaterialInfo(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRetrieveRendererBufferInfo(IntPtr delegatePtr);
@@ -1123,6 +1125,19 @@ namespace PopcornFX
 			if (PKFxManager.RenderingPlugin != null)
 			{
 				PKFxManager.RenderingPlugin.SetLightsBuffer(lightInfos, count);
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
+		private delegate void SetSoundsBufferCallback(IntPtr soundInfos, int count);
+
+		[MonoPInvokeCallback(typeof(SetSoundsBufferCallback))]
+		public static void OnSetSoundsBuffer(IntPtr soundInfos, int count)
+		{
+			if (PKFxManager.RenderingPlugin != null)
+			{
+				PKFxManager.RenderingPlugin.SetSoundsBuffer(soundInfos, count);
 			}
 		}
 

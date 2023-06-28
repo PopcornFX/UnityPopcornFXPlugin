@@ -13,6 +13,23 @@ using UnityEngine.Rendering.HighDefinition;
 
 namespace PopcornFX
 {
+
+#if UNITY_EDITOR
+
+	[InitializeOnLoad]
+	public class PKFxMaterialFactoryHDRPUtils
+	{
+		static PKFxMaterialFactoryHDRPUtils()
+		{
+			if (PKFxSettings.CheckRenderPipeline() == PKFxSettings.ERenderPipeline.HDRP && PKFxSettings.MaterialFactory.GetType() != typeof(PKFxMaterialFactoryHDRP))
+			{
+				PKFxSettings.MaterialFactory = PKFxMaterialFactoryHDRP.CreateMaterialFactoryHDRP();
+			}
+		}
+	}
+
+#endif
+
 	[Serializable]
 	public class PKFxMaterialFactoryHDRP : PKFxMaterialFactory
 	{
@@ -26,7 +43,7 @@ namespace PopcornFX
 
 #if UNITY_EDITOR
 		[MenuItem("Assets/Create/PopcornFX/Material Factory/HDRP")]
-		static void CreateMaterialFactoryHDRP()
+		public static PKFxMaterialFactoryHDRP CreateMaterialFactoryHDRP()
 		{
 			string folderPath = GetSelectedPathOrFallback();
 			string path = Path.Combine(folderPath, "HDRPMaterialFactory.asset");
@@ -42,6 +59,8 @@ namespace PopcornFX
 			EditorUtility.FocusProjectWindow();
 
 			Selection.activeObject = materialFactoryHDRP;
+
+			return materialFactoryHDRP;
 		}
 
 #endif

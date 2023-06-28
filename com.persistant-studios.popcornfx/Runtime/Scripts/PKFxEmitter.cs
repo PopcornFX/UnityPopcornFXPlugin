@@ -349,6 +349,19 @@ namespace PopcornFX
 				OnFxStopPlaying(m_FXGUID);
 			}
 		}
+
+		//----------------------------------------------------------------------------
+
+		public void TeleportEffect()
+		{
+			if (!m_IsPlaying || m_FXGUID == -1)
+				Debug.LogWarning("[PopcornFX] Trying to teleport an effect that is not playing", this);
+			else
+			{
+				PKFxManager.TeleportEffect(m_FXGUID);
+			}
+		}
+
 		#endregion
 
 		#region Events

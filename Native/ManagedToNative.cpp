@@ -466,6 +466,16 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	MANAGED_TO_POPCORN_CONVENTION bool	TeleportFx(int guid)
+	{
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		PK_SCOPEDPROFILE();
+
+		return CRuntimeManager::Instance().TeleportFx(guid);
+	}
+
+	//----------------------------------------------------------------------------
+
 	MANAGED_TO_POPCORN_CONVENTION bool	RegisterExportedEvent(int guid, const char *eventName, unsigned int unityKey)
 	{
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);

@@ -4,6 +4,9 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\_Private">
+      <UniqueIdentifier>{2A0082BF-16F9-A011-3F2B-86962B83801D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\batch_jobs">
       <UniqueIdentifier>{5F763A5A-4B5A-FBAF-B4BA-F502A0BDE531}</UniqueIdentifier>
     </Filter>
@@ -57,9 +60,6 @@
     </Filter>
     <Filter Include="Sources\frame_collector">
       <UniqueIdentifier>{691251C3-D549-995A-DE53-FD7D4A0AC053}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\include">
-      <UniqueIdentifier>{FCF66EC6-6882-DC8A-7193-5F7FDD9D388B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\render_features">
       <UniqueIdentifier>{56DFCBB0-C216-1448-CB20-786B37D73A41}</UniqueIdentifier>
@@ -316,7 +316,7 @@
       <Filter>Sources\billboarders\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\include\pv_renderhelpers.h">
-      <Filter>Sources\include</Filter>
+      <Filter>Headers\_Private</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.h">
       <Filter>Precompiled</Filter>

@@ -996,7 +996,7 @@ bool CEffectBaker::ExtrackPkkg(const CString &srcArchiveAbsPath, bool runUpgrade
 	}
 	// It's a path to a package.
 	// We need to extract it and upgrade it to the latest version
-	CString		tmpDir = ParticleToolbox::GetTempDirectory("PopcornFXUnity-PKKG-");
+	CString		tmpDir = ParticleToolbox::GetTempDirectory("PopcornFXUnity-PKKG");
 	CString		pkprojAbsPath;
 	if (!PK_VERIFY(ExtractPackage(m_BakeContext.m_BakeFSController, srcArchiveAbsPath, tmpDir, pkprojAbsPath)))
 	{

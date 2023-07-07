@@ -1277,7 +1277,44 @@ bool	CRuntimeManager::TeleportFx(int guid)
 	PK_ASSERT(fx != null);
 	if (fx != null)
 	{
-		fx->GetEffectInstance().Get()->SetTeleportThisFrame(true);
+		const PParticleEffectInstance	effectInstance = fx->GetEffectInstance();
+		if (!PK_VERIFY(effectInstance != null))
+			return false;
+		effectInstance->SetTeleportThisFrame(true);
+		return true;
+	}
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CRuntimeManager::SetFxTimescale(int guid, float timeScale)
+{
+	CPKFXEffect		*fx = FxGet(guid);
+	PK_ASSERT(fx != null);
+	if (fx != null)
+	{
+		const PParticleEffectInstance	effectInstance = fx->GetEffectInstance();
+		if (!PK_VERIFY(effectInstance != null))
+			return false;
+		effectInstance->SetTimeScale(timeScale);
+		return true;
+	}
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CRuntimeManager::SetFxVisibility(int guid, bool enable)
+{
+	CPKFXEffect		*fx = FxGet(guid);
+	PK_ASSERT(fx != null);
+	if (fx != null)
+	{
+		const PParticleEffectInstance	effectInstance = fx->GetEffectInstance();
+		if (!PK_VERIFY(effectInstance != null))
+			return false;
+		effectInstance->SetVisible(enable);
 		return true;
 	}
 	return false;

@@ -230,6 +230,10 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool TerminateFx(int guid);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool SetFxVisibility(int guid, bool enabled);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool SetFxTimescale(int guid, float timescale);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool StopFx(int guid);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool KillFx(int guid);
@@ -366,7 +370,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.17.0 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.17.1 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";

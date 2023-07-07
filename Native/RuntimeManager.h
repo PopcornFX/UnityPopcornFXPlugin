@@ -167,6 +167,8 @@ public:
 	bool								StopFx(int guid);
 	bool								KillFx(int guid);
 	bool								TeleportFx(int guid);
+	bool								SetFxTimescale(int guid, float timeScale);
+	bool								SetFxVisibility(int guid, bool enable);
 	void								UpdateCamDesc(int camID, const SCamDesc &desc, bool update);
 
 	void								ExecDelayedManagedToNativeMethods();

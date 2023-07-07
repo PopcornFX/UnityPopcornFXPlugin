@@ -498,6 +498,20 @@ namespace PopcornFX
 			return false;
 		}
 
+		public static bool SetFxVisibility(int effectGUID, bool enabled)
+		{
+			if (effectGUID >= 0)
+				return PKFxManagerImpl.SetFxVisibility(effectGUID, enabled);
+			return false;
+		}
+
+		public static bool SetFxTimescale(int effectGUID, float timescale)
+		{
+			if (effectGUID >= 0)
+				return PKFxManagerImpl.SetFxTimescale(effectGUID, timescale);
+			return false;
+		}
+
 		public static bool PreloadEffectDependencies(PKFxEffectAsset fxAsset)
 		{
 			return PKFxManagerImpl._PreloadFxDependencies(fxAsset);

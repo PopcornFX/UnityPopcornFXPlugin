@@ -476,6 +476,26 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	MANAGED_TO_POPCORN_CONVENTION bool	SetFxVisibility(int guid, bool enabled)
+	{
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		PK_SCOPEDPROFILE();
+
+		return CRuntimeManager::Instance().SetFxVisibility(guid, enabled);
+	}
+
+	//----------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION bool	SetFxTimescale(int guid, float timeScale)
+	{
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		PK_SCOPEDPROFILE();
+
+		return CRuntimeManager::Instance().SetFxTimescale(guid, timeScale);
+	}
+
+	//----------------------------------------------------------------------------
+
 	MANAGED_TO_POPCORN_CONVENTION bool	RegisterExportedEvent(int guid, const char *eventName, unsigned int unityKey)
 	{
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);

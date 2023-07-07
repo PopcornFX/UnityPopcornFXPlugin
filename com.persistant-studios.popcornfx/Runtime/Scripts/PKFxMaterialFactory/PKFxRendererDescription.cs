@@ -94,18 +94,18 @@ namespace PopcornFX
 			if (desc.m_NormalMap != IntPtr.Zero)
 			{
 				normalStr = Marshal.PtrToStringAnsi(desc.m_NormalMap);
-				//string normalTextureFileName = Marshal.PtrToStringAnsi(desc.m_NormalMap);
-				//string filePath = Path.GetDirectoryName(normalTextureFileName) + "/" + Path.GetFileNameWithoutExtension(normalTextureFileName);
-				//string extension = Path.GetExtension(normalTextureFileName);
-				//normalStr = filePath.Replace('\\', '/') + "_linear" + extension;
+				string normalTextureFileName = Marshal.PtrToStringAnsi(desc.m_NormalMap);
+				string filePath = Path.GetDirectoryName(normalTextureFileName) + "/" + Path.GetFileNameWithoutExtension(normalTextureFileName);
+				string extension = Path.GetExtension(normalTextureFileName);
+				normalStr = filePath.Replace('\\', '/') + "_linear" + extension;
 			}
 			if (desc.m_RoughMetalMap != IntPtr.Zero)
 			{
 				roughtMetalStr = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
-				//string RMTextureFileName = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
-				//string filePath = Path.GetDirectoryName(RMTextureFileName) + "/" + Path.GetFileNameWithoutExtension(RMTextureFileName);
-				//string extension = Path.GetExtension(RMTextureFileName);
-				//roughtMetalStr = filePath.Replace('\\', '/') + "_linear" + extension;
+				string RMTextureFileName = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
+				string filePath = Path.GetDirectoryName(RMTextureFileName) + "/" + Path.GetFileNameWithoutExtension(RMTextureFileName);
+				string extension = Path.GetExtension(RMTextureFileName);
+				roughtMetalStr = filePath.Replace('\\', '/') + "_linear" + extension;
 			}
 			m_NormalMap = normalStr;
 			m_RoughMetalMap = roughtMetalStr;

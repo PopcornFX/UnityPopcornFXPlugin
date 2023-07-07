@@ -362,6 +362,30 @@ namespace PopcornFX
 			}
 		}
 
+		//----------------------------------------------------------------------------
+
+		public void SetTimescale(float timescale)
+		{
+			if (m_FXGUID == -1)
+				Debug.LogWarning("[PopcornFX] Trying to set timescale for an emitter without FX assigned", this);
+			else
+			{
+				PKFxManager.SetFxTimescale(m_FXGUID, timescale);
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
+		public void SetVisible(bool enable)
+		{
+			if (m_FXGUID == -1)
+				Debug.LogWarning("[PopcornFX] Trying to set visibility for an emitter without FX assigned", this);
+			else
+			{
+				PKFxManager.SetFxVisibility(m_FXGUID, enable);
+			}
+		}
+
 		#endregion
 
 		#region Events

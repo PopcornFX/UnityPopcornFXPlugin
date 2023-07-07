@@ -730,17 +730,6 @@ namespace PopcornFX
 	[CustomEditor(typeof(PKFxSettings))]
 	public class PKFxSettingsEditor : Editor
 	{
-		[MenuItem("Assets/Create/PopcornFX/PopcornFX Settings")]
-		static void CreateMaterialFactoryDefault()
-		{
-			PKFxSettings settings = PKFxSettings.Instance;
-			AssetDatabase.SaveAssets();
-
-			EditorUtility.FocusProjectWindow();
-
-			Selection.activeObject = settings;
-		}
-
 		bool	showBuffers = true;
 
 		private static void _AddSortingLayerIFN(string layerName, bool isFirst)

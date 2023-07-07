@@ -349,7 +349,6 @@ namespace PopcornFX
 			get { return Instance.m_MeshesDefaultSize; }
 			set { Instance.m_MeshesDefaultSize = value; }
 		}
-
 		public static bool EnablePopcornFXLight
 		{
 			get { return Instance.m_EnablePopcornFXLight; }
@@ -716,6 +715,7 @@ namespace PopcornFX
 			PKFxManager.GetAllAssetPath();
 			return true;
 		}
+
 		public static bool ReimportAssets(List<string> assetsList, string platformName)
 		{
 			if (Instance.m_PopcornPackFxPath == null || Instance.m_PopcornPackFxPath.Length == 0)

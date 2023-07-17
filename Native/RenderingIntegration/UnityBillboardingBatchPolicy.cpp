@@ -51,11 +51,6 @@ bool CUnityBillboardingBatchPolicy::Init(UnityGfxRenderer deviceType, CUnityRend
 {
 	(void)deviceType;
 	m_RenderDataFactory = renderDataFactory;
-	//At least one
-	if (!m_UnityMeshInfoPerViews.Resize(1) ||
-		!m_Exec_SAO2AOS.Resize(1) ||
-		!m_MappedVtxBuffer.Resize(1))
-		return false;
 	return true;
 }
 
@@ -146,19 +141,26 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 		m_MaterialDescBillboard = rendererCache->m_MaterialDescBillboard;
 		m_MaterialDescMesh = rendererCache->m_MaterialDescMesh;
 		u32 viewCount = 1;
-		if (m_RendererType != Renderer_Mesh && m_RendererType != Renderer_Light)
+
+		if (!(m_RendererType == Renderer_Mesh || m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound))
 			viewCount = views.Count();
 
-		PK_ASSERT(viewCount > 0);
-		if (!PK_VERIFY(m_Exec_SAO2AOS.Resize(viewCount)) ||
-			!PK_VERIFY(m_UnityMeshInfoPerViews.Resize(viewCount)))
-			return false;
+		if (m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound)
+			viewCount = 0;
 
-		for (u32 i = 0; i < viewCount; ++i)
+		if (viewCount > 0)
 		{
-			m_Exec_SAO2AOS[i].Clear();
-			m_UnityMeshInfoPerViews[i] = rendererCache->m_UnityMeshInfoPerViews[i];
+			if (!PK_VERIFY(m_Exec_SAO2AOS.Resize(viewCount)) ||
+				!PK_VERIFY(m_UnityMeshInfoPerViews.Resize(viewCount)))
+				return false;
+
+			for (u32 i = 0; i < viewCount; ++i)
+			{
+				m_Exec_SAO2AOS[i].Clear();
+				m_UnityMeshInfoPerViews[i] = rendererCache->m_UnityMeshInfoPerViews[i];
+			}
 		}
+
 		m_UnityMeshInfo = rendererCache->m_UnityMeshInfo;
 	}
 
@@ -581,6 +583,22 @@ bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const
 			}
 		}
 	}
+	else if (toEmit.m_Renderer == Renderer_Sound)
+	{
+		u32		&totalParticleCount = CRuntimeManager::Instance().GetScene().GetTotalSoundParticleCount();
+		for (u32 i = 0; i < toEmit.m_DrawRequests.Count(); ++i)
+		{
+			const Drawers::SSound_DrawRequest	*soundRequest = static_cast<const Drawers::SSound_DrawRequest*>(toEmit.m_DrawRequests[i]);
+			if (soundRequest != null)
+			{
+				CUnityRendererCache		*matCache = static_cast<CUnityRendererCache*>(toEmit.m_RendererCaches[i].Get());
+				if (!PK_VERIFY(matCache != null))
+					return true;
+				_UpdateThread_IssueDrawCallSound(soundRequest, matCache, totalParticleCount);
+			}
+		}
+	}
+
 	(void)ctx; (void)output;
 	return true;
 }
@@ -599,7 +617,6 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallLight(const Drawe
 		PK_ASSERT_NOT_REACHED();
 		return false;
 	}
-	//CParticleMaterialDescMesh &matDesc = rdrCache->m_MaterialDescLight // If needed ?;
 
 	const PopcornFX::Drawers::SLight_BillboardingRequest &bbRequest = static_cast<const PopcornFX::Drawers::SLight_BillboardingRequest &>(lightRequest->BaseBillboardingRequest());
 	if (lightRequest->StorageClass() != PopcornFX::CParticleStorageManager_MainMemory::DefaultStorageClass())
@@ -675,6 +692,107 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallLight(const Drawe
 	}
 
 	::OnSetLightsBuffer(m_LightDatas.RawDataPointer(), totalParticleCount);
+	return true;
+}
+
+
+bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawers::SSound_DrawRequest *soundRequest, CUnityRendererCache *rdrCache, u32 &totalParticleCount)
+{
+	TArray<SSoundInfo>	&soundDatas = CRuntimeManager::Instance().GetScene().GetSoundDatas();
+
+	const u32		drawRequestParticleCount = soundRequest->RenderedParticleCount();
+	PK_ASSERT(!soundRequest->Empty());
+	PK_ASSERT(drawRequestParticleCount > 0);
+
+	if (!soundDatas.Reserve(soundDatas.Count() + drawRequestParticleCount))
+	{
+		PK_ASSERT_NOT_REACHED();
+		return false;
+	}
+	totalParticleCount += drawRequestParticleCount;
+
+	const PopcornFX::Drawers::SSound_BillboardingRequest& bbRequest = static_cast<const PopcornFX::Drawers::SSound_BillboardingRequest&>(soundRequest->BaseBillboardingRequest());
+	if (soundRequest->StorageClass() != PopcornFX::CParticleStorageManager_MainMemory::DefaultStorageClass())
+	{
+		PK_ASSERT_NOT_REACHED();
+		return false;
+	}
+	const PopcornFX::CParticleStreamToRender_MainMemory* lockedStream = soundRequest->StreamToRender_MainMemory();
+	if (!PK_VERIFY(lockedStream != null))
+		return true;
+
+
+	const u32	pageCount = lockedStream->PageCount();
+
+	for (u32 pagei = 0; pagei < pageCount; ++pagei)
+	{
+		const PopcornFX::CParticlePageToRender_MainMemory	*page = lockedStream->Page(pagei);
+		PK_ASSERT(page != null && !page->Empty());
+		const u32		pcount = page->InputParticleCount();
+		const float		dopplerFactor = bbRequest.m_DopplerFactor;
+		const float		isBlended = false;
+
+		PopcornFX::TStridedMemoryView<const float>		lifeRatios = page->StreamForReading<float>(bbRequest.m_LifeRatioStreamId);
+		PopcornFX::TStridedMemoryView<const float>		invLives = page->StreamForReading<float>(bbRequest.m_InvLifeStreamId);
+		PopcornFX::TStridedMemoryView<const CInt2>		selfIDs = page->StreamForReading<CInt2>(bbRequest.m_SelfIDStreamId);
+		PopcornFX::TStridedMemoryView<const CFloat3>	positions = page->StreamForReading<CFloat3>(bbRequest.m_PositionStreamId);
+
+		PopcornFX::TStridedMemoryView<const CFloat3>	velocities = bbRequest.m_VelocityStreamId.Valid() ? page->StreamForReading<CFloat3>(bbRequest.m_VelocityStreamId) : PopcornFX::TStridedMemoryView<const CFloat3>(&CFloat4::ZERO.xyz(), positions.Count(), 0);
+		PopcornFX::TStridedMemoryView<const float>		volumes = bbRequest.m_VolumeStreamId.Valid() ? page->StreamForReading<float>(bbRequest.m_VolumeStreamId) : PopcornFX::TStridedMemoryView<const float>(&CFloat4::ONE.x(), positions.Count(), 0);
+		PopcornFX::TStridedMemoryView<const float>		radii = bbRequest.m_RangeStreamId.Valid() ? page->StreamForReading<float>(bbRequest.m_RangeStreamId) : PopcornFX::TStridedMemoryView<const float>(&CFloat4::ONE.x(), positions.Count(), 0);
+
+		const u8										enabledTrue = u8(-1);
+		TStridedMemoryView<const u8>					enabledParticles = (bbRequest.m_EnabledStreamId.Valid()) ? page->StreamForReading<bool>(bbRequest.m_EnabledStreamId) : TStridedMemoryView<const u8>(&enabledTrue, pcount, 0);
+
+		const u32	posCount = positions.Count();
+		PK_ASSERT(
+			posCount == pcount &&
+			posCount == lifeRatios.Count() &&
+			posCount == invLives.Count() &&
+			posCount == selfIDs.Count() &&
+			posCount == velocities.Count() &&
+			posCount == volumes.Count() &&
+			posCount == radii.Count());
+
+
+		for (u32 parti = 0; parti < pcount; ++parti)
+		{
+			if (!enabledParticles[parti])
+				continue;
+
+			const float		volume = volumes[parti];
+
+			const CFloat3	pos = positions[parti];
+			const float		radius = radii[parti];
+
+			const bool		audible = true;
+
+
+			const float		soundId = 0;
+			const float		soundIdFrac = PopcornFX::PKFrac(soundId) * isBlended;
+			const u32		soundId0 = u32(soundId);
+
+			TArray<SSoundInfo>	&soundDatas = CRuntimeManager::Instance().GetScene().GetSoundDatas();
+			PopcornFX::CGuid	ldatai = soundDatas.PushBack();
+
+			SSoundInfo &soundInfo = soundDatas[ldatai];
+			soundInfo.m_SelfID = selfIDs[parti];
+			soundInfo.m_Age = lifeRatios[parti] / invLives[parti];
+			soundInfo.m_Position = pos;
+			soundInfo.m_Velocity = velocities[parti];
+			soundInfo.m_Radius = radius;
+			soundInfo.m_DopplerLevel = dopplerFactor;
+			soundInfo.m_Volume = volume * (1.0f - soundIdFrac);
+			soundInfo.m_Audible = audible;
+			soundInfo.m_SoundData = (char*)rdrCache->m_MaterialDescSound.m_SoundData.ToStringData();
+
+			if (!isBlended)
+				continue;
+
+			soundInfo.m_Volume = volume * soundIdFrac;
+		}
+	}
+
 	return true;
 }
 
@@ -754,7 +872,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 {
 	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
 	// No need to update the bounds for the light: Unity handle them itself
-	if (m_RendererType == Renderer_Mesh || m_RendererType == Renderer_Light)
+	if (m_RendererType == Renderer_Mesh || m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound)
 		return;
 
 	CAABB	bbox = CAABB::DEGENERATED;

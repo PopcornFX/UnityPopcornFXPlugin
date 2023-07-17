@@ -284,6 +284,9 @@ public:
 																CStringId eventName, u32 count, const SUpdateTimeArgs &timeArgs, const TMemoryView<const float> &spawnDtToEnd,
 																const TMemoryView<const CEffectID> &effectIDs, const SPayloadView &payloadView);
 
+	inline TArray<SSoundInfo>		&GetSoundDatas(){ return m_SoundDatas;}
+	inline u32						&GetTotalSoundParticleCount() { return m_TotalSoundParticleCount; }
+
 protected:
 
 	bool								_ResetParticleMediumCollections();
@@ -315,6 +318,9 @@ private:
 	bool										m_RenderThreadIsSet;
 
 	TArray<SUnitySceneView>						m_SceneViews;
+
+	TArray<SSoundInfo>							m_SoundDatas;
+	u32											m_TotalSoundParticleCount = 0;
 
 	bool										m_EnableRaycastCollisions;
 

@@ -79,6 +79,7 @@ private:
 	void		_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views);
 
 	bool		_UpdateThread_IssueDrawCallLight(const Drawers::SLight_DrawRequest *lightRequest, CUnityRendererCache *rdrCache);
+	bool		_UpdateThread_IssueDrawCallSound(const Drawers::SSound_DrawRequest *soundRequest, CUnityRendererCache *rdrCache, u32 &totalParticleCount);
 
 	void		_UpdateThread_ResizeUnityMeshInstanceCount(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData);
 

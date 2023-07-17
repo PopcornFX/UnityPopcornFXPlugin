@@ -100,6 +100,9 @@
     <Filter Include="Particles\Headers\Storage\Auto">
       <UniqueIdentifier>{A3E026A6-8F06-F10C-784C-76D8641116D9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particles\Headers\Storage\GPU">
+      <UniqueIdentifier>{56BEF1A7-C2D6-D8D1-8B83-686BF75A6D6B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Particles\Headers\Storage\MainMemory">
       <UniqueIdentifier>{E8B51981-D49C-DB78-7DED-419669B354DF}</UniqueIdentifier>
     </Filter>
@@ -1014,6 +1017,9 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\Auto\storage_spatial_auto.h">
       <Filter>Particles\Headers\Storage\Auto</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\GPU\storage_gpu.h">
+      <Filter>Particles\Headers\Storage\GPU</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram.h">
       <Filter>Particles\Headers\Storage\MainMemory</Filter>
     </ClInclude>
@@ -1168,6 +1174,9 @@
       <Filter>Particles\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_event_stream.h">
+      <Filter>Particles\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_grid.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image.h">

@@ -135,7 +135,8 @@ namespace PopcornFX
 						for (int i = 0; i < asset.m_RendererDescs.Count; ++i)
 						{
 							SBatchDesc rdr = asset.m_RendererDescs[i];
-
+							if (rdr.m_Type == ERendererType.Light || rdr.m_Type == ERendererType.Sound)
+								continue;
 							PKFxRenderFeatureBinding binding = PKFxSettings.MaterialFactory.ResolveBatchBinding(rdr);
 
 							if (binding != null)

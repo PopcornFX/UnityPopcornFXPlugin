@@ -40,6 +40,8 @@ extern "C"
 		ManagedBool				m_UseApplicationAudioLoopback;
 		ManagedBool				m_LightRendererEnabled;
 
+		ManagedBool				m_SoundRendererEnabled;
+
 		// Threading:
 		ManagedBool				m_SingleThreadedExecution;
 		ManagedBool				m_OverrideThreadPool;
@@ -247,6 +249,21 @@ extern "C"
 		CFloat4	m_Color;
 		float	m_Range;
 		float	m_Intensity;
+	};
+
+	//----------------------------------------------------------------------------
+
+	struct SSoundInfo
+	{
+		CInt2		m_SelfID;
+		float		m_Age;
+		CFloat3		m_Position;
+		CFloat3		m_Velocity;
+		float		m_Radius;
+		float		m_DopplerLevel;
+		float		m_Volume;
+		bool		m_Audible;
+		char*		m_SoundData;
 	};
 
 	//----------------------------------------------------------------------------

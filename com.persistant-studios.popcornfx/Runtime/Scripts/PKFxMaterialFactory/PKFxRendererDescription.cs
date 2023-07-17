@@ -70,6 +70,9 @@ namespace PopcornFX
 		Ribbon,
 		Mesh,
 		Triangle,
+		Decal, //Not supported yet
+		Light,
+		Sound,
 		RendererType_Count
 	};
 
@@ -77,8 +80,8 @@ namespace PopcornFX
 	public class SBatchLitFeatureDesc
 	{
 		public bool m_Activated = false;
-		public string m_NormalMap;
-		public string m_RoughMetalMap;
+		public string m_NormalMap = null;
+		public string m_RoughMetalMap = null;
 
 		public bool m_CastShadows;
 
@@ -89,26 +92,11 @@ namespace PopcornFX
 		public SBatchLitFeatureDesc(SRenderingFeatureLitDesc desc)
 		{
 			m_Activated = true;
-			string normalStr = null, roughtMetalStr = null;
 
 			if (desc.m_NormalMap != IntPtr.Zero)
-			{
-				normalStr = Marshal.PtrToStringAnsi(desc.m_NormalMap);
-				//string normalTextureFileName = Marshal.PtrToStringAnsi(desc.m_NormalMap);
-				//string filePath = Path.GetDirectoryName(normalTextureFileName) + "/" + Path.GetFileNameWithoutExtension(normalTextureFileName);
-				//string extension = Path.GetExtension(normalTextureFileName);
-				//normalStr = filePath.Replace('\\', '/') + "_linear" + extension;
-			}
+				m_NormalMap = Marshal.PtrToStringAnsi(desc.m_NormalMap);
 			if (desc.m_RoughMetalMap != IntPtr.Zero)
-			{
-				roughtMetalStr = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
-				//string RMTextureFileName = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
-				//string filePath = Path.GetDirectoryName(RMTextureFileName) + "/" + Path.GetFileNameWithoutExtension(RMTextureFileName);
-				//string extension = Path.GetExtension(RMTextureFileName);
-				//roughtMetalStr = filePath.Replace('\\', '/') + "_linear" + extension;
-			}
-			m_NormalMap = normalStr;
-			m_RoughMetalMap = roughtMetalStr;
+				m_RoughMetalMap = Marshal.PtrToStringAnsi(desc.m_RoughMetalMap);
 
 			m_CastShadows = desc.m_CastShadows != 0 ? true : false;
 
@@ -374,20 +362,20 @@ namespace PopcornFX
 
 		//Internal
 		[SerializeField]
-		//internal int				m_InternalId;
 		internal int				m_CameraId;
 
 		public int					m_UID;
 
-		//public int MaterialIdx { get { return m_InternalId; } }
 
-		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc, int idx)
+		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc)
 		{
 			string diffuseStr = null;
 			string emissiveStr = null;
 			string diffuseRampStr = null;
 			string emissiveRampStr = null;
 			string alphaRemapStr = null;
+
+			m_Type = type;
 
 			if (desc.m_DiffuseMap != IntPtr.Zero)
 				diffuseStr = Marshal.PtrToStringAnsi(desc.m_DiffuseMap);
@@ -400,7 +388,6 @@ namespace PopcornFX
 			if (desc.m_EmissiveRampMap != IntPtr.Zero)
 				emissiveRampStr = Marshal.PtrToStringAnsi(desc.m_EmissiveRampMap);
 
-			m_Type = type;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
 			m_BlendMode = desc.m_BlendMode;
 			m_RotateUVs = desc.m_RotateTexture != 0 ? true : false;
@@ -432,7 +419,7 @@ namespace PopcornFX
 			m_GeneratedName = GenerateNameFromDescription();
 		}
 
-		public SBatchDesc(SMeshRendererDesc desc, int idx)
+		public SBatchDesc(SMeshRendererDesc desc)
 		{
 			string diffuseStr = null;
 			string meshAssetStr = null;

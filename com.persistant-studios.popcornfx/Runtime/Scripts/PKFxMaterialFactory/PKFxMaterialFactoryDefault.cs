@@ -12,6 +12,23 @@ using UnityEditor;
 
 namespace PopcornFX
 {
+
+#if UNITY_EDITOR
+
+	[InitializeOnLoad]
+	public class PKFxMaterialFactoryDefaultUtils
+	{
+		static PKFxMaterialFactoryDefaultUtils()
+		{
+			if (PKFxSettings.CheckRenderPipeline() == PKFxSettings.ERenderPipeline.Legacy && PKFxSettings.MaterialFactory.GetType() != typeof(PKFxMaterialFactoryDefault))
+			{
+				PKFxSettings.MaterialFactory = PKFxMaterialFactoryDefault.CreateMaterialFactoryDefaultAsset();
+			}
+		}
+	}
+
+#endif
+
 	[Serializable]
 	public class PKFxMaterialFactoryDefault : PKFxMaterialFactory
 	{

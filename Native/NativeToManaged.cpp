@@ -42,6 +42,7 @@ extern "C"
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnSetMeshInstancesBuffer)(int rendererGUID, int submesh, void *instanceBuffer) = null;
 
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnSetLightsBuffer)(void *lightInfos, int count) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION *_OnSetSoundsBuffer)(void *soundInfos, int count) = null;
 
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveCustomMaterialInfo)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveRendererBufferInfo)(int rendererGUID, const SRetrieveRendererInfo *info) = null;
@@ -150,6 +151,11 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetLightsBuffer(void *delegatePtr)
 	{
 		_OnSetLightsBuffer = (void (POPCORN_TO_MANAGED_CONVENTION *)(void *lightInfos, int count))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetSoundsBuffer(void *delegatePtr)
+	{
+		_OnSetSoundsBuffer = (void (POPCORN_TO_MANAGED_CONVENTION*)(void *soundInfos, int count))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr)
@@ -441,6 +447,20 @@ extern "C"
 		}
 	}
 
+	void	OnSetSoundsBuffer(void *soundInfos, int count)
+	{
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnSetSoundsBuffer not called on main thread: callback ignored");
+			return;
+		}
+		if (PK_VERIFY(_OnSetSoundsBuffer != null))
+		{
+			_OnSetSoundsBuffer(soundInfos, count);
+		}
+	}
+
+
 	void	OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int *customMaterialID)
 	{
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
@@ -540,6 +560,7 @@ extern "C"
 		_OnSetMeshInstancesCount = null;
 		_OnSetMeshInstancesBuffer = null;
 		_OnSetLightsBuffer = null;
+		_OnSetSoundsBuffer = null;
 		_OnRetrieveCustomMaterialInfo = null;
 		_OnRetrieveRendererBufferInfo = null;
 		_OnUpdateRendererBounds = null;

@@ -321,6 +321,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnSetLightsBuffer(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnSetSoundsBuffer(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRetrieveCustomMaterialInfo(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRetrieveRendererBufferInfo(IntPtr delegatePtr);
@@ -504,9 +506,12 @@ namespace PopcornFX
 				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshSampler;
 
 			bool isLinearTexture = (useInfoFlags & (int)EUseInfoFlag.IsLinearTextureRenderer) != 0;
-			
+
 			if (isLinearTexture)
+			{
 				depDesc.m_Path = Path.GetDirectoryName(depDesc.m_Path) + "/" + Path.GetFileNameWithoutExtension(depDesc.m_Path) + "_linear" + Path.GetExtension(depDesc.m_Path);
+				depDesc.m_Path = depDesc.m_Path.Replace('\\', '/');
+			}
 
 			int idx = m_CurrentlyImportedAsset.m_Dependencies.FindIndex(x => x.m_Path == depDesc.m_Path);
 
@@ -568,6 +573,12 @@ namespace PopcornFX
 				etype = ERendererType.Mesh;
 			else if (type == 3)
 				etype = ERendererType.Triangle;
+			else if (type == 4)
+				etype = ERendererType.Decal;
+			else if (type == 5)
+				etype = ERendererType.Light;
+			else if (type == 6)
+				etype = ERendererType.Sound;
 
 			if (etype == ERendererType.Mesh)
 			{
@@ -714,7 +725,7 @@ namespace PopcornFX
 			unsafe
 			{
 				SPopcornRendererDesc* desc = (SPopcornRendererDesc*)rendererDescPtr.ToPointer();
-				batchDesc = new SBatchDesc(ERendererType.Billboard, *desc, idx);
+				batchDesc = new SBatchDesc(ERendererType.Billboard, *desc);
 			}
 
 			// Create the material description:
@@ -735,7 +746,7 @@ namespace PopcornFX
 			unsafe
 			{
 				SPopcornRendererDesc* desc = (SPopcornRendererDesc*)rendererDescPtr.ToPointer();
-				batchDesc = new SBatchDesc(ERendererType.Ribbon, *desc, idx);
+				batchDesc = new SBatchDesc(ERendererType.Ribbon, *desc);
 			}
 
 			// Create the material description:
@@ -757,7 +768,7 @@ namespace PopcornFX
 			{
 				SMeshRendererDesc* desc = (SMeshRendererDesc*)rendererDescPtr.ToPointer();
 
-				batchDesc = new SBatchDesc(*desc, idx);
+				batchDesc = new SBatchDesc(*desc);
 			}
 
 			// Create the material description:
@@ -788,7 +799,7 @@ namespace PopcornFX
 			unsafe
 			{
 				SPopcornRendererDesc* desc = (SPopcornRendererDesc*)rendererDescPtr.ToPointer();
-				batchDesc = new SBatchDesc(ERendererType.Triangle, *desc, idx);
+				batchDesc = new SBatchDesc(ERendererType.Triangle, *desc);
 			}
 
 			// Create the material description:
@@ -1128,6 +1139,19 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		private delegate void SetSoundsBufferCallback(IntPtr soundInfos, int count);
+
+		[MonoPInvokeCallback(typeof(SetSoundsBufferCallback))]
+		public static void OnSetSoundsBuffer(IntPtr soundInfos, int count)
+		{
+			if (PKFxManager.RenderingPlugin != null)
+			{
+				PKFxManager.RenderingPlugin.SetSoundsBuffer(soundInfos, count);
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
 		private delegate void RetrieveCustomMaterialInfoCallback(int type, IntPtr rendererDescPtr, int idx, IntPtr hasCustomMaterialPtr, IntPtr customMaterialIdPtr);
 
 		[MonoPInvokeCallback(typeof(RetrieveRendererBufferInfoCallback))]
@@ -1142,12 +1166,12 @@ namespace PopcornFX
 				if (type == 0 || type == 1 || type == 3)
 				{
 					SPopcornRendererDesc* desc = (SPopcornRendererDesc*)rendererDescPtr.ToPointer();
-					batchDesc = new SBatchDesc((ERendererType)type, *desc, idx);
+					batchDesc = new SBatchDesc((ERendererType)type, *desc);
 				}
 				else if (type == 2)
 				{
 					SMeshRendererDesc* desc = (SMeshRendererDesc*)rendererDescPtr.ToPointer();
-					batchDesc = new SBatchDesc(*desc, idx);
+					batchDesc = new SBatchDesc(*desc);
 				}
 
 				PKFxCustomMaterialInfo matInfo = m_CurrentlyBuildAsset.FindCustomMaterialInfo(batchDesc);

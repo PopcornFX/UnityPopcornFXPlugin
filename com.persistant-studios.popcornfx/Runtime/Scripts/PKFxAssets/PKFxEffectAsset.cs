@@ -381,8 +381,13 @@ namespace PopcornFX
 
 		public void AddRenderer(ERendererType type, SPopcornRendererDesc renderer, int idx)
 		{
-			SBatchDesc batch = new SBatchDesc(type, renderer, idx);
+			SBatchDesc batch = new SBatchDesc(type, renderer);
 			m_RendererDescs.Add(batch);
+
+			while (idx >= m_Materials.Count)
+				m_Materials.Add(null);
+			if (batch.m_Type == ERendererType.Light || batch.m_Type == ERendererType.Sound)
+				return;
 
 			Material mat = null;
 			RemoveOutdatedCustomMaterials(batch);
@@ -396,8 +401,6 @@ namespace PopcornFX
 			else
 				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false);
 
-			while (idx >= m_Materials.Count)
-				m_Materials.Add(null);
 			if (mat == null)
 			{
 				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
@@ -411,8 +414,11 @@ namespace PopcornFX
 
 		public void AddRenderer(ERendererType type, SMeshRendererDesc renderer, int idx)
 		{
-			SBatchDesc batch = new SBatchDesc(renderer, idx);
+			SBatchDesc batch = new SBatchDesc(renderer);
 			m_RendererDescs.Add(batch);
+
+			while (idx >= m_Materials.Count)
+				m_Materials.Add(null);
 
 			Material mat = null;
 			RemoveOutdatedCustomMaterials(batch);
@@ -433,7 +439,7 @@ namespace PopcornFX
 				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + " in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
 				return;
 			}
-			m_Materials.Add(mat);
+			m_Materials[idx] = mat;
 		}
 
 		public void LinkRenderer(int GlobalIdx, string qualityLevel, int UID)

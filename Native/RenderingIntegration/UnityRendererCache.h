@@ -166,6 +166,8 @@ public:
 	CParticleMaterialDescBillboard();
 
 	bool		InitFromRenderer(const CRendererDataBase &renderer);
+	bool		InitFromRenderer(const CRendererDataSound &renderer);
+
 
 	bool		operator == (const CParticleMaterialDescBillboard &oth) const;
 };
@@ -234,6 +236,17 @@ public:
 	bool		InitFromRenderer(const CRendererDataMesh &renderer);
 
 	bool		operator == (const CParticleMaterialDescMesh &oth) const;
+};
+
+
+class CParticleMaterialDescSound
+{
+public:
+	CStringId	m_SoundData;
+
+	bool InitFromRenderer(const CRendererDataSound &renderer);
+
+	bool		operator == (const CParticleMaterialDescSound &oth) const;
 };
 
 struct	SUnityMeshInfoPerView
@@ -355,6 +368,7 @@ public:
 	CParticleMaterialDescBillboard				m_MaterialDescBillboard;
 	// For the Meshes:
 	CParticleMaterialDescMesh					m_MaterialDescMesh;
+	CParticleMaterialDescSound					m_MaterialDescSound;
 
 	CString										m_AssetName;
 	

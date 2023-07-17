@@ -636,6 +636,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\GPU\sampler_gpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\Auto\storage_spatial_auto.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\GPU\storage_gpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_allocator.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_stream.h" />
@@ -688,6 +689,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_classes.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_curve.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_event_stream.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_grid.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_shape.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_text.h" />

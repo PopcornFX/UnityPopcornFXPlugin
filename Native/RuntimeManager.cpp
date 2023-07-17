@@ -741,6 +741,10 @@ bool	CRuntimeManager::PopcornFXChangeSettings(const SPopcornFxSettings &settings
 	CRuntimeManager::SPopcornFXRuntimeData::m_Settings = &settings;
 	m_PopcornFXRuntimeData->m_GPUBillboarding = settings.m_EnableGPUBillboarding == ManagedBool_True ? true : false;
 	m_PopcornFXRuntimeData->m_LightRenderer = settings.m_LightRendererEnabled == ManagedBool_True ? true : false;
+
+	m_PopcornFXRuntimeData->m_SoundRenderer = settings.m_SoundRendererEnabled == ManagedBool_True ? true : false;
+
+
 	Scheduler::SetThreadPool(_CreateCustomThreadPool());
 	CRuntimeManager::SPopcornFXRuntimeData::m_Settings = null;
 
@@ -1263,6 +1267,57 @@ bool	CRuntimeManager::KillFx(int guid)
 		m_ToKill.PushBack(callback);
 		return true;
 	}
+}
+
+//----------------------------------------------------------------------------
+
+bool	CRuntimeManager::TeleportFx(int guid)
+{
+	CPKFXEffect		*fx = FxGet(guid);
+	PK_ASSERT(fx != null);
+	if (fx != null)
+	{
+		const PParticleEffectInstance	effectInstance = fx->GetEffectInstance();
+		if (!PK_VERIFY(effectInstance != null))
+			return false;
+		effectInstance->SetTeleportThisFrame(true);
+		return true;
+	}
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CRuntimeManager::SetFxTimescale(int guid, float timeScale)
+{
+	CPKFXEffect		*fx = FxGet(guid);
+	PK_ASSERT(fx != null);
+	if (fx != null)
+	{
+		const PParticleEffectInstance	effectInstance = fx->GetEffectInstance();
+		if (!PK_VERIFY(effectInstance != null))
+			return false;
+		effectInstance->SetTimeScale(timeScale);
+		return true;
+	}
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CRuntimeManager::SetFxVisibility(int guid, bool enable)
+{
+	CPKFXEffect		*fx = FxGet(guid);
+	PK_ASSERT(fx != null);
+	if (fx != null)
+	{
+		const PParticleEffectInstance	effectInstance = fx->GetEffectInstance();
+		if (!PK_VERIFY(effectInstance != null))
+			return false;
+		effectInstance->SetVisible(enable);
+		return true;
+	}
+	return false;
 }
 
 //----------------------------------------------------------------------------
@@ -1936,11 +1991,13 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup()
 	{
 		m_GPUBillboarding = m_Settings->m_EnableGPUBillboarding == ManagedBool_True ? true : false;
 		m_LightRenderer = m_Settings->m_LightRendererEnabled == ManagedBool_True ? true : false;
+		m_SoundRenderer = m_Settings->m_SoundRendererEnabled == ManagedBool_True ? true : false;
 	}
 	else
 	{
 		m_GPUBillboarding = false;
 		m_LightRenderer = false;
+		m_SoundRenderer = false;
 	}
 	SDllVersion			engineVersion(PK_VERSION_MAJOR, PK_VERSION_MINOR, PK_VERSION_PATCH, PK_VERSION_REVID, debugMode);
 	CPKKernel::Config	configKernel;

@@ -513,7 +513,28 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 			}
 			else if (renderer->m_RendererType == Renderer_Light && CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_LightRenderer)
 			{
+				SPopcornRendererDesc			unityLightDesc;
+				const CRendererDataLight		*dataLight = static_cast<const CRendererDataLight*>(renderer.Get());
+
+				dummyCache.GameThread_SetupRenderer(dataLight);
+				dummyCache.GetRendererInfo(unityLightDesc);
+
 				requiresGameThreadCollect = true;
+				::OnEffectRendererFound(&unityLightDesc, renderer->m_RendererType, m_UniqueRendererCount);
+				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
+			}
+			else if (renderer->m_RendererType == Renderer_Sound && CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_SoundRenderer)
+			{
+				SPopcornRendererDesc			unitySoundDesc;
+				const CRendererDataSound		*dataSound = static_cast<const CRendererDataSound*>(renderer.Get());
+
+				dummyCache.GameThread_SetupRenderer(dataSound);
+				dummyCache.GetRendererInfo(unitySoundDesc);
+				requiresGameThreadCollect = true;
+				::OnEffectRendererFound(&unitySoundDesc, renderer->m_RendererType, m_UniqueRendererCount);
+				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
 				++m_UniqueRendererCount;
 				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
 			}

@@ -301,6 +301,9 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetLightsBuffer(void *delegatePtr);
 	void										OnSetLightsBuffer(void *lightInfos, int count);
 
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetSoundsBuffer(void *delegatePtr);
+	void										OnSetSoundsBuffer(void *soundInfos, int count);
+
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr);
 	void										OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID);
 

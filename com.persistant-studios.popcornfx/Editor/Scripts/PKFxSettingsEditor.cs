@@ -66,7 +66,9 @@ namespace PopcornFX
 #else
 		public static GUIContent useGPUBillboarding = new GUIContent(" Enable GPU Billboarding (experimental)");
 #endif
+
 		public static GUIContent enablePopcornFXLightsLabel = new GUIContent(" Enable Light from PopcornFX Effects");
+		public static GUIContent enablePopcornFXAudiosLabel = new GUIContent(" Enable Audio from PopcornFX Effects");
 
 		public static GUIContent useMeshInstancingLabel = new GUIContent(" Enable Mesh Instancing (per instance color in not supported by URP/HDRP yet)");
 
@@ -565,6 +567,16 @@ namespace PopcornFX
 			{
 				PKFxSettings.MaxPopcornFXLights = EditorGUILayout.IntSlider(PKFxSettings.MaxPopcornFXLights, 0, 256);
 			}
+
+			bool soundValue = EditorGUILayout.ToggleLeft(enablePopcornFXAudiosLabel, PKFxSettings.EnablePopcornFXSound);
+			if (PKFxSettings.EnablePopcornFXSound != soundValue)
+			{
+				PKFxSettings.EnablePopcornFXSound = soundValue;
+			}
+			if (PKFxSettings.EnablePopcornFXSound)
+			{
+				PKFxSettings.MaxPopcornFXSounds = EditorGUILayout.IntSlider(PKFxSettings.MaxPopcornFXSounds, 0, 256);
+			}
 		}
 
 		private static void DisplayDebugCategory()
@@ -718,17 +730,6 @@ namespace PopcornFX
 	[CustomEditor(typeof(PKFxSettings))]
 	public class PKFxSettingsEditor : Editor
 	{
-		[MenuItem("Assets/Create/PopcornFX/PopcornFX Settings")]
-		static void CreateMaterialFactoryDefault()
-		{
-			PKFxSettings settings = PKFxSettings.Instance;
-			AssetDatabase.SaveAssets();
-
-			EditorUtility.FocusProjectWindow();
-
-			Selection.activeObject = settings;
-		}
-
 		bool	showBuffers = true;
 
 		private static void _AddSortingLayerIFN(string layerName, bool isFirst)

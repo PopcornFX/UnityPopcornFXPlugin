@@ -267,6 +267,7 @@ namespace PopcornFX
 							SerializedProperty m_Type = attrDesc.FindPropertyRelative("m_Type");
 							SerializedProperty m_DropMode = attrDesc.FindPropertyRelative("m_DropMode");
 							SerializedProperty x, y, z, w;
+
 							if (m_DropMode.intValue == (int)EAttributeDropMode.None)
 							{
 								switch ((EAttributeType)m_Type.intValue)
@@ -316,6 +317,18 @@ namespace PopcornFX
 																					  PKFxUtils.Float2Int(y.floatValue),
 																					  PKFxUtils.Float2Int(z.floatValue),
 																					  PKFxUtils.Float2Int(w.floatValue));
+										}
+										break;
+									case EAttributeType.Quaternion:
+										x = propertyX.FindPropertyRelative("f1");
+										y = propertyY.FindPropertyRelative("f1");
+										z = propertyZ.FindPropertyRelative("f1");
+										w = propertyW.FindPropertyRelative("f1");
+
+										if (PKFxAttributePropertyDrawer.DrawAttributeQuaternion(attrDesc, x, y, z, w))
+										{
+											if (attribContainer != null)
+												attribContainer.SetAttributeUnsafe(i, x.floatValue, y.floatValue, z.floatValue, w.floatValue);
 										}
 										break;
 								}

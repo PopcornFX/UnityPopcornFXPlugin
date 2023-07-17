@@ -31,10 +31,13 @@ namespace PopcornFX
 
 		public static PKFxLightPool			LightPool = null;
 
+		private static Dictionary<string, AudioClip> m_SoundDependencies = new Dictionary<string, AudioClip>();
+		public static PKFxAudioPool					 SoundPool = null;
+
 		public static string				StoredQualityLevel = "Medium";
 		public static string[]				QualitiesLevelDescription;
 		
-		private static Dictionary<string, AudioClip> m_SoundDependencies = new Dictionary<string, AudioClip>();
+
 
 		//----------------------------------------------------------------------------
 		// PopcornFX General State With Native Interop
@@ -210,6 +213,8 @@ namespace PopcornFX
 			settings.m_EnableLocalizedPages = PKFxSettings.EnableLocalizedPages;
 			settings.m_EnableLocalizedByDefault = PKFxSettings.EnableLocalizedByDefault;
 			settings.m_LightRendererEnabled = PKFxSettings.EnablePopcornFXLight;
+
+			settings.m_SoundRendererEnabled = PKFxSettings.EnablePopcornFXSound;
 
 			settings.m_FreeUnusedBatches = PKFxSettings.FreeUnusedBatches;
 			settings.m_FrameCountBeforeFreeingUnusedBatches = PKFxSettings.FrameCountBeforeFreeingUnusedBatches;
@@ -483,6 +488,27 @@ namespace PopcornFX
 		{
 			if (effectGUID >= 0)
 				return PKFxManagerImpl.KillFx(effectGUID);
+			return false;
+		}
+
+		public static bool TeleportEffect(int effectGUID)
+		{
+			if (effectGUID >= 0)
+				return PKFxManagerImpl.TeleportFx(effectGUID);
+			return false;
+		}
+
+		public static bool SetFxVisibility(int effectGUID, bool enabled)
+		{
+			if (effectGUID >= 0)
+				return PKFxManagerImpl.SetFxVisibility(effectGUID, enabled);
+			return false;
+		}
+
+		public static bool SetFxTimescale(int effectGUID, float timescale)
+		{
+			if (effectGUID >= 0)
+				return PKFxManagerImpl.SetFxTimescale(effectGUID, timescale);
 			return false;
 		}
 

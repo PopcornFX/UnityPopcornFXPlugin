@@ -95,6 +95,8 @@ namespace PopcornFX
 
 		public virtual Material EditorGetDefaultMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null, bool logError = true)
 		{
+			if (batchDesc.m_Type == ERendererType.Light || batchDesc.m_Type == ERendererType.Sound)
+				return null;
 			PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
 			Material material;
 
@@ -182,7 +184,7 @@ namespace PopcornFX
 				{
 #if UNITY_EDITOR
 					if (DepDesc.m_Object == null)
-						DepDesc.m_Object = AssetDatabase.LoadAssetAtPath("Assets" + PKFxSettings.UnityPackFxPath + "/" + rawPath, typeof(Texture));
+						DepDesc.m_Object = AssetDatabase.LoadAssetAtPath("Assets" + PKFxSettings.UnityPackFxPath + "/" + DepDesc.m_Path, typeof(Texture));
 #endif
 					texture = DepDesc.m_Object as Texture;
 				}
@@ -552,6 +554,5 @@ namespace PopcornFX
 			light.intensity = info.m_Intensity;
 			light.transform.position = info.m_Position;
 		}
-
 	}
 }

@@ -89,6 +89,7 @@ namespace PopcornFX
 			// Print the path of the created asset
 			Debug.Log(AssetDatabase.GetAssetPath(binding));
 		}
+
 		public override void OnInspectorGUI()
 		{
 			SerializedProperty	UseShader = serializedObject.FindProperty("m_UseShader");

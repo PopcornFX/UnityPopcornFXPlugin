@@ -181,6 +181,5 @@ namespace PopcornFX
 			}
 			EditorGUILayout.EndHorizontal();
 		}
-
 	}
 }

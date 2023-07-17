@@ -12,6 +12,22 @@ using UnityEditor;
 
 namespace PopcornFX
 {
+#if UNITY_EDITOR
+
+	[InitializeOnLoad]
+	public class PKFxMaterialFactoryURPUtils
+	{
+		static PKFxMaterialFactoryURPUtils()
+		{
+			if (PKFxSettings.CheckRenderPipeline() == PKFxSettings.ERenderPipeline.URP && PKFxSettings.MaterialFactory.GetType() != typeof(PKFxMaterialFactoryURP))
+			{
+				PKFxSettings.MaterialFactory = PKFxMaterialFactoryURP.CreateMaterialFactoryURP();
+			}
+		}
+	}
+
+#endif
+
 	[Serializable]
 	public class PKFxMaterialFactoryURP : PKFxMaterialFactory
 	{
@@ -50,7 +66,7 @@ namespace PopcornFX
 
 #if UNITY_EDITOR
 		[MenuItem("Assets/Create/PopcornFX/Material Factory/URP")]
-		static void CreateMaterialFactoryURP()
+		public static PKFxMaterialFactoryURP CreateMaterialFactoryURP()
 		{
 			string folderPath = GetSelectedPathOrFallback();
 			string path = Path.Combine(folderPath, "URPMaterialFactory.asset");
@@ -64,6 +80,13 @@ namespace PopcornFX
 			EditorUtility.FocusProjectWindow();
 
 			Selection.activeObject = materialFactoryURP;
+
+			return materialFactoryURP;
+		}
+
+		public void CreateMaterialFactoryIFN()
+		{
+			
 		}
 
 #endif

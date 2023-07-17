@@ -73,6 +73,8 @@ namespace PopcornFX
 		public bool m_UseApplicationAudioLoopback;
 		public bool m_LightRendererEnabled;
 
+		public bool m_SoundRendererEnabled;
+
 		// Threading
 		public bool m_SingleThreadedExecution;
 		public bool m_OverrideThreadPool;
@@ -228,9 +230,15 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool TerminateFx(int guid);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool SetFxVisibility(int guid, bool enabled);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool SetFxTimescale(int guid, float timescale);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool StopFx(int guid);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool KillFx(int guid);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool TeleportFx(int guid);
 		// Exported Event
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool RegisterExportedEvent(int guid, string eventName, int unityKey);
@@ -362,7 +370,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.16.6 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.17.2 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
@@ -586,6 +594,7 @@ namespace PopcornFX
 			SetDelegateOnSetMeshInstancesCount(delegateHandler.DelegateToFunctionPointer(new SetMeshInstancesCountCallback(OnSetMeshInstancesCount)));
 			SetDelegateOnSetMeshInstancesBuffer(delegateHandler.DelegateToFunctionPointer(new SetMeshInstancesBufferCallback(OnSetMeshInstancesBuffer)));
 			SetDelegateOnSetLightsBuffer(delegateHandler.DelegateToFunctionPointer(new SetLightsBufferCallback(OnSetLightsBuffer)));
+			SetDelegateOnSetSoundsBuffer(delegateHandler.DelegateToFunctionPointer(new SetSoundsBufferCallback(OnSetSoundsBuffer)));
 			SetDelegateOnRetrieveCustomMaterialInfo(delegateHandler.DelegateToFunctionPointer(new RetrieveCustomMaterialInfoCallback(OnRetrieveCustomMaterialInfo)));
 			SetDelegateOnRetrieveRendererBufferInfo(delegateHandler.DelegateToFunctionPointer(new RetrieveRendererBufferInfoCallback(OnRetrieveRendererBufferInfo)));
 			SetDelegateOnUpdateRendererBounds(delegateHandler.DelegateToFunctionPointer(new RendererBoundsUpdateCallback(OnRendererBoundsUpdate)));

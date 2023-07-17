@@ -27,10 +27,10 @@ endif
 ifeq ($(origin AR), default)
   AR = ar
 endif
-PCH = ../../../ExternalLibs/Runtime/pk_render_helpers/src/precompiled/rh_precompiled.h
+PCH = ../../ExternalLibs/Runtime/pk_render_helpers/src/precompiled/rh_precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_render_helpers/src -I../../../ExternalLibs/Runtime/pk_render_helpers/src/precompiled
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_render_helpers/src -I../../ExternalLibs/Runtime/pk_render_helpers/src/precompiled
 FORCE_INCLUDE += -include pk_compiler_warnings.h
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -49,7 +49,7 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug_x64)
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
 TARGET = $(TARGETDIR)/libPK-RenderHelpers_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-RenderHelpers
 DEFINES += -D_DEBUG
@@ -57,7 +57,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 
 else ifeq ($(config),release_x64)
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
 TARGET = $(TARGETDIR)/libPK-RenderHelpers_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-RenderHelpers
 DEFINES += -DNDEBUG
@@ -65,7 +65,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 
 else ifeq ($(config),retail_x64)
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
 TARGET = $(TARGETDIR)/libPK-RenderHelpers_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-RenderHelpers
 DEFINES += -DNDEBUG -DPK_RETAIL
@@ -261,172 +261,172 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/rh_precompiled.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/precompiled/rh_precompiled.cpp
+$(OBJDIR)/rh_precompiled.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/precompiled/rh_precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_billboard_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_billboard_cpu.cpp
+$(OBJDIR)/rh_batch_jobs_billboard_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_billboard_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_billboard_gpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_billboard_gpu.cpp
+$(OBJDIR)/rh_batch_jobs_billboard_gpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_billboard_gpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_decal_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_decal_cpu.cpp
+$(OBJDIR)/rh_batch_jobs_decal_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_decal_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_decal_gpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_decal_gpu.cpp
+$(OBJDIR)/rh_batch_jobs_decal_gpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_decal_gpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_helpers.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_helpers.cpp
+$(OBJDIR)/rh_batch_jobs_helpers.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_helpers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_light_std.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_light_std.cpp
+$(OBJDIR)/rh_batch_jobs_light_std.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_light_std.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_mesh_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_mesh_cpu.cpp
+$(OBJDIR)/rh_batch_jobs_mesh_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_mesh_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_mesh_gpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_mesh_gpu.cpp
+$(OBJDIR)/rh_batch_jobs_mesh_gpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_mesh_gpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_ribbon_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_ribbon_cpu.cpp
+$(OBJDIR)/rh_batch_jobs_ribbon_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_ribbon_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_ribbon_gpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_ribbon_gpu.cpp
+$(OBJDIR)/rh_batch_jobs_ribbon_gpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_ribbon_gpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_sound_std.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_sound_std.cpp
+$(OBJDIR)/rh_batch_jobs_sound_std.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_sound_std.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_triangle_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_triangle_cpu.cpp
+$(OBJDIR)/rh_batch_jobs_triangle_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_triangle_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_jobs_triangle_gpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_triangle_gpu.cpp
+$(OBJDIR)/rh_batch_jobs_triangle_gpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_triangle_gpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboard_ribbon_batch_helper.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/batches/rh_billboard_ribbon_batch_helper.cpp
+$(OBJDIR)/rh_billboard_ribbon_batch_helper.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batches/rh_billboard_ribbon_batch_helper.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_billboards_axial_capsule.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_capsule.cpp
+$(OBJDIR)/rh_billboarders_billboards_axial_capsule.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_capsule.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_billboards_axial_quad.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_quad.cpp
+$(OBJDIR)/rh_billboarders_billboards_axial_quad.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_quad.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_billboards_axial_spheroidal.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_spheroidal.cpp
+$(OBJDIR)/rh_billboarders_billboards_axial_spheroidal.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_spheroidal.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_billboards_planar_quad.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_planar_quad.cpp
+$(OBJDIR)/rh_billboarders_billboards_planar_quad.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_planar_quad.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_billboards_screen_quad.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_screen_quad.cpp
+$(OBJDIR)/rh_billboarders_billboards_screen_quad.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_screen_quad.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_billboards_standard.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_standard.cpp
+$(OBJDIR)/rh_billboarders_billboards_standard.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_standard.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_billboards_view_quad.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_view_quad.cpp
+$(OBJDIR)/rh_billboarders_billboards_view_quad.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_view_quad.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_ribbons.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_ribbons.cpp
+$(OBJDIR)/rh_billboarders_ribbons.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_ribbons.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboarders_ribbons_axial.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_ribbons_axial.cpp
+$(OBJDIR)/rh_billboarders_ribbons_axial.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_ribbons_axial.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_bufferpool.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/buffer_pool/rh_bufferpool.cpp
+$(OBJDIR)/rh_bufferpool.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/buffer_pool/rh_bufferpool.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboard.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_billboard.cpp
+$(OBJDIR)/rh_billboard.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_billboard.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboard_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_billboard_cpu.cpp
+$(OBJDIR)/rh_billboard_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_billboard_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboard_cpu_tasks.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_billboard_cpu_tasks.cpp
+$(OBJDIR)/rh_billboard_cpu_tasks.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_billboard_cpu_tasks.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_common.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_common.cpp
+$(OBJDIR)/rh_common.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_common.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_copystream_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_copystream_cpu.cpp
+$(OBJDIR)/rh_copystream_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_copystream_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_copystream_cpu_tasks.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_copystream_cpu_tasks.cpp
+$(OBJDIR)/rh_copystream_cpu_tasks.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_copystream_cpu_tasks.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_decal.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_decal.cpp
+$(OBJDIR)/rh_decal.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_decal.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_decal_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_decal_cpu.cpp
+$(OBJDIR)/rh_decal_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_decal_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_decal_cpu_tasks.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_decal_cpu_tasks.cpp
+$(OBJDIR)/rh_decal_cpu_tasks.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_decal_cpu_tasks.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_draw_requests.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_draw_requests.cpp
+$(OBJDIR)/rh_draw_requests.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_draw_requests.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_light.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_light.cpp
+$(OBJDIR)/rh_light.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_light.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_mesh.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_mesh.cpp
+$(OBJDIR)/rh_mesh.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_mesh.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_mesh_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_mesh_cpu.cpp
+$(OBJDIR)/rh_mesh_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_mesh_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_mesh_cpu_tasks.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_mesh_cpu_tasks.cpp
+$(OBJDIR)/rh_mesh_cpu_tasks.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_mesh_cpu_tasks.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_ribbon.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_ribbon.cpp
+$(OBJDIR)/rh_ribbon.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_ribbon.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_ribbon_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_ribbon_cpu.cpp
+$(OBJDIR)/rh_ribbon_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_ribbon_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_ribbon_cpu_tasks.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_ribbon_cpu_tasks.cpp
+$(OBJDIR)/rh_ribbon_cpu_tasks.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_ribbon_cpu_tasks.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_sound.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_sound.cpp
+$(OBJDIR)/rh_sound.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_sound.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_triangle.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_triangle.cpp
+$(OBJDIR)/rh_triangle.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_triangle.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_triangle_cpu.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_triangle_cpu.cpp
+$(OBJDIR)/rh_triangle_cpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_triangle_cpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_triangle_cpu_tasks.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_triangle_cpu_tasks.cpp
+$(OBJDIR)/rh_triangle_cpu_tasks.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_triangle_cpu_tasks.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_batch_drawer.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_batch_drawer.cpp
+$(OBJDIR)/rh_batch_drawer.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_batch_drawer.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_frame_collector.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_frame_collector.cpp
+$(OBJDIR)/rh_frame_collector.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_frame_collector.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_particle_render_data_factory.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_particle_render_data_factory.cpp
+$(OBJDIR)/rh_particle_render_data_factory.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_particle_render_data_factory.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_render_medium.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_render_medium.cpp
+$(OBJDIR)/rh_render_medium.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_render_medium.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_renderers_walker.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_renderers_walker.cpp
+$(OBJDIR)/rh_renderers_walker.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/frame_collector/rh_renderers_walker.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_features_basic.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_basic.cpp
+$(OBJDIR)/rh_features_basic.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_basic.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_features_vat_skeletal.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_vat_skeletal.cpp
+$(OBJDIR)/rh_features_vat_skeletal.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_vat_skeletal.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_features_vat_static.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_vat_static.cpp
+$(OBJDIR)/rh_features_vat_static.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/render_features/rh_features_vat_static.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_init.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/rh_init.cpp
+$(OBJDIR)/rh_init.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/rh_init.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_main.o: ../../../ExternalLibs/Runtime/pk_render_helpers/src/rh_main.cpp
+$(OBJDIR)/rh_main.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/rh_main.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

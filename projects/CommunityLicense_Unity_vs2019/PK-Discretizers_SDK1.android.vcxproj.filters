@@ -9,7 +9,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_discretizers\include\dc_discretizers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_discretizers\include\dc_discretizers.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

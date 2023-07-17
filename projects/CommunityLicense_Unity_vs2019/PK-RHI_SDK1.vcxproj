@@ -55,19 +55,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Debug\PK-RHI_SDK1\</IntDir>
     <TargetName>PK-RHI_d</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Release\PK-RHI_SDK1\</IntDir>
     <TargetName>PK-RHI_r</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Retail\PK-RHI_SDK1\</IntDir>
     <TargetName>PK-RHI_s</TargetName>
     <TargetExt>.lib</TargetExt>
@@ -81,7 +81,7 @@
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -112,7 +112,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -144,7 +144,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -344,17 +344,17 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ExternalLibs\GL\src\glew.c">
+    <ClCompile Include="..\..\ExternalLibs\GL\src\glew.c">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <DisableSpecificWarnings>4668;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>

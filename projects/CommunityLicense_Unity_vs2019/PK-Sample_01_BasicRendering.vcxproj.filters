@@ -102,28 +102,28 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h">
       <Filter>_External\GL\include\GL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-Sample_01_BasicRendering\BasicBatchDrawer_Billboard.h">

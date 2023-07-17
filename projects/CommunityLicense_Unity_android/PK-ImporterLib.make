@@ -18,10 +18,10 @@ endif
 # Configurations
 # #############################################
 
-PCH = ../../../ExternalLibs/pk_importerlib/src/precompiled/imp_precompiled.h
+PCH = ../../ExternalLibs/pk_importerlib/src/precompiled/imp_precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs -I../../../ExternalLibs/pk_importerlib/src -I../../../ExternalLibs/pk_importerlib/src/precompiled
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs -I../../ExternalLibs/pk_importerlib/src -I../../ExternalLibs/pk_importerlib/src/precompiled
 FORCE_INCLUDE += -include pk_compiler_warnings.h
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -48,7 +48,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
 TARGET = $(TARGETDIR)/libPK-ImporterLib_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Debug/PK-ImporterLib
 DEFINES += -D_DEBUG
@@ -66,7 +66,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
 TARGET = $(TARGETDIR)/libPK-ImporterLib_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Debug/PK-ImporterLib
 DEFINES += -D_DEBUG
@@ -84,7 +84,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
 TARGET = $(TARGETDIR)/libPK-ImporterLib_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Release/PK-ImporterLib
 DEFINES += -DNDEBUG
@@ -102,7 +102,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
 TARGET = $(TARGETDIR)/libPK-ImporterLib_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Release/PK-ImporterLib
 DEFINES += -DNDEBUG
@@ -120,7 +120,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android
 TARGET = $(TARGETDIR)/libPK-ImporterLib_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android/Retail/PK-ImporterLib
 DEFINES += -DNDEBUG -DPK_RETAIL
@@ -138,7 +138,7 @@ endif
 ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_android64
 TARGET = $(TARGETDIR)/libPK-ImporterLib_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/android64/Retail/PK-ImporterLib
 DEFINES += -DNDEBUG -DPK_RETAIL
@@ -267,70 +267,70 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/imp_precompiled.o: ../../../ExternalLibs/pk_importerlib/src/precompiled/imp_precompiled.cpp
+$(OBJDIR)/imp_precompiled.o: ../../ExternalLibs/pk_importerlib/src/precompiled/imp_precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_ir_editor_effect.o: ../../../ExternalLibs/pk_importerlib/src/IR/Editor/imp_ir_editor_effect.cpp
+$(OBJDIR)/imp_ir_editor_effect.o: ../../ExternalLibs/pk_importerlib/src/IR/Editor/imp_ir_editor_effect.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Core.o: ../../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Core.cpp
+$(OBJDIR)/Core.o: ../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Core.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Events.o: ../../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Events.cpp
+$(OBJDIR)/Events.o: ../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Events.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/Legacy.o: ../../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Legacy.cpp
+$(OBJDIR)/Legacy.o: ../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Legacy.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_script_tokenizer.o: ../../../ExternalLibs/pk_importerlib/src/IR/Utils/imp_script_tokenizer.cpp
+$(OBJDIR)/imp_script_tokenizer.o: ../../ExternalLibs/pk_importerlib/src/IR/Utils/imp_script_tokenizer.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_ir_particle_effect.o: ../../../ExternalLibs/pk_importerlib/src/IR/imp_ir_particle_effect.cpp
+$(OBJDIR)/imp_ir_particle_effect.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_particle_effect.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_ir_project_settings.o: ../../../ExternalLibs/pk_importerlib/src/IR/imp_ir_project_settings.cpp
+$(OBJDIR)/imp_ir_project_settings.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_project_settings.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_ir_renderers.o: ../../../ExternalLibs/pk_importerlib/src/IR/imp_ir_renderers.cpp
+$(OBJDIR)/imp_ir_renderers.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_renderers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_ir_samplers.o: ../../../ExternalLibs/pk_importerlib/src/IR/imp_ir_samplers.cpp
+$(OBJDIR)/imp_ir_samplers.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_samplers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_EditorParticle_Data.o: ../../../ExternalLibs/pk_importerlib/src/v1/Editor/imp_v1_EditorParticle_Data.cpp
+$(OBJDIR)/imp_v1_EditorParticle_Data.o: ../../ExternalLibs/pk_importerlib/src/v1/Editor/imp_v1_EditorParticle_Data.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_dynamic_field_declarator.o: ../../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_dynamic_field_declarator.cpp
+$(OBJDIR)/imp_v1_dynamic_field_declarator.o: ../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_dynamic_field_declarator.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_scripts_utils.o: ../../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_scripts_utils.cpp
+$(OBJDIR)/imp_v1_scripts_utils.o: ../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_scripts_utils.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_templates.o: ../../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_templates.cpp
+$(OBJDIR)/imp_v1_templates.o: ../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_templates.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_actionfactory.o: ../../../ExternalLibs/pk_importerlib/src/v1/imp_v1_actionfactory.cpp
+$(OBJDIR)/imp_v1_actionfactory.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_actionfactory.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_descriptor.o: ../../../ExternalLibs/pk_importerlib/src/v1/imp_v1_descriptor.cpp
+$(OBJDIR)/imp_v1_descriptor.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_descriptor.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_evolvers.o: ../../../ExternalLibs/pk_importerlib/src/v1/imp_v1_evolvers.cpp
+$(OBJDIR)/imp_v1_evolvers.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_evolvers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_particle_effect.o: ../../../ExternalLibs/pk_importerlib/src/v1/imp_v1_particle_effect.cpp
+$(OBJDIR)/imp_v1_particle_effect.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_particle_effect.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_projectsettings.o: ../../../ExternalLibs/pk_importerlib/src/v1/imp_v1_projectsettings.cpp
+$(OBJDIR)/imp_v1_projectsettings.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_projectsettings.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_renderers.o: ../../../ExternalLibs/pk_importerlib/src/v1/imp_v1_renderers.cpp
+$(OBJDIR)/imp_v1_renderers.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_renderers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/imp_v1_samplers.o: ../../../ExternalLibs/pk_importerlib/src/v1/imp_v1_samplers.cpp
+$(OBJDIR)/imp_v1_samplers.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_samplers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/tinyxml2.o: ../../../ExternalLibs/pk_importerlib/src/xmlparser/tinyxml2/tinyxml2.cpp
+$(OBJDIR)/tinyxml2.o: ../../ExternalLibs/pk_importerlib/src/xmlparser/tinyxml2/tinyxml2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

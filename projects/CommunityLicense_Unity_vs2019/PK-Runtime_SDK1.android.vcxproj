@@ -146,42 +146,42 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Debug\PK-Runtime_SDK1.android\</IntDir>
     <TargetName>libPK-Runtime_d</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Debug\PK-Runtime_SDK1.android\</IntDir>
     <TargetName>libPK-Runtime_d</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Release\PK-Runtime_SDK1.android\</IntDir>
     <TargetName>libPK-Runtime_r</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Release\PK-Runtime_SDK1.android\</IntDir>
     <TargetName>libPK-Runtime_r</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Retail\PK-Runtime_SDK1.android\</IntDir>
     <TargetName>libPK-Runtime_s</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Retail\PK-Runtime_SDK1.android\</IntDir>
     <TargetName>libPK-Runtime_s</TargetName>
     <TargetExt>.a</TargetExt>
@@ -193,7 +193,7 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_maths\src;..\..\..\ExternalLibs\Runtime\pk_maths;..\..\..\ExternalLibs\Runtime\pk_toolkit;..\..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\..\ExternalLibs\Runtime\pk_kernel;..\..\..\ExternalLibs\Runtime\pk_imaging;..\..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_geometrics;..\..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android\Debug\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android\Debug\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -219,7 +219,7 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_maths\src;..\..\..\ExternalLibs\Runtime\pk_maths;..\..\..\ExternalLibs\Runtime\pk_toolkit;..\..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\..\ExternalLibs\Runtime\pk_kernel;..\..\..\ExternalLibs\Runtime\pk_imaging;..\..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_geometrics;..\..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android64\Debug\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android64\Debug\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -244,7 +244,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_maths\src;..\..\..\ExternalLibs\Runtime\pk_maths;..\..\..\ExternalLibs\Runtime\pk_toolkit;..\..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\..\ExternalLibs\Runtime\pk_kernel;..\..\..\ExternalLibs\Runtime\pk_imaging;..\..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_geometrics;..\..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android\Release\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android\Release\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -270,7 +270,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_maths\src;..\..\..\ExternalLibs\Runtime\pk_maths;..\..\..\ExternalLibs\Runtime\pk_toolkit;..\..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\..\ExternalLibs\Runtime\pk_kernel;..\..\..\ExternalLibs\Runtime\pk_imaging;..\..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_geometrics;..\..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android64\Release\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android64\Release\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -296,7 +296,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_maths\src;..\..\..\ExternalLibs\Runtime\pk_maths;..\..\..\ExternalLibs\Runtime\pk_toolkit;..\..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\..\ExternalLibs\Runtime\pk_kernel;..\..\..\ExternalLibs\Runtime\pk_imaging;..\..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_geometrics;..\..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android\Retail\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android\Retail\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -322,7 +322,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_maths\src;..\..\..\ExternalLibs\Runtime\pk_maths;..\..\..\ExternalLibs\Runtime\pk_toolkit;..\..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\..\ExternalLibs\Runtime\pk_kernel;..\..\..\ExternalLibs\Runtime\pk_imaging;..\..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\..\ExternalLibs\Runtime\pk_geometrics;..\..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android64\Retail\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\CommunityLicense_Unity\VC142\android64\Retail\PK-Runtime_SDK1.android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>

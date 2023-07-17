@@ -146,42 +146,42 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Debug\PK-Discretizers_SDK1.android\</IntDir>
     <TargetName>libPK-Discretizers_d</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Debug\PK-Discretizers_SDK1.android\</IntDir>
     <TargetName>libPK-Discretizers_d</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Release\PK-Discretizers_SDK1.android\</IntDir>
     <TargetName>libPK-Discretizers_r</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Release\PK-Discretizers_SDK1.android\</IntDir>
     <TargetName>libPK-Discretizers_r</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Retail\PK-Discretizers_SDK1.android\</IntDir>
     <TargetName>libPK-Discretizers_s</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Retail\PK-Discretizers_SDK1.android\</IntDir>
     <TargetName>libPK-Discretizers_s</TargetName>
     <TargetExt>.a</TargetExt>
@@ -190,11 +190,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -217,11 +217,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -244,10 +244,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -271,10 +271,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -298,10 +298,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -325,10 +325,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_discretizers/dc_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_discretizers\src;..\..\ExternalLibs\Runtime\pk_discretizers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -350,7 +350,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_discretizers\include\dc_discretizers.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_discretizers\include\dc_discretizers.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />

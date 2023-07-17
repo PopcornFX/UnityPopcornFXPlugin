@@ -146,42 +146,42 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Debug\PK-RHI_SDK1.android\</IntDir>
     <TargetName>libPK-RHI_d</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Debug\PK-RHI_SDK1.android\</IntDir>
     <TargetName>libPK-RHI_d</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Release\PK-RHI_SDK1.android\</IntDir>
     <TargetName>libPK-RHI_r</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Release\PK-RHI_SDK1.android\</IntDir>
     <TargetName>libPK-RHI_r</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android\Retail\PK-RHI_SDK1.android\</IntDir>
     <TargetName>libPK-RHI_s</TargetName>
     <TargetExt>.a</TargetExt>
     <UseMultiToolTask>true</UseMultiToolTask>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\android64\Retail\PK-RHI_SDK1.android\</IntDir>
     <TargetName>libPK-RHI_s</TargetName>
     <TargetExt>.a</TargetExt>
@@ -190,11 +190,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -216,11 +216,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -242,10 +242,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -268,10 +268,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -294,10 +294,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -320,10 +320,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>../../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -510,7 +510,7 @@
     <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ExternalLibs\GL\src\glew.c">
+    <ClCompile Include="..\..\ExternalLibs\GL\src\glew.c">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderCompileAs></PrecompiledHeaderCompileAs>
       <PrecompiledHeaderFile></PrecompiledHeaderFile>

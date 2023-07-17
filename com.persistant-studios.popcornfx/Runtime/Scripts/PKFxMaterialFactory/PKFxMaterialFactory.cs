@@ -100,8 +100,7 @@ namespace PopcornFX
 
 			if (binding == null)
 			{
-				if (logError)
-					Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName + "in effect: " + asset.name);
+				Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName + "in effect: " + asset.name);
 				return null;
 			}
 

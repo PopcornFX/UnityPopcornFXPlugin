@@ -147,7 +147,7 @@
       <PrecompiledHeaderFile>../../Native/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=0;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=1;PK_BUILD_WITH_GLES3_SUPPORT=1;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=0;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PK_UNITY_EDITOR=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <OmitFramePointers>false</OmitFramePointers>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -159,7 +159,7 @@
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -169,7 +169,7 @@
       <PrecompiledHeaderFile>../../Native/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=0;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=1;PK_BUILD_WITH_GLES3_SUPPORT=1;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=0;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PK_UNITY_EDITOR=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <OmitFramePointers>false</OmitFramePointers>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -181,7 +181,7 @@
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android64;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -191,7 +191,7 @@
       <PrecompiledHeaderFile>../../Native/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=0;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=1;PK_BUILD_WITH_GLES3_SUPPORT=1;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=0;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PK_UNITY_EDITOR=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -209,7 +209,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -219,7 +219,7 @@
       <PrecompiledHeaderFile>../../Native/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=0;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=1;PK_BUILD_WITH_GLES3_SUPPORT=1;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=0;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PK_UNITY_EDITOR=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -237,7 +237,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\gmake_android64;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -279,27 +279,27 @@
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityRenderingExtensions.h" />
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityShaderCompilerAccess.h" />
     <ClInclude Include="..\..\Native\precompiled\precompiled.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxRendererSubView.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.cpp" />

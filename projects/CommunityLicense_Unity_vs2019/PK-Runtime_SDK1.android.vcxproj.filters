@@ -126,853 +126,853 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hb_init.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hb_init.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_config.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_config_dump.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_context.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_context.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_details.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_details.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_file.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_file.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_handler.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_handler.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_helpers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_helpers.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_internals.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_internals.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_object.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_object.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_serializer.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_serializer.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_serializer_binary.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_serializer_binary.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_serializer_text.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_serializer_text.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_stats.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_base_object\include\hbo_stats.h">
       <Filter>BaseObject\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ast.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ast.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_backend.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_backend.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_backend_debug.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_backend_debug.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_binders.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_binders.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_binders.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_binders.inl">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_cache.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_cache.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_compiler.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_compiler.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_config.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_config_dump.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_helpers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_helpers.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_init.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_init.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_details.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_details.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_details.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_details.inl">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_ranges.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_ranges.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_ranges.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_ir_ranges.inl">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_messages.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_messages.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_native_invoker.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_native_invoker.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_nodes.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_nodes.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_compiler\include\cp_parser.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_compiler\include\cp_parser.h">
       <Filter>Compiler\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config_dump.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_init.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_init.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_random.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_random.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers_curve.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers_curve.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers_low_discrepancy.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers_low_discrepancy.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_transforms_helper.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_transforms_helper.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_collidable_object.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_collidable_object.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_colliders.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_colliders.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_colliders.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_colliders.inl">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_config.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_config_dump.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_coordinate_frame.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_coordinate_frame.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_init.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_init.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_matrix_tools.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_matrix_tools.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_matrix_tools.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_matrix_tools.inl">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh.inl">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_deformers_morph.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_deformers_morph.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_deformers_skin.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_deformers_skin.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_inspector.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_inspector.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_kdtree.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_kdtree.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_plugins.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_plugins.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_projection.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_projection.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_projection_accel.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_projection_accel.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_projection_accel.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_projection_accel.inl">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_resource.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_resource.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_resource_handler.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_resource_handler.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_sampler.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_sampler.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_sampler_accel.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_sampler_accel.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_sampler_accel.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_sampler_accel.inl">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_tangent_basis.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_tangent_basis.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_triangle_sorter.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_triangle_sorter.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_triangle_sorter_parallel.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_triangle_sorter_parallel.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_utils.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_utils.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_vertex_declarations.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_mesh_vertex_declarations.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_1d.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_1d.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_1d_sampling.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_1d_sampling.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_1d_sampling.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_1d_sampling.inl">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_2d.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_probability_function_2d.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query_bruteforce.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query_bruteforce.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query_hash.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query_hash.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query_hash.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_proximity_query_hash.inl">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_rectangle_list.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_rectangle_list.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_shapes.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_shapes.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_skeleton.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_geometrics\include\ge_skeleton.h">
       <Filter>Geometrics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_codecs.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_codecs.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_color.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_color.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_compression.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_compression.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_config.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_config_dump.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_downsampling.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_downsampling.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_image.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_image.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_init.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_init.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_memoryviews.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_memoryviews.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_memoryviews.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_memoryviews.inl">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_resource.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_resource.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_imaging\include\im_samplers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_samplers.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_assert_internals.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_assert_internals.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_base_types.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_base_types.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_binary_search.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_binary_search.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_binary_search.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_binary_search.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_bitstream.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_bitstream.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_bitstream.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_bitstream.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer_base64.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer_base64.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer_parsing_utils.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_buffer_parsing_utils.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_call_context.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_call_context.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_callbacks.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_callbacks.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_callstack.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_callstack.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_caps.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_caps.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_caps_cpu.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_caps_cpu.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_caps_mem.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_caps_mem.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_checksum.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_checksum.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_compression.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_compression.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_chunked.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_chunked.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_chunked.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_chunked.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_circular.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_circular.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_circular.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_circular.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_recycled.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_recycled.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_recycled.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_recycled.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_slot.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_slot.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_slot.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_slot.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_storage.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_array_storage.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_hash.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_hash.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_internals.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_internals.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_list.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_list.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_lockless.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_lockless.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_onstack.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_onstack.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_onstack.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_onstack.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_static.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_static.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_decorated_pointer.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_decorated_pointer.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_delegates.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_delegates.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_engine_version.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_engine_version.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_controller.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_controller.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_directory_walker.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_directory_walker.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_stats.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_stats.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_watcher.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file_watcher.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_hash.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_hash.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_hash_static.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_hash_static.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_init.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_init.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_iterators.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_iterators.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_listeners.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_listeners.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_listeners_file.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_listeners_file.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_loggers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_loggers.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_unique.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_log_unique.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_basics.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_basics.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_debug.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_debug.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_stats.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_stats.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_utils.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_utils.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_virtual.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_virtual.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_memoryviews.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_memoryviews.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_memoryviews_utils.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_memoryviews_utils.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_messages.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_messages.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_parallel_sort.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_parallel_sort.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_performance_monitor.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_performance_monitor.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_plugins.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_plugins.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_d3d.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_d3d.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_details.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_details.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_hazards.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_hazards.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_instrumentation.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_profiler_instrumentation.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_ptrlike.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_ptrlike.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_refcounted_buffer.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_refcounted_buffer.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_refptr.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_refptr.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_resources.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_resources.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_resources.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_resources.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_scheduler.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_scheduler.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_scoped_timer_cb.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_scoped_timer_cb.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_scopedptr.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_scopedptr.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_select.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_select.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_sort.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_sort.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_static_config_flags.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_static_config_flags.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_streams.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_streams.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_streams_memory.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_streams_memory.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_streams_memory.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_streams_memory.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_id.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_id.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_localized.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_localized.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_semidynamic.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_semidynamic.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_static.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_static.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_static.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_static.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_unicode.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_string_unicode.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool_default.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool_default.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool_details.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool_details.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool_waitobjects.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_thread_pool_waitobjects.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_atomic.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_atomic.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_basics.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_basics.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_job_pool.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_job_pool.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_rwlock.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_rwlock.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_stats.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_threads_stats.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timed_data_collection.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timed_data_collection.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timed_data_collection.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timed_data_collection.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timers.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timers.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_timers.inl">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_units.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_units.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\kr_workingbuffer.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_workingbuffer.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\pk_kernel_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\pk_kernel_config.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\pk_kernel_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\pk_kernel_config_dump.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\pk_license.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\pk_license.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\android\kr_callstack.impl.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\android\kr_callstack.impl.h">
       <Filter>Kernel\Headers\platforms\android</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\android\kr_timers.impl.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\android\kr_timers.impl.h">
       <Filter>Kernel\Headers\platforms\android</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\apple\kr_timers.impl.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\platforms\apple\kr_timers.impl.h">
       <Filter>Kernel\Headers\platforms\apple</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_config.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_config_dump.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_divisor.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_divisor.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_fp16.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_fp16.h">
       <Filter>Maths\Headers\CoreTypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_interpolable.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_interpolable.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_interpolators.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_interpolators.h">
       <Filter>Maths\Headers\Interpolators</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_interpolators.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_interpolators.inl">
       <Filter>Maths\Headers\Interpolators</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_matrix.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_matrix.h">
       <Filter>Maths\Headers\CoreTypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_matrix.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_matrix.inl">
       <Filter>Maths\Headers\CoreTypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_morton.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_morton.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_morton.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_morton.inl">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_noise.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_noise.h">
       <Filter>Maths\Headers\Noise</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_noise.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_noise.inl">
       <Filter>Maths\Headers\Noise</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_primitives.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_primitives.h">
       <Filter>Maths\Headers\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_primitives_frustum.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_primitives_frustum.h">
       <Filter>Maths\Headers\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_primitives_plane.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_primitives_plane.h">
       <Filter>Maths\Headers\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_quaternion.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_quaternion.h">
       <Filter>Maths\Headers\CoreTypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_quaternion.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_quaternion.inl">
       <Filter>Maths\Headers\CoreTypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random.h">
       <Filter>Maths\Headers\Random</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random.inl">
       <Filter>Maths\Headers\Random</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_details.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_details.h">
       <Filter>Maths\Headers\Random</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_lcg.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_lcg.h">
       <Filter>Maths\Headers\Random</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_lcg.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_lcg.inl">
       <Filter>Maths\Headers\Random</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_mt19937.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_random_mt19937.h">
       <Filter>Maths\Headers\Random</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges.inl">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges_arithmetic.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges_arithmetic.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges_arithmetic.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_ranges_arithmetic.inl">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_resonant_filter.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_resonant_filter.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_root_cube.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_root_cube.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_defs.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_defs.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_matrix.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_matrix.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_matrix.interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_matrix.interface.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_quaternion.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_quaternion.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_quaternion.interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_quaternion.interface.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_scalar.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_scalar.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_scalar.interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_scalar.interface.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_streams.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_streams.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_streams.interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_streams.interface.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_unroll.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_unroll.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_vector.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_vector.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_vector.interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_vector.interface.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_vector8.interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_simd_vector8.interface.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_topology_utils.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_topology_utils.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_transforms.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_transforms.h">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_transforms.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_transforms.inl">
       <Filter>Maths\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_type_converters.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_type_converters.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_type_converters.interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_type_converters.interface.h">
       <Filter>Maths\Headers\SIMD</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_vector.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_vector.h">
       <Filter>Maths\Headers\CoreTypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_vector.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_maths_vector.inl">
       <Filter>Maths\Headers\CoreTypes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools.h">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_float.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_float.h">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_float.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_float.inl">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_int.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_int.h">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_int.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_tools_int.inl">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_traits.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_traits.h">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_traits_float.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_traits_float.h">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_traits_int.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_traits_int.h">
       <Filter>Maths\Headers\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd.h">
       <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_converters.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_converters.h">
       <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_defs.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_defs.h">
       <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_matrix.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_matrix.h">
       <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_scalar.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_scalar.h">
       <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_streams.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_streams.h">
       <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_vector.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_vector.h">
       <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_base.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_base.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_billboard.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_billboard.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_decal.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_decal.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_enums.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_enums.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_fields.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_fields.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_properties.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_properties.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_light.h">
@@ -981,247 +981,247 @@
     <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_material.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_mesh.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_mesh.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_ribbon.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_ribbon.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_sound.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_sound.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_triangle.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_triangle.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu.h">
       <Filter>Particles\Headers\Samplers\CPU</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\GPU\sampler_gpu.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\GPU\sampler_gpu.h">
       <Filter>Particles\Headers\Samplers\GPU</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Storage\Auto\storage_spatial_auto.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\Auto\storage_spatial_auto.h">
       <Filter>Particles\Headers\Storage\Auto</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram.h">
       <Filter>Particles\Headers\Storage\MainMemory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_allocator.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_allocator.h">
       <Filter>Particles\Headers\Storage\MainMemory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_stream.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_stream.h">
       <Filter>Particles\Headers\Storage\MainMemory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_stream.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_ram_stream.inl">
       <Filter>Particles\Headers\Storage\MainMemory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_spatial_ram.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\MainMemory\storage_spatial_ram.h">
       <Filter>Particles\Headers\Storage\MainMemory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\Auto\updater_auto.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\Auto\updater_auto.h">
       <Filter>Particles\Headers\Updaters\Auto</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\CPU\updater_cpu.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\CPU\updater_cpu.h">
       <Filter>Particles\Headers\Updaters\CPU</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\GPU\updater_gpu.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\GPU\updater_gpu.h">
       <Filter>Particles\Headers\Updaters\GPU</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\GPU\updater_gpu.inl">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Updaters\GPU\updater_gpu.inl">
       <Filter>Particles\Headers\Updaters\GPU</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_annotation.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_annotation.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_attributes.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_attributes.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_bounds.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_bounds.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_compiler_metadata.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_compiler_metadata.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_config.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_config.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_config_dump.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_config_dump.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_declaration.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_declaration.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor_cache.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor_cache.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor_source.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor_source.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor_spatial.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_descriptor_spatial.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_effect.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_effect.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_effect.impl.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_effect.impl.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_effect_compiler.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_effect_compiler.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_evaluators.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_evaluators.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_event_map.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_event_map.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_event_map_cache.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_event_map_cache.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_font_metrics.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_font_metrics.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_font_metrics_resource.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_font_metrics_resource.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_init.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_init.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_lod.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_lod.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_mediums.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_mediums.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_frontend.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_frontend.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_frontend_renderers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_frontend_renderers.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_event.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_event.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_math.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_math.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_meta.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_meta.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_render.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_render.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_spatial.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_spatial.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_types.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_types.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_xform.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_nodes_xform.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_timeline.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_nodegraph_timeline.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_object_remapper.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_object_remapper.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_project_settings.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_project_settings.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_resources.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_resources.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_animtrack.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_animtrack.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_audio.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_audio.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_classes.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_classes.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_curve.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_curve.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_event_stream.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_event_stream.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_shape.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_shape.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_text.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_text.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_vectorfield.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_vectorfield.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_scene.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_scene.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_scripts_gpu.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_scripts_gpu.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_simcache.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_simcache.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_simulation_interface.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_simulation_interface.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_stats.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_stats.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_storage.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_storage.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_stream.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_stream.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_stream_to_render.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_stream_to_render.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_system.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_system.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_types.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_types.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_updater.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_updater.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_vectorfield.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_vectorfield.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\ps_vectorfield_resource.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_vectorfield_resource.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit.h">
       <Filter>Toolkit\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_error.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_error.h">
       <Filter>Toolkit\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_modules.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_modules.h">
       <Filter>Toolkit\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_process.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_process.h">
       <Filter>Toolkit\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_version.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_toolkit\include\pk_toolkit_version.h">
       <Filter>Toolkit\Headers</Filter>
     </ClInclude>
   </ItemGroup>

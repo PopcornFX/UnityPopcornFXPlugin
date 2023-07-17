@@ -18,10 +18,10 @@ endif
 # Configurations
 # #############################################
 
-PCH = ../../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h
+PCH = ../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_particles_toolbox -I../../../ExternalLibs/Runtime/pk_particles_toolbox/src/include
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_particles_toolbox -I../../ExternalLibs/Runtime/pk_particles_toolbox/src/include
 FORCE_INCLUDE += -include pk_compiler_warnings.h
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -49,7 +49,7 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
 TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Debug/PK-ParticlesToolbox_SDK1
 DEFINES += -D_DEBUG
@@ -66,7 +66,7 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Debug/PK-ParticlesToolbox_SDK1
 DEFINES += -D_DEBUG
@@ -83,7 +83,7 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
 TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Release/PK-ParticlesToolbox_SDK1
 DEFINES += -DNDEBUG
@@ -100,7 +100,7 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Release/PK-ParticlesToolbox_SDK1
 DEFINES += -DNDEBUG
@@ -117,7 +117,7 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
 TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Retail/PK-ParticlesToolbox_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL
@@ -134,7 +134,7 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Retail/PK-ParticlesToolbox_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL

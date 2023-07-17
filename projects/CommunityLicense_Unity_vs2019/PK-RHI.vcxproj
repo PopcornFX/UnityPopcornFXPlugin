@@ -55,19 +55,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Debug\PK-RHI\</IntDir>
     <TargetName>PK-RHI_d</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Release\PK-RHI\</IntDir>
     <TargetName>PK-RHI_r</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Retail\PK-RHI\</IntDir>
     <TargetName>PK-RHI_s</TargetName>
     <TargetExt>.lib</TargetExt>
@@ -81,7 +81,7 @@
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -112,7 +112,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -144,7 +144,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -344,333 +344,333 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ApiManager.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ApiManager.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11CommandBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11CommandBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ComputeState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ComputeState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ConstantSampler.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ConstantSampler.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ConstantSet.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ConstantSet.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11FrameBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11FrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11GpuBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11GpuBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11PopcornEnumConversion.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11PopcornEnumConversion.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11QueryPool.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11QueryPool.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RHI.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RHI.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ReadBackTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ReadBackTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RenderPass.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RenderPass.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RenderState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RenderState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RenderTarget.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11RenderTarget.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ShaderModule.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ShaderModule.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ShaderProgram.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11ShaderProgram.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11Texture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\D3D11Texture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ApiManager.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ApiManager.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12CommandBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12CommandBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ComputeState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ComputeState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ConstantSampler.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ConstantSampler.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ConstantSet.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ConstantSet.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12DescriptorAllocator.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12DescriptorAllocator.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12Fence.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12Fence.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12FrameBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12FrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12GpuBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12GpuBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12PopcornEnumConversion.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12PopcornEnumConversion.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12QueryPool.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12QueryPool.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RHI.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RHI.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ReadBackTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ReadBackTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RenderPass.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RenderPass.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RenderState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RenderState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RenderTarget.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12RenderTarget.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ShaderModule.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ShaderModule.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ShaderProgram.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12ShaderProgram.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12Texture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\D3D12Texture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3DCommon\D3DCompileShader.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3DCommon\D3DCompileShader.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\D3DCommon\D3DPopcornEnumConversion.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3DCommon\D3DPopcornEnumConversion.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\EnumHelper.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\EnumHelper.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\PixelFormatFallbacks.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\PixelFormatFallbacks.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\RHIInit.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\RHIInit.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\ShaderConstantBindingGenerator.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\ShaderConstantBindingGenerator.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\Startup.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\Startup.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IFrameBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IFrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IGpuBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IGpuBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IReadBackTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IReadBackTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IRenderPass.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IRenderPass.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IRenderTarget.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IRenderTarget.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\SConstantSetLayout.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\SConstantSetLayout.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\SShaderBindings.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\SShaderBindings.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractCommandBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractCommandBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractConstantSet.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractConstantSet.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractFrameBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractFrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractGpuBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractGpuBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractRenderPass.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractRenderPass.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractRenderTarget.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractRenderTarget.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\abstracts\AbstractTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullApiManager.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullApiManager.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullCommandBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullCommandBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullConstantSampler.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullConstantSampler.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullConstantSet.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullConstantSet.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullFrameBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullFrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullGpuBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullGpuBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullReadBackTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullReadBackTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullRenderPass.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullRenderPass.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullRenderState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullRenderState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullRenderTarget.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullRenderTarget.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullShaderModule.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullShaderModule.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullShaderProgram.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullShaderProgram.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\NullTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLApiManager.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLApiManager.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLCommandBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLCommandBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLComputeState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLComputeState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLConstantSampler.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLConstantSampler.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLConstantSet.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLConstantSet.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLFrameBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLFrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLGpuBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLGpuBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLPopcornEnumConversion.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLPopcornEnumConversion.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLQueryPool.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLQueryPool.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRHI.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRHI.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLReadBackTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLReadBackTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRenderPass.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRenderPass.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRenderState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRenderState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRenderTarget.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLRenderTarget.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLShaderModule.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLShaderModule.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLShaderProgram.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLShaderProgram.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\OpenGLTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled\rhi_precompiled.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled\rhi_precompiled.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanApiManager.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanApiManager.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanCommandBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanCommandBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanComputeState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanComputeState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanConstantSampler.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanConstantSampler.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanConstantSet.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanConstantSet.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanFrameBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanFrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanGpuBuffer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanGpuBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanPopcornEnumConversion.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanPopcornEnumConversion.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanQueryPool.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanQueryPool.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRHI.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRHI.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanReadBackTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanReadBackTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRenderPass.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRenderPass.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRenderState.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRenderState.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRenderTarget.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanRenderTarget.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanShaderModule.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanShaderModule.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanShaderProgram.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanShaderProgram.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanTexture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\VulkanTexture.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\GL\src\glew.c">
+    <ClCompile Include="..\..\ExternalLibs\GL\src\glew.c">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <DisableSpecificWarnings>4668;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>

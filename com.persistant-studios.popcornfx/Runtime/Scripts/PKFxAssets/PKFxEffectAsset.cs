@@ -390,11 +390,11 @@ namespace PopcornFX
 			if (curMat != null && curMat.m_CustomMaterial != null)
 			{
 				curMat.SetMaterialKeywords(batch, curMat.m_CustomMaterial);
-				curMat.BindMaterialProperties(batch, curMat.m_CustomMaterial, this);
+				curMat.BindMaterialProperties(batch, curMat.m_CustomMaterial, this, true);
 				mat = curMat.m_CustomMaterial;
 			}
 			else
-				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this);
+				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false);
 
 			while (idx >= m_Materials.Count)
 				m_Materials.Add(null);
@@ -420,11 +420,11 @@ namespace PopcornFX
 			if (curMat != null && curMat.m_CustomMaterial != null)
 			{
 				curMat.SetMaterialKeywords(batch, curMat.m_CustomMaterial);
-				curMat.BindMaterialProperties(batch, curMat.m_CustomMaterial, this);
+				curMat.BindMaterialProperties(batch, curMat.m_CustomMaterial, this, true);
 				mat = curMat.m_CustomMaterial;
 			}
 			else
-				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this);
+				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false);
 
 			if (mat == null)
 			{

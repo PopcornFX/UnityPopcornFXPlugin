@@ -87,7 +87,7 @@ namespace PopcornFX
 		public string 			m_AtlasCountPropertyName = "_AtlasCount";
 		public string 			m_AtlasIdPropertyName = "_AtlasId";
 
-		public void BindMaterialProperties(SBatchDesc batchDesc, Material material, PKFxEffectAsset asset)
+		public void BindMaterialProperties(SBatchDesc batchDesc, Material material, PKFxEffectAsset asset, bool logError = true)
 		{
 			// Set the blend mode:
 			int srcMode = 0;
@@ -151,36 +151,60 @@ namespace PopcornFX
 				!string.IsNullOrEmpty(m_DistortionMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_DiffuseMap))
 			{
 				Texture distortionMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_DiffuseMap, true, wrapMode);
+				if (logError && distortionMap == null)
+				{
+					Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_DiffuseMap, asset.AssetVirtualPath));
+				}
 				material.SetTexture(m_DistortionMapPropertyName, distortionMap);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) &&
 				!string.IsNullOrEmpty(m_DiffuseMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_DiffuseMap))
 			{
 				Texture diffuseMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_DiffuseMap, false, wrapMode);
+				if (logError && diffuseMap == null)
+				{
+					Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_DiffuseMap, asset.AssetVirtualPath));
+				}
 				material.SetTexture(m_DiffuseMapPropertyName, diffuseMap);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive) &&
 				!string.IsNullOrEmpty(m_EmissiveMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_EmissiveMap))
 			{
 				Texture emissiveMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_EmissiveMap, false, wrapMode);
+				if (logError && emissiveMap == null)
+				{
+					Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_EmissiveMap, asset.AssetVirtualPath));
+				}
 				material.SetTexture(m_EmissiveMapPropertyName, emissiveMap);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_EmissiveRamp) &&
 				!string.IsNullOrEmpty(m_EmissiveRampMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_EmissiveRampMap))
 			{
 				Texture emissiveRampMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_EmissiveRampMap, false, TextureWrapMode.Clamp);
+				if (logError && emissiveRampMap == null)
+				{
+					Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_EmissiveRampMap, asset.AssetVirtualPath));
+				}
 				material.SetTexture(m_EmissiveRampMapPropertyName, emissiveRampMap);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) &&
 				!string.IsNullOrEmpty(m_AlphaRemapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_AlphaRemap))
 			{
 				Texture alphaRemap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_AlphaRemap, true, TextureWrapMode.Clamp);
+				if (logError && alphaRemap == null)
+				{
+					Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_AlphaRemap, asset.AssetVirtualPath));
+				}
 				material.SetTexture(m_AlphaRemapPropertyName, alphaRemap);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp) &&
 				!string.IsNullOrEmpty(m_DiffuseRampMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_DiffuseRampMap))
 			{
 				Texture diffuseRampMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_DiffuseRampMap, false, TextureWrapMode.Clamp);
+				if (logError && diffuseRampMap == null)
+				{
+					Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_DiffuseRampMap, asset.AssetVirtualPath));
+				}
 				material.SetTexture(m_DiffuseRampMapPropertyName, diffuseRampMap);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Soft) &&
@@ -193,11 +217,19 @@ namespace PopcornFX
 				if (!string.IsNullOrEmpty(m_NormalMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_LitFeature.m_NormalMap))
 				{
 					Texture normalMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_LitFeature.m_NormalMap, true, wrapMode);
+					if (logError && normalMap == null)
+					{
+						Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_LitFeature.m_NormalMap, asset.AssetVirtualPath));
+					}
 					material.SetTexture(m_NormalMapPropertyName, normalMap);
 				}
 				if (!string.IsNullOrEmpty(m_RoughMetalMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_LitFeature.m_RoughMetalMap))
 				{
 					Texture roughMetalMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_LitFeature.m_RoughMetalMap, true, wrapMode);
+					if (logError && roughMetalMap == null)
+					{
+						Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_LitFeature.m_RoughMetalMap, asset.AssetVirtualPath));
+					}
 					material.SetTexture(m_RoughMetalMapPropertyName, roughMetalMap);
 				}
 				if (!string.IsNullOrEmpty(m_RoughnessPropertyName))
@@ -238,21 +270,37 @@ namespace PopcornFX
 					if (!string.IsNullOrEmpty(m_VATPositionMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_VatFeature.m_PositionMap))
 					{
 						Texture positionMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_VatFeature.m_PositionMap, false, TextureWrapMode.Clamp);
+						if (logError && positionMap == null)
+						{
+							Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_VatFeature.m_PositionMap, asset.AssetVirtualPath));
+						}
 						material.SetTexture(m_VATPositionMapPropertyName, positionMap);
 					}
 					if (!string.IsNullOrEmpty(m_VATNormalMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_VatFeature.m_NormalMap))
 					{
 						Texture normalMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_VatFeature.m_NormalMap, false, TextureWrapMode.Clamp);
+						if (logError && normalMap == null)
+						{
+							Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_VatFeature.m_NormalMap, asset.AssetVirtualPath));
+						}
 						material.SetTexture(m_VATNormalMapPropertyName, normalMap);
 					}
 					if (!string.IsNullOrEmpty(m_VATRotationMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_VatFeature.m_RotationMap))
 					{
 						Texture rotationMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_VatFeature.m_RotationMap, false, TextureWrapMode.Clamp);
+						if (logError && rotationMap == null)
+						{
+							Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_VatFeature.m_RotationMap, asset.AssetVirtualPath));
+						}
 						material.SetTexture(m_VATRotationMapPropertyName, rotationMap);
 					}
 					if (!string.IsNullOrEmpty(m_VATColorMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_VatFeature.m_ColorMap))
 					{
 						Texture colorMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_VatFeature.m_ColorMap, false, TextureWrapMode.Clamp);
+						if (logError && colorMap == null)
+						{
+							Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_VatFeature.m_ColorMap, asset.AssetVirtualPath));
+						}
 						material.SetTexture(m_VATColorMapPropertyName, colorMap);
 					}
 
@@ -290,6 +338,10 @@ namespace PopcornFX
 					if (!string.IsNullOrEmpty(m_SkeletalAnimTexturePropertyName))
 					{
 						Texture animMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_SkeletalAnimFeature.m_AnimTextureMap, true, TextureWrapMode.Clamp);
+						if (logError && animMap == null)
+						{
+							Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_SkeletalAnimFeature.m_AnimTextureMap, asset.AssetVirtualPath));
+						}
 						material.SetTexture(m_SkeletalAnimTexturePropertyName, animMap);
 					}
 					if (!string.IsNullOrEmpty(m_SkeletalAnimTextureResolPropertyName))

@@ -769,7 +769,7 @@ namespace PopcornFX
 			SerializedProperty layersProp = tagsAndLayersManager.FindProperty("layers");
 
 			List<string> cameraLayerName = new List<string>(new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" });
-			string distortionLayerName = "PopcornFX_Disto";
+			string distortionLayerName = PKFxManager.DistortionLayer;
 
 			PKFxSettings.Instance.m_PopcornLayerName = new string[cameraLayerName.Count() + 1];
 
@@ -802,8 +802,9 @@ namespace PopcornFX
 				cameraLayerName.Add(distortionLayerName);
 			cameraLayerName = cameraLayerName.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
 
-			if (cameraLayerName.Count == 0 && distortionLayerName == "")
+			if (cameraLayerName.Count == 0)
 			{
+				// Nothing to add
 				tagsAndLayersManager.ApplyModifiedProperties();
 				return;
 			}

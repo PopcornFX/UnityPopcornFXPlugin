@@ -89,7 +89,7 @@ namespace PopcornFX
 
 		public static void NotifyAssetPostProcess(string path)
 		{
-			int key = path.GetHashCode();
+			int key = path.ToLowerInvariant().GetHashCode();
 			if (DependenciesLoading.ContainsKey(key))
 			{
 				UnityEngine.Object obj = null;
@@ -340,7 +340,7 @@ namespace PopcornFX
 				Debug.LogWarning("[PopcornFX] FileUtil.ReplaceFile failed: " + e.Message);
 			}
 
-			int key = dstFullPath.GetHashCode();
+			int key = dstFullPath.ToLowerInvariant().GetHashCode();
 			if (!DependenciesLoading.ContainsKey(key))
 			{
 				DependenciesLoading.Add(key, new List<PKFxEffectAsset>());

@@ -514,7 +514,15 @@ namespace PopcornFX
 
 		private static void DisplayFeatureSetCategory(PKFxEditorCategory category)
 		{
-			PKFxSettings.EnableDistortion = EditorGUILayout.ToggleLeft("Enable distortion", PKFxSettings.EnableDistortion);
+			bool enableDistortion = EditorGUILayout.ToggleLeft("Enable distortion", PKFxSettings.EnableDistortion);
+			if (enableDistortion != PKFxSettings.EnableDistortion)
+			{
+				PKFxSettings.EnableDistortion = enableDistortion;
+				if (!PKFxSettings.ManualCameraLayer)
+				{
+					PKFxSettingsEditor._AddCameraLayersIFN(PKFxSettings.MaxCameraSupport, PKFxSettings.EnableDistortion);
+				}
+			}
 			PKFxSettings.EnableBlur = EditorGUILayout.ToggleLeft("Enable blur", PKFxSettings.EnableBlur);
 			if (PKFxSettings.EnableBlur)
 				PKFxSettings.BlurFactor = EditorGUILayout.Slider("Blur factor", PKFxSettings.BlurFactor, 0.0f, 1.0f);
@@ -868,6 +876,7 @@ namespace PopcornFX
 
 			PKFxSettings.SetInstance(instance);
 
+			PKFxManager.SetQualityLevelSettings();
 			_AddSortingLayerIFN("PopcornFX", newInstance);
 			_AddSortingLayerIFN("PopcornFXUI", newInstance);
 			_AddCameraLayersIFN(PKFxSettings.MaxCameraSupport, PKFxSettings.EnableDistortion);

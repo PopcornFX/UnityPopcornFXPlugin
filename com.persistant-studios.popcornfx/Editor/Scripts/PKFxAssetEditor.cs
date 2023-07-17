@@ -188,6 +188,8 @@ namespace PopcornFX
 
 			Texture2D[] colors = new Texture2D[] { MakeGUITexture(backgroundColor * 1.2f), MakeGUITexture(backgroundColor * 1.35f) };
 
+			//
+			int[]	usedRenderers = new int[rdrsListSize];
 			for (int q = 0; q < PKFxManager.QualitiesLevelDescription.Length; ++q) // Quality level counts
 			{
 				m_ShowQualities[q] = EditorGUILayout.Foldout(m_ShowQualities[q], PKFxManager.QualitiesLevelDescription[q]);
@@ -210,6 +212,7 @@ namespace PopcornFX
 						PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == renderers[i].m_UID && item.m_Quality == PKFxManager.QualitiesLevelDescription[q]);
 						if (index != null && index.m_Idx < mats.arraySize)
 						{
+							usedRenderers[i]++; //Flag renderers used in at least one quality level
 							SerializedProperty matProp = mats.GetArrayElementAtIndex(index.m_Idx);
 							if (matProp.objectReferenceValue == null)
 							{
@@ -323,6 +326,24 @@ namespace PopcornFX
 					EditorGUILayout.LabelField("No renderer for this Quality level.");
 
 			}
+
+			//Show renderers not presents in quality levels
+			bool showUnusedRendererWarning = false;
+			for (int i = 0; i < rdrsListSize; i++)
+			{
+				if (usedRenderers[i] == 0)
+					showUnusedRendererWarning = true;
+			}
+			if (showUnusedRendererWarning)
+			{
+				GUIStyle	warnStyle = new GUIStyle();
+				Texture2D	colorWarn = MakeGUITexture(new Color32(200, 56, 56, 255));
+
+				warnStyle.normal.background = colorWarn;
+				warnStyle.alignment = TextAnchor.MiddleCenter;
+				EditorGUILayout.LabelField("Warning: Asset contains at least one renderer defined for an absent quality settings.", warnStyle);
+			}
+				
 			EditorGUI.indentLevel--;
 
 			UnityEngine.Object[] data = AssetDatabase.LoadAllAssetsAtPath("Assets/" + PKFxSettings.UnityPackFxPath + "/" + asset.AssetVirtualPath + ".asset");

@@ -121,7 +121,7 @@ namespace PopcornFX
 				if (batchDesc.m_Type == ERendererType.Mesh)
 					material.enableInstancing = true;
 				binding.SetMaterialKeywords(batchDesc, material);
-				binding.BindMaterialProperties(batchDesc, material, asset);
+				binding.BindMaterialProperties(batchDesc, material, asset, logError);
 				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat");
 			}
 			else

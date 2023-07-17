@@ -350,22 +350,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_compile.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_debug_symbols_provider.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_effect_analysis.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_helpers.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_init.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_legacy_timeline.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_morph.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_skin.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_overdraw.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler_new.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_seek_interface.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_skeleton.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_skeleton_anim.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_trace.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_transforms.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_compile.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_debug_symbols_provider.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_effect_analysis.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_helpers.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_init.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_legacy_timeline.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_morph.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_skin.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_overdraw.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler_new.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_seek_interface.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_skeleton.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_skeleton_anim.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_trace.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_transforms.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />

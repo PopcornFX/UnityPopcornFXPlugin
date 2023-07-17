@@ -987,10 +987,10 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_feature_properties.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_light.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_light.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_material.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_material.h">
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_mesh.h">

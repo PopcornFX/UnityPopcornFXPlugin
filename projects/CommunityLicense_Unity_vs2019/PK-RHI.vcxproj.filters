@@ -327,7 +327,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SConstantSetLayout.h">
       <Filter>Headers\interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SIndirectArgs.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SIndirectArgs.h">
       <Filter>Headers\interfaces</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SRenderState.h">

@@ -23,7 +23,7 @@ TARGET = $(TARGETDIR)/libPK-UnityPlugin.a
 PCH = ../../Native/precompiled/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/Gl -I../../Native/Common/GLES -I../../../ExternalLibs/GL/include -I../../../ExternalLibs/Runtime/libs/zlib-1.2.8
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/Gl -I../../Native/Common/GLES -I../../ExternalLibs/GL/include -I../../ExternalLibs/Runtime/libs/zlib-1.2.8
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -52,11 +52,11 @@ DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lPK-ParticlesToolbox_d -lPK-Runtime_d
-ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
 define POSTBUILDCMDS
 	@echo Merging Runtime with Plugin
 	mkdir -p ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios
-	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios/libPK-UnityPlugin.a -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios $(TARGET) $(LIBS)
+	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios/libPK-UnityPlugin.a -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios $(TARGET) $(LIBS)
 endef
 
 else ifeq ($(config),debug_ios64)
@@ -74,11 +74,11 @@ DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lPK-ParticlesToolbox_d -lPK-Runtime_d
-ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
 define POSTBUILDCMDS
 	@echo Merging Runtime with Plugin
 	mkdir -p ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios64
-	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios64/libPK-UnityPlugin.a -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 $(TARGET) $(LIBS)
+	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios64/libPK-UnityPlugin.a -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 $(TARGET) $(LIBS)
 endef
 
 else ifeq ($(config),release_ios)
@@ -96,11 +96,11 @@ DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lPK-ParticlesToolbox_r -lPK-Runtime_r
-ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
 define POSTBUILDCMDS
 	@echo Merging Runtime with Plugin
 	mkdir -p ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios
-	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios/libPK-UnityPlugin.a -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios $(TARGET) $(LIBS)
+	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios/libPK-UnityPlugin.a -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios $(TARGET) $(LIBS)
 endef
 
 else ifeq ($(config),release_ios64)
@@ -118,11 +118,11 @@ DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -fobjc-arc -miphoneos-version-min=8.0 -fembed-bitcode
 LIBS += -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lPK-ParticlesToolbox_r -lPK-Runtime_r
-ALL_LDFLAGS += $(LDFLAGS) -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wl,-syslibroot `xcrun --sdk iphoneos --show-sdk-path` -miphoneos-version-min=8.0
 define POSTBUILDCMDS
 	@echo Merging Runtime with Plugin
 	mkdir -p ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios64
-	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios64/libPK-UnityPlugin.a -L../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 $(TARGET) $(LIBS)
+	xcrun --sdk iphoneos libtool -no_warning_for_no_symbols -o ../../com.persistant-studios.popcornfx/Runtime/Plugins/iOS/ios64/libPK-UnityPlugin.a -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64 $(TARGET) $(LIBS)
 endef
 
 #else

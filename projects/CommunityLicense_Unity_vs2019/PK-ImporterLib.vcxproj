@@ -55,19 +55,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Debug\PK-ImporterLib\</IntDir>
     <TargetName>PK-ImporterLib_d</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Release\PK-ImporterLib\</IntDir>
     <TargetName>PK-ImporterLib_r</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
-    <OutDir>..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
+    <OutDir>..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\CommunityLicense_Unity\VC142\x64\Retail\PK-ImporterLib\</IntDir>
     <TargetName>PK-ImporterLib_s</TargetName>
     <TargetExt>.lib</TargetExt>
@@ -80,7 +80,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\..\ExternalLibs\pk_importerlib\src;..\..\..\ExternalLibs\pk_importerlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\ExternalLibs\pk_importerlib\src;..\..\ExternalLibs\pk_importerlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -107,7 +107,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\..\ExternalLibs\pk_importerlib\src;..\..\..\ExternalLibs\pk_importerlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\ExternalLibs\pk_importerlib\src;..\..\ExternalLibs\pk_importerlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -140,7 +140,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\..\ExternalLibs\pk_importerlib\src;..\..\..\ExternalLibs\pk_importerlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\ExternalLibs\pk_importerlib\src;..\..\ExternalLibs\pk_importerlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -166,59 +166,59 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\IR\imp_ir_particle_effect.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\IR\imp_ir_project_settings.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\imp_precompiled_default.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\Editor\imp_v1_EditorParticle_Data.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\Utils\imp_v1_dynamic_field_declarator.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_actionfactory.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_context.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_descriptor.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_evolvers.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_fields.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_particle_effect.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_projectsettings.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_renderers.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_samplers.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\Editor\imp_ir_editor_effect.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Core.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Events.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Legacy.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\Utils\imp_ir_generate_helpers.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\Utils\imp_script_tokenizer.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_baseobject.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_renderers.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_samplers.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\precompiled\imp_precompiled.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_scripts_utils.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_templates.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\pk_importerlib\src\xmlparser\tinyxml2\tinyxml2.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\IR\imp_ir_particle_effect.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\IR\imp_ir_project_settings.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\imp_precompiled_default.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\Editor\imp_v1_EditorParticle_Data.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\Utils\imp_v1_dynamic_field_declarator.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_actionfactory.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_context.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_descriptor.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_evolvers.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_fields.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_particle_effect.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_projectsettings.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_renderers.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\include\v1\imp_v1_samplers.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\Editor\imp_ir_editor_effect.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Core.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Events.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Legacy.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\Utils\imp_ir_generate_helpers.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\Utils\imp_script_tokenizer.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_baseobject.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_renderers.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_samplers.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\precompiled\imp_precompiled.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_scripts_utils.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_templates.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_importerlib\src\xmlparser\tinyxml2\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\Editor\imp_ir_editor_effect.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Core.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Events.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Legacy.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\Utils\imp_script_tokenizer.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_particle_effect.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_project_settings.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_renderers.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_samplers.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\precompiled\imp_precompiled.cpp">
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\Editor\imp_ir_editor_effect.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Core.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Events.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\PopcornFXCore\Legacy.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\Utils\imp_script_tokenizer.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_particle_effect.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_project_settings.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_renderers.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\IR\imp_ir_samplers.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\precompiled\imp_precompiled.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\Editor\imp_v1_EditorParticle_Data.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_dynamic_field_declarator.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_scripts_utils.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_templates.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_actionfactory.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_descriptor.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_evolvers.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_particle_effect.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_projectsettings.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_renderers.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_samplers.cpp" />
-    <ClCompile Include="..\..\..\ExternalLibs\pk_importerlib\src\xmlparser\tinyxml2\tinyxml2.cpp">
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\Editor\imp_v1_EditorParticle_Data.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_dynamic_field_declarator.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_scripts_utils.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\Utils\imp_v1_templates.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_actionfactory.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_descriptor.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_evolvers.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_particle_effect.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_projectsettings.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_renderers.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\v1\imp_v1_samplers.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_importerlib\src\xmlparser\tinyxml2\tinyxml2.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>

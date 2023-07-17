@@ -45,11 +45,11 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
 TARGET = $(TARGETDIR)/libPK-Runtime_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Debug/PK-Runtime_SDK1
 DEFINES += -D_DEBUG
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios/Debug/PK-Runtime_SDK1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios/Debug/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
 
@@ -63,11 +63,11 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-Runtime_d.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Debug/PK-Runtime_SDK1
 DEFINES += -D_DEBUG
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios64/Debug/PK-Runtime_SDK1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios64/Debug/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
 
@@ -81,11 +81,11 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
 TARGET = $(TARGETDIR)/libPK-Runtime_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Release/PK-Runtime_SDK1
 DEFINES += -DNDEBUG
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios/Release/PK-Runtime_SDK1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios/Release/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 
@@ -99,11 +99,11 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-Runtime_r.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Release/PK-Runtime_SDK1
 DEFINES += -DNDEBUG
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios64/Release/PK-Runtime_SDK1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios64/Release/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 
@@ -117,11 +117,11 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios
 TARGET = $(TARGETDIR)/libPK-Runtime_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios/Retail/PK-Runtime_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios/Retail/PK-Runtime_SDK1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios/Retail/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -mcpu=cortex-a8 -marm -march=armv7-a -Wshadow -Wundef -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 
@@ -135,11 +135,11 @@ endif
 ifeq ($(origin AR), default)
   AR = xcrun --sdk iphoneos ar
 endif
-TARGETDIR = ../../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-Runtime_s.a
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ios64/Retail/PK-Runtime_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL
-INCLUDES += -I../../../ExternalLibs/Runtime -I../../../ExternalLibs/Runtime/include -I../../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../../ExternalLibs/Runtime/pk_maths/src -I../../../ExternalLibs/Runtime/pk_maths -I../../../ExternalLibs/Runtime/pk_toolkit -I../../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../../ExternalLibs/Runtime/pk_kernel -I../../../ExternalLibs/Runtime/pk_imaging -I../../../ExternalLibs/Runtime/pk_base_object/src -I../../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../../ExternalLibs/Runtime/pk_compiler/src -I../../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../../ExternalLibs/Runtime/pk_geometrics -I../../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios64/Retail/PK-Runtime_SDK1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ios64/Retail/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
 

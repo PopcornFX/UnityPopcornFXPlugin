@@ -189,18 +189,20 @@ namespace PopcornFX
 			m_CurrentCameraID = ID;
 			int cull = m_Camera.cullingMask;// << Origin Mask
 			m_Camera.cullingMask = (cull & (~allPKMask)) | targetMask;
-			
 
-			if (GraphicsSettings.renderPipelineAsset == null ||
-				!(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
-				  GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset"))
+			if (PKFxSettings.EnableDistortion)
 			{
-				// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
-				m_Camera.cullingMask &= ~(1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer));
+				if (GraphicsSettings.renderPipelineAsset == null ||
+					!(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
+					  GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset"))
+				{
+					// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
+					m_Camera.cullingMask &= ~(1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer));
 
+				}
+				else
+					m_Camera.cullingMask |= 1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
 			}
-			else
-				m_Camera.cullingMask |= 1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
 		}
 
 		//----------------------------------------------------------------------------

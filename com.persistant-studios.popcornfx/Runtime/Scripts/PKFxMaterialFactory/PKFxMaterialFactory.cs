@@ -100,8 +100,7 @@ namespace PopcornFX
 
 			if (binding == null)
 			{
-				if (logError)
-					Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName + "in effect: " + asset.name);
+				Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName + "in effect: " + asset.name);
 				return null;
 			}
 
@@ -120,7 +119,7 @@ namespace PopcornFX
 			{
 				material = new Material(binding.m_Shader);
 				binding.SetMaterialKeywords(batchDesc, material);
-				binding.BindMaterialProperties(batchDesc, material, asset);
+				binding.BindMaterialProperties(batchDesc, material, asset, logError);
 				if (batchDesc.m_Type == ERendererType.Mesh)
 					material.enableInstancing = true;
 				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat");

@@ -27,31 +27,31 @@
     <ClInclude Include="..\..\SDK\Samples\ParticleSample\src\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_core_upgrade.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_core_upgrade.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_file.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_file.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_material.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_material.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_nodegraph.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_nodegraph.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_script.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_script.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_string.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_string.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_logger.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_logger.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_rawfile.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_rawfile.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\pk_upgraderlib\include\upg_upgrader.h">
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_upgrader.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>
   </ItemGroup>

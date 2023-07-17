@@ -88,7 +88,7 @@ namespace PopcornFX
 
 		public static void NotifyAssetPostProcess(string path)
 		{
-			int key = path.GetHashCode();
+			int key = path.ToLowerInvariant().GetHashCode();
 			if (DependenciesLoading.ContainsKey(key))
 			{
 				UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(path, typeof(UnityEngine.Object));
@@ -117,7 +117,8 @@ namespace PopcornFX
 							if (binding != null)
 							{
 								if (asset.m_Materials.Count > rdr.MaterialIdx)
-									binding.BindMaterialProperties(rdr, asset.m_Materials[rdr.MaterialIdx], asset);
+									// Attempt to bind all materials properties, even though some texture can be in import process, do not log errors.
+									binding.BindMaterialProperties(rdr, asset.m_Materials[rdr.MaterialIdx], asset, false);
 							}
 							else
 								Debug.LogWarning("[PopcornFX] No material binding found for batch descriptor: " + rdr.m_GeneratedName);
@@ -265,7 +266,7 @@ namespace PopcornFX
 				Debug.LogWarning("[PopcornFX] FileUtil.ReplaceFile failed: " + e.Message);
 			}
 
-			int key = dstFullPath.GetHashCode();
+			int key = dstFullPath.ToLowerInvariant().GetHashCode();
 			if (!DependenciesLoading.ContainsKey(key))
 			{
 				DependenciesLoading.Add(key, new List<PKFxEffectAsset>());

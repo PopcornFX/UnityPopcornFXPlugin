@@ -171,37 +171,37 @@
     <ClInclude Include="..\..\Native\precompiled\precompiled.h">
       <Filter>Headers\precompiled</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Native\Common\PKFX\FxRendererSubView.h">
@@ -210,28 +210,28 @@
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h">
       <Filter>Common\PKFX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h">
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h">
       <Filter>External\GL\GL</Filter>
     </ClInclude>
   </ItemGroup>

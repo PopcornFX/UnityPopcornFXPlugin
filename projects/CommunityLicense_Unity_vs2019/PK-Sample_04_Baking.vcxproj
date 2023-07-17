@@ -83,7 +83,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -99,7 +99,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TIFF_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;PK-Plugin_CodecMesh_FBX_d.lib;PK-Plugin_CodecImage_EXR_d.lib;freetype.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Debug;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -111,7 +111,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -133,7 +133,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TIFF_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;PK-Plugin_CodecMesh_FBX_r.lib;PK-Plugin_CodecImage_EXR_r.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -145,7 +145,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -167,7 +167,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CodecImage_TGA_s.lib;PK-Plugin_CodecImage_PKM_s.lib;PK-Plugin_CodecImage_PVR_s.lib;PK-Plugin_CodecImage_TIFF_s.lib;PK-Plugin_CodecImage_HDR_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-Plugin_CodecMesh_FBX_s.lib;PK-Plugin_CodecImage_EXR_s.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -175,13 +175,13 @@
     <ClInclude Include="..\..\Native\Common\PKFX\FxPlugins.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
     <ClInclude Include="..\..\SDK\Samples\ParticleSample\src\precompiled.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Native\Common\PKFX\FxPlugins.cpp">

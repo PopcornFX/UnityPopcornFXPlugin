@@ -12,81 +12,81 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\precompiled.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO_AttributeHotfix.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO_AttributeHotfix.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\ConvexHull.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\TextureTrimmer.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBakerLib\precompiled.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\precompiled.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

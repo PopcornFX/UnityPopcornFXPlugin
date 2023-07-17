@@ -30,37 +30,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h">
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h">
       <Filter>Headers\PK-ZLib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Native\Common\PKFX\FxPlugins.h">
@@ -69,34 +69,34 @@
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h">
       <Filter>Headers\Common\PKFX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBaker\precompiled.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBaker\unzip.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\unzip.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
   </ItemGroup>
@@ -107,22 +107,22 @@
     <ClCompile Include="..\..\Native\Common\PKFX\FxStartup.cpp">
       <Filter>Sources\Common\PKFX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Unzip.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Unzip.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Upgrade.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Upgrade.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\precompiled.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\PK-AssetBaker\unzip.cpp">
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\unzip.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

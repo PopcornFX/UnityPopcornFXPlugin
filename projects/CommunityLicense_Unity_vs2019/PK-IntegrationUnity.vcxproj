@@ -71,7 +71,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -88,7 +88,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>mmdevapi.lib;mfplat.lib;mfuuid.lib;PK-RenderHelpers_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Plugin_CodecMesh_FBX_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_TIFF_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CodecImage_EXR_d.lib;PK-ZLib_d.lib;comctl32.lib;comctl32.lib;version.lib;wsock32.lib;PK-Plugin_CodecImage_PKM_d.lib;OpenGL32.lib;GLU32.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\GL\lib\win64;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\GL\lib\win64;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -99,7 +99,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=0;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\ExternalLibs\Runtime;..\..\..\ExternalLibs\Runtime\include;..\..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\CommunityLicense_Unity;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -122,7 +122,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>mmdevapi.lib;mfplat.lib;mfuuid.lib;PK-RenderHelpers_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Plugin_CodecMesh_FBX_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_TIFF_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CodecImage_EXR_r.lib;PK-ZLib_r.lib;comctl32.lib;comctl32.lib;version.lib;wsock32.lib;PK-Plugin_CodecImage_PKM_r.lib;OpenGL32.lib;GLU32.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\ExternalLibs\GL\lib\win64;..\..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\GL\lib\win64;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\CommunityLicense_Unity\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -182,27 +182,27 @@
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityRenderingExtensions.h" />
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityShaderCompilerAccess.h" />
     <ClInclude Include="..\..\Native\precompiled\precompiled.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxRendererSubView.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\eglew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glext.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\glxew.h" />
-    <ClInclude Include="..\..\..\ExternalLibs\GL\include\GL\wglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.cpp" />
@@ -248,7 +248,7 @@
     <ClCompile Include="..\..\Native\Common\PKFX\FxStartup.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\ExternalLibs\GL\src\glew.c">
+    <ClCompile Include="..\..\ExternalLibs\GL\src\glew.c">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>

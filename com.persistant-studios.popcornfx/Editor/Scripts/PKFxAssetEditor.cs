@@ -171,7 +171,7 @@ namespace PopcornFX
 							if (customMatInfo.DrawEditorShaderInputBindings(renderers[i])) // Change in the bindings, update materials
 							{
 								customMatInfo.SetMaterialKeywords(renderers[i], customMatInfo.m_CustomMaterial);
-								customMatInfo.BindMaterialProperties(renderers[i], customMatInfo.m_CustomMaterial, asset);
+								customMatInfo.BindMaterialProperties(renderers[i], customMatInfo.m_CustomMaterial, asset, true);
 							}
 						}
 						EditorGUI.indentLevel--;

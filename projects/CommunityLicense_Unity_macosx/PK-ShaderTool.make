@@ -34,7 +34,6 @@ INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -framework AppKit -framework OpenGL
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -52,6 +51,18 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_d.a -framework quartzcore -framework cocoa -framework metal -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PKM_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Plugin_CodecImage_HDR_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Discretizers_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lPK-ZLib_d
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_d.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -framework AppKit -framework OpenGL
+
+else ifeq ($(config),debug_arm64)
+TARGETDIR = ../../../release/builds/ARM64_Samples
+TARGET = $(TARGETDIR)/PK-ShaderTool_macosx_d
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Debug/PK-ShaderTool
+DEFINES += -D_DEBUG -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DMACOSX -DPK_BUILD_WITH_SDL=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-SampleLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-MCPP_d.a -framework quartzcore -framework cocoa -framework metal -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PKM_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Plugin_CodecImage_HDR_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Discretizers_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lPK-ZLib_d
+LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-SampleLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-MCPP_d.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64 -target arm64-apple-macos11.0 -framework AppKit -framework OpenGL
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
@@ -62,6 +73,18 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_r.a -framework quartzcore -framework cocoa -framework metal -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PKM_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Plugin_CodecImage_HDR_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Discretizers_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lPK-ZLib_r
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-SampleLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-MCPP_r.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -framework AppKit -framework OpenGL
+
+else ifeq ($(config),release_arm64)
+TARGETDIR = ../../../release/builds/ARM64_Samples
+TARGET = $(TARGETDIR)/PK-ShaderTool_macosx_r
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Release/PK-ShaderTool
+DEFINES += -DNDEBUG -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DMACOSX -DPK_BUILD_WITH_SDL=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-SampleLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-MCPP_r.a -framework quartzcore -framework cocoa -framework metal -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PKM_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Plugin_CodecImage_HDR_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Discretizers_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lPK-ZLib_r
+LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-SampleLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-MCPP_r.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64 -target arm64-apple-macos11.0 -framework AppKit -framework OpenGL
 
 #else
 #  $(error "invalid configuration $(config)")

@@ -34,7 +34,6 @@ INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -liconv
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -52,6 +51,18 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_d.a -lPK-ParticlesToolbox_d -lPK-Runtime_d
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_d.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -liconv
+
+else ifeq ($(config),debug_arm64)
+TARGETDIR = ../../../release/application/BinariesGM_macosx_ARM64_d
+TARGET = $(TARGETDIR)/PK-Upgrader
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Debug/PK-Upgrader
+DEFINES += -D_DEBUG -DMACOSX
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_d.a -lPK-ParticlesToolbox_d -lPK-Runtime_d
+LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_d.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64 -target arm64-apple-macos11.0 -liconv
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../../release/application/BinariesGM_macosx_x64_r
@@ -62,6 +73,18 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_r.a -lPK-ParticlesToolbox_r -lPK-Runtime_r
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_r.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -liconv
+
+else ifeq ($(config),release_arm64)
+TARGETDIR = ../../../release/application/BinariesGM_macosx_ARM64_r
+TARGET = $(TARGETDIR)/PK-Upgrader
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Release/PK-Upgrader
+DEFINES += -DNDEBUG -DMACOSX
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_r.a -lPK-ParticlesToolbox_r -lPK-Runtime_r
+LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_r.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64 -target arm64-apple-macos11.0 -liconv
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../../release/application/BinariesGM_macosx_x64_r
@@ -72,6 +95,18 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-point
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_s.a -lPK-ParticlesToolbox_s -lPK-Runtime_s
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_s.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -target x86_64-apple-macos10.14 -liconv
+
+else ifeq ($(config),retail_arm64)
+TARGETDIR = ../../../release/application/BinariesGM_macosx_ARM64_r
+TARGET = $(TARGETDIR)/PK-Upgrader_s
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Retail/PK-Upgrader
+DEFINES += -DNDEBUG -DPK_RETAIL -DMACOSX
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_s.a -lPK-ParticlesToolbox_s -lPK-Runtime_s
+LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_s.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64 -target arm64-apple-macos11.0 -liconv
 
 #else
 #  $(error "invalid configuration $(config)")

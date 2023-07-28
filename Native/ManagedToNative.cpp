@@ -983,8 +983,9 @@ extern "C"
 #if	(PK_PARTICLES_HAS_STATS != 0)
 		CRuntimeManager			&manager = CRuntimeManager::Instance();
 		return manager.GetProfiler().FillFrameStats(reportName, data);
-#endif	// (PK_PARTICLES_HAS_STATS != 0)
+#else // (PK_PARTICLES_HAS_STATS != 0)
 		return false;
+#endif	
 	}
 
 	//----------------------------------------------------------------------------

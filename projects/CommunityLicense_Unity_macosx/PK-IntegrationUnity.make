@@ -27,16 +27,12 @@ endif
 ifeq ($(origin AR), default)
   AR = ar
 endif
-TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins
-TARGET = $(TARGETDIR)/PK-UnityPlugin.bundle
 PCH = ../../Native/precompiled/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/Gl -I../../Native/Common/GLES -I../../ExternalLibs/GL/include -I"$(VULKAN_SDK)/include" -I../../ExternalLibs/Runtime/libs/zlib-1.2.8
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/macosx -L../../ExternalLibs/CodecMesh_FBX/libs/macosx/legacy_clang -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -dynamiclib -Wl,-install_name,@rpath/PK-UnityPlugin.bundle -Wl,-undefined,error -target x86_64-apple-macos10.14 -framework Cocoa -framework OpenGL -framework IOKit
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
@@ -46,20 +42,52 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug_x64)
+TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/x86_64
+TARGET = $(TARGETDIR)/PK-UnityPlugin.dylib
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-IntegrationUnity
 DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DMACOSX -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=0 -DPK_BUILD_WITH_GLES3_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=1 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/Gl -I../../Native/Common/GLES -I../../ExternalLibs/GL/include -I"$(VULKAN_SDK)/include" -I../../ExternalLibs/Runtime/libs/zlib-1.2.8
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-AssetBakerLib_d.a -framework Cocoa -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Plugin_CodecMesh_FBX_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Plugin_CodecImage_TIFF_d -lPK-Plugin_CodecImage_HDR_d -lPK-Plugin_CodecImage_EXR_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lfbxsdk_d -lxml2 -lz -lPK-ParticlesToolbox_d -lPK-Runtime_d -liconv
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-AssetBakerLib_d.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/macosx -L../../ExternalLibs/CodecMesh_FBX/libs/macosx/legacy_clang -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -dynamiclib -Wl,-install_name,@rpath/PK-UnityPlugin.dylib -Wl,-undefined,error -target x86_64-apple-macos10.14 -framework Cocoa -framework OpenGL -framework IOKit
+
+else ifeq ($(config),debug_arm64)
+TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/ARM64
+TARGET = $(TARGETDIR)/PK-UnityPlugin.dylib
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Debug/PK-IntegrationUnity
+DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DMACOSX -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=0 -DPK_BUILD_WITH_GLES3_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../ExternalLibs/pk_upgraderlib/include -I../../ExternalLibs/Runtime/libs/zlib-1.2.8
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
+LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-AssetBakerLib_d.a -framework Cocoa -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Plugin_CodecMesh_FBX_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Plugin_CodecImage_TIFF_d -lPK-Plugin_CodecImage_HDR_d -lPK-Plugin_CodecImage_EXR_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lfbxsdk_d -lxml2 -lz -lPK-ParticlesToolbox_d -lPK-Runtime_d -liconv
+LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-AssetBakerLib_d.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/macosx -L../../ExternalLibs/CodecMesh_FBX/libs/macosx/clang -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64 -dynamiclib -Wl,-install_name,@rpath/PK-UnityPlugin.dylib -Wl,-undefined,error -target arm64-apple-macos11.0 -framework Cocoa -framework OpenGL -framework IOKit
 
 else ifeq ($(config),release_x64)
+TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/x86_64
+TARGET = $(TARGETDIR)/PK-UnityPlugin.dylib
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-IntegrationUnity
 DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DMACOSX -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=0 -DPK_BUILD_WITH_GLES3_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=1 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/Gl -I../../Native/Common/GLES -I../../ExternalLibs/GL/include -I"$(VULKAN_SDK)/include" -I../../ExternalLibs/Runtime/libs/zlib-1.2.8
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-AssetBakerLib_r.a -framework Cocoa -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Plugin_CodecMesh_FBX_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Plugin_CodecImage_TIFF_r -lPK-Plugin_CodecImage_HDR_r -lPK-Plugin_CodecImage_EXR_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lfbxsdk_r -lxml2 -lz -lPK-ParticlesToolbox_r -lPK-Runtime_r -liconv
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-ImporterLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64/libPK-AssetBakerLib_r.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/macosx -L../../ExternalLibs/CodecMesh_FBX/libs/macosx/legacy_clang -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64 -m64 -dynamiclib -Wl,-install_name,@rpath/PK-UnityPlugin.dylib -Wl,-undefined,error -target x86_64-apple-macos10.14 -framework Cocoa -framework OpenGL -framework IOKit
+
+else ifeq ($(config),release_arm64)
+TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/ARM64
+TARGET = $(TARGETDIR)/PK-UnityPlugin.dylib
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Release/PK-IntegrationUnity
+DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DMACOSX -DPK_USE_RENDER_HELPERS=1 -DPK_BUILD_WITH_VULKAN_SUPPORT=0 -DPK_BUILD_WITH_D3D11_SUPPORT=0 -DPK_BUILD_WITH_D3D12_SUPPORT=0 -DPK_BUILD_WITH_GLES_SUPPORT=0 -DPK_BUILD_WITH_GLES3_SUPPORT=0 -DPK_BUILD_WITH_METAL_SUPPORT=1 -DPK_BUILD_WITH_GNM_SUPPORT=0 -DPK_BUILD_WITH_AGC_SUPPORT=0 -DPK_BUILD_WITH_GL_SUPPORT=0 -DPK_BUILD_WITH_NVN_SUPPORT=0 -DPK_PRINTF_TO_CLOG -DGLEW_STATIC -DGL_GLEXT_PROTOTYPES -DPK_UNITY_EDITOR=1
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs -I../../Native -I../../Native/precompiled -I../../Native/Common/PKFX -I../../ExternalLibs/pk_upgraderlib/include -I../../ExternalLibs/Runtime/libs/zlib-1.2.8
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path` -fobjc-arc
+LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-AssetBakerLib_r.a -framework Cocoa -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Plugin_CodecMesh_FBX_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Plugin_CodecImage_TIFF_r -lPK-Plugin_CodecImage_HDR_r -lPK-Plugin_CodecImage_EXR_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lfbxsdk_r -lxml2 -lz -lPK-ParticlesToolbox_r -lPK-Runtime_r -liconv
+LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-ImporterLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64/libPK-AssetBakerLib_r.a
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/macosx -L../../ExternalLibs/CodecMesh_FBX/libs/macosx/clang -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64 -dynamiclib -Wl,-install_name,@rpath/PK-UnityPlugin.dylib -Wl,-undefined,error -target arm64-apple-macos11.0 -framework Cocoa -framework OpenGL -framework IOKit
 
 #else
 #  $(error "invalid configuration $(config)")
@@ -109,8 +137,6 @@ GENERATED += $(OBJDIR)/RuntimeManager.o
 GENERATED += $(OBJDIR)/UnityBillboardingBatchPolicy.o
 GENERATED += $(OBJDIR)/UnityRenderDataFactory.o
 GENERATED += $(OBJDIR)/UnityRendererCache.o
-GENERATED += $(OBJDIR)/gl_utils.o
-GENERATED += $(OBJDIR)/glew.o
 GENERATED += $(OBJDIR)/precompiled.o
 GENERATED += $(OBJDIR)/unzip.o
 OBJECTS += $(OBJDIR)/AssetBaker.o
@@ -146,10 +172,24 @@ OBJECTS += $(OBJDIR)/RuntimeManager.o
 OBJECTS += $(OBJDIR)/UnityBillboardingBatchPolicy.o
 OBJECTS += $(OBJDIR)/UnityRenderDataFactory.o
 OBJECTS += $(OBJDIR)/UnityRendererCache.o
-OBJECTS += $(OBJDIR)/gl_utils.o
-OBJECTS += $(OBJDIR)/glew.o
 OBJECTS += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/unzip.o
+
+ifeq ($(config),debug_x64)
+GENERATED += $(OBJDIR)/gl_utils.o
+GENERATED += $(OBJDIR)/glew.o
+OBJECTS += $(OBJDIR)/gl_utils.o
+OBJECTS += $(OBJDIR)/glew.o
+
+else ifeq ($(config),release_x64)
+GENERATED += $(OBJDIR)/gl_utils.o
+GENERATED += $(OBJDIR)/glew.o
+OBJECTS += $(OBJDIR)/gl_utils.o
+OBJECTS += $(OBJDIR)/glew.o
+
+#else
+#  $(error "invalid configuration $(config)")
+endif
 
 # Rules
 # #############################################
@@ -213,15 +253,9 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/gl_utils.o: ../../Native/Common/Gl/gl_utils.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/glew.o: ../../ExternalLibs/GL/src/glew.c
-	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ILoopbackCapture.o: ../../Native/AudioApplicationLoopback/ILoopbackCapture.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -324,6 +358,26 @@ $(OBJDIR)/RuntimeManager.o: ../../Native/RuntimeManager.cpp
 $(OBJDIR)/precompiled.o: ../../Native/precompiled/precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+ifeq ($(config),debug_x64)
+$(OBJDIR)/gl_utils.o: ../../Native/Common/Gl/gl_utils.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/glew.o: ../../ExternalLibs/GL/src/glew.c
+	@echo "$(notdir $<)"
+	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),release_x64)
+$(OBJDIR)/gl_utils.o: ../../Native/Common/Gl/gl_utils.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/glew.o: ../../ExternalLibs/GL/src/glew.c
+	@echo "$(notdir $<)"
+	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+#else
+#  $(error "invalid configuration $(config)")
+endif
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

@@ -36,7 +36,6 @@ ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS +=
 LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
 define LINKCMD
   $(SILENT) $(RM) -f $@
   $(SILENT) $(AR) -rcs $@ $(OBJECTS)
@@ -55,6 +54,16 @@ OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-RenderHelpers_SD
 DEFINES += -D_DEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
+
+else ifeq ($(config),debug_arm64)
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64
+TARGET = $(TARGETDIR)/libPK-RenderHelpers_d.a
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Debug/PK-RenderHelpers_SDK1
+DEFINES += -D_DEBUG
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
@@ -63,6 +72,16 @@ OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-RenderHelpers_
 DEFINES += -DNDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
+
+else ifeq ($(config),release_arm64)
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64
+TARGET = $(TARGETDIR)/libPK-RenderHelpers_r.a
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Release/PK-RenderHelpers_SDK1
+DEFINES += -DNDEBUG
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
@@ -71,6 +90,16 @@ OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-RenderHelpers_S
 DEFINES += -DNDEBUG -DPK_RETAIL
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
+
+else ifeq ($(config),retail_arm64)
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64
+TARGET = $(TARGETDIR)/libPK-RenderHelpers_s.a
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Retail/PK-RenderHelpers_SDK1
+DEFINES += -DNDEBUG -DPK_RETAIL
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 #else
 #  $(error "invalid configuration $(config)")

@@ -1063,28 +1063,25 @@ namespace PopcornFX
 				hasBeenResized = true;
 			}
 
-#pragma warning disable CS0162
 			if (mesh.GetIndexCount(0) < usedIndexCount)
 			{
 				int[] triangles = new int[reservedIndexCount];			// index
+#if UNITY_PS4 || UNITY_PS5
 				// fix to set the right vertex buffer size on PS4 and PS5 : fill the index buffer with vertex ids
-				if (
-#if UNITY_PS4
-				Application.platform == RuntimePlatform.PS4 ||
-#elif UNITY_PS5
-				Application.platform == RuntimePlatform.PS5 ||
-#else
-				false
-#endif
-				)
+#	if UNITY_PS4
+				if (Application.platform == RuntimePlatform.PS4)
+#	elif UNITY_PS5
+				if (Application.platform == RuntimePlatform.PS5)
+#	endif
 				{
 					for (int i = 0; i < mesh.vertexCount; ++i)
 						triangles[i] = i;
 				}
+#endif
 				mesh.triangles = triangles;
 				hasBeenResized = true;
 			}
-#pragma warning restore CS0162
+
 			return hasBeenResized;
 		}
 

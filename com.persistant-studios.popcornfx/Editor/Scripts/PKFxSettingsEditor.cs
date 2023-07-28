@@ -436,12 +436,7 @@ namespace PopcornFX
 
 			}
 			EditorGUILayout.EndHorizontal();
-#if UNITY_EDITOR_OSX
-			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.LabelField("Bake of PopcornFX Effects inside Unity MacOS is disabled.", boldStyleRed);
-			EditorGUILayout.EndHorizontal();
-#else
-#endif
+
 			PKFxSettings.EnableForceDeterminism = EditorGUILayout.ToggleLeft(forceDeterminismLabel, PKFxSettings.EnableForceDeterminism);
 			PKFxSettings.EnableThumbnails = EditorGUILayout.ToggleLeft(enableThumbnails, PKFxSettings.EnableThumbnails);
 

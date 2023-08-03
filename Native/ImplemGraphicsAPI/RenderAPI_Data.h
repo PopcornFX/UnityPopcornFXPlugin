@@ -32,7 +32,7 @@ PK_DECLARE_REFPTRCLASS(BufferAbstract);
 
 struct	SBufferHandles
 {
-#if defined(PK_MACOSX) || defined(PK_IOS) || defined(PK_NX)
+#if defined(PK_MACOSX) || defined(PK_IOS) || defined(PK_NX) || defined(PK_ORBIS)
 	static const u32 HOST_VISIBLE_BUFFER_NUMBER = 3;
 #else
 	static const u32 HOST_VISIBLE_BUFFER_NUMBER = 2;

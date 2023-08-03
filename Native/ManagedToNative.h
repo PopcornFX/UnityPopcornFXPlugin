@@ -45,6 +45,8 @@ extern "C"
 		int						m_WorkerCount;
 		u32						*m_WorkerAffinities;
 
+		unsigned int			m_CPPMarkerMaxDepth;
+
 		void					PrettyPrintSettings() const
 		{
 			CString	settings = "";

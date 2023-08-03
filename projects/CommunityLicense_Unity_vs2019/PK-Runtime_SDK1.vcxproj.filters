@@ -73,6 +73,9 @@
     <Filter Include="Maths\Headers\SIMD">
       <UniqueIdentifier>{A91312A5-95F7-D2FA-FE57-CD4DEA5ABD7C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Maths\Headers\SIMD\neon">
+      <UniqueIdentifier>{08531E80-748A-6617-7D94-CA3AE94A8D10}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Maths\Headers\SIMD\sse">
       <UniqueIdentifier>{637EF141-4F78-1A94-38E5-B0A4247E8000}</UniqueIdentifier>
     </Filter>
@@ -941,6 +944,27 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\pk_numeric_traits_int.h">
       <Filter>Maths\Headers\Numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd.h">
+      <Filter>Maths\Headers\SIMD\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_converters.h">
+      <Filter>Maths\Headers\SIMD\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_defs.h">
+      <Filter>Maths\Headers\SIMD\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_matrix.h">
+      <Filter>Maths\Headers\SIMD\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_scalar.h">
+      <Filter>Maths\Headers\SIMD\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_streams.h">
+      <Filter>Maths\Headers\SIMD\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\neon\simd_vector.h">
+      <Filter>Maths\Headers\SIMD\neon</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_maths\include\simd\sse\simd.h">
       <Filter>Maths\Headers\SIMD\sse</Filter>

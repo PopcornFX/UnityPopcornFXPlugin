@@ -78,18 +78,12 @@ extern "C"
 	void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API	UnityPluginLoad(IUnityInterfaces *unityInterfaces)
 #endif
 	{
-		(void)unityInterfaces;
-		if (!PK_VERIFY(CRuntimeManager::InitializeInstanceIFN(null)))
+		if (!PK_VERIFY(CRuntimeManager::InitializeInstanceIFN(null, unityInterfaces)))
 		{
 			CLog::Log(PK_ERROR, "InitializeInstanceIFN failed");
 			return;
 		}
-		CLog::Log(PK_INFO, "UnityPluginUnload: Loading PopcornFX Plugin, Initialization success");
-		if (unityInterfaces != null)
-		{
-			if (!PK_VERIFY(CRuntimeManager::Instance().SetUnityInterfaces(unityInterfaces)))
-				return;
-		}
+		CLog::Log(PK_INFO, "UnityPluginLoad: Loading PopcornFX Plugin, Initialization success");
 		IUnityGraphics	*unityGraphics = CRuntimeManager::Instance().GetUnityGraphics();
 		if (unityGraphics == null)
 			unityGraphics = UNITY_GET_INTERFACE(unityInterfaces, IUnityGraphics);
@@ -97,7 +91,7 @@ extern "C"
 		{
 			unityGraphics->RegisterDeviceEventCallback(OnGraphicsDeviceEvent);
 		}
-		// Run OnGraphicsDeviceEvent(initialize) manually on plugin load in case Unity missed it:
+		// Run OnGraphicsDeviceEvent(initialize) manually on plugin load
 		OnGraphicsDeviceEvent(kUnityGfxDeviceEventInitialize);
 	}
 
@@ -109,8 +103,7 @@ extern "C"
 #endif
 	{
 		CLog::Log(PK_INFO, "UnityPluginUnload: Unloading PopcornFX Plugin");
-		IUnityGraphics* unityGraphics = CRuntimeManager::Instance().GetUnityGraphics();
-
+		IUnityGraphics	*unityGraphics = CRuntimeManager::Instance().GetUnityGraphics();
 		unityGraphics->UnregisterDeviceEventCallback(OnGraphicsDeviceEvent);
 
 		PopcornFXShutdown();
@@ -126,8 +119,11 @@ extern "C"
 		}
 		else if (eventType == kUnityGfxDeviceEventInitialize)
 		{
+			if (!CRuntimeManager::IsInstanceInitialized())
+				return; // Wait the UnityPluginLoad, it will initialize the instance and call OnGraphicsDeviceEvent(kUnityGfxDeviceEventInitialize);
+
 			CLog::Log(PK_INFO, "OnGraphicsDeviceEvent: UnityGfxDeviceEventType == kUnityGfxDeviceEventInitialize");
-			if (!PK_VERIFY(CRuntimeManager::InitializeInstanceIFN(null)))
+			if (!PK_VERIFY(CRuntimeManager::InitializeInstanceIFN(null, CRuntimeManager::Instance().GetUnityInterfaces())))
 			{
 				CLog::Log(PK_ERROR, "InitializeInstanceIFN failed");
 				return;
@@ -162,29 +158,21 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION bool	PopcornFXStartup(const SPopcornFxSettings *settings)
 	{
+		const bool	pluginIsInitialized = CRuntimeManager::IsInstanceInitialized();
+
+		if (!PK_VERIFY(pluginIsInitialized))
+			return false;
+
 		if (!PK_VERIFY(settings != null))
 			return false;
-		PK_SCOPEDPROFILE();
-		bool		pluginIsInitialized = CRuntimeManager::IsInstanceInitialized();
 
-		if (pluginIsInitialized)
+		// The plugin was already started so we just change the settings:
+		if (!PK_VERIFY(CRuntimeManager::Instance().PopcornFXChangeSettings(*settings)))
 		{
-			// The plugin was already started so we just change the settings:
-			if (!PK_VERIFY(CRuntimeManager::Instance().PopcornFXChangeSettings(*settings)))
-			{
-				CLog::Log(PK_ERROR, "Could not change the PopcornFX settings");
-				return false;
-			}
+			CLog::Log(PK_ERROR, "Could not change the PopcornFX settings");
+			return false;
 		}
-		else
-		{
-			// We start the plugin directly with the correct settings:
-			if (!PK_VERIFY(CRuntimeManager::InitializeInstanceIFN(settings)))
-			{
-				CLog::Log(PK_ERROR, "InitializeInstanceIFN failed");
-				return false;
-			}
-		}
+
 		// Load the effect pack:
 		CRuntimeManager::Instance().LoadPack();
 		return true;
@@ -195,7 +183,6 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION const char	*GetRuntimeVersion()
 	{
 		NEED_PK_RUNTIME_STARTED(return "Runtime not started");
-		PK_SCOPEDPROFILE();
 
 		return PK_VERSION_CURRENT_STRING;
 	}
@@ -289,18 +276,19 @@ extern "C"
 	void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API	OnRenderEvent(int renderEvent)
 	{
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return);
-		PK_SCOPEDPROFILE();
+		g_RenderThreadID = CCurrentThread::RegisterUserThread();
 
 		const CPU::CScoped_FpuEnableFastMode	_fm;
 		const CPU::CScoped_FpuDisableExceptions	_de;
 
-		g_RenderThreadID = CCurrentThread::RegisterUserThread();
-
 		CRuntimeManager	&manager = CRuntimeManager::Instance();
 		CPKFXScene		&scene = manager.GetScene();
 
-		if (scene.RenderThreadIsSet() == false || !scene.IsRenderThread())
-			scene.SetRenderThread();
+		if (manager.RenderThreadIsSet() == false || !manager.IsRenderThread())
+		{
+			manager.SetRenderThread();
+		}
+		PK_SCOPEDPROFILE();
 
 		const u32	event_masked = static_cast<u32>(renderEvent);
 
@@ -948,8 +936,9 @@ extern "C"
 #if	(PK_PARTICLES_HAS_STATS != 0)
 		CRuntimeManager			&manager = CRuntimeManager::Instance();
 		return manager.GetProfiler().FillFrameStats(reportName, data);
-#endif	// (KR_PROFILER_ENABLED != 0)
+#else // (PK_PARTICLES_HAS_STATS != 0)
 		return false;
+#endif	
 	}
 
 	//----------------------------------------------------------------------------

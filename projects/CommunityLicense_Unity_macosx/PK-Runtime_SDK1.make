@@ -32,7 +32,6 @@ ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS +=
 LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
 define LINKCMD
   $(SILENT) $(RM) -f $@
   $(SILENT) $(AR) -rcs $@ $(OBJECTS)
@@ -52,6 +51,17 @@ DEFINES += -D_DEBUG
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
+
+else ifeq ($(config),debug_arm64)
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64
+TARGET = $(TARGETDIR)/libPK-Runtime_d.a
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Debug/PK-Runtime_SDK1
+DEFINES += -D_DEBUG
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ARM64/Debug/PK-Runtime_SDK1
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
@@ -61,6 +71,17 @@ DEFINES += -DNDEBUG
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
+
+else ifeq ($(config),release_arm64)
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64
+TARGET = $(TARGETDIR)/libPK-Runtime_r.a
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Release/PK-Runtime_SDK1
+DEFINES += -DNDEBUG
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ARM64/Release/PK-Runtime_SDK1
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_x64
@@ -70,6 +91,17 @@ DEFINES += -DNDEBUG -DPK_RETAIL
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
+
+else ifeq ($(config),retail_arm64)
+TARGETDIR = ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_macosx_ARM64
+TARGET = $(TARGETDIR)/libPK-Runtime_s.a
+OBJDIR = ../intermediate/CommunityLicense_Unity/GM/ARM64/Retail/PK-Runtime_SDK1
+DEFINES += -DNDEBUG -DPK_RETAIL
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/CommunityLicense_Unity -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/CommunityLicense_Unity/GM/ARM64/Retail/PK-Runtime_SDK1
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 #else
 #  $(error "invalid configuration $(config)")

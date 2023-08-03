@@ -121,6 +121,7 @@ void	CUnityBillboardingBatchPolicy::CustomStepFlagInactive()
 
 bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views, ERendererClass rendererType)
 {
+	PK_SCOPEDPROFILE();
 	(void)views;
 	PK_ASSERT(!allocBuffers.m_DrawRequests.Empty());
 	PK_ASSERT(allocBuffers.m_DrawRequests.Count() == allocBuffers.m_RendererCaches.Count());
@@ -199,6 +200,7 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 
 bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap)
 {
+	PK_SCOPEDPROFILE();
 	(void)views;
 	if (!PK_VERIFY(ctx.m_RenderApiData != null))
 	{
@@ -239,6 +241,7 @@ bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const T
 
 bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPUBillboardBatchJobs *batchJobs, const SGeneratedInputs &toMap)
 {
+	PK_SCOPEDPROFILE();
 	(void)views;
 	if (!PK_VERIFY(ctx.m_RenderApiData != null))
 	{
@@ -298,6 +301,7 @@ bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const T
 
 bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SRibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap)
 {
+	PK_SCOPEDPROFILE();
 	(void)views;
 	if (!PK_VERIFY(ctx.m_RenderApiData != null))
 	{
@@ -349,6 +353,7 @@ bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext & ctx, const 
 
 bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SMeshBatchJobs *batchJobs, const SGeneratedInputs &toMap)
 {
+	PK_SCOPEDPROFILE();
 	(void)ctx; (void)views;
 	if (!m_MeshIsValid)
 		return true;
@@ -357,6 +362,7 @@ bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const T
 
 bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext & ctx, const TMemoryView<SUnitySceneView>& views, STriangleBatchJobs * batchJobs, const SGeneratedInputs & toMap)
 {
+	PK_SCOPEDPROFILE();
 	(void)views;
 	if (!PK_VERIFY(ctx.m_RenderApiData != null))
 	{
@@ -496,6 +502,7 @@ bool	CUnityBillboardingBatchPolicy::WaitForCustomTasks(SUnityRenderContext &ctx)
 
 bool	CUnityBillboardingBatchPolicy::UnmapBuffers(SUnityRenderContext &ctx)
 {
+	PK_SCOPEDPROFILE();
 	if (!m_MeshIsValid)
 		return true;
 	if (m_RendererType == Renderer_Billboard || m_RendererType == Renderer_Ribbon || m_RendererType == Renderer_Triangle)
@@ -567,6 +574,7 @@ bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const
 
 void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMesh(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData)
 {
+	PK_SCOPEDPROFILE();
 	(void)allocBuffers; (void)renderApiData;
 	m_MeshIsValid = true;
 	CRuntimeManager	&manager = CRuntimeManager::Instance();
@@ -629,6 +637,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMesh(const SBuffers
 
 void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views)
 {
+	PK_SCOPEDPROFILE();
 	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
 	if (m_RendererType == Renderer_Mesh)
 		return;
@@ -677,6 +686,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData)
 {
 	(void)renderApiData;
+	PK_SCOPEDPROFILE();
 	u32		perMeshDataSize = sizeof(CFloat4x4);
 	bool	hasDiffuseColor = false;
 	bool	hasEmissiveColor = false;
@@ -931,6 +941,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 
 bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const SGeneratedInputs &toMap, SBillboardBatchJobs *billboardBatch)
 {
+	PK_SCOPEDPROFILE();
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
 	{
 		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Indices != null))
@@ -1066,6 +1077,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 
 bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersGeomBillboards(const SGeneratedInputs &toMap, SGPUBillboardBatchJobs *billboardBatch)
 {
+	PK_SCOPEDPROFILE();
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
 	{
 		if (!PK_VERIFY(m_MappedIdxBuffer != null))
@@ -1189,6 +1201,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersGeomBillboards(con
 
 bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGeneratedInputs &toMap, SRibbonBatchJobs *ribbonBatch)
 {
+	PK_SCOPEDPROFILE();
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
 	{
 		if (!PK_VERIFY(m_ParticleBuffers.m_ViewIndependantGeom.m_Indices != null))
@@ -1327,6 +1340,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 
 bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SGeneratedInputs &toMap, SMeshBatchJobs *meshBatch)
 {
+	PK_SCOPEDPROFILE();
 	if (m_PerMeshBuffers.Count() == 0)
 		return false;
 
@@ -1421,6 +1435,7 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 
 bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SGeneratedInputs &toMap, STriangleBatchJobs *triangleBatch)
 {
+	PK_SCOPEDPROFILE();
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_Indices) != 0)
 	{
 		triangleBatch->m_Exec_Indices.m_IndexStream.m_Indices = m_ParticleBuffers.m_ViewIndependantGeom.m_Indices;

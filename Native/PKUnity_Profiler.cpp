@@ -102,7 +102,7 @@ CLiveProfiler::~CLiveProfiler()
 	m_StatsReports.PopulateArray(data);
 
 	while (data.Count() != 0)
-		PK_FREE(data.Pop().Value());
+		PK_DELETE(data.Pop().Value());
 	m_StatsReports.Clear();
 
 	if (m_AliveStatsMemory != null)

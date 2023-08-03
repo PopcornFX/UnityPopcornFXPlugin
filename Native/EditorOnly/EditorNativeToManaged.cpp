@@ -81,6 +81,7 @@ extern "C"
 
 	void										OnEffectDependencyFound(const char *dependencyPath, int useInfoFlags)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnEffectDependencyFound != null))
 		{
@@ -90,6 +91,7 @@ extern "C"
 
 	void										OnEffectRendererFound(const void *effectRdrDesc, int type, int idx)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnEffectRendererFound != null))
 		{
@@ -99,6 +101,7 @@ extern "C"
 
 	void										OnEffectEventFound(const SFxEventDesc *effectEventDesc)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnEffectEventFound != null))
 		{
@@ -109,6 +112,7 @@ extern "C"
 
 	void										OnEffectAttributeFound(const SFxAttributeDesc *attribDesc)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnEffectAttributeFound != null))
 		{
@@ -118,6 +122,7 @@ extern "C"
 
 	void										OnEffectSamplerFound(const SFxSamplerDesc *samplerDesc)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnEffectSamplerFound != null))
 		{
@@ -127,6 +132,7 @@ extern "C"
 
 	void										OnGetEffectInfo(int usesMeshParticles)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnGetEffectInfo != null))
 		{
@@ -136,6 +142,7 @@ extern "C"
 
 	void										OnEffectAboutToBake(const char *effectName)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnEffectAboutToBake != null))
 		{
@@ -145,6 +152,7 @@ extern "C"
 
 	void										OnAssetChange(const SAssetChangesDesc *assetChanges)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnAssetChange != null))
 		{
@@ -154,6 +162,7 @@ extern "C"
 
 	void										OnGetAllAssetPath(const char **pathArray, int size)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnGetAllAssetPath != null))
 		{
@@ -163,6 +172,7 @@ extern "C"
 
 	void										OnPkkgExtracted(const char *dirPath)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnPkkgExtracted != null))
 		{

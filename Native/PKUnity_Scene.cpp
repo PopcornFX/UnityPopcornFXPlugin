@@ -38,8 +38,6 @@ CPKFXScene::CPKFXScene()
 ,	m_ParticleMeshMediumCollection(null)
 ,	m_ParticleMeshFrameCollector(null)
 ,	m_UpdateMode(UpdateMode_Standard)
-,	m_RenderThread(0)
-,	m_RenderThreadIsSet(false)
 ,	m_EnableRaycastCollisions(false)
 ,	m_IsSingleThreaded(false)
 ,	m_WaitForUpdateOnRenderThread(false)
@@ -298,14 +296,11 @@ void	CPKFXScene::LaunchUpdate(float dt)
 void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 {
 	(void)view;
-	PK_NAMEDSCOPEDPROFILE_C("CPKFXScene: BuildDrawCalls", CFloat3(0.0f, 0.6f, 1.0f));
+	PK_NAMEDSCOPEDPROFILE("CPKFXScene: BuildDrawCalls");
 #if		defined(PK_DURANGO)
 	PK_TODO("Gore hack for Durango. revise the sample lib locks.");
 	PK_SCOPEDLOCK(m_test);
 #endif
-
-	if (!RenderThreadIsSet())
-		SetRenderThread();
 
 	if (!m_RenderContext.m_RenderApiData)
 	{
@@ -418,7 +413,7 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 
 	if (!m_EnableRaycastCollisions)
 	{
-		PK_NAMEDSCOPEDPROFILE_C("CParticleSceneInterface: RayTracePacket Collision Mesh", CFloat3(0.0f, 0.6f, 1.0f));
+		PK_NAMEDSCOPEDPROFILE("CParticleSceneInterface: RayTracePacket Collision Mesh");
 
 		if (m_CollisionMesh != null)
 		{
@@ -430,7 +425,7 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 	}
 	else
 	{
-		PK_NAMEDSCOPEDPROFILE_C("CParticleSceneInterface: RayTracePacket Dynamic Collision", CFloat3(0.0f, 0.6f, 1.0f));
+		PK_NAMEDSCOPEDPROFILE("CParticleSceneInterface: RayTracePacket Dynamic Collision");
 
 		const CFloat4	*origins = packet.m_RayOrigins_Aligned16.Data();
 		const CFloat4	*directions = packet.m_RayDirectionsAndLengths_Aligned16.Data();

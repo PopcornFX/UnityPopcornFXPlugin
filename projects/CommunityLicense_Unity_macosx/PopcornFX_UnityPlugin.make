@@ -18,6 +18,16 @@ ifeq ($(config),debug_x64)
   PK_RenderHelpers_SDK1_config = debug_x64
   PK_IntegrationUnity_config = debug_x64
 
+else ifeq ($(config),debug_arm64)
+  PK_Runtime_SDK1_config = debug_arm64
+  PK_Discretizers_SDK1_config = debug_arm64
+  PK_ParticlesToolbox_SDK1_config = debug_arm64
+  PK_AssetBakerLib_config = debug_arm64
+  PK_ImporterLib_config = debug_arm64
+  PK_UpgraderLib_config = debug_arm64
+  PK_RenderHelpers_SDK1_config = debug_arm64
+  PK_IntegrationUnity_config = debug_arm64
+
 else ifeq ($(config),release_x64)
   PK_Runtime_SDK1_config = release_x64
   PK_Discretizers_SDK1_config = release_x64
@@ -27,6 +37,16 @@ else ifeq ($(config),release_x64)
   PK_UpgraderLib_config = release_x64
   PK_RenderHelpers_SDK1_config = release_x64
   PK_IntegrationUnity_config = release_x64
+
+else ifeq ($(config),release_arm64)
+  PK_Runtime_SDK1_config = release_arm64
+  PK_Discretizers_SDK1_config = release_arm64
+  PK_ParticlesToolbox_SDK1_config = release_arm64
+  PK_AssetBakerLib_config = release_arm64
+  PK_ImporterLib_config = release_arm64
+  PK_UpgraderLib_config = release_arm64
+  PK_RenderHelpers_SDK1_config = release_arm64
+  PK_IntegrationUnity_config = release_arm64
 
 else
   $(error "invalid configuration $(config)")
@@ -113,7 +133,9 @@ help:
 	@echo ""
 	@echo "CONFIGURATIONS:"
 	@echo "  debug_x64"
+	@echo "  debug_arm64"
 	@echo "  release_x64"
+	@echo "  release_arm64"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"

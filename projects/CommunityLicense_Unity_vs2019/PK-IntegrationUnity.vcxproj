@@ -179,6 +179,9 @@
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityGraphicsD3D9.h" />
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityGraphicsVulkan.h" />
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityInterface.h" />
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityLog.h" />
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityProfiler.h" />
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityProfilerCallbacks.h" />
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityRenderingExtensions.h" />
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityShaderCompilerAccess.h" />
     <ClInclude Include="..\..\Native\precompiled\precompiled.h" />

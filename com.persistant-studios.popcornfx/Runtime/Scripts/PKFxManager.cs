@@ -235,6 +235,9 @@ namespace PopcornFX
 					settings.m_WorkerAffinities = IntPtr.Zero;
 				}
 			}
+
+			settings.m_CPPMarkerMaxDepth = PKFxSettings.CPPMarkersMaxDepth;
+
 			PKFxManagerImpl.PopcornFXStartup(ref settings);
 			if (settings.m_WorkerAffinities != IntPtr.Zero)
 			{

@@ -234,6 +234,15 @@
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityInterface.h">
       <Filter>Headers\UnityGraphicsAPI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityLog.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityProfiler.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityProfilerCallbacks.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityRenderingExtensions.h">
       <Filter>Headers\UnityGraphicsAPI</Filter>
     </ClInclude>

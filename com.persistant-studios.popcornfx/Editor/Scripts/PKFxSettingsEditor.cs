@@ -54,6 +54,7 @@ namespace PopcornFX
 		public static GUIContent vertexBufferSizeMultiplicatorLabel = new GUIContent(" Vertex buffer size multiplicator");
 		public static GUIContent indexBufferSizeMultiplicatorLabel = new GUIContent(" Index buffer size multiplicator");
 
+		public static GUIContent CPPMarkersDepthLabel = new GUIContent(" Max depth profiling markers");
 		public static GUIContent profilerSceneParticleBudgetLabel = new GUIContent(" Particle Budget for Frame");
 		public static GUIContent profilerPerEffectParticleBudgetLabel = new GUIContent(" Particle budget for individual effects");
 		public static GUIContent profilerSceneTimeBudgetLabel = new GUIContent(" Time budget for frame (in seconds)");
@@ -378,12 +379,7 @@ namespace PopcornFX
 
 			}
 			EditorGUILayout.EndHorizontal();
-#if UNITY_EDITOR_OSX
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.LabelField("Bake of PopcornFX Effects inside Unity MacOS is disabled.", boldStyleRed);
-		EditorGUILayout.EndHorizontal();
-#else
-#endif
+
 			EditorGUILayout.BeginHorizontal();
 			bool hotreload = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.hotreloadLabel, PKFxSettings.EnableEffectHotreload);
 			if (hotreload != PKFxSettings.EnableEffectHotreload)
@@ -476,6 +472,7 @@ namespace PopcornFX
 			PKFxSettings.ProfilerSceneBudgetInSeconds = Mathf.Max(0, EditorGUILayout.FloatField(PKFxSettingsUIUtils.profilerSceneTimeBudgetLabel, PKFxSettings.ProfilerSceneBudgetInSeconds));
 			PKFxSettings.ProfilerSceneParticleBudget = (uint)Mathf.Max(0, EditorGUILayout.IntField(PKFxSettingsUIUtils.profilerSceneParticleBudgetLabel, (int)PKFxSettings.ProfilerSceneParticleBudget));
 			EditorGUI.indentLevel--;
+			PKFxSettings.CPPMarkersMaxDepth = (uint)EditorGUILayout.IntSlider(PKFxSettingsUIUtils.CPPMarkersDepthLabel, (int)PKFxSettings.CPPMarkersMaxDepth, 1, 32);
 			EditorGUI.indentLevel--;
 		}
 

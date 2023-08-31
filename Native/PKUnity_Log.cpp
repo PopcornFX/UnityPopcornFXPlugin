@@ -30,7 +30,7 @@ void	CUnityLog::Notify(CLog::ELogLevel level, CGuid logClass, const char *messag
 	(void)logClass;
 	while (m_CurrentLogWrite->Count() >= m_MaxLogsCount && m_CurrentLogWrite->Count() != 0)
 		m_CurrentLogWrite->PopFrontAndDiscard();
-	if (m_IgnoreLogs)
+	if (m_IgnoreLogs || m_MaxLogsCount == 0)
 		return;
 	SPopcornLogData	log = { message, level };
 	m_CurrentLogWrite->PushBack(log);

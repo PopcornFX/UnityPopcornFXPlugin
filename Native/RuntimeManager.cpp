@@ -1298,14 +1298,6 @@ void	CRuntimeManager::ExecDelayedManagedToNativeMethods()
 	}
 	m_ToKill.Clear();
 
-#if 0	// NOTE(Julien): 'TransformAllParticles' is a no-op in v2.0
-	PK_FOREACH(it, m_TransformAllParticles)
-	{
-		_ExecTransformAllParticles(it->m_Transform);
-	}
-	m_TransformAllParticles.Clear();
-#endif
-
 	PK_FOREACH(it, m_UpdateCamDesc)
 	{
 		_ExecUpdateCamDesc(it->m_CamID, it->m_Desc, it->m_Update);

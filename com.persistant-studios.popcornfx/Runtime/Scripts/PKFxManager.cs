@@ -104,6 +104,7 @@ namespace PopcornFX
 
 		public static void ResetAndUnloadAllEffects()
 		{
+			PKFxManagerImpl.UnloadAllFxDependencies();
 			PKFxManagerImpl.DeepReset();
 		}
 

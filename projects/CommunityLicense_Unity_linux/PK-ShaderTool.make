@@ -40,8 +40,8 @@ TARGETDIR = ../../../release/builds/x64_Samples
 TARGET = $(TARGETDIR)/PK-ShaderTool_linux_d
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-ShaderTool
 DEFINES += -D_DEBUG -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-SampleLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-MCPP_d.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PKM_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Plugin_CodecImage_HDR_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Discretizers_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lPK-ZLib_d -ldl -lpthread -lbfd -lGL -lGLX -lX11 -lvulkan
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-SampleLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-MCPP_d.a
 
@@ -50,8 +50,8 @@ TARGETDIR = ../../../release/builds/x64_Samples
 TARGET = $(TARGETDIR)/PK-ShaderTool_linux_r
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-ShaderTool
 DEFINES += -DNDEBUG -DPK_BUILD_WITH_FMODEX_SUPPORT=0 -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-SampleLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-MCPP_r.a -lPK-RHI -lPK-RenderHelpers -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PKM_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Plugin_CodecImage_HDR_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Discretizers_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lPK-ZLib_r -ldl -lpthread -lbfd -lGL -lGLX -lX11 -lvulkan
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-SampleLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-MCPP_r.a
 

@@ -297,7 +297,6 @@ private:
 	TArray<STerminateFx>						m_ToTerminate;
 	TArray<SStopFx>								m_ToStop;
 	TArray<SKillFx>								m_ToKill;
-	TArray<STransformAllParticles>				m_TransformAllParticles;
 	TArray<SUpdateCamDesc>						m_UpdateCamDesc;
 	TArray<CGuid>								m_FxStopped;
 

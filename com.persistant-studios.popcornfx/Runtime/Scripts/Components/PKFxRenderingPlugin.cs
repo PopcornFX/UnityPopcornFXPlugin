@@ -12,9 +12,6 @@ namespace PopcornFX
 	[RequireComponent(typeof(PKFxLogger))]
 	public class PKFxRenderingPlugin : MonoBehaviour
 	{
-		// Static data
-		private static int g_LastFrameCount = -1;
-
 		// Exposed in "Advanced" Editor
 		[Tooltip("Loads a user-defined mesh to be used for particles world collisions.")]
 		[HideInInspector]
@@ -132,6 +129,8 @@ namespace PopcornFX
 			PKFxManager.SetMaxCameraCount(MaxCameraSupport());
 		}
 
+		//----------------------------------------------------------------------------
+
 		public void UpdateSimulation()
 		{
 			_LateUpdate();
@@ -141,8 +140,6 @@ namespace PopcornFX
 
 		void Update()
 		{
-			float frameDt = Time.smoothDeltaTime * TimeMultiplier;
-
 			for (int i = 0; i < m_Cameras.Count; ++i)
 			{
 				if (i < MaxCameraSupport())
@@ -165,19 +162,15 @@ namespace PopcornFX
 
 		void _LateUpdate()
 		{
-			if (g_LastFrameCount != Time.frameCount)
-			{
-				PKFxManager.UpdateParticles();
+			PKFxManager.UpdateParticles();
 
-				for (int i = 0; i < m_Cameras.Count; ++i)
+			for (int i = 0; i < m_Cameras.Count; ++i)
+			{
+				if (i < MaxCameraSupport())
 				{
-					if (i < MaxCameraSupport())
-					{
-						m_Cameras[i].LateUpdateCamera();
-					}
+					m_Cameras[i].LateUpdateCamera();
 				}
 			}
-
 			PKFxManager.DrawMeshRenderers();
 		}
 

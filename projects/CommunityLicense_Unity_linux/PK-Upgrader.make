@@ -39,8 +39,8 @@ TARGETDIR = ../../../release/application/BinariesGM_linux_x64_d
 TARGET = $(TARGETDIR)/PK-Upgrader
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Debug/PK-Upgrader
 DEFINES += -D_DEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a -lPK-ParticlesToolbox_d -lPK-Runtime_d -lbfd -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_d.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
@@ -50,8 +50,8 @@ TARGETDIR = ../../../release/application/BinariesGM_linux_x64_r
 TARGET = $(TARGETDIR)/PK-Upgrader
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Release/PK-Upgrader
 DEFINES += -DNDEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a -lPK-ParticlesToolbox_r -lPK-Runtime_r -lbfd -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_r.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64
@@ -61,8 +61,8 @@ TARGETDIR = ../../../release/application/BinariesGM_linux_x64_r
 TARGET = $(TARGETDIR)/PK-Upgrader_s
 OBJDIR = ../intermediate/CommunityLicense_Unity/GM/x64/Retail/PK-Upgrader
 DEFINES += -DNDEBUG -DPK_RETAIL
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpmath=sse -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a -lPK-ParticlesToolbox_s -lPK-Runtime_s -lbfd -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64/libPK-ImporterLib_s.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/CommunityLicense_Unity/gmake_linux_x64 -L/usr/lib64 -m64 -s

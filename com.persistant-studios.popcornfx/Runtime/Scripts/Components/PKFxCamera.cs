@@ -42,10 +42,8 @@ namespace PopcornFX
 		public static Material			m_DistortionMat = null;
 		public static Material			m_BlurMat = null;
 
-
-		//----------------------------------------------------------------------------
-
-		private bool _updated = false; // Used only when PKFxManager.m_HasSRP is true
+		private bool					m_EnableDistortion = false;
+		private bool					m_EnableBlur = false;
 
 		//----------------------------------------------------------------------------
 
@@ -182,6 +180,9 @@ namespace PopcornFX
 			//Enable depth texture on mobile
 			if (PKFxSettings.EnableSoftParticles)
 				m_Camera.depthTextureMode = DepthTextureMode.Depth;
+
+			m_EnableDistortion = PKFxSettings.EnableDistortion;
+			m_EnableBlur = PKFxSettings.EnableBlur;
 		}
 
 		internal void SetCullingMask(short ID, LayerMask targetMask, LayerMask allPKMask)
@@ -266,10 +267,7 @@ namespace PopcornFX
 			m_CurrentFrameID++;
 			UpdateFrame();
 
-			bool enableDistortion = PKFxSettings.EnableDistortion;
-			bool enableBlur = PKFxSettings.EnableBlur;
-
-			if (enableBlur || enableDistortion)
+			if (m_EnableDistortion || m_EnableBlur)
 			{
 				if (SetupDistortionPassIFN())
 				{
@@ -293,11 +291,11 @@ namespace PopcornFX
 					// Now we get a tmp render target to blur the camera RT:
 					m_CommandBuffer.GetTemporaryRT(m_CameraIDRT, m_Camera.pixelWidth, m_Camera.pixelHeight);
 
-					if (enableBlur && enableDistortion == false)
+					if (m_EnableBlur && m_EnableDistortion == false)
 						m_CommandBuffer.Blit(BuiltinRenderTextureType.CameraTarget, m_CameraIDRT, m_BlurMat);
 					else
 						m_CommandBuffer.Blit(BuiltinRenderTextureType.CameraTarget, m_CameraIDRT, m_DistortionMat);
-					if (enableDistortion && enableBlur)
+					if (m_EnableDistortion && m_EnableBlur)
 						m_CommandBuffer.Blit(m_CameraIDRT, BuiltinRenderTextureType.CameraTarget, m_BlurMat);
 					else
 						m_CommandBuffer.Blit(m_CameraIDRT, BuiltinRenderTextureType.CameraTarget);
@@ -311,7 +309,6 @@ namespace PopcornFX
 				if (-1 != m_CameraIDRT)
 					m_CommandBuffer.ReleaseTemporaryRT(m_CameraIDRT);
 			}
-			_updated = true;
 		}
 
 		//----------------------------------------------------------------------------
@@ -321,11 +318,7 @@ namespace PopcornFX
 			if (m_LastFrameCount != Time.frameCount)
 			{
 				m_LastFrameCount = Time.frameCount;
-				if (_updated)
-				{
-					_updated = false;
-					_Render();
-				}
+				_Render();
 			}
 		}
 

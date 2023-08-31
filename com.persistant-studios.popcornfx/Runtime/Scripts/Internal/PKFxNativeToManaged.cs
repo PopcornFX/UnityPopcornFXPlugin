@@ -375,6 +375,50 @@ namespace PopcornFX
 			string path = Marshal.PtrToStringAnsi(pathHandler);
 			string ext = Path.GetExtension(path);
 
+			if (m_CurrentlyBuildAsset != null) // preferered path for loading dependencies.
+			{
+				if (ext == ".pkfx" && m_CurrentlyBuildAsset.AssetVirtualPath == path)
+				{ 
+					var pinned = PinnedData.PinAsset(m_CurrentlyBuildAsset);
+					handler = pinned;
+					return (ulong)m_CurrentlyBuildAsset.m_Data.Length;
+				}
+				foreach (PKFxEffectAsset.DependencyDesc dependency in m_CurrentlyBuildAsset.m_Dependencies)
+				{
+					if (dependency.m_Path == path)
+					{
+						Texture2D		depTex = dependency.m_Object as Texture2D;
+						PKFxAsset		pkfxDependency = dependency.m_Object as PKFxAsset;
+						if (pkfxDependency)
+						{
+							var pinned = PinnedData.PinAsset(pkfxDependency);
+							handler = pinned;
+							return (ulong)pkfxDependency.m_Data.Length;
+						}
+						else if (depTex)
+						{
+							ulong len = PinnedData.PinTexture(depTex, ref handler);
+							return len;
+						}
+						// Need to handle vectorfield files when implemented
+					}
+				}
+			}
+			// failing that, check if we have it in the runtime resources
+			if (m_RuntimeAssets != null && m_RuntimeAssets.Count > 0)
+			{
+				foreach (GameObject go in m_RuntimeAssets)
+				{
+					PKFxRuntimeMeshAsset asset = go.GetComponent<PKFxRuntimeMeshAsset>();
+					if (asset.m_AssetVirtualPath == path)
+					{
+						var pinned = PinnedData.PinAsset(asset);
+						handler = pinned;
+						return (ulong)asset.m_Data.Length;
+					}
+				}
+			}
+			// On last resort: Load via general array of dependencies.
 			if (m_Dependencies != null)
 			{
 				if (PKFxUtils.ArrayContains(s_CustomFileTypes, ext))
@@ -386,6 +430,8 @@ namespace PopcornFX
 						{
 							var pinned = PinnedData.PinAsset(asset);
 							handler = pinned;
+
+							Debug.LogWarning("[PopcornFX] Perfomance issue: " + path + " found in general dependencies.");
 							return (ulong)asset.m_Data.Length;
 						}
 					}
@@ -397,22 +443,10 @@ namespace PopcornFX
 						if (t.m_Path == path)
 						{
 							ulong len = PinnedData.PinTexture(t.m_Texture, ref handler);
+							
+							Debug.LogWarning("[PopcornFX] Perfomance issue: " + path + " found in general dependencies.");
 							return len;
 						}
-					}
-				}
-			}
-			if (m_RuntimeAssets != null && m_RuntimeAssets.Count > 0)
-			{
-				// failing that, check if we have it in the runtime resources
-				foreach (GameObject go in m_RuntimeAssets)
-				{
-					PKFxRuntimeMeshAsset asset = go.GetComponent<PKFxRuntimeMeshAsset>();
-					if (asset.m_AssetVirtualPath == path)
-					{
-						var pinned = PinnedData.PinAsset(asset);
-						handler = pinned;
-						return (ulong)asset.m_Data.Length;
 					}
 				}
 			}
@@ -998,7 +1032,7 @@ namespace PopcornFX
 		{
 			bool hasBeenResized = false;
 
-			if (mesh.vertexCount < usedVertexCount)
+			if (renderer.m_VertexCount < usedVertexCount)
 			{
 				// We only do the transition from uint16 to uint32 because the transition clear the index buffer...
 				if (useLargeIdx == true && mesh.indexFormat == IndexFormat.UInt16)
@@ -1006,79 +1040,76 @@ namespace PopcornFX
 				else if (useLargeIdx == false && mesh.indexFormat == IndexFormat.UInt32)
 					mesh.indexFormat = IndexFormat.UInt16;
 
-				int uvIdxForEmissive = 0;
 				mesh.Clear();
 
-				mesh.vertices = new Vector3[reservedVertexCount];		// positions
+				VertexAttribute uvIdxForEmissive = 0;
+
+				List<VertexAttributeDescriptor> layout = new List<VertexAttributeDescriptor>();
+				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Position, VertexAttributeFormat.Float32, 3));			// positions
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
 				{
-					mesh.colors = new Color[reservedVertexCount];		// color
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4));			// color
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
 				{
-					mesh.normals = new Vector3[reservedVertexCount];	// normal
-					mesh.tangents = new Vector4[reservedVertexCount];	// tangent
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Normal, VertexAttributeFormat.Float32, 3));		// normal
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Tangent, VertexAttributeFormat.Float32, 4));		// tangent
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
 				{
-					mesh.uv = new Vector2[reservedVertexCount];			// uvFactors
-					mesh.uv2 = new Vector2[reservedVertexCount];		// uvScale
-					mesh.uv3 = new Vector2[reservedVertexCount];		// uvOffset
-					uvIdxForEmissive = 3;
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uvFactors
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// uvScale
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));		// uvOffset
+					uvIdxForEmissive = VertexAttribute.TexCoord3;
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
-						mesh.uv4 = new Vector2[reservedVertexCount];	// alpha cursor
-						uvIdxForEmissive = 4;
-
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord3, VertexAttributeFormat.Float32, 2));	// alpha cursor
+						mesh.uv4 = new Vector2[reservedVertexCount];    
+						uvIdxForEmissive = VertexAttribute.TexCoord4;
 					}
 				}
 				else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
 				{
-					mesh.uv = new Vector2[reservedVertexCount];			// uv0
-					mesh.uv2 = new Vector2[reservedVertexCount];		// uv1
-					mesh.uv3 = new Vector2[reservedVertexCount];		// atlas id and if Has_AlphaRemap, alpha cursor
-					uvIdxForEmissive = 3;
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uv0
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// uv1
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));		// atlas id and if Has_AlphaRemap, alpha cursor
+					uvIdxForEmissive = VertexAttribute.TexCoord3;
 				}
 				else
 				{
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) ||
 						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 					{
-						mesh.uv = new Vector2[reservedVertexCount];		// uv0
-						uvIdxForEmissive = 1;
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));	// uv0
+						uvIdxForEmissive = VertexAttribute.TexCoord1;
 					}
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
-						mesh.uv2 = new Vector2[reservedVertexCount];	// alpha cursor
-						uvIdxForEmissive = 2;
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2)); // alpha cursor
+						uvIdxForEmissive = VertexAttribute.TexCoord2;
 					}
 				}
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 				{
-					mesh.SetUVs(uvIdxForEmissive, new Vector3[reservedVertexCount]);	// emissive color
+					layout.Add(new VertexAttributeDescriptor(uvIdxForEmissive, VertexAttributeFormat.Float32, 2)); // emissive color
 				}
+
+				mesh.SetVertexBufferParams((int)reservedVertexCount, layout.ToArray());
+				renderer.m_VertexCount = (int)reservedVertexCount;
 
 				hasBeenResized = true;
 			}
 
-			if (mesh.GetIndexCount(0) < usedIndexCount)
+			if (renderer.m_IndexCount < usedIndexCount)
 			{
-				int[] triangles = new int[reservedIndexCount];			// index
-#if UNITY_PS4 || UNITY_PS5
-				// fix to set the right vertex buffer size on PS4 and PS5 : fill the index buffer with vertex ids
-#	if UNITY_PS4
-				if (Application.platform == RuntimePlatform.PS4)
-#	elif UNITY_PS5
-				if (Application.platform == RuntimePlatform.PS5)
-#	endif
-				{
-					for (int i = 0; i < mesh.vertexCount; ++i)
-						triangles[i] = i;
-				}
-#endif
-				mesh.triangles = triangles;
+				mesh.SetIndexBufferParams((int)reservedIndexCount, mesh.indexFormat);
+				renderer.m_IndexCount = (int)reservedIndexCount;
+
+				mesh.subMeshCount = 1;
+				mesh.SetSubMesh(0, new SubMeshDescriptor(0, (int)reservedIndexCount), MeshUpdateFlags.DontRecalculateBounds);
+
 				hasBeenResized = true;
 			}
 
@@ -1220,8 +1251,9 @@ namespace PopcornFX
 				if (renderer.m_Slice != null)
 				{
 					Mesh currentRendererMesh = renderer.m_Slice.mesh;
-					int indexCount = (int)currentRendererMesh.GetIndexCount(0);
-					int vertexCount = currentRendererMesh.vertexCount;
+
+					int indexCount = renderer.m_IndexCount;
+					int vertexCount = renderer.m_VertexCount;
 
 					if (rendererInfo.m_UseComputeBuffers != IntPtr.Zero)
 					{

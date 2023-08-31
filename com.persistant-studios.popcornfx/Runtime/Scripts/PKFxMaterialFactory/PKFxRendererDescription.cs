@@ -723,6 +723,10 @@ namespace PopcornFX
 	public class SMeshDesc
 	{
 		public MeshFilter m_Slice;
+
+		public int m_VertexCount;
+		public int m_IndexCount;
+
 		public PKFxProceduralRenderer m_Procedural;
 		public Material m_Material;
 		public GameObject m_RenderingObject;

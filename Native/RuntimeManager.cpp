@@ -775,6 +775,7 @@ bool	CRuntimeManager::PopcornFXChangeSettings(const SPopcornFxSettings &settings
 
 	m_PopcornFXRuntimeData->m_SoundRenderer = settings.m_SoundRendererEnabled == ManagedBool_True ? true : false;
 
+	g_MaxDepthProfiling = settings.m_CPPMarkerMaxDepth;
 
 	Scheduler::SetThreadPool(_CreateCustomThreadPool());
 	CRuntimeManager::SPopcornFXRuntimeData::m_Settings = null;
@@ -1388,14 +1389,6 @@ void	CRuntimeManager::ExecDelayedManagedToNativeMethods()
 		_ExecKillFx(it->m_Guid);
 	}
 	m_ToKill.Clear();
-
-#if 0	// NOTE(Julien): 'TransformAllParticles' is a no-op in v2.0
-	PK_FOREACH(it, m_TransformAllParticles)
-	{
-		_ExecTransformAllParticles(it->m_Transform);
-	}
-	m_TransformAllParticles.Clear();
-#endif
 
 	PK_FOREACH(it, m_UpdateCamDesc)
 	{

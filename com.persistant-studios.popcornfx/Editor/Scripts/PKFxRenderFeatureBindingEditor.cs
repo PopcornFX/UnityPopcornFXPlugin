@@ -129,17 +129,23 @@ namespace PopcornFX
 				for (int i = 0; i < ArraySize; i++)
 				{
 					SerializedProperty type = RenderTypes.GetArrayElementAtIndex(i);
-
-					EditorGUILayout.BeginHorizontal();
 					ERendererType rendererType = (ERendererType)i;
-					bool disabledGroup = bindingHasMeshRenderer && rendererType != ERendererType.Mesh;
-					EditorGUI.BeginDisabledGroup(disabledGroup);
-					EditorGUILayout.LabelField(_RendererTypeToString(rendererType));
-					if (disabledGroup)
-						type.boolValue = false;
-					type.boolValue = EditorGUILayout.Toggle(type.boolValue);
-					EditorGUI.EndDisabledGroup();
-					EditorGUILayout.EndHorizontal();
+
+					if (_RendererTypeIsSupported(rendererType))
+					{
+						EditorGUI.BeginDisabledGroup(!_RendererTypeShouldHaveBindings(rendererType));
+						EditorGUILayout.BeginHorizontal();
+						bool disabledGroup = bindingHasMeshRenderer && rendererType != ERendererType.Mesh;
+						EditorGUI.BeginDisabledGroup(disabledGroup);
+						EditorGUILayout.LabelField(_RendererTypeToString(rendererType));
+						if (disabledGroup)
+							type.boolValue = false;
+						type.boolValue = EditorGUILayout.Toggle(type.boolValue);
+						EditorGUI.EndDisabledGroup();
+						EditorGUILayout.EndHorizontal();
+						EditorGUI.EndDisabledGroup();
+
+					}
 				}
 				if (RenderTypes.GetArrayElementAtIndex((int)ERendererType.Billboard).boolValue)
 				{
@@ -252,9 +258,61 @@ namespace PopcornFX
 			case ERendererType.Triangle:
 				result = "Triangle";
 				break;
+			case ERendererType.Decal:
+				result = "Decal";
+				break;
+			case ERendererType.Sound:
+				result = "Sound";
+				break;
+			case ERendererType.Light:
+				result = "Light";
+				break;
 			default:
 				result = "Renderer not supported";
 				break;
+			}
+			return result;
+		}
+
+		public bool _RendererTypeIsSupported(ERendererType type)
+		{
+			bool result;
+			switch (type)
+			{
+				case ERendererType.Billboard:
+				case ERendererType.Ribbon:
+				case ERendererType.Mesh:
+				case ERendererType.Triangle:
+				case ERendererType.Sound:
+				case ERendererType.Light:
+					result = true;
+					break;
+				case ERendererType.Decal:
+				default:
+					result = false;
+					break;
+			}
+			return result;
+		}
+
+
+		public bool _RendererTypeShouldHaveBindings(ERendererType type)
+		{
+			bool result;
+			switch (type)
+			{
+				case ERendererType.Billboard:
+				case ERendererType.Ribbon:
+				case ERendererType.Mesh:
+				case ERendererType.Triangle:
+					result = true;
+					break;
+				case ERendererType.Sound:
+				case ERendererType.Light:
+				case ERendererType.Decal:
+				default:
+					result = false;
+					break;
 			}
 			return result;
 		}

@@ -52,6 +52,8 @@ extern "C"
 		int						m_RaycastHitSize;
 		int						m_RaycastCommandSize;
 
+		unsigned int			m_CPPMarkerMaxDepth;
+
 		void					PrettyPrintSettings() const
 		{
 			CString	settings = "";

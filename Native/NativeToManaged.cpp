@@ -222,6 +222,7 @@ extern "C"
 
 	void	OnRaycastStart(int count, void **cmd)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
@@ -235,6 +236,7 @@ extern "C"
 
 	void	OnRaycastEnd()
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
@@ -451,6 +453,7 @@ extern "C"
 
 	void	OnSetLightsBuffer(void *lightInfos, int count)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetLightsBuffer not called on main thread: callback ignored");
@@ -464,6 +467,7 @@ extern "C"
 
 	void	OnSetSoundsBuffer(void *soundInfos, int count)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetSoundsBuffer not called on main thread: callback ignored");

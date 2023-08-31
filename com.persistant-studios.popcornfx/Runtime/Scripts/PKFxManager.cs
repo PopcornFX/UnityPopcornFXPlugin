@@ -119,6 +119,7 @@ namespace PopcornFX
 
 		public static void ResetAndUnloadAllEffects()
 		{
+			PKFxManagerImpl.UnloadAllFxDependencies();
 			PKFxManagerImpl.DeepReset();
 		}
 
@@ -256,6 +257,8 @@ namespace PopcornFX
 
 			settings.m_RaycastHitSize = UnsafeUtility.SizeOf<RaycastHit>();
 			settings.m_RaycastCommandSize = UnsafeUtility.SizeOf<RaycastCommand>();
+
+			settings.m_CPPMarkerMaxDepth = PKFxSettings.CPPMarkersMaxDepth;
 
 			PKFxManagerImpl.PopcornFXStartup(ref settings);
 			if (settings.m_WorkerAffinities != IntPtr.Zero)

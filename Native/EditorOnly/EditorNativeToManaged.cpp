@@ -107,6 +107,7 @@ extern "C"
 
 	void										OnEffectRendererLink(int globalIdx, const char *currentQualityLevel, int uid)
 	{
+		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());
 		if (PK_VERIFY(_OnEffectRendererLink != null))
 		{

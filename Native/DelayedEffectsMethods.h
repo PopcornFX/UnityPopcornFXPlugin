@@ -45,11 +45,6 @@ struct	SOnFxStopped
 	bool	operator==(const SOnFxStopped &oth) const { return m_Guid == oth.m_Guid; }
 };
 
-struct	STransformAllParticles
-{
-	CFloat4x4	m_Transform;
-};
-
 struct	SUpdateCamDesc
 {
 	int			m_CamID;

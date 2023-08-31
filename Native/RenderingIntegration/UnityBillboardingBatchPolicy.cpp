@@ -575,6 +575,7 @@ bool	CUnityBillboardingBatchPolicy::AreBillboardingBatchable(const PCRendererCac
 
 bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const SDrawCallDesc &toEmit, SUnityDrawOutputs &output)
 {
+	PK_SCOPEDPROFILE();
 	if (toEmit.m_Renderer == Renderer_Light)
 	{
 		m_LightDatas.Clear();
@@ -612,6 +613,7 @@ bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const
 
 bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallLight(const Drawers::SLight_DrawRequest *lightRequest, CUnityRendererCache *rdrCache)
 {
+	PK_SCOPEDPROFILE();
 	(void)rdrCache;
 
 	const u32		totalParticleCount = lightRequest->RenderedParticleCount();
@@ -705,6 +707,7 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallLight(const Drawe
 
 bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawers::SSound_DrawRequest *soundRequest, CUnityRendererCache *rdrCache, u32 &totalParticleCount)
 {
+	PK_SCOPEDPROFILE();
 	TArray<SSoundInfo>	&soundDatas = CRuntimeManager::Instance().GetScene().GetSoundDatas();
 
 	const u32		drawRequestParticleCount = soundRequest->RenderedParticleCount();
@@ -729,7 +732,7 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 		return true;
 
 
-	const u32	pageCount = lockedStream->PageCount();
+	const u32			pageCount = lockedStream->PageCount();
 
 	for (u32 pagei = 0; pagei < pageCount; ++pagei)
 	{
@@ -779,7 +782,6 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 			const float		soundIdFrac = PopcornFX::PKFrac(soundId) * isBlended;
 			const u32		soundId0 = u32(soundId);
 
-			TArray<SSoundInfo>	&soundDatas = CRuntimeManager::Instance().GetScene().GetSoundDatas();
 			PopcornFX::CGuid	ldatai = soundDatas.PushBack();
 
 			SSoundInfo &soundInfo = soundDatas[ldatai];

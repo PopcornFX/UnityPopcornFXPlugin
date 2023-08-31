@@ -12,12 +12,12 @@
 #include <pk_kernel/include/kr_profiler_details.h>
 #include <pk_particles/include/ps_stats.h>
 
-#include <ManagedToNative.h>
+#include "ManagedToNative.h"
 
 __PK_API_BEGIN
 
-
 //----------------------------------------------------------------------------
+
 class	CMultiReport
 {
 public:
@@ -39,6 +39,8 @@ private:
 	TArray<SReportEntry>	m_Reports;
 	u32						m_NextReport;
 };
+
+//----------------------------------------------------------------------------
 
 class CLiveProfiler
 {
@@ -88,8 +90,10 @@ public:
 
 	void			EnableFrameStats(bool enable) { m_FrameStatsEnabled = enable; }
 	void			EnableEffectsStats(bool enable) { m_EffectsStatsEnabled = enable; }
+
 private:
 	//stats
+
 	u32									m_CurrentFrameNumber = 0;
 	u32									m_NumberOfFrameToAverage = 16;
 
@@ -100,8 +104,11 @@ private:
 
 	 SEffectStatsToFill					*m_AliveStatsMemory = null;
 	 CString							m_AliveNamesMemory;
+
 };
+
 //----------------------------------------------------------------------------
+
 __PK_API_END
 
 #endif

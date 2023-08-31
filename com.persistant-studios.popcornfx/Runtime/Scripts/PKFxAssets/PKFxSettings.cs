@@ -415,6 +415,7 @@ namespace PopcornFX
 		[SerializeField] private float		m_ProfilerPerEffectBudgetInSeconds = 0.0005f;
 		[SerializeField] private uint		m_ProfilerSceneParticleBudget = 10000;
 		[SerializeField] private uint		m_ProfilerPerEffectParticleBudget = 1000;
+		[SerializeField] private uint		m_CPPMarkersMaxDepth = 2;
 
 		[SerializeField] private Color		m_ProfilerColorBudgetExceeded = Color.red;
 		[SerializeField] private Color		m_ProfilerColorBudgetNormal = Color.green;
@@ -445,6 +446,12 @@ namespace PopcornFX
 		{
 			get { return Instance.m_ProfilerSceneParticleBudget; }
 			set { Instance.m_ProfilerSceneParticleBudget = value; }
+		}
+
+		public static uint CPPMarkersMaxDepth
+		{
+			get { return Instance.m_CPPMarkersMaxDepth; }
+			set { Instance.m_CPPMarkersMaxDepth = value; }
 		}
 
 		public static uint ProfilerPerEffectParticleBudget

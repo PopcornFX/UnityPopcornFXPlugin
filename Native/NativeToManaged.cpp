@@ -192,6 +192,7 @@ extern "C"
 
 	unsigned long long	OnResourceLoad(const char *path, void **handler)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnResourceLoad not called on main thread: callback ignored");
@@ -206,6 +207,7 @@ extern "C"
 
 	unsigned long long	OnResourceWrite(const char *path, const void *data, u64 offset, u64 size)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnResourceWrite not called on main thread: callback ignored");
@@ -246,6 +248,7 @@ extern "C"
 
 	void	OnRaycastPack(void **res)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
@@ -259,6 +262,7 @@ extern "C"
 
 	void	OnFxStopped(int guid)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnFxStopped not called on main thread: callback ignored");
@@ -286,6 +290,7 @@ extern "C"
 
 	void	*OnGetAudioWaveformData(const char *name, int *nbSamples)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnGetAudioWaveformData not called on main thread: callback ignored");
@@ -300,6 +305,7 @@ extern "C"
 
 	void	*OnGetAudioSpectrumData(const char *name, int *nbSamples)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnGetAudioSpectrumData not called on main thread: callback ignored");
@@ -314,6 +320,7 @@ extern "C"
 
 	int	OnSetupNewBillboardRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetupNewBillboardRenderer not called on main thread: callback ignored");
@@ -328,6 +335,7 @@ extern "C"
 
 	int	OnSetupNewRibbonRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetupNewRibbonRenderer not called on main thread: callback ignored");
@@ -342,6 +350,7 @@ extern "C"
 
 	int	OnSetupNewMeshRenderer(const SMeshRendererDesc *rendererDesc, int idx)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetupNewMeshRenderer not called on main thread: callback ignored");
@@ -356,6 +365,7 @@ extern "C"
 
 	int	OnSetupNewTriangleRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetupNewTriangleRenderer not called on main thread: callback ignored");
@@ -370,6 +380,7 @@ extern "C"
 
 	ManagedBool	OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnResizeRenderer not called on main thread: callback ignored");
@@ -384,6 +395,7 @@ extern "C"
 
 	void	OnSetParticleCount(int rendererGUID, int particleCount)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetParticleCount not called on main thread: callback ignored");
@@ -397,6 +409,7 @@ extern "C"
 
 	void	OnSetRendererActive(int rendererGUID, ManagedBool active)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetRendererActive not called on main thread: callback ignored");
@@ -410,6 +423,7 @@ extern "C"
 
 	void	OnSetMeshInstancesCount(int rendererGUID, int submesh, int instancesCount)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetMeshInstancesCount not called on main thread: callback ignored");
@@ -423,6 +437,7 @@ extern "C"
 
 	void	OnSetMeshInstancesBuffer(int rendererGUID, int submesh, void *instanceBuffer)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnSetMeshInstancesBuffer not called on main thread: callback ignored");
@@ -463,6 +478,7 @@ extern "C"
 
 	void	OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int *customMaterialID)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnRetrieveCustomMaterialInfo not called on main thread: callback ignored");
@@ -476,6 +492,7 @@ extern "C"
 
 	void	OnRetrieveRendererBufferInfo(int rendererGUID, const SRetrieveRendererInfo *info)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnRetrieveRendererBufferInfo not called on main thread: callback ignored");
@@ -489,6 +506,7 @@ extern "C"
 
 	void	OnUpdateRendererBounds(int rendererGUID, const SUpdateRendererBounds *bounds)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnUpdateRendererBounds not called on main thread: callback ignored");
@@ -502,6 +520,7 @@ extern "C"
 
 	int		OnGetMeshCount(int rendererGUID, int lod)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnGetMeshCount not called on main thread: callback ignored");
@@ -516,6 +535,7 @@ extern "C"
 
 	int	OnGetMeshLODsCount(int rendererGUID)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnGetMeshLODsCount not called on main thread: callback ignored");
@@ -530,6 +550,7 @@ extern "C"
 
 	void	OnGetMeshBounds(int rendererGUID, int submesh, void* bbox)
 	{
+		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
 		{
 			CLog::Log(PK_ERROR, "OnGetMeshBounds not called on main thread: callback ignored");

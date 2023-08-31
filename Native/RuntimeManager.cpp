@@ -76,6 +76,9 @@
 #include "UnityGraphicsAPI/IUnityGraphicsNvn.h"
 #endif
 
+#include <map>
+#include <string>
+
 #if	defined(PK_MACOSX)
 namespace PKFX
 {
@@ -84,6 +87,20 @@ namespace PKFX
 #endif
 
 __PK_API_BEGIN
+
+struct SPkCachePaddedU32
+{
+	u32	m_Depth;
+	u8	m_Padding[Memory::CacheLineSize - sizeof(u32)];
+};
+
+static bool												g_ThreadReentryGuards[CThreadManager::MaxThreadCount] = {0};
+static UnityProfilerThreadId							g_ThreadRegistered[CThreadManager::MaxThreadCount] = {0};
+static std::map<u32, const UnityProfilerMarkerDesc*>	g_UnityMarker[CThreadManager::MaxThreadCount];
+PK_ALIGN(128) SPkCachePaddedU32							g_ThreadProfileRecordDepth[CThreadManager::MaxThreadCount];
+IUnityProfiler											*g_UnityProfiler;
+unsigned int											g_MaxDepthProfiling = 2;
+bool													g_IsDevelopmentBuild = false;
 
 //----------------------------------------------------------------------------
 // Logs and Asserts handlers:
@@ -476,6 +493,8 @@ CRuntimeManager::CRuntimeManager()
 	: m_PopcornFXRuntimeData(null)
 	, m_ReadAudioFromProcessOutput(false)
 	, m_Unloading(false)
+	, m_RenderThread(0)
+	, m_RenderThreadIsSet(false)
 	, m_IsUnitTesting(false)
 	, m_UnityInterfaces(null)
 	, m_UnityGraphics(null)
@@ -494,6 +513,7 @@ CRuntimeManager::CRuntimeManager()
 #endif
 	, m_HasBackgroundTasksToKick(false)
 {
+	memset(g_ThreadProfileRecordDepth, 0, sizeof(g_ThreadProfileRecordDepth));
 }
 
 //----------------------------------------------------------------------------
@@ -511,10 +531,13 @@ bool	CRuntimeManager::IsInstanceInitialized()
 
 //----------------------------------------------------------------------------
 
-bool	CRuntimeManager::InitializeInstanceIFN(const SPopcornFxSettings *settings)
+bool	CRuntimeManager::InitializeInstanceIFN(const SPopcornFxSettings *settings, IUnityInterfaces *unityInterfaces)
 {
 	if (!IsInstanceInitialized())
 	{
+		if (!PK_VERIFY(unityInterfaces != null))
+			return false;
+
 		// Startup PopcornFX:
 		SPopcornFXRuntimeData	*runtimeData = new SPopcornFXRuntimeData();
 
@@ -525,7 +548,7 @@ bool	CRuntimeManager::InitializeInstanceIFN(const SPopcornFxSettings *settings)
 		}
 
 		SPopcornFXRuntimeData::m_Settings = settings;
-		runtimeData->PopcornFXStartup();
+		runtimeData->PopcornFXStartup(unityInterfaces);
 		SPopcornFXRuntimeData::m_Settings = null; // We avoid keeping a pointer to invalid settings after the startup
 
 		// Create the CPKFX manager instance:
@@ -536,6 +559,10 @@ bool	CRuntimeManager::InitializeInstanceIFN(const SPopcornFxSettings *settings)
 			CLog::Log(PK_ERROR, "Could not allocate CRuntimeManager");
 			return false;
 		}
+
+		if (!PK_VERIFY(m_Instance->SetUnityInterfaces(unityInterfaces)))
+			return false;
+
 		if (settings != null)
 		{
 			m_Instance->m_IsUnitTesting = (settings->m_IsUnitTesting == ManagedBool_True);
@@ -553,6 +580,9 @@ bool	CRuntimeManager::InitializeInstanceIFN(const SPopcornFxSettings *settings)
 		}
 		// Setup the runtime data:
 		m_Instance->m_PopcornFXRuntimeData = runtimeData;
+
+		m_Instance->m_RenderThread = CThreadID::INVALID;
+		m_Instance->m_RenderThreadIsSet = false;
 		// Create the scene instance:
 		m_Instance->m_ParticleScene = PK_NEW(CPKFXScene());
 		if (!PK_VERIFY(m_Instance->m_ParticleScene != null))
@@ -737,6 +767,7 @@ void	CRuntimeManager::SetQualityLevelSettings(const char **qualityLevelNames, un
 
 bool	CRuntimeManager::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 {
+	memset(g_ThreadProfileRecordDepth, 0, sizeof(g_ThreadProfileRecordDepth));
 	settings.PrettyPrintSettings();
 	CRuntimeManager::SPopcornFXRuntimeData::m_Settings = &settings;
 	m_PopcornFXRuntimeData->m_GPUBillboarding = settings.m_EnableGPUBillboarding == ManagedBool_True ? true : false;
@@ -804,6 +835,8 @@ bool	CRuntimeManager::PopcornFXShutdown()
 		m_UnityGraphics->UnregisterDeviceEventCallback(OnGraphicsDeviceEvent);
 	}
 
+	memset(g_ThreadProfileRecordDepth, 0, sizeof(g_ThreadProfileRecordDepth));
+
 	m_Unloading = true;
 	File::DefaultFileSystem()->UnmountAllPacks();
 	m_Unloading = false;
@@ -825,7 +858,7 @@ bool	CRuntimeManager::PopcornFXShutdown()
 
 //----------------------------------------------------------------------------
 
-bool	CRuntimeManager::SetUnityInterfaces(IUnityInterfaces* unityInterfaces)
+bool	CRuntimeManager::SetUnityInterfaces(IUnityInterfaces *unityInterfaces)
 {
 	m_UnityInterfaces = unityInterfaces;
 	if (m_UnityInterfaces != null)
@@ -1953,6 +1986,109 @@ void		CRuntimeManager::_ExecOnFxStopped(CGuid fxId)
 
 //----------------------------------------------------------------------------
 
+bool		ProfileRecordEventStart(void *arg, const PopcornFX::Profiler::SNodeDescriptor *nodeDescriptor)
+{
+	(void)arg;
+	if (!g_IsDevelopmentBuild)
+		return false;
+	if (nodeDescriptor == null ||
+		nodeDescriptor->m_Name == null)
+		return false;
+
+	const CThreadID	cThread = PopcornFX::CCurrentThread::ThreadID();
+	if (g_ThreadReentryGuards[cThread] != false)
+		return false;
+	g_ThreadReentryGuards[cThread] = true;
+
+	if (g_ThreadProfileRecordDepth[cThread].m_Depth < g_MaxDepthProfiling)
+	{
+		++g_ThreadProfileRecordDepth[cThread].m_Depth; // increment this thread's counter
+		const u32	id = TTypeHasher<CString>::Hash(nodeDescriptor->m_Name);
+		if (g_UnityMarker[cThread].count(id) == 0)
+		{
+			const UnityProfilerMarkerDesc *marker = null;
+			if (g_UnityProfiler->CreateMarker(&marker, nodeDescriptor->m_Name, kUnityProfilerCategoryOther, kUnityProfilerMarkerFlagDefault, 0) != 0)
+				return false;
+			PK_ASSERT(marker != null);
+			g_UnityMarker[cThread][id] =  marker;
+		}
+		g_UnityProfiler->BeginSample((g_UnityMarker[cThread][id]));
+		g_ThreadReentryGuards[cThread] = false;
+		return true;
+	}
+	g_ThreadReentryGuards[cThread] = false;
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
+void	ProfileRecordEventEnd(void *arg, const PopcornFX::Profiler::SNodeDescriptor *nodeDescriptor)
+{
+	(void)arg;
+	if (nodeDescriptor == null ||
+		nodeDescriptor->m_Name == null)
+		return;
+	if (!g_IsDevelopmentBuild)
+		return;
+
+	const CThreadID	cThread = PopcornFX::CCurrentThread::ThreadID();
+	if (g_ThreadReentryGuards[cThread] != false)
+		return;
+	g_ThreadReentryGuards[cThread] = true;
+
+	const u32	depth = g_ThreadProfileRecordDepth[cThread].m_Depth--; // decrement this thread's counter
+	PK_ASSERT(depth <= g_MaxDepthProfiling); // otherwise, 'StartScopedProfile' should have returned false, and we shouldn't have been called
+	const u32	id = TTypeHasher<CString>::Hash(nodeDescriptor->m_Name);
+	if (g_UnityMarker[cThread].count(id) != 0)
+		g_UnityProfiler->EndSample(g_UnityMarker[cThread][id]);
+	g_ThreadReentryGuards[cThread] = false;
+}
+
+//----------------------------------------------------------------------------
+
+void		ProfileRecordRegisterThread()
+{
+	const CThreadID	cThread = PopcornFX::CCurrentThread::ThreadID();
+	if (g_ThreadRegistered[cThread] == 0 && !CCurrentThread::IsMainThread() && (!CRuntimeManager::Instance().RenderThreadIsSet() || !CRuntimeManager::Instance().IsRenderThread()))
+	{
+		CThread	*thread = CThreadManager::MapThread(cThread);
+		g_UnityProfiler->RegisterThread(&g_ThreadRegistered[cThread], "Popcorn Workers", thread->GetDebugThreadName().Data());
+	}
+}
+
+//----------------------------------------------------------------------------
+
+void		ProfileRecordUnregisterThread()
+{
+	const CThreadID	cThread = PopcornFX::CCurrentThread::ThreadID();
+	if (g_ThreadRegistered[cThread] != 0 && g_UnityProfiler)
+	{
+		g_UnityProfiler->UnregisterThread(g_ThreadRegistered[cThread]);
+		g_ThreadRegistered[cThread] = 0;
+	}
+	g_UnityMarker[cThread].clear();
+	g_ThreadReentryGuards[cThread] = false;
+}
+
+//----------------------------------------------------------------------------
+
+void	CRuntimeManager::ProfileRecordMemoryTransaction(void *arg, sreg bytes)
+{
+	(void)arg;
+	(void)bytes;
+}
+
+//----------------------------------------------------------------------------
+
+void	CRuntimeManager::ProfileRecordThreadDependency(void *arg, PopcornFX::CThreadID other, u32 dFlags)
+{
+	(void)arg;
+	(void)other;
+	(void)dFlags;
+}
+
+//----------------------------------------------------------------------------
+
 CRuntimeManager::CBackgroundTask::CBackgroundTask()
 {
 	m_ExecutionFilter = ExecFilter_BackgroundTask;
@@ -1974,7 +2110,7 @@ void	CRuntimeManager::CBackgroundTask::_VirtualLaunch(Threads::SThreadContext &t
 
 //----------------------------------------------------------------------------
 
-bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup()
+bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup(IUnityInterfaces *unityInterfaces)
 {
 #ifdef	PK_DEBUG
 	const bool	debugMode = true;
@@ -2005,6 +2141,23 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup()
 	// The log is handled by the Unity log listener: it stacks the logs until they are unstacked
 	configKernel.m_AddDefaultLogListeners = &AddDefaultLogListenersOverride;
 	configKernel.m_UserHandle = this;
+
+#if	defined(KR_PROFILER_ENABLED)
+	g_UnityProfiler = unityInterfaces->Get<IUnityProfiler>();
+	if (g_UnityProfiler != NULL)
+		g_IsDevelopmentBuild = g_UnityProfiler->IsAvailable() != 0;
+
+	if (g_IsDevelopmentBuild)
+	{
+		configKernel.m_ProfilerRecordArg = null;
+		configKernel.m_ProfilerRecordEventStart = &ProfileRecordEventStart;
+		configKernel.m_ProfilerRecordEventEnd = &ProfileRecordEventEnd;
+		configKernel.m_ProfilerRecordMemoryTransaction = &CRuntimeManager::ProfileRecordMemoryTransaction;
+		configKernel.m_ProfilerRecordThreadDependency = &CRuntimeManager::ProfileRecordThreadDependency;
+		configKernel.m_OnThreadStarted = &ProfileRecordRegisterThread;
+		configKernel.m_OnThreadStopped = &ProfileRecordUnregisterThread;
+	}
+#endif
 #if		defined(PK_MOBILE)
 	configKernel.m_AssertCatcher = &CbAssertCatcherSkip;
 #elif	defined(PK_MACOSX)
@@ -2062,6 +2215,12 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup()
 		PK_LOG_MODULE_INIT_START;
 		PK_LOG_MODULE_INIT_END;
 		CLog::Log(PK_INFO, "PopcornFX Runtime initialisation OK");
+
+#if	defined(KR_PROFILER_ENABLED)
+		if (g_IsDevelopmentBuild)
+			Profiler::MainEngineProfiler()->Activate(g_IsDevelopmentBuild);
+#endif
+
 		return true;
 	}
 	return false;

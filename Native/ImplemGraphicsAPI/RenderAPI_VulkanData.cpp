@@ -82,7 +82,7 @@ void	*CVulkanData::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool is
 {
 	(void)isIdxBuff; (void)fullSize; (void)mapSize;
 
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 	IUnityGraphicsVulkan *graphicVulkan = CRuntimeManager::Instance().GetUnityGraphicsVulkan();
 	if (!PK_VERIFY(graphicVulkan != null))
 		return null;
@@ -121,7 +121,7 @@ void	CVulkanData::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdx
 	(void)isIdxBuff;
 	// cannot do resource uploads inside renderpass, but we know that the texture modification is done first and that already ends the renderpass
 	// m_UnityVulkan->EnsureOutsideRenderPass(); 
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 	IUnityGraphicsVulkan *graphicVulkan = CRuntimeManager::Instance().GetUnityGraphicsVulkan();
 	if (!PK_VERIFY(graphicVulkan != null))
 		return;

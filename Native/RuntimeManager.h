@@ -17,6 +17,7 @@
 #include "FxEffect.h"
 
 #include "UnityGraphicsAPI/IUnityInterface.h"
+#include "UnityGraphicsAPI/IUnityProfiler.h"
 #include "FxWindowsGraphicsDefs.h"
 
 #include "AudioApplicationLoopback/ILoopbackCapture.h"
@@ -84,7 +85,7 @@ public:
 
 	// Handle singleton startup etc...
 	static bool							IsInstanceInitialized();
-	static bool							InitializeInstanceIFN(const SPopcornFxSettings *settings); // Create the scene and startup PopcornFX
+	static bool							InitializeInstanceIFN(const SPopcornFxSettings *settings, IUnityInterfaces *unityInterfaces); // Create the scene and startup PopcornFX
 
 	void								SetMaxCameraCount(int count);
 	static CRuntimeManager				&Instance();
@@ -143,6 +144,8 @@ public:
 #if	(PK_PARTICLES_HAS_STATS != 0)
 	CLiveProfiler						&GetProfiler() { return m_Profiler; }
 #endif
+	static void							ProfileRecordMemoryTransaction(void *arg, sreg bytes);
+	static void							ProfileRecordThreadDependency(void *arg, PopcornFX::CThreadID other, u32 dFlags);
 
 	bool								LoadPack();
 
@@ -186,6 +189,10 @@ public:
 	CUnityLog							*GetLogger() const;
 	void								SetMaxLogStack(u32 maxLogStack);
 
+	bool								RenderThreadIsSet() const { return m_RenderThreadIsSet; }
+	bool								IsRenderThread() const { PK_ASSERT(m_RenderThreadIsSet); return CCurrentThread::ThreadID() == m_RenderThread; }
+	void								SetRenderThread() { m_RenderThread = CCurrentThread::ThreadID(); m_RenderThreadIsSet = true; }
+
 	static PMeshNew						LoadPkmm(const CString &pkmmVirtualPath);
 
 	void								BeforeUpdate();
@@ -217,7 +224,7 @@ public:
 	struct	SPopcornFXRuntimeData
 	{
 	public:
-		bool					PopcornFXStartup();
+		bool					PopcornFXStartup(IUnityInterfaces *unityInterfaces);
 		bool					PopcornFXShutdown();
 
 		static const SPopcornFxSettings		*m_Settings;
@@ -232,7 +239,6 @@ public:
 		bool								m_LightRenderer;
 		bool								m_SoundRenderer;
 	};
-
 	SPopcornFXRuntimeData				*m_PopcornFXRuntimeData;
 
 	PLoopbackCapture					m_LoopbackAudio;
@@ -245,6 +251,9 @@ private:
 	static CRuntimeManager				*m_Instance;
 
 	bool								m_Unloading;
+
+	CThreadID							m_RenderThread;
+	bool								m_RenderThreadIsSet;
 
 	Threads::CCriticalSection			m_FxToDeleteLock;
 	TArray<CPKFXEffect*>				m_FxToDelete; // queue of FXs to run when sync'd with the rendering thread.

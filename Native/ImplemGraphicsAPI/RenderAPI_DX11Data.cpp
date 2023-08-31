@@ -58,7 +58,7 @@ void	CDX11Data::BeginFrame()
 void	*CDX11Data::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff, u32 fullSize, u32 mapSize)
 {
 	(void)isIdxBuff; (void)fullSize; (void)mapSize;
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 	D3D11_MAPPED_SUBRESOURCE	mapped;
 
 	CDX11BufferHandles			*bufferHandleDX11 = (CDX11BufferHandles*)(bufferHandle.m_Buffer.Get());
@@ -120,7 +120,7 @@ void	*CDX11Data::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool isId
 void	CDX11Data::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff)
 {
 	(void)isIdxBuff;
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 
 	int							idx = m_CurrentBuffIdx;
 	CDX11BufferHandles			*bufferHandleDX11 = (CDX11BufferHandles*)(bufferHandle.m_Buffer.Get());

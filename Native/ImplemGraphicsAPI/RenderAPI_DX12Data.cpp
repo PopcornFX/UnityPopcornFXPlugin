@@ -157,7 +157,7 @@ void	CDX12Data::EndFrame()
 void	*CDX12Data::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff, u32 fullSize, u32 mapSize)
 {
 	(void)mapSize; (void)isIdxBuff;
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 
 	ID3D12Resource			*deviceLocalBuff = (ID3D12Resource*)bufferHandle.m_Buffer->m_DeviceLocal;
 
@@ -260,7 +260,7 @@ void	*CDX12Data::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool isId
 void	CDX12Data::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff)
 {
 	(void)isIdxBuff;
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 
 	ID3D12Resource			*deviceLocalBuff = (ID3D12Resource*)bufferHandle.m_Buffer->m_DeviceLocal;
 

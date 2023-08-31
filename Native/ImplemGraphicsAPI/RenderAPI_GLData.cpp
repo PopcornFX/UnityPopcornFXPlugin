@@ -36,7 +36,7 @@ void	*GLData::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBu
 {
 	PK_SCOPEDPROFILE();
 
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 
 	if (bufferHandle.m_Buffer->m_DeviceLocal == null)
 		return null;
@@ -59,7 +59,7 @@ void	GLData::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff)
 {
 	PK_SCOPEDPROFILE();
 
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 
 	if (bufferHandle.m_Buffer->m_DeviceLocal == null)
 		return;

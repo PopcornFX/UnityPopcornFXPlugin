@@ -125,9 +125,6 @@ public:
 	void						Reset();
 	void						HardReset();
 
-	bool						RenderThreadIsSet() const { return m_RenderThreadIsSet; }
-	bool						IsRenderThread() const { PK_ASSERT(m_RenderThreadIsSet); return CCurrentThread::ThreadID() == m_RenderThread; }
-	void						SetRenderThread() { m_RenderThread = CCurrentThread::ThreadID(); m_RenderThreadIsSet = true; }
 	void						UnsetCollisionMesh();
 	void						SetCollisionMesh(const PMeshNew &mesh);
 
@@ -313,9 +310,6 @@ private:
 	CUnityFrameCollector						*m_GameThreadFrameCollector;
 
 	EUpdateMode									m_UpdateMode;
-
-	CThreadID									m_RenderThread;
-	bool										m_RenderThreadIsSet;
 
 	TArray<SUnitySceneView>						m_SceneViews;
 

@@ -121,6 +121,7 @@ namespace PopcornFX
 		public IntPtr m_EmissiveRampMap;
 		public float m_InvSoftnessDistance;
 		public float m_AlphaClipThreshold;
+		public int m_TransformUVs_RGBOnly;
 
 		public EBillboardMode m_BillboardMode;
 		public int m_DrawOrder;
@@ -1042,7 +1043,7 @@ namespace PopcornFX
 
 				mesh.Clear();
 
-				VertexAttribute uvIdxForEmissive = 0;
+				VertexAttribute additionalUVIdx = 0;
 
 				List<VertexAttributeDescriptor> layout = new List<VertexAttributeDescriptor>();
 				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Position, VertexAttributeFormat.Float32, 3));			// positions
@@ -1060,40 +1061,45 @@ namespace PopcornFX
 				{
 					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uvFactors
 					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// uvScale
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));		// uvOffset
-					uvIdxForEmissive = VertexAttribute.TexCoord3;
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));     // uvOffset
+					additionalUVIdx = VertexAttribute.TexCoord3;
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
 						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord3, VertexAttributeFormat.Float32, 2));	// alpha cursor
-						mesh.uv4 = new Vector2[reservedVertexCount];    
-						uvIdxForEmissive = VertexAttribute.TexCoord4;
+						mesh.uv4 = new Vector2[reservedVertexCount];
+						additionalUVIdx = VertexAttribute.TexCoord4;
 					}
 				}
 				else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
 				{
 					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uv0
 					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// uv1
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));		// atlas id and if Has_AlphaRemap, alpha cursor
-					uvIdxForEmissive = VertexAttribute.TexCoord3;
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));     // atlas id and if Has_AlphaRemap, alpha cursor
+					additionalUVIdx = VertexAttribute.TexCoord3;
 				}
 				else
 				{
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) ||
 						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));	// uv0
-						uvIdxForEmissive = VertexAttribute.TexCoord1;
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2)); // uv0
+						additionalUVIdx = VertexAttribute.TexCoord1;
 					}
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
 						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2)); // alpha cursor
-						uvIdxForEmissive = VertexAttribute.TexCoord2;
+						additionalUVIdx = VertexAttribute.TexCoord2;
 					}
 				}
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 				{
-					layout.Add(new VertexAttributeDescriptor(uvIdxForEmissive, VertexAttributeFormat.Float32, 2)); // emissive color
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2)); // emissive color
+				}
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+				{
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord6, VertexAttributeFormat.Float32, 2)); // TransformUVs rotate
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord7, VertexAttributeFormat.Float32, 4)); // TransformUVs ScaleAndOffset
 				}
 
 				mesh.SetVertexBufferParams((int)reservedVertexCount, layout.ToArray());
@@ -1102,7 +1108,7 @@ namespace PopcornFX
 				hasBeenResized = true;
 			}
 
-			if (renderer.m_IndexCount < usedIndexCount)
+			if (hasBeenResized || renderer.m_IndexCount < usedIndexCount)
 			{
 				mesh.SetIndexBufferParams((int)reservedIndexCount, mesh.indexFormat);
 				renderer.m_IndexCount = (int)reservedIndexCount;
@@ -1230,7 +1236,6 @@ namespace PopcornFX
 
 				SMeshDesc renderer = m_Renderers[rendererGUID];
 
-
 				if (rendererInfo.m_HasCustomMaterial != IntPtr.Zero)
 				{
 					int* hasCustomMat = (int*)rendererInfo.m_HasCustomMaterial.ToPointer();
@@ -1250,6 +1255,10 @@ namespace PopcornFX
 
 				if (renderer.m_Slice != null)
 				{
+					int atlasesBSize = (int)renderer.NativeRawAtlasesBufferSize;
+					int* atlasesBSizePtr = (int*)rendererInfo.m_AtlasesBSize.ToPointer();
+					IntPtr* atlasesHandler = (IntPtr*)rendererInfo.m_AtlasesBHandler.ToPointer();
+
 					Mesh currentRendererMesh = renderer.m_Slice.mesh;
 
 					int indexCount = renderer.m_IndexCount;
@@ -1266,12 +1275,18 @@ namespace PopcornFX
 						*vertexBufferSize = vertexCount;
 					if (indexBufferSize != null)
 						*indexBufferSize = indexCount;
+
+					if (atlasesBSizePtr != null)
+						*atlasesBSizePtr = atlasesBSize;
+
 					if (vertexCount > 0 || indexCount > 0)
 					{
 						if (vbHandler != null)
 							*vbHandler = currentRendererMesh.GetNativeVertexBufferPtr(0);
 						if (ibHandler != null)
 							*ibHandler = currentRendererMesh.GetNativeIndexBufferPtr();
+						if (atlasesHandler != null)
+							*atlasesHandler = renderer.GetNativeRawAtlasesBuffer();
 					}
 					else
 					{
@@ -1279,6 +1294,8 @@ namespace PopcornFX
 							*vbHandler = IntPtr.Zero;
 						if (ibHandler != null)
 							*ibHandler = IntPtr.Zero;
+						if (atlasesHandler != null)
+							*atlasesHandler = IntPtr.Zero;
 					}
 				}
 				else if (renderer.m_Procedural != null)
@@ -1321,8 +1338,6 @@ namespace PopcornFX
 							*ibHandler = renderer.m_Procedural.GetNativeRawIndexBuffer();
 						if (infoHandler != null)
 							*infoHandler = renderer.m_Procedural.GetNativeRawBillboardingInfoBuffer();
-						if (atlasesHandler != null)
-							*atlasesHandler = renderer.m_Procedural.GetNativeRawAtlasesBuffer();
 						if (atlasesHandler != null)
 							*atlasesHandler = renderer.m_Procedural.GetNativeRawAtlasesBuffer();
 						if (indirectArgsHandler != null && renderer.m_Procedural.DrawIndirectArgs != null)

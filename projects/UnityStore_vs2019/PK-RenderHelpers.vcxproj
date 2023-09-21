@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|Win32">
+      <Configuration>Retail</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|x64">
+      <Configuration>Retail</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|ARM64">
+      <Configuration>Retail</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1822BA45-2535-4E66-B24D-90B284A46F5B}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PK-RenderHelpers</RootNamespace>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Debug\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_d</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Debug\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_d</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\ARM64\Debug\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_d</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Release\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_r</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Release\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_r</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\ARM64\Release\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_r</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Retail\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_s</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Retail\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_s</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\ARM64\Retail\PK-RenderHelpers\</IntDir>
+    <TargetName>PK-RenderHelpers_s</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rh_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_render_helpers\src;..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_billboard_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_decal_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_helpers.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_light_std.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_mesh_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_ribbon_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_sound_std.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batch_jobs\rh_batch_jobs_triangle_gpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_billboard_ribbon_batch_helper.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_decal_batch.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_decal_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_light_batch.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_light_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_mesh_batch.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_mesh_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_particle_batch_policy_data.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_ribbon_batch.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_ribbon_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_sound_batch.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_sound_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\batches\rh_triangle_batch.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c0.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c1.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_c2.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\billboarders\rh_billboarders_billboards_ribbon.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\buffer_pool\rh_bufferpool.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_billboard_light.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_common.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_copystream_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_copystream_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_decal.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_decal_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_decal_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_draw_requests.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_job_pools.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_light.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_mesh.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_mesh_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_mesh_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_ribbon.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_ribbon_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_ribbon_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_sound.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu_tasks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_collector_legacy.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\legacy\rh_frame_data_legacy.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_batch_drawer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batch_interface.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_data.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_particle_render_data_factory.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_render_medium.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_renderers_walker.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_basic.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_skeletal.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\render_features\rh_features_vat_static.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\resource_manager\rh_resource_manager.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\rh_init.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_billboards.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_common.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_multiplane.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_tube.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\include\pv_renderhelpers.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_billboard_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_decal_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_decal_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_helpers.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_light_std.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_mesh_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_mesh_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_ribbon_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_ribbon_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_sound_std.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_triangle_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batch_jobs\rh_batch_jobs_triangle_gpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\batches\rh_billboard_ribbon_batch_helper.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_capsule.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_axial_spheroidal.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_planar_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_screen_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_standard.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_billboards_view_quad.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_ribbons.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\rh_billboarders_ribbons_axial.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\buffer_pool\rh_bufferpool.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_billboard_cpu_tasks.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_common.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_copystream_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_copystream_cpu_tasks.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_decal.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_decal_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_decal_cpu_tasks.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_draw_requests.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_light.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_mesh.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_mesh_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_mesh_cpu_tasks.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_ribbon.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_ribbon_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_ribbon_cpu_tasks.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_sound.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle_cpu.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\draw_requests\rh_triangle_cpu_tasks.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_batch_drawer.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_frame_collector.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_particle_render_data_factory.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_render_medium.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\frame_collector\rh_renderers_walker.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_basic.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_vat_skeletal.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\render_features\rh_features_vat_static.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_init.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\rh_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

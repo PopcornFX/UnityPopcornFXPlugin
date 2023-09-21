@@ -93,6 +93,9 @@ enum	EVertexSemantic
 	Semantic_AlphaCursor,
 	Semantic_EmissiveColor,
 
+	Semantic_TransformUVsRotate,
+	Semantic_TransformUVsScaleAndOffset,
+
 	__Semantic_Count
 };
 
@@ -227,6 +230,24 @@ PK_INLINE void	FillAlphaCursor(void * const stream, volatile void * const dstPtr
 {
 	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_AlphaCursor]);
 	*(float*)dst = *(const float*)stream;
+}
+
+//-------------------------------------------------------------------------------------
+
+PK_INLINE void	FillTransformUVsRotate(void * const stream, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_TransformUVsRotate]);
+	*(float*)dst = *(const float*)stream;
+}
+
+//-------------------------------------------------------------------------------------
+
+PK_INLINE void	FillTransformUVsScaleAndOffset(void * const streamScale, void * const streamOffset, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_TransformUVsScaleAndOffset]);
+	*(CFloat2*)dst = *(const CFloat2*)streamScale;
+	dst = Mem::AdvanceRawPointer(dst, sizeof(CFloat2));
+	*(CFloat2*)dst = *(const CFloat2*)streamOffset;
 }
 
 #undef SIMDFY

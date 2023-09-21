@@ -557,7 +557,7 @@ void	CPKFXScene::_FillPayload(const PopcornFX::SPayloadElementView &srcPayloadEl
 	{
 		_OutType splat;
 		memcpy(&splat, srcPtr, sizeof(_OutType));
-		Mem::FillN(dstPtr, &splat, particleCount, sizeof(dstPayload.m_Values[0])); // efficient mem fill when src is virtual
+		Mem::FillN<sizeof(dstPayload.m_Values[0])>(dstPtr, &splat, particleCount); // efficient mem fill when src is virtual
 	}
 	else
 	{

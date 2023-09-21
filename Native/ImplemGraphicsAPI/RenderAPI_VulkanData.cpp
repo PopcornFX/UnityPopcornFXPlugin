@@ -61,12 +61,11 @@ CVulkanData::CVulkanData()
 	UnityVulkanInstance		instance = graphicVulkan->Instance();
 	LoadVulkanAPI(instance.getInstanceProcAddr, instance.instance);
 
-	// Test in case of glitches:
-//	UnityVulkanPluginEventConfig config_1;
-//	config_1.graphicsQueueAccess = kUnityVulkanGraphicsQueueAccess_DontCare;
-//	config_1.renderPassPrecondition = kUnityVulkanRenderPass_EnsureInside;
-//	config_1.flags = kUnityVulkanEventConfigFlag_EnsurePreviousFrameSubmission | kUnityVulkanEventConfigFlag_ModifiesCommandBuffersState;
-//	graphicVulkan->ConfigureEvent(/* for each camera */, &config_1);
+	UnityVulkanPluginEventConfig config_1;
+	config_1.graphicsQueueAccess = kUnityVulkanGraphicsQueueAccess_DontCare;
+	config_1.renderPassPrecondition = kUnityVulkanRenderPass_EnsureInside;
+	config_1.flags = kUnityVulkanEventConfigFlag_EnsurePreviousFrameSubmission | kUnityVulkanEventConfigFlag_ModifiesCommandBuffersState;
+	graphicVulkan->ConfigureEvent(1, &config_1);
 }
 
 CVulkanData::~CVulkanData()
@@ -99,19 +98,13 @@ void	*CVulkanData::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool is
 	if (!bufferInfo.memory.mapped)
 		return null;
 
-	UnityVulkanBuffer src;
-	if (!graphicVulkan->AccessBuffer(bufferHandle.m_Buffer->m_DeviceLocal, VK_PIPELINE_STAGE_HOST_BIT, VK_ACCESS_HOST_READ_BIT, kUnityVulkanResourceAccess_PipelineBarrier, &src))
+	// We don't want to start modifying a resource that might still be used by the GPU,
+	// so we can use kUnityVulkanResourceAccess_Recreate to recreate it while still keeping the old one alive if it's in use.
+	UnityVulkanBuffer recreatedBuffer;
+	if (!graphicVulkan->AccessBuffer(bufferHandle.m_Buffer->m_DeviceLocal, VK_PIPELINE_STAGE_HOST_BIT, VK_ACCESS_HOST_WRITE_BIT, kUnityVulkanResourceAccess_Recreate, &recreatedBuffer))
 		return null;
 
-	UnityVulkanBuffer dst;
-	if (!graphicVulkan->AccessBuffer(bufferHandle.m_Buffer->m_DeviceLocal, VK_PIPELINE_STAGE_HOST_BIT, VK_ACCESS_HOST_WRITE_BIT, kUnityVulkanResourceAccess_PipelineBarrier, &dst))
-		return null;
-
-	// read might be slow because it's not cached
-	// can't use GPU transfer here because is not marked as transfer src
-	Mem::Copy(dst.memory.mapped, src.memory.mapped, bufferInfo.sizeInBytes);
-
-	return dst.memory.mapped;
+	return recreatedBuffer.memory.mapped;
 }
 
 //-------------------------------------------------------------------------------------
@@ -119,8 +112,6 @@ void	*CVulkanData::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool is
 void	CVulkanData::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff)
 {
 	(void)isIdxBuff;
-	// cannot do resource uploads inside renderpass, but we know that the texture modification is done first and that already ends the renderpass
-	// m_UnityVulkan->EnsureOutsideRenderPass(); 
 	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 	IUnityGraphicsVulkan *graphicVulkan = CRuntimeManager::Instance().GetUnityGraphicsVulkan();
 	if (!PK_VERIFY(graphicVulkan != null))
@@ -135,7 +126,7 @@ void	CVulkanData::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdx
 	{
 		VkMappedMemoryRange range;
 		range.sType = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
-		range.pNext = NULL;
+		range.pNext = null;
 		range.memory = buffer.memory.memory;
 		range.offset = buffer.memory.offset; // size and offset also must be multiple of nonCoherentAtomSize
 		range.size = buffer.memory.size;

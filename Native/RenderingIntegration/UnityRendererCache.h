@@ -75,7 +75,8 @@ namespace	ShaderVariationFlags
 		Has_SkeletalAnim			= (1 << 19),
 		Has_SkeletalInterpol		= (1 << 20),
 		Has_SkeletalTrackInterpol	= (1 << 21),
-		ShaderVariation_Count		= 22
+		Has_TransformUVs			= (1 << 22),
+		ShaderVariation_Count		= 23
 	};
 }
 
@@ -162,6 +163,9 @@ public:
 	CStringId					m_DiffuseRampMap;
 	CStringId					m_EmissiveMap;
 	CStringId					m_EmissiveRampMap;
+
+	//TransformUVs Feature
+	bool						m_TransformUVs_RGBOnly;
 
 	CParticleMaterialDescBillboard();
 

@@ -13,6 +13,7 @@ Shader "PopcornFX/URP/ParticleShader_CutOutOpaque"
 		_EmissiveRampMap("Emissive Ramp Texture", 2D) = "white" {}
 		_UniformFlags("Uniform Flags", Int) = 0
 		_RotateUVs("Rotate UVs (only used in shader for correct deformation ribbons)", Int) = 0
+		_TransformUVs_RGBOnly("TransformUVs.RGBOnly (only used if transform UVs render feature is activated)", Int) = 0
 		_CutOutAlpha("Cutout Alpha", Float) = 0.5
 	}
 
@@ -46,6 +47,7 @@ Shader "PopcornFX/URP/ParticleShader_CutOutOpaque"
 			#define PK_HAS_COLOR 1
 			#pragma shader_feature PK_HAS_EMISSIVE_NONE PK_HAS_EMISSIVE_BASIC PK_HAS_EMISSIVE_WITH_RAMP
 			#pragma shader_feature _ PK_HAS_ALPHA_REMAP
+			#pragma shader_feature _ PK_HAS_TRANSFORM_UVS
 			#pragma shader_feature _ PK_HAS_DIFFUSE_RAMP
 			#pragma shader_feature _ PK_HAS_LIGHTING
 			#pragma shader_feature _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX

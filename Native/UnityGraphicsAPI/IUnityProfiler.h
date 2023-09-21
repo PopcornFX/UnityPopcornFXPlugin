@@ -374,14 +374,14 @@ UNITY_REGISTER_INTERFACE_GUID(0xB957E0189CB6A30BULL, 0x83CE589AE85B9068ULL, IUni
 struct UnityProfilerCounterValue
 {
     UnityProfilerCounterValue()
-        : m_Profiler(nullptr)
-        , m_Value(nullptr)
+        : m_Value(nullptr)
+        , m_Profiler(nullptr)
     {
     }
 
     UnityProfilerCounterValue(IUnityProfilerV2* profiler, void* value)
-        : m_Profiler(profiler)
-        , m_Value(value)
+        : m_Value(value)
+        , m_Profiler(profiler)
     {
     }
 

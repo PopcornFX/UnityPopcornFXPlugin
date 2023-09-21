@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{8EEA3EAC-7A8C-6982-6347-7DD64F88F0D2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Gl">
+      <UniqueIdentifier>{50591DAC-BCC3-D122-0502-83C871ABAF77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\PKFX">
+      <UniqueIdentifier>{B659DD28-220F-561E-AB03-50F517B84C22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{089DB854-F469-1360-1D83-010809AF48EE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\GL">
+      <UniqueIdentifier>{6AB1D40F-D666-4D05-5F5B-47DCCB0F4409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\GL\GL">
+      <UniqueIdentifier>{8C029E50-78D0-9156-6164-027D4DD16DBB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\AudioApplicationLoopback">
+      <UniqueIdentifier>{E170E346-CDC1-CE88-F625-BD4AE2D561F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\AudioApplicationLoopback\Windows">
+      <UniqueIdentifier>{1B6CC0D2-07E9-B315-3066-B4291C4250A9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\AudioApplicationLoopback\Windows\wil">
+      <UniqueIdentifier>{96CF1AD7-82E2-1A30-2BCC-F71C17BEB77D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\EditorOnly">
+      <UniqueIdentifier>{9958E449-853C-A59F-EE9C-9FF2DA9F8F21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\ImplemGraphicsAPI">
+      <UniqueIdentifier>{3FB51BB5-AB77-4F3F-F427-DECB6029281D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\PK-ZLib">
+      <UniqueIdentifier>{89BA71F6-F545-DFBA-FE56-62AF6A613BBB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\RenderingIntegration">
+      <UniqueIdentifier>{1251306A-FE0B-2016-A7C3-9860935D6AA6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\UnityGraphicsAPI">
+      <UniqueIdentifier>{943A1706-805F-6686-A9AA-4B16952E65A4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\precompiled">
+      <UniqueIdentifier>{E483ED99-50E5-CAA7-D952-115A45B30167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Integrations">
+      <UniqueIdentifier>{FC4D5FA6-E8B0-EE4A-9136-27017D78BACD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Integrations\Unity">
+      <UniqueIdentifier>{24931B30-1077-DC85-79D7-D6D865DAC607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Integrations\Unity\Native">
+      <UniqueIdentifier>{3A5E3A89-A620-6E13-EFD0-FC9F5BD246F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\AudioApplicationLoopback">
+      <UniqueIdentifier>{A901CA54-9552-B596-BEB6-A358AA664800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\AudioApplicationLoopback\Windows">
+      <UniqueIdentifier>{E3446F67-CFC1-62AA-F83E-63BEE41AFF3D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\EditorOnly">
+      <UniqueIdentifier>{61AB15A5-4D8F-D6FA-B6EF-D04DA2F2C07C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ImplemGraphicsAPI">
+      <UniqueIdentifier>{0717CB18-73D9-FEA2-BC89-8D2F288BD780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RenderingIntegration">
+      <UniqueIdentifier>{DABD1D19-C678-0DC5-6F30-860F5BCA5755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\precompiled">
+      <UniqueIdentifier>{AC2F495B-1891-2669-A1FE-6C1B0D5F5D28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.h">
+      <Filter>Headers\AudioApplicationLoopback</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\Common.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\LoopbackCapture.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\com.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\common.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\resource.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\result.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\result_macros.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\wistd_config.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\wistd_functional.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\wistd_memory.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\AudioApplicationLoopback\Windows\wil\wistd_type_traits.h">
+      <Filter>Headers\AudioApplicationLoopback\Windows\wil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\DelayedEffectsMethods.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\AssetBaker.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\BrowseEffect.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\EditorManagedToNative.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\EditorManager.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\EditorNativeToManaged.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\FileWatcher.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\MeshBaking.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\PackFxExplorer.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\EditorOnly\unzip.h">
+      <Filter>Headers\EditorOnly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\FxEffect.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\FxWindowsGraphicsDefs.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX11Data.h">
+      <Filter>Headers\ImplemGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX12Data.h">
+      <Filter>Headers\ImplemGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_Data.h">
+      <Filter>Headers\ImplemGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_VulkanData.h">
+      <Filter>Headers\ImplemGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\ManagedToNative.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\NativeToManaged.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_FileSystemController.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_ImageResourceManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_InterfaceCommon.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_Log.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_Plugins.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_Profiler.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_Scene.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_SkinnedMesh.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\PKUnity_Tasks.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\FrameCollectorUnityTypes.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBillboardingBatchPolicy.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityRenderDataFactory.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityRendererCache.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\ResourceHandleDummy.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RuntimeManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\SingleThreadedPool.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityEventQueue.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityGraphics.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityGraphicsD3D11.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityGraphicsD3D12.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityGraphicsD3D9.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityGraphicsVulkan.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityInterface.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityLog.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityProfiler.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityProfilerCallbacks.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityRenderingExtensions.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\UnityGraphicsAPI\IUnityShaderCompilerAccess.h">
+      <Filter>Headers\UnityGraphicsAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\precompiled\precompiled.h">
+      <Filter>Headers\precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\Common\PKFX\FxRendererSubView.h">
+      <Filter>Common\PKFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h">
+      <Filter>Common\PKFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h">
+      <Filter>External\GL\GL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Native\AudioApplicationLoopback\ILoopbackCapture.cpp">
+      <Filter>Sources\AudioApplicationLoopback</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\AudioApplicationLoopback\Windows\LoopbackCapture.cpp">
+      <Filter>Sources\AudioApplicationLoopback\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker_Unzip.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\AssetBaker_Upgrade.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\BrowseEffect.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\EditorManagedToNative.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\EditorManager.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\EditorNativeToManaged.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\FileWatcher.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\MeshBaking.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\PackFxExplorer.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\EditorOnly\unzip.cpp">
+      <Filter>Sources\EditorOnly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\FxEffect.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX11Data.cpp">
+      <Filter>Sources\ImplemGraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_DX12Data.cpp">
+      <Filter>Sources\ImplemGraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_Data.cpp">
+      <Filter>Sources\ImplemGraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_GLData.cpp">
+      <Filter>Sources\ImplemGraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\ImplemGraphicsAPI\RenderAPI_VulkanData.cpp">
+      <Filter>Sources\ImplemGraphicsAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\ManagedToNative.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\NativeToManaged.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_CImageResourceManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_FileSystemController.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_Log.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_Plugins.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_Profiler.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_Scene.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_SkinnedMesh.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\PKUnity_Tasks.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\FrameCollectorUnityTypes.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBillboardingBatchPolicy.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityRenderDataFactory.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityRendererCache.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RuntimeManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\precompiled\precompiled.cpp">
+      <Filter>Sources\precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\Common\Gl\gl_utils.cpp">
+      <Filter>Common\Gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxStartup.cpp">
+      <Filter>Common\PKFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\GL\src\glew.c">
+      <Filter>External\GL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Native\IntegrationUnity.def">
+      <Filter>Integrations\Unity\Native</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

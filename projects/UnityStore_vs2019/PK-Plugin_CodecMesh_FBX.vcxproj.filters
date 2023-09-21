@@ -1,0 +1,1600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX">
+      <UniqueIdentifier>{B00768E3-1CBD-E0D8-A5B1-DAAF1166D7DC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk">
+      <UniqueIdentifier>{A1FE8C4F-8DE2-4DA5-F642-48F8E2453827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\core">
+      <UniqueIdentifier>{B9FB74E0-2533-BD77-2E3D-219B9AF3E370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\core\arch">
+      <UniqueIdentifier>{E6D9DD7A-D294-CD26-7B4C-467167E617B7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\core\base">
+      <UniqueIdentifier>{0320DE7A-EFDA-CD26-9892-4671842C18B7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\core\math">
+      <UniqueIdentifier>{5228E47A-3EE3-D326-E79A-4C71D3341EB7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\core\sync">
+      <UniqueIdentifier>{E5D7E77A-D192-D726-7A4A-507166E421B7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\fileio">
+      <UniqueIdentifier>{887832D8-F43A-6662-3DEB-F4EEA9EC3E40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\fileio\collada">
+      <UniqueIdentifier>{87EBED50-F359-43D0-3C43-FECFA8F0386C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\fileio\fbx">
+      <UniqueIdentifier>{57016726-C319-4E50-8CC6-DDE9F89DE2E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\scene">
+      <UniqueIdentifier>{9E302FF0-8A55-7E70-B3A0-63009F247D8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\scene\animation">
+      <UniqueIdentifier>{2DE785E5-1923-894F-8235-A1466E90316A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\scene\constraint">
+      <UniqueIdentifier>{D24B24AA-3E05-8F54-C764-A92E331D45C4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\scene\geometry">
+      <UniqueIdentifier>{D98BB4E9-45FA-0969-8EE3-C468FA90FF04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\scene\shading">
+      <UniqueIdentifier>{0BBC58D7-F70C-4419-2071-32DB0C21D782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX\fbxsdk\utils">
+      <UniqueIdentifier>{E1C45CF0-CDE9-AB70-F634-9100E2B8AA8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2">
+      <UniqueIdentifier>{1B6C7B41-0750-3C97-70B0-36EA5CB32619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk">
+      <UniqueIdentifier>{ACDCEB30-189F-1FBB-614F-AE47CD50F898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\core">
+      <UniqueIdentifier>{A458773F-907E-41A6-79C4-C67165896672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\core\arch">
+      <UniqueIdentifier>{B101E649-1DBB-50F4-A61A-6BCE12D30664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\core\base">
+      <UniqueIdentifier>{CE47E649-3A01-51F4-C360-6BCE2F190764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\core\math">
+      <UniqueIdentifier>{1D50EC49-8909-57F4-1269-71CE7E210D64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\core\sync">
+      <UniqueIdentifier>{B0FFEF49-1CB9-5AF4-A518-75CE11D11064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\fileio">
+      <UniqueIdentifier>{33BC3F01-1F0D-2B43-4871-19053421BEAC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\fileio\collada">
+      <UniqueIdentifier>{32AAAD97-1E27-A1DA-47A4-A1EE33803D6E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\fileio\fbx">
+      <UniqueIdentifier>{822274D6-6E09-36CE-175A-9CEB0320AF34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\scene">
+      <UniqueIdentifier>{E92A7D2F-550E-8C6F-5E11-BAABCA7352C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\scene\animation">
+      <UniqueIdentifier>{387B3D04-A495-A0A5-EDB7-B0395911C8AC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\scene\constraint">
+      <UniqueIdentifier>{3D61CE9F-29C9-946D-9234-A9837EBBAB59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\scene\geometry">
+      <UniqueIdentifier>{844A7430-70C7-6773-9944-688785200407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\scene\shading">
+      <UniqueIdentifier>{56D175BA-C260-37A5-CB5C-18BD376B72B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\FBX_2019.2\fbxsdk\utils">
+      <UniqueIdentifier>{2CBFAA2F-98A2-B96F-A1A5-E7AB0D0880C0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Common">
+      <UniqueIdentifier>{A18F02DC-8D5D-F6E1-76F1-6608625ED246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\NvTriStrip">
+      <UniqueIdentifier>{DD36BEEE-C91A-7F44-327B-79971E7E69C6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\NvTriStrip\NvTriStrip.h">
+      <Filter>Sources\NvTriStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\NvTriStrip\NvTriStripObjects.h">
+      <Filter>Sources\NvTriStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\NvTriStrip\VertexCache.h">
+      <Filter>Sources\NvTriStrip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\Common.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk.h">
+      <Filter>Headers\FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\arch\fbxalloc.h">
+      <Filter>Headers\FBX\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\arch\fbxarch.h">
+      <Filter>Headers\FBX\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\arch\fbxdebug.h">
+      <Filter>Headers\FBX\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\arch\fbxnew.h">
+      <Filter>Headers\FBX\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\arch\fbxstdcompliant.h">
+      <Filter>Headers\FBX\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\arch\fbxtypes.h">
+      <Filter>Headers\FBX\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxarray.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxbitset.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxcharptrset.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxcontainerallocators.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxdynamicarray.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxfile.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxfolder.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxhashmap.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxintrusivelist.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxmap.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxmemorypool.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxmultimap.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxpair.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxredblacktree.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxset.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxstatus.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxstring.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxstringlist.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxtime.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxtimecode.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\base\fbxutils.h">
+      <Filter>Headers\FBX\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxclassid.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxconnectionpoint.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxdatatypes.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxemitter.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxevent.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxeventhandler.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxlistener.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxloadingstrategy.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxmanager.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxmodule.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxobject.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxperipheral.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxplugin.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxplugincontainer.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxproperty.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxpropertydef.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxpropertyhandle.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxpropertypage.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxpropertytypes.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxquery.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxqueryevent.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxscopedloadingdirectory.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxscopedloadingfilename.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxstream.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxsymbol.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxsystemunit.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\fbxxref.h">
+      <Filter>Headers\FBX\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxaffinematrix.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxdualquaternion.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxmath.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxmatrix.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxquaternion.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxtransforms.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxvector2.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\math\fbxvector4.h">
+      <Filter>Headers\FBX\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\sync\fbxatomic.h">
+      <Filter>Headers\FBX\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\sync\fbxclock.h">
+      <Filter>Headers\FBX\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\sync\fbxsync.h">
+      <Filter>Headers\FBX\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\core\sync\fbxthread.h">
+      <Filter>Headers\FBX\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fbxsdk_def.h">
+      <Filter>Headers\FBX\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fbxsdk_nsbegin.h">
+      <Filter>Headers\FBX\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fbxsdk_nsend.h">
+      <Filter>Headers\FBX\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fbxsdk_version.h">
+      <Filter>Headers\FBX\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxcolladaanimationelement.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxcolladaelement.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxcolladaiostream.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxcolladanamespace.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxcolladatokens.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxcolladautils.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxreadercollada14.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\collada\fbxwritercollada14.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbx\fbxio.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbx\fbxreaderfbx5.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbx\fbxreaderfbx6.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbx\fbxreaderfbx7.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbx\fbxwriterfbx5.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbx\fbxwriterfbx6.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbx\fbxwriterfbx7.h">
+      <Filter>Headers\FBX\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxbase64coder.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxcallbacks.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxexporter.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxexternaldocreflistener.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxfiletokens.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxglobalcamerasettings.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxgloballightsettings.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxglobalsettings.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxgobo.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbximporter.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxiobase.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxiopluginregistry.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxiosettings.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxiosettingspath.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxprogress.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxreader.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxstatistics.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxstatisticsfbx.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\fileio\fbxwriter.h">
+      <Filter>Headers\FBX\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimcurve.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimcurvebase.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimcurvefilters.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimcurvenode.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimevalclassic.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimevalstate.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimevaluator.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimlayer.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimstack.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\animation\fbxanimutilities.h">
+      <Filter>Headers\FBX\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxcharacter.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxcharacternodename.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxcharacterpose.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraint.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintaim.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintcustom.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintparent.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintposition.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintrotation.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintscale.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintsinglechainik.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxconstraintutils.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxcontrolset.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\constraint\fbxhik2fbxcharacter.h">
+      <Filter>Headers\FBX\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxaudio.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxaudiolayer.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxaxissystem.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxcollection.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxcollectionexclusive.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxcontainer.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxcontainertemplate.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxdisplaylayer.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxdocument.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxdocumentinfo.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxenvironment.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxgroupname.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxlibrary.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxmediaclip.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxobjectfilter.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxobjectmetadata.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxobjectscontainer.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxpose.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxreference.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxscene.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxselectionnode.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxselectionset.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxtakeinfo.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxthumbnail.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\fbxvideo.h">
+      <Filter>Headers\FBX\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxblendshape.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxblendshapechannel.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxcache.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxcachedeffect.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxcamera.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxcamerastereo.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxcameraswitcher.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxcluster.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxdeformer.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxgenericnode.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxgeometry.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxgeometrybase.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxgeometryweightedmap.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxlayer.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxlayercontainer.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxlight.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxlimitsutilities.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxline.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxlodgroup.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxmarker.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxmesh.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxnode.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxnodeattribute.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxnull.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxnurbs.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxnurbscurve.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxnurbssurface.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxopticalreference.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxpatch.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxproceduralgeometry.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxshape.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxskeleton.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxskin.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxsubdeformer.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxsubdiv.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxtrimnurbssurface.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxvertexcachedeformer.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\geometry\fbxweightedmapping.h">
+      <Filter>Headers\FBX\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxbindingoperator.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxbindingsentryview.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxbindingtable.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxbindingtablebase.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxbindingtableentry.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxconstantentryview.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxentryview.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxfiletexture.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbximplementation.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbximplementationfilter.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbximplementationutils.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxlayeredtexture.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxlayerentryview.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxoperatorentryview.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxproceduraltexture.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxpropertyentryview.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxsemanticentryview.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxshadingconventions.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxsurfacelambert.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxsurfacematerial.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxsurfacematerialutils.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxsurfacephong.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\scene\shading\fbxtexture.h">
+      <Filter>Headers\FBX\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxclonemanager.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxdeformationsevaluator.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxembeddedfilesaccumulator.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxgeometryconverter.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxmanipulators.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxmaterialconverter.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxnamehandler.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxprocessor.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxprocessorshaderdependency.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxprocessorxref.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxprocessorxrefuserlib.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxrenamingstrategy.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxrenamingstrategybase.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxrenamingstrategyfbx5.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxrenamingstrategyfbx6.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxrenamingstrategyfbx7.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxrenamingstrategyutilities.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxrootnodeutility.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxscenecheckutility.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX\fbxsdk\utils\fbxusernotification.h">
+      <Filter>Headers\FBX\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk.h">
+      <Filter>Headers\FBX_2019.2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\arch\fbxalloc.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\arch\fbxarch.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\arch\fbxdebug.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\arch\fbxnew.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\arch\fbxstdcompliant.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\arch\fbxtypes.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\arch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxarray.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxbitset.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxcharptrset.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxcontainerallocators.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxdynamicarray.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxfile.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxfolder.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxhashmap.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxintrusivelist.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxmap.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxmemorypool.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxmultimap.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxpair.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxredblacktree.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxset.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxstatus.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxstring.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxstringlist.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxtime.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxtimecode.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\base\fbxutils.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxclassid.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxconnectionpoint.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxdatatypes.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxemitter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxevent.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxeventhandler.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxlistener.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxloadingstrategy.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxmanager.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxmodule.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxobject.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxperipheral.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxplugin.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxplugincontainer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxproperty.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxpropertydef.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxpropertyhandle.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxpropertypage.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxpropertytypes.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxquery.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxqueryevent.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxscopedloadingdirectory.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxscopedloadingfilename.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxstream.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxsymbol.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxsystemunit.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\fbxxref.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxaffinematrix.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxdualquaternion.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxmath.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxmatrix.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxquaternion.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxtransforms.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxvector2.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\math\fbxvector4.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\sync\fbxatomic.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\sync\fbxclock.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\sync\fbxsync.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\core\sync\fbxthread.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\core\sync</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fbxsdk_def.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fbxsdk_nsbegin.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fbxsdk_nsend.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fbxsdk_version.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxcolladaanimationelement.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxcolladaelement.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxcolladaiostream.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxcolladanamespace.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxcolladatokens.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxcolladautils.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxreadercollada14.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\collada\fbxwritercollada14.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\collada</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbx\fbxio.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbx\fbxreaderfbx5.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbx\fbxreaderfbx6.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbx\fbxreaderfbx7.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbx\fbxwriterfbx5.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbx\fbxwriterfbx6.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbx\fbxwriterfbx7.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio\fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxbase64coder.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxexporter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxexternaldocreflistener.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxfiletokens.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxglobalcamerasettings.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxgloballightsettings.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxglobalsettings.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxgobo.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbximporter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxiobase.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxiopluginregistry.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxiosettings.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxiosettingspath.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxprogress.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxreader.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxstatistics.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxstatisticsfbx.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\fileio\fbxwriter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\fileio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimcurve.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimcurvebase.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimcurvefilters.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimcurvenode.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimevalclassic.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimevalstate.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimevaluator.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimlayer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimstack.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\animation\fbxanimutilities.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxcharacter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxcharacternodename.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxcharacterpose.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraint.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintaim.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintcustom.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintparent.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintposition.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintrotation.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintscale.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintsinglechainik.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxconstraintutils.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxcontrolset.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\constraint\fbxhik2fbxcharacter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\constraint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxaudio.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxaudiolayer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxaxissystem.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxcollection.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxcollectionexclusive.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxcontainer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxcontainertemplate.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxdisplaylayer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxdocument.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxdocumentinfo.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxenvironment.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxgroupname.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxlibrary.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxmediaclip.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxobjectfilter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxobjectmetadata.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxobjectscontainer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxpose.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxreference.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxscene.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxselectionnode.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxselectionset.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxtakeinfo.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxthumbnail.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\fbxvideo.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxblendshape.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxblendshapechannel.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxcache.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxcachedeffect.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxcamera.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxcamerastereo.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxcameraswitcher.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxcluster.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxdeformer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxgenericnode.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxgeometry.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxgeometrybase.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxgeometryweightedmap.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxlayer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxlayercontainer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxlight.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxlimitsutilities.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxline.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxlodgroup.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxmarker.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxmesh.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxnode.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxnodeattribute.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxnull.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxnurbs.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxnurbscurve.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxnurbssurface.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxopticalreference.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxpatch.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxproceduralgeometry.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxshape.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxskeleton.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxskin.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxsubdeformer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxsubdiv.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxtrimnurbssurface.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxvertexcachedeformer.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\geometry\fbxweightedmapping.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxbindingoperator.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxbindingsentryview.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxbindingtable.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxbindingtablebase.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxbindingtableentry.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxconstantentryview.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxentryview.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxfiletexture.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbximplementation.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbximplementationfilter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbximplementationutils.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxlayeredtexture.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxlayerentryview.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxoperatorentryview.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxproceduraltexture.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxpropertyentryview.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxsemanticentryview.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxshadingconventions.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxsurfacelambert.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxsurfacematerial.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxsurfacephong.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\scene\shading\fbxtexture.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\scene\shading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxclonemanager.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxdeformationsevaluator.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxembeddedfilesaccumulator.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxgeometryconverter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxmanipulators.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxmaterialconverter.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxnamehandler.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxprocessor.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxprocessorshaderdependency.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxprocessorxref.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxprocessorxrefuserlib.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxrenamingstrategy.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxrenamingstrategybase.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxrenamingstrategyfbx5.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxrenamingstrategyfbx6.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxrenamingstrategyfbx7.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxrenamingstrategyutilities.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxrootnodeutility.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxscenecheckutility.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\FBX_2019.2\fbxsdk\utils\fbxusernotification.h">
+      <Filter>Headers\FBX_2019.2\fbxsdk\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\fbx_main.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\fbx_precompiled.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\CodecMesh_FBX\include\fbx_stream.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\NvTriStrip\NvTriStrip.cpp">
+      <Filter>Sources\NvTriStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\NvTriStrip\NvTriStripObjects.cpp">
+      <Filter>Sources\NvTriStrip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\Common\Common.cpp">
+      <Filter>Sources\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_export.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_import.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_import_animation.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_import_mesh.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_import_nodes.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_import_skeletal_animation.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_import_skeleton.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_mesh_codec.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_precompiled.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_stream.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\CodecMesh_FBX\src\fbx_utils.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\ExternalLibs\CodecMesh_FBX\NvTriStrip\README.txt">
+      <Filter>Sources\NvTriStrip</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

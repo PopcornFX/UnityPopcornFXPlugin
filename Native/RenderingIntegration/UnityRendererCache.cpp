@@ -99,7 +99,14 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	const SRendererFeaturePropertyValue	*size2 = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_EnableSize2D());
 
 	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());//a
-	//const CGuid							distoColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Distortion_Color());
+	
+	// Basic Transform feature (flips U and V independently):
+	const SRendererFeaturePropertyValue	*transformUVs = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs());
+	const SRendererFeaturePropertyValue	*transformUVsRGBOnly = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs_RGBOnly());
+	const SRendererFeaturePropertyValue	*basicTransformUVs = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_BasicTransformUVs());
+	const SRendererFeaturePropertyValue	*basicTransformUVsFlipU = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_BasicTransformUVs_FlipU());
+	const SRendererFeaturePropertyValue	*basicTransformUVsFlipV = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_BasicTransformUVs_FlipV());
+	const SRendererFeaturePropertyValue	*basicTransformUVsRotateUV = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_BasicTransformUVs_RotateUV());
 
 	const SRendererFeaturePropertyValue	*atlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
 	const SRendererFeaturePropertyValue	*atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
@@ -132,6 +139,12 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseMap;
 	if (size2 != null && size2->ValueB())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Size2;
+	if (transformUVs != null && transformUVs->ValueB())
+	{
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_TransformUVs;
+		if (transformUVsRGBOnly != null && transformUVsRGBOnly->ValueB())
+			m_TransformUVs_RGBOnly = transformUVsRGBOnly->ValueB();
+	}
 	if (atlas != null && atlas->ValueB())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Atlas;
 	if (atlasBlending != null && atlasBlending->ValueI().x() == 1)
@@ -273,6 +286,13 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_UVGenerationFlags |= UVGeneration::FlipV;
 	}
 
+	if (basicTransformUVs != null && basicTransformUVs->ValueB())
+	{
+		m_Flags.m_UVGenerationFlags |= (basicTransformUVsFlipU != null && basicTransformUVsFlipU->ValueB()) ? UVGeneration::FlipU : 0;
+		m_Flags.m_UVGenerationFlags |= (basicTransformUVsFlipV != null && basicTransformUVsFlipV->ValueB()) ? UVGeneration::FlipV : 0;
+		m_Flags.m_UVGenerationFlags |= (basicTransformUVsRotateUV != null && basicTransformUVsRotateUV->ValueB()) ? UVGeneration::RotateUV : 0;
+	}
+		
 	// ----------------------------
 	// Lighting Features
 	// ----------------------------
@@ -867,6 +887,7 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 	desc.m_BillboardMode = m_RendererType == ERendererClass::Renderer_Billboard ? m_BillboardBR.m_Mode : 0;
 	desc.m_DrawOrder = m_MaterialDescBillboard.m_Flags.m_DrawOrder;
 	desc.m_AlphaClipThreshold = m_MaterialDescBillboard.m_AlphaThreshold;
+	desc.m_TransformUVs_RGBOnly = m_MaterialDescBillboard.m_TransformUVs_RGBOnly  ? ManagedBool_True : ManagedBool_False;
 
 	desc.m_UID = m_UID;
 	if ((m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)

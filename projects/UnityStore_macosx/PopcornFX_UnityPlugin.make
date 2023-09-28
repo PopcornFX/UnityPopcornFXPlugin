@@ -25,6 +25,7 @@ ifeq ($(config),debug_x64)
   PK_Plugin_CodecMesh_FBX_config = debug_x64
   PK_ZLib_config = debug_x64
   PK_AssetBakerLib_config = debug_x64
+  PK_ImporterLib_config = debug_x64
   PK_UpgraderLib_config = debug_x64
   PK_RenderHelpers_config = debug_x64
   PK_IntegrationUnity_config = debug_x64
@@ -46,6 +47,7 @@ else ifeq ($(config),debug_arm64)
   PK_Plugin_CodecMesh_FBX_config = debug_arm64
   PK_ZLib_config = debug_arm64
   PK_AssetBakerLib_config = debug_arm64
+  PK_ImporterLib_config = debug_arm64
   PK_UpgraderLib_config = debug_arm64
   PK_RenderHelpers_config = debug_arm64
   PK_IntegrationUnity_config = debug_arm64
@@ -67,6 +69,7 @@ else ifeq ($(config),release_x64)
   PK_Plugin_CodecMesh_FBX_config = release_x64
   PK_ZLib_config = release_x64
   PK_AssetBakerLib_config = release_x64
+  PK_ImporterLib_config = release_x64
   PK_UpgraderLib_config = release_x64
   PK_RenderHelpers_config = release_x64
   PK_IntegrationUnity_config = release_x64
@@ -88,6 +91,7 @@ else ifeq ($(config),release_arm64)
   PK_Plugin_CodecMesh_FBX_config = release_arm64
   PK_ZLib_config = release_arm64
   PK_AssetBakerLib_config = release_arm64
+  PK_ImporterLib_config = release_arm64
   PK_UpgraderLib_config = release_arm64
   PK_RenderHelpers_config = release_arm64
   PK_IntegrationUnity_config = release_arm64
@@ -96,7 +100,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-Plugin_CodecMesh_FBX PK-ZLib PK-AssetBakerLib PK-UpgraderLib PK-RenderHelpers PK-IntegrationUnity
+PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-Plugin_CodecMesh_FBX PK-ZLib PK-AssetBakerLib PK-ImporterLib PK-UpgraderLib PK-RenderHelpers PK-IntegrationUnity
 
 .PHONY: all clean help $(PROJECTS) Plugins Plugins/External Rendering Runtime Tools Tools/AssetBaker Tools/Upgrader Unity
 
@@ -114,7 +118,7 @@ Tools: Tools/AssetBaker Tools/Upgrader
 
 Tools/AssetBaker: PK-AssetBakerLib
 
-Tools/Upgrader: PK-UpgraderLib
+Tools/Upgrader: PK-ImporterLib PK-UpgraderLib
 
 Unity: PK-IntegrationUnity
 
@@ -214,6 +218,12 @@ ifneq (,$(PK_AssetBakerLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make config=$(PK_AssetBakerLib_config)
 endif
 
+PK-ImporterLib:
+ifneq (,$(PK_ImporterLib_config))
+	@echo "==== Building PK-ImporterLib ($(PK_ImporterLib_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make config=$(PK_ImporterLib_config)
+endif
+
 PK-UpgraderLib:
 ifneq (,$(PK_UpgraderLib_config))
 	@echo "==== Building PK-UpgraderLib ($(PK_UpgraderLib_config)) ===="
@@ -226,7 +236,7 @@ ifneq (,$(PK_RenderHelpers_config))
 	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers.make config=$(PK_RenderHelpers_config)
 endif
 
-PK-IntegrationUnity: PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecMesh_FBX PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-UpgraderLib PK-AssetBakerLib PK-ZLib PK-Plugin_CodecImage_PKM PK-ParticlesToolbox PK-Runtime
+PK-IntegrationUnity: PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecMesh_FBX PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-UpgraderLib PK-ImporterLib PK-AssetBakerLib PK-ZLib PK-Plugin_CodecImage_PKM PK-ParticlesToolbox PK-Runtime
 ifneq (,$(PK_IntegrationUnity_config))
 	@echo "==== Building PK-IntegrationUnity ($(PK_IntegrationUnity_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-IntegrationUnity.make config=$(PK_IntegrationUnity_config)
@@ -249,6 +259,7 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecMesh_FBX.make clean
 	@${MAKE} --no-print-directory -C . -f PK-ZLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make clean
+	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers.make clean
 	@${MAKE} --no-print-directory -C . -f PK-IntegrationUnity.make clean
@@ -281,6 +292,7 @@ help:
 	@echo "   PK-Plugin_CodecMesh_FBX"
 	@echo "   PK-ZLib"
 	@echo "   PK-AssetBakerLib"
+	@echo "   PK-ImporterLib"
 	@echo "   PK-UpgraderLib"
 	@echo "   PK-RenderHelpers"
 	@echo "   PK-IntegrationUnity"

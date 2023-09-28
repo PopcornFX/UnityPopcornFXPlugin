@@ -18,10 +18,10 @@ endif
 # Configurations
 # #############################################
 
-PCH = ../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.h
+PCH = ../../ExternalLibs/pk_importerlib/src/precompiled/imp_precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_particles_toolbox -I../../ExternalLibs/Runtime/pk_particles_toolbox/src/include
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs -I../../ExternalLibs/pk_importerlib/src -I../../ExternalLibs/pk_importerlib/src/precompiled
 FORCE_INCLUDE += -include pk_compiler_warnings.h
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -49,11 +49,11 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
-TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_d.a
-OBJDIR = ../intermediate/UnityStore/GM/android/Debug/PK-ParticlesToolbox
+TARGET = $(TARGETDIR)/libPK-ImporterLib_d.a
+OBJDIR = ../intermediate/UnityStore/GM/android/Debug/PK-ImporterLib
 DEFINES += -D_DEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),debug_android64)
@@ -67,11 +67,11 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
-TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_d.a
-OBJDIR = ../intermediate/UnityStore/GM/android64/Debug/PK-ParticlesToolbox
+TARGET = $(TARGETDIR)/libPK-ImporterLib_d.a
+OBJDIR = ../intermediate/UnityStore/GM/android64/Debug/PK-ImporterLib
 DEFINES += -D_DEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_android)
@@ -85,8 +85,8 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
-TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_r.a
-OBJDIR = ../intermediate/UnityStore/GM/android/Release/PK-ParticlesToolbox
+TARGET = $(TARGETDIR)/libPK-ImporterLib_r.a
+OBJDIR = ../intermediate/UnityStore/GM/android/Release/PK-ImporterLib
 DEFINES += -DNDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
@@ -103,8 +103,8 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
-TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_r.a
-OBJDIR = ../intermediate/UnityStore/GM/android64/Release/PK-ParticlesToolbox
+TARGET = $(TARGETDIR)/libPK-ImporterLib_r.a
+OBJDIR = ../intermediate/UnityStore/GM/android64/Release/PK-ImporterLib
 DEFINES += -DNDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
@@ -121,8 +121,8 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH)/arm-linux-androideabi-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
-TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_s.a
-OBJDIR = ../intermediate/UnityStore/GM/android/Retail/PK-ParticlesToolbox
+TARGET = $(TARGETDIR)/libPK-ImporterLib_s.a
+OBJDIR = ../intermediate/UnityStore/GM/android/Retail/PK-ImporterLib
 DEFINES += -DNDEBUG -DPK_RETAIL
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
@@ -139,8 +139,8 @@ ifeq ($(origin AR), default)
   AR = $(EASYPATH64)/aarch64-linux-android-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
-TARGET = $(TARGETDIR)/libPK-ParticlesToolbox_s.a
-OBJDIR = ../intermediate/UnityStore/GM/android64/Retail/PK-ParticlesToolbox
+TARGET = $(TARGETDIR)/libPK-ImporterLib_s.a
+OBJDIR = ../intermediate/UnityStore/GM/android64/Retail/PK-ImporterLib
 DEFINES += -DNDEBUG -DPK_RETAIL
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
@@ -160,56 +160,50 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/pt_compile.o
-GENERATED += $(OBJDIR)/pt_debug_symbol_provider.o
-GENERATED += $(OBJDIR)/pt_deformers_morph_morpher.o
-GENERATED += $(OBJDIR)/pt_deformers_skin_core.o
-GENERATED += $(OBJDIR)/pt_deformers_skin_helpers.o
-GENERATED += $(OBJDIR)/pt_deformers_skin_skeletal_skinner.o
-GENERATED += $(OBJDIR)/pt_deformers_skin_skeletal_skinner_jobs.o
-GENERATED += $(OBJDIR)/pt_deformers_skin_stats.o
-GENERATED += $(OBJDIR)/pt_effect_analysis.o
-GENERATED += $(OBJDIR)/pt_file_helpers.o
-GENERATED += $(OBJDIR)/pt_helpers.o
-GENERATED += $(OBJDIR)/pt_init.o
-GENERATED += $(OBJDIR)/pt_legacy_timeline.o
-GENERATED += $(OBJDIR)/pt_legacy_timeline_track.o
-GENERATED += $(OBJDIR)/pt_legacy_timeline_track_domain.o
-GENERATED += $(OBJDIR)/pt_overdraw.o
-GENERATED += $(OBJDIR)/pt_precompiled.o
-GENERATED += $(OBJDIR)/pt_profiler.o
-GENERATED += $(OBJDIR)/pt_profiler_new.o
-GENERATED += $(OBJDIR)/pt_seek_interface.o
-GENERATED += $(OBJDIR)/pt_skeleton_animation.o
-GENERATED += $(OBJDIR)/pt_skeleton_animation_instance.o
-GENERATED += $(OBJDIR)/pt_skeleton_instance.o
-GENERATED += $(OBJDIR)/pt_trace.o
-GENERATED += $(OBJDIR)/pt_transforms.o
-OBJECTS += $(OBJDIR)/pt_compile.o
-OBJECTS += $(OBJDIR)/pt_debug_symbol_provider.o
-OBJECTS += $(OBJDIR)/pt_deformers_morph_morpher.o
-OBJECTS += $(OBJDIR)/pt_deformers_skin_core.o
-OBJECTS += $(OBJDIR)/pt_deformers_skin_helpers.o
-OBJECTS += $(OBJDIR)/pt_deformers_skin_skeletal_skinner.o
-OBJECTS += $(OBJDIR)/pt_deformers_skin_skeletal_skinner_jobs.o
-OBJECTS += $(OBJDIR)/pt_deformers_skin_stats.o
-OBJECTS += $(OBJDIR)/pt_effect_analysis.o
-OBJECTS += $(OBJDIR)/pt_file_helpers.o
-OBJECTS += $(OBJDIR)/pt_helpers.o
-OBJECTS += $(OBJDIR)/pt_init.o
-OBJECTS += $(OBJDIR)/pt_legacy_timeline.o
-OBJECTS += $(OBJDIR)/pt_legacy_timeline_track.o
-OBJECTS += $(OBJDIR)/pt_legacy_timeline_track_domain.o
-OBJECTS += $(OBJDIR)/pt_overdraw.o
-OBJECTS += $(OBJDIR)/pt_precompiled.o
-OBJECTS += $(OBJDIR)/pt_profiler.o
-OBJECTS += $(OBJDIR)/pt_profiler_new.o
-OBJECTS += $(OBJDIR)/pt_seek_interface.o
-OBJECTS += $(OBJDIR)/pt_skeleton_animation.o
-OBJECTS += $(OBJDIR)/pt_skeleton_animation_instance.o
-OBJECTS += $(OBJDIR)/pt_skeleton_instance.o
-OBJECTS += $(OBJDIR)/pt_trace.o
-OBJECTS += $(OBJDIR)/pt_transforms.o
+GENERATED += $(OBJDIR)/Core.o
+GENERATED += $(OBJDIR)/Events.o
+GENERATED += $(OBJDIR)/Legacy.o
+GENERATED += $(OBJDIR)/imp_ir_editor_effect.o
+GENERATED += $(OBJDIR)/imp_ir_particle_effect.o
+GENERATED += $(OBJDIR)/imp_ir_project_settings.o
+GENERATED += $(OBJDIR)/imp_ir_renderers.o
+GENERATED += $(OBJDIR)/imp_ir_samplers.o
+GENERATED += $(OBJDIR)/imp_precompiled.o
+GENERATED += $(OBJDIR)/imp_script_tokenizer.o
+GENERATED += $(OBJDIR)/imp_v1_EditorParticle_Data.o
+GENERATED += $(OBJDIR)/imp_v1_actionfactory.o
+GENERATED += $(OBJDIR)/imp_v1_descriptor.o
+GENERATED += $(OBJDIR)/imp_v1_dynamic_field_declarator.o
+GENERATED += $(OBJDIR)/imp_v1_evolvers.o
+GENERATED += $(OBJDIR)/imp_v1_particle_effect.o
+GENERATED += $(OBJDIR)/imp_v1_projectsettings.o
+GENERATED += $(OBJDIR)/imp_v1_renderers.o
+GENERATED += $(OBJDIR)/imp_v1_samplers.o
+GENERATED += $(OBJDIR)/imp_v1_scripts_utils.o
+GENERATED += $(OBJDIR)/imp_v1_templates.o
+GENERATED += $(OBJDIR)/tinyxml2.o
+OBJECTS += $(OBJDIR)/Core.o
+OBJECTS += $(OBJDIR)/Events.o
+OBJECTS += $(OBJDIR)/Legacy.o
+OBJECTS += $(OBJDIR)/imp_ir_editor_effect.o
+OBJECTS += $(OBJDIR)/imp_ir_particle_effect.o
+OBJECTS += $(OBJDIR)/imp_ir_project_settings.o
+OBJECTS += $(OBJDIR)/imp_ir_renderers.o
+OBJECTS += $(OBJDIR)/imp_ir_samplers.o
+OBJECTS += $(OBJDIR)/imp_precompiled.o
+OBJECTS += $(OBJDIR)/imp_script_tokenizer.o
+OBJECTS += $(OBJDIR)/imp_v1_EditorParticle_Data.o
+OBJECTS += $(OBJDIR)/imp_v1_actionfactory.o
+OBJECTS += $(OBJDIR)/imp_v1_descriptor.o
+OBJECTS += $(OBJDIR)/imp_v1_dynamic_field_declarator.o
+OBJECTS += $(OBJDIR)/imp_v1_evolvers.o
+OBJECTS += $(OBJDIR)/imp_v1_particle_effect.o
+OBJECTS += $(OBJDIR)/imp_v1_projectsettings.o
+OBJECTS += $(OBJDIR)/imp_v1_renderers.o
+OBJECTS += $(OBJDIR)/imp_v1_samplers.o
+OBJECTS += $(OBJDIR)/imp_v1_scripts_utils.o
+OBJECTS += $(OBJDIR)/imp_v1_templates.o
+OBJECTS += $(OBJDIR)/tinyxml2.o
 
 # Rules
 # #############################################
@@ -219,7 +213,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking PK-ParticlesToolbox
+	@echo Linking PK-ImporterLib
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -240,7 +234,7 @@ else
 endif
 
 clean:
-	@echo Cleaning PK-ParticlesToolbox
+	@echo Cleaning PK-ImporterLib
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -273,81 +267,72 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/pt_precompiled.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/pt_precompiled.cpp
+$(OBJDIR)/imp_precompiled.o: ../../ExternalLibs/pk_importerlib/src/precompiled/imp_precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_legacy_timeline.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/LegacyTimeline/pt_legacy_timeline.cpp
+$(OBJDIR)/imp_ir_editor_effect.o: ../../ExternalLibs/pk_importerlib/src/IR/Editor/imp_ir_editor_effect.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_legacy_timeline_track.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/LegacyTimeline/pt_legacy_timeline_track.cpp
+$(OBJDIR)/Core.o: ../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Core.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_legacy_timeline_track_domain.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/LegacyTimeline/pt_legacy_timeline_track_domain.cpp
+$(OBJDIR)/Events.o: ../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Events.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_deformers_morph_morpher.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/MeshDeformers/pt_deformers_morph_morpher.cpp
+$(OBJDIR)/Legacy.o: ../../ExternalLibs/pk_importerlib/src/IR/PopcornFXCore/Legacy.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_deformers_skin_core.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/MeshDeformers/pt_deformers_skin_core.cpp
+$(OBJDIR)/imp_script_tokenizer.o: ../../ExternalLibs/pk_importerlib/src/IR/Utils/imp_script_tokenizer.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_deformers_skin_helpers.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/MeshDeformers/pt_deformers_skin_helpers.cpp
+$(OBJDIR)/imp_ir_particle_effect.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_particle_effect.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_deformers_skin_skeletal_skinner.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/MeshDeformers/pt_deformers_skin_skeletal_skinner.cpp
+$(OBJDIR)/imp_ir_project_settings.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_project_settings.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_deformers_skin_skeletal_skinner_jobs.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/MeshDeformers/pt_deformers_skin_skeletal_skinner_jobs.cpp
+$(OBJDIR)/imp_ir_renderers.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_renderers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_deformers_skin_stats.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/MeshDeformers/pt_deformers_skin_stats.cpp
+$(OBJDIR)/imp_ir_samplers.o: ../../ExternalLibs/pk_importerlib/src/IR/imp_ir_samplers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_skeleton_animation.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/Skeleton/pt_skeleton_animation.cpp
+$(OBJDIR)/imp_v1_EditorParticle_Data.o: ../../ExternalLibs/pk_importerlib/src/v1/Editor/imp_v1_EditorParticle_Data.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_skeleton_animation_instance.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/Skeleton/pt_skeleton_animation_instance.cpp
+$(OBJDIR)/imp_v1_dynamic_field_declarator.o: ../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_dynamic_field_declarator.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_skeleton_instance.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/Skeleton/pt_skeleton_instance.cpp
+$(OBJDIR)/imp_v1_scripts_utils.o: ../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_scripts_utils.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_compile.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_compile.cpp
+$(OBJDIR)/imp_v1_templates.o: ../../ExternalLibs/pk_importerlib/src/v1/Utils/imp_v1_templates.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_debug_symbol_provider.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_debug_symbol_provider.cpp
+$(OBJDIR)/imp_v1_actionfactory.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_actionfactory.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_effect_analysis.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_effect_analysis.cpp
+$(OBJDIR)/imp_v1_descriptor.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_descriptor.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_file_helpers.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_file_helpers.cpp
+$(OBJDIR)/imp_v1_evolvers.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_evolvers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_helpers.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_helpers.cpp
+$(OBJDIR)/imp_v1_particle_effect.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_particle_effect.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_init.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_init.cpp
+$(OBJDIR)/imp_v1_projectsettings.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_projectsettings.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_overdraw.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_overdraw.cpp
+$(OBJDIR)/imp_v1_renderers.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_renderers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_profiler.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_profiler.cpp
+$(OBJDIR)/imp_v1_samplers.o: ../../ExternalLibs/pk_importerlib/src/v1/imp_v1_samplers.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_profiler_new.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_profiler_new.cpp
+$(OBJDIR)/tinyxml2.o: ../../ExternalLibs/pk_importerlib/src/xmlparser/tinyxml2/tinyxml2.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_seek_interface.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_seek_interface.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_trace.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_trace.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/pt_transforms.o: ../../ExternalLibs/Runtime/pk_particles_toolbox/src/pt_transforms.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

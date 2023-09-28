@@ -174,7 +174,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function3.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_vector_constructor.o
@@ -202,7 +201,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function3.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_vector_constructor.o
@@ -330,9 +328,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbv
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_math_operator.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select.cpp

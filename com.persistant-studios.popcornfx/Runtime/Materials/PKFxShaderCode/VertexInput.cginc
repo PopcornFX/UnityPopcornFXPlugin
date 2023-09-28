@@ -52,10 +52,5 @@ struct SVertexInput
 #	if	!PK_HAS_EMISSIVE_NONE
 		float3 EmissiveColor		: EMISSIVETEXCOORD;
 #	endif
-
-#if	PK_HAS_TRANSFORM_UVS
-		float2  TransformUVs_Rotate				: TEXCOORD6;
-		float4  TransformUVs_ScaleAndOffset		: TEXCOORD7;
-#endif
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };

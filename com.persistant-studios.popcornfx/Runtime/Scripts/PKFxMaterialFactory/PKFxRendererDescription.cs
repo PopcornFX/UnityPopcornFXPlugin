@@ -48,8 +48,7 @@ namespace PopcornFX
 		Has_EmissiveRamp = (1 << 18),
 		Has_SkeletalAnim = (1 << 19),
 		Has_SkeletalInterpol = (1 << 20),
-		Has_SkeletalTrackInterpol = (1 << 21),
-		Has_TransformUVs = (1 << 22)
+		Has_SkeletalTrackInterpol = (1 << 21)
 	};
 
 	public enum EBlendMode : int
@@ -352,7 +351,6 @@ namespace PopcornFX
 		public float				m_AlphaClipThreshold;
 		public string				m_GeneratedName;
 		public bool					m_DoubleSided;
-		public bool					m_TransformUVs_RGBOnly;
 		// VAT:
 		public SBatchVatFeatureDesc m_VatFeature = null;
 		// Lit:
@@ -402,7 +400,6 @@ namespace PopcornFX
 			m_BillboardMode = desc.m_BillboardMode;
 			m_InvSoftnessDistance = desc.m_InvSoftnessDistance;
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
-			m_TransformUVs_RGBOnly = desc.m_TransformUVs_RGBOnly != 0 ? true : false;
 
 			m_VatFeature = null;
 			m_SkeletalAnimFeature = null;
@@ -527,8 +524,6 @@ namespace PopcornFX
 
 			if ((materialFlags & (int)EShaderVariationFlags.Has_RibbonComplex) != 0)
 				finalName += " RibbonComplex";
-			if ((materialFlags & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
-				finalName += " TransformUVs";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_Atlas) != 0)
 				finalName += " Atlas";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_AnimBlend) != 0)
@@ -599,8 +594,6 @@ namespace PopcornFX
 			finalName += " ";
 			finalName += m_RotateUVs ? "RotateUvs" : "UVs";
 			finalName += " ";
-			finalName += m_TransformUVs_RGBOnly ? "RGBOnly" : "";
-			finalName += " ";
 			finalName += m_DiffuseMap == null ? "(none)" : m_DiffuseMap;
 			finalName += " ";
 			finalName += m_EmissiveMap == null ? "(none)" : m_EmissiveMap;
@@ -657,8 +650,6 @@ namespace PopcornFX
 
 			if ((materialFlags & (int)EShaderVariationFlags.Has_RibbonComplex) != 0)
 				finalName += "RC";
-			if ((materialFlags & (int)EShaderVariationFlags.Has_Atlas) != 0)
-				finalName += "TUV";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_Atlas) != 0)
 				finalName += "At";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_AnimBlend) != 0)
@@ -745,10 +736,6 @@ namespace PopcornFX
 		public Color m_BoundsDebugColor;
 #endif
 
-		private ComputeBuffer m_AtlasInfo = null;
-		public IntPtr	GetNativeRawAtlasesBuffer() { return m_AtlasInfo == null ? IntPtr.Zero : m_AtlasInfo.GetNativeBufferPtr(); }
-		public int		NativeRawAtlasesBufferSize { get { return m_AtlasInfo == null ? 0 : 4112; } } /*257 * 16*/
-
 		public SMeshDesc(Material mat, SBatchDesc batchDesc, GameObject renderingObject)
 		{
 			m_Slice = null;
@@ -759,7 +746,6 @@ namespace PopcornFX
 #if UNITY_EDITOR
 			m_BoundsDebugColor = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 #endif
-			Init();
 		}
 
 		public SMeshDesc(MeshFilter m, Material mat, SBatchDesc batchDesc, PKFxMeshInstancesRenderer mir, GameObject renderingObject)
@@ -772,37 +758,11 @@ namespace PopcornFX
 #if UNITY_EDITOR
 			m_BoundsDebugColor = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 #endif
-			Init();
-		}
-
-		~SMeshDesc()
-		{
-			Clean();
 		}
 
 		public bool HasShaderVariationFlag(EShaderVariationFlags flag)
 		{
 			return (m_BatchDesc.m_ShaderVariationFlags & (int)flag) == (int)flag;
-		}
-
-		public void Clean()
-		{
-			if (m_AtlasInfo != null)
-			{
-				m_AtlasInfo.Release();
-				m_AtlasInfo = null;
-			}
-		}
-
-		public void Init()
-		{
-			Clean();
-
-			if (HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas) && HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
-				m_AtlasInfo = new ComputeBuffer(257, 16, ComputeBufferType.Raw);
-
-
-			m_Material.SetBuffer("_Atlas", m_AtlasInfo);
 		}
 	}
 

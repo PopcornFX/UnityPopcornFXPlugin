@@ -194,7 +194,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function3.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_vector_constructor.o
@@ -222,7 +221,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function3.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_vector_constructor.o
@@ -242,8 +240,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_broadcast_avx.o
@@ -254,8 +250,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 
@@ -268,8 +262,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_broadcast_avx.o
@@ -280,8 +272,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 
@@ -294,8 +284,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_broadcast_avx.o
@@ -306,8 +294,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 
@@ -320,8 +306,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_broadcast_avx.o
@@ -332,8 +316,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 
@@ -346,8 +328,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_broadcast_avx.o
@@ -358,8 +338,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 
@@ -372,8 +350,6 @@ GENERATED += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-GENERATED += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_select_avx.o
 GENERATED += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_broadcast_avx.o
@@ -384,8 +360,6 @@ OBJECTS += $(OBJDIR)/cbvm_meta_op_math_function_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_idiv_mulinv_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_madd_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_math_operator_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx.o
-OBJECTS += $(OBJDIR)/cbvm_meta_op_math_permute_avx2.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_select_avx.o
 OBJECTS += $(OBJDIR)/cbvm_meta_op_type_converter_avx.o
 
@@ -512,9 +486,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbv
 $(OBJDIR)/cbvm_meta_op_math_operator.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -565,12 +536,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src
 $(OBJDIR)/cbvm_meta_op_math_operator_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx2.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx2.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -603,12 +568,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src
 $(OBJDIR)/cbvm_meta_op_math_operator_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx2.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx2.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -641,12 +600,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src
 $(OBJDIR)/cbvm_meta_op_math_operator_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx2.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx2.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -679,12 +632,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src
 $(OBJDIR)/cbvm_meta_op_math_operator_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx2.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx2.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -717,12 +664,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src
 $(OBJDIR)/cbvm_meta_op_math_operator_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx2.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx2.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -755,12 +696,6 @@ $(OBJDIR)/cbvm_meta_op_math_madd_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src
 $(OBJDIR)/cbvm_meta_op_math_operator_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_operator_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/cbvm_meta_op_math_permute_avx2.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_math_permute_avx2.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/cbvm_meta_op_select_avx.o: ../../Plugins/CompilerBackend_CPU_VM/src/cbvm_meta_op_select_avx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

@@ -189,10 +189,6 @@ GENERATED += $(OBJDIR)/core_upgrader_2_16_0_16701.o
 GENERATED += $(OBJDIR)/core_upgrader_2_17_0_17463.o
 GENERATED += $(OBJDIR)/core_upgrader_2_17_0_17579.o
 GENERATED += $(OBJDIR)/core_upgrader_2_17_0_17673.o
-GENERATED += $(OBJDIR)/core_upgrader_2_18_0_18518.o
-GENERATED += $(OBJDIR)/core_upgrader_2_18_0_18710.o
-GENERATED += $(OBJDIR)/core_upgrader_2_18_0_18748.o
-GENERATED += $(OBJDIR)/core_upgrader_2_18_0_18759.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53244.o
 GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
@@ -399,7 +395,6 @@ GENERATED += $(OBJDIR)/upg_upgrades_v2.14.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.15.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.16.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.17.0.o
-GENERATED += $(OBJDIR)/upg_upgrades_v2.18.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.2.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
@@ -441,10 +436,6 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_16_0_16701.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_17_0_17463.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_17_0_17579.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_17_0_17673.o
-OBJECTS += $(OBJDIR)/core_upgrader_2_18_0_18518.o
-OBJECTS += $(OBJDIR)/core_upgrader_2_18_0_18710.o
-OBJECTS += $(OBJDIR)/core_upgrader_2_18_0_18748.o
-OBJECTS += $(OBJDIR)/core_upgrader_2_18_0_18759.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53244.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
@@ -651,7 +642,6 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.14.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.15.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.16.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.17.0.o
-OBJECTS += $(OBJDIR)/upg_upgrades_v2.18.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.2.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
@@ -832,18 +822,6 @@ $(OBJDIR)/core_upgrader_2_17_0_17579.o: ../../ExternalLibs/pk_upgraderlib/src/Up
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_17_0_17673.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17673/core_upgrader_2_17_0_17673.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/core_upgrader_2_18_0_18518.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18518/core_upgrader_2_18_0_18518.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/core_upgrader_2_18_0_18710.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18710/core_upgrader_2_18_0_18710.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/core_upgrader_2_18_0_18748.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18748/core_upgrader_2_18_0_18748.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/core_upgrader_2_18_0_18759.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18759/core_upgrader_2_18_0_18759.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
@@ -1417,9 +1395,6 @@ $(OBJDIR)/upg_upgrades_v2.16.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.17.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.17.0.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_upgrades_v2.18.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.18.0.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp

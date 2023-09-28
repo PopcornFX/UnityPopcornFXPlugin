@@ -75,9 +75,6 @@
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator.low.impl.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_permute.impl.h">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_select.impl.h">
       <Filter>Sources</Filter>
     </ClInclude>
@@ -174,15 +171,6 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator_avx.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_permute.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_permute_avx.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_permute_avx2.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_select.cpp">

@@ -53,7 +53,6 @@ extern "C"
 		const char					*m_EmissiveRampMap;
 		float						m_InvSoftnessDistance;
 		float						m_AlphaClipThreshold;
-		ManagedBool					m_TransformUVs_RGBOnly;
 
 		int							m_BillboardMode;
 		int							m_DrawOrder;
@@ -74,7 +73,6 @@ extern "C"
 		,	m_EmissiveRampMap(null)
 		,	m_InvSoftnessDistance(0)
 		,	m_AlphaClipThreshold(0)
-		,	m_TransformUVs_RGBOnly(ManagedBool_False)
 		,	m_BillboardMode(0)
 		,	m_DrawOrder(0)
 		,	m_LitRendering(null)

@@ -52,8 +52,7 @@ namespace PopcornFX
 			"EmissiveRampMap",
 			"SkeletonAnimation",
 			"SkeletonAnimationInterpolate",
-			"SkeletonAnimationInterpolateTracks",
-			"TransformUVs"
+			"SkeletonAnimationInterpolateTracks"
 		};
 
 		public static string GetSelectedPathOrFallback()

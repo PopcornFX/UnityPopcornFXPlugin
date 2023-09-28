@@ -315,15 +315,6 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons.h">
       <Filter>Sources\billboarders\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_common.h">
-      <Filter>Sources\billboarders\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_multiplane.h">
-      <Filter>Sources\billboarders\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_tube.h">
-      <Filter>Sources\billboarders\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\include\pv_renderhelpers.h">
       <Filter>Headers\_Private</Filter>
     </ClInclude>

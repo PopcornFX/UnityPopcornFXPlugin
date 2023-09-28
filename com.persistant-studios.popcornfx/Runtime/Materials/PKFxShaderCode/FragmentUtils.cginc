@@ -2,11 +2,6 @@
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
 
-
-#if PK_HAS_TRANSFORM_UVS
-ByteAddressBuffer	_Atlas;
-#endif 
-
 //------------------------------------------
 // Diffuse texture sampling
 //------------------------------------------
@@ -18,15 +13,6 @@ float4	SampleSpriteTexture(float2 uv)
 	float4 color = tex2D(_MainTex, uv);
 	return color;
 }
-
-#if PK_HAS_TRANSFORM_UVS
-float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
-{
-	uv.y = 1 - uv.y;
-	float4 color = tex2Dgrad(_MainTex, uv, dUVdx, dUVdy);
-	return color;
-}
-#endif
 
 //------------------------------------------
 
@@ -44,15 +30,6 @@ float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
 		float4 color = _AlphaMap.Sample(linear_clamp_sampler, uv);
 		return color;
 	}
-
-	#if PK_HAS_TRANSFORM_UVS
-		float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
-		{
-			uv.y = 1 - uv.y;
-			float4 color = _AlphaMap.SampleGrad(linear_clamp_sampler, uv, dUVdx, dUVdy);
-			return color;
-		}
-	#endif
 #endif
 
 //------------------------------------------
@@ -67,15 +44,6 @@ float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
 		float3 color = tex2D(_EmissiveMap, uv).rgb;
 		return color;
 	}
-
-	#if PK_HAS_TRANSFORM_UVS
-		float3	SampleGradEmissiveTexture(float2 uv, float dUVdx, float dUVdy)
-		{
-			uv.y = 1 - uv.y;
-			float3 color = tex2Dgrad(_EmissiveMap, uv, dUVdx, dUVdy).rgb;
-			return color;
-		}
-	#endif
 #endif
 
 //------------------------------------------
@@ -160,18 +128,4 @@ float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
 
 #if	PK_HAS_RIBBON_COMPLEX
 	int		_RotateUVs;
-#endif
-
-//------------------------------------------
-// TransformUVs
-//------------------------------------------
-
-#if defined(PK_HAS_TRANSFORM_UVS)
-
-	int		_TransformUVs_RGBOnly;
-
-	float2 transformUV(float2 UV, float2 scale, float2x2 rotation, float2 offset)
-	{
-		return mul(UV * scale, rotation) + offset;
-	}
 #endif

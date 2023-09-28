@@ -1161,9 +1161,6 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_utils.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_utils.inl">
-      <Filter>Kernel\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_virtual.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
@@ -2340,9 +2337,6 @@
       <Filter>Compiler\Sources\cp_ir</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_vector_constructor.cpp">
-      <Filter>Compiler\Sources\cp_ir</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_vector_permute.cpp">
       <Filter>Compiler\Sources\cp_ir</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_vector_swizzler.cpp">

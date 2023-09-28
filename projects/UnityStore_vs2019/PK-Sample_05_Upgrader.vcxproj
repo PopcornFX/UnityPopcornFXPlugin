@@ -518,6 +518,9 @@
     <ProjectReference Include="PK-UpgraderLib.vcxproj">
       <Project>{55ACDBF7-CBA0-4035-B212-68E793243242}</Project>
     </ProjectReference>
+    <ProjectReference Include="PK-ImporterLib.vcxproj">
+      <Project>{55ACDBF7-CBA0-4035-B212-68E973234242}</Project>
+    </ProjectReference>
     <ProjectReference Include="PK-Plugin_CodecImage_DDS.vcxproj">
       <Project>{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}</Project>
     </ProjectReference>

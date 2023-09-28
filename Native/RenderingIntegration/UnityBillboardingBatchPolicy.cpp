@@ -229,25 +229,6 @@ bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const T
 	if (!PK_VERIFY(_RenderThread_AllocPerViewGeomBuffers(toMap, ctx.m_RenderApiData)))
 		return false;
 
-	if (m_AtlasList != null && m_UnityMeshInfo.m_AtlasesSize != 0)
-	{
-		//VMN: Should be done once.
-		m_MappedAtlasesBuffer = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfoPerViews[0].m_AtlasesHandler, false, m_UnityMeshInfo.m_AtlasesSize, m_UnityMeshInfo.m_AtlasesSize);
-		if (!PK_VERIFY(m_MappedAtlasesBuffer != null))
-			return false;
-
-		u32		*count = reinterpret_cast<u32*>(Mem::AdvanceRawPointer(m_MappedAtlasesBuffer, 0));
-		CFloat4	*data = reinterpret_cast<CFloat4*>(Mem::AdvanceRawPointer(m_MappedAtlasesBuffer, sizeof(CUint4))); // Alignement
-		*count = m_AtlasList->m_RectsFp32.Count();
-		PK_ASSERT(*count < 0x100);
-		PK_ASSERT(m_AtlasList->m_RectsFp32.Stride() == sizeof(CFloat4));
-		Mem::Copy(data, m_AtlasList->m_RectsFp32.RawDataPointer(), m_AtlasList->m_RectsFp32.CoveredBytes());
-
-		if (m_MappedAtlasesBuffer != null)
-			ctx.m_RenderApiData->EndModifyNativeBuffer(m_UnityMeshInfoPerViews[0].m_AtlasesHandler, false);
-
-		m_AtlasList = null;
-	}
 	// Setup the memory view in the jobs:
 	if (!PK_VERIFY(_RenderThread_SetupBuffersBillboards(toMap, batchJobs)))
 		return false;
@@ -553,7 +534,7 @@ bool	CUnityBillboardingBatchPolicy::UnmapBuffers(SUnityRenderContext &ctx)
 			{
 				void		*indices = ctx.m_RenderApiData->BeginModifyNativeBuffer(m_UnityMeshInfoPerViews[i].m_IBHandler, true, iboFullSize, iboFullSize);
 
-				if (!PK_VERIFY(indices != null && m_Exec_SAO2AOS[i].m_ParticleBuffers.m_Indices != null))
+				if (!PK_VERIFY(indices != null))
 					continue;
 
 				Mem::Copy(indices, m_Exec_SAO2AOS[i].m_ParticleBuffers.m_Indices, srcIdxSize);
@@ -1189,13 +1170,6 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_Cursor(), BaseType_Float, genInputs))
 			m_ParticleBuffers.m_AlphaCursor.ResizeIFN(m_VertexCount);
 
-		if (_FindAdditionalInput(BasicRendererProperties::SID_TransformUVs_UVRotate(), BaseType_Float, genInputs))
-			m_ParticleBuffers.m_TransformUVsRotate.ResizeIFN(m_VertexCount);
-		if (_FindAdditionalInput(BasicRendererProperties::SID_TransformUVs_UVOffset(), BaseType_Float2, genInputs))
-			m_ParticleBuffers.m_TransformUVsOffset.ResizeIFN(m_VertexCount);
-		if (_FindAdditionalInput(BasicRendererProperties::SID_TransformUVs_UVScale(), BaseType_Float2, genInputs))
-			m_ParticleBuffers.m_TransformUVsScale.ResizeIFN(m_VertexCount);
-
 		m_ParticleBuffers.m_GeneratedInputs = genInputs.m_GeneratedInputs;
 	}
 
@@ -1308,37 +1282,8 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaCursor.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVOffset() && addInput.m_Type == BaseType_Float2)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsOffset.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat2);
-		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVScale() && addInput.m_Type == BaseType_Float2)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsScale.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat2);
-		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVRotate() && addInput.m_Type == BaseType_Float)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsRotate.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(float);
-		}
 	}
+
 	billboardBatch->m_Exec_CopyField.m_FieldsToCopy = m_ParticleBuffers.m_AdditionalFieldsBuffers;
 
 	// -----------------------------------------
@@ -1595,36 +1540,6 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaCursor.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVOffset() && addInput.m_Type == BaseType_Float2)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsOffset.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat2);
-		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVScale() && addInput.m_Type == BaseType_Float2)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsScale.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat2);
-		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVRotate() && addInput.m_Type == BaseType_Float)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsRotate.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(float);
-		}
 	}
 
 	ribbonBatch->m_Exec_CopyField.m_FieldsToCopy = m_ParticleBuffers.m_AdditionalFieldsBuffers;
@@ -1863,36 +1778,6 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaCursor.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVOffset() && addInput.m_Type == BaseType_Float2)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsOffset.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat2);
-		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVScale() && addInput.m_Type == BaseType_Float2)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsScale.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat2);
-		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVRotate() && addInput.m_Type == BaseType_Float)
-		{
-			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
-				return false;
-			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
-			field.m_AdditionalInputIndex = i;
-			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsRotate.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(float);
-		}
 	}
 
 	triangleBatch->m_Exec_CopyField.m_FieldsToCopy = m_ParticleBuffers.m_AdditionalFieldsBuffers;
@@ -1997,14 +1882,9 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 		{
 			FillEmissiveColors(&(m_ParticleBuffers.m_EmissiveColors[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
-		{
-			FillTransformUVsRotate(&(m_ParticleBuffers.m_TransformUVsRotate[vertexID]), bfPtr, *m_SemanticOffsets);
-			FillTransformUVsScaleAndOffset(&(((CFloat2*)m_ParticleBuffers.m_TransformUVsScale)[vertexID]), &(((CFloat2*)m_ParticleBuffers.m_TransformUVsOffset)[vertexID]), bfPtr, *m_SemanticOffsets);
-		}
 		bfPtr = Mem::AdvanceRawPointer(bfPtr, m_VertexStride);
 	}
+	
 }
 
 //----------------------------------------------------------------------------

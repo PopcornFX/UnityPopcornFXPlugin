@@ -30,7 +30,6 @@ MonoBehaviour:
   m_MeshDiffuseColorPropertyName: _BaseColor
   m_MeshEmissiveColorPropertyName: _EmissiveColor
   m_MeshAlphaCursorPropertyName: _AlphaCursor
-  m_MeshCullPropertyName: _Cull
   m_MeshVATCursorPropertyName: _VATCursor
   m_VATPositionMapPropertyName: _VATPositionMap
   m_VATNormalMapPropertyName: _VATNormalMap
@@ -61,15 +60,10 @@ MonoBehaviour:
   m_MeshTransformRow1PropertyName: _SkeletalMeshTransform1
   m_MeshTransformRow2PropertyName: _SkeletalMeshTransform2
   m_MeshTransformRow3PropertyName: _SkeletalMeshTransform3
-  m_TextureAtlasPropertyName: _AtlasRects
-  m_AtlasCountPropertyName: _AtlasCount
-  m_AtlasIdPropertyName: _AtlasId
-  m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
   m_UseShader: 1
   m_Shader: {fileID: 4800000, guid: c8cdae2f330eab8498a2d93cffea73cb, type: 3}
   m_Material: {fileID: 0}
   m_RenderTypes: 01010001
   m_BlendMode: 010101010000
-  m_SupportedShaderMask: 8388599
-  m_MandatoryShaderMask: 0
+  m_ShaderMask: 4194295
   m_BillboardingLocation: 0

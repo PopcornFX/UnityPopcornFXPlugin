@@ -27,7 +27,7 @@ struct SVertexOutput
 	#elif	PK_HAS_ANIM_BLEND
 		float2 UV0					: TEXCOORD1;
 		float2 UV1					: TEXCOORD2;
-		float  FrameLerp			: TEXCOORD3;
+		float  FrameLerp : TEXCOORD3;
 	
 		#if		PK_HAS_ALPHA_REMAP
 			float  AlphaCursor 		: TEXCOORD4;
@@ -38,18 +38,11 @@ struct SVertexOutput
 		#if		PK_HAS_ALPHA_REMAP
 			float  AlphaCursor 		: TEXCOORD2;
 		#endif
-			
 	#endif
 	
 	#if !PK_HAS_EMISSIVE_NONE
 		float3 EmissiveColor		: TEXCOORD5;
 	#endif
-		
-	#if	PK_HAS_TRANSFORM_UVS
-		float2   TransformUVs_Rotate			: TEXCOORD6;
-		float4  TransformUVs_ScaleAndOffset		: TEXCOORD7;
-	#endif
-
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 	UNITY_VERTEX_OUTPUT_STEREO
 };

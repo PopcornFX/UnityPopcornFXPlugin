@@ -138,9 +138,7 @@ SFlagsToUseSemantic		flagsToUseSemantic[__Semantic_Count] =
 	{ 0U, ShaderVariationFlags::Has_AnimBlend },																						// Semantic_Uv1
 	{ 0U, ShaderVariationFlags::Has_AnimBlend },																						// Semantic_AtlasId
 	{ 0U, ShaderVariationFlags::Has_AlphaRemap },																						// Semantic_AlphaCursor
-	{ 0U, ShaderVariationFlags::Has_Emissive },																							// Semantic_EmissiveColor
-	{ 0U, ShaderVariationFlags::Has_TransformUVs },																						// Semantic_TransformUvsRotate
-	{ 0U, ShaderVariationFlags::Has_TransformUVs },																						// Semantic_TransformUvsScaleAndOffset
+	{ 0U, ShaderVariationFlags::Has_Emissive }																							// Semantic_EmissiveColor
 };
 
 u32		semanticSize[__Semantic_Count] =
@@ -153,11 +151,9 @@ u32		semanticSize[__Semantic_Count] =
 	4 * sizeof(float),									// Semantic_UvScaleAndOffset
 	2 * sizeof(float),									// Semantic_Uv0
 	2 * sizeof(float),									// Semantic_Uv1
-	1 * sizeof(float),									// Semantic_AtlasId
-	1 * sizeof(float),									// Semantic_AlphaCursor
+	sizeof(float),										// Semantic_AtlasId
+	sizeof(float),										// Semantic_AlphaCursor
 	3 * sizeof(float),									// Semantic_EmissiveColor
-	1 * sizeof(float),									// Semantic_TransformUvsRotate
-	4 * sizeof(float),									// Semantic_TransformUvsScaleAndOffset
 };
 
 //----------------------------------------------------------------------------
@@ -317,13 +313,6 @@ u32		GetGeomBillboardVertexBufferStride(EBillboardMode bbMode, u32 shaderVariati
 	{
 		vertexStride += 1 * sizeof(float); // float Atlas
 	}
-#if 0
-	//To implement when vertex billboarding will be possible with shadergraph
-	if ((shaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
-	{
-		vertexStride += 1 * sizeof(float) + 4 * sizeof(float); // rotate + 2 x float2 scale and offset
-	}
-#endif
 	return vertexStride;
 }
 

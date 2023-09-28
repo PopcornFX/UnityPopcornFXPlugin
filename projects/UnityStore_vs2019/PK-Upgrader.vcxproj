@@ -513,6 +513,12 @@
     <ProjectReference Include="PK-Runtime.vcxproj">
       <Project>{E21DB851-1449-42D8-B5FC-7FC2E9399524}</Project>
     </ProjectReference>
+    <ProjectReference Include="PK-ParticlesToolbox.vcxproj">
+      <Project>{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Runtime.vcxproj">
+      <Project>{E21DB851-1449-42D8-B5FC-7FC2E9399524}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

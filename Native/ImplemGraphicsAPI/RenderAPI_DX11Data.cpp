@@ -62,10 +62,12 @@ void	*CDX11Data::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool isId
 	D3D11_MAPPED_SUBRESOURCE	mapped;
 
 	CDX11BufferHandles			*bufferHandleDX11 = (CDX11BufferHandles*)(bufferHandle.m_Buffer.Get());
+	PK_ASSERT(bufferHandleDX11->m_DeviceLocal != null);
 	ID3D11Buffer				*deviceLocalBuff = (ID3D11Buffer*)bufferHandleDX11->m_DeviceLocal;
 	PD3D11Device				device = CRuntimeManager::Instance().GetDeviceD3D11();
 	PD3D11Context				immediateCtx = null;
 
+	PK_ASSERT(deviceLocalBuff != null);
 	GET_IMMEDIATE_CONTEXT(device, immediateCtx, return null);
 	D3D11_BUFFER_DESC	deviceLocalDesc = {};
 	deviceLocalBuff->GetDesc(&deviceLocalDesc);

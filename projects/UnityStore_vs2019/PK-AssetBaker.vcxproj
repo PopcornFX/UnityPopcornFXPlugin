@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{44CEDA8C-CBA0-4053-B122-6E8793324224}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PK-AssetBaker</RootNamespace>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\release\application\BinariesVC142_x32_d\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Debug\PK-AssetBaker\</IntDir>
+    <TargetName>PK-AssetBaker</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\release\application\BinariesVC142_x64_d\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Debug\PK-AssetBaker\</IntDir>
+    <TargetName>PK-AssetBaker</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\release\application\BinariesVC142_x32_r\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Release\PK-AssetBaker\</IntDir>
+    <TargetName>PK-AssetBaker</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\release\application\BinariesVC142_x64_r\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Release\PK-AssetBaker\</IntDir>
+    <TargetName>PK-AssetBaker</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>freetype.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x32\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>freetype.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x32\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
+    <ClInclude Include="..\..\Native\Common\PKFX\FxPlugins.h" />
+    <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\unzip.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_HBO.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Texture.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxPlugins.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxStartup.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Unzip.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Upgrade.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\unzip.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="PK-Plugin_CodecImage_DDS.vcxproj">
+      <Project>{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_PNG.vcxproj">
+      <Project>{23F02C00-32A1-4255-7F68-489FEF2EF4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_JPG.vcxproj">
+      <Project>{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_TGA.vcxproj">
+      <Project>{23F03C17-32A1-4155-7F68-489FEAC3F4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_PKM.vcxproj">
+      <Project>{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_PVR.vcxproj">
+      <Project>{23F02D13-32A2-4155-7F68-489FEAC3F4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_TIFF.vcxproj">
+      <Project>{A1F7C864-F8F8-9855-7F68-489FEF2EF4C1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_HDR.vcxproj">
+      <Project>{23F008B9-32A1-4155-7F68-489FEAC305E2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CompilerBackend_CPU_VM.vcxproj">
+      <Project>{FBF093C7-32A1-4155-8968-4890F7C3F4DF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-ZLib.vcxproj">
+      <Project>{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecMesh_FBX.vcxproj">
+      <Project>{4D8DC385-32A1-4155-7F68-489FEAC3F4D7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_EXR.vcxproj">
+      <Project>{23EFFE8A-32A1-4155-7F68-479F1ADDF436}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-AssetBakerLib.vcxproj">
+      <Project>{44ECDA8C-CBA0-4035-B212-68E793243242}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-UpgraderLib.vcxproj">
+      <Project>{55ACDBF7-CBA0-4035-B212-68E793243242}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-ImporterLib.vcxproj">
+      <Project>{55ACDBF7-CBA0-4035-B212-68E973234242}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-ParticlesToolbox.vcxproj">
+      <Project>{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Runtime.vcxproj">
+      <Project>{E21DB851-1449-42D8-B5FC-7FC2E9399524}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

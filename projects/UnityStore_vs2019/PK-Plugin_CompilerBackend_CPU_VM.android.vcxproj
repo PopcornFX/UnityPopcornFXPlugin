@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug android|ARM">
+      <Configuration>Debug android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android|ARM64">
+      <Configuration>Debug android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android64|ARM">
+      <Configuration>Debug android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android64|ARM64">
+      <Configuration>Debug android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android|ARM">
+      <Configuration>Release android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android|ARM64">
+      <Configuration>Release android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android64|ARM">
+      <Configuration>Release android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android64|ARM64">
+      <Configuration>Release android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android|ARM">
+      <Configuration>Retail android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android|ARM64">
+      <Configuration>Retail android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android64|ARM">
+      <Configuration>Retail android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android64|ARM64">
+      <Configuration>Retail android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FBF093C7-32A1-4155-8968-4890F7C3F4DF}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CompilerBackend_CPU_VM.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CompilerBackend_CPU_VM.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CompilerBackend_CPU_VM.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CompilerBackend_CPU_VM.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CompilerBackend_CPU_VM.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CompilerBackend_CPU_VM.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Debug\PK-Plugin_CompilerBackend_CPU_VM.android\</IntDir>
+    <TargetName>libPK-Plugin_CompilerBackend_CPU_VM_d</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Debug\PK-Plugin_CompilerBackend_CPU_VM.android\</IntDir>
+    <TargetName>libPK-Plugin_CompilerBackend_CPU_VM_d</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Release\PK-Plugin_CompilerBackend_CPU_VM.android\</IntDir>
+    <TargetName>libPK-Plugin_CompilerBackend_CPU_VM_r</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Release\PK-Plugin_CompilerBackend_CPU_VM.android\</IntDir>
+    <TargetName>libPK-Plugin_CompilerBackend_CPU_VM_r</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Retail\PK-Plugin_CompilerBackend_CPU_VM.android\</IntDir>
+    <TargetName>libPK-Plugin_CompilerBackend_CPU_VM_s</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Retail\PK-Plugin_CompilerBackend_CPU_VM.android\</IntDir>
+    <TargetName>libPK-Plugin_CompilerBackend_CPU_VM_s</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../Plugins/CompilerBackend_CPU_VM/src/cbvm_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CompilerBackend_CPU_VM;..\..\Plugins\CompilerBackend_CPU_VM\include;..\..\Plugins\CompilerBackend_CPU_VM\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../Plugins/CompilerBackend_CPU_VM/src/cbvm_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CompilerBackend_CPU_VM;..\..\Plugins\CompilerBackend_CPU_VM\include;..\..\Plugins\CompilerBackend_CPU_VM\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../Plugins/CompilerBackend_CPU_VM/src/cbvm_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CompilerBackend_CPU_VM;..\..\Plugins\CompilerBackend_CPU_VM\include;..\..\Plugins\CompilerBackend_CPU_VM\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../Plugins/CompilerBackend_CPU_VM/src/cbvm_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CompilerBackend_CPU_VM;..\..\Plugins\CompilerBackend_CPU_VM\include;..\..\Plugins\CompilerBackend_CPU_VM\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../Plugins/CompilerBackend_CPU_VM/src/cbvm_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CompilerBackend_CPU_VM;..\..\Plugins\CompilerBackend_CPU_VM\include;..\..\Plugins\CompilerBackend_CPU_VM\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../Plugins/CompilerBackend_CPU_VM/src/cbvm_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CompilerBackend_CPU_VM;..\..\Plugins\CompilerBackend_CPU_VM\include;..\..\Plugins\CompilerBackend_CPU_VM\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_codegen_jit.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_compile.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_config.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_debug.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_main.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_meta_ops.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_meta_ops.inl" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_registers.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_registers.inl" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\include\cbvm_stream_copier.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_broadcast.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_external_clear.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_external_load.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_external_store.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_function.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_function3.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_idiv_mulinv.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_madd.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator.low.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_select.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_type_converter.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_precompiled.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_compile.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_compile_bytecode.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_compile_instrcombiner.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_compile_instrscheduler.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_compile_registers.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_debug.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_exec.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_main.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_broadcast.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_call.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_external_clear.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_external_load.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_external_store.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_function.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_function3.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_idiv_mulinv.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_madd.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_select.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_type_converter.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_vector_constructor.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_vector_swizzler.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_vector_swizzler_codegen.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_precompiled.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_program.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_registers.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_scratch_pool.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

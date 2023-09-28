@@ -222,10 +222,17 @@ namespace PopcornFX
 
 		public int MaxCameraSupport()
 		{
-			if (m_CameraLayers == null || m_CameraLayers.Length == 0)
+			if (PKFxSettings.MaxCameraSupport != m_CameraLayers.Length)
 			{
-				m_CameraLayers = new int[1];
-				m_CameraLayers[0] = PKFxSettings.Instance.GetCameraLayer(0);
+				int[] prevCameraLayers = CameraLayers;
+				int[] newCameraLayers = new int[PKFxSettings.MaxCameraSupport];
+
+				for (int i = 0; i < PKFxSettings.MaxCameraSupport; i++)
+				{
+					int cameraLayerID = i < prevCameraLayers.Length ? prevCameraLayers[i] : PKFxSettings.Instance.GetCameraLayer(i);
+					newCameraLayers[i] = cameraLayerID;
+				}
+				CameraLayers = newCameraLayers;
 			}
 			return m_CameraLayers.Length;
 		}

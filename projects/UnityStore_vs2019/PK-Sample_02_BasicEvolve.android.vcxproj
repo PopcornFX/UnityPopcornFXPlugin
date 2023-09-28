@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug android|ARM">
+      <Configuration>Debug android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android|ARM64">
+      <Configuration>Debug android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android64|ARM">
+      <Configuration>Debug android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android64|ARM64">
+      <Configuration>Debug android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android|ARM">
+      <Configuration>Release android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android|ARM64">
+      <Configuration>Release android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android64|ARM">
+      <Configuration>Release android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android64|ARM64">
+      <Configuration>Release android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android|ARM">
+      <Configuration>Retail android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android|ARM64">
+      <Configuration>Retail android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android64|ARM">
+      <Configuration>Retail android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android64|ARM64">
+      <Configuration>Retail android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{44DEC18A-CBA0-4053-B592-6ECF4D324224}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Sample_02_BasicEvolve.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Sample_02_BasicEvolve.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Sample_02_BasicEvolve.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Sample_02_BasicEvolve.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Sample_02_BasicEvolve.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Sample_02_BasicEvolve.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\release\builds\Android_Samples.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Debug\PK-Sample_02_BasicEvolve.android\</IntDir>
+    <TargetName>PK-Sample_02_BasicEvolve_d</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\release\builds\Android64_Samples.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Debug\PK-Sample_02_BasicEvolve.android\</IntDir>
+    <TargetName>PK-Sample_02_BasicEvolve_d</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\release\builds\Android_Samples.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Release\PK-Sample_02_BasicEvolve.android\</IntDir>
+    <TargetName>PK-Sample_02_BasicEvolve_r</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\release\builds\Android64_Samples.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Release\PK-Sample_02_BasicEvolve.android\</IntDir>
+    <TargetName>PK-Sample_02_BasicEvolve_r</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\release\builds\Android_Samples.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Retail\PK-Sample_02_BasicEvolve.android\</IntDir>
+    <TargetName>PK-Sample_02_BasicEvolve_s</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\release\builds\Android64_Samples.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Retail\PK-Sample_02_BasicEvolve.android\</IntDir>
+    <TargetName>PK-Sample_02_BasicEvolve_s</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../SDK/Samples/ParticleSample/src/precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>_DEBUG;PK_USE_RENDER_HELPERS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <OmitFramePointers>false</OmitFramePointers>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <StrictAliasing>false</StrictAliasing>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>%(LibraryDependencies);log;EGL;GLESv3</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../SDK/Samples/ParticleSample/src/precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>_DEBUG;PK_USE_RENDER_HELPERS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <OmitFramePointers>false</OmitFramePointers>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <StrictAliasing>false</StrictAliasing>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>%(LibraryDependencies);log;EGL;GLESv3</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../SDK/Samples/ParticleSample/src/precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_USE_RENDER_HELPERS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <StrictAliasing>false</StrictAliasing>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <LibraryDependencies>%(LibraryDependencies);log;EGL;GLESv3</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../SDK/Samples/ParticleSample/src/precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_USE_RENDER_HELPERS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <StrictAliasing>false</StrictAliasing>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <LibraryDependencies>%(LibraryDependencies);log;EGL;GLESv3</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../SDK/Samples/ParticleSample/src/precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_USE_RENDER_HELPERS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <StrictAliasing>false</StrictAliasing>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <LibraryDependencies>%(LibraryDependencies);log;EGL;GLESv3</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>../../SDK/Samples/ParticleSample/src/precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_USE_RENDER_HELPERS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Disabled</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <StrictAliasing>false</StrictAliasing>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <LibraryDependencies>%(LibraryDependencies);log;EGL;GLESv3</LibraryDependencies>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+      <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Native\Common\PKFX\FxPlatform.h" />
+    <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
+    <ClInclude Include="..\..\SDK\Samples\ParticleSample\src\precompiled.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxPlatformGeneric.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderCompileAs></PrecompiledHeaderCompileAs>
+      <PrecompiledHeaderFile></PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFileDirectory></PrecompiledHeaderOutputFileDirectory>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxStartup.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderCompileAs></PrecompiledHeaderCompileAs>
+      <PrecompiledHeaderFile></PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFileDirectory></PrecompiledHeaderOutputFileDirectory>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\ParticleSample\src\ParticleSample_02_BasicEvolve.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\ParticleSample\src\precompiled.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="PK-Plugin_CodecImage_DDS.android.vcxproj">
+      <Project>{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_PNG.android.vcxproj">
+      <Project>{23F02C00-32A1-4255-7F68-489FEF2EF4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_JPG.android.vcxproj">
+      <Project>{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CompilerBackend_CPU_VM.android.vcxproj">
+      <Project>{FBF093C7-32A1-4155-8968-4890F7C3F4DF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-ZLib.android.vcxproj">
+      <Project>{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-ParticlesToolbox.android.vcxproj">
+      <Project>{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-Runtime.android.vcxproj">
+      <Project>{E21DB851-1449-42D8-B5FC-7FC2E9399524}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

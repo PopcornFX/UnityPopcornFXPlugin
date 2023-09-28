@@ -620,6 +620,7 @@ void	CRuntimeManager::SetMaxCameraCount(int count)
 
 	for (u32 i = 0; i < sceneViews.Count(); ++i)
 	{
+		sceneViews[i].m_InvViewMatrix = CFloat4x4::IDENTITY;
 		sceneViews[i].m_UserData.m_CamSlotIdxInMedCol = medCol->RegisterView();
 		if (medCol != medColMeshes)
 			sceneViews[i].m_UserData.m_CamSlotIdxInMeshMedCol = medColMeshes->RegisterView();
@@ -1935,11 +1936,14 @@ void	ProfileRecordEventEnd(void *arg, const PopcornFX::Profiler::SNodeDescriptor
 		return;
 	g_ThreadReentryGuards[cThread] = true;
 
-	const u32	depth = g_ThreadProfileRecordDepth[cThread].m_Depth--; // decrement this thread's counter
-	PK_ASSERT(depth <= g_MaxDepthProfiling); // otherwise, 'StartScopedProfile' should have returned false, and we shouldn't have been called
-	const u32	id = TTypeHasher<CString>::Hash(nodeDescriptor->m_Name);
-	if (g_UnityMarker[cThread].count(id) != 0)
-		g_UnityProfiler->EndSample(g_UnityMarker[cThread][id]);
+	if (g_ThreadProfileRecordDepth[cThread].m_Depth > 0)
+	{
+		g_ThreadProfileRecordDepth[cThread].m_Depth--;
+		PK_ASSERT(g_ThreadProfileRecordDepth[cThread].m_Depth <= g_MaxDepthProfiling); // otherwise, 'StartScopedProfile' should have returned false, and we shouldn't have been called
+		const u32	id = TTypeHasher<CString>::Hash(nodeDescriptor->m_Name);
+		if (g_UnityMarker[cThread].count(id) != 0)
+			g_UnityProfiler->EndSample(g_UnityMarker[cThread][id]);
+	}
 	g_ThreadReentryGuards[cThread] = false;
 }
 
@@ -2035,7 +2039,7 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup(IUnityInterfaces *
 
 #if	defined(KR_PROFILER_ENABLED)
 	g_UnityProfiler = unityInterfaces->Get<IUnityProfiler>();
-	if (g_UnityProfiler != NULL)
+	if (g_UnityProfiler != null)
 		g_IsDevelopmentBuild = g_UnityProfiler->IsAvailable() != 0;
 
 	if (g_IsDevelopmentBuild)

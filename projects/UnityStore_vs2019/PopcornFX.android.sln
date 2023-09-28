@@ -1,0 +1,354 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{603D9F76-4C37-C8C8-35A4-5ED9213D2E35}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-ZLib.android", "PK-ZLib.android.vcxproj", "{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_DDS.android", "PK-Plugin_CodecImage_DDS.android.vcxproj", "{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_EXR.android", "PK-Plugin_CodecImage_EXR.android.vcxproj", "{23EFFE8A-32A1-4155-7F68-479F1ADDF436}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_HDR.android", "PK-Plugin_CodecImage_HDR.android.vcxproj", "{23F008B9-32A1-4155-7F68-489FEAC305E2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_JPG.android", "PK-Plugin_CodecImage_JPG.android.vcxproj", "{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_PKM.android", "PK-Plugin_CodecImage_PKM.android.vcxproj", "{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_PNG.android", "PK-Plugin_CodecImage_PNG.android.vcxproj", "{23F02C00-32A1-4255-7F68-489FEF2EF4D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_PVR.android", "PK-Plugin_CodecImage_PVR.android.vcxproj", "{23F02D13-32A2-4155-7F68-489FEAC3F4D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CodecImage_TGA.android", "PK-Plugin_CodecImage_TGA.android.vcxproj", "{23F03C17-32A1-4155-7F68-489FEAC3F4D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Plugin_CompilerBackend_CPU_VM.android", "PK-Plugin_CompilerBackend_CPU_VM.android.vcxproj", "{FBF093C7-32A1-4155-8968-4890F7C3F4DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rendering", "Rendering", "{2A23E243-96AE-4F08-9FBF-D2FC0BCAAB08}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-RHI.android", "PK-RHI.android.vcxproj", "{1822BA45-2535-4E66-B24D-AAB284A46F5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-RenderHelpers.android", "PK-RenderHelpers.android.vcxproj", "{1822BA45-2535-4E66-B24D-90B284A46F5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-SampleLib.android", "PK-SampleLib.android.vcxproj", "{89A78AC6-E37E-456E-B4B4-F944839A2FFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runtime", "Runtime", "{D04B1513-3C0C-9149-0547-DAC671C6D525}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Discretizers.android", "PK-Discretizers.android.vcxproj", "{F866336F-906C-411B-8295-AABBCC2C47CE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-ParticlesToolbox.android", "PK-ParticlesToolbox.android.vcxproj", "{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Runtime.android", "PK-Runtime.android.vcxproj", "{E21DB851-1449-42D8-B5FC-7FC2E9399524}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{C11D5431-2DDE-CF67-F618-19E562981444}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basic", "Basic", "{329961B4-9EFA-3EC2-2768-857493C87581}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Sample_01_BasicStartup.android", "PK-Sample_01_BasicStartup.android.vcxproj", "{6180C80A-EF04-4935-AEDB-FF9D2A087E79}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Sample_02_BasicEvolve.android", "PK-Sample_02_BasicEvolve.android.vcxproj", "{44DEC18A-CBA0-4053-B592-6ECF4D324224}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-Sample_03_EngineHooks.android", "PK-Sample_03_EngineHooks.android.vcxproj", "{44DEFFAA-CBA0-4053-B592-6ECF4D324224}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{DD376B17-49ED-E30C-D2E1-DDE33E96DA10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Upgrader", "Upgrader", "{A68CD0DC-921B-5AA6-3B3A-6EA127A86A4C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-ImporterLib.android", "PK-ImporterLib.android.vcxproj", "{55ACDBF7-CBA0-4035-B212-68E973234242}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PK-UpgraderLib.android", "PK-UpgraderLib.android.vcxproj", "{55ACDBF7-CBA0-4035-B212-68E793243242}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|android = Debug|android
+		Debug|android64 = Debug|android64
+		Release|android = Release|android
+		Release|android64 = Release|android64
+		Retail|android = Retail|android
+		Retail|android64 = Retail|android64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Debug|android.ActiveCfg = Debug android|ARM
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Debug|android.Build.0 = Debug android|ARM
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Debug|android64.Build.0 = Debug android64|ARM64
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Release|android.ActiveCfg = Release android|ARM
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Release|android.Build.0 = Release android|ARM
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Release|android64.ActiveCfg = Release android64|ARM64
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Release|android64.Build.0 = Release android64|ARM64
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Retail|android.ActiveCfg = Retail android|ARM
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Retail|android.Build.0 = Retail android|ARM
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Debug|android.ActiveCfg = Debug android|ARM
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Debug|android.Build.0 = Debug android|ARM
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Release|android.ActiveCfg = Release android|ARM
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Release|android.Build.0 = Release android|ARM
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Release|android64.Build.0 = Release android64|ARM64
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Retail|android.ActiveCfg = Retail android|ARM
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Retail|android.Build.0 = Retail android|ARM
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Debug|android.ActiveCfg = Debug android|ARM
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Debug|android.Build.0 = Debug android|ARM
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Release|android.ActiveCfg = Release android|ARM
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Release|android.Build.0 = Release android|ARM
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Release|android64.Build.0 = Release android64|ARM64
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Retail|android.ActiveCfg = Retail android|ARM
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Retail|android.Build.0 = Retail android|ARM
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Debug|android.ActiveCfg = Debug android|ARM
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Debug|android.Build.0 = Debug android|ARM
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Release|android.ActiveCfg = Release android|ARM
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Release|android.Build.0 = Release android|ARM
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Release|android64.Build.0 = Release android64|ARM64
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Retail|android.ActiveCfg = Retail android|ARM
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Retail|android.Build.0 = Retail android|ARM
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23F008B9-32A1-4155-7F68-489FEAC305E2}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Debug|android.ActiveCfg = Debug android|ARM
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Debug|android.Build.0 = Debug android|ARM
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Release|android.ActiveCfg = Release android|ARM
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Release|android.Build.0 = Release android|ARM
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Release|android64.Build.0 = Release android64|ARM64
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Retail|android.ActiveCfg = Retail android|ARM
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Retail|android.Build.0 = Retail android|ARM
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Debug|android.ActiveCfg = Debug android|ARM
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Debug|android.Build.0 = Debug android|ARM
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Release|android.ActiveCfg = Release android|ARM
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Release|android.Build.0 = Release android|ARM
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Release|android64.Build.0 = Release android64|ARM64
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Retail|android.ActiveCfg = Retail android|ARM
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Retail|android.Build.0 = Retail android|ARM
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Debug|android.ActiveCfg = Debug android|ARM
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Debug|android.Build.0 = Debug android|ARM
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Release|android.ActiveCfg = Release android|ARM
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Release|android.Build.0 = Release android|ARM
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Release|android64.Build.0 = Release android64|ARM64
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Retail|android.ActiveCfg = Retail android|ARM
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Retail|android.Build.0 = Retail android|ARM
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Debug|android.ActiveCfg = Debug android|ARM
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Debug|android.Build.0 = Debug android|ARM
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Release|android.ActiveCfg = Release android|ARM
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Release|android.Build.0 = Release android|ARM
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Release|android64.Build.0 = Release android64|ARM64
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Retail|android.ActiveCfg = Retail android|ARM
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Retail|android.Build.0 = Retail android|ARM
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1}.Retail|android64.Build.0 = Retail android64|ARM64
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Debug|android.ActiveCfg = Debug android|ARM
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Debug|android.Build.0 = Debug android|ARM
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Debug|android64.Build.0 = Debug android64|ARM64
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Release|android.ActiveCfg = Release android|ARM
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Release|android.Build.0 = Release android|ARM
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Release|android64.ActiveCfg = Release android64|ARM64
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Release|android64.Build.0 = Release android64|ARM64
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Retail|android.ActiveCfg = Retail android|ARM
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Retail|android.Build.0 = Retail android|ARM
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1}.Retail|android64.Build.0 = Retail android64|ARM64
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Debug|android.ActiveCfg = Debug android|ARM
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Debug|android.Build.0 = Debug android|ARM
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Debug|android64.Build.0 = Debug android64|ARM64
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Release|android.ActiveCfg = Release android|ARM
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Release|android.Build.0 = Release android|ARM
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Release|android64.ActiveCfg = Release android64|ARM64
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Release|android64.Build.0 = Release android64|ARM64
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Retail|android.ActiveCfg = Retail android|ARM
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Retail|android.Build.0 = Retail android|ARM
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF}.Retail|android64.Build.0 = Retail android64|ARM64
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Debug|android.ActiveCfg = Debug android|ARM
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Debug|android.Build.0 = Debug android|ARM
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Debug|android64.Build.0 = Debug android64|ARM64
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Release|android.ActiveCfg = Release android|ARM
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Release|android.Build.0 = Release android|ARM
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Release|android64.ActiveCfg = Release android64|ARM64
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Release|android64.Build.0 = Release android64|ARM64
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Retail|android.ActiveCfg = Retail android|ARM
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Retail|android.Build.0 = Retail android|ARM
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B}.Retail|android64.Build.0 = Retail android64|ARM64
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Debug|android.ActiveCfg = Debug android|ARM
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Debug|android.Build.0 = Debug android|ARM
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Debug|android64.Build.0 = Debug android64|ARM64
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Release|android.ActiveCfg = Release android|ARM
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Release|android.Build.0 = Release android|ARM
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Release|android64.ActiveCfg = Release android64|ARM64
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Release|android64.Build.0 = Release android64|ARM64
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Retail|android.ActiveCfg = Retail android|ARM
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Retail|android.Build.0 = Retail android|ARM
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{1822BA45-2535-4E66-B24D-90B284A46F5B}.Retail|android64.Build.0 = Retail android64|ARM64
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Debug|android.ActiveCfg = Debug android|ARM
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Debug|android.Build.0 = Debug android|ARM
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Debug|android64.Build.0 = Debug android64|ARM64
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Release|android.ActiveCfg = Release android|ARM
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Release|android.Build.0 = Release android|ARM
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Release|android64.ActiveCfg = Release android64|ARM64
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Release|android64.Build.0 = Release android64|ARM64
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Retail|android.ActiveCfg = Retail android|ARM
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Retail|android.Build.0 = Retail android|ARM
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC}.Retail|android64.Build.0 = Retail android64|ARM64
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Debug|android.ActiveCfg = Debug android|ARM
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Debug|android.Build.0 = Debug android|ARM
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Debug|android64.Build.0 = Debug android64|ARM64
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Release|android.ActiveCfg = Release android|ARM
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Release|android.Build.0 = Release android|ARM
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Release|android64.ActiveCfg = Release android64|ARM64
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Release|android64.Build.0 = Release android64|ARM64
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Retail|android.ActiveCfg = Retail android|ARM
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Retail|android.Build.0 = Retail android|ARM
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{F866336F-906C-411B-8295-AABBCC2C47CE}.Retail|android64.Build.0 = Retail android64|ARM64
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Debug|android.ActiveCfg = Debug android|ARM
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Debug|android.Build.0 = Debug android|ARM
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Debug|android64.Build.0 = Debug android64|ARM64
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Release|android.ActiveCfg = Release android|ARM
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Release|android.Build.0 = Release android|ARM
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Release|android64.ActiveCfg = Release android64|ARM64
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Release|android64.Build.0 = Release android64|ARM64
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Retail|android.ActiveCfg = Retail android|ARM
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Retail|android.Build.0 = Retail android|ARM
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}.Retail|android64.Build.0 = Retail android64|ARM64
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Debug|android.ActiveCfg = Debug android|ARM
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Debug|android.Build.0 = Debug android|ARM
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Debug|android64.Build.0 = Debug android64|ARM64
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Release|android.ActiveCfg = Release android|ARM
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Release|android.Build.0 = Release android|ARM
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Release|android64.ActiveCfg = Release android64|ARM64
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Release|android64.Build.0 = Release android64|ARM64
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Retail|android.ActiveCfg = Retail android|ARM
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Retail|android.Build.0 = Retail android|ARM
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524}.Retail|android64.Build.0 = Retail android64|ARM64
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Debug|android.ActiveCfg = Debug android|ARM
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Debug|android.Build.0 = Debug android|ARM
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Debug|android64.Build.0 = Debug android64|ARM64
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Release|android.ActiveCfg = Release android|ARM
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Release|android.Build.0 = Release android|ARM
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Release|android64.ActiveCfg = Release android64|ARM64
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Release|android64.Build.0 = Release android64|ARM64
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Retail|android.ActiveCfg = Retail android|ARM
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Retail|android.Build.0 = Retail android|ARM
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79}.Retail|android64.Build.0 = Retail android64|ARM64
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Debug|android.ActiveCfg = Debug android|ARM
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Debug|android.Build.0 = Debug android|ARM
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Debug|android64.Build.0 = Debug android64|ARM64
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Release|android.ActiveCfg = Release android|ARM
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Release|android.Build.0 = Release android|ARM
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Release|android64.ActiveCfg = Release android64|ARM64
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Release|android64.Build.0 = Release android64|ARM64
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Retail|android.ActiveCfg = Retail android|ARM
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Retail|android.Build.0 = Retail android|ARM
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224}.Retail|android64.Build.0 = Retail android64|ARM64
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Debug|android.ActiveCfg = Debug android|ARM
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Debug|android.Build.0 = Debug android|ARM
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Debug|android64.Build.0 = Debug android64|ARM64
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Release|android.ActiveCfg = Release android|ARM
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Release|android.Build.0 = Release android|ARM
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Release|android64.ActiveCfg = Release android64|ARM64
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Release|android64.Build.0 = Release android64|ARM64
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Retail|android.ActiveCfg = Retail android|ARM
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Retail|android.Build.0 = Retail android|ARM
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224}.Retail|android64.Build.0 = Retail android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Debug|android.ActiveCfg = Debug android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Debug|android.Build.0 = Debug android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Debug|android64.Build.0 = Debug android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Release|android.ActiveCfg = Release android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Release|android.Build.0 = Release android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Release|android64.ActiveCfg = Release android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Release|android64.Build.0 = Release android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Retail|android.ActiveCfg = Retail android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Retail|android.Build.0 = Retail android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E973234242}.Retail|android64.Build.0 = Retail android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Debug|android.ActiveCfg = Debug android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Debug|android.Build.0 = Debug android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Debug|android64.ActiveCfg = Debug android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Debug|android64.Build.0 = Debug android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Release|android.ActiveCfg = Release android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Release|android.Build.0 = Release android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Release|android64.ActiveCfg = Release android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Release|android64.Build.0 = Release android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Retail|android.ActiveCfg = Retail android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Retail|android.Build.0 = Retail android|ARM
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Retail|android64.ActiveCfg = Retail android64|ARM64
+		{55ACDBF7-CBA0-4035-B212-68E793243242}.Retail|android64.Build.0 = Retail android64|ARM64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{603D9F76-4C37-C8C8-35A4-5ED9213D2E35} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9} = {603D9F76-4C37-C8C8-35A4-5ED9213D2E35}
+		{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{23EFFE8A-32A1-4155-7F68-479F1ADDF436} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{23F008B9-32A1-4155-7F68-489FEAC305E2} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{23F012BC-F8F8-4255-7F68-489FEF2EF4D1} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{23F02BA3-32A1-4155-7F68-489FEAC3F4D1} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{23F02C00-32A1-4255-7F68-489FEF2EF4D1} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{23F02D13-32A2-4155-7F68-489FEAC3F4D1} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{23F03C17-32A1-4155-7F68-489FEAC3F4D1} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{FBF093C7-32A1-4155-8968-4890F7C3F4DF} = {6EEF9964-DAAF-159B-A3EA-5E180F6A5A77}
+		{1822BA45-2535-4E66-B24D-AAB284A46F5B} = {2A23E243-96AE-4F08-9FBF-D2FC0BCAAB08}
+		{1822BA45-2535-4E66-B24D-90B284A46F5B} = {2A23E243-96AE-4F08-9FBF-D2FC0BCAAB08}
+		{89A78AC6-E37E-456E-B4B4-F944839A2FFC} = {2A23E243-96AE-4F08-9FBF-D2FC0BCAAB08}
+		{F866336F-906C-411B-8295-AABBCC2C47CE} = {D04B1513-3C0C-9149-0547-DAC671C6D525}
+		{1A87AB61-B71A-4EBA-8EC6-997BB30241A3} = {D04B1513-3C0C-9149-0547-DAC671C6D525}
+		{E21DB851-1449-42D8-B5FC-7FC2E9399524} = {D04B1513-3C0C-9149-0547-DAC671C6D525}
+		{329961B4-9EFA-3EC2-2768-857493C87581} = {C11D5431-2DDE-CF67-F618-19E562981444}
+		{6180C80A-EF04-4935-AEDB-FF9D2A087E79} = {329961B4-9EFA-3EC2-2768-857493C87581}
+		{44DEC18A-CBA0-4053-B592-6ECF4D324224} = {329961B4-9EFA-3EC2-2768-857493C87581}
+		{44DEFFAA-CBA0-4053-B592-6ECF4D324224} = {329961B4-9EFA-3EC2-2768-857493C87581}
+		{A68CD0DC-921B-5AA6-3B3A-6EA127A86A4C} = {DD376B17-49ED-E30C-D2E1-DDE33E96DA10}
+		{55ACDBF7-CBA0-4035-B212-68E973234242} = {A68CD0DC-921B-5AA6-3B3A-6EA127A86A4C}
+		{55ACDBF7-CBA0-4035-B212-68E793243242} = {A68CD0DC-921B-5AA6-3B3A-6EA127A86A4C}
+	EndGlobalSection
+EndGlobal

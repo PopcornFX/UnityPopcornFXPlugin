@@ -1,0 +1,865 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug android|ARM">
+      <Configuration>Debug android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android|ARM64">
+      <Configuration>Debug android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android64|ARM">
+      <Configuration>Debug android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug android64|ARM64">
+      <Configuration>Debug android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android|ARM">
+      <Configuration>Release android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android|ARM64">
+      <Configuration>Release android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android64|ARM">
+      <Configuration>Release android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release android64|ARM64">
+      <Configuration>Release android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android|ARM">
+      <Configuration>Retail android</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android|ARM64">
+      <Configuration>Retail android</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android64|ARM">
+      <Configuration>Retail android64</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail android64|ARM64">
+      <Configuration>Retail android64</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{23EFFE8A-32A1-4155-7F68-479F1ADDF436}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CodecImage_EXR.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CodecImage_EXR.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CodecImage_EXR.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CodecImage_EXR.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CodecImage_EXR.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'" Label="Globals">
+    <Keyword>Android</Keyword>
+    <RootNamespace>PK-Plugin_CodecImage_EXR.android</RootNamespace>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Debug\PK-Plugin_CodecImage_EXR.android\</IntDir>
+    <TargetName>libPK-Plugin_CodecImage_EXR_d</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Debug\PK-Plugin_CodecImage_EXR.android\</IntDir>
+    <TargetName>libPK-Plugin_CodecImage_EXR_d</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Release\PK-Plugin_CodecImage_EXR.android\</IntDir>
+    <TargetName>libPK-Plugin_CodecImage_EXR_r</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Release\PK-Plugin_CodecImage_EXR.android\</IntDir>
+    <TargetName>libPK-Plugin_CodecImage_EXR_r</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android\Retail\PK-Plugin_CodecImage_EXR.android\</IntDir>
+    <TargetName>libPK-Plugin_CodecImage_EXR_s</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\android64\Retail\PK-Plugin_CodecImage_EXR.android\</IntDir>
+    <TargetName>libPK-Plugin_CodecImage_EXR_s</TargetName>
+    <TargetExt>.a</TargetExt>
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;IMATH_NAMESPACE=PK_Imath;ILMTHREAD_NAMESPACE=PK_IlmThread;OPENEXR_IMF_NAMESPACE=PK_Imf;IEX_NAMESPACE=PK_Iex;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CodecImage_EXR;..\..\Plugins\CodecImage_EXR\include;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;IMATH_NAMESPACE=PK_Imath;ILMTHREAD_NAMESPACE=PK_IlmThread;OPENEXR_IMF_NAMESPACE=PK_Imf;IEX_NAMESPACE=PK_Iex;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CodecImage_EXR;..\..\Plugins\CodecImage_EXR\include;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;IMATH_NAMESPACE=PK_Imath;ILMTHREAD_NAMESPACE=PK_IlmThread;OPENEXR_IMF_NAMESPACE=PK_Imf;IEX_NAMESPACE=PK_Iex;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CodecImage_EXR;..\..\Plugins\CodecImage_EXR\include;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;IMATH_NAMESPACE=PK_Imath;ILMTHREAD_NAMESPACE=PK_IlmThread;OPENEXR_IMF_NAMESPACE=PK_Imf;IEX_NAMESPACE=PK_Iex;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CodecImage_EXR;..\..\Plugins\CodecImage_EXR\include;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;IMATH_NAMESPACE=PK_Imath;ILMTHREAD_NAMESPACE=PK_IlmThread;OPENEXR_IMF_NAMESPACE=PK_Imf;IEX_NAMESPACE=PK_Iex;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CodecImage_EXR;..\..\Plugins\CodecImage_EXR\include;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;IMATH_NAMESPACE=PK_Imath;ILMTHREAD_NAMESPACE=PK_IlmThread;OPENEXR_IMF_NAMESPACE=PK_Imf;IEX_NAMESPACE=PK_Iex;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\Plugins\CodecImage_EXR;..\..\Plugins\CodecImage_EXR\include;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex;..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+      <StrictAliasing>false</StrictAliasing>
+      <PositionIndependentCode>true</PositionIndependentCode>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half\eLut.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half\half.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half\halfExport.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half\halfFunction.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half\halfLimits.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half\toFloat.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\Iex.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexBaseExc.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexErrnoExc.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexExport.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexForward.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexMacros.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexMathExc.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexNamespace.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexThrowErrnoExc.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmBaseConfig.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfAcesFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfArray.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfAutoArray.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfB44Compressor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfBoxAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCRgbaFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChannelList.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChannelListAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCheckedArithmetic.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChromaticities.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChromaticitiesAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCompositeDeepScanLine.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCompression.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCompressionAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCompressor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfConvert.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepCompositing.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepFrameBuffer.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepImageState.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepImageStateAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineInputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineInputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineOutputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineOutputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledInputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledInputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledOutputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledOutputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDoubleAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDwaCompressor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDwaCompressorSimd.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfEnvmap.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfEnvmapAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfExport.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFastHuf.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFloatAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFloatVectorAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfForward.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFrameBuffer.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFramesPerSecond.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfGenericInputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfGenericOutputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfHeader.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfHuf.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfIO.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInputPartData.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInputStreamMutex.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInt64.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfIntAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfKeyCode.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfKeyCodeAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfLineOrder.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfLineOrderAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfLut.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMatrixAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMisc.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMultiPartInputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMultiPartOutputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMultiView.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfName.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfNamespace.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOpaqueAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOptimizedPixelReading.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOutputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOutputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOutputPartData.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOutputStreamMutex.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPartHelper.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPartType.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPixelType.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPizCompressor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPreviewImage.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPreviewImageAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPxr24Compressor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRational.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRationalAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRgba.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRgbaFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRgbaYca.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRle.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRleCompressor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfScanLineInputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfSimd.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStandardAttributes.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStdIO.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStringAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStringVectorAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfSystemSpecific.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTestFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfThreading.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTileDescription.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTileDescriptionAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTileOffsets.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledInputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledInputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledMisc.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledOutputFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledOutputPart.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledRgbaFile.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTimeCode.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTimeCodeAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfVecAttribute.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfVersion.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfWav.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfXdr.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfZip.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfZipCompressor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\b44ExpLogTable.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\dwaLookups.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThread.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadExport.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadForward.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadMutex.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadNamespace.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadPool.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadSemaphore.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathBox.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathBoxAlgo.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathColor.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathColorAlgo.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathEuler.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathExc.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathExport.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathForward.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathFrame.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathFrustum.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathFrustumTest.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathFun.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathGL.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathGLU.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathHalfLimits.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathInt64.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathInterval.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathLimits.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathLine.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathLineAlgo.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathMath.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathMatrix.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathMatrixAlgo.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathNamespace.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathPlane.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathPlatform.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathQuat.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathRandom.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathRoots.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathShear.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathSphere.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathVec.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathVecAlgo.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\OpenEXRConfig.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\include\exr_codec.h" />
+    <ClInclude Include="..\..\Plugins\CodecImage_EXR\include\exr_main.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Half\half.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexBaseExc.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Iex\IexThrowErrnoExc.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfAcesFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfB44Compressor.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfBoxAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCRgbaFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChannelList.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChannelListAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChromaticities.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfChromaticitiesAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCompositeDeepScanLine.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCompressionAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfCompressor.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfConvert.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepCompositing.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepFrameBuffer.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepImageStateAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineInputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineInputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineOutputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepScanLineOutputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledInputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledInputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledOutputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDeepTiledOutputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDoubleAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfDwaCompressor.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfEnvmap.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfEnvmapAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFastHuf.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFloatAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFloatVectorAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFrameBuffer.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfFramesPerSecond.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfGenericInputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfGenericOutputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfHeader.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfHuf.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfIO.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfInputPartData.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfIntAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfKeyCode.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfKeyCodeAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfLineOrderAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfLut.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMatrixAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMisc.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMultiPartInputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMultiPartOutputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfMultiView.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOpaqueAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOutputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOutputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfOutputPartData.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPartType.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPizCompressor.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPreviewImage.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPreviewImageAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfPxr24Compressor.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRational.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRationalAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRgbaFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRgbaYca.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRle.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfRleCompressor.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfScanLineInputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStandardAttributes.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStdIO.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStringAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfStringVectorAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfSystemSpecific.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTestFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfThreading.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTileDescriptionAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTileOffsets.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledInputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledInputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledMisc.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledOutputFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledOutputPart.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTiledRgbaFile.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTimeCode.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfTimeCodeAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfVecAttribute.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfVersion.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfWav.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfZip.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmImf\ImfZipCompressor.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThread.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadMutex.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadMutexPosix.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadPool.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadPosix.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadSemaphore.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\IlmThread\IlmThreadSemaphorePosix.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathColorAlgo.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathFun.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathMatrixAlgo.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathRandom.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\OpenEXR-2.3.0\Imath\ImathVec.cpp">
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\exr_load.cpp">
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\exr_main.cpp">
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_EXR\exr_save.cpp">
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

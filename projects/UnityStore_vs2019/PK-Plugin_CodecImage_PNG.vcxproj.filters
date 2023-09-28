@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\PK-ZLib">
+      <UniqueIdentifier>{89BA71F6-F545-DFBA-FE56-62AF6A613BBB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\libpng">
+      <UniqueIdentifier>{0C540C6A-F821-0070-E1B5-7096CD22DCD4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\libpng">
+      <UniqueIdentifier>{D482333B-C050-2741-A9E4-9767955103A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\libpng\arm">
+      <UniqueIdentifier>{633E3CDC-4F22-FD31-B882-F784A485E7B3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\include\png_codec.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\include\png_main.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\include\resource.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\png.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngconf.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngdebug.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pnginfo.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pnglibconf.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngprefix.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngpriv.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngstruct.h">
+      <Filter>Headers\libpng</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h">
+      <Filter>Headers\PK-ZLib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\arm\arm_init.c">
+      <Filter>Sources\libpng\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\arm\filter_neon.S">
+      <Filter>Sources\libpng\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\arm\filter_neon_intrinsics.c">
+      <Filter>Sources\libpng\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\arm\palette_neon_intrinsics.c">
+      <Filter>Sources\libpng\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\png.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngerror.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngget.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngmem.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngpread.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngread.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngrio.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngrtran.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngrutil.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngset.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngtrans.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngwio.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngwrite.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngwtran.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\libpng-1.6.37-prefixed\pngwutil.c">
+      <Filter>Sources\libpng</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\png_load.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\png_main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_PNG\png_save.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

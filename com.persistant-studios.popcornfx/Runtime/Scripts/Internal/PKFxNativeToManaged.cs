@@ -1070,7 +1070,7 @@ namespace PopcornFX
 				hasBeenResized = true;
 			}
 
-			if (renderer.m_IndexCount < usedIndexCount)
+			if (hasBeenResized || renderer.m_IndexCount < usedIndexCount)
 			{
 				mesh.SetIndexBufferParams((int)reservedIndexCount, mesh.indexFormat);
 				renderer.m_IndexCount = (int)reservedIndexCount;

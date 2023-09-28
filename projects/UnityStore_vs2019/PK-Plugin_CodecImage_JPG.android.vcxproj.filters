@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\jpeg-9b">
+      <UniqueIdentifier>{46C03318-B24B-A1DC-BB5C-24D12767FDDC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\include\jpeg_codec.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\include\jpeg_main.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jconfig.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdct.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jerror.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jinclude.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jmemsys.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jmorecfg.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jpegint.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jpeglib.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jversion.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\pk_generated_prefix_jpg.h">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jaricom.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcapimin.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcapistd.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcarith.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jccoefct.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jccolor.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcdctmgr.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jchuff.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcinit.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcmainct.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcmarker.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcmaster.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcomapi.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcparam.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcprepct.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jcsample.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jctrans.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdapimin.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdapistd.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdarith.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdatadst.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdatasrc.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdcoefct.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdcolor.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jddctmgr.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdhuff.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdinput.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdmainct.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdmarker.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdmaster.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdmerge.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdpostct.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdsample.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jdtrans.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jerror.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jfdctflt.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jfdctfst.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jfdctint.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jidctflt.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jidctfst.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jidctint.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jmemansi.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jmemmgr.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jquant1.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jquant2.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg-9b\jutils.c">
+      <Filter>Sources\jpeg-9b</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg_jlwrapper.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg_load.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg_main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\CodecImage_JPG\jpeg_save.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

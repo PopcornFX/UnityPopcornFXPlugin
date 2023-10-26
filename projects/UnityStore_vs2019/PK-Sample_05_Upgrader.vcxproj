@@ -518,30 +518,6 @@
     <ProjectReference Include="PK-UpgraderLib.vcxproj">
       <Project>{55ACDBF7-CBA0-4035-B212-68E793243242}</Project>
     </ProjectReference>
-    <ProjectReference Include="PK-ImporterLib.vcxproj">
-      <Project>{55ACDBF7-CBA0-4035-B212-68E973234242}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_DDS.vcxproj">
-      <Project>{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_PNG.vcxproj">
-      <Project>{23F02C00-32A1-4255-7F68-489FEF2EF4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_JPG.vcxproj">
-      <Project>{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CompilerBackend_CPU_VM.vcxproj">
-      <Project>{FBF093C7-32A1-4155-8968-4890F7C3F4DF}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-ZLib.vcxproj">
-      <Project>{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-ParticlesToolbox.vcxproj">
-      <Project>{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Runtime.vcxproj">
-      <Project>{E21DB851-1449-42D8-B5FC-7FC2E9399524}</Project>
-    </ProjectReference>
     <ProjectReference Include="PK-Plugin_CodecImage_DDS.vcxproj">
       <Project>{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}</Project>
     </ProjectReference>

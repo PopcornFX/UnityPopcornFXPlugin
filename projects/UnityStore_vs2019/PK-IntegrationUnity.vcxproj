@@ -493,9 +493,6 @@
     <ProjectReference Include="PK-UpgraderLib.vcxproj">
       <Project>{55ACDBF7-CBA0-4035-B212-68E793243242}</Project>
     </ProjectReference>
-    <ProjectReference Include="PK-ImporterLib.vcxproj">
-      <Project>{55ACDBF7-CBA0-4035-B212-68E973234242}</Project>
-    </ProjectReference>
     <ProjectReference Include="PK-AssetBakerLib.vcxproj">
       <Project>{44ECDA8C-CBA0-4035-B212-68E793243242}</Project>
     </ProjectReference>

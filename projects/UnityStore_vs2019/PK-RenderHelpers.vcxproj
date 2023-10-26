@@ -572,6 +572,9 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\rh_init.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_billboards.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_common.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_multiplane.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\billboarders\include\pv_billboarders_ribbons_tube.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\include\pv_renderhelpers.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.h" />
   </ItemGroup>

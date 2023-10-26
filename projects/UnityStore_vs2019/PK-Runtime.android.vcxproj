@@ -551,6 +551,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_debug.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_stats.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_utils.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_utils.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_mem_virtual.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_memoryviews.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_memoryviews_utils.h" />
@@ -934,6 +935,7 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_static_cmp.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_type_converter.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_vector_constructor.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_vector_permute.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_op_vector_swizzler.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_can.cpp" />

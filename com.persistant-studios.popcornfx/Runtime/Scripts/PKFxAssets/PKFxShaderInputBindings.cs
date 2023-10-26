@@ -86,6 +86,9 @@ namespace PopcornFX
 		public string			m_TextureAtlasPropertyName = "_AtlasRects";
 		public string 			m_AtlasCountPropertyName = "_AtlasCount";
 		public string 			m_AtlasIdPropertyName = "_AtlasId";
+		// Transform UVs:
+		public string			m_TransformUVsRGBOnlyPropertyName = "_TransformUVs_RGBOnly";
+		
 
 		public void BindMaterialProperties(SBatchDesc batchDesc, Material material, PKFxEffectAsset asset, bool logError = true)
 		{
@@ -211,6 +214,11 @@ namespace PopcornFX
 				!string.IsNullOrEmpty(m_InvSoftnessDistancePropertyName))
 			{
 				material.SetFloat(m_InvSoftnessDistancePropertyName, batchDesc.m_InvSoftnessDistance);
+			}
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs) &&
+				!string.IsNullOrEmpty(m_TransformUVsRGBOnlyPropertyName))
+			{
+				material.SetInt(m_TransformUVsRGBOnlyPropertyName, Convert.ToInt32(batchDesc.m_TransformUVs_RGBOnly));
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
 			{
@@ -515,6 +523,11 @@ namespace PopcornFX
 				_EnableMaterialKeywords(material, "PK_HAS_SOFT");
 			else
 				_DisableMaterialKeywords(material, "PK_HAS_SOFT");
+			// Soft particles: PK_HAS_TRANSFORM_UVS
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+				_EnableMaterialKeywords(material, "PK_HAS_TRANSFORM_UVS");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_TRANSFORM_UVS");
 		}
 
 		private bool m_ShowBindings = false;
@@ -565,7 +578,7 @@ namespace PopcornFX
 				if (HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_DistortionMap))
 				{
 					SerializedProperty DistortionMapPropertyName = serializedObject.FindProperty("m_DistortionMapPropertyName");
-					DistortionMapPropertyName.stringValue = EditorGUILayout.TextField("Ditortion (Texture2D): ", DistortionMapPropertyName.stringValue);
+					DistortionMapPropertyName.stringValue = EditorGUILayout.TextField("Distortion (Texture2D): ", DistortionMapPropertyName.stringValue);
 				}
 				if (HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_Emissive))
 				{
@@ -603,6 +616,11 @@ namespace PopcornFX
 					RoughnessPropertyName.stringValue = EditorGUILayout.TextField("Roughness (Float): ", RoughnessPropertyName.stringValue);
 					SerializedProperty MetalnessPropertyName = serializedObject.FindProperty("m_MetalnessPropertyName");
 					MetalnessPropertyName.stringValue = EditorGUILayout.TextField("Metalness (Float): ", MetalnessPropertyName.stringValue);
+				}
+				if (HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_TransformUVs))
+				{
+					SerializedProperty TransformUVs_RGBOnlyName = serializedObject.FindProperty("m_TransformUVsRGBOnlyPropertyName");
+					TransformUVs_RGBOnlyName.stringValue = EditorGUILayout.TextField("TransformUVs IsRGB Only (Bool): ", TransformUVs_RGBOnlyName.stringValue);
 				}
 				if (bindingHasMeshRenderer)
 				{

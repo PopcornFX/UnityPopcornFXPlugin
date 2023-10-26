@@ -241,6 +241,9 @@ private:
 		SSizedBuffer<CFloat4>	m_Colors;
 		SSizedBuffer<CFloat3>	m_EmissiveColors;
 		SSizedBuffer<float>		m_AlphaCursor;
+		SSizedBuffer<float>		m_TransformUVsRotate;
+		SSizedBuffer<CFloat2>	m_TransformUVsScale;
+		SSizedBuffer<CFloat2>	m_TransformUVsOffset;
 
 		// View on the additional fields, all are null except for color and alpha cursor:
 		TArray<Drawers::SCopyFieldDesc>		m_AdditionalFieldsBuffers;
@@ -262,6 +265,10 @@ private:
 			m_Colors.FreeIFN();
 			m_EmissiveColors.FreeIFN();
 			m_AlphaCursor.FreeIFN();
+
+			m_TransformUVsRotate.FreeIFN();
+			m_TransformUVsScale.FreeIFN();
+			m_TransformUVsOffset.FreeIFN();
 		}
 	};
 
@@ -317,6 +324,10 @@ private:
 		CFloat3					*m_EmissiveColors;
 		float					*m_AlphaCursor;
 
+		float					*m_TransformUVsRotate;
+		CFloat2					*m_TransformUVsOffset;
+		CFloat2					*m_TransformUVsScale;
+
 		SParticleSourceBuffers()
 		{
 			Clear();
@@ -352,6 +363,9 @@ private:
 			m_Colors = buffers.m_Colors.m_Ptr;
 			m_EmissiveColors = buffers.m_EmissiveColors.m_Ptr;
 			m_AlphaCursor = buffers.m_AlphaCursor.m_Ptr;
+			m_TransformUVsRotate = buffers.m_TransformUVsRotate.m_Ptr;
+			m_TransformUVsOffset = buffers.m_TransformUVsOffset.m_Ptr;
+			m_TransformUVsScale = buffers.m_TransformUVsScale.m_Ptr;
 
 			if (buffers.m_PerViewGeom.Count() > viewIdx)
 			{
@@ -381,6 +395,9 @@ private:
 			m_UVRemap = null;
 			m_Colors = null;
 			m_AlphaCursor = null;
+			m_TransformUVsRotate = null;
+			m_TransformUVsOffset = null;
+			m_TransformUVsScale = null;
 		}
 	};
 

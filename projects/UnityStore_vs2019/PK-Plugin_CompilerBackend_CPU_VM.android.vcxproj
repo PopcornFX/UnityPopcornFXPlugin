@@ -370,6 +370,7 @@
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_madd.impl.h" />
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator.impl.h" />
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator.low.impl.h" />
+    <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_permute.impl.h" />
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_select.impl.h" />
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_type_converter.impl.h" />
     <ClInclude Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_precompiled.h" />
@@ -393,6 +394,7 @@
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_idiv_mulinv.cpp" />
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_madd.cpp" />
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_operator.cpp" />
+    <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_math_permute.cpp" />
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_select.cpp" />
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_type_converter.cpp" />
     <ClCompile Include="..\..\Plugins\CompilerBackend_CPU_VM\src\cbvm_meta_op_vector_constructor.cpp" />

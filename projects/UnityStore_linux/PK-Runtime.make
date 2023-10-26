@@ -383,6 +383,7 @@ GENERATED += $(OBJDIR)/ir_op_select.o
 GENERATED += $(OBJDIR)/ir_op_static_cmp.o
 GENERATED += $(OBJDIR)/ir_op_type_converter.o
 GENERATED += $(OBJDIR)/ir_op_vector_constructor.o
+GENERATED += $(OBJDIR)/ir_op_vector_permute.o
 GENERATED += $(OBJDIR)/ir_op_vector_swizzler.o
 GENERATED += $(OBJDIR)/ir_optimizer.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_can.o
@@ -957,6 +958,7 @@ OBJECTS += $(OBJDIR)/ir_op_select.o
 OBJECTS += $(OBJDIR)/ir_op_static_cmp.o
 OBJECTS += $(OBJDIR)/ir_op_type_converter.o
 OBJECTS += $(OBJDIR)/ir_op_vector_constructor.o
+OBJECTS += $(OBJDIR)/ir_op_vector_permute.o
 OBJECTS += $(OBJDIR)/ir_op_vector_swizzler.o
 OBJECTS += $(OBJDIR)/ir_optimizer.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_can.o
@@ -2055,6 +2057,9 @@ $(OBJDIR)/ir_op_type_converter.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ir_op_vector_constructor.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_op_vector_constructor.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ir_op_vector_permute.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_op_vector_permute.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ir_op_vector_swizzler.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_op_vector_swizzler.cpp

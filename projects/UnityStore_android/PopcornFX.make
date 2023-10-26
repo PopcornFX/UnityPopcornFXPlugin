@@ -22,7 +22,6 @@ ifeq ($(config),debug_android)
   PK_Plugin_CodecImage_HDR_config = debug_android
   PK_Plugin_CodecImage_EXR_config = debug_android
   PK_ZLib_config = debug_android
-  PK_ImporterLib_config = debug_android
   PK_UpgraderLib_config = debug_android
   PK_Sample_01_BasicStartup_config = debug_android
   PK_Sample_02_BasicEvolve_config = debug_android
@@ -56,7 +55,6 @@ else ifeq ($(config),debug_android64)
   PK_Plugin_CodecImage_HDR_config = debug_android64
   PK_Plugin_CodecImage_EXR_config = debug_android64
   PK_ZLib_config = debug_android64
-  PK_ImporterLib_config = debug_android64
   PK_UpgraderLib_config = debug_android64
   PK_Sample_01_BasicStartup_config = debug_android64
   PK_Sample_02_BasicEvolve_config = debug_android64
@@ -90,7 +88,6 @@ else ifeq ($(config),release_android)
   PK_Plugin_CodecImage_HDR_config = release_android
   PK_Plugin_CodecImage_EXR_config = release_android
   PK_ZLib_config = release_android
-  PK_ImporterLib_config = release_android
   PK_UpgraderLib_config = release_android
   PK_Sample_01_BasicStartup_config = release_android
   PK_Sample_02_BasicEvolve_config = release_android
@@ -124,7 +121,6 @@ else ifeq ($(config),release_android64)
   PK_Plugin_CodecImage_HDR_config = release_android64
   PK_Plugin_CodecImage_EXR_config = release_android64
   PK_ZLib_config = release_android64
-  PK_ImporterLib_config = release_android64
   PK_UpgraderLib_config = release_android64
   PK_Sample_01_BasicStartup_config = release_android64
   PK_Sample_02_BasicEvolve_config = release_android64
@@ -158,7 +154,6 @@ else ifeq ($(config),retail_android)
   PK_Plugin_CodecImage_HDR_config = retail_android
   PK_Plugin_CodecImage_EXR_config = retail_android
   PK_ZLib_config = retail_android
-  PK_ImporterLib_config = retail_android
   PK_UpgraderLib_config = retail_android
   PK_Sample_01_BasicStartup_config = retail_android
   PK_Sample_02_BasicEvolve_config = retail_android
@@ -192,7 +187,6 @@ else ifeq ($(config),retail_android64)
   PK_Plugin_CodecImage_HDR_config = retail_android64
   PK_Plugin_CodecImage_EXR_config = retail_android64
   PK_ZLib_config = retail_android64
-  PK_ImporterLib_config = retail_android64
   PK_UpgraderLib_config = retail_android64
   PK_Sample_01_BasicStartup_config = retail_android64
   PK_Sample_02_BasicEvolve_config = retail_android64
@@ -216,7 +210,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-ZLib PK-ImporterLib PK-UpgraderLib PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-RenderHelpers PK-RHI PK-SampleLib PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
+PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-ZLib PK-UpgraderLib PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-RenderHelpers PK-RHI PK-SampleLib PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
 .PHONY: all clean help $(PROJECTS) Plugins Plugins/External Rendering Runtime Samples Samples/Basic Tools Tools/Upgrader
 
@@ -236,7 +230,7 @@ Samples/Basic: PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_E
 
 Tools: Tools/Upgrader
 
-Tools/Upgrader: PK-ImporterLib PK-UpgraderLib
+Tools/Upgrader: PK-UpgraderLib
 
 PK-Runtime:
 ifneq (,$(PK_Runtime_config))
@@ -314,12 +308,6 @@ PK-ZLib:
 ifneq (,$(PK_ZLib_config))
 	@echo "==== Building PK-ZLib ($(PK_ZLib_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-ZLib.make config=$(PK_ZLib_config)
-endif
-
-PK-ImporterLib:
-ifneq (,$(PK_ImporterLib_config))
-	@echo "==== Building PK-ImporterLib ($(PK_ImporterLib_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make config=$(PK_ImporterLib_config)
 endif
 
 PK-UpgraderLib:
@@ -444,7 +432,6 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_HDR.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_EXR.make clean
 	@${MAKE} --no-print-directory -C . -f PK-ZLib.make clean
-	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_01_BasicStartup.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_02_BasicEvolve.make clean
@@ -491,7 +478,6 @@ help:
 	@echo "   PK-Plugin_CodecImage_HDR"
 	@echo "   PK-Plugin_CodecImage_EXR"
 	@echo "   PK-ZLib"
-	@echo "   PK-ImporterLib"
 	@echo "   PK-UpgraderLib"
 	@echo "   PK-Sample_01_BasicStartup"
 	@echo "   PK-Sample_02_BasicEvolve"

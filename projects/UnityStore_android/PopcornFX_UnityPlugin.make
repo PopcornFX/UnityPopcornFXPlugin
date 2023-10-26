@@ -22,7 +22,6 @@ ifeq ($(config),debug_android)
   PK_Plugin_CodecImage_HDR_config = debug_android
   PK_Plugin_CodecImage_EXR_config = debug_android
   PK_ZLib_config = debug_android
-  PK_ImporterLib_config = debug_android
   PK_UpgraderLib_config = debug_android
   PK_RenderHelpers_config = debug_android
   PK_IntegrationUnity_config = debug_android
@@ -41,7 +40,6 @@ else ifeq ($(config),debug_android64)
   PK_Plugin_CodecImage_HDR_config = debug_android64
   PK_Plugin_CodecImage_EXR_config = debug_android64
   PK_ZLib_config = debug_android64
-  PK_ImporterLib_config = debug_android64
   PK_UpgraderLib_config = debug_android64
   PK_RenderHelpers_config = debug_android64
   PK_IntegrationUnity_config = debug_android64
@@ -60,7 +58,6 @@ else ifeq ($(config),release_android)
   PK_Plugin_CodecImage_HDR_config = release_android
   PK_Plugin_CodecImage_EXR_config = release_android
   PK_ZLib_config = release_android
-  PK_ImporterLib_config = release_android
   PK_UpgraderLib_config = release_android
   PK_RenderHelpers_config = release_android
   PK_IntegrationUnity_config = release_android
@@ -79,7 +76,6 @@ else ifeq ($(config),release_android64)
   PK_Plugin_CodecImage_HDR_config = release_android64
   PK_Plugin_CodecImage_EXR_config = release_android64
   PK_ZLib_config = release_android64
-  PK_ImporterLib_config = release_android64
   PK_UpgraderLib_config = release_android64
   PK_RenderHelpers_config = release_android64
   PK_IntegrationUnity_config = release_android64
@@ -88,7 +84,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-ZLib PK-ImporterLib PK-UpgraderLib PK-RenderHelpers PK-IntegrationUnity
+PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-ZLib PK-UpgraderLib PK-RenderHelpers PK-IntegrationUnity
 
 .PHONY: all clean help $(PROJECTS) Plugins Plugins/External Rendering Runtime Tools Tools/Upgrader Unity
 
@@ -104,7 +100,7 @@ Runtime: PK-Discretizers PK-ParticlesToolbox PK-Runtime
 
 Tools: Tools/Upgrader
 
-Tools/Upgrader: PK-ImporterLib PK-UpgraderLib
+Tools/Upgrader: PK-UpgraderLib
 
 Unity: PK-IntegrationUnity
 
@@ -186,12 +182,6 @@ ifneq (,$(PK_ZLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-ZLib.make config=$(PK_ZLib_config)
 endif
 
-PK-ImporterLib:
-ifneq (,$(PK_ImporterLib_config))
-	@echo "==== Building PK-ImporterLib ($(PK_ImporterLib_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make config=$(PK_ImporterLib_config)
-endif
-
 PK-UpgraderLib:
 ifneq (,$(PK_UpgraderLib_config))
 	@echo "==== Building PK-UpgraderLib ($(PK_UpgraderLib_config)) ===="
@@ -224,7 +214,6 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_HDR.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_EXR.make clean
 	@${MAKE} --no-print-directory -C . -f PK-ZLib.make clean
-	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers.make clean
 	@${MAKE} --no-print-directory -C . -f PK-IntegrationUnity.make clean
@@ -254,7 +243,6 @@ help:
 	@echo "   PK-Plugin_CodecImage_HDR"
 	@echo "   PK-Plugin_CodecImage_EXR"
 	@echo "   PK-ZLib"
-	@echo "   PK-ImporterLib"
 	@echo "   PK-UpgraderLib"
 	@echo "   PK-RenderHelpers"
 	@echo "   PK-IntegrationUnity"

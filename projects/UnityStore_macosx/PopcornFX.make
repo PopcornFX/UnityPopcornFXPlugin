@@ -26,7 +26,6 @@ ifeq ($(config),debug_x64)
   PK_ZLib_config = debug_x64
   PK_AssetBakerLib_config = debug_x64
   PK_AssetBaker_config = debug_x64
-  PK_ImporterLib_config = debug_x64
   PK_UpgraderLib_config = debug_x64
   PK_Upgrader_config = debug_x64
   PK_Sample_01_BasicStartup_config = debug_x64
@@ -70,7 +69,6 @@ else ifeq ($(config),debug_arm64)
   PK_ZLib_config = debug_arm64
   PK_AssetBakerLib_config = debug_arm64
   PK_AssetBaker_config = debug_arm64
-  PK_ImporterLib_config = debug_arm64
   PK_UpgraderLib_config = debug_arm64
   PK_Upgrader_config = debug_arm64
   PK_Sample_01_BasicStartup_config = debug_arm64
@@ -114,7 +112,6 @@ else ifeq ($(config),release_x64)
   PK_ZLib_config = release_x64
   PK_AssetBakerLib_config = release_x64
   PK_AssetBaker_config = release_x64
-  PK_ImporterLib_config = release_x64
   PK_UpgraderLib_config = release_x64
   PK_Upgrader_config = release_x64
   PK_Sample_01_BasicStartup_config = release_x64
@@ -158,7 +155,6 @@ else ifeq ($(config),release_arm64)
   PK_ZLib_config = release_arm64
   PK_AssetBakerLib_config = release_arm64
   PK_AssetBaker_config = release_arm64
-  PK_ImporterLib_config = release_arm64
   PK_UpgraderLib_config = release_arm64
   PK_Upgrader_config = release_arm64
   PK_Sample_01_BasicStartup_config = release_arm64
@@ -201,7 +197,6 @@ else ifeq ($(config),retail_x64)
   PK_Plugin_CodecMesh_FBX_config = retail_x64
   PK_ZLib_config = retail_x64
   PK_AssetBakerLib_config = retail_x64
-  PK_ImporterLib_config = retail_x64
   PK_UpgraderLib_config = retail_x64
   PK_Upgrader_config = retail_x64
   PK_Sample_01_BasicStartup_config = retail_x64
@@ -243,7 +238,6 @@ else ifeq ($(config),retail_arm64)
   PK_Plugin_CodecMesh_FBX_config = retail_arm64
   PK_ZLib_config = retail_arm64
   PK_AssetBakerLib_config = retail_arm64
-  PK_ImporterLib_config = retail_arm64
   PK_UpgraderLib_config = retail_arm64
   PK_Upgrader_config = retail_arm64
   PK_Sample_01_BasicStartup_config = retail_arm64
@@ -272,7 +266,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-Plugin_CodecMesh_FBX PK-ZLib PK-AssetBakerLib PK-AssetBaker PK-ImporterLib PK-UpgraderLib PK-Upgrader PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking PK-Sample_05_Upgrader PK-RenderHelpers PK-RHI PK-SampleLib PK-ShaderTool PK-MCPP PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
+PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-Plugin_CodecMesh_FBX PK-ZLib PK-AssetBakerLib PK-AssetBaker PK-UpgraderLib PK-Upgrader PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-Sample_04_Baking PK-Sample_05_Upgrader PK-RenderHelpers PK-RHI PK-SampleLib PK-ShaderTool PK-MCPP PK-Sample_01_BasicRendering PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
 .PHONY: all clean help $(PROJECTS) Plugins Plugins/External Rendering Runtime Samples Samples/Basic Tools Tools/AssetBaker Tools/Upgrader
 
@@ -294,7 +288,7 @@ Tools: Tools/AssetBaker Tools/Upgrader PK-MCPP PK-ShaderTool
 
 Tools/AssetBaker: PK-AssetBaker PK-AssetBakerLib
 
-Tools/Upgrader: PK-ImporterLib PK-Upgrader PK-UpgraderLib
+Tools/Upgrader: PK-Upgrader PK-UpgraderLib
 
 PK-Runtime:
 ifneq (,$(PK_Runtime_config))
@@ -392,16 +386,10 @@ ifneq (,$(PK_AssetBakerLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make config=$(PK_AssetBakerLib_config)
 endif
 
-PK-AssetBaker: PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_HDR PK-Plugin_CompilerBackend_CPU_VM PK-ZLib PK-Plugin_CodecMesh_FBX PK-Plugin_CodecImage_EXR PK-AssetBakerLib PK-UpgraderLib PK-ImporterLib PK-ParticlesToolbox PK-Runtime
+PK-AssetBaker: PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_HDR PK-Plugin_CompilerBackend_CPU_VM PK-ZLib PK-Plugin_CodecMesh_FBX PK-Plugin_CodecImage_EXR PK-AssetBakerLib PK-UpgraderLib PK-ParticlesToolbox PK-Runtime
 ifneq (,$(PK_AssetBaker_config))
 	@echo "==== Building PK-AssetBaker ($(PK_AssetBaker_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-AssetBaker.make config=$(PK_AssetBaker_config)
-endif
-
-PK-ImporterLib:
-ifneq (,$(PK_ImporterLib_config))
-	@echo "==== Building PK-ImporterLib ($(PK_ImporterLib_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make config=$(PK_ImporterLib_config)
 endif
 
 PK-UpgraderLib:
@@ -410,7 +398,7 @@ ifneq (,$(PK_UpgraderLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make config=$(PK_UpgraderLib_config)
 endif
 
-PK-Upgrader: PK-UpgraderLib PK-ImporterLib PK-ParticlesToolbox PK-Runtime
+PK-Upgrader: PK-UpgraderLib PK-ParticlesToolbox PK-Runtime
 ifneq (,$(PK_Upgrader_config))
 	@echo "==== Building PK-Upgrader ($(PK_Upgrader_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Upgrader.make config=$(PK_Upgrader_config)
@@ -440,7 +428,7 @@ ifneq (,$(PK_Sample_04_Baking_config))
 	@${MAKE} --no-print-directory -C . -f PK-Sample_04_Baking.make config=$(PK_Sample_04_Baking_config)
 endif
 
-PK-Sample_05_Upgrader: PK-UpgraderLib PK-ImporterLib PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_JPG PK-Plugin_CompilerBackend_CPU_VM PK-ZLib PK-ParticlesToolbox PK-Runtime
+PK-Sample_05_Upgrader: PK-UpgraderLib PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_JPG PK-Plugin_CompilerBackend_CPU_VM PK-ZLib PK-ParticlesToolbox PK-Runtime
 ifneq (,$(PK_Sample_05_Upgrader_config))
 	@echo "==== Building PK-Sample_05_Upgrader ($(PK_Sample_05_Upgrader_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_05_Upgrader.make config=$(PK_Sample_05_Upgrader_config)
@@ -566,7 +554,6 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-ZLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-AssetBaker.make clean
-	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Upgrader.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_01_BasicStartup.make clean
@@ -623,7 +610,6 @@ help:
 	@echo "   PK-ZLib"
 	@echo "   PK-AssetBakerLib"
 	@echo "   PK-AssetBaker"
-	@echo "   PK-ImporterLib"
 	@echo "   PK-UpgraderLib"
 	@echo "   PK-Upgrader"
 	@echo "   PK-Sample_01_BasicStartup"

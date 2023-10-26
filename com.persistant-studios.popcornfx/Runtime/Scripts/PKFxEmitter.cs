@@ -121,7 +121,7 @@ namespace PopcornFX
 
 		void Start()
 		{
-			InstantiateIFN();
+			PreloadIFN();
 			if ((m_PlayOnStart || m_AskedToStart) && !Alive)
 				StartEffect();
 			m_AskedToStart = false;
@@ -169,12 +169,21 @@ namespace PopcornFX
 		// Effect control
 		//----------------------------------------------------------------------------
 
+		public void PreloadIFN()
+		{
+			if (m_FXGUID == -1 && m_FxAsset != null)
+			{
+				PreloadEffectFromAsset(m_FxAsset);
+			}
+		}
+
 		public void InstantiateIFN()
 		{
 			if (m_FXGUID == -1 && m_FxAsset != null)
 			{
 				// Preload the FX:
-				PreloadEffectFromAsset(m_FxAsset);
+				PreloadIFN();
+
 				// Instantiate the FX:
 				m_FXGUID = CreateEffect(m_FxAsset, transform);
 

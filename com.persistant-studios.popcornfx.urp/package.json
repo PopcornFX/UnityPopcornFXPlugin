@@ -1,13 +1,13 @@
 {
   "name": "com.persistant-studios.popcornfx.urp",
   "description": "URP Materials for PopcornFX.",
-  "version": "2.15.14",
+  "version": "2.15.15",
   "unity": "2020.2",
   "unityRelease": "",
   "displayName": "PopcornFX URP",
   "dependencies": {
     "com.unity.render-pipelines.core": "10.2.2",
     "com.unity.render-pipelines.universal": "10.2.2",
-    "com.persistant-studios.popcornfx": "2.15.14"
+    "com.persistant-studios.popcornfx": "2.15.15"
   }
 }

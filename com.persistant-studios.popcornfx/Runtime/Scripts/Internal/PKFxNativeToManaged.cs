@@ -1015,14 +1015,14 @@ namespace PopcornFX
 				List<VertexAttributeDescriptor> layout = new List<VertexAttributeDescriptor>();
 				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Position, VertexAttributeFormat.Float32, 3));			// positions
 
-				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
-				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4));			// color
-				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
 				{
 					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Normal, VertexAttributeFormat.Float32, 3));		// normal
 					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Tangent, VertexAttributeFormat.Float32, 4));		// tangent
+				}
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
+				{
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4));			// color
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
 				{
@@ -1033,7 +1033,6 @@ namespace PopcornFX
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
 						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord3, VertexAttributeFormat.Float32, 2));	// alpha cursor
-						mesh.uv4 = new Vector2[reservedVertexCount];    
 						uvIdxForEmissive = VertexAttribute.TexCoord4;
 					}
 				}
@@ -1054,14 +1053,14 @@ namespace PopcornFX
 					}
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2)); // alpha cursor
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));	// alpha cursor
 						uvIdxForEmissive = VertexAttribute.TexCoord2;
 					}
 				}
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 				{
-					layout.Add(new VertexAttributeDescriptor(uvIdxForEmissive, VertexAttributeFormat.Float32, 2)); // emissive color
+					layout.Add(new VertexAttributeDescriptor(uvIdxForEmissive, VertexAttributeFormat.Float32, 3)); // emissive color
 				}
 
 				mesh.SetVertexBufferParams((int)reservedVertexCount, layout.ToArray());

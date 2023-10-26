@@ -21,6 +21,7 @@ Shader "PopcornFX/Particle_CutOutOpaque"
 	{
 		Tags
 		{
+			"DisableBatching" = "True"
 			"Queue" = "AlphaTest"
 			"IgnoreProjector" = "True"
 			"RenderType" = "TransparentCutout"

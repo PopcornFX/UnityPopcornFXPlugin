@@ -19,6 +19,7 @@ Shader "PopcornFX/Particle_VertexBillboarding"
 	{
 		Tags
 		{
+			"DisableBatching" = "True"
 			"Queue" = "Transparent"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"

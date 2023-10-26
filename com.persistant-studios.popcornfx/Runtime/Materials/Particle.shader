@@ -21,6 +21,7 @@ Shader "PopcornFX/Particle"
 	{
 		Tags
 		{
+			"DisableBatching" = "True"
 			"Queue" = "Transparent"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"

@@ -168,7 +168,6 @@ PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -include pk_compiler_warnings.h
 PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -Wno-unused-parameter
 PERFILE_FLAGS_2 = $(ALL_CFLAGS) -Wno-unused-parameter
 PERFILE_FLAGS_3 = $(ALL_CXXFLAGS) -Wno-clobbered -include pk_compiler_warnings.h
-PERFILE_FLAGS_4 = $(ALL_CFLAGS) -Wno-unused-parameter -masm=intel
 
 # File sets
 # #############################################
@@ -383,7 +382,7 @@ $(OBJDIR)/arm_init.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/ar
 	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/filter_neon.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/filter_neon.S
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/filter_neon_intrinsics.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/filter_neon_intrinsics.c
 	@echo "$(notdir $<)"
 	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -428,7 +427,7 @@ $(OBJDIR)/arm_init.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/ar
 	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/filter_neon.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/filter_neon.S
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/filter_neon_intrinsics.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/filter_neon_intrinsics.c
 	@echo "$(notdir $<)"
 	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -473,7 +472,7 @@ $(OBJDIR)/arm_init.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/ar
 	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/filter_neon.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/filter_neon.S
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/filter_neon_intrinsics.o: ../../Plugins/CodecImage_PNG/libpng-1.6.37-prefixed/arm/filter_neon_intrinsics.c
 	@echo "$(notdir $<)"
 	$(SILENT) $(CC) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

@@ -112,6 +112,11 @@ int	CPKFXEffect::LoadFX(const CString &fx)
 
 	// instantiate and add the new effect
 	m_Emitter = m_Effect->Instantiate(m_MediumCollection);
+	// Fix #12945: Caused by fix #12901,
+	// GetAllAttributes doesn't check if m_EffectID is valid now
+	// and return the parent effect default container instead of null for newly instantiated emitters.
+	// So force create the attribute container here
+	m_Emitter->SetAllAttributes(null);	
 
 	if (CRuntimeManager::Instance().GetIsUnitTesting())
 	{

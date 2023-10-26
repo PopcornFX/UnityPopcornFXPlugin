@@ -269,6 +269,8 @@ namespace PopcornFX
 
 		public int MaxCameraSupport()
 		{
+			if (m_CameraLayers == null)
+				m_CameraLayers = new int[0];
 			if (PKFxSettings.MaxCameraSupport != m_CameraLayers.Length)
 			{
 				int[] prevCameraLayers = CameraLayers;

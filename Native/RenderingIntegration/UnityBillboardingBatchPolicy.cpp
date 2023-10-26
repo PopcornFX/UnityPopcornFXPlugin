@@ -1848,37 +1848,38 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 
 	for (u32 vertexID = vertexOffset; vertexID < endVertex; vertexID++)
 	{
-		FillPositions(&(m_ParticleBuffers.m_Positions[vertexID]), bfPtr, *m_SemanticOffsets);
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
+		if (m_ParticleBuffers.m_Positions != null)
+			FillPositions(&(m_ParticleBuffers.m_Positions[vertexID]), bfPtr, *m_SemanticOffsets);
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0 && m_ParticleBuffers.m_Normals != null)
 		{
 			FillNormals(&(m_ParticleBuffers.m_Normals[vertexID]), bfPtr, *m_SemanticOffsets);
 			if (m_ParticleBuffers.m_Tangents != null)
 				FillTangents(&(m_ParticleBuffers.m_Tangents[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Color) != 0)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Color) != 0 && m_ParticleBuffers.m_Colors != null)
 		{
 			FillColors(&(m_ParticleBuffers.m_Colors[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) != 0)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) != 0 && m_ParticleBuffers.m_UVFactors != null && m_ParticleBuffers.m_UVRemap != null)
 		{
 			FillUVFactors(&(m_ParticleBuffers.m_UVFactors[vertexID]), bfPtr, *m_SemanticOffsets);
 			FillUVScalesAndOffsets(&(((CFloat4*)m_ParticleBuffers.m_UVRemap)[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		else
+		else if (m_ParticleBuffers.m_TexCoords0 != null && (*m_SemanticOffsets)[Semantic_Uv0] != (u32)0xFFFFFFFF)
 		{
 			FillUV0(&(m_ParticleBuffers.m_TexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) != 0)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) != 0 && m_ParticleBuffers.m_TexCoords1 != null && m_ParticleBuffers.m_AtlasId != null)
 		{
 			FillUV1(&(((CFloat2*)m_ParticleBuffers.m_TexCoords1)[vertexID]), bfPtr, *m_SemanticOffsets);
 			FillAtlasId(&(m_ParticleBuffers.m_AtlasId[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0 && m_ParticleBuffers.m_AlphaCursor != null)
 		{
 			FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
 
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0 && m_ParticleBuffers.m_EmissiveColors != null)
 		{
 			FillEmissiveColors(&(m_ParticleBuffers.m_EmissiveColors[vertexID]), bfPtr, *m_SemanticOffsets);
 		}

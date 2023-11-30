@@ -29,6 +29,7 @@ extern "C"
 		};
 
 		int				m_AttributeType;
+		int				m_AttributeSemantic;
 		int				m_AttributeDropMode;
 		int				m_MinMaxFlag;
 

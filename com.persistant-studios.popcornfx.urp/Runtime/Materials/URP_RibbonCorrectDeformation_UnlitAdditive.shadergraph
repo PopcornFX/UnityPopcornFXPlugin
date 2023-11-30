@@ -249,6 +249,9 @@
         },
         {
             "m_Id": "e234cfdd9de543b9b6ccdba6c5de51d1"
+        },
+        {
+            "m_Id": "c723b8b1a78646309253c765bef5a65c"
         }
     ],
     "m_GroupDatas": [
@@ -1285,6 +1288,9 @@
             },
             {
                 "m_Id": "55ca279b2fbd4e37a1525b8b8a510932"
+            },
+            {
+                "m_Id": "c723b8b1a78646309253c765bef5a65c"
             }
         ]
     },
@@ -2040,6 +2046,21 @@
         "y": 0.0,
         "z": 0.0
     },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "18e9cf802a6a4efab8cc650e17f1286e",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha Clip Threshold",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "AlphaClipThreshold",
+    "m_StageCapability": 2,
+    "m_Value": 0.5,
+    "m_DefaultValue": 0.5,
     "m_Labels": []
 }
 
@@ -2936,7 +2957,7 @@
     "m_ActiveSubTarget": {
         "m_Id": "54899225417b4e3f8f18e1e19275d9eb"
     },
-    "m_AllowMaterialOverride": false,
+    "m_AllowMaterialOverride": true,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
@@ -7055,6 +7076,39 @@
     "m_FunctionName": "FragmentRibbonCorrectDeformation",
     "m_FunctionSource": "0004b11f1e91240419296f3f7e0a953e",
     "m_FunctionBody": "Enter function body here..."
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "c723b8b1a78646309253c765bef5a65c",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.AlphaClipThreshold",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "18e9cf802a6a4efab8cc650e17f1286e"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.AlphaClipThreshold"
 }
 
 {

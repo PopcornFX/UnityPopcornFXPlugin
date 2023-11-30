@@ -25,6 +25,16 @@ namespace PopcornFX
 		Quaternion = 36
 	}
 
+	public enum EAttributeSemantic : int
+	{
+		None = 0,
+		Coordinate3D,
+		Scale3D,
+		Color,
+		Angle,
+		Visibility,
+	}
+
 	public enum EAttributeDropMode : int
 	{
 		None = 0,
@@ -130,6 +140,30 @@ namespace PopcornFX
 				a[i] = value;
 			}
 			return a;
+		}
+
+		public static float Linear2sRGB(float channel)
+		{
+#if true //ACCURATE_SRGB
+			if (channel <= 0.0031308f)
+				return channel * 12.92f;
+			else
+				return 1.055f * Mathf.Pow(channel, 1 / 2.4f) - 0.055f;
+#else
+			return Mathf.Pow(channel, 1 / 2.2f);
+#endif
+		}
+
+		public static float sRGB2Linear(float channel)
+		{
+#if true //ACCURATE_SRGB
+			if (channel <= 0.04045f)
+				return channel / 12.92f;
+			else
+				return Mathf.Pow((channel + 0.055f) / 1.055f, 2.4f);
+#else
+			return Mathf.Pow(channel, 2.2f);
+#endif
 		}
 	}
 }

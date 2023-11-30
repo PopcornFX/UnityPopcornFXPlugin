@@ -297,8 +297,10 @@ namespace PopcornFX
 				SerializedProperty attrDesc = attrs.GetArrayElementAtIndex(i);
 				SerializedProperty attrName = attrDesc.FindPropertyRelative("m_Name");
 				SerializedProperty attrType = attrDesc.FindPropertyRelative("m_Type");
+				SerializedProperty attrSemantic = attrDesc.FindPropertyRelative("m_Semantic");
 				SerializedProperty minMaxFlag = attrDesc.FindPropertyRelative("m_MinMaxFlag");
 				EAttributeType baseType = (EAttributeType)attrType.intValue;
+				EAttributeSemantic semantic = (EAttributeSemantic)attrSemantic.intValue;
 
 				bool showMinMax = false;
 				string minValDesc = "";
@@ -322,7 +324,7 @@ namespace PopcornFX
 													 minValProp.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
 													 minValProp.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
 													 minValProp.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
-						minValDesc = FormatLimitValue(minVal, baseType);
+						minValDesc = FormatLimitValue(minVal, baseType, EAttributeSemantic.None);
 					}
 					else
 					{
@@ -335,7 +337,7 @@ namespace PopcornFX
 													 maxValProp.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
 													 maxValProp.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
 													 maxValProp.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
-						maxValDesc = FormatLimitValue(maxVal, baseType);
+						maxValDesc = FormatLimitValue(maxVal, baseType, EAttributeSemantic.None);
 					}
 					else
 					{
@@ -348,7 +350,7 @@ namespace PopcornFX
 														 defaultValue.FindPropertyRelative("y").FindPropertyRelative("f1").floatValue,
 														 defaultValue.FindPropertyRelative("z").FindPropertyRelative("f1").floatValue,
 														 defaultValue.FindPropertyRelative("w").FindPropertyRelative("f1").floatValue);
-				defaultValStr = FormatLimitValue(defaultVectorValue, baseType);
+				defaultValStr = FormatLimitValue(defaultVectorValue, baseType, semantic);
 
 				EditorGUI.indentLevel++;
 				EditorGUILayout.LabelField(attrName.stringValue);
@@ -357,6 +359,10 @@ namespace PopcornFX
 				if (showMinMax)
 				{
 					EditorGUILayout.LabelField("Min/Max: " + minValDesc + "-" + maxValDesc);
+				}
+				if (semantic != EAttributeSemantic.None)
+				{
+					EditorGUILayout.LabelField("Semantic: " + semantic.ToString());
 				}
 				EditorGUILayout.LabelField("Default: " + defaultValStr);
 				EditorGUI.indentLevel--;
@@ -386,7 +392,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private string FormatLimitValue(Vector4 value, EAttributeType baseType)
+		private string FormatLimitValue(Vector4 value, EAttributeType baseType, EAttributeSemantic semantic)
 		{
 			string retStr = "";
 
@@ -424,11 +430,17 @@ namespace PopcornFX
 			}
 			else if (baseType == EAttributeType.Float3)
 			{
-				retStr = "[" + value.x + ", " + value.y + ", " + value.z + "]";
+				if (semantic == EAttributeSemantic.Color)
+					retStr = "[" + PKFxUtils.Linear2sRGB(value.x) + ", " + PKFxUtils.Linear2sRGB(value.y) + ", " + PKFxUtils.Linear2sRGB(value.z) + "]";
+				else
+					retStr = "[" + value.x + ", " + value.y + ", " + value.z + "]";
 			}
 			else if (baseType == EAttributeType.Float4)
 			{
-				retStr = "[" + value.x + ", " + value.y + ", " + value.z + ", " + value.w + "]";
+				if (semantic == EAttributeSemantic.Color)
+					retStr = "[" + PKFxUtils.Linear2sRGB(value.x) + ", " + PKFxUtils.Linear2sRGB(value.y) + ", " + PKFxUtils.Linear2sRGB(value.z) + ", " + value.w + "]";
+				else
+					retStr = "[" + value.x + ", " + value.y + ", " + value.z + ", " + value.w + "]";
 			}
 			else if (baseType == EAttributeType.Int)
 			{

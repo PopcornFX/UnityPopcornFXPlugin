@@ -47,7 +47,7 @@ float4	frag(SVertexOutput i) : SV_Target
 	float4 result = float4(1,1,1,1);
 
 	#if CUTOUT_OPAQUE
-		float cutout = diffuse.a - _CutOutAlpha;
+		float cutout = (i.Color.a * diffuse.a) - _CutOutAlpha;
 		clip(cutout);
 	#endif
 

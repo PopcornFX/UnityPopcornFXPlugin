@@ -45,6 +45,7 @@ namespace PopcornFX
 			string path = Path.Combine(folderPath, "URPMaterialFactory.asset");
 
 			PKFxMaterialFactoryURP materialFactoryURP = CreateInstance<PKFxMaterialFactoryURP>();
+			materialFactoryURP.m_FactoryType = FactoryType.URP;
 			materialFactoryURP.SetupFallBackFeatureBinding();
 
 			AssetDatabase.CreateAsset(materialFactoryURP, path);

@@ -64,6 +64,7 @@ namespace PopcornFX
 			};
 
 			[FormerlySerializedAs("Type")]			public EAttributeType		m_Type;
+													public EAttributeSemantic	m_Semantic;
 													public EAttributeDropMode	m_DropMode;
 			[FormerlySerializedAs("MinMaxFlag")]	public int				m_MinMaxFlag;
 			[FormerlySerializedAs("Name")]			public string			m_Name;
@@ -77,6 +78,7 @@ namespace PopcornFX
 			public AttributeDesc(SNativeAttributeDesc desc)
 			{
 				m_Type = desc.m_AttributeType;
+				m_Semantic = desc.m_AttributeSemantic;
 				m_DropMode = desc.m_AttributeDropMode;
 				m_MinMaxFlag = (int)desc.m_MinMaxFlag;
 				m_Name = Marshal.PtrToStringAnsi(desc.m_AttributeName);
@@ -187,7 +189,7 @@ namespace PopcornFX
 				string dftval = m_DefaultValue.x.f1 + ";" + m_DefaultValue.y.f1 + ";" + m_DefaultValue.z.f1 + ";" + m_DefaultValue.w.f1;
 				string dropval = m_DropMode.ToString() + ";" + m_DropNameList;
 
-				return m_Type.ToString() + ";" + m_Name + ";" + m_MinMaxFlag + ";" + minval + ";" + maxval + ";" + dftval + ";" + dropval + ";" + m_Description;
+				return m_Type.ToString() + ";" + m_Semantic.ToString() + ";" + m_Name + ";" + m_MinMaxFlag + ";" + minval + ";" + maxval + ";" + dftval + ";" + dropval + ";" + m_Description;
 			}
 		}
 

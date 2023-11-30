@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
   m_Name: URP_Mesh_LitTransparent
   m_EditorClassIdentifier: 
-  m_SourceBlendPropertyName: 
-  m_DestinationBlendPropertyName: 
+  m_SourceBlendPropertyName: _SrcBlend
+  m_DestinationBlendPropertyName: _DstBlend
   m_MaskThresholdPropertyName: 
   m_RotateUVsPropertyName: 
   m_DiffuseMapPropertyName: _MainTex
@@ -30,6 +30,7 @@ MonoBehaviour:
   m_MeshDiffuseColorPropertyName: _BaseColor
   m_MeshEmissiveColorPropertyName: _EmissiveColor
   m_MeshAlphaCursorPropertyName: _AlphaCursor
+  m_MeshCullPropertyName: _Cull
   m_MeshVATCursorPropertyName: _VATCursor
   m_VATPositionMapPropertyName: _VATPositionMap
   m_VATNormalMapPropertyName: _VATNormalMap
@@ -60,12 +61,15 @@ MonoBehaviour:
   m_MeshTransformRow1PropertyName: _SkeletalMeshTransform1
   m_MeshTransformRow2PropertyName: _SkeletalMeshTransform2
   m_MeshTransformRow3PropertyName: _SkeletalMeshTransform3
+  m_TextureAtlasPropertyName: _AtlasRects
+  m_AtlasCountPropertyName: _AtlasCount
+  m_AtlasIdPropertyName: _AtlasId
   m_UseShader: 1
   m_Shader: {fileID: -6465566751694194690, guid: 3efdb00d30b86454297a8be4b2b95dbf,
     type: 3}
   m_Material: {fileID: 0}
   m_RenderTypes: 00000100
-  m_BlendMode: 010100000000
+  m_BlendMode: 010101010000
   m_SupportedShaderMask: 524207
   m_MandatoryShaderMask: 8
   m_BillboardingLocation: 0

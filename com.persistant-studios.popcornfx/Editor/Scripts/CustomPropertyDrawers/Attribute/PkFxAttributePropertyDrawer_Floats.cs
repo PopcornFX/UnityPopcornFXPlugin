@@ -76,16 +76,29 @@ namespace PopcornFX
 
 		private static void DrawFloat3Attribute(SerializedProperty attrDesc, ref float valueX, ref float valueY, ref float valueZ)
 		{
+			SerializedProperty m_Semantic = attrDesc.FindPropertyRelative("m_Semantic");
 			SerializedProperty m_MinMaxFlag = attrDesc.FindPropertyRelative("m_MinMaxFlag");
 			SerializedProperty m_MinValue = attrDesc.FindPropertyRelative("m_MinValue");
 			SerializedProperty m_MaxValue = attrDesc.FindPropertyRelative("m_MaxValue");
 
 			EditorGUILayout.BeginHorizontal();
 			DrawAttributeName(attrDesc, false);
-			if (PKFxEditorTools.HasMin(m_MinMaxFlag.intValue) && PKFxEditorTools.HasMax(m_MinMaxFlag.intValue))
+			if ((EAttributeSemantic)m_Semantic.intValue == EAttributeSemantic.Color)
+			{
+				Vector3 tmp3 = new Vector3(PKFxUtils.Linear2sRGB(valueX), PKFxUtils.Linear2sRGB(valueY), PKFxUtils.Linear2sRGB(valueZ));
+
+				EditorGUILayout.BeginVertical();
+				tmp3 = EditorGUILayout.Vector3Field(GUIContent.none, tmp3);
+				PKFxEditorTools.ColorPicker(GUIContent.none, ref tmp3.x, ref tmp3.y, ref tmp3.z, true);
+				EditorGUILayout.EndVertical();
+
+				valueX = PKFxUtils.sRGB2Linear(tmp3.x);
+				valueY = PKFxUtils.sRGB2Linear(tmp3.y);
+				valueZ = PKFxUtils.sRGB2Linear(tmp3.z);
+			}
+			else if (PKFxEditorTools.HasMin(m_MinMaxFlag.intValue) && PKFxEditorTools.HasMax(m_MinMaxFlag.intValue))
 			{
 				EditorGUILayout.BeginVertical();
-				PKFxEditorTools.ColorPicker(GUIContent.none, ref valueX, ref valueY, ref valueZ, true);
 				valueX = PKFxEditorTools.FloatSlider(valueX, PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MinValue, "x"), PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MaxValue, "x"), null);
 				valueY = PKFxEditorTools.FloatSlider(valueY, PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MinValue, "y"), PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MaxValue, "y"), null);
 				valueZ = PKFxEditorTools.FloatSlider(valueZ, PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MinValue, "z"), PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MaxValue, "z"), null);
@@ -111,7 +124,6 @@ namespace PopcornFX
 					valueY = tmp3.y;
 					valueZ = tmp3.z;
 				}
-				PKFxEditorTools.ColorPicker(GUIContent.none, ref valueX, ref valueY, ref valueZ);
 			}
 			EditorGUILayout.EndHorizontal();
 
@@ -136,16 +148,30 @@ namespace PopcornFX
 
 		private static void DrawFloat4Attribute(SerializedProperty attrDesc, ref float valueX, ref float valueY, ref float valueZ, ref float valueW)
 		{
+			SerializedProperty m_Semantic = attrDesc.FindPropertyRelative("m_Semantic");
 			SerializedProperty m_MinMaxFlag = attrDesc.FindPropertyRelative("m_MinMaxFlag");
 			SerializedProperty m_MinValue = attrDesc.FindPropertyRelative("m_MinValue");
 			SerializedProperty m_MaxValue = attrDesc.FindPropertyRelative("m_MaxValue");
 
 			EditorGUILayout.BeginHorizontal();
 			DrawAttributeName(attrDesc, false);
-			if (PKFxEditorTools.HasMin(m_MinMaxFlag.intValue) && PKFxEditorTools.HasMax(m_MinMaxFlag.intValue))
+			if ((EAttributeSemantic)m_Semantic.intValue == EAttributeSemantic.Color)
+			{
+				Vector4 tmp4 = new Vector4(PKFxUtils.Linear2sRGB(valueX), PKFxUtils.Linear2sRGB(valueY), PKFxUtils.Linear2sRGB(valueZ), valueW);
+
+				EditorGUILayout.BeginVertical();
+				tmp4 = EditorGUILayout.Vector4Field(GUIContent.none, tmp4);
+				PKFxEditorTools.ColorPicker(GUIContent.none, ref tmp4.x, ref tmp4.y, ref tmp4.z, ref tmp4.w, true);
+				EditorGUILayout.EndVertical();
+
+				valueX = PKFxUtils.sRGB2Linear(tmp4.x);
+				valueY = PKFxUtils.sRGB2Linear(tmp4.y);
+				valueZ = PKFxUtils.sRGB2Linear(tmp4.z);
+				valueW = tmp4.w;
+			}
+			else if (PKFxEditorTools.HasMin(m_MinMaxFlag.intValue) && PKFxEditorTools.HasMax(m_MinMaxFlag.intValue))
 			{
 				EditorGUILayout.BeginVertical();
-				PKFxEditorTools.ColorPicker(GUIContent.none, ref valueX, ref valueY, ref valueZ, ref valueW, true);
 				valueX = PKFxEditorTools.FloatSlider(valueX, PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MinValue, "x"), PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MaxValue, "x"));
 				valueY = PKFxEditorTools.FloatSlider(valueY, PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MinValue, "y"), PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MaxValue, "y"));
 				valueZ = PKFxEditorTools.FloatSlider(valueZ, PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MinValue, "z"), PKFxAssetEditor.AttrBoundsGetFloatValueSerialized(m_MaxValue, "z"));
@@ -176,7 +202,6 @@ namespace PopcornFX
 					valueZ = tmp4.z;
 					valueW = tmp4.w;
 				}
-				PKFxEditorTools.ColorPicker(GUIContent.none, ref valueX, ref valueY, ref valueZ, ref valueW, true);
 				EditorGUILayout.EndVertical();
 			}
 			EditorGUILayout.EndHorizontal();

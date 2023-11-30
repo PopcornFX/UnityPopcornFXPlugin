@@ -492,6 +492,7 @@ bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList::_TypeOfAttri
 			SFxAttributeDesc	attribDesc;
 
 			attribDesc.m_AttributeType = attrib->ExportedType();
+			attribDesc.m_AttributeSemantic = attrib->Semantic();
 			attribDesc.m_MinMaxFlag = 0x00;
 			if (attrib->HasMin())
 				attribDesc.m_MinMaxFlag |= SFxAttributeDesc::EAttrDescFlag::HasMin;

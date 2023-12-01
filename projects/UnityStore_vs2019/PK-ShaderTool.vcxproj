@@ -373,6 +373,12 @@
     <ProjectReference Include="PK-MCPP.vcxproj">
       <Project>{C43F305D-E37E-456E-B4B4-F944839A2FFC}</Project>
     </ProjectReference>
+    <ProjectReference Include="PK-RHI.vcxproj">
+      <Project>{1822BA45-2535-4E66-B24D-AAB284A46F5B}</Project>
+    </ProjectReference>
+    <ProjectReference Include="PK-RenderHelpers.vcxproj">
+      <Project>{1822BA45-2535-4E66-B24D-90B284A46F5B}</Project>
+    </ProjectReference>
     <ProjectReference Include="PK-Plugin_CodecImage_DDS.vcxproj">
       <Project>{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}</Project>
     </ProjectReference>
@@ -396,12 +402,6 @@
     </ProjectReference>
     <ProjectReference Include="PK-Plugin_CompilerBackend_CPU_VM.vcxproj">
       <Project>{FBF093C7-32A1-4155-8968-4890F7C3F4DF}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-RHI.vcxproj">
-      <Project>{1822BA45-2535-4E66-B24D-AAB284A46F5B}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-RenderHelpers.vcxproj">
-      <Project>{1822BA45-2535-4E66-B24D-90B284A46F5B}</Project>
     </ProjectReference>
     <ProjectReference Include="PK-Discretizers.vcxproj">
       <Project>{F866336F-906C-411B-8295-AABBCC2C47CE}</Project>

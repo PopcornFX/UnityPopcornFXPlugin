@@ -452,7 +452,7 @@ ifneq (,$(PK_SampleLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-SampleLib.make config=$(PK_SampleLib_config)
 endif
 
-PK-ShaderTool: PK-SampleLib PK-MCPP PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Plugin_CompilerBackend_CPU_VM PK-RHI PK-RenderHelpers PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-ShaderTool: PK-SampleLib PK-MCPP PK-RHI PK-RenderHelpers PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Plugin_CompilerBackend_CPU_VM PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_ShaderTool_config))
 	@echo "==== Building PK-ShaderTool ($(PK_ShaderTool_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-ShaderTool.make config=$(PK_ShaderTool_config)

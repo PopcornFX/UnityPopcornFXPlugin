@@ -64,12 +64,13 @@ MonoBehaviour:
   m_TextureAtlasPropertyName: _AtlasRects
   m_AtlasCountPropertyName: _AtlasCount
   m_AtlasIdPropertyName: _AtlasId
+  m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
   m_UseShader: 1
   m_Shader: {fileID: -6465566751694194690, guid: 81069c1a99efd2f45a4207dc8df378cf,
     type: 3}
   m_Material: {fileID: 0}
-  m_RenderTypes: 00000100
-  m_BlendMode: 010100000000
+  m_RenderTypes: 00000100000000
+  m_BlendMode: 010101010000
   m_DoubleSided: 1
   m_SupportedShaderMask: 524215
   m_MandatoryShaderMask: 0

@@ -859,21 +859,31 @@ namespace PopcornFX
 												SBatchDesc batchDesc,
 												Material mat)
 		{
-			int newId = m_CurrentRenderersGUID++;
+			int newId = -1;
+			try
+			{
+				newId = m_CurrentRenderersGUID;
 
-			renderingObject.name += " " + newId;
+				renderingObject.name += " " + newId;
 
-			var meshDesc = new SMeshDesc(mat, batchDesc, renderingObject);
+				var meshDesc = new SMeshDesc(mat, batchDesc, renderingObject);
 
-			if (!PKFxSettings.UseGPUBillboarding || 
-				batchDesc.m_Type == ERendererType.Ribbon || 
-				batchDesc.m_Type == ERendererType.Triangle) // to improve
-				SetupSliceInRenderingObject(meshDesc);
-			else
-				SetupProceduralInRenderingObject(meshDesc);
+				if (!PKFxSettings.UseGPUBillboarding ||
+					batchDesc.m_Type == ERendererType.Ribbon ||
+					batchDesc.m_Type == ERendererType.Triangle) // to improve
+					SetupSliceInRenderingObject(meshDesc);
+				else
+					SetupProceduralInRenderingObject(meshDesc);
 
-			m_Renderers.Add(meshDesc);
+				m_Renderers.Add(meshDesc);
 
+			}
+			catch (Exception e)
+			{
+				Debug.LogError("PopcornFX: SetupRenderingObject exception:" + e.Message);
+				return -1;
+			}
+			m_CurrentRenderersGUID++;
 			return newId;
 		}
 
@@ -881,23 +891,31 @@ namespace PopcornFX
 
 		public static int SetupMeshRenderingObject(GameObject renderingObject, SBatchDesc batchDesc, Material mat)
 		{
-			int newId = m_CurrentRenderersGUID++;
+			int newId = -1;
+			try
+			{
+				newId = m_CurrentRenderersGUID;
+				renderingObject.name += " " + newId;
+				var renderer = renderingObject.AddComponent<PKFxMeshInstancesRenderer>();
+				renderer.m_Material = mat;
 
-			renderingObject.name += " " + newId;
-			var renderer = renderingObject.AddComponent<PKFxMeshInstancesRenderer>();
-			renderer.m_Material = mat;
+				PKFxSettings.MaterialFactory.SetupMeshRenderer(batchDesc, renderingObject, renderer);
 
-			PKFxSettings.MaterialFactory.SetupMeshRenderer(batchDesc, renderingObject, renderer);
+				if (renderer.Meshes.Length == 0)
+					return -1;
+				var filter = renderingObject.AddComponent<MeshFilter>();
+				filter.mesh = renderer.Meshes[0].m_Mesh;
 
-			if (renderer.Meshes.Length == 0)
+				m_Renderers.Add(new SMeshDesc(filter, mat, batchDesc, renderer, renderingObject));
+				Debug.Assert(m_Renderers[newId].m_Slice.mesh == filter.mesh);
+
+			}
+			catch (Exception e)
+			{
+				Debug.LogError("PopcornFX: SetupRenderingObject exception:" + e.Message);
 				return -1;
-
-			var filter = renderingObject.AddComponent<MeshFilter>();
-			filter.mesh = renderer.Meshes[0].m_Mesh;
-
-			m_Renderers.Add(new SMeshDesc(filter, mat, batchDesc, renderer, renderingObject));
-			Debug.Assert(m_Renderers[newId].m_Slice.mesh == filter.mesh);
-
+			}
+			m_CurrentRenderersGUID++;
 			return newId;
 		}
 

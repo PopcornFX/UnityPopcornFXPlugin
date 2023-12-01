@@ -558,7 +558,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private string FormatLimitValue(Vector4 value, EAttributeType baseType)
+		private string FormatLimitValue(Vector4 value, EAttributeType baseType, EAttributeSemantic semantic)
 		{
 			string retStr = "";
 
@@ -596,11 +596,17 @@ namespace PopcornFX
 			}
 			else if (baseType == EAttributeType.Float3)
 			{
-				retStr = "[" + value.x + ", " + value.y + ", " + value.z + "]";
+				if (semantic == EAttributeSemantic.Color)
+					retStr = "[" + PKFxUtils.Linear2sRGB(value.x) + ", " + PKFxUtils.Linear2sRGB(value.y) + ", " + PKFxUtils.Linear2sRGB(value.z) + "]";
+				else
+					retStr = "[" + value.x + ", " + value.y + ", " + value.z + "]";
 			}
 			else if (baseType == EAttributeType.Float4)
 			{
-				retStr = "[" + value.x + ", " + value.y + ", " + value.z + ", " + value.w + "]";
+				if (semantic == EAttributeSemantic.Color)
+					retStr = "[" + PKFxUtils.Linear2sRGB(value.x) + ", " + PKFxUtils.Linear2sRGB(value.y) + ", " + PKFxUtils.Linear2sRGB(value.z) + ", " + value.w + "]";
+				else
+					retStr = "[" + value.x + ", " + value.y + ", " + value.z + ", " + value.w + "]";
 			}
 			else if (baseType == EAttributeType.Int)
 			{

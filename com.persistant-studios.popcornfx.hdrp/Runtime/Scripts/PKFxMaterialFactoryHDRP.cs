@@ -50,7 +50,7 @@ namespace PopcornFX
 
 			// Create the HDRP material factory asset:
 			PKFxMaterialFactoryHDRP materialFactoryHDRP = CreateInstance<PKFxMaterialFactoryHDRP>();
-
+			materialFactoryHDRP.m_FactoryType = FactoryType.HDRP;
 			materialFactoryHDRP.SetupFallBackFeatureBinding();
 
 			AssetDatabase.CreateAsset(materialFactoryHDRP, path);

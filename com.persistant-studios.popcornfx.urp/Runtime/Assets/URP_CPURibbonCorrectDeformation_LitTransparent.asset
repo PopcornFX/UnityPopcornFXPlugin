@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
-  m_Name: URP_CPUParticle_UnlitAdditive
+  m_Name: URP_CPURibbonCorrectDeformation_LitTransparent
   m_EditorClassIdentifier: 
-  m_SourceBlendPropertyName: _SrcBlendMode
-  m_DestinationBlendPropertyName: _DstBlendMode
+  m_SourceBlendPropertyName: _SrcBlend
+  m_DestinationBlendPropertyName: _DstBlend
   m_MaskThresholdPropertyName: _CutOutAlpha
   m_RotateUVsPropertyName: _RotateUVs
   m_DiffuseMapPropertyName: _MainTex
@@ -66,11 +66,11 @@ MonoBehaviour:
   m_AtlasIdPropertyName: _AtlasId
   m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
   m_UseShader: 1
-  m_Shader: {fileID: -6465566751694194690, guid: 607e915b86eb0444e8ffe55cfad5faca,
+  m_Shader: {fileID: -6465566751694194690, guid: c8da94dbab42cb24cad0e6551b536dde,
     type: 3}
   m_Material: {fileID: 0}
-  m_RenderTypes: 01010001
-  m_BlendMode: 010000000000
-  m_SupportedShaderMask: 4194294
-  m_MandatoryShaderMask: 0
+  m_RenderTypes: 00010000
+  m_BlendMode: 010101010000
+  m_SupportedShaderMask: 4194301
+  m_MandatoryShaderMask: 9
   m_BillboardingLocation: 0

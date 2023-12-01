@@ -90,15 +90,25 @@ namespace PopcornFX
 		public string			m_TransformUVsRGBOnlyPropertyName = "_TransformUVs_RGBOnly";
 		
 
+		public enum UnityBlendMode : int // Duplicate of AlphaMode that is EditorOnly from shadergraph...
+		{
+			Alpha,
+			Premultiply,
+			Additive,
+			Multiply,
+		}
+
 		public void BindMaterialProperties(SBatchDesc batchDesc, Material material, PKFxEffectAsset asset, bool logError = true)
 		{
 			// Set the blend mode:
 			int srcMode = 0;
 			int dstMode = 0;
+			UnityBlendMode blend = UnityBlendMode.Alpha;
 			// Additive and distortion
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap) ||
 				batchDesc.m_BlendMode == EBlendMode.Additive)
 			{
+				blend = UnityBlendMode.Additive;
 				srcMode = (int)UnityEngine.Rendering.BlendMode.SrcAlpha;
 				if (GraphicsSettings.renderPipelineAsset != null && GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset")
 					dstMode = (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
@@ -107,21 +117,25 @@ namespace PopcornFX
 			}
 			else if (batchDesc.m_BlendMode == EBlendMode.AdditiveNoAlpha)
 			{
+				blend = UnityBlendMode.Additive;
 				srcMode = (int)UnityEngine.Rendering.BlendMode.One;
 				dstMode = (int)UnityEngine.Rendering.BlendMode.One;
 			}
 			else if (batchDesc.m_BlendMode == EBlendMode.PremultipliedAlpha)
 			{
+				blend = UnityBlendMode.Premultiply;
 				srcMode = (int)UnityEngine.Rendering.BlendMode.One;
 				dstMode = (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
 			}
 			else if (batchDesc.m_BlendMode == EBlendMode.AlphaBlend)
 			{
+				blend = UnityBlendMode.Alpha;
 				srcMode = (int)UnityEngine.Rendering.BlendMode.SrcAlpha;
 				dstMode = (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
 			}
 			else
 			{
+				blend = UnityBlendMode.Additive;
 				srcMode = (int)UnityEngine.Rendering.BlendMode.One;
 				dstMode = (int)UnityEngine.Rendering.BlendMode.One;
 			}
@@ -129,6 +143,10 @@ namespace PopcornFX
 			if (!string.IsNullOrEmpty(m_SourceBlendPropertyName))
 			{
 				material.SetInt(m_SourceBlendPropertyName, srcMode);
+				if (PKFxSettings.MaterialFactory.m_FactoryType == PKFxMaterialFactory.FactoryType.URP)
+				{
+					material.SetInt("_Blend", (int)blend);
+				}
 			}
 			if (!string.IsNullOrEmpty(m_DestinationBlendPropertyName))
 			{

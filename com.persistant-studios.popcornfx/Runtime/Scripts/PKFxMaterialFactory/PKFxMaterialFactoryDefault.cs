@@ -42,6 +42,7 @@ namespace PopcornFX
 			string path = Path.Combine(folderPath, "DefaultMaterialFactory.asset");
 
 			PKFxMaterialFactoryDefault materialFactoryDefault = CreateInstance<PKFxMaterialFactoryDefault>();
+			materialFactoryDefault.m_FactoryType = FactoryType.DEFAULT;
 			materialFactoryDefault.SetupFallBackFeatureBinding();
 
 			AssetDatabase.CreateAsset(materialFactoryDefault, path);

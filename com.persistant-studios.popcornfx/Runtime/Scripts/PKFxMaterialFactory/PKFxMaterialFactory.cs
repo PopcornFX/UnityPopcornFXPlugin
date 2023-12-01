@@ -16,8 +16,16 @@ namespace PopcornFX
 	[Serializable]
 	public abstract class PKFxMaterialFactory : ScriptableObject
 	{
-		public bool m_UseSortingLayers = false;
+		public enum FactoryType : int
+		{
+			DEFAULT,
+			URP,
+			HDRP,
+			SRP,
+		}
 
+		public bool m_UseSortingLayers = false;
+		public FactoryType m_FactoryType = FactoryType.DEFAULT;
 		public abstract void		SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer);
 		public abstract Material	ResolveParticleMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null);
 
@@ -347,7 +355,7 @@ namespace PopcornFX
 				majExtention = majExtention.Replace(".fbx", ".FBX");
 				DepDesc = PKFxManager.GetBuiltAsset().m_Dependencies.Find(x => majExtention.Contains(x.m_Path));
 			}
-			if (DepDesc != null)
+			if (DepDesc != null && DepDesc.m_Object != null)
 			{
 				GameObject									meshGO = DepDesc.m_Object as GameObject;
 

@@ -30,6 +30,7 @@ namespace PopcornFX
 	public struct SNativeAttributeDesc
 	{
 		public EAttributeType		m_AttributeType;
+		public EAttributeSemantic	m_AttributeSemantic;
 		public EAttributeDropMode	m_AttributeDropMode;
 		public int m_MinMaxFlag;
 
@@ -852,6 +853,12 @@ namespace PopcornFX
 		{
 			Debug.Assert(m_Renderers.Count > rendererGUID);
 			Debug.Assert(rendererGUID != -1);
+
+			if (rendererGUID >= m_Renderers.Count)
+			{
+				Debug.LogError("[PopcornFX] Invalid renderer guid on renderer resize.");
+				return false;
+			}
 			SMeshDesc renderer = m_Renderers[rendererGUID];
 			if (renderer.m_Procedural != null)
 				return OnRendererComputeBufferResize(rendererGUID, particleCount, vertexCount, indexCount);
@@ -1225,6 +1232,11 @@ namespace PopcornFX
 		[MonoPInvokeCallback(typeof(RetrieveRendererBufferInfoCallback))]
 		public static void OnRetrieveRendererBufferInfo(int rendererGUID, ref SRetrieveRendererInfo rendererInfo)
 		{
+			if (rendererGUID >= m_Renderers.Count)
+			{
+				Debug.LogError("[PopcornFX] Invalid renderer guid  on RetrieveRendererBufferInfo.");
+				return;
+			}
 			unsafe
 			{
 				int* isIdx32 = (int*)rendererInfo.m_IsIndex32.ToPointer();
@@ -1240,16 +1252,16 @@ namespace PopcornFX
 				{
 					int* hasCustomMat = (int*)rendererInfo.m_HasCustomMaterial.ToPointer();
 
-					if (hasCustomMat != null)
+					if (hasCustomMat != null && customMatID != null)
 					{
 						PKFxCustomMaterialInfo matInfo = m_CurrentlyBuildAsset.FindCustomMaterialInfo(renderer.m_BatchDesc);
-						if (matInfo == null)
-							*hasCustomMat = 0;
-						else
+						if (matInfo != null && matInfo.m_CustomMaterial != null)
 						{
 							*hasCustomMat = 1;
 							*customMatID = matInfo.m_CustomMaterial.GetInstanceID();
 						}
+						else
+							*hasCustomMat = 0;
 					}
 				}
 
@@ -1261,13 +1273,20 @@ namespace PopcornFX
 
 					Mesh currentRendererMesh = renderer.m_Slice.mesh;
 
+					if (currentRendererMesh == null)
+					{
+						Debug.LogWarning("[PopcornFX] null mesh in renderer slice.");
+						return;
+					}
+
 					int indexCount = renderer.m_IndexCount;
 					int vertexCount = renderer.m_VertexCount;
 
 					if (rendererInfo.m_UseComputeBuffers != IntPtr.Zero)
 					{
 						int* useComputebuffers = (int*)rendererInfo.m_UseComputeBuffers.ToPointer();
-						*useComputebuffers = 0;
+						if (useComputebuffers != null)
+							*useComputebuffers = 0;
 					}
 					if (isIdx32 != null)
 						*isIdx32 = currentRendererMesh.indexFormat == IndexFormat.UInt32 ? 1 : 0;

@@ -26,6 +26,7 @@ public:
 	s32				PopFront(SPopcornLogData &out);
 	void			SetMaxLogsCount(u32 maxLogsCount);
 	void			ClearLogs();
+	u32				Count() const { return m_LogStackMain.Count(); }
 
 	void			StartLogs();
 	void			ValidateLogsAtLevel(CLog::ELogLevel level, const CString &header);

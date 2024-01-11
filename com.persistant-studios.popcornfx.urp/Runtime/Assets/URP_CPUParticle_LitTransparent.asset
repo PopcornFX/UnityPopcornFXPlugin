@@ -70,6 +70,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_RenderTypes: 01010001
   m_BlendMode: 010101010000
-  m_SupportedShaderMask: 4194302
+  m_SupportedShaderMask: 4194238
   m_MandatoryShaderMask: 8
   m_BillboardingLocation: 0

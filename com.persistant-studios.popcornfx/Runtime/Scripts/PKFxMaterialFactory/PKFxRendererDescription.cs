@@ -455,6 +455,7 @@ namespace PopcornFX
 			m_Type = ERendererType.Mesh;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
 			m_BlendMode = desc.m_BlendMode;
+			m_DrawOrder = desc.m_DrawOrder;
 			m_RotateUVs = false;
 			m_DiffuseMap = diffuseStr;
 			m_DiffuseRampMap = diffuseRampStr;
@@ -512,6 +513,7 @@ namespace PopcornFX
 					for (int i = 0; i < desc.m_TextureAtlasCount; ++i)
 					{
 						Vector4 curCol = subRects[i];
+						curCol.w = 1 - curCol.y - curCol.w; // Unity sampling is reversed in Y. 
 						m_AtlasSubRects.SetPixel(i, 0, curCol);
 					}
 				}
@@ -631,6 +633,7 @@ namespace PopcornFX
 				finalName += " ";
 				finalName += m_DoubleSided ? "DoubleSided" : "OneSided";
 			}
+			finalName += " " + m_DrawOrder;
 			return finalName;
 		}
 		public static string BlendModeToShortString(EBlendMode blendMode)
@@ -693,7 +696,6 @@ namespace PopcornFX
 
 		public string GenerateShortNameFromDescription()
 		{
-
 			string finalName;
 
 			if (m_Type == ERendererType.Billboard)

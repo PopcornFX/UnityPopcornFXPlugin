@@ -200,6 +200,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern int UnstackLog(StringBuilder dstBuffer, int dstSize, ref int logSeverity);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern int GetStackLogNumber();
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetMaxCameraCount(int number);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void UpdateCamDesc(int camID, ref SCamDesc desc, bool update);
@@ -306,6 +308,9 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool StatsPullFrameData(string reportName, ref SStatsToFill data);
 
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool CanSkipUpdate();
+
 #if UNITY_EDITOR
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool PopcornFXEditorStartup();
@@ -352,7 +357,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.15.16 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.15.17 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";

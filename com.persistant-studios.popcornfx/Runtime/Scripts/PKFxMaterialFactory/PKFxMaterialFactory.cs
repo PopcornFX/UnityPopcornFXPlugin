@@ -101,10 +101,27 @@ namespace PopcornFX
 			return path;
 		}
 
-		public virtual Material EditorGetDefaultMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null, bool logError = true)
+		public string EditorResolveMaterialName(SBatchDesc batchDesc)
 		{
+			if (PKFxSettings.UseHashesAsMaterialName)
+			{
+				Hash128 hash = new Hash128();
+				hash.Append(batchDesc.m_GeneratedName);
+				return hash.ToString();
+			}
+			else
+				return batchDesc.GenerateShortNameFromDescription();
+		}
+
+		public Material EditorResolveMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null, bool reimport = false, bool resolveCustomMat = false, bool logError = true)
+		{
+			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath))
+				AssetDatabase.CreateFolder("Assets", PKFxSettings.UnityPackFxPath.Substring(1));
+			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
+				AssetDatabase.CreateFolder("Assets" + PKFxSettings.UnityPackFxPath, "UnityMaterials");
+
 			PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
-			Material material;
+			Material material = null;
 
 			if (binding == null)
 			{
@@ -112,17 +129,15 @@ namespace PopcornFX
 				return null;
 			}
 
-			string matName;
-			if (PKFxSettings.UseHashesAsMaterialName)
-			{
-				Hash128 hash = new Hash128();
-				hash.Append(batchDesc.m_GeneratedName);
-				matName = hash.ToString();
-			}
-			else
-				matName = batchDesc.GenerateShortNameFromDescription();
+			string matName = EditorResolveMaterialName(batchDesc);
+			string materialPath = "Assets/" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat";
+			Material assetMat = (Material)AssetDatabase.LoadAssetAtPath(materialPath, typeof(Material));
 
-			Material assetMat = (Material)AssetDatabase.LoadAssetAtPath("Assets/" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat", typeof(Material));
+			if (reimport && assetMat != null)
+			{
+				assetMat = null;
+				AssetDatabase.DeleteAsset(materialPath);
+			}
 			if (assetMat == null)
 			{
 				material = new Material(binding.m_Shader);
@@ -133,19 +148,15 @@ namespace PopcornFX
 				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat");
 				AssetDatabase.SaveAssets();
 			}
-			else
+			if (resolveCustomMat)
+			{
+				PKFxCustomMaterialInfo customMatInfo = asset.FindCustomMaterialInfo(batchDesc);
+				if (customMatInfo != null)
+					material = customMatInfo.m_CustomMaterial;
+			}
+			if (material == null)
 				material = assetMat;
 			return material;
-		}
-
-		public virtual Material EditorResolveMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null, bool logError = true)
-		{
-			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath))
-				AssetDatabase.CreateFolder("Assets", PKFxSettings.UnityPackFxPath.Substring(1));
-			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
-				AssetDatabase.CreateFolder("Assets" + PKFxSettings.UnityPackFxPath, "UnityMaterials");
-			
-			return EditorGetDefaultMaterial(batchDesc, asset, logError);
 		}
 #endif
 		

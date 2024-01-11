@@ -81,6 +81,14 @@ namespace PopcornFX
 			PKFxManagerImpl.SetMaxLogStack(maxLogs);
 		}
 
+		public static int GetPopcornFXLogNumber()
+		{
+			if (!PKFxManagerImpl._IsDllLoaded())
+				return 0;
+
+			return PKFxManagerImpl.GetStackLogNumber();
+		}
+
 		public static int GetPopcornFXLog(ref string log, ref EPopcornLogLevels level)
 		{
 			if (!PKFxManagerImpl._IsDllLoaded())
@@ -649,5 +657,11 @@ namespace PopcornFX
 					renderer.m_InstancesRenderer.DrawMeshes();
 			}
 		}
+
+		public static bool CanSkipUpdate()
+		{
+			return PKFxManagerImpl.CanSkipUpdate();
+		}
+
 	}
 }

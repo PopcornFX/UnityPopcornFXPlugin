@@ -24,7 +24,7 @@ namespace PopcornFX
 			if (minimumLogLevel == PKFxManager.EPopcornLogLevels.Level_None)
 				return;
 
-			while (PKFxManager.GetPopcornFXLog(ref currentLog, ref level) >= 0)
+			while (PKFxManager.GetPopcornFXLogNumber() > 0 && PKFxManager.GetPopcornFXLog(ref currentLog, ref level) >= 0)
 			{
 				if ((int)level < (int)minimumLogLevel)
 					continue;

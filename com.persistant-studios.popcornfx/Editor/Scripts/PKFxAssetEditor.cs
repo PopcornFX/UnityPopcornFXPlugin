@@ -85,9 +85,8 @@ namespace PopcornFX
 			SerializedProperty rdrs = serializedObject.FindProperty("m_RendererDescs");
 			SerializedProperty mats = serializedObject.FindProperty("m_Materials");
 			SerializedProperty customMats = serializedObject.FindProperty("m_CustomMaterials");
+
 			int rdrsListSize = rdrs.arraySize;
-			if (rdrsListSize > 0)
-				EditorGUILayout.LabelField("Renderers : ");
 
 			// Upgrade if material wasn't set in import (2.12.7 ++)
 			if (mats.arraySize < rdrsListSize)
@@ -100,6 +99,20 @@ namespace PopcornFX
 					newMatProp.objectReferenceValue = mat;
 				}
 				serializedObject.ApplyModifiedProperties();
+			}
+
+			bool reimport = false;
+
+			if (rdrsListSize > 0)
+			{
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.LabelField("Renderers : ");
+				using (new EditorGUI.DisabledScope(Application.isPlaying))
+				{
+					if (GUILayout.Button("Reimport Materials"))
+						reimport = true;
+				}
+				EditorGUILayout.EndHorizontal();
 			}
 
 			GUIStyle		alernatingColors = new GUIStyle();
@@ -120,9 +133,9 @@ namespace PopcornFX
 				if (field != null)
 				{
 					SerializedProperty matProp = mats.GetArrayElementAtIndex(renderers[i].MaterialIdx);
-					if (matProp.objectReferenceValue == null)
+					if (reimport || matProp.objectReferenceValue == null)
 					{
-						Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset, false);
+						Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset, reimport, true, false);
 						matProp.objectReferenceValue = mat;
 						serializedObject.ApplyModifiedProperties();
 					}

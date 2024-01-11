@@ -171,6 +171,29 @@ void	CPKFXScene::SyncPreviousUpdateAndRunDeferredCallsIFN()
 
 //----------------------------------------------------------------------------
 
+bool	CPKFXScene::ShouldUpdatePopcorn()
+{
+	if (!m_WaitForUpdateOnRenderThread)
+	{
+		PK_ASSERT(m_ParticleMediumCollection != null);
+		if (m_ParticleMediumCollection->CanSkipUpdate())
+			return false;
+	}
+	else
+	{
+		PK_ASSERT(m_ParticleMeshMediumCollection != null);
+		PK_ASSERT(m_ParticleMediumCollection != null);
+
+		if (m_ParticleMediumCollection->CanSkipUpdate() &&
+			m_ParticleMeshMediumCollection->CanSkipUpdate())
+			return false;
+	}
+
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
 void	CPKFXScene::LaunchUpdate(float dt)
 {
 	PK_SCOPEDPROFILE();
@@ -186,7 +209,7 @@ void	CPKFXScene::LaunchUpdate(float dt)
 
 	if (UpdateMode() != UpdateMode_NoUpdate)
 	{
-		if (dt != 0.0f)
+		if (dt != 0.0f && ShouldUpdatePopcorn())
 		{
 			CRuntimeManager::Instance().BeforeUpdate();
 			CRuntimeManager::Instance().Update(dt);
@@ -194,13 +217,12 @@ void	CPKFXScene::LaunchUpdate(float dt)
 			if (!m_WaitForUpdateOnRenderThread)
 			{
 				PK_ASSERT(m_ParticleMeshMediumCollection == null);
-
-
 #if	(PK_PARTICLES_HAS_STATS != 0)
 				m_ParticleMediumCollection->Stats().Reset();
 				PopcornFX::CTimer	updateTimer;
 				updateTimer.Start();
 #endif // (PK_PARTICLES_HAS_STATS != 0)
+
 				m_ParticleMediumCollection->Update(dt);
 
 				while (m_ParticleMediumCollection->UpdateFence(1)) {}

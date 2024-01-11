@@ -140,6 +140,8 @@ namespace PopcornFX
 
 		void Update()
 		{
+			if (PKFxManager.CanSkipUpdate())
+				return;
 			for (int i = 0; i < m_Cameras.Count; ++i)
 			{
 				if (i < MaxCameraSupport())
@@ -162,8 +164,9 @@ namespace PopcornFX
 
 		void _LateUpdate()
 		{
+			if (PKFxManager.CanSkipUpdate())
+				return;
 			PKFxManager.UpdateParticles();
-
 			for (int i = 0; i < m_Cameras.Count; ++i)
 			{
 				if (i < MaxCameraSupport())

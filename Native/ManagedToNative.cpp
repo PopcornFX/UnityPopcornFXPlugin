@@ -215,6 +215,18 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	MANAGED_TO_POPCORN_CONVENTION int	GetStackLogNumber()
+	{
+		if (!CRuntimeManager::IsInstanceInitialized())
+			return 0;
+
+		CUnityLog	*logger = CRuntimeManager::Instance().GetLogger();
+
+		return (int)logger->Count();
+	}
+
+	//----------------------------------------------------------------------------
+
 	MANAGED_TO_POPCORN_CONVENTION int	UnstackLog(char *dstBuffer, int dstSize, int &logSeverity)
 	{
 		// DO NOT LOG AIN THIS FUNCTION! INFINITE LOOP...
@@ -236,6 +248,8 @@ extern "C"
 		}
 		return -1;
 	}
+
+	//----------------------------------------------------------------------------
 
 
 	MANAGED_TO_POPCORN_CONVENTION void	SetMaxCameraCount(int count)
@@ -1013,6 +1027,12 @@ extern "C"
 		const PLoopbackCapture	&loopback = CRuntimeManager::Instance().m_LoopbackAudio;
 		if (loopback != null)
 			loopback->SetVolumeMultiplier(volume);
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION bool	CanSkipUpdate()
+	{
+		NEED_PK_RUNTIME_STARTED(return true);
+		return CRuntimeManager::Instance().CanSkipUpdate();
 	}
 
 

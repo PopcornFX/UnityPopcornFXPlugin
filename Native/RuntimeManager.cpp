@@ -1576,6 +1576,13 @@ void	CRuntimeManager::AfterUpdate()
 
 //----------------------------------------------------------------------------
 
+bool	CRuntimeManager::CanSkipUpdate()
+{
+	return !m_ParticleScene->ShouldUpdatePopcorn();
+}
+
+//----------------------------------------------------------------------------
+
 bool	CRuntimeManager::KickBackgroundTasksIFN()
 {
 	if (m_HasBackgroundTasksToKick)
@@ -1638,10 +1645,10 @@ Threads::PAbstractPool	CRuntimeManager::_CreateCustomThreadPool()
 #if		defined(PK_ORBIS)
 		// Default worker affinities on Orbis (and UNKNOWN2?):
 	{
-		1 << 2,
-		1 << 3, // our main thread
-		1 << 4,
-		1 << 5,
+		0x0C,
+		0x0C,
+		0x30,
+		0x30,
 	};
 #elif	defined(PK_LUMIN)
 		// Default worker affinities on Lumin:
@@ -1667,7 +1674,7 @@ Threads::PAbstractPool	CRuntimeManager::_CreateCustomThreadPool()
 #if		defined(PK_ORBIS) || defined(PK_UNKNOWN2)
 		affinityMasks = kWorkerAffinities;
 		affinityCount = PK_ARRAY_COUNT(kWorkerAffinities);
-		workersPriority = CThreadManager::Priority_BackgroundLow;
+		workersPriority = CThreadManager::Priority_High;
 		hasExplicitAffinities = true;
 #elif	defined(PK_LUMIN)
 		affinityMasks = kWorkerAffinities;

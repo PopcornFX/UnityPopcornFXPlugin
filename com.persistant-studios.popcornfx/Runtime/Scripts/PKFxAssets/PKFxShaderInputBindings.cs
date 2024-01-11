@@ -102,15 +102,20 @@ namespace PopcornFX
 			int dstMode = 0;
 			UnityBlendMode blend = UnityBlendMode.Alpha;
 			// Additive and distortion
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap) ||
-				batchDesc.m_BlendMode == EBlendMode.Additive)
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 			{
 				blend = UnityBlendMode.Additive;
 				srcMode = (int)UnityEngine.Rendering.BlendMode.SrcAlpha;
-				if (GraphicsSettings.renderPipelineAsset != null && GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset")
+				if (PKFxSettings.MaterialFactory.m_FactoryType == PKFxMaterialFactory.FactoryType.URP)
 					dstMode = (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha;
 				else
 					dstMode = (int)UnityEngine.Rendering.BlendMode.One;
+			}
+			else if (batchDesc.m_BlendMode == EBlendMode.Additive)
+			{
+				blend = UnityBlendMode.Additive;
+				srcMode = (int)UnityEngine.Rendering.BlendMode.SrcAlpha;
+				dstMode = (int)UnityEngine.Rendering.BlendMode.One;
 			}
 			else if (batchDesc.m_BlendMode == EBlendMode.AdditiveNoAlpha)
 			{
@@ -137,6 +142,10 @@ namespace PopcornFX
 				dstMode = (int)UnityEngine.Rendering.BlendMode.One;
 			}
 
+			if (batchDesc.m_DrawOrder != 0 && PKFxSettings.MaterialFactory.m_FactoryType == PKFxMaterialFactory.FactoryType.URP)
+			{
+				material.SetFloat("_QueueOffset", batchDesc.m_DrawOrder);
+			}
 			if (!string.IsNullOrEmpty(m_SourceBlendPropertyName))
 			{
 				material.SetInt(m_SourceBlendPropertyName, srcMode);

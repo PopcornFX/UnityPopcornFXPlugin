@@ -95,6 +95,7 @@ public:
 	void						TransformAllParticles(const CFloat3 &worldOffset);
 
 	void						ResolveDynamicCollisionsIFN();
+	bool						ShouldUpdatePopcorn();
 
 	// Both of those need to be called for the particles to be correctly updated:
 	void						SyncPreviousUpdateAndRunDeferredCallsIFN();

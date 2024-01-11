@@ -159,6 +159,8 @@ namespace PopcornFX
 
 		public int		m_TextureAtlasCount;
 		public IntPtr	m_TextureAtlas;
+
+		public int		m_DrawOrder;
 	};
 
 
@@ -1082,7 +1084,14 @@ namespace PopcornFX
 				renderer.m_IndexCount = (int)reservedIndexCount;
 
 				mesh.subMeshCount = 1;
-				mesh.SetSubMesh(0, new SubMeshDescriptor(0, (int)reservedIndexCount), MeshUpdateFlags.DontRecalculateBounds);
+				SubMeshDescriptor desc = new SubMeshDescriptor();
+				desc.topology = MeshTopology.Triangles;
+				desc.firstVertex = 0;
+				desc.baseVertex = 0;
+				desc.indexStart = 0;
+				desc.vertexCount = renderer.m_VertexCount;
+				desc.indexCount = renderer.m_IndexCount;
+				mesh.SetSubMesh(0, desc, MeshUpdateFlags.DontRecalculateBounds);
 
 				hasBeenResized = true;
 			}

@@ -171,6 +171,8 @@ extern "C"
 		int							m_TextureAtlasCount;
 		CFloat4						*m_TextureAtlas;
 
+		int							m_DrawOrder;
+
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
 			, m_ShaderVariationFlags(0)
@@ -189,6 +191,7 @@ extern "C"
 			, m_AnimDescRendering(null)
 			, m_TextureAtlasCount(0)
 			, m_TextureAtlas(null)
+			, m_DrawOrder(0)
 		{
 		}
 

@@ -197,6 +197,7 @@ public:
 
 	void								BeforeUpdate();
 	void								AfterUpdate();
+	bool								CanSkipUpdate();
 
 	template<class T>
 	bool								AddBackgroundTask(T *functor)

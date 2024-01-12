@@ -35,13 +35,13 @@ endef
 
 ifeq ($(config),debug_android)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH)/arm-linux-androideabi-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH)/arm-linux-androideabi-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH)/arm-linux-androideabi-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../../release/builds/Android_Samples
 TARGET = $(TARGETDIR)/PK-Sample_11_ThreadPool_d
@@ -55,13 +55,13 @@ ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_andr
 
 else ifeq ($(config),debug_android64)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH64)/aarch64-linux-android-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH64)/aarch64-linux-android-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH64)/aarch64-linux-android-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../../release/builds/Android64_Samples
 TARGET = $(TARGETDIR)/PK-Sample_11_ThreadPool_d
@@ -75,13 +75,13 @@ ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_andr
 
 else ifeq ($(config),release_android)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH)/arm-linux-androideabi-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH)/arm-linux-androideabi-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH)/arm-linux-androideabi-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../../release/builds/Android_Samples
 TARGET = $(TARGETDIR)/PK-Sample_11_ThreadPool_r
@@ -95,13 +95,13 @@ ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_andr
 
 else ifeq ($(config),release_android64)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH64)/aarch64-linux-android-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH64)/aarch64-linux-android-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH64)/aarch64-linux-android-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../../release/builds/Android64_Samples
 TARGET = $(TARGETDIR)/PK-Sample_11_ThreadPool_r
@@ -115,13 +115,13 @@ ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_andr
 
 else ifeq ($(config),retail_android)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH)/arm-linux-androideabi-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH)/arm-linux-androideabi-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH)/arm-linux-androideabi-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../../release/builds/Android_Samples
 TARGET = $(TARGETDIR)/PK-Sample_11_ThreadPool_s
@@ -135,13 +135,13 @@ ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_andr
 
 else ifeq ($(config),retail_android64)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH64)/aarch64-linux-android-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH64)/aarch64-linux-android-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH64)/aarch64-linux-android-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../../release/builds/Android64_Samples
 TARGET = $(TARGETDIR)/PK-Sample_11_ThreadPool_s

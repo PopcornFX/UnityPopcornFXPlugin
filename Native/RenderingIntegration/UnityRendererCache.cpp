@@ -464,6 +464,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue *atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
 
 	m_Flags.m_ShaderVariationFlags = 0;
+
 	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseMap;
 	if (alphaRemap != null && alphaRemap->ValueB() && alphaRemapAlphaMap != null && !alphaRemapAlphaMap->ValuePath().Empty() && alphaRemapCursor.Valid())
@@ -524,7 +525,10 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	m_Flags.m_BlendMode = BlendMode::Solid;
 
 	if (transparent != null && transparent->ValueB() && transparentType != null)
-	{
+	{		
+		const SRendererFeaturePropertyValue *globalSortOverride = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Transparent_GlobalSortOverride());
+		m_Flags.m_DrawOrder = globalSortOverride != null ? globalSortOverride->ValueI().x() : 0;
+	
 		if (transparentType->ValueI().x() == BasicRendererProperties::Additive)
 		{
 			m_Flags.m_BlendMode = BlendMode::Additive;
@@ -923,6 +927,7 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	desc.m_InvSoftnessDistance = m_MaterialDescMesh.m_InvSoftnessDistance;
 	desc.m_AlphaClipThreshold = m_MaterialDescMesh.m_AlphaThreshold;
 	desc.m_DoubleSided = m_MaterialDescMesh.m_DoubleSided;
+	desc.m_DrawOrder = m_MaterialDescMesh.m_Flags.m_DrawOrder;
 
 	bool fluidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0;
 	bool softVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0;

@@ -216,6 +216,18 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	MANAGED_TO_POPCORN_CONVENTION int	GetStackLogNumber()
+	{
+		if (!CRuntimeManager::IsInstanceInitialized())
+			return 0;
+
+		CUnityLog	*logger = CRuntimeManager::Instance().GetLogger();
+
+		return (int)logger->Count();
+	}
+
+	//----------------------------------------------------------------------------
+
 	MANAGED_TO_POPCORN_CONVENTION int	UnstackLog(char *dstBuffer, int dstSize, int &logSeverity)
 	{
 		// DO NOT LOG ANYTHING IN THIS FUNCTION! INFINITE LOOP...

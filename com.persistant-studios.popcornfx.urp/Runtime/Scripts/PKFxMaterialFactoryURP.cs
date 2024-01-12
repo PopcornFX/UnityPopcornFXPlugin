@@ -211,8 +211,7 @@ namespace PopcornFX
 				Debug.LogError("[PopcornFX] Trying to resolve material from PKFxEffectAsset that is not holding materials");
 			if (material == null)
 				return null;
-			if (batchDesc.m_Type != ERendererType.Mesh)
-				material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
+			material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
 			return material;
 		}
 	}

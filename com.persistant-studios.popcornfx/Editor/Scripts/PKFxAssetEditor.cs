@@ -166,9 +166,8 @@ namespace PopcornFX
 			SerializedProperty rdrs = serializedObject.FindProperty("m_RendererDescs");
 			SerializedProperty mats = serializedObject.FindProperty("m_Materials");
 			SerializedProperty customMats = serializedObject.FindProperty("m_CustomMaterials");
+
 			int rdrsListSize = rdrs.arraySize;
-			if (rdrsListSize > 0)
-				EditorGUILayout.LabelField("Renderers : ");
 
 			// Upgrade if material wasn't set in import (2.12.7 ++)
 			if (mats.arraySize < rdrsListSize)

@@ -1668,6 +1668,13 @@ void	CRuntimeManager::AfterUpdate()
 
 //----------------------------------------------------------------------------
 
+bool	CRuntimeManager::CanSkipUpdate()
+{
+	return !m_ParticleScene->ShouldUpdatePopcorn();
+}
+
+//----------------------------------------------------------------------------
+
 bool	CRuntimeManager::KickBackgroundTasksIFN()
 {
 	if (m_HasBackgroundTasksToKick)

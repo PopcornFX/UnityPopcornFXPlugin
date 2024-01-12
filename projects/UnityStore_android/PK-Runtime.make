@@ -39,13 +39,13 @@ endef
 
 ifeq ($(config),debug_android)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH)/arm-linux-androideabi-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH)/arm-linux-androideabi-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH)/arm-linux-androideabi-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-Runtime_d.a
@@ -58,13 +58,13 @@ ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),debug_android64)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH64)/aarch64-linux-android-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH64)/aarch64-linux-android-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH64)/aarch64-linux-android-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-Runtime_d.a
@@ -77,13 +77,13 @@ ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_android)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH)/arm-linux-androideabi-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH)/arm-linux-androideabi-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH)/arm-linux-androideabi-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-Runtime_r.a
@@ -96,13 +96,13 @@ ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_android64)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH64)/aarch64-linux-android-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH64)/aarch64-linux-android-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH64)/aarch64-linux-android-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-Runtime_r.a
@@ -115,13 +115,13 @@ ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),retail_android)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH)/arm-linux-androideabi-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH)/arm-linux-androideabi-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/armv7a-linux-androideabi21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH)/arm-linux-androideabi-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-Runtime_s.a
@@ -134,13 +134,13 @@ ALL_LDFLAGS += $(LDFLAGS) -s
 
 else ifeq ($(config),retail_android64)
 ifeq ($(origin CC), default)
-  CC = $(EASYPATH64)/aarch64-linux-android-clang
+  CC = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang
 endif
 ifeq ($(origin CXX), default)
-  CXX = $(EASYPATH64)/aarch64-linux-android-clang++
+  CXX = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/aarch64-linux-android21-clang++
 endif
 ifeq ($(origin AR), default)
-  AR = $(EASYPATH64)/aarch64-linux-android-ar
+  AR = $(PK_ANDROID_TOOLCHAINS)/toolchain-r21e/bin/llvm-ar
 endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-Runtime_s.a

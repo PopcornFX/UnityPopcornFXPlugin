@@ -57,9 +57,8 @@ namespace PopcornFX
 
 		bool SetupDistortionPassIFN()
 		{
-			if (GraphicsSettings.renderPipelineAsset != null &&
-				(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
-				 GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset"))
+			if (PKFxSettings.MaterialFactory.m_FactoryType == PKFxMaterialFactory.FactoryType.URP ||
+				PKFxSettings.MaterialFactory.m_FactoryType == PKFxMaterialFactory.FactoryType.HDRP)
 				return false; // HDRP, we are using distortion builtin shaders
 							  // URP, Distortion is handled as forward rendering
 			if (PKFxSettings.EnableSoftParticles == false)
@@ -193,13 +192,11 @@ namespace PopcornFX
 
 			if (PKFxSettings.EnableDistortion)
 			{
-				if (GraphicsSettings.renderPipelineAsset == null ||
-					!(GraphicsSettings.renderPipelineAsset.name == "HDRenderPipelineAsset" ||
-					  GraphicsSettings.renderPipelineAsset.name == "UniversalRenderPipelineAsset"))
+				if (PKFxSettings.MaterialFactory.m_FactoryType != PKFxMaterialFactory.FactoryType.URP &&
+					PKFxSettings.MaterialFactory.m_FactoryType != PKFxMaterialFactory.FactoryType.HDRP)
 				{
 					// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
 					m_Camera.cullingMask &= ~(1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer));
-
 				}
 				else
 					m_Camera.cullingMask |= 1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);

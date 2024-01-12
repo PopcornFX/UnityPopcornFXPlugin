@@ -506,7 +506,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		public static void CreatePKFxFXMaterialsIFN()
+		public static void CreatePKFxFXMaterialsIFN(bool reimport = false)
 		{
 			string[] pkfxEffectAssets = AssetDatabase.FindAssets("t:PKFxEffectAsset");
 

@@ -96,6 +96,14 @@ namespace PopcornFX
 			PKFxManagerImpl.SetMaxLogStack(maxLogs);
 		}
 
+		public static int GetPopcornFXLogNumber()
+		{
+			if (!PKFxManagerImpl._IsDllLoaded())
+				return 0;
+
+			return PKFxManagerImpl.GetStackLogNumber();
+		}
+
 		public static int GetPopcornFXLog(ref string log, ref EPopcornLogLevels level)
 		{
 			if (!PKFxManagerImpl._IsDllLoaded())

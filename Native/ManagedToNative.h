@@ -323,6 +323,7 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void 								PopcornFXShutdown();
 	//Log
 	MANAGED_TO_POPCORN_CONVENTION void								SetMaxLogStack(int maxLogStack);
+	MANAGED_TO_POPCORN_CONVENTION int								GetStackLogNumber();
 	MANAGED_TO_POPCORN_CONVENTION int								UnstackLog(char *dstBuffer, int dstSize, int &logSeverity);
 	// Update and rendering:
 	MANAGED_TO_POPCORN_CONVENTION void								SetMaxCameraCount(int number);
@@ -395,6 +396,7 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION const char						*GetRuntimeVersion();
 
 	MANAGED_TO_POPCORN_CONVENTION void								SetApplicationLoopbackAudioVolume(float volume);
+	MANAGED_TO_POPCORN_CONVENTION bool								CanSkipUpdate();
 
 	MANAGED_TO_POPCORN_CONVENTION void								SetQualityLevelSettings(const char **qualityLevelNames, int qualityLevelCount, int current, bool updateCookery);
 

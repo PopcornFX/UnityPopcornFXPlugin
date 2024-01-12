@@ -210,6 +210,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern int UnstackLog(StringBuilder dstBuffer, int dstSize, ref int logSeverity);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern int GetStackLogNumber();
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetMaxCameraCount(int number);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetCurrentQualityLevel(string currentQualityLevel);
@@ -325,6 +327,9 @@ namespace PopcornFX
 		public static extern bool StatsPullFrameData(string reportName, ref SStatsToFill data);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetQualityLevelSettings(string[] QualityLevels, int qualityLevelCount, int currentQualityLevel, bool updateCookery);
+
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool CanSkipUpdate();
 
 #if UNITY_EDITOR
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]

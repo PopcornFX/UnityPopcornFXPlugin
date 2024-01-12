@@ -371,7 +371,7 @@ namespace PopcornFX
 			foreach (SBatchDesc desc in m_RendererDescs)
 			{
 				PKFxEffectAsset.MaterialUIDToIndex index = m_MaterialIndexes.Find(item => item.m_UID == desc.m_UID && item.m_Quality == PKFxManager.StoredQualityLevel);
-				m_Materials[index.m_Idx] = PKFxSettings.MaterialFactory.EditorGetDefaultMaterial(desc, this);
+				m_Materials[index.m_Idx] = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
 				mats.GetArrayElementAtIndex(index.m_Idx).objectReferenceValue = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
 				break;
 			}

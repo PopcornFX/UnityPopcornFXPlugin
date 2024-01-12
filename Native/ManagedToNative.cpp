@@ -1078,6 +1078,15 @@ extern "C"
 		}
 	}
 
+	//--------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION bool	CanSkipUpdate()
+	{
+		NEED_PK_RUNTIME_STARTED(return true);
+		return CRuntimeManager::Instance().CanSkipUpdate();
+	}
+
+
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop
 #endif

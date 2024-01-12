@@ -195,11 +195,11 @@ bool	CPKFXScene::ShouldUpdatePopcorn()
 	}
 	else
 	{
-		PK_ASSERT(m_ParticleMeshMediumCollection != null);
+		PK_ASSERT(m_GameThreadMediumCollection != null);
 		PK_ASSERT(m_ParticleMediumCollection != null);
 
 		if (m_ParticleMediumCollection->CanSkipUpdate() &&
-			m_ParticleMeshMediumCollection->CanSkipUpdate())
+			m_GameThreadMediumCollection->CanSkipUpdate())
 			return false;
 	}
 

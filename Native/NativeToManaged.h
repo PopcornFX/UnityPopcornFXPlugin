@@ -165,6 +165,7 @@ extern "C"
 		CFloat4						*m_TextureAtlas;
 
 		int							m_UID;
+		int							m_DrawOrder;
 
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
@@ -185,6 +186,7 @@ extern "C"
 			, m_TextureAtlasCount(0)
 			, m_TextureAtlas(null)
 			, m_UID(-1)
+			, m_DrawOrder(0)
 		{
 		}
 

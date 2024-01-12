@@ -158,6 +158,7 @@ namespace PopcornFX
 		public int		m_TextureAtlasCount;
 		public IntPtr	m_TextureAtlas;
 		public int		m_UID;
+		public int		m_DrawOrder;
 	};
 
 

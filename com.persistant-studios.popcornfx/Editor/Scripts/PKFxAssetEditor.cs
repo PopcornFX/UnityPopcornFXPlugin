@@ -182,6 +182,20 @@ namespace PopcornFX
 				serializedObject.ApplyModifiedProperties();
 			}
 
+			bool reimport = false;
+
+			if (rdrsListSize > 0)
+			{
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.LabelField("Renderers : ");
+				using (new EditorGUI.DisabledScope(Application.isPlaying))
+				{
+					if (GUILayout.Button("Reimport Materials"))
+						reimport = true;
+				}
+				EditorGUILayout.EndHorizontal();
+			}
+
 			GUIStyle alernatingColors = new GUIStyle();
 			Color backgroundColor = EditorGUIUtility.isProSkin ? new Color32(56, 56, 56, 255) : new Color32(194, 194, 194, 255);
 
@@ -225,9 +239,9 @@ namespace PopcornFX
 								else
 								{
 									SerializedProperty matProp = mats.GetArrayElementAtIndex(index.m_Idx);
-									if (matProp.objectReferenceValue == null)
+									if (reimport || matProp.objectReferenceValue == null)
 									{
-										Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset, false);
+										Material mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(renderers[i], asset, reimport, true, false);
 										matProp.objectReferenceValue = mat;
 										serializedObject.ApplyModifiedProperties();
 									}

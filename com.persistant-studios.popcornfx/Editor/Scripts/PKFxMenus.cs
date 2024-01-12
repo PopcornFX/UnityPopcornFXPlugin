@@ -518,7 +518,7 @@ namespace PopcornFX
 				foreach (SBatchDesc batch in asset.m_RendererDescs)
 				{
 					PKFxEffectAsset.MaterialUIDToIndex index = asset.m_MaterialIndexes.Find(item => item.m_UID == batch.m_UID);
-					asset.m_Materials[index.m_Idx] = factory.EditorResolveMaterial(batch, asset);
+					asset.m_Materials[index.m_Idx] = factory.EditorResolveMaterial(batch, asset, reimport, true);
 				}
 			}
 			AssetDatabase.SaveAssets();
@@ -538,7 +538,57 @@ namespace PopcornFX
 		static public void UpdateQualityLevelSettings()
 		{
 			PKFxManager.SetQualityLevelSettings();
+		}
 
+		[MenuItem("Assets/PopcornFX/Delete unused PKFxFX Materials")]
+		static void _DeleteUnusedPKFxFXMaterials(MenuCommand menuCommand)
+		{
+			string pkfxMaterialsFolder = "Assets/" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/";
+			string[] pkfxMaterialAssets = AssetDatabase.FindAssets("t:material", new string[] { pkfxMaterialsFolder });
+			Dictionary<string, bool> isUsedPkfxMaterials = new Dictionary<string, bool>();
+
+			foreach (string matGUID in pkfxMaterialAssets)
+			{
+				string matName = AssetDatabase.GUIDToAssetPath(matGUID);
+				matName = matName.Remove(0, pkfxMaterialsFolder.Length - 1); // Remove pkfxMaterialsFolder
+				matName = matName.Remove(matName.Length - 4); // Remove ".mat"
+				isUsedPkfxMaterials.Add(matName, false);
+			}
+
+			string[] pkfxEffectAssets = AssetDatabase.FindAssets("t:PKFxEffectAsset");
+			PKFxMaterialFactory factory = PKFxSettings.MaterialFactory;
+			foreach (string assetGUID in pkfxEffectAssets)
+			{
+				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetGUID), typeof(PKFxEffectAsset));
+
+				foreach (SBatchDesc batch in asset.m_RendererDescs)
+				{
+					string matName = factory.EditorResolveMaterialName(batch);
+					if (isUsedPkfxMaterials.ContainsKey(matName))
+						isUsedPkfxMaterials[matName] = true;
+				}
+			}
+
+			int deleteCount = 0;
+
+			foreach (var isUsedMat in isUsedPkfxMaterials)
+			{
+				if (!isUsedMat.Value)
+				{
+					string materialPath = pkfxMaterialsFolder + isUsedMat.Key + ".mat";
+					AssetDatabase.DeleteAsset(materialPath);
+					deleteCount++;
+				}
+			}
+			Debug.Log("[PopcornFX] " + deleteCount + " unused PKFx material deleted.");
+		}
+
+		//----------------------------------------------------------------------------
+
+		[MenuItem("Assets/PopcornFX/Reimport PKFxFX Materials")]
+		static void _ReimportKFxFXMaterials(MenuCommand menuCommand)
+		{
+			CreatePKFxFXMaterialsIFN(true);
 		}
 
 		//----------------------------------------------------------------------------

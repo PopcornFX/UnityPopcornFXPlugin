@@ -819,5 +819,11 @@ namespace PopcornFX
 #endif
 
 		}
+
+		public static bool CanSkipUpdate()
+		{
+			return PKFxManagerImpl.CanSkipUpdate();
+		}
+
 	}
 }

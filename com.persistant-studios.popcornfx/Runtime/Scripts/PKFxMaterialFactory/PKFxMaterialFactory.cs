@@ -103,8 +103,26 @@ namespace PopcornFX
 
 		public string EditorResolveMaterialName(SBatchDesc batchDesc)
 		{
+			if (PKFxSettings.UseHashesAsMaterialName)
+			{
+				Hash128 hash = new Hash128();
+				hash.Append(batchDesc.m_GeneratedName);
+				return hash.ToString();
+			}
+			else
+				return batchDesc.GenerateShortNameFromDescription();
+		}
+
+		public Material EditorResolveMaterial(SBatchDesc batchDesc, PKFxEffectAsset asset = null, bool reimport = false, bool resolveCustomMat = false, bool logError = true)
+		{
 			if (batchDesc.m_Type == ERendererType.Light || batchDesc.m_Type == ERendererType.Sound)
 				return null;
+			
+			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath))
+				AssetDatabase.CreateFolder("Assets", PKFxSettings.UnityPackFxPath.Substring(1));
+			if (!AssetDatabase.IsValidFolder("Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials"))
+				AssetDatabase.CreateFolder("Assets" + PKFxSettings.UnityPackFxPath, "UnityMaterials");
+
 			PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
 			Material material = null;
 
@@ -132,7 +150,13 @@ namespace PopcornFX
 				binding.BindMaterialProperties(batchDesc, material, asset, logError);
 				AssetDatabase.CreateAsset(material, "Assets" + PKFxSettings.UnityPackFxPath + "/UnityMaterials/" + matName + ".mat");
 			}
-			else
+			if (resolveCustomMat)
+			{
+				PKFxCustomMaterialInfo customMatInfo = asset.FindCustomMaterialInfo(batchDesc);
+				if (customMatInfo != null)
+					material = customMatInfo.m_CustomMaterial;
+			}
+			if (material == null)
 			{
 				material = assetMat;
 				binding.SetMaterialKeywords(batchDesc, material);

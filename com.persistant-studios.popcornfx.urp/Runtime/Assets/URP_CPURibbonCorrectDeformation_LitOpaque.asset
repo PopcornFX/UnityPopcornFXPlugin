@@ -30,7 +30,7 @@ MonoBehaviour:
   m_MeshDiffuseColorPropertyName: _BaseColor
   m_MeshEmissiveColorPropertyName: _EmissiveColor
   m_MeshAlphaCursorPropertyName: _AlphaCursor
-  m_MeshCullPropertyName: _Cull
+  m_MeshCullingModePropertyName: 
   m_MeshVATCursorPropertyName: _VATCursor
   m_VATPositionMapPropertyName: _VATPositionMap
   m_VATNormalMapPropertyName: _VATNormalMap
@@ -69,8 +69,9 @@ MonoBehaviour:
   m_Shader: {fileID: -6465566751694194690, guid: 15a9db13376f7e947949caecd4a6a4f7,
     type: 3}
   m_Material: {fileID: 0}
-  m_RenderTypes: 00010000
+  m_RenderTypes: 00010000000000
   m_BlendMode: 000000000101
-  m_SupportedShaderMask: 4194301
+  m_DoubleSided: 0
+  m_SupportedShaderMask: 8388605
   m_MandatoryShaderMask: 9
   m_BillboardingLocation: 0

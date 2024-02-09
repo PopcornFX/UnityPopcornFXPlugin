@@ -457,6 +457,7 @@ namespace PopcornFX
 			m_InvSoftnessDistance = desc.m_InvSofnessDistance;
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
 			m_DoubleSided = desc.m_DoubleSided;
+			m_TransformUVs_RGBOnly = desc.m_TransformUVs_RGBOnly != 0 ? true : false;
 
 			m_SpecularMap = null;
 			m_MeshAsset = meshAssetStr;

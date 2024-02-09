@@ -85,6 +85,7 @@ public:
 		float		distance;
 		int			layerMask;
 		int			maxHits;
+		int			padding;
 	};
 
 	struct RaycastHit

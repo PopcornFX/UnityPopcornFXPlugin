@@ -218,6 +218,11 @@ namespace PopcornFX
 				m_SoundPool.DrawSoundRenderers();
 			}
 			PKFxManager.DrawMeshRenderers();
+
+#if UNITY_EDITOR
+			if (PKFxSettings.DebugEffectsBoundingBoxes && !PKFxSettings.UseGPUBillboarding)
+				PKFxManager.DrawBounds();
+#endif
 		}
 
 		//----------------------------------------------------------------------------

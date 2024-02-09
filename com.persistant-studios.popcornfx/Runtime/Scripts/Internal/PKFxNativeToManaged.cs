@@ -84,7 +84,6 @@ namespace PopcornFX
 		public IntPtr m_RotationMap;
 		public int m_NumFrames;
 		public int m_PackedData;
-		public Vector4 m_Color;
 		public Vector2 m_BoundsPivot;
 		public int m_NormalizedData;
 		public Vector2 m_BoundsPosition;
@@ -159,6 +158,7 @@ namespace PopcornFX
 		public IntPtr	m_TextureAtlas;
 		public int		m_UID;
 		public int		m_DrawOrder;
+		public int		m_TransformUVs_RGBOnly;
 	};
 
 
@@ -1067,47 +1067,64 @@ namespace PopcornFX
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
 				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uvFactors
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// uvScale
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));     // uvOffset
-					additionalUVIdx = VertexAttribute.TexCoord3;
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
+					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) &&
+						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
 					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord3, VertexAttributeFormat.Float32, 2));	// alpha cursor
-						additionalUVIdx = VertexAttribute.TexCoord4;
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));   // uvFactors + alpha cursor + rotate uv
 					}
+					else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) ||
+							 renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+					{
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));   // uvFactors + alpha cursor | rotate uvs
+					}
+					else
+					{
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));   // uvFactors
+					}
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));       // uvScale/uvOffset
+					additionalUVIdx = VertexAttribute.TexCoord2;
 				}
 				else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
 				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uv0
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// uv1
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord2, VertexAttributeFormat.Float32, 2));     // atlas id and if Has_AlphaRemap, alpha cursor
-					additionalUVIdx = VertexAttribute.TexCoord3;
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));     // uv0/uv1
+					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 3));   // atlas id and if Has_AlphaRemap, alpha cursor and transform uv rotate
+					else
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));   // atlas id and if Has_AlphaRemap, alpha cursor
+					additionalUVIdx = VertexAttribute.TexCoord2;
 				}
 				else
 				{
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) ||
 						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
 					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2)); // uv0
+						if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
+						{
+							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));   // uv0 + alpha cursor
+						}
+						else
+						{
+							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));   // uv0
+						}
 						additionalUVIdx = VertexAttribute.TexCoord1;
-					}
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
-					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2)); // alpha cursor
-						additionalUVIdx = VertexAttribute.TexCoord2;
 					}
 				}
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 				{
-					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3)); 				// emissive color
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3));               // emissive color
+					additionalUVIdx = additionalUVIdx + 1;
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
 				{
-					// Should be packed more IFP
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord6, VertexAttributeFormat.Float32, 2)); 	// TransformUVs rotate
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord7, VertexAttributeFormat.Float32, 4)); 	// TransformUVs ScaleAndOffset
+					if (!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex) &&
+						!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
+					{
+						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // TransformUVs rotate
+						additionalUVIdx = additionalUVIdx + 1;
+					}
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));     // TransformUVs ScaleAndOffset
+					additionalUVIdx = additionalUVIdx + 1;
 				}
 
 				mesh.SetVertexBufferParams((int)reservedVertexCount, layout.ToArray());
@@ -1400,25 +1417,6 @@ namespace PopcornFX
 			b.min = new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ);
 			b.max = new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ);
 
-#if UNITY_EDITOR
-			if (PKFxSettings.DebugEffectsBoundingBoxes && !PKFxSettings.UseGPUBillboarding)
-			{
-				Color boundsColor = m_Renderers[rendererGUID].m_BoundsDebugColor;
-
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-			}
-#endif
 			if (m_Renderers[rendererGUID].m_Slice != null)
 				m_Renderers[rendererGUID].m_Slice.mesh.bounds = b;
 			else if (m_Renderers[rendererGUID].m_Procedural != null)

@@ -906,6 +906,7 @@ namespace PopcornFX
 			if (UnityEditorInternal.InternalEditorUtility.inBatchMode)
 				return;
 
+			PKFxShadergraphSettingSetter.SetVariantCount();
 			GetOrCreateSettingsAsset();
 
 

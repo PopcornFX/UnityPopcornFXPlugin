@@ -9,10 +9,54 @@ using Unity.Jobs;
 using Unity.Collections;
 #if UNITY_EDITOR
 using UnityEditor;
+using System.Reflection;
 #endif
 
 namespace PopcornFX
 {
+#if UNITY_EDITOR
+	public static class PKFxShadergraphSettingSetter
+	{
+		public static void SetVariantCount()
+		{
+			Assembly asm = null;
+			Assembly[] assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
+			foreach (var assembly in assemblies)
+			{
+				if (assembly.FullName.StartsWith("Unity.ShaderGraph.Editor"))
+				{
+					asm = assembly;
+					break;
+				}
+			}
+			if (asm != null)
+			{
+				Type[] types = asm.GetTypes();
+				Type ShaderGraphPreferencesType = null;
+				foreach (var type in types)
+				{
+					if (type.FullName == "UnityEditor.ShaderGraph.ShaderGraphPreferences")
+					{
+						ShaderGraphPreferencesType = type;
+						break;
+					}
+				}
+				if (ShaderGraphPreferencesType != null)
+				{
+					PropertyInfo prop = ShaderGraphPreferencesType.GetProperty("variantLimit", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+					if (prop != null)
+					{
+						System.Object value = prop.GetValue(null);
+						int intValue = (int)value;
+						if (intValue < 256)
+							prop.SetValue(null, 256);
+					}
+				}
+			}
+		}
+	}
+#endif
+
 	[Serializable]
 	public abstract class PKFxMaterialFactory : ScriptableObject
 	{
@@ -160,7 +204,7 @@ namespace PopcornFX
 			{
 				material = assetMat;
 				binding.SetMaterialKeywords(batchDesc, material);
-				binding.BindMaterialProperties(batchDesc, material, asset);
+				binding.BindMaterialProperties(batchDesc, material, asset, logError);
 			}
 			AssetDatabase.SaveAssets();
 			return material;

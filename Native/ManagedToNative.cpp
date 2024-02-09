@@ -157,26 +157,26 @@ extern "C"
 		return 42;
 	}
 
-	MANAGED_TO_POPCORN_CONVENTION bool	PopcornFXStartup(const SPopcornFxSettings *settings)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	PopcornFXStartup(const SPopcornFxSettings *settings)
 	{
 		const bool	pluginIsInitialized = CRuntimeManager::IsInstanceInitialized();
 
 		if (!PK_VERIFY(pluginIsInitialized))
-			return false;
+			return ManagedBool_False;
 
 		if (!PK_VERIFY(settings != null))
-			return false;
+			return ManagedBool_False;
 
 		// The plugin was already started so we just change the settings:
 		if (!PK_VERIFY(CRuntimeManager::Instance().PopcornFXChangeSettings(*settings)))
 		{
 			CLog::Log(PK_ERROR, "Could not change the PopcornFX settings");
-			return false;
+			return ManagedBool_False;
 		}
 
 		// Load the effect pack:
 		CRuntimeManager::Instance().LoadPack();
-		return true;
+		return ManagedBool_True;
 	}
 
 	//--------------------------------------------------------------------------
@@ -426,98 +426,101 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	TerminateFx(int guid)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	TerminateFx(int guid)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
-		return CRuntimeManager::Instance().TerminateFx(guid);
+		return CRuntimeManager::Instance().TerminateFx(guid) ? ManagedBool_True : ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	StartFx(int guid, float dt, float prewarm)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	StartFx(int guid, float dt, float prewarm)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
-		return CRuntimeManager::Instance().StartFx(guid, dt, prewarm);
+		return CRuntimeManager::Instance().StartFx(guid, dt, prewarm) ? ManagedBool_True : ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	StopFx(int guid)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	StopFx(int guid)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
-		return CRuntimeManager::Instance().StopFx(guid);
+		return CRuntimeManager::Instance().StopFx(guid) ? ManagedBool_True : ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	KillFx(int guid)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	KillFx(int guid)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
-		return CRuntimeManager::Instance().KillFx(guid);
+		return CRuntimeManager::Instance().KillFx(guid) ? ManagedBool_True : ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	TeleportFx(int guid)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	TeleportFx(int guid)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
-		return CRuntimeManager::Instance().TeleportFx(guid);
+		return CRuntimeManager::Instance().TeleportFx(guid)  ? ManagedBool_True : ManagedBool_False;;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	SetFxVisibility(int guid, bool enabled)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	SetFxVisibility(int guid, ManagedBool enabled)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
-		return CRuntimeManager::Instance().SetFxVisibility(guid, enabled);
+		bool activate = enabled == ManagedBool_True ? true : false;
+		return CRuntimeManager::Instance().SetFxVisibility(guid, activate) ? ManagedBool_True : ManagedBool_False;;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	SetFxTimescale(int guid, float timeScale)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	SetFxTimescale(int guid, float timeScale)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
-		return CRuntimeManager::Instance().SetFxTimescale(guid, timeScale);
+		return CRuntimeManager::Instance().SetFxTimescale(guid, timeScale) ? ManagedBool_True : ManagedBool_False;;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	RegisterExportedEvent(int guid, const char *eventName, unsigned int unityKey)
+	//----------------------------------------------------------------------------
+
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	RegisterExportedEvent(int guid, const char *eventName, unsigned int unityKey)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		CString			eventString = CString(eventName);
 		const CStringId	event = CStringId(eventString);
 
-		return CRuntimeManager::Instance().GetScene().RegisterEventListener(guid, event, unityKey);
+		return CRuntimeManager::Instance().GetScene().RegisterEventListener(guid, event, unityKey) ? ManagedBool_True : ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	UnregisterExportedEvent(int guid, const char *eventName, unsigned int unityKey)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	UnregisterExportedEvent(int guid, const char *eventName, unsigned int unityKey)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		CString			eventString = CString(eventName);
 		const CStringId	event = CStringId(eventString);
 
-		return CRuntimeManager::Instance().GetScene().UnregisterEventListener(guid, event, unityKey);
+		return CRuntimeManager::Instance().GetScene().UnregisterEventListener(guid, event, unityKey) ? ManagedBool_True : ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
@@ -570,18 +573,18 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool		EffectSetSamplerShapeTransform(int guid, int samplerId, CFloat4x4 transforms)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool		EffectSetSamplerShapeTransform(int guid, int samplerId, CFloat4x4 transforms)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect		*effect = CRuntimeManager::Instance().FxGet(guid);
 
 		if (effect != null)
 		{
-			return effect->SetSamplerShapeTransform(samplerId, transforms);
+			return effect->SetSamplerShapeTransform(samplerId, transforms) ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
@@ -614,11 +617,11 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	EffectSetMeshSampler(int guid, int samplerId, SMeshDataToFill *meshSampler, CFloat3 size, ManagedBool async)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	EffectSetMeshSampler(int guid, int samplerId, SMeshDataToFill *meshSampler, CFloat3 size, ManagedBool async)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		if (!PK_VERIFY(meshSampler != null))
-			return false;
+			return ManagedBool_False;
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect		*effect = CRuntimeManager::Instance().FxGet(guid);
@@ -637,18 +640,18 @@ extern "C"
 			{
 				success = effect->SetSamplerShapeMesh(samplerId, meshSampler, size);
 			}
-			return success;
+			return success ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	EffectSetMeshSamplerBaked(int guid, int samplerId, SMeshSamplerBaked *meshSamplerBaked, CFloat3 size, ManagedBool async)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	EffectSetMeshSamplerBaked(int guid, int samplerId, SMeshSamplerBaked *meshSamplerBaked, CFloat3 size, ManagedBool async)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		if (!PK_VERIFY(meshSamplerBaked->m_PkmmFileContent != null))
-			return false;
+			return ManagedBool_False;
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect		*effect = CRuntimeManager::Instance().FxGet(guid);
@@ -656,11 +659,11 @@ extern "C"
 		if (effect != null)
 		{
 			if (async == ManagedBool_True)
-				return effect->SetSamplerShapeMeshFromPkmm_Async(samplerId, meshSamplerBaked, size);
+				return effect->SetSamplerShapeMeshFromPkmm_Async(samplerId, meshSamplerBaked, size) ? ManagedBool_True : ManagedBool_False;
 			else
-				return effect->SetSamplerShapeMeshFromPkmm(samplerId, meshSamplerBaked, size);
+				return effect->SetSamplerShapeMeshFromPkmm(samplerId, meshSamplerBaked, size) ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
@@ -681,9 +684,9 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectBeginUpdateSamplerSkinning(int guid, int samplerId, float dt)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool								EffectBeginUpdateSamplerSkinning(int guid, int samplerId, float dt)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		const CPU::CScoped_FpuEnableFastMode	_fm;
@@ -693,16 +696,16 @@ extern "C"
 
 		if (effect != null)
 		{
-			return effect->EffectBeginUpdateSamplerSkinning(samplerId, dt);
+			return effect->EffectBeginUpdateSamplerSkinning(samplerId, dt) ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectEndUpdateSamplerSkinning(int guid, int samplerId)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool								EffectEndUpdateSamplerSkinning(int guid, int samplerId)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		const CPU::CScoped_FpuEnableFastMode	_fm;
@@ -712,25 +715,25 @@ extern "C"
 
 		if (effect != null)
 		{
-			return effect->EffectEndUpdateSamplerSkinning(samplerId);
+			return effect->EffectEndUpdateSamplerSkinning(samplerId) ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool						EffectSetSamplerShape(int guid, int samplerId, EShapeType shapeType, CFloat3 size)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetSamplerShape(int guid, int samplerId, EShapeType shapeType, CFloat3 size)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect	*effect = CRuntimeManager::Instance().FxGet(guid);
 
 		if (effect != null)
 		{
-			return effect->SetSamplerShapeBasics(samplerId, shapeType, size);
+			return effect->SetSamplerShapeBasics(samplerId, shapeType, size) ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
@@ -758,11 +761,11 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool						EffectSetCurveSampler(int guid, int samplerId, SCurveSamplerToFill *curveSampler)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetCurveSampler(int guid, int samplerId, SCurveSamplerToFill *curveSampler)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		if (!PK_VERIFY(curveSampler != null))
-			return false;
+			return ManagedBool_False;
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect	*effect = CRuntimeManager::Instance().FxGet(guid);
@@ -774,9 +777,9 @@ extern "C"
 			success = effect->SetSamplerCurve(samplerId, curveSampler);
 			PK_FREE(curveSampler->m_KeyPoints);
 			PK_DELETE(curveSampler);
-			return success;
+			return success ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
@@ -798,11 +801,11 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetTextureSampler(int guid, int samplerId, STextureSamplerToFill *textureSampler)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool								EffectSetTextureSampler(int guid, int samplerId, STextureSamplerToFill *textureSampler)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		if (!PK_VERIFY(textureSampler != null))
-			return false;
+			return ManagedBool_False;
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect	*effect = CRuntimeManager::Instance().FxGet(guid);
@@ -814,82 +817,82 @@ extern "C"
 			success = effect->SetSamplerTexture(samplerId, textureSampler);
 			PK_FREE(textureSampler->m_TextureData);
 			PK_DELETE(textureSampler);
-			return success;
+			return success ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	EffectSetTextSampler(int guid, int samplerId, const char *text)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	EffectSetTextSampler(int guid, int samplerId, const char *text)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		if (!PK_VERIFY(text != null))
-			return false;
+			return ManagedBool_False;
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect	*effect = CRuntimeManager::Instance().FxGet(guid);
 
 		if (effect != null)
 		{
-			return effect->SetSamplerText(samplerId, text);
+			return effect->SetSamplerText(samplerId, text) ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	EffectResetDefaultSampler(int guid, int samplerId)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	EffectResetDefaultSampler(int guid, int samplerId)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect	*effect = CRuntimeManager::Instance().FxGet(guid);
 
 		if (effect != null)
 		{
-			return effect->ResetSamplerToDefault(samplerId);
+			return effect->ResetSamplerToDefault(samplerId) ? ManagedBool_True : ManagedBool_False;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//----------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	EffectSetTransforms(int guid, CFloat4x4 transforms)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	EffectSetTransforms(int guid, CFloat4x4 transforms)
 	{
-		NEED_PK_MEDIUM_COLLECTION_CREATED(return false);
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
 		PK_SCOPEDPROFILE();
 
 		CPKFXEffect	*effect = CRuntimeManager::Instance().FxGet(guid);
 		if (effect != null)
 		{
 			effect->UpdateTransforms(transforms);
-			return true;
+			return ManagedBool_True;
 		}
-		return false;
+		return ManagedBool_False;
 	}
 
 	//--------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	 LoadPkmmAsSceneMesh(const char *pkmmVirtualPath)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	 LoadPkmmAsSceneMesh(const char *pkmmVirtualPath)
 	{
-		NEED_PK_RUNTIME_STARTED(return false);
+		NEED_PK_RUNTIME_STARTED(return ManagedBool_False);
 		if (!PK_VERIFY(pkmmVirtualPath != null))
-			return false;
+			return ManagedBool_False;
 		PK_SCOPEDPROFILE();
 
 		CString		pkmm = pkmmVirtualPath;
 		if (pkmm.Empty())
-			return false;
+			return ManagedBool_False;
 
 		PMeshNew	mesh = CRuntimeManager::Instance().LoadPkmm(pkmm);
 		if (mesh == null)
 		{
 			CLog::Log(PK_ERROR, "Fail to load \"%s\" as scene mesh", pkmm.Data());
-			return false;
+			return ManagedBool_False;
 		}
 		CRuntimeManager::Instance().GetScene().SetCollisionMesh(mesh);
-		return true;
+		return ManagedBool_True;
 	}
 
 	//----------------------------------------------------------------------------
@@ -938,7 +941,7 @@ extern "C"
 
 	// --------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION void	ProfilerSetEnable(bool enable)
+	MANAGED_TO_POPCORN_CONVENTION void	ProfilerSetEnable(ManagedBool enable)
 	{
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return);
 #if	(KR_PROFILER_ENABLED != 0)
@@ -948,43 +951,43 @@ extern "C"
 			return;
 
 		profiler->GrabCallstacks(false);
-		profiler->Activate(enable);
+		profiler->Activate(enable == ManagedBool_True ? true : false);
 		profiler->Reset();
 #endif	// (KR_PROFILER_ENABLED != 0)
 	}
 
 	// --------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableFrameStats(bool enable)
+	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableFrameStats(ManagedBool enable)
 	{
 		(void)enable;
 #if	(PK_PARTICLES_HAS_STATS != 0)
-		CRuntimeManager::Instance().GetProfiler().EnableFrameStats(enable);
+		CRuntimeManager::Instance().GetProfiler().EnableFrameStats(enable == ManagedBool_True ? true : false);
 #endif
 	}
 
 	// --------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableEffectsStats(bool enable)
+	MANAGED_TO_POPCORN_CONVENTION void 		StatsEnableEffectsStats(ManagedBool enable)
 	{
 		(void)enable;
 #if	(PK_PARTICLES_HAS_STATS != 0)
-		CRuntimeManager::Instance().GetProfiler().EnableEffectsStats(enable);
+		CRuntimeManager::Instance().GetProfiler().EnableEffectsStats(enable == ManagedBool_True ? true : false);
 #endif
 	}
 
 
 	// --------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool 		StatsPullFrameData(const char *reportName, SStatsToFill &data)
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool 		StatsPullFrameData(const char *reportName, SStatsToFill &data)
 	{
 		(void)reportName;
 		(void)data;
 #if	(PK_PARTICLES_HAS_STATS != 0)
 		CRuntimeManager			&manager = CRuntimeManager::Instance();
-		return manager.GetProfiler().FillFrameStats(reportName, data);
+		return manager.GetProfiler().FillFrameStats(reportName, data) ? ManagedBool_True : ManagedBool_False;
 #else // (PK_PARTICLES_HAS_STATS != 0)
-		return false;
+		return ManagedBool_False;
 #endif	
 	}
 
@@ -1080,10 +1083,10 @@ extern "C"
 
 	//--------------------------------------------------------------------------
 
-	MANAGED_TO_POPCORN_CONVENTION bool	CanSkipUpdate()
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	CanSkipUpdate()
 	{
-		NEED_PK_RUNTIME_STARTED(return true);
-		return CRuntimeManager::Instance().CanSkipUpdate();
+		NEED_PK_RUNTIME_STARTED(return ManagedBool_True);
+		return CRuntimeManager::Instance().CanSkipUpdate() ? ManagedBool_True : ManagedBool_False;
 	}
 
 

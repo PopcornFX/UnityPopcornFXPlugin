@@ -228,45 +228,94 @@ IRenderAPIData *IRenderAPIData::GetRenderAPISpecificData(UnityGfxRenderer device
 
 //----------------------------------------------------------------------------
 
-static	bool	AreFlagsCompatible(const SFlagsToUseSemantic &flagToUseSemantic, u32 materialFlags)
-{
-	bool	hasForbiddenFlags = (flagToUseSemantic.m_Forbidden & materialFlags) != 0;
-	bool	hasOneRequiredFlag = (flagToUseSemantic.m_Required & materialFlags) != 0;
-	if (hasForbiddenFlags)
-		return false;
-	// flag is 0 == always
-	if (flagToUseSemantic.m_Required == 0 || hasOneRequiredFlag)
-		return true;
-	return false;
-}
-
-//----------------------------------------------------------------------------
-
 u32	FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u32 shaderVariationFlags)
 {
 	u32	vertexOffset = 0;
-	u32 consecutiveScalars = 0;
 
 	for (u32 i = 0; i < __Semantic_Count; ++i)
 	{
 		offsetTable[i] = 0xFFFFFFFF;
-		if (AreFlagsCompatible(flagsToUseSemantic[i], shaderVariationFlags))
+	}
+	offsetTable[Semantic_Position] = vertexOffset;
+	vertexOffset += semanticSize[Semantic_Position];
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
+	{
+		offsetTable[Semantic_Normal] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_Normal];
+		offsetTable[Semantic_Tangent] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_Tangent];
+	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_Color) != 0)
+	{
+		offsetTable[Semantic_Color] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_Color];
+	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) != 0)
+	{
+		offsetTable[Semantic_UvFactors] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_UvFactors];
+		if ((shaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
 		{
-			// The single floats are packed together:
-			if (semanticSize[i] == sizeof(float))
-				++consecutiveScalars;
-			else
-			{
-				if (consecutiveScalars == 1)
-					vertexOffset += sizeof(float);
-				consecutiveScalars = 0;
-			}
-			offsetTable[i] = vertexOffset;
-			vertexOffset += semanticSize[i];
+			offsetTable[Semantic_AlphaCursor] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_AlphaCursor];
+		}
+		if ((shaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
+		{
+			offsetTable[Semantic_TransformUVsRotate] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_TransformUVsRotate];
+		}
+		offsetTable[Semantic_UvScaleAndOffset] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_UvScaleAndOffset];
+	}
+	else if ((shaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) != 0)
+	{
+		offsetTable[Semantic_Uv0] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_Uv0];
+		offsetTable[Semantic_Uv1] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_Uv1];
+		offsetTable[Semantic_AtlasId] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_AtlasId];
+		if ((shaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+		{
+			offsetTable[Semantic_AlphaCursor] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_AlphaCursor];
+		}
+		else //Pad it anyway to simplify shader bindings later
+		{
+			vertexOffset += semanticSize[Semantic_AlphaCursor];
+		}
+		if ((shaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
+		{
+			offsetTable[Semantic_TransformUVsRotate] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_TransformUVsRotate];
 		}
 	}
-	if (consecutiveScalars == 1)
-		vertexOffset += sizeof(float);
+	else
+	{
+		offsetTable[Semantic_Uv0] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_Uv0];
+		if ((shaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+		{
+			offsetTable[Semantic_AlphaCursor] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_AlphaCursor];
+		}
+	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0)
+	{
+		offsetTable[Semantic_EmissiveColor] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_EmissiveColor];
+	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
+	{
+		if ((shaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) == 0 &&
+			(shaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) == 0)
+		{
+			offsetTable[Semantic_TransformUVsRotate] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_TransformUVsRotate] + sizeof(float);// Padding;
+		}
+		offsetTable[Semantic_TransformUVsScaleAndOffset] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_TransformUVsScaleAndOffset];
+	}
 	return vertexOffset;
 }
 

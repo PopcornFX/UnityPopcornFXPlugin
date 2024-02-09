@@ -69,6 +69,9 @@ u32	CParticleMaterialDescFlags::CombineFlags()
 CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 :	m_InvSoftnessDistance(1)
 ,	m_AlphaThreshold(0.5f)
+,	m_AtlasDefinition(CStringId::Null)
+,	m_AtlasSubdivX(0)
+,	m_AtlasSubdivY(0)
 ,	m_RibbonAlignment(0)
 //Feature Lit
 ,	m_NormalMap(CStringId::Null)
@@ -80,6 +83,7 @@ CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 ,	m_DiffuseRampMap(CStringId::Null)
 ,	m_EmissiveMap(CStringId::Null)
 ,	m_EmissiveRampMap(CStringId::Null)
+,	m_TransformUVs_RGBOnly(false)
 {
 }
 
@@ -110,6 +114,10 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 
 	const SRendererFeaturePropertyValue	*atlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
 	const SRendererFeaturePropertyValue	*atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
+	const SRendererFeaturePropertyValue	*atlasSource = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Source());
+	const SRendererFeaturePropertyValue	*atlasDefinition = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Definition());
+	const SRendererFeaturePropertyValue	*atlasSubDiv = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_SubDiv());
+
 	const SRendererFeaturePropertyValue	*alphaRemap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap());
 	const SRendererFeaturePropertyValue	*alphaRemapAlphaMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap_AlphaMap());
 	const CGuid							alphaRemapCursor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_AlphaRemap_Cursor());
@@ -147,6 +155,21 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	}
 	if (atlas != null && atlas->ValueB())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Atlas;
+	if (atlasSource == null || atlasSource->ValueI().x() == 0)
+	{
+		if (atlasDefinition != null && atlasDefinition->m_Type == PropertyType_TextureAtlasPath && !atlasDefinition->ValuePath().Empty())
+		{
+			m_AtlasDefinition = CStringId(atlasDefinition->ValuePath());
+		}
+	}
+	else
+	{
+		if (atlasSubDiv != null && atlasSubDiv->ValueI().x() > 0 && atlasSubDiv->ValueI().y() > 0)
+		{
+			m_AtlasSubdivX = atlasSubDiv->ValueI().x();
+			m_AtlasSubdivY = atlasSubDiv->ValueI().y();
+		}
+	}
 	if (atlasBlending != null && atlasBlending->ValueI().x() == 1)
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AnimBlend;
 	if (alphaRemap != null && alphaRemap->ValueB() && alphaRemapAlphaMap != null && !alphaRemapAlphaMap->ValuePath().Empty() && alphaRemapCursor.Valid())
@@ -386,7 +409,10 @@ bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBil
 			m_Metalness == oth.m_Metalness &&
 			m_DiffuseRampMap == oth.m_DiffuseRampMap &&
 			m_EmissiveMap == oth.m_EmissiveMap &&
-			m_EmissiveRampMap == oth.m_EmissiveRampMap;
+			m_EmissiveRampMap == oth.m_EmissiveRampMap &&
+			m_AtlasDefinition == oth.m_AtlasDefinition &&
+			m_AtlasSubdivX == oth.m_AtlasSubdivX &&
+			m_AtlasSubdivY == oth.m_AtlasSubdivY;
 }
 
 //----------------------------------------------------------------------------
@@ -428,6 +454,7 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_AlphaMap(CStringId::Null)
 ,	m_InvSoftnessDistance(0.0f)
 ,	m_AlphaThreshold(0.5f)
+,	m_TransformUVs_RGBOnly(false)
 ,	m_AtlasPath(CStringId::Null)
 ,	m_AtlasSubdivs(0, 0)
 {
@@ -462,6 +489,8 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue	*softnessDistance = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_SoftParticles_SoftnessDistance());
 	const SRendererFeaturePropertyValue *atlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
 	const SRendererFeaturePropertyValue *atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
+	const SRendererFeaturePropertyValue	*transformUVs = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs());
+	const SRendererFeaturePropertyValue	*transformUVsRGBOnly = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs_RGBOnly());
 
 	m_Flags.m_ShaderVariationFlags = 0;
 
@@ -485,6 +514,12 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Atlas;
 	if (atlasBlending != null && atlasBlending->ValueI().x() == 1)
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AnimBlend;
+	if (transformUVs != null && transformUVs->ValueB())
+	{
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_TransformUVs;
+		if (transformUVsRGBOnly != null && transformUVsRGBOnly->ValueB())
+			m_TransformUVs_RGBOnly = transformUVsRGBOnly->ValueB();
+	}
 
 	if (diffuseColorInput.Valid())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
@@ -928,6 +963,7 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	desc.m_AlphaClipThreshold = m_MaterialDescMesh.m_AlphaThreshold;
 	desc.m_DoubleSided = m_MaterialDescMesh.m_DoubleSided;
 	desc.m_DrawOrder = m_MaterialDescMesh.m_Flags.m_DrawOrder;
+	desc.m_TransformUVs_RGBOnly = m_MaterialDescBillboard.m_TransformUVs_RGBOnly  ? ManagedBool_True : ManagedBool_False;
 
 	bool fluidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0;
 	bool softVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0;

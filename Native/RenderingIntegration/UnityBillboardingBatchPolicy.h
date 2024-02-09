@@ -133,6 +133,8 @@ private:
 
 	u32								m_UnusedFrameCount;
 
+	bool							m_HasTransformUV;
+
 	// ----------------------------------------------------------------------------
 	// FILLED ON RENDER THREAD - ALLOC BILLBOARDING BUFFERS:
 	// ----------------------------------------------------------------------------
@@ -291,6 +293,10 @@ private:
 		TStridedMemoryView<u32>					m_AnimIdx1;
 		TStridedMemoryView<float>				m_AnimCursor1;
 		TStridedMemoryView<float>				m_TransitionCursor;
+
+		TStridedMemoryView<float>				m_TransformUVRotate;
+		TStridedMemoryView<CFloat2>				m_TransformUVOffset;
+		TStridedMemoryView<CFloat2>				m_TransformUVScale;
 	};
 
 	TArray<Drawers::SCopyFieldDescPerMesh>	m_MeshAdditionalField;

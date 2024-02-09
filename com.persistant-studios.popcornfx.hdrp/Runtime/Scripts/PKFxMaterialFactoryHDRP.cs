@@ -17,12 +17,22 @@ namespace PopcornFX
 #if UNITY_EDITOR
 
 	[InitializeOnLoad]
-	public class PKFxMaterialFactoryHDRPUtils
+	public class PKFxMaterialFactoryHDRPUtils : AssetPostprocessor
 	{
+		internal static bool m_CreateFactory = false;
 		static PKFxMaterialFactoryHDRPUtils()
 		{
 			if (PKFxSettings.CheckRenderPipeline() == PKFxSettings.ERenderPipeline.HDRP && PKFxSettings.MaterialFactory.GetType() != typeof(PKFxMaterialFactoryHDRP))
 			{
+				m_CreateFactory = true;
+			}
+		}
+
+		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+		{
+			if (m_CreateFactory)
+			{
+				m_CreateFactory = false;
 				PKFxSettings.MaterialFactory = PKFxMaterialFactoryHDRP.CreateMaterialFactoryHDRP();
 			}
 		}

@@ -16,12 +16,23 @@ namespace PopcornFX
 #if UNITY_EDITOR
 
 	[InitializeOnLoad]
-	public class PKFxMaterialFactoryDefaultUtils
+	public class PKFxMaterialFactoryDefaultUtils : AssetPostprocessor
 	{
+		internal static bool m_CreateFactory = false;
+
 		static PKFxMaterialFactoryDefaultUtils()
 		{
 			if (PKFxSettings.CheckRenderPipeline() == PKFxSettings.ERenderPipeline.Legacy && PKFxSettings.MaterialFactory.GetType() != typeof(PKFxMaterialFactoryDefault))
 			{
+				m_CreateFactory = true;
+			}
+		}
+		
+		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+		{
+			if (m_CreateFactory)
+			{
+				m_CreateFactory = false;
 				PKFxSettings.MaterialFactory = PKFxMaterialFactoryDefault.CreateMaterialFactoryDefaultAsset();
 			}
 		}

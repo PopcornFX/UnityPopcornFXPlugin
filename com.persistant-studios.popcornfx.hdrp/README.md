@@ -1,7 +1,7 @@
 # Unity PopcornFX Plugin
 
 Integrates the **PopcornFX Runtime SDK** into **Unity** as a Plugin.
-* **Version:** `v2.18.4`
+* **Version:** `v2.18.5`
 * **Unity:** `2019.4` to `2022.x`
 * **Platforms:** `Windows`, `Linux`, `MacOS`, `iOS`, `Android`, `PS4`, `XboxOne`, `Switch`. 
 [Contact-us](https://www.popcornfx.com/contact-popcornfx/) to request access to the plugin for consoles.

@@ -45,7 +45,7 @@ namespace PopcornFX
 		public string 			m_MeshDiffuseColorPropertyName = "_BaseColor";
 		public string 			m_MeshEmissiveColorPropertyName = "_EmissiveColor";
 		public string 			m_MeshAlphaCursorPropertyName = "_AlphaCursor";
-		public string 			m_MeshCullingModePropertyName = "";
+		public string 			m_MeshCullingModePropertyName = "_Cull";
 		// --------------------------------------
 		// VAT render feature:
 		// --------------------------------------
@@ -440,7 +440,7 @@ namespace PopcornFX
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
-					material.SetFloat("PK_HAS_VAT", 3.0f);
+					material.SetFloat("PK_HAS_VAT", 2.0f);
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT))
 				{
@@ -448,7 +448,7 @@ namespace PopcornFX
 					_EnableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
-					material.SetFloat("PK_HAS_VAT", 2.0f);
+					material.SetFloat("PK_HAS_VAT", 1.0f);
 				}
 				else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SoftVAT))
 				{
@@ -456,7 +456,7 @@ namespace PopcornFX
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_RIGID");
 					_EnableMaterialKeywords(material, "PK_HAS_VAT_SOFT");
 					_DisableMaterialKeywords(material, "PK_HAS_VAT_NONE");
-					material.SetFloat("PK_HAS_VAT", 1.0f);
+					material.SetFloat("PK_HAS_VAT", 3.0f);
 				}
 				else
 				{

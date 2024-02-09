@@ -17,10 +17,20 @@ namespace PopcornFX
 	[InitializeOnLoad]
 	public class PKFxMaterialFactoryURPUtils
 	{
+		internal static bool m_CreateFactory = false;
 		static PKFxMaterialFactoryURPUtils()
 		{
 			if (PKFxSettings.CheckRenderPipeline() == PKFxSettings.ERenderPipeline.URP && PKFxSettings.MaterialFactory.GetType() != typeof(PKFxMaterialFactoryURP))
 			{
+				m_CreateFactory = true;
+			}
+		}
+		
+		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+		{
+			if (m_CreateFactory)
+			{
+				m_CreateFactory = false;
 				PKFxSettings.MaterialFactory = PKFxMaterialFactoryURP.CreateMaterialFactoryURP();
 			}
 		}
@@ -31,12 +41,6 @@ namespace PopcornFX
 	[Serializable]
 	public class PKFxMaterialFactoryURP : PKFxMaterialFactory
 	{
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlitDoubleSidedDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlitDoubleSidedDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLitDoubleSidedDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitDoubleSidedDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitSkinnedDoubleSidedDefault;
-
 		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlit2020;
 		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlit2020;
 		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLit2020;
@@ -71,6 +75,8 @@ namespace PopcornFX
 			string folderPath = GetSelectedPathOrFallback();
 			string path = Path.Combine(folderPath, "URPMaterialFactory.asset");
 
+			PKFxShadergraphSettingSetter.SetVariantCount();
+
 			PKFxMaterialFactoryURP materialFactoryURP = CreateInstance<PKFxMaterialFactoryURP>();
 			materialFactoryURP.m_FactoryType = FactoryType.URP;
 			materialFactoryURP.SetupFallBackFeatureBinding();
@@ -83,11 +89,6 @@ namespace PopcornFX
 			Selection.activeObject = materialFactoryURP;
 
 			return materialFactoryURP;
-		}
-
-		public void CreateMaterialFactoryIFN()
-		{
-			
 		}
 
 #endif
@@ -106,16 +107,6 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
 			if (m_OpaqueMeshLitSkinnedDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDefault);
-			if (m_TransparentMeshUnlitDoubleSidedDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDoubleSidedDefault);
-			if (m_OpaqueMeshUnlitDoubleSidedDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDoubleSidedDefault);
-			if (m_TransparentMeshLitDoubleSidedDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentMeshLitDoubleSidedDefault);
-			if (m_OpaqueMeshLitDoubleSidedDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDoubleSidedDefault);
-			if (m_OpaqueMeshLitSkinnedDoubleSidedDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDoubleSidedDefault);
 			// Particles Unlit:
 			if (m_OpaqueParticleUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);

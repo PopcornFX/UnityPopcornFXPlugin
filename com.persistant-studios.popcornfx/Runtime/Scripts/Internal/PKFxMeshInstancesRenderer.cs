@@ -63,6 +63,8 @@ namespace PopcornFX
 		public string	m_SkeletalMeshTransformRow1 = "_SkeletalMeshTransform1";
 		public string	m_SkeletalMeshTransformRow2 = "_SkeletalMeshTransform2";
 		public string	m_SkeletalMeshTransformRow3 = "_SkeletalMeshTransform3";
+		public string m_TransformUVRotatePropertyName = "_TransformUVRotate";
+		public string m_TransformUVOffsetScalePropertyName = "_TransformUVOffsetScale";
 
 		NativeArray<Matrix4x4> m_Transforms;
 		NativeArray<Vector4> m_DiffuseColors;
@@ -75,6 +77,8 @@ namespace PopcornFX
 		NativeArray<float> m_AnimIdx1;
 		NativeArray<float> m_AnimTransition;
 		NativeArray<float> m_AtlasId;
+		NativeArray<float> m_TransformUVRotate;
+		NativeArray<Vector4> m_TransformUVOffsetScale;
 
 		Matrix4x4[] m_TransformsManagedArray;
 		Matrix4x4[] TransformsManagedArray
@@ -238,6 +242,8 @@ namespace PopcornFX
 			public NativeArray<float> animTransition;
 
 			public NativeArray<float> atlasId;
+			public NativeArray<float> transformUVRotate;
+			public NativeArray<Vector4> transformUVOffsetScale;
 
 			public void Execute(int h)
 			{
@@ -303,6 +309,15 @@ namespace PopcornFX
 						animTransition[h] = instanceTransitionCursorAnim1[offset + h];
 						currentPtr = instanceTransitionCursorAnim1 + count;
 					}
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
+					{
+						float* instanceTransformRotate = (float*)currentPtr;
+						transformUVRotate[h] = instanceTransformRotate[offset + h];
+						currentPtr = instanceTransformRotate + count;
+						Vector4* instanceTransformOffsetScale = (Vector4*)currentPtr;
+						transformUVOffsetScale[h] = instanceTransformOffsetScale[offset + h];
+						currentPtr = instanceTransformOffsetScale + count;
+					}
 				}
 			}
 		}
@@ -346,6 +361,8 @@ namespace PopcornFX
 			m_AnimCursor1 = new NativeArray<float>(1023, Allocator.Persistent);
 			m_AnimIdx1 = new NativeArray<float>(1023, Allocator.Persistent);
 			m_AnimTransition = new NativeArray<float>(1023, Allocator.Persistent);
+			m_TransformUVRotate = new NativeArray<float>(1023, Allocator.Persistent);
+			m_TransformUVOffsetScale = new NativeArray<Vector4>(1023, Allocator.Persistent);
 		}
 
 		public void OnDisable()
@@ -361,6 +378,8 @@ namespace PopcornFX
 			m_AnimCursor1.Dispose();
 			m_AnimIdx1.Dispose();
 			m_AnimTransition.Dispose();
+			m_TransformUVRotate.Dispose();
+			m_TransformUVOffsetScale.Dispose();
 		}
 
 		public void DrawMeshes()
@@ -401,6 +420,8 @@ namespace PopcornFX
 								job.animCursor1 = m_AnimCursor1;
 								job.animIdx1 = m_AnimIdx1;
 								job.animTransition = m_AnimTransition;
+								job.transformUVRotate = m_TransformUVRotate;
+								job.transformUVOffsetScale = m_TransformUVOffsetScale;
 
 								//In data
 								job.meshTransform = meshToDraw.m_ImportTransform;
@@ -453,6 +474,11 @@ namespace PopcornFX
 								{
 									materialProp.SetFloatArray(m_AtlasIdPropertyName, AtlasIdManagedArray);
 								}
+								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
+								{
+									materialProp.SetFloatArray(m_TransformUVRotatePropertyName, m_TransformUVRotate.ToArray());
+									materialProp.SetVectorArray(m_TransformUVOffsetScalePropertyName, m_TransformUVOffsetScale.ToArray());
+								}
 
 								Graphics.DrawMeshInstanced(
 									meshToDraw.m_Mesh,
@@ -492,6 +518,9 @@ namespace PopcornFX
 						float* instanceNextAnimCursor = null;
 						uint* instanceNextAnimIdx = null;
 						float* instanceTransitionRatio = null;
+
+						float* instanceTransformUVRotate = null;
+						Vector4* instanceTransformUVOffsetScale = null;
 
 						void* currentPtr = m_PerInstanceBuffer[bufferIdx].ToPointer();
 						int instanceCount = m_InstancesCount[bufferIdx];
@@ -552,6 +581,13 @@ namespace PopcornFX
 							instanceTransitionRatio = (float*)currentPtr;
 							currentPtr = instanceTransitionRatio + instanceCount;
 						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
+						{
+							instanceTransformUVRotate = (float*)currentPtr;
+							currentPtr = instanceTransformUVRotate + instanceCount;
+							instanceTransformUVOffsetScale = (Vector4*)currentPtr;
+							currentPtr = instanceTransformUVOffsetScale + instanceCount;
+						}
 
 						for (int i = 0; i < m_InstancesCount[bufferIdx]; i++)
 						{
@@ -587,6 +623,13 @@ namespace PopcornFX
 									materialProp.SetFloat(m_SkeletalAnimCursor1PropertyName, instanceNextAnimCursor[i]);
 								if (instanceTransitionRatio != null && !string.IsNullOrEmpty(m_SkeletalAnimTransitionPropertyName))
 									materialProp.SetFloat(m_SkeletalAnimTransitionPropertyName, instanceTransitionRatio[i]);
+							}
+							if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
+							{
+								if (instanceTransformUVRotate != null && !string.IsNullOrEmpty(m_TransformUVRotatePropertyName))
+									materialProp.SetFloat(m_TransformUVRotatePropertyName, instanceTransformUVRotate[i]);
+								if (instanceTransformUVOffsetScale != null && !string.IsNullOrEmpty(m_TransformUVOffsetScalePropertyName))
+									materialProp.SetVector(m_TransformUVOffsetScalePropertyName, instanceTransformUVOffsetScale[i]);
 							}
 
 							Graphics.DrawMesh(meshToDraw.m_Mesh, meshTransform, m_Material, 0, null, meshToDraw.m_SubMeshId, materialProp, m_CastShadow, isLit);

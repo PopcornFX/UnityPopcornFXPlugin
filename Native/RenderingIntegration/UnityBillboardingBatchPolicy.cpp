@@ -167,13 +167,13 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 
 	m_ParticleCount = allocBuffers.m_TotalParticleCount;
 
-	_UpdateThread_SetUnityMeshBounds(allocBuffers, views);
 
 	if (rendererType == Renderer_Billboard || rendererType == Renderer_Ribbon || rendererType == Renderer_Triangle)
 	{
 		m_VertexCount = allocBuffers.m_TotalVertexCount;
 		m_IndexCount = allocBuffers.m_TotalIndexCount;
 		_UpdateThread_ResizeUnityMesh(allocBuffers, ctx.m_RenderApiData);
+		_UpdateThread_SetUnityMeshBounds(allocBuffers, views);
 
 		if (!allocBuffers.m_DrawRequests.Empty())
 		{
@@ -902,7 +902,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 	PK_SCOPEDPROFILE();
 	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
 	// No need to update the bounds for the light: Unity handle them itself
-	if (m_RendererType == Renderer_Mesh || m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound)
+	if (!PK_VERIFY(m_RendererType != Renderer_Mesh && m_RendererType != Renderer_Light && m_RendererType != Renderer_Sound))
 		return;
 
 	CAABB	bbox = CAABB::DEGENERATED;
@@ -1003,6 +1003,15 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			skeletalAnimMask |= (1 << 3);
 		else if (addInput.m_Name == SkeletalAnimationTexture::SID_SkeletalAnimationInterpolateTracks_TransitionRatio() && addInput.m_Type == BaseType_Float)
 			skeletalAnimMask |= (1 << 4);
+		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVRotate() && addInput.m_Type == BaseType_Float)
+		{
+			perMeshDataSize += sizeof(float);
+			m_HasTransformUV = true;
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVOffset() && addInput.m_Type == BaseType_Float2)
+			perMeshDataSize += sizeof(CFloat2);
+		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVScale() && addInput.m_Type == BaseType_Float2)
+			perMeshDataSize += sizeof(CFloat2);
 	}
 
 	m_UseSkeletalAnimData = (skeletalAnimMask & 0x3) == 0x3;
@@ -1085,6 +1094,16 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
 			meshBuff.m_TransitionCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
 			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+		}
+		if (m_HasTransformUV)
+		{
+			meshBuff.m_TransformUVRotate = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+			meshBuff.m_TransformUVOffset = TMemoryView<CFloat2>(static_cast<CFloat2*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat2));
+			meshBuff.m_TransformUVScale = TMemoryView<CFloat2>(static_cast<CFloat2*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat2));
+
 		}
 		::OnSetMeshInstancesCount(rdrGUID, subMesh, particleCount);
 	}
@@ -1762,6 +1781,27 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
 			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_TransitionCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
+		else if (m_HasTransformUV && addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVRotate() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_TransformUVRotate), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_HasTransformUV && addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVOffset() && addInput.m_Type == BaseType_Float2)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_TransformUVOffset), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_HasTransformUV && addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVScale() && addInput.m_Type == BaseType_Float2)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_TransformUVScale), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
 	}
 	meshBatch->m_Exec_Matrices.m_MatricesPerMesh = TStridedMemoryView<TStridedMemoryView<CFloat4x4> >(&m_PerMeshBuffers.First().m_Transforms, m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 	if (!m_MeshAdditionalField.Empty())
@@ -1965,43 +2005,54 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 	{
 		if (m_ParticleBuffers.m_Positions != null)
 			FillPositions(&(m_ParticleBuffers.m_Positions[vertexID]), bfPtr, *m_SemanticOffsets);
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0 && m_ParticleBuffers.m_Normals != null)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Lighting) != 0)
 		{
 			FillNormals(&(m_ParticleBuffers.m_Normals[vertexID]), bfPtr, *m_SemanticOffsets);
 			if (m_ParticleBuffers.m_Tangents != null)
 				FillTangents(&(m_ParticleBuffers.m_Tangents[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Color) != 0 && m_ParticleBuffers.m_Colors != null)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Color) != 0)
 		{
 			FillColors(&(m_ParticleBuffers.m_Colors[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) != 0 && m_ParticleBuffers.m_UVFactors != null && m_ParticleBuffers.m_UVRemap != null)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) != 0)
 		{
 			FillUVFactors(&(m_ParticleBuffers.m_UVFactors[vertexID]), bfPtr, *m_SemanticOffsets);
+			if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+				FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with UVFactor
+			if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
+				FillTransformUVsRotate(&(m_ParticleBuffers.m_TransformUVsRotate[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with UVFactor
+
 			FillUVScalesAndOffsets(&(((CFloat4*)m_ParticleBuffers.m_UVRemap)[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-		else if (m_ParticleBuffers.m_TexCoords0 != null && (*m_SemanticOffsets)[Semantic_Uv0] != (u32)0xFFFFFFFF)
+		else if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) != 0)
 		{
 			FillUV0(&(m_ParticleBuffers.m_TexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
-		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) != 0 && m_ParticleBuffers.m_TexCoords1 != null && m_ParticleBuffers.m_AtlasId != null)
-		{
-			FillUV1(&(((CFloat2*)m_ParticleBuffers.m_TexCoords1)[vertexID]), bfPtr, *m_SemanticOffsets);
+			FillUV1(&(m_ParticleBuffers.m_TexCoords1[vertexID]), bfPtr, *m_SemanticOffsets);
 			FillAtlasId(&(m_ParticleBuffers.m_AtlasId[vertexID]), bfPtr, *m_SemanticOffsets);
+			if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+				FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with AtlasID
+			if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
+				FillTransformUVsRotate(&(m_ParticleBuffers.m_TransformUVsRotate[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with AtlasID
 		}
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0 && m_ParticleBuffers.m_AlphaCursor != null)
+		else
 		{
-			FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets);
+			FillUV0(&(m_ParticleBuffers.m_TexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
+			if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+				FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with UV0
 		}
 
-		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0 && m_ParticleBuffers.m_EmissiveColors != null)
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0)
 		{
 			FillEmissiveColors(&(m_ParticleBuffers.m_EmissiveColors[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
-
 		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
 		{
-			FillTransformUVsRotate(&(m_ParticleBuffers.m_TransformUVsRotate[vertexID]), bfPtr, *m_SemanticOffsets);
+			if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_CorrectDeformation) == 0 &&
+				(m_ShaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) == 0)
+			{
+				FillTransformUVsRotate(&(m_ParticleBuffers.m_TransformUVsRotate[vertexID]), bfPtr, *m_SemanticOffsets);
+			}
 			FillTransformUVsScaleAndOffset(&(((CFloat2*)m_ParticleBuffers.m_TransformUVsScale)[vertexID]), &(((CFloat2*)m_ParticleBuffers.m_TransformUVsOffset)[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
 		bfPtr = Mem::AdvanceRawPointer(bfPtr, m_VertexStride);

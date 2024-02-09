@@ -196,6 +196,7 @@ namespace PopcornFX
 														bindingHasMasked,
 														bindingHasMeshRenderer,
 														true);
+#if false
 			bool usesShaderGraphs = (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null) && (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline.name == "UniversalRenderPipelineAsset" || UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline.name == "HDRenderPipelineAsset");
 			if (bindingHasMeshRenderer && usesShaderGraphs)
 			{
@@ -209,9 +210,9 @@ namespace PopcornFX
 				}
 				EditorGUILayout.EndFoldoutHeaderGroup();
 			}
+#endif
 			serializedObject.ApplyModifiedProperties();
 		}
-
 		public string _BlendModeToString(EBlendMode type)
 		{
 			string result;

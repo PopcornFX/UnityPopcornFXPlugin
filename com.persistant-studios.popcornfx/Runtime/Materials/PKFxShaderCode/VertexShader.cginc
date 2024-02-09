@@ -35,13 +35,13 @@ SVertexOutput	vert(SVertexInput v)
 	#endif
 
 	#if	PK_HAS_LIGHTING
-		o.Normal = v.Normal;
+		o.Normal = v.Normal.xyz;
 		o.Tangent = v.Tangent;
 	#endif
 
 	#if	PK_HAS_RIBBON_COMPLEX
 
-		o.UVScaleAndOffset = float4(v.UVScale, v.UVOffset);
+		o.UVScaleAndOffset = v.UVScaleOffset;
 
 		uint		id = v.VertexID;
 
@@ -53,12 +53,12 @@ SVertexOutput	vert(SVertexInput v)
 		else if (id % 4 == 1)
 		{
 			o.UV0 = float2(0.0, 1.0);
-			o.UVFactors = float4(v.UVFactors.x, 1.0, 1.0, 1.0 / v.UVFactors.y);
+			o.UVFactors = float4(v.UVFactorsAlphaRotate.x, 1.0, 1.0, 1.0 / v.UVFactorsAlphaRotate.y);
 		}
 		else if (id % 4 == 2)
 		{
 			o.UV0 = float2(1.0, 0.0);
-			o.UVFactors = float4(1.0, v.UVFactors.y, 1.0 / v.UVFactors.x, 1.0);
+			o.UVFactors = float4(1.0, v.UVFactorsAlphaRotate.y, 1.0 / v.UVFactorsAlphaRotate.x, 1.0);
 		}
 		else
 		{
@@ -67,7 +67,7 @@ SVertexOutput	vert(SVertexInput v)
 		}
 
 		#if	PK_HAS_ALPHA_REMAP
-			o.AlphaCursor = v.AlphaCursor.x;
+			o.AlphaCursor = v.UVFactorsAlphaRotate.z;
 		#endif
 
 	#elif	PK_HAS_ANIM_BLEND
@@ -75,27 +75,35 @@ SVertexOutput	vert(SVertexInput v)
 		//	Animation blend
 		//------------------------------------------
 
-		o.UV0 = v.UV0;
-		o.UV1 = v.UV1;
-		o.FrameLerp = /*frac(*/v.AtlasIdAlphaCursor.x;//);
+		o.UV0 = v.UVs.xy;
+		o.UV1 = v.UVs.zw;
+		o.FrameLerp = /*frac(*/v.AtlasIdAlphaCursorRotate.x;//);
 
 		#if	PK_HAS_ALPHA_REMAP
-			o.AlphaCursor = v.AtlasIdAlphaCursor.y;
+			o.AlphaCursor = v.AtlasIdAlphaCursorRotate.y;
 		#endif
 	#else
 		//------------------------------------------
 		//	No animation blending
 		//------------------------------------------
 
-		o.UV0 = v.UV0;
+		o.UV0 = v.UV0AlphaCursor.xy;
 
 		#if	PK_HAS_ALPHA_REMAP
-			o.AlphaCursor = v.AlphaCursor.x;
+			o.AlphaCursor = v.UV0AlphaCursor.z;
 		#endif
 	#endif
 
 	#if	PK_HAS_TRANSFORM_UVS
-		o.TransformUVs_Rotate = v.TransformUVs_Rotate;
+		#if	PK_HAS_RIBBON_COMPLEX && PK_HAS_ALPHA_REMAP
+			o.TransformUVs_Rotate = v.UVFactorsAlphaRotate.w;
+		#elif PK_HAS_RIBBON_COMPLEX
+			o.TransformUVs_Rotate = v.UVFactorsAlphaRotate.z;
+		#elif PK_HAS_ANIM_BLEND
+			o.TransformUVs_Rotate = v.AtlasIdAlphaCursorRotate.z;
+		#else
+			o.TransformUVs_Rotate = v.TransformUVs_Rotate;
+		#endif
 		o.TransformUVs_ScaleAndOffset = v.TransformUVs_ScaleAndOffset;
 	#endif
 	return o;

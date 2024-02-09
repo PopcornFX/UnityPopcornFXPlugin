@@ -77,9 +77,6 @@ namespace PopcornFX
 			if (!m_BlendMode[(int)desc.m_BlendMode])
 				return false;
 
-			if (m_UseShaderGraph && (m_DoubleSided != desc.m_DoubleSided))
-				return false;
-
 			int supportedShaderMask = (int)m_SupportedShaderMask;
 			int mandatoryShaderMask = (int)m_MandatoryShaderMask;
 

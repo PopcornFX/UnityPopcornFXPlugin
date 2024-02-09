@@ -167,6 +167,8 @@ extern "C"
 		int							m_UID;
 		int							m_DrawOrder;
 
+		ManagedBool					m_TransformUVs_RGBOnly;
+
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
 			, m_ShaderVariationFlags(0)
@@ -187,6 +189,7 @@ extern "C"
 			, m_TextureAtlas(null)
 			, m_UID(-1)
 			, m_DrawOrder(0)
+			, m_TransformUVs_RGBOnly(ManagedBool_False)
 		{
 		}
 

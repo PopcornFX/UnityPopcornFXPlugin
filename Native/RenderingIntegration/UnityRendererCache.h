@@ -146,7 +146,7 @@ public:
 	float						m_AlphaThreshold;
 
 	//Atlas
-	CStringId					m_AtlasMap;
+	CStringId					m_AtlasDefinition;
 	u32							m_AtlasSubdivX;
 	u32							m_AtlasSubdivY;
 
@@ -230,6 +230,8 @@ public:
 
 	float									m_InvSoftnessDistance;
 	float									m_AlphaThreshold;
+
+	bool									m_TransformUVs_RGBOnly;
 
 	// Should break batching (no batching for meshes right now so this is useless):
 	CStringId								m_AtlasPath;

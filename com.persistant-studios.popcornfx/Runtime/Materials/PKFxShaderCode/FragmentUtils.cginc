@@ -20,7 +20,7 @@ float4	SampleSpriteTexture(float2 uv)
 }
 
 #if PK_HAS_TRANSFORM_UVS
-float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
+float4	SampleSpriteGradTexture(float2 uv, float2 dUVdx, float2 dUVdy)
 {
 	uv.y = 1 - uv.y;
 	float4 color = tex2Dgrad(_MainTex, uv, dUVdx, dUVdy);
@@ -46,7 +46,7 @@ float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
 	}
 
 	#if PK_HAS_TRANSFORM_UVS
-		float4	SampleSpriteGradTexture(float2 uv, float dUVdx, float dUVdy)
+		float4	SampleSpriteGradTexture(float2 uv, float2 dUVdx, float2 dUVdy)
 		{
 			uv.y = 1 - uv.y;
 			float4 color = _AlphaMap.SampleGrad(linear_clamp_sampler, uv, dUVdx, dUVdy);

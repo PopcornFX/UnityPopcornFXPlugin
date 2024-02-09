@@ -262,13 +262,13 @@ namespace PopcornFX
 					settings.m_WorkerAffinities = IntPtr.Zero;
 				}
 			}
-
 			settings.m_RaycastHitSize = UnsafeUtility.SizeOf<RaycastHit>();
 			settings.m_RaycastCommandSize = UnsafeUtility.SizeOf<RaycastCommand>();
-
 			settings.m_CPPMarkerMaxDepth = PKFxSettings.CPPMarkersMaxDepth;
-
-			PKFxManagerImpl.PopcornFXStartup(ref settings);
+			if (!PKFxManagerImpl.PopcornFXStartup(ref settings))
+			{
+				Debug.LogError("[PopcornFX] PopcornFX failed initialization, please check native logs");
+			}
 			if (settings.m_WorkerAffinities != IntPtr.Zero)
 			{
 				Marshal.FreeHGlobal(settings.m_WorkerAffinities);
@@ -825,5 +825,31 @@ namespace PopcornFX
 			return PKFxManagerImpl.CanSkipUpdate();
 		}
 
+#if UNITY_EDITOR
+		public static void DrawBounds()
+		{
+			foreach (var renderer in PKFxManagerImpl.m_Renderers)
+			{
+				if (renderer.m_InstancesRenderer == null && renderer.m_RenderingObject.activeInHierarchy)
+				{
+					Bounds bounds = renderer.m_Slice.mesh.bounds;
+					Color boundsColor = renderer.m_BoundsDebugColor;
+
+					Debug.DrawLine(new Vector3(bounds.min.x, bounds.min.y, bounds.min.z), new Vector3(bounds.max.x, bounds.min.y, bounds.min.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.min.x, bounds.min.y, bounds.min.z), new Vector3(bounds.min.x, bounds.max.y, bounds.min.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.min.x, bounds.min.y, bounds.min.z), new Vector3(bounds.min.x, bounds.min.y, bounds.max.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.max.x, bounds.max.y, bounds.max.z), new Vector3(bounds.min.x, bounds.max.y, bounds.max.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.max.x, bounds.max.y, bounds.max.z), new Vector3(bounds.max.x, bounds.min.y, bounds.max.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.max.x, bounds.max.y, bounds.max.z), new Vector3(bounds.max.x, bounds.max.y, bounds.min.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.min.x, bounds.max.y, bounds.max.z), new Vector3(bounds.min.x, bounds.min.y, bounds.max.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.min.x, bounds.max.y, bounds.max.z), new Vector3(bounds.min.x, bounds.max.y, bounds.min.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.max.x, bounds.min.y, bounds.min.z), new Vector3(bounds.max.x, bounds.max.y, bounds.min.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.max.x, bounds.min.y, bounds.min.z), new Vector3(bounds.max.x, bounds.min.y, bounds.max.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.min.x, bounds.max.y, bounds.min.z), new Vector3(bounds.max.x, bounds.max.y, bounds.min.z), boundsColor);
+					Debug.DrawLine(new Vector3(bounds.max.x, bounds.min.y, bounds.max.z), new Vector3(bounds.min.x, bounds.min.y, bounds.max.z), boundsColor);
+				}
+			}
+		}
+#endif
 	}
 }

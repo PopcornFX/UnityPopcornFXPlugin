@@ -577,7 +577,12 @@ namespace PopcornFX
 
 		private static void DisplayDebugCategory()
 		{
-			PKFxSettings.EnablePopcornFXLogs = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.enableUnityConsoleLog, PKFxSettings.EnablePopcornFXLogs);
+			bool enablePopcornFXLogs = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.enableUnityConsoleLog, PKFxSettings.EnablePopcornFXLogs);
+			if (enablePopcornFXLogs != PKFxSettings.EnablePopcornFXLogs)
+			{
+				PKFxSettings.EnablePopcornFXLogs = enablePopcornFXLogs;
+				PKFxManager.SetupPopcornFxLogs();
+			}
 			PKFxSettings.EnableFileLogs = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.enableFileLog, PKFxSettings.EnableFileLogs);
 
 			PKFxSettings.DebugEffectsBoundingBoxes = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.debugEffectsBoundingBoxes, PKFxSettings.DebugEffectsBoundingBoxes);

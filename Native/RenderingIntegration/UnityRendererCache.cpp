@@ -412,7 +412,8 @@ bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBil
 			m_EmissiveRampMap == oth.m_EmissiveRampMap &&
 			m_AtlasDefinition == oth.m_AtlasDefinition &&
 			m_AtlasSubdivX == oth.m_AtlasSubdivX &&
-			m_AtlasSubdivY == oth.m_AtlasSubdivY;
+			m_AtlasSubdivY == oth.m_AtlasSubdivY &&
+			m_AlphaThreshold == oth.m_AlphaThreshold;
 }
 
 //----------------------------------------------------------------------------
@@ -455,6 +456,7 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_InvSoftnessDistance(0.0f)
 ,	m_AlphaThreshold(0.5f)
 ,	m_TransformUVs_RGBOnly(false)
+,	m_UseVertexColor(false)
 ,	m_AtlasPath(CStringId::Null)
 ,	m_AtlasSubdivs(0, 0)
 {
@@ -491,6 +493,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue *atlasBlending = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
 	const SRendererFeaturePropertyValue	*transformUVs = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs());
 	const SRendererFeaturePropertyValue	*transformUVsRGBOnly = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs_RGBOnly());
+	const SRendererFeaturePropertyValue	*doubleSided = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Culling_DoubleSided());
 
 	m_Flags.m_ShaderVariationFlags = 0;
 
@@ -520,6 +523,8 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		if (transformUVsRGBOnly != null && transformUVsRGBOnly->ValueB())
 			m_TransformUVs_RGBOnly = transformUVsRGBOnly->ValueB();
 	}
+	if (doubleSided != null && doubleSided->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DoubleSided;
 
 	if (diffuseColorInput.Valid())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
@@ -598,23 +603,19 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	}
 
 	//-----------------------------
-	// Choose the culling mode:
-	//-----------------------------
-	m_DoubleSided = true; // Keep culling off by default
-	if (renderer.m_Declaration.IsFeatureEnabled(BasicRendererProperties::SID_Culling()))
-		m_DoubleSided = renderer.m_Declaration.GetPropertyValue_B(BasicRendererProperties::SID_Culling_DoubleSided(), true);
-
-	//-----------------------------
 	// Retrieve the shader uniforms (mesh resource, property values...):
 	//-----------------------------
 	const SRendererFeaturePropertyValue	*mesh = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Mesh());
 	const SRendererFeaturePropertyValue	*meshAtlas = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_MeshAtlas());
+	const SRendererFeaturePropertyValue* meshUseVertexColor = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UseVertexColor());
 
 	if (PK_VERIFY(mesh != null && !mesh->ValuePath().Empty()))
 		m_MeshPath = CStringId(CFilePath::Purified(mesh->ValuePath()));
 	else
 		return false;
 
+	if (meshUseVertexColor != null && meshUseVertexColor->ValueB())
+		m_UseVertexColor = true;
 	// Skeletal anim:
 	if (skeletalAnim != null && skeletalAnim->ValueB() && skeletalAnimTexResol != null && skeletalAnimTex != null &&
 		skeletalAnimBonesTranslateBoundsMin != null && skeletalAnimBonesTranslateBoundsMax != null && skeletalAnimCount != null)
@@ -624,6 +625,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		m_SkeletalAnimTranslationBoundsMin = skeletalAnimBonesTranslateBoundsMin->ValueF().xyz();
 		m_SkeletalAnimTranslationBoundsMax = skeletalAnimBonesTranslateBoundsMax->ValueF().xyz();
 		m_SkeletalAnimCount = (u32)skeletalAnimCount->ValueI().x();
+		m_UseVertexColor = true;
 		if (skeletalAnimUseBonesScale != null && skeletalAnimUseBonesScale->ValueB() &&
 			skeletalAnimBonesScaleBoundsMin != null && skeletalAnimBonesScaleBoundsMax != null)
 		{
@@ -667,6 +669,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 
 	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0)
 	{
+		m_UseVertexColor = true;
 		const SRendererFeaturePropertyValue	*fluid_PositionMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_PositionMap());
 		if (fluid_PositionMap != null && !fluid_PositionMap->ValuePath().Empty())
 			m_Vat_PositionMap = CStringId(CFilePath::Purified(fluid_PositionMap->ValuePath()));
@@ -689,6 +692,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	}
 	else if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0)
 	{
+		m_UseVertexColor = true;
 		const SRendererFeaturePropertyValue	*soft_PositionMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Soft_PositionMap());
 		if (soft_PositionMap != null && !soft_PositionMap->ValuePath().Empty())
 			m_Vat_PositionMap = CStringId(CFilePath::Purified(soft_PositionMap->ValuePath()));
@@ -711,6 +715,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	}
 	else if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_RigidVAT) != 0)
 	{
+		m_UseVertexColor = true;
 		const SRendererFeaturePropertyValue	*rigid_PositionMap = renderer.m_Declaration.FindProperty(VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_PositionMap());
 		if (rigid_PositionMap != null && !rigid_PositionMap->ValuePath().Empty())
 			m_Vat_PositionMap = CStringId(CFilePath::Purified(rigid_PositionMap->ValuePath()));
@@ -961,9 +966,9 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	desc.m_DiffuseMap = m_MaterialDescMesh.m_DiffuseMap.ToStringData();
 	desc.m_InvSoftnessDistance = m_MaterialDescMesh.m_InvSoftnessDistance;
 	desc.m_AlphaClipThreshold = m_MaterialDescMesh.m_AlphaThreshold;
-	desc.m_DoubleSided = m_MaterialDescMesh.m_DoubleSided;
 	desc.m_DrawOrder = m_MaterialDescMesh.m_Flags.m_DrawOrder;
-	desc.m_TransformUVs_RGBOnly = m_MaterialDescBillboard.m_TransformUVs_RGBOnly  ? ManagedBool_True : ManagedBool_False;
+	desc.m_TransformUVs_RGBOnly = m_MaterialDescMesh.m_TransformUVs_RGBOnly  ? ManagedBool_True : ManagedBool_False;
+	desc.m_UseVertexColor = m_MaterialDescMesh.m_UseVertexColor ? ManagedBool_True : ManagedBool_False;
 
 	bool fluidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0;
 	bool softVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0;

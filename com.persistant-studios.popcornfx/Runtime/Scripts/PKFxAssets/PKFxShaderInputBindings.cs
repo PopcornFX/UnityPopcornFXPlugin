@@ -88,7 +88,8 @@ namespace PopcornFX
 		public string 			m_AtlasIdPropertyName = "_AtlasId";
 		// Transform UVs:
 		public string			m_TransformUVsRGBOnlyPropertyName = "_TransformUVs_RGBOnly";
-		
+		public string			m_UseVertexColorPropertyName = "_UseVertexColor";
+
 
 		public enum UnityBlendMode : int // Duplicate of AlphaMode that is EditorOnly from shadergraph...
 		{
@@ -283,23 +284,23 @@ namespace PopcornFX
 				bool hasRigidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RigidVAT);
 				bool hasVAT = (hasFluidVAT || hasSoftVAT || hasRigidVAT) && (batchDesc.m_VatFeature != null && batchDesc.m_VatFeature.m_Activated);
 				bool hasSkeletalAnim = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_SkeletalAnim);
-				bool isDoubleSided = batchDesc.m_DoubleSided;
+				bool isDoubleSided = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DoubleSided);
 
 				if (!string.IsNullOrEmpty(m_MeshCullingModePropertyName))
 				{
 					if (isDoubleSided)
-					{
 						material.SetInt(m_MeshCullingModePropertyName, (int) UnityEngine.Rendering.CullMode.Off);
-					}
 					else
-					{
 						material.SetInt(m_MeshCullingModePropertyName, (int) UnityEngine.Rendering.CullMode.Back);
-					}
 				}
 
 				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
 					material.doubleSidedGI = isDoubleSided;
 
+				if (!string.IsNullOrEmpty(m_UseVertexColorPropertyName))
+				{
+					material.SetInt(m_UseVertexColorPropertyName, Convert.ToInt32(batchDesc.m_UseVertexColor));
+				}
 				if (hasVAT)
 				{
 					if (!string.IsNullOrEmpty(m_VATPositionMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_VatFeature.m_PositionMap))
@@ -737,6 +738,9 @@ namespace PopcornFX
 						SerializedProperty skeletalAnimTransitionPropertyName = serializedObject.FindProperty("m_SkeletalAnimTransitionPropertyName");
 						skeletalAnimTransitionPropertyName.stringValue = EditorGUILayout.TextField("Skeletal animation transition (Float): ", skeletalAnimTransitionPropertyName.stringValue);
 					}
+
+					SerializedProperty useVertexColorPropertyName = serializedObject.FindProperty("m_UseVertexColorPropertyName");
+					useVertexColorPropertyName.stringValue = EditorGUILayout.TextField("Use Vertex Color (Bool): ", useVertexColorPropertyName.stringValue);
 				}
 			}
 			if (headerGroup)

@@ -30,6 +30,7 @@ MonoBehaviour:
   m_MeshDiffuseColorPropertyName: _BaseColor
   m_MeshEmissiveColorPropertyName: _EmissiveColor
   m_MeshAlphaCursorPropertyName: _AlphaCursor
+  m_MeshCullingModePropertyName: _Cull
   m_MeshVATCursorPropertyName: _VATCursor
   m_VATPositionMapPropertyName: _VATPositionMap
   m_VATNormalMapPropertyName: _VATNormalMap
@@ -43,11 +44,34 @@ MonoBehaviour:
   m_VATBoundsPositionPropertyName: _VATBounds
   m_VATPadToPowerOf2PropertyName: _VATPadToPowerOf2
   m_VATPaddedRatioPropertyName: _VATPaddedRatio
+  m_SkeletalAnimTexturePropertyName: _SkeletalAnimTexture
+  m_SkeletalAnimTextureResolPropertyName: _SkeletalAnimTextureResol
+  m_SkeletalAnimCountPropertyName: _SkeletalAnimCount
+  m_SkeletalAnimUseBoneScalePropertyName: _SkeletalAnimUseBoneScale
+  m_SkeletalAnimCursor0PropertyName: _SkeletalAnimCursor0
+  m_SkeletalAnimIdx0PropertyName: _SkeletalAnimIdx0
+  m_SkeletalAnimCursor1PropertyName: _SkeletalAnimCursor1
+  m_SkeletalAnimIdx1PropertyName: _SkeletalAnimIdx1
+  m_SkeletalAnimTransitionPropertyName: _SkeletalAnimTransition
+  m_SkeletalAnimTranslationBoundsMinPropertyName: _SkeletalAnimTranslationBoundsMin
+  m_SkeletalAnimTranslationBoundsMaxPropertyName: _SkeletalAnimTranslationBoundsMax
+  m_SkeletalAnimScaleBoundsMinPropertyName: _SkeletalAnimScaleBoundsMin
+  m_SkeletalAnimScaleBoundsMaxPropertyName: _SkeletalAnimScaleBoundsMax
+  m_MeshTransformRow0PropertyName: _SkeletalMeshTransform0
+  m_MeshTransformRow1PropertyName: _SkeletalMeshTransform1
+  m_MeshTransformRow2PropertyName: _SkeletalMeshTransform2
+  m_MeshTransformRow3PropertyName: _SkeletalMeshTransform3
+  m_TextureAtlasPropertyName: _AtlasRects
+  m_AtlasCountPropertyName: _AtlasCount
+  m_AtlasIdPropertyName: _AtlasId
+  m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
+  m_UseVertexColorPropertyName: _UseVertexColor
   m_UseShader: 1
   m_Shader: {fileID: -6465566751694194690, guid: 17050459db9cda941bc92e51f5f811ee,
     type: 3}
   m_Material: {fileID: 0}
-  m_RenderTypes: 00000100
+  m_RenderTypes: 00000100000000
   m_BlendMode: 010100000000
-  m_ShaderMask: 524207
+  m_SupportedShaderMask: 523695
+  m_MandatoryShaderMask: 0
   m_BillboardingLocation: 0

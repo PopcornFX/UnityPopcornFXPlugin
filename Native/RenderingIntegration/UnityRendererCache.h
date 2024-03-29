@@ -198,8 +198,6 @@ public:
 	float									m_Roughness;
 	float									m_Metalness;
 
-	bool									m_DoubleSided;
-
 	// VAT
 	CStringId								m_Vat_PositionMap;
 	CStringId								m_Vat_NormalMap;
@@ -232,6 +230,8 @@ public:
 	float									m_AlphaThreshold;
 
 	bool									m_TransformUVs_RGBOnly;
+	bool									m_UseVertexColor;
+
 
 	// Should break batching (no batching for meshes right now so this is useless):
 	CStringId								m_AtlasPath;

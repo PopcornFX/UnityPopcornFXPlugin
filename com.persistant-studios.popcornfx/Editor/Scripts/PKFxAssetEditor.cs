@@ -141,6 +141,9 @@ namespace PopcornFX
 
 		public override void OnInspectorGUI()
 		{
+			// Update the serializedObject, the source asset can be changed during filewatcher events in PKFxAssetCreationUtils
+			serializedObject.Update();
+
 			if (PKFxManager.QualitiesLevelDescription != null && (m_ShowQualities == null || m_ShowQualities.Length != PKFxManager.QualitiesLevelDescription.Length))
 			{
 				m_ShowQualities = new bool[PKFxManager.QualitiesLevelDescription.Length];

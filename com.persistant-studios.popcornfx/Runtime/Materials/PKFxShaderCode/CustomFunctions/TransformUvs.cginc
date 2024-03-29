@@ -10,13 +10,15 @@ float2 transformUV(float2 UV, float2 scale, float2x2 rotation, float2 offset)
 #endif
 
 void	TransformUVs_float(in float2 uv, in float2 uv1, in float frameLerp, in float rotate, in float4 scaleAndOffset,
-						   out float2 uvOut, out float2 uv1Out, out float2 dUVdx, out float2 dUVdy, out float frameLerpOut)
+						   out float2 uvOut, out float2 uv1Out, out float2 dUVdx, out float2 dUVdy, out float frameLerpOut, out float2 oldUV0, out float2 oldUV1)
 {
 	uvOut = uv;
 	uv1Out = uv1;
 	dUVdx = float2(0.0f, 0.0f);
 	dUVdy = float2(0.0f, 0.0f);
 	frameLerpOut = frameLerp;
+	oldUV0 = uv;
+	oldUV1 = uv1;
 
 #if PK_HAS_TRANSFORM_UVS_ON
 	float		sinR = sin(-rotate);

@@ -351,8 +351,8 @@ namespace PopcornFX
 		public float				m_InvSoftnessDistance;
 		public float				m_AlphaClipThreshold;
 		public string				m_GeneratedName;
-		public bool					m_DoubleSided;
 		public bool					m_TransformUVs_RGBOnly;
+		public bool					m_UseVertexColor = false;
 		// VAT:
 		public SBatchVatFeatureDesc m_VatFeature = null;
 		// Lit:
@@ -403,6 +403,7 @@ namespace PopcornFX
 			m_InvSoftnessDistance = desc.m_InvSoftnessDistance;
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
 			m_TransformUVs_RGBOnly = desc.m_TransformUVs_RGBOnly != 0 ? true : false;
+			m_UseVertexColor = false; // Only for mesh renderers
 
 			m_VatFeature = null;
 			m_SkeletalAnimFeature = null;
@@ -456,8 +457,8 @@ namespace PopcornFX
 			m_AlphaRemap = alphaRemapStr;
 			m_InvSoftnessDistance = desc.m_InvSofnessDistance;
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
-			m_DoubleSided = desc.m_DoubleSided;
 			m_TransformUVs_RGBOnly = desc.m_TransformUVs_RGBOnly != 0 ? true : false;
+			m_UseVertexColor = desc.m_UseVertexColor != 0 ? true : false;
 
 			m_SpecularMap = null;
 			m_MeshAsset = meshAssetStr;
@@ -524,7 +525,7 @@ namespace PopcornFX
 		}
 
 		// All of those functions are used to generate a description for the renderer:
-		public static string MaterialFlagsToString(int materialFlags)
+		public string MaterialFlagsToString(int materialFlags)
 		{
 			string finalName = "";
 
@@ -563,7 +564,7 @@ namespace PopcornFX
 			return finalName.Length == 0 ? " MaterialBasic" : finalName;
 		}
 
-		public static string BlendModeToString(EBlendMode blendMode)
+		public string BlendModeToString(EBlendMode blendMode)
 		{
 			string finalName = "";
 			if (blendMode == EBlendMode.Additive)
@@ -577,7 +578,7 @@ namespace PopcornFX
 			if (blendMode == EBlendMode.Solid)
 				finalName += " Solid";
 			if (blendMode == EBlendMode.Masked)
-				finalName += " Masked";
+				finalName += " Masked" + m_AlphaClipThreshold;
 			return finalName;
 		}
 
@@ -629,12 +630,13 @@ namespace PopcornFX
 				finalName += " ";
 				finalName += m_SpecularMap == null ? "(none)" : m_SpecularMap;
 				finalName += " ";
-				finalName += m_DoubleSided ? "DoubleSided" : "OneSided";
+				if (m_UseVertexColor)
+					finalName += " VertexColor";
 			}
 			finalName += " " + m_DrawOrder;
 			return finalName;
 		}
-		public static string BlendModeToShortString(EBlendMode blendMode)
+		public string BlendModeToShortString(EBlendMode blendMode)
 		{
 			string finalName = "";
 			if (blendMode == EBlendMode.Additive)
@@ -648,7 +650,7 @@ namespace PopcornFX
 			if (blendMode == EBlendMode.Solid)
 				finalName += "So";
 			if (blendMode == EBlendMode.Masked)
-				finalName += "M";
+				finalName += "M" + m_AlphaClipThreshold;
 			finalName += "_";
 			return finalName;
 		}
@@ -727,6 +729,8 @@ namespace PopcornFX
 			else
 			{
 				finalName += m_SpecularMap == null ? "U_" : Path.GetFileName(m_SpecularMap) + "_";
+				if (m_UseVertexColor)
+					finalName += " VC";
 			}
 			return finalName;
 		}

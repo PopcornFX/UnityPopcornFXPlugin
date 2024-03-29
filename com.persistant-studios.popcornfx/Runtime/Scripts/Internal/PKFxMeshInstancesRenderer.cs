@@ -63,8 +63,9 @@ namespace PopcornFX
 		public string	m_SkeletalMeshTransformRow1 = "_SkeletalMeshTransform1";
 		public string	m_SkeletalMeshTransformRow2 = "_SkeletalMeshTransform2";
 		public string	m_SkeletalMeshTransformRow3 = "_SkeletalMeshTransform3";
-		public string m_TransformUVRotatePropertyName = "_TransformUVRotate";
-		public string m_TransformUVOffsetScalePropertyName = "_TransformUVOffsetScale";
+
+		public string	m_TransformUVRotatePropertyName = "_TransformUVRotate";
+		public string	m_TransformUVOffsetScalePropertyName = "_TransformUVOffsetScale";
 
 		NativeArray<Matrix4x4> m_Transforms;
 		NativeArray<Vector4> m_DiffuseColors;
@@ -80,137 +81,21 @@ namespace PopcornFX
 		NativeArray<float> m_TransformUVRotate;
 		NativeArray<Vector4> m_TransformUVOffsetScale;
 
-		Matrix4x4[] m_TransformsManagedArray;
-		Matrix4x4[] TransformsManagedArray
-		{
-			get
-			{
-				if (m_TransformsManagedArray == null)
-					m_TransformsManagedArray = new Matrix4x4[m_Transforms.Length];
-				m_Transforms.CopyTo(m_TransformsManagedArray);
-				return m_TransformsManagedArray;
-			}
-		}
+		Matrix4x4[] m_TransformsArray;
+		Vector4[] m_DiffuseColorsArray;
+		Vector4[] m_EmissiveColorsArray;
+		float[] m_AlphaCursorsArray;
+		float[] m_VatCursorsArray;
+		float[] m_AnimCursor0Array;
+		float[] m_AnimIdx0Array;
+		float[] m_AnimCursor1Array;
+		float[] m_AnimIdx1Array;
+		float[] m_AnimTransitionArray;
+		float[] m_AtlasIdArray;
+		float[] m_TransformUVRotateArray;
+		Vector4[] m_TransformUVOffsetScaleArray;
 
-		Vector4[] m_DiffuseColorsManagedArray;
-		Vector4[] DiffuseColorsManagedArray
-		{
-			get
-			{
-				if (m_DiffuseColorsManagedArray == null)
-					m_DiffuseColorsManagedArray = new Vector4[m_DiffuseColors.Length];
-				m_DiffuseColors.CopyTo(m_DiffuseColorsManagedArray);
-				return m_DiffuseColorsManagedArray;
-			}
-		}
-
-		Vector4[] m_EmissiveColorsManagedArray;
-		Vector4[] EmissiveColorsManagedArray
-		{
-			get
-			{
-				if (m_EmissiveColorsManagedArray == null)
-					m_EmissiveColorsManagedArray = new Vector4[m_EmissiveColors.Length];
-				m_EmissiveColors.CopyTo(m_EmissiveColorsManagedArray);
-				return m_EmissiveColorsManagedArray;
-			}
-		}
-
-		float[] m_AlphaCursorsManagedArray;
-		float[] AlphaCursorsManagedArray
-		{
-			get
-			{
-				if (m_AlphaCursorsManagedArray == null)
-					m_AlphaCursorsManagedArray = new float[m_AlphaCursors.Length];
-				m_AlphaCursors.CopyTo(m_AlphaCursorsManagedArray);
-				return m_AlphaCursorsManagedArray;
-			}
-		}
-
-		float[] m_VatCursorsManagedArray;
-		float[] VatCursorsManagedArray
-		{
-			get
-			{
-				if (m_VatCursorsManagedArray == null)
-					m_VatCursorsManagedArray = new float[m_VatCursors.Length];
-				m_VatCursors.CopyTo(m_VatCursorsManagedArray);
-				return m_VatCursorsManagedArray;
-			}
-		}
-
-		float[] m_AnimCursor0ManagedArray;
-		float[] AnimCursor0ManagedArray
-		{
-			get
-			{
-				if (m_AnimCursor0ManagedArray == null)
-					m_AnimCursor0ManagedArray = new float[m_AnimCursor0.Length];
-				m_AnimCursor0.CopyTo(m_AnimCursor0ManagedArray);
-				return m_AnimCursor0ManagedArray;
-			}
-		}
-
-		float[] m_AnimIdx0ManagedArray;
-		float[] AnimIdx0ManagedArray
-		{
-			get
-			{
-				if (m_AnimIdx0ManagedArray == null)
-					m_AnimIdx0ManagedArray = new float[m_AnimIdx0.Length];
-				m_AnimIdx0.CopyTo(m_AnimIdx0ManagedArray);
-				return m_AnimIdx0ManagedArray;
-			}
-		}
-
-		float[] m_AnimCursor1ManagedArray;
-		float[] AnimCursor1ManagedArray
-		{
-			get
-			{
-				if (m_AnimCursor1ManagedArray == null)
-					m_AnimCursor1ManagedArray = new float[m_AnimCursor1.Length];
-				m_AnimCursor1.CopyTo(m_AnimCursor1ManagedArray);
-				return m_AnimCursor1ManagedArray;
-			}
-		}
-
-		float[] m_AnimIdx1ManagedArray;
-		float[] AnimIdx1ManagedArray
-		{
-			get
-			{
-				if (m_AnimIdx1ManagedArray == null)
-					m_AnimIdx1ManagedArray = new float[m_AnimIdx1.Length];
-				m_AnimIdx1.CopyTo(m_AnimIdx1ManagedArray);
-				return m_AnimIdx1ManagedArray;
-			}
-		}
-
-		float[] m_AnimTransitionManagedArray;
-		float[] AnimTransitionManagedArray
-		{
-			get
-			{
-				if (m_AnimTransitionManagedArray == null)
-					m_AnimTransitionManagedArray = new float[m_AnimTransition.Length];
-				m_AnimTransition.CopyTo(m_AnimTransitionManagedArray);
-				return m_AnimTransitionManagedArray;
-			}
-		}
-
-		float[] m_AtlasIdManagedArray;
-		float[] AtlasIdManagedArray
-		{
-			get
-			{
-				if (m_AtlasIdManagedArray == null)
-					m_AtlasIdManagedArray = new float[m_AtlasId.Length];
-				m_AtlasId.CopyTo(m_AtlasIdManagedArray);
-				return m_AtlasIdManagedArray;
-			}
-		}
+		MaterialPropertyBlock m_PropertyBlock;
 
 		// Job adding two floating point values together
 		public struct MeshData : IJobParallelFor
@@ -244,6 +129,8 @@ namespace PopcornFX
 			public NativeArray<float> atlasId;
 			public NativeArray<float> transformUVRotate;
 			public NativeArray<Vector4> transformUVOffsetScale;
+
+			public Vector4 transformUVOffsetScaleVec;
 
 			public void Execute(int h)
 			{
@@ -314,9 +201,12 @@ namespace PopcornFX
 						float* instanceTransformRotate = (float*)currentPtr;
 						transformUVRotate[h] = instanceTransformRotate[offset + h];
 						currentPtr = instanceTransformRotate + count;
-						Vector4* instanceTransformOffsetScale = (Vector4*)currentPtr;
-						transformUVOffsetScale[h] = instanceTransformOffsetScale[offset + h];
-						currentPtr = instanceTransformOffsetScale + count;
+						Vector2* instanceTransformOffset = (Vector2*)currentPtr;
+						currentPtr = instanceTransformOffset + count;
+						Vector2* instanceTransformScale = (Vector2*)currentPtr;
+						currentPtr = instanceTransformScale + count;
+						transformUVOffsetScaleVec.Set(instanceTransformOffset[offset + h].x, instanceTransformOffset[offset + h].y, instanceTransformScale[offset + h].x, instanceTransformScale[offset + h].y);
+						transformUVOffsetScale.ReinterpretStore(h, transformUVOffsetScaleVec);
 					}
 				}
 			}
@@ -350,36 +240,74 @@ namespace PopcornFX
 
 		public void OnEnable()
 		{
-			m_Transforms = new NativeArray<Matrix4x4>(1023, Allocator.Persistent);
-			m_DiffuseColors = new NativeArray<Vector4>(1023, Allocator.Persistent);
-			m_EmissiveColors = new NativeArray<Vector4>(1023, Allocator.Persistent);
-			m_AlphaCursors = new NativeArray<float>(1023, Allocator.Persistent);
-			m_VatCursors = new NativeArray<float>(1023, Allocator.Persistent);
-			m_AtlasId = new NativeArray<float>(1023, Allocator.Persistent);
-			m_AnimCursor0 = new NativeArray<float>(1023, Allocator.Persistent);
-			m_AnimIdx0 = new NativeArray<float>(1023, Allocator.Persistent);
-			m_AnimCursor1 = new NativeArray<float>(1023, Allocator.Persistent);
-			m_AnimIdx1 = new NativeArray<float>(1023, Allocator.Persistent);
-			m_AnimTransition = new NativeArray<float>(1023, Allocator.Persistent);
-			m_TransformUVRotate = new NativeArray<float>(1023, Allocator.Persistent);
-			m_TransformUVOffsetScale = new NativeArray<Vector4>(1023, Allocator.Persistent);
+			if (PKFxSettings.UseMeshInstancing)
+			{
+				m_Transforms = new NativeArray<Matrix4x4>(1023, Allocator.Persistent);
+				m_DiffuseColors = new NativeArray<Vector4>(1023, Allocator.Persistent);
+				m_EmissiveColors = new NativeArray<Vector4>(1023, Allocator.Persistent);
+				m_AlphaCursors = new NativeArray<float>(1023, Allocator.Persistent);
+				m_VatCursors = new NativeArray<float>(1023, Allocator.Persistent);
+				m_AtlasId = new NativeArray<float>(1023, Allocator.Persistent);
+				m_AnimCursor0 = new NativeArray<float>(1023, Allocator.Persistent);
+				m_AnimIdx0 = new NativeArray<float>(1023, Allocator.Persistent);
+				m_AnimCursor1 = new NativeArray<float>(1023, Allocator.Persistent);
+				m_AnimIdx1 = new NativeArray<float>(1023, Allocator.Persistent);
+				m_AnimTransition = new NativeArray<float>(1023, Allocator.Persistent);
+				m_TransformUVRotate = new NativeArray<float>(1023, Allocator.Persistent);
+				m_TransformUVOffsetScale = new NativeArray<Vector4>(1023, Allocator.Persistent);
+
+				m_TransformsArray = new Matrix4x4[1023];
+				m_DiffuseColorsArray = new Vector4[1023];
+				m_EmissiveColorsArray = new Vector4[1023];
+				m_AlphaCursorsArray = new float[1023];
+				m_VatCursorsArray = new float[1023];
+				m_AnimCursor0Array = new float[1023];
+				m_AnimIdx0Array = new float[1023];
+				m_AnimCursor1Array = new float[1023];
+				m_AnimIdx1Array = new float[1023];
+				m_AnimTransitionArray = new float[1023];
+				m_AtlasIdArray = new float[1023];
+				m_TransformUVRotateArray = new float[1023];
+				m_TransformUVOffsetScaleArray = new Vector4[1023];
+
+			}
+			m_PropertyBlock = new MaterialPropertyBlock();
 		}
 
 		public void OnDisable()
 		{
-			m_Transforms.Dispose();
-			m_DiffuseColors.Dispose();
-			m_EmissiveColors.Dispose();
-			m_AlphaCursors.Dispose();
-			m_VatCursors.Dispose();
-			m_AtlasId.Dispose();
-			m_AnimCursor0.Dispose();
-			m_AnimIdx0.Dispose();
-			m_AnimCursor1.Dispose();
-			m_AnimIdx1.Dispose();
-			m_AnimTransition.Dispose();
-			m_TransformUVRotate.Dispose();
-			m_TransformUVOffsetScale.Dispose();
+			if (PKFxSettings.UseMeshInstancing)
+			{
+				m_Transforms.Dispose();
+				m_DiffuseColors.Dispose();
+				m_EmissiveColors.Dispose();
+				m_AlphaCursors.Dispose();
+				m_VatCursors.Dispose();
+				m_AtlasId.Dispose();
+				m_AnimCursor0.Dispose();
+				m_AnimIdx0.Dispose();
+				m_AnimCursor1.Dispose();
+				m_AnimIdx1.Dispose();
+				m_AnimTransition.Dispose();
+				m_TransformUVRotate.Dispose();
+				m_TransformUVOffsetScale.Dispose();
+			}
+		}
+
+		private Matrix4x4[] CopyNativeArrayToArray(NativeArray<Matrix4x4> from, Matrix4x4[] to, int size)
+		{
+			NativeArray<Matrix4x4>.Copy(from, to, size);
+			return to;
+		}
+		private Vector4[] CopyNativeArrayToArray(NativeArray<Vector4> from, Vector4[] to, int size)
+		{
+			NativeArray<Vector4>.Copy(from, to, size);
+			return to;
+		}
+		private float[] CopyNativeArrayToArray(NativeArray<float> from, float[] to, int size)
+		{
+			NativeArray<float>.Copy(from, to, size);
+			return to;
 		}
 
 		public void DrawMeshes()
@@ -391,17 +319,18 @@ namespace PopcornFX
 			{
 				unsafe
 				{
-					MaterialPropertyBlock materialProp = new MaterialPropertyBlock();
+					m_PropertyBlock.Clear();
+
 					int bufferIdx = 0;
 
 					foreach (MeshToDraw meshToDraw in m_Meshes)
 					{
 						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 						{
-							materialProp.SetVector(m_SkeletalMeshTransformRow0, meshToDraw.m_ImportTransform.GetRow(0));
-							materialProp.SetVector(m_SkeletalMeshTransformRow1, meshToDraw.m_ImportTransform.GetRow(1));
-							materialProp.SetVector(m_SkeletalMeshTransformRow2, meshToDraw.m_ImportTransform.GetRow(2));
-							materialProp.SetVector(m_SkeletalMeshTransformRow3, meshToDraw.m_ImportTransform.GetRow(3));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow0, meshToDraw.m_ImportTransform.GetRow(0));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow1, meshToDraw.m_ImportTransform.GetRow(1));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow2, meshToDraw.m_ImportTransform.GetRow(2));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow3, meshToDraw.m_ImportTransform.GetRow(3));
 						}
 						if (m_PerInstanceBuffer[bufferIdx] != IntPtr.Zero && m_InstancesCount[bufferIdx] > 0)
 						{
@@ -420,6 +349,7 @@ namespace PopcornFX
 								job.animCursor1 = m_AnimCursor1;
 								job.animIdx1 = m_AnimIdx1;
 								job.animTransition = m_AnimTransition;
+
 								job.transformUVRotate = m_TransformUVRotate;
 								job.transformUVOffsetScale = m_TransformUVOffsetScale;
 
@@ -434,26 +364,27 @@ namespace PopcornFX
 								bool isLit = false;
 
 								// Schedule the job with one Execute per index in the results array and only 1 item per processing batch
-								JobHandle handle = job.Schedule(Math.Min(dataLeft, 1023), 1);
+								JobHandle handle = job.Schedule(dataLeft, 1);
 
 								// Wait for the job to complete
 								handle.Complete();
 
 								generalOffset += dataLeft;
-								materialProp.SetVectorArray(m_DiffuseColorPropertyName, DiffuseColorsManagedArray);
+
+								m_PropertyBlock.SetVectorArray(m_DiffuseColorPropertyName, CopyNativeArrayToArray(m_DiffuseColors, m_DiffuseColorsArray, dataLeft));
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
 								{
-									materialProp.SetVectorArray(m_EmissiveColorPropertyName, EmissiveColorsManagedArray);
+									m_PropertyBlock.SetVectorArray(m_EmissiveColorPropertyName, CopyNativeArrayToArray(m_EmissiveColors, m_EmissiveColorsArray, dataLeft));
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)
 								{
-									materialProp.SetFloatArray(m_AlphaRemapCursorPropertyName, AlphaCursorsManagedArray);
+									m_PropertyBlock.SetFloatArray(m_AlphaRemapCursorPropertyName, CopyNativeArrayToArray(m_AlphaCursors, m_AlphaCursorsArray, dataLeft));
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_FluidVAT) != 0 ||
 									(m_ShaderVariation & (int)EShaderVariationFlags.Has_RigidVAT) != 0 ||
 									(m_ShaderVariation & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
 								{
-									materialProp.SetFloatArray(m_VATCursorPropertyName, VatCursorsManagedArray);
+									m_PropertyBlock.SetFloatArray(m_VATCursorPropertyName, CopyNativeArrayToArray(m_VatCursors, m_VatCursorsArray, dataLeft));
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Lighting) != 0)
 								{
@@ -461,32 +392,33 @@ namespace PopcornFX
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 								{
-									materialProp.SetFloatArray(m_SkeletalAnimCursor0PropertyName, AnimCursor0ManagedArray);
-									materialProp.SetFloatArray(m_SkeletalAnimIdx0PropertyName, AnimIdx0ManagedArray);
+									m_PropertyBlock.SetFloatArray(m_SkeletalAnimCursor0PropertyName, CopyNativeArrayToArray(m_AnimCursor0, m_AnimCursor0Array, dataLeft));
+									m_PropertyBlock.SetFloatArray(m_SkeletalAnimIdx0PropertyName, CopyNativeArrayToArray(m_AnimIdx0, m_AnimIdx0Array, dataLeft));
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalTrackInterpol) != 0)
 								{
-									materialProp.SetFloatArray(m_SkeletalAnimCursor1PropertyName, AnimCursor1ManagedArray);
-									materialProp.SetFloatArray(m_SkeletalAnimIdx1PropertyName, AnimIdx1ManagedArray);
-									materialProp.SetFloatArray(m_SkeletalAnimTransitionPropertyName, AnimTransitionManagedArray);
+									m_PropertyBlock.SetFloatArray(m_SkeletalAnimCursor1PropertyName, CopyNativeArrayToArray(m_AnimCursor1, m_AnimCursor1Array, dataLeft));
+									m_PropertyBlock.SetFloatArray(m_SkeletalAnimIdx1PropertyName, CopyNativeArrayToArray(m_AnimIdx1, m_AnimIdx1Array, dataLeft));
+									m_PropertyBlock.SetFloatArray(m_SkeletalAnimTransitionPropertyName, CopyNativeArrayToArray(m_AnimTransition, m_AnimTransitionArray, dataLeft));
 								}
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0)
 								{
-									materialProp.SetFloatArray(m_AtlasIdPropertyName, AtlasIdManagedArray);
+									m_PropertyBlock.SetFloatArray(m_AtlasIdPropertyName, CopyNativeArrayToArray(m_AtlasId, m_AtlasIdArray, dataLeft));
 								}
+
 								if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
 								{
-									materialProp.SetFloatArray(m_TransformUVRotatePropertyName, m_TransformUVRotate.ToArray());
-									materialProp.SetVectorArray(m_TransformUVOffsetScalePropertyName, m_TransformUVOffsetScale.ToArray());
+									m_PropertyBlock.SetFloatArray(m_TransformUVRotatePropertyName, CopyNativeArrayToArray(m_TransformUVRotate, m_TransformUVRotateArray, dataLeft));
+									m_PropertyBlock.SetVectorArray(m_TransformUVOffsetScalePropertyName, CopyNativeArrayToArray(m_TransformUVOffsetScale, m_TransformUVOffsetScaleArray, dataLeft));
 								}
 
 								Graphics.DrawMeshInstanced(
 									meshToDraw.m_Mesh,
 									meshToDraw.m_SubMeshId,
 									m_Material,
-									TransformsManagedArray,
+									CopyNativeArrayToArray(m_Transforms, m_TransformsArray, dataLeft),
 									dataLeft,
-									materialProp,
+									m_PropertyBlock,
 									m_CastShadow ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off,
 									isLit
 								);
@@ -502,7 +434,7 @@ namespace PopcornFX
 
 				foreach (MeshToDraw meshToDraw in m_Meshes)
 				{
-					MaterialPropertyBlock materialProp = new MaterialPropertyBlock();
+					m_PropertyBlock.Clear();
 
 					unsafe
 					{
@@ -519,8 +451,10 @@ namespace PopcornFX
 						uint* instanceNextAnimIdx = null;
 						float* instanceTransitionRatio = null;
 
+
 						float* instanceTransformUVRotate = null;
-						Vector4* instanceTransformUVOffsetScale = null;
+						Vector2* instanceTransformUVOffset = null;
+						Vector2* instanceTransformUVScale = null;
 
 						void* currentPtr = m_PerInstanceBuffer[bufferIdx].ToPointer();
 						int instanceCount = m_InstancesCount[bufferIdx];
@@ -560,10 +494,10 @@ namespace PopcornFX
 
 						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 						{
-							materialProp.SetVector(m_SkeletalMeshTransformRow0, meshToDraw.m_ImportTransform.GetRow(0));
-							materialProp.SetVector(m_SkeletalMeshTransformRow1, meshToDraw.m_ImportTransform.GetRow(1));
-							materialProp.SetVector(m_SkeletalMeshTransformRow2, meshToDraw.m_ImportTransform.GetRow(2));
-							materialProp.SetVector(m_SkeletalMeshTransformRow3, meshToDraw.m_ImportTransform.GetRow(3));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow0, meshToDraw.m_ImportTransform.GetRow(0));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow1, meshToDraw.m_ImportTransform.GetRow(1));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow2, meshToDraw.m_ImportTransform.GetRow(2));
+							m_PropertyBlock.SetVector(m_SkeletalMeshTransformRow3, meshToDraw.m_ImportTransform.GetRow(3));
 						}
 						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 						{
@@ -585,8 +519,10 @@ namespace PopcornFX
 						{
 							instanceTransformUVRotate = (float*)currentPtr;
 							currentPtr = instanceTransformUVRotate + instanceCount;
-							instanceTransformUVOffsetScale = (Vector4*)currentPtr;
-							currentPtr = instanceTransformUVOffsetScale + instanceCount;
+							instanceTransformUVOffset = (Vector2*)currentPtr;
+							currentPtr = instanceTransformUVOffset + instanceCount;
+							instanceTransformUVScale = (Vector2*)currentPtr;
+							currentPtr = instanceTransformUVScale + instanceCount;
 						}
 
 						for (int i = 0; i < m_InstancesCount[bufferIdx]; i++)
@@ -597,42 +533,45 @@ namespace PopcornFX
 								meshTransform = instanceTransform[i];
 							else
 								meshTransform = instanceTransform[i] * meshToDraw.m_ImportTransform;
-							materialProp.SetVector(m_DiffuseColorPropertyName, instanceDiffuseColor[i]);
+							m_PropertyBlock.SetVector(m_DiffuseColorPropertyName, instanceDiffuseColor[i]);
 							if (instanceEmissiveColor != null && !string.IsNullOrEmpty(m_EmissiveColorPropertyName))
-								materialProp.SetVector(m_EmissiveColorPropertyName, instanceEmissiveColor[i]);
+								m_PropertyBlock.SetVector(m_EmissiveColorPropertyName, instanceEmissiveColor[i]);
 							if (instanceAlphaCursor != null && !string.IsNullOrEmpty(m_AlphaRemapCursorPropertyName))
-								materialProp.SetFloat(m_AlphaRemapCursorPropertyName, instanceAlphaCursor[i]);
+								m_PropertyBlock.SetFloat(m_AlphaRemapCursorPropertyName, instanceAlphaCursor[i]);
 							if (instanceVATCursor != null && !string.IsNullOrEmpty(m_VATCursorPropertyName))
-								materialProp.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
+								m_PropertyBlock.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
 							if (instanceVATCursor != null && !string.IsNullOrEmpty(m_VATCursorPropertyName))
-								materialProp.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
+								m_PropertyBlock.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
 							if (atlasId != null && !string.IsNullOrEmpty(m_AtlasIdPropertyName))
-								materialProp.SetFloat(m_AtlasIdPropertyName, atlasId[i]);
+								m_PropertyBlock.SetFloat(m_AtlasIdPropertyName, atlasId[i]);
 							if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 							{
 								if (instanceCurrentAnimIdx != null && !string.IsNullOrEmpty(m_SkeletalAnimIdx0PropertyName))
-									materialProp.SetFloat(m_SkeletalAnimIdx0PropertyName, instanceCurrentAnimIdx[i]);
+									m_PropertyBlock.SetFloat(m_SkeletalAnimIdx0PropertyName, instanceCurrentAnimIdx[i]);
 								if (instanceCurrentAnimCursor != null && !string.IsNullOrEmpty(m_SkeletalAnimCursor0PropertyName))
-									materialProp.SetFloat(m_SkeletalAnimCursor0PropertyName, instanceCurrentAnimCursor[i]);
+									m_PropertyBlock.SetFloat(m_SkeletalAnimCursor0PropertyName, instanceCurrentAnimCursor[i]);
 							}
 							if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalTrackInterpol) != 0)
 							{
 								if (instanceNextAnimIdx != null && !string.IsNullOrEmpty(m_SkeletalAnimIdx1PropertyName))
-									materialProp.SetFloat(m_SkeletalAnimIdx1PropertyName, instanceNextAnimIdx[i]);
+									m_PropertyBlock.SetFloat(m_SkeletalAnimIdx1PropertyName, instanceNextAnimIdx[i]);
 								if (instanceNextAnimCursor != null && !string.IsNullOrEmpty(m_SkeletalAnimCursor1PropertyName))
-									materialProp.SetFloat(m_SkeletalAnimCursor1PropertyName, instanceNextAnimCursor[i]);
+									m_PropertyBlock.SetFloat(m_SkeletalAnimCursor1PropertyName, instanceNextAnimCursor[i]);
 								if (instanceTransitionRatio != null && !string.IsNullOrEmpty(m_SkeletalAnimTransitionPropertyName))
-									materialProp.SetFloat(m_SkeletalAnimTransitionPropertyName, instanceTransitionRatio[i]);
+									m_PropertyBlock.SetFloat(m_SkeletalAnimTransitionPropertyName, instanceTransitionRatio[i]);
 							}
 							if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
 							{
 								if (instanceTransformUVRotate != null && !string.IsNullOrEmpty(m_TransformUVRotatePropertyName))
-									materialProp.SetFloat(m_TransformUVRotatePropertyName, instanceTransformUVRotate[i]);
-								if (instanceTransformUVOffsetScale != null && !string.IsNullOrEmpty(m_TransformUVOffsetScalePropertyName))
-									materialProp.SetVector(m_TransformUVOffsetScalePropertyName, instanceTransformUVOffsetScale[i]);
+									m_PropertyBlock.SetFloat(m_TransformUVRotatePropertyName, instanceTransformUVRotate[i]);
+								if (instanceTransformUVOffset != null && instanceTransformUVScale != null && !string.IsNullOrEmpty(m_TransformUVOffsetScalePropertyName))
+								{
+									m_PropertyBlock.SetVector(m_TransformUVOffsetScalePropertyName, new Vector4(instanceTransformUVOffset[i].x, instanceTransformUVOffset[i].y, instanceTransformUVScale[i].x, instanceTransformUVScale[i].y));
+								}
+
 							}
 
-							Graphics.DrawMesh(meshToDraw.m_Mesh, meshTransform, m_Material, 0, null, meshToDraw.m_SubMeshId, materialProp, m_CastShadow, isLit);
+							Graphics.DrawMesh(meshToDraw.m_Mesh, meshTransform, m_Material, 0, null, meshToDraw.m_SubMeshId, m_PropertyBlock, m_CastShadow, isLit);
 						}
 					}
 					++bufferIdx;

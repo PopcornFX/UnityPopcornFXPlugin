@@ -208,6 +208,14 @@ namespace PopcornFX
 		}
 #endif
 
+		public static void SetupPopcornFxLogs()
+		{
+			if (PKFxSettings.EnablePopcornFXLogs)
+				SetMaxLogsPerFrame(0x100);
+			else
+				SetMaxLogsPerFrame(0);
+		}
+
 		public static void SetupPopcornFxSettings(bool isUnitTesting)
 		{
 			SPopcornFxSettings settings = new SPopcornFxSettings();
@@ -228,10 +236,8 @@ namespace PopcornFX
 			settings.m_FreeUnusedBatches = PKFxSettings.FreeUnusedBatches;
 			settings.m_FrameCountBeforeFreeingUnusedBatches = PKFxSettings.FrameCountBeforeFreeingUnusedBatches;
 
-			if (PKFxSettings.EnablePopcornFXLogs)
-				SetMaxLogsPerFrame(0x100);
-			else
-				SetMaxLogsPerFrame(0);
+			SetupPopcornFxLogs();
+
 			if (!Application.isPlaying)
 			{
 				settings.m_SingleThreadedExecution = false;

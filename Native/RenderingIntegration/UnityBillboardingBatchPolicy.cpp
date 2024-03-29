@@ -32,6 +32,8 @@ CUnityBillboardingBatchPolicy::CUnityBillboardingBatchPolicy()
 ,	m_MappedIdxBuffer(null)
 ,	m_MappedInfoBillboardBuffer(null)
 ,	m_MappedAtlasesBuffer(null)
+,	m_HasAtlas(false)
+,	m_HasTransformUV(false)
 {
 }
 

@@ -155,7 +155,6 @@ extern "C"
 		const char					*m_EmissiveRampMap;
 		float						m_InvSoftnessDistance;
 		float						m_AlphaClipThreshold;
-		bool						m_DoubleSided;
 
 		SRenderingFeatureLitDesc			*m_LitRendering;
 		SRenderingFeatureVATDesc			*m_VatRendering;
@@ -168,6 +167,7 @@ extern "C"
 		int							m_DrawOrder;
 
 		ManagedBool					m_TransformUVs_RGBOnly;
+		ManagedBool					m_UseVertexColor;
 
 		SMeshRendererDesc()
 			: m_MeshAsset(null)
@@ -181,7 +181,6 @@ extern "C"
 			, m_EmissiveRampMap(null)
 			, m_InvSoftnessDistance(0)
 			, m_AlphaClipThreshold(0)
-			, m_DoubleSided(false)
 			, m_LitRendering(null)
 			, m_VatRendering(null)
 			, m_AnimDescRendering(null)
@@ -190,6 +189,7 @@ extern "C"
 			, m_UID(-1)
 			, m_DrawOrder(0)
 			, m_TransformUVs_RGBOnly(ManagedBool_False)
+			, m_UseVertexColor(ManagedBool_False)
 		{
 		}
 

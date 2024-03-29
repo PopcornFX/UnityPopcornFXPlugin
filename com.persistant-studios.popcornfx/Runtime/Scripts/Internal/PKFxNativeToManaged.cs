@@ -148,7 +148,6 @@ namespace PopcornFX
 		public IntPtr m_EmissiveRampMap;
 		public float m_InvSofnessDistance;
 		public float m_AlphaClipThreshold;
-		public bool	m_DoubleSided;
 
 		public IntPtr m_LitRendering;
 		public IntPtr m_VatRendering;
@@ -159,6 +158,7 @@ namespace PopcornFX
 		public int		m_UID;
 		public int		m_DrawOrder;
 		public int		m_TransformUVs_RGBOnly;
+		public int		m_UseVertexColor;
 	};
 
 

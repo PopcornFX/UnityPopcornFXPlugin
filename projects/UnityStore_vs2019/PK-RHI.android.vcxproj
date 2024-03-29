@@ -639,6 +639,9 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\Startup.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IApiManager.cpp">
+      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IFrameBuffer.cpp">
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
     </ClCompile>

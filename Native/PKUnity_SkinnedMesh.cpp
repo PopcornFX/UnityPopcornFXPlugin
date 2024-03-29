@@ -202,7 +202,7 @@ bool		CPkFxSkinnedMesh::_Init(u32 samplerUsage,
 	m_SkinContext.m_SrcNormals = m_SrcNormals;
 	m_SkinContext.m_DstNormals = m_DstNormals;
 
-	m_SkinContext.m_SrcTangents = TStridedMemoryView<const CFloat3>(reinterpret_cast<const CFloat3*>(m_SrcTangents.Data()), m_SrcTangents.Count(), 0x10);
+	m_SkinContext.m_SrcTangents = m_SrcTangents;
 	m_SkinContext.m_DstTangents = m_DstTangents;
 
 	m_Override.m_PositionsOverride = m_DstPositions;

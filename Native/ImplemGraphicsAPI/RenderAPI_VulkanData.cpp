@@ -81,7 +81,7 @@ void	*CVulkanData::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool is
 {
 	(void)isIdxBuff; (void)fullSize; (void)mapSize;
 
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 	IUnityGraphicsVulkan *graphicVulkan = CRuntimeManager::Instance().GetUnityGraphicsVulkan();
 	if (!PK_VERIFY(graphicVulkan != null))
 		return null;
@@ -112,7 +112,7 @@ void	*CVulkanData::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool is
 void	CVulkanData::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBuff)
 {
 	(void)isIdxBuff;
-	PK_ASSERT(CRuntimeManager::Instance().GetScene().IsRenderThread());
+	PK_ASSERT(CRuntimeManager::Instance().IsRenderThread());
 	IUnityGraphicsVulkan *graphicVulkan = CRuntimeManager::Instance().GetUnityGraphicsVulkan();
 	if (!PK_VERIFY(graphicVulkan != null))
 		return;

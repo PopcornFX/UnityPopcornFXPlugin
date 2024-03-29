@@ -208,6 +208,7 @@ GENERATED += $(OBJDIR)/D3D12Texture.o
 GENERATED += $(OBJDIR)/D3DCompileShader.o
 GENERATED += $(OBJDIR)/D3DPopcornEnumConversion.o
 GENERATED += $(OBJDIR)/EnumHelper.o
+GENERATED += $(OBJDIR)/IApiManager.o
 GENERATED += $(OBJDIR)/IFrameBuffer.o
 GENERATED += $(OBJDIR)/IGpuBuffer.o
 GENERATED += $(OBJDIR)/IReadBackTexture.o
@@ -314,6 +315,7 @@ OBJECTS += $(OBJDIR)/D3D12Texture.o
 OBJECTS += $(OBJDIR)/D3DCompileShader.o
 OBJECTS += $(OBJDIR)/D3DPopcornEnumConversion.o
 OBJECTS += $(OBJDIR)/EnumHelper.o
+OBJECTS += $(OBJDIR)/IApiManager.o
 OBJECTS += $(OBJDIR)/IFrameBuffer.o
 OBJECTS += $(OBJDIR)/IGpuBuffer.o
 OBJECTS += $(OBJDIR)/IReadBackTexture.o
@@ -570,6 +572,9 @@ $(OBJDIR)/ShaderConstantBindingGenerator.o: ../../ExternalLibs/Runtime/pk_rhi/sr
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Startup.o: ../../ExternalLibs/Runtime/pk_rhi/src/Startup.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IApiManager.o: ../../ExternalLibs/Runtime/pk_rhi/src/interfaces/IApiManager.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/IFrameBuffer.o: ../../ExternalLibs/Runtime/pk_rhi/src/interfaces/IFrameBuffer.cpp

@@ -776,6 +776,9 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\Startup.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IApiManager.cpp">
+      <Filter>Sources\interfaces</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_rhi\src\interfaces\IFrameBuffer.cpp">
       <Filter>Sources\interfaces</Filter>
     </ClCompile>

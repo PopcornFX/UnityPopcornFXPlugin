@@ -23,6 +23,7 @@
 #include <pk_particles/include/ps_descriptor.h>
 #include <pk_particles/include/Renderers/ps_renderer_base.h>
 #include <pk_particles/include/ps_descriptor_cache.h>
+#include <pk_particles/include/ps_nodegraph_nodes_render.h>		// CParticleNodeRendererBase
 
 #include <pk_particles/include/ps_samplers_classes.h>
 #include <pk_particles/include/ps_samplers_shape.h>
@@ -110,23 +111,23 @@ struct	SUnityDependencyAppendHelper
 					else if (property->m_Name == BasicRendererProperties::SID_Lit_NormalMap())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_PositionMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_NormalMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Fluid_ColorMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_PositionMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_NormalMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Soft_ColorMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_PositionMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == VertexAnimationRendererProperties::SID_VertexAnimation_Rigid_RotationMap())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else if (property->m_Name == SkeletalAnimationTexture::SID_SkeletalAnimation_AnimationTexture())
-						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_VAT;
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Lookup;
 					else
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_sRGB;
 				}
@@ -250,7 +251,7 @@ bool	CEffectBrowser::LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSi
 	ClearForNewEffect();
 
 	CEffectBaker	*effectBaker = CEditorManager::Instance().GetEffectBaker();
-	PFilePack		pKSourcePack = m_BrowseFSController->MountPack(effectBaker->GetPopcornFXPackPath());
+	PFilePack		pKSourcePack = m_BrowseFSController->MountPack(effectBaker->GetDstBakePackPath());
 
 	CConstMemoryStream	memStream(pkfxContentPtr, contentByteSize);
 	CStringView			pathView = CStringView(path, SNativeStringUtils::Length(path));
@@ -298,7 +299,7 @@ bool	CEffectBrowser::LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSi
 			effect->SetDefaultConnectionMap(ecmState);
 			ret &= effect->LoadConnectionMap();
 		}
-		if (!BrowseEffect(effect, i == 0, requiresGameThreadCollect))
+		if (!BrowseEffect(effect, file, i == 0, requiresGameThreadCollect))
 			ret = false;
 		if (!ret)
 			break;
@@ -310,7 +311,7 @@ bool	CEffectBrowser::LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSi
 	return ret;
 }
 
-bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect, bool browseAttributes, bool &requiresGameThreadCollect)
+bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect, PBaseObjectFile &file, bool browseAttributes, bool &requiresGameThreadCollect)
 {
 
 	TArray<SResourceDependency>		dependencies;
@@ -329,7 +330,7 @@ bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect, bool br
 	if (!BrowseObjectForDependencies(dependencies, requiresGameThreadCollect))
 		return false;
 
-	if (!BrowseRenderers(particleEffect.Get(), requiresGameThreadCollect))
+	if (!BrowseRenderers(particleEffect.Get(), file.Get(), requiresGameThreadCollect))
 		return false;
 
 	if (!BrowseExportedEvents(particleEffect.Get()))
@@ -384,18 +385,12 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 			}
 			else if (dependency.m_Type == SResourceDependency::Type_Image)
 			{
-				if (dependency.m_Usage & SResourceDependency::UsageFlags_Image_VAT)
-				{
-					dependencyMask |= IsVatTexture;
-				}
+				if (dependency.m_Usage & SResourceDependency::UsageFlags_Image_Lookup)
+					dependencyMask |= IsLookupTexture;
 				else if (dependency.m_Usage & SResourceDependency::UsageFlags_Image_Linear)
-				{
 					dependencyMask |= IsLinearTextureRenderer;
-				}
 				else
-				{
 					dependencyMask |= IsTextureRenderer;
-				}
 			}
 			::OnEffectDependencyFound(path.Data(), dependencyMask);
 		}
@@ -428,7 +423,7 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 
 //----------------------------------------------------------------------------
 
-bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requiresGameThreadCollect)
+bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjectFile *file, bool &requiresGameThreadCollect)
 {
 	if (!PK_VERIFY(particleEffect != null))
 		return false;
@@ -462,6 +457,15 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 				++count;
 				continue;
 			}
+
+			CString	customName;
+			PBaseObject rendererObj = file->FindObject(renderer->m_Declaration.m_RendererUID);
+			if (PK_VERIFY(CParticleNodeRendererBase::m_Handler->IsBaseClassOf(rendererObj.Get())))
+			{
+				CParticleNodeRendererBase	*rendererNode = checked_cast<CParticleNodeRendererBase*>((rendererObj.Get()));
+				customName = rendererNode->CustomName().MapDefault().ToUTF8();
+			}
+
 			if (renderer->m_RendererType == Renderer_Billboard)
 			{
 				SPopcornRendererDesc			unityMeshDesc;
@@ -469,6 +473,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 
 				dummyCache.GameThread_SetupRenderer(dataBillboard);
 				dummyCache.GetRendererInfo(unityMeshDesc);
+				unityMeshDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
 				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
 				++m_UniqueRendererCount;
@@ -481,6 +486,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 
 				dummyCache.GameThread_SetupRenderer(dataRibbon);
 				dummyCache.GetRendererInfo(unityMeshDesc);
+				unityMeshDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
 				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
 				++m_UniqueRendererCount;
@@ -493,6 +499,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 
 				dummyCache.GameThread_SetupRenderer(dataMesh);
 				dummyCache.GetRendererInfo(unityMeshDesc);
+				unityMeshDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
 				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
 				++m_UniqueRendererCount;
@@ -506,6 +513,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 
 				dummyCache.GameThread_SetupRenderer(dataTriangle);
 				dummyCache.GetRendererInfo(unityTriangleDesc);
+				unityTriangleDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityTriangleDesc, renderer->m_RendererType, m_UniqueRendererCount);
 				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
 				++m_UniqueRendererCount;
@@ -518,7 +526,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 
 				dummyCache.GameThread_SetupRenderer(dataLight);
 				dummyCache.GetRendererInfo(unityLightDesc);
-
+				unityLightDesc.m_CustomName = customName.Data();
 				requiresGameThreadCollect = true;
 				::OnEffectRendererFound(&unityLightDesc, renderer->m_RendererType, m_UniqueRendererCount);
 				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
@@ -532,6 +540,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, bool &requ
 
 				dummyCache.GameThread_SetupRenderer(dataSound);
 				dummyCache.GetRendererInfo(unitySoundDesc);
+				unitySoundDesc.m_CustomName = customName.Data();
 				requiresGameThreadCollect = true;
 				::OnEffectRendererFound(&unitySoundDesc, renderer->m_RendererType, m_UniqueRendererCount);
 				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);

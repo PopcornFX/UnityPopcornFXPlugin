@@ -492,6 +492,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
     <ClInclude Include="..\..\SDK\Samples\ParticleSample\src\precompiled.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_axis_system.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_core_upgrade.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_file.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_material.h" />

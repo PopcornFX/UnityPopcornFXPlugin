@@ -42,9 +42,9 @@ public:
 	void	ClearForNewEffect();
 	bool	LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSize, const char *path);
 
-	bool	BrowseEffect(const PParticleEffect &effectContent, bool browseAttributes, bool &requiresGameThreadCollect);
+	bool	BrowseEffect(const PParticleEffect &effectContent, PBaseObjectFile &file, bool browseAttributes, bool &requiresGameThreadCollect);
 	bool	BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &requiresGameThreadCollect);
-	bool	BrowseRenderers(CParticleEffect *particleEffect, bool &requiresGameThreadCollect);
+	bool	BrowseRenderers(CParticleEffect *particleEffect, CBaseObjectFile *file, bool &requiresGameThreadCollect);
 	bool	BrowseExportedEvents(CParticleEffect *particleEffect);
 	bool	BrowseAttributes(const CParticleAttributeList::_TypeOfAttributeList &attributeList, const TMemoryView<const u32> &remapIds);
 	bool	BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerList);

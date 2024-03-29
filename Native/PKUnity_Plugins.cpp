@@ -36,7 +36,7 @@
 		PK_PLUGIN_DECLARE(CCompilerBackendCPU_VM);
 #	endif
 
-#	if defined(USE_IMAGE_PLUGINS)
+#	if (USE_IMAGE_PLUGINS != 0)
 		PK_PLUGIN_DECLARE(CImageDDSCodec);
 		PK_PLUGIN_DECLARE(CImagePNGCodec);
 		PK_PLUGIN_DECLARE(CImageTGACodec);
@@ -48,7 +48,7 @@
 		PK_PLUGIN_DECLARE(CImageEXRCodec);
 #	endif
 
-#	if defined(USE_FBX_PLUGIN)
+#	if (USE_FBX_PLUGIN != 0)
 		PK_PLUGIN_DECLARE(CMeshCodecFBX);
 #	endif
 
@@ -76,11 +76,11 @@ namespace	PKFX
 		PK_ASSERT(g_LoadedPlugins == 0);
 
 		bool	success = true;
-#	ifndef	PK_PLUGINS_STATIC
+#ifndef	PK_PLUGINS_STATIC
 		// plugins are .dll
 		CPluginManager::RegisterDirectory("Plugins", false);
 
-#	else
+#else
 		// plugins are linked statically
 		if (selected & EPlugin_CompilerBackendVM)
 		{
@@ -88,80 +88,80 @@ namespace	PKFX
 			IPluginModule	*backend = StartupPlugin_CCompilerBackendCPU_VM();
 			success &= (backend != null && CPluginManager::PluginRegister(backend, true, backendPath));
 		}
-#		if USE_IMAGE_PLUGINS
+#	if (USE_IMAGE_PLUGINS != 0)
 		if (selected & EPlugin_ImageCodecDDS)
 		{
-			const char		*codecPathDDS = "Plugins/image_codec_dds" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecDDS = StartupPlugin_CImageDDSCodec();
-			success &= (codecDDS != null && CPluginManager::PluginRegister(codecDDS, true, codecPathDDS));
+			const char		*codecPath = "Plugins/image_codec_dds" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImageDDSCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecPNG)
 		{
-			const char		*codecPathPNG = "Plugins/image_codec_png" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecPNG = StartupPlugin_CImagePNGCodec();
-			success &= (codecPNG != null && CPluginManager::PluginRegister(codecPNG, true, codecPathPNG));
+			const char		*codecPath = "Plugins/image_codec_png" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImagePNGCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecJPG)
 		{
-			const char		*codecPathJPG = "Plugins/image_codec_jpeg" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecJPG = StartupPlugin_CImageJPEGCodec();
-			success &= (codecJPG != null && CPluginManager::PluginRegister(codecJPG, true, codecPathJPG));
+			const char		*codecPath = "Plugins/image_codec_jpeg" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImageJPEGCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecTGA)
 		{
-			const char		*codecPathTGA = "Plugins/image_codec_tga" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecTGA = StartupPlugin_CImageTGACodec();
-			success &= (codecTGA != null && CPluginManager::PluginRegister(codecTGA, true, codecPathTGA));
+			const char		*codecPath = "Plugins/image_codec_tga" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImageTGACodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecTIFF)
 		{
-			const char		*codecPathTIFF = "Plugins/image_codec_tiff" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecTIFF = StartupPlugin_CImageTIFFCodec();
-			success &= (codecTIFF != null && CPluginManager::PluginRegister(codecTIFF, true, codecPathTIFF));
+			const char		*codecPath = "Plugins/image_codec_tiff" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImageTIFFCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecPKM)
 		{
-			const char		*codecPathPKM = "Plugins/image_codec_pkm" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecPKM = StartupPlugin_CImagePKMCodec();
-			success &= (codecPKM != null && CPluginManager::PluginRegister(codecPKM, true, codecPathPKM));
+			const char		*codecPath = "Plugins/image_codec_pkm" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImagePKMCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecPVR)
 		{
-			const char		*codecPathPVR = "Plugins/image_codec_pvr" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecPVR = StartupPlugin_CImagePVRCodec();
-			success &= (codecPVR != null && CPluginManager::PluginRegister(codecPVR, true, codecPathPVR));
+			const char		*codecPath = "Plugins/image_codec_pvr" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImagePVRCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecHDR)
 		{
-			const char		*codecPathHDR = "Plugins/image_codec_hdr" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecHDR = StartupPlugin_CImageHDRCodec();
-			success &= (codecHDR != null && CPluginManager::PluginRegister(codecHDR, true, codecPathHDR));
+			const char		*codecPath = "Plugins/image_codec_hdr" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImageHDRCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 
 		if (selected & EPlugin_ImageCodecEXR)
 		{
-			const char		*codecPathEXR = "Plugins/image_codec_hdr" PK_PLUGIN_POSTFIX_BUILD;
-			IPluginModule	*codecEXR = StartupPlugin_CImageEXRCodec();
-			success &= (codecEXR != null && CPluginManager::PluginRegister(codecEXR, true, codecPathEXR));
+			const char		*codecPath = "Plugins/image_codec_hdr" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImageEXRCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
-#		endif
+#	endif	// (USE_IMAGE_PLUGINS != 0)
 
-#		if USE_FBX_PLUGIN
+#	if (USE_FBX_PLUGIN != 0)
 		if (selected & EPlugin_MeshCodecFBX)
 		{
 			const char		*codecPath = "Plugins/MeshCodecFBX" PK_PLUGIN_POSTFIX_BUILD;
 			IPluginModule	*codec = StartupPlugin_CMeshCodecFBX();
 			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
-#		endif
-#	endif
+#	endif	// (USE_FBX_PLUGIN != 0)
+#endif
 
 		g_LoadedPlugins = selected;
 		return success;
@@ -176,7 +176,7 @@ namespace	PKFX
 	void	UnregisterPlugins()
 	{
 		// unregister plugins:
-#	ifdef	PK_PLUGINS_STATIC
+#ifdef	PK_PLUGINS_STATIC
 		if (g_LoadedPlugins & EPlugin_CompilerBackendVM)
 		{
 			IPluginModule	*backend = GetPlugin_CCompilerBackendCPU_VM();
@@ -184,80 +184,80 @@ namespace	PKFX
 			ShutdownPlugin_CCompilerBackendCPU_VM();
 		}
 
-#		if	USE_IMAGE_PLUGINS
+#	if (USE_IMAGE_PLUGINS != 0)
 		if (g_LoadedPlugins & EPlugin_ImageCodecDDS)
 		{
-			IPluginModule	*codecDDS = GetPlugin_CImageDDSCodec();
-			(codecDDS != null && CPluginManager::PluginRelease(codecDDS));
+			IPluginModule	*codec = GetPlugin_CImageDDSCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImageDDSCodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecPNG)
 		{
-			IPluginModule	*codecPNG = GetPlugin_CImagePNGCodec();
-			(codecPNG != null && CPluginManager::PluginRelease(codecPNG));
+			IPluginModule	*codec = GetPlugin_CImagePNGCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImagePNGCodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecJPG)
 		{
-			IPluginModule	*codecJPG = GetPlugin_CImageJPEGCodec();
-			(codecJPG != null && CPluginManager::PluginRelease(codecJPG));
+			IPluginModule	*codec = GetPlugin_CImageJPEGCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImageJPEGCodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecTGA)
 		{
-			IPluginModule	*codecTGA = GetPlugin_CImageTGACodec();
-			(codecTGA != null && CPluginManager::PluginRelease(codecTGA));
+			IPluginModule	*codec = GetPlugin_CImageTGACodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImageTGACodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecTIFF)
 		{
-			IPluginModule	*codecTIFF = GetPlugin_CImageTIFFCodec();
-			(codecTIFF != null && CPluginManager::PluginRelease(codecTIFF));
+			IPluginModule	*codec = GetPlugin_CImageTIFFCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImageTIFFCodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecPKM)
 		{
-			IPluginModule	*codecPKM = GetPlugin_CImagePKMCodec();
-			(codecPKM != null && CPluginManager::PluginRelease(codecPKM));
+			IPluginModule	*codec = GetPlugin_CImagePKMCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImagePKMCodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecPVR)
 		{
-			IPluginModule	*codecPVR = GetPlugin_CImagePVRCodec();
-			(codecPVR != null && CPluginManager::PluginRelease(codecPVR));
+			IPluginModule	*codec = GetPlugin_CImagePVRCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImagePVRCodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecHDR)
 		{
-			IPluginModule	*codecHDR = GetPlugin_CImageHDRCodec();
-			(codecHDR != null && CPluginManager::PluginRelease(codecHDR));
+			IPluginModule	*codec = GetPlugin_CImageHDRCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImageHDRCodec();
 		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecEXR)
 		{
-			IPluginModule	*codecEXR = GetPlugin_CImageEXRCodec();
-			(codecEXR != null && CPluginManager::PluginRelease(codecEXR));
+			IPluginModule	*codec = GetPlugin_CImageEXRCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CImageEXRCodec();
 		}
-#		endif
+#	endif	// (USE_IMAGE_PLUGINS != 0)
 
-#		if USE_FBX_PLUGIN
+#	if (USE_FBX_PLUGIN != 0)
 		if (g_LoadedPlugins & EPlugin_MeshCodecFBX)
 		{
 			IPluginModule	*codec = GetPlugin_CMeshCodecFBX();
 			(codec != null && CPluginManager::PluginRelease(codec));
 			ShutdownPlugin_CMeshCodecFBX();
 		}
-#		endif
-#	endif
+#	endif	// (USE_FBX_PLUGIN != 0)
+#endif
 
 		g_LoadedPlugins = 0;
 	}

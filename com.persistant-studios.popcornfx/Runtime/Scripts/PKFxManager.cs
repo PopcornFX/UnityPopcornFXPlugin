@@ -444,11 +444,11 @@ namespace PopcornFX
 			PKFxManagerImpl.SyncParticlesSimulation();
 
 			// Update the FX transforms and attributes:
-			foreach (PKFxEmitter fx in PKFxEmitter.g_PlayingEffectsToUpdate)
+			foreach (var fx in PKFxEmitter.g_PlayingEffectsToUpdate)
 			{
-				fx.UpdateEffectTransforms();
-				fx.UpdateAttributes();
-				fx.UpdateSamplers(false);
+				fx.Value.UpdateEffectTransforms();
+				fx.Value.UpdateAttributes();
+				fx.Value.UpdateSamplers(false);
 			}
 			float frameDt = Time.smoothDeltaTime * TimeMultiplier;
 			if (UseFixedDT)
@@ -838,7 +838,7 @@ namespace PopcornFX
 			{
 				if (renderer.m_InstancesRenderer == null && renderer.m_RenderingObject.activeInHierarchy)
 				{
-					Bounds bounds = renderer.m_Slice.mesh.bounds;
+					Bounds bounds = renderer.m_Slice.sharedMesh.bounds;
 					Color boundsColor = renderer.m_BoundsDebugColor;
 
 					Debug.DrawLine(new Vector3(bounds.min.x, bounds.min.y, bounds.min.z), new Vector3(bounds.max.x, bounds.min.y, bounds.min.z), boundsColor);

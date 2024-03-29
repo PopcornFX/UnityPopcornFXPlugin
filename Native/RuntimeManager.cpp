@@ -1177,7 +1177,7 @@ u32	CRuntimeManager::GetInstanceCount(const PopcornFX::CParticleEffect *effect)
 		if (emitter == null)
 			continue;
 		const PParticleEffectInstance	effectInstance = emitter->GetEffectInstance();
-		if (!PK_VERIFY(effectInstance != null) || !effectInstance->Alive())
+		if (effectInstance == null || !effectInstance->Alive())
 			continue;
 		if (effectInstance->ParentEffect() == effect)
 			++instanceCount;
@@ -1938,33 +1938,27 @@ void	CRuntimeManager::_ExecUpdateCamDesc(int camID, SCamDesc desc, bool update)
 
 	SUnitySceneView	&sceneView = sceneViews[camID];
 
-	const CFloat4x4 &camV2W = desc.m_ViewMatrix.Inverse();
-	const CFloat4x4	&camW2V = desc.m_ViewMatrix;
-	const CFloat4x4 &camV2P = desc.m_ProjectionMatrix;
-	const CFloat4x4 &camP2V = desc.m_ProjectionMatrix.Inverse();
-	const CFloat4x4	camW2P = camW2V * camV2P;
-	const CFloat4x4	camP2W = camP2V * camV2W;
+	CFloat4x4	toYUp;
+	PopcornFX::CCoordinateFrame::BuildTransitionFrame(PopcornFX::ECoordinateFrame::Frame_LeftHand_Y_Up, PopcornFX::ECoordinateFrame::Frame_RightHand_Y_Up, toYUp);
 
-	sceneView.m_InvViewMatrix = camV2W;
+	const CFloat4x4	camW2V = desc.m_ViewMatrix;
+	const CFloat4x4	camW2P = desc.m_ViewMatrix * desc.m_ProjectionMatrix;
 
+	sceneView.m_InvViewMatrix = camW2V.Inverse();
 
 	// We update the "view" namespace in the script
 	if (sceneView.m_UserData.m_CamSlotIdxInMedCol.Valid())
 	{
 		medCol->UpdateView(	sceneView.m_UserData.m_CamSlotIdxInMedCol,
-							camW2V,
-							camV2W,
+							camW2V * toYUp,
 							camW2P,
-							camP2W,
 							CUint2(desc.m_ViewportWidth, desc.m_ViewportHeight));
 	}
 	if (sceneView.m_UserData.m_CamSlotIdxInMeshMedCol.Valid())
 	{
 		medColMeshes->UpdateView(	sceneView.m_UserData.m_CamSlotIdxInMeshMedCol,
-									camW2V,
-									camV2W,
+									camW2V * toYUp,
 									camW2P,
-									camP2W,
 									CUint2(desc.m_ViewportWidth, desc.m_ViewportHeight));
 	}
 }

@@ -365,16 +365,7 @@ namespace PopcornFX
 				PKFxCustomMaterialInfo info = asset as PKFxCustomMaterialInfo;
 				if (info != null)
 				{
-					foreach (SBatchDesc desc in m_RendererDescs)
-					{
-						if (desc.MaterialIdx == info.m_InternalId)
-						{
-							m_Materials[info.m_InternalId] = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
-							AssetDatabase.RemoveObjectFromAsset(info);
-							mats.GetArrayElementAtIndex(info.m_InternalId).objectReferenceValue = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
-						}
-
-					}
+					AssetDatabase.RemoveObjectFromAsset(info);
 				}
 			}
 			foreach (SBatchDesc desc in m_RendererDescs)

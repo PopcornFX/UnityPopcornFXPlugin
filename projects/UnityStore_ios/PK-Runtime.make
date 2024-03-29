@@ -291,6 +291,7 @@ GENERATED += $(OBJDIR)/ir_optimizer_stage_cfl.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_cpr.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_cse.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_dce.o
+GENERATED += $(OBJDIR)/ir_optimizer_stage_dre.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_icb.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_lse.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_mtp.o
@@ -877,6 +878,7 @@ OBJECTS += $(OBJDIR)/ir_optimizer_stage_cfl.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_cpr.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_cse.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_dce.o
+OBJECTS += $(OBJDIR)/ir_optimizer_stage_dre.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_icb.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_lse.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_mtp.o
@@ -1548,6 +1550,9 @@ $(OBJDIR)/ir_optimizer_stage_cse.o: ../../ExternalLibs/Runtime/pk_compiler/src/c
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ir_optimizer_stage_dce.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_optimizer_stage_dce.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ir_optimizer_stage_dre.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_optimizer_stage_dre.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ir_optimizer_stage_icb.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_optimizer_stage_icb.cpp

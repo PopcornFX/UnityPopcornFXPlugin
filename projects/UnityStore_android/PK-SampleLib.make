@@ -173,6 +173,7 @@ GENERATED += $(OBJDIR)/DeferredScene.o
 GENERATED += $(OBJDIR)/DirectionalShadows.o
 GENERATED += $(OBJDIR)/DownSampleTexture.o
 GENERATED += $(OBJDIR)/EGLContext.o
+GENERATED += $(OBJDIR)/EditorShaderDefinitions.o
 GENERATED += $(OBJDIR)/EnvironmentMapEntity.o
 GENERATED += $(OBJDIR)/FeatureRenderingSettings.o
 GENERATED += $(OBJDIR)/FrameCollector.o
@@ -192,9 +193,9 @@ GENERATED += $(OBJDIR)/PKPix.o
 GENERATED += $(OBJDIR)/PKSampleInit.o
 GENERATED += $(OBJDIR)/ParticleShaderGenerator.o
 GENERATED += $(OBJDIR)/PipelineCacheHelper.o
-GENERATED += $(OBJDIR)/PopEdShaderDefinitions.o
 GENERATED += $(OBJDIR)/PopcornStartup.o
 GENERATED += $(OBJDIR)/PostFxBloom.o
+GENERATED += $(OBJDIR)/PostFxColorRemap.o
 GENERATED += $(OBJDIR)/PostFxDistortion.o
 GENERATED += $(OBJDIR)/PostFxFXAA.o
 GENERATED += $(OBJDIR)/PostFxToneMapping.o
@@ -236,6 +237,7 @@ OBJECTS += $(OBJDIR)/DeferredScene.o
 OBJECTS += $(OBJDIR)/DirectionalShadows.o
 OBJECTS += $(OBJDIR)/DownSampleTexture.o
 OBJECTS += $(OBJDIR)/EGLContext.o
+OBJECTS += $(OBJDIR)/EditorShaderDefinitions.o
 OBJECTS += $(OBJDIR)/EnvironmentMapEntity.o
 OBJECTS += $(OBJDIR)/FeatureRenderingSettings.o
 OBJECTS += $(OBJDIR)/FrameCollector.o
@@ -255,9 +257,9 @@ OBJECTS += $(OBJDIR)/PKPix.o
 OBJECTS += $(OBJDIR)/PKSampleInit.o
 OBJECTS += $(OBJDIR)/ParticleShaderGenerator.o
 OBJECTS += $(OBJDIR)/PipelineCacheHelper.o
-OBJECTS += $(OBJDIR)/PopEdShaderDefinitions.o
 OBJECTS += $(OBJDIR)/PopcornStartup.o
 OBJECTS += $(OBJDIR)/PostFxBloom.o
+OBJECTS += $(OBJDIR)/PostFxColorRemap.o
 OBJECTS += $(OBJDIR)/PostFxDistortion.o
 OBJECTS += $(OBJDIR)/PostFxFXAA.o
 OBJECTS += $(OBJDIR)/PostFxToneMapping.o
@@ -454,6 +456,9 @@ $(OBJDIR)/GBuffer.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/GBuf
 $(OBJDIR)/PostFxBloom.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/PostFxBloom.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PostFxColorRemap.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/PostFxColorRemap.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/PostFxDistortion.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/RenderPasses/PostFxDistortion.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -484,7 +489,7 @@ $(OBJDIR)/SampleUtils.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/SampleUtils.c
 $(OBJDIR)/BasicSceneShaderDefinitions.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/ShaderDefinitions/BasicSceneShaderDefinitions.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/PopEdShaderDefinitions.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/ShaderDefinitions/PopEdShaderDefinitions.cpp
+$(OBJDIR)/EditorShaderDefinitions.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/ShaderDefinitions/EditorShaderDefinitions.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/SampleLibShaderDefinitions.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/ShaderDefinitions/SampleLibShaderDefinitions.cpp

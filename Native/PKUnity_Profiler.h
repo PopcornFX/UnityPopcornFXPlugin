@@ -8,6 +8,7 @@
 
 #if	(PK_PARTICLES_HAS_STATS != 0)
 
+#include <pk_particles/include/ps_effect.h>
 #include <pk_kernel/include/kr_profiler.h>
 #include <pk_kernel/include/kr_profiler_details.h>
 #include <pk_particles/include/ps_stats.h>

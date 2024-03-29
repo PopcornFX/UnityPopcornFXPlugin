@@ -854,6 +854,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_particles_effect_data.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_particles_gpu_common.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_particles_sort_common_hlsl.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_particles_sort_common_pssl.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_samplers.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_scripts_gpu_common.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\ps_not_precompiled.h" />
@@ -943,6 +944,7 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_cpr.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_cse.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_dce.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_dre.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_icb.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_lse.cpp" />
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_mtp.cpp" />

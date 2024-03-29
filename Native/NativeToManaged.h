@@ -42,6 +42,8 @@ extern "C"
 	// Billboards and ribbons:
 	struct SPopcornRendererDesc
 	{
+		const char					*m_CustomName;
+
 		int							m_ShaderVariationFlags;
 		int							m_BlendMode;
 		ManagedBool					m_RotateUvs;
@@ -64,7 +66,8 @@ extern "C"
 		int							m_UID;
 
 		SPopcornRendererDesc()
-		:	m_ShaderVariationFlags(0)
+		:	m_CustomName(null)
+		,	m_ShaderVariationFlags(0)
 		,	m_BlendMode(0)
 		,	m_RotateUvs(ManagedBool_False)
 		,	m_DiffuseMap(null)
@@ -141,6 +144,8 @@ extern "C"
 	// Meshes:
 	struct SMeshRendererDesc
 	{
+		const char					*m_CustomName;
+
 		// Common info for the renderers:
 		const char					*m_MeshAsset;
 		int							m_ShaderVariationFlags;
@@ -170,7 +175,8 @@ extern "C"
 		ManagedBool					m_UseVertexColor;
 
 		SMeshRendererDesc()
-			: m_MeshAsset(null)
+			: m_CustomName(null)
+			, m_MeshAsset(null)
 			, m_ShaderVariationFlags(0)
 			, m_BlendMode(0)
 			, m_HasMeshAtlas(ManagedBool_False)
@@ -252,6 +258,9 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResourceWrite(void *delegatePtr);
 	unsigned long long							OnResourceWrite(const char *path, const void *data, u64 offset, u64 size);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResourceUnload(void* delegatePtr);
+	bool										OnResourceUnload(const char* path);
 
 	// Particles to Unity interactions:
 

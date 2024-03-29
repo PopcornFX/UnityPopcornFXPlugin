@@ -17,6 +17,13 @@ Shader "PopcornFX/Mesh_UnlitTransparent"
 		_VATColorMap("VAT Color map (RGB)", 2D) = "white" {}
 		_VATRotationMap("VAT Rotation map (RGB)", 2D) = "white" {}
 		_VATNormalMap("VAT Normal map (RGB)", 2D) = "white" {}
+		_VATNumFrames("VAT Numframes", Float) = 1
+		_VATPackedData("VAT PackedData", Int) = 0
+		_VATNormalizedData("VAT NormalizedData", Int) = 0
+		_VATPadToPowerOf2("VAT PadToPowerOf2", Int) = 0
+		_VATBounds("VAT Bounds", Vector) = (1,1,1,1)
+		_VATPaddedRatio("VAT PaddedRatio", Vector) = (1,1,1,1)
+		_VATPivot("VAT Pivot", Vector) = (1,1,1,1)
 		[Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Int) = 0
 	}
 

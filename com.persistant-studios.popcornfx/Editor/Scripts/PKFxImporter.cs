@@ -4,6 +4,7 @@
 using UnityEngine;
 using System.IO;
 using UnityEditor.AssetImporters;
+using System;
 
 namespace PopcornFX
 {
@@ -39,12 +40,8 @@ namespace PopcornFX
 			{
 				fxa.m_Data = File.ReadAllBytes(ctx.assetPath);
 				fxa.name = fxa.AssetFullPath = ctx.assetPath;
-#if UNITY_2017_3_OR_NEWER
-				ctx.AddObjectToAsset(fxa.name, fxa);
+				ctx.AddObjectToAsset("PopcornFXAsset", fxa);
 				ctx.SetMainObject(fxa);
-#else
-				ctx.SetMainAsset(assetVirtualPath, fxa, null);
-#endif
 			}
 		}
 	}

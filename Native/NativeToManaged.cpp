@@ -17,6 +17,7 @@ extern "C"
 	// Fake file system manager:
 	unsigned long long	(POPCORN_TO_MANAGED_CONVENTION	*_OnResourceLoad)(const char *path, void **handler) = null;
 	unsigned long long	(POPCORN_TO_MANAGED_CONVENTION	*_OnResourceWrite)(const char *path, const void *data, u64 offset, u64 size) = null;
+	ManagedBool			(POPCORN_TO_MANAGED_CONVENTION	*_OnResourceUnload)(const char* path) = null;
 
 	// Particles to Unity interactions:
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastStart)(int count, void **cmd) = null;
@@ -63,6 +64,11 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResourceWrite(void *delegatePtr)
 	{
 		_OnResourceWrite = (unsigned long long (POPCORN_TO_MANAGED_CONVENTION *)(const char *path, const void *data, u64 offset, u64 size))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResourceUnload(void* delegatePtr)
+	{
+		_OnResourceUnload = (ManagedBool (POPCORN_TO_MANAGED_CONVENTION*)(const char* path))delegatePtr;
 	}
 
 	// Particles to Unity interactions:
@@ -218,6 +224,21 @@ extern "C"
 			return _OnResourceWrite(path, data, offset, size);
 		}
 		return 0ULL;
+	}
+
+	bool	OnResourceUnload(const char* path)
+	{
+		PK_SCOPEDPROFILE();
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnResourceUnload not called on main thread: callback ignored");
+			return false;
+		}
+		if (PK_VERIFY(_OnResourceUnload != null))
+		{
+			return _OnResourceUnload(path) == ManagedBool_True ? true : false;
+		}
+		return false;
 	}
 
 	void	OnRaycastStart(int count, void **cmd)
@@ -570,6 +591,7 @@ extern "C"
 	{
 		_OnResourceLoad = null;
 		_OnResourceWrite = null;
+		_OnResourceUnload = null;
 		_OnRaycastPack = null;
 		_OnFxStopped = null;
 		_OnRaiseEvent = null;

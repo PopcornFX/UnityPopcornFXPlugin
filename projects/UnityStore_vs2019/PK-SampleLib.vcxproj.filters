@@ -630,6 +630,9 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.h">
       <Filter>Headers\RenderPasses</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxColorRemap.h">
+      <Filter>Headers\RenderPasses</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxDistortion.h">
       <Filter>Headers\RenderPasses</Filter>
     </ClInclude>
@@ -660,7 +663,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\BasicSceneShaderDefinitions.h">
       <Filter>Headers\ShaderDefinitions</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\PopEdShaderDefinitions.h">
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\EditorShaderDefinitions.h">
       <Filter>Headers\ShaderDefinitions</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\SampleLibShaderDefinitions.h">
@@ -821,6 +824,9 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.cpp">
       <Filter>Sources\RenderPasses</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxColorRemap.cpp">
+      <Filter>Sources\RenderPasses</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxDistortion.cpp">
       <Filter>Sources\RenderPasses</Filter>
     </ClCompile>
@@ -851,7 +857,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\BasicSceneShaderDefinitions.cpp">
       <Filter>Sources\ShaderDefinitions</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\PopEdShaderDefinitions.cpp">
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\EditorShaderDefinitions.cpp">
       <Filter>Sources\ShaderDefinitions</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\SampleLibShaderDefinitions.cpp">

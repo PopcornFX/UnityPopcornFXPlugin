@@ -15,16 +15,9 @@ namespace PopcornFX
 			if (!m_TriggerAndForget && isPlaying != m_IsPlaying)
 			{
 				if (isPlaying)
-				{
-					if (!g_PlayingEffectsToUpdate.Contains(this))
-					{
-						g_PlayingEffectsToUpdate.Add(this);
-					}
-				}
+					g_PlayingEffectsToUpdate.TryAdd(m_FXGUID, this);
 				else
-				{
-					g_PlayingEffectsToUpdate.Remove(this);
-				}
+					g_PlayingEffectsToUpdate.Remove(m_FXGUID);
 			}
 			m_IsPlaying = isPlaying;
 			m_IsStopped = !isPlaying;

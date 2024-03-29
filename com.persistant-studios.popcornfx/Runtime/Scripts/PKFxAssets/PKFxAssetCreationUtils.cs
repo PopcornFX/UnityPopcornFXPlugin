@@ -409,7 +409,7 @@ namespace PopcornFX
 				if (textureImporter != null)
 				{
 					bool reimport = false;
-					if (dependency.HasUsageFlag(EUseInfoFlag.IsVatTexture))
+					if (dependency.HasUsageFlag(EUseInfoFlag.IsLookupTexture))
 					{
 						textureImporter.sRGBTexture = false;
 						textureImporter.wrapMode = TextureWrapMode.Clamp;

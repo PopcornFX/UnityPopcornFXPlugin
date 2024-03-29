@@ -28,7 +28,7 @@ namespace PopcornFX
 	{
 		// Static
 		static public Dictionary<int, PKFxEmitter> g_ListEffects = new Dictionary<int, PKFxEmitter>();
-		static public List<PKFxEmitter> g_PlayingEffectsToUpdate = new List<PKFxEmitter>();
+		static public Dictionary<int, PKFxEmitter> g_PlayingEffectsToUpdate = new Dictionary<int, PKFxEmitter>();
 
 		static public string UpdateAssetPathIFN(string assetPath)
 		{

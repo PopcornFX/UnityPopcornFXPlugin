@@ -414,6 +414,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxColorRemap.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxDistortion.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxFXAA.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxToneMapping.h" />
@@ -424,7 +425,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\MeshEntity.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleUtils.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\BasicSceneShaderDefinitions.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\PopEdShaderDefinitions.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\EditorShaderDefinitions.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\SampleLibShaderDefinitions.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\ShaderDefinitions.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\UnitTestsShaderDefinitions.h" />
@@ -484,6 +485,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxBloom.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxColorRemap.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxDistortion.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxFXAA.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\PostFxToneMapping.cpp" />
@@ -494,7 +496,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleScene\Entities\MeshEntity.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SampleUtils.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\BasicSceneShaderDefinitions.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\PopEdShaderDefinitions.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\EditorShaderDefinitions.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\SampleLibShaderDefinitions.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\ShaderDefinitions.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderDefinitions\UnitTestsShaderDefinitions.cpp" />

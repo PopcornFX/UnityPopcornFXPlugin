@@ -178,10 +178,10 @@ endif
 PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -mavx2
 PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -msse4.1 -DPK_SIMD_SSE_VERSION=PK_SSE41
 PERFILE_FLAGS_2 = $(ALL_CXXFLAGS) -mf16c -mavx
-PERFILE_FLAGS_3 = $(ALL_CXXFLAGS) -mavx
-PERFILE_FLAGS_4 = $(ALL_CFLAGS) -masm=intel
-PERFILE_FLAGS_5 = $(ALL_CXXFLAGS) -mf16c
-PERFILE_FLAGS_6 = $(ALL_CXXFLAGS) -mf16c -mavx2
+PERFILE_FLAGS_3 = $(ALL_CXXFLAGS) -mf16c -mavx2
+PERFILE_FLAGS_4 = $(ALL_CXXFLAGS) -mavx
+PERFILE_FLAGS_5 = $(ALL_CFLAGS) -masm=intel
+PERFILE_FLAGS_6 = $(ALL_CXXFLAGS) -mf16c
 PERFILE_FLAGS_7 = $(ALL_CXXFLAGS) -mbmi2
 PERFILE_FLAGS_8 = $(ALL_CXXFLAGS) -mpclmul
 
@@ -391,6 +391,7 @@ GENERATED += $(OBJDIR)/ir_optimizer_stage_cfl.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_cpr.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_cse.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_dce.o
+GENERATED += $(OBJDIR)/ir_optimizer_stage_dre.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_icb.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_lse.o
 GENERATED += $(OBJDIR)/ir_optimizer_stage_mtp.o
@@ -966,6 +967,7 @@ OBJECTS += $(OBJDIR)/ir_optimizer_stage_cfl.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_cpr.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_cse.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_dce.o
+OBJECTS += $(OBJDIR)/ir_optimizer_stage_dre.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_icb.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_lse.o
 OBJECTS += $(OBJDIR)/ir_optimizer_stage_mtp.o
@@ -1351,8 +1353,11 @@ GENERATED += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 GENERATED += $(OBJDIR)/caps_cpuid_linux_x86.o
 GENERATED += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 GENERATED += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+GENERATED += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 GENERATED += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1382,8 +1387,11 @@ OBJECTS += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 OBJECTS += $(OBJDIR)/caps_cpuid_linux_x86.o
 OBJECTS += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 OBJECTS += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+OBJECTS += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 OBJECTS += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1415,8 +1423,11 @@ GENERATED += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 GENERATED += $(OBJDIR)/caps_cpuid_linux_x64.o
 GENERATED += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 GENERATED += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+GENERATED += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 GENERATED += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1446,8 +1457,11 @@ OBJECTS += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 OBJECTS += $(OBJDIR)/caps_cpuid_linux_x64.o
 OBJECTS += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 OBJECTS += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+OBJECTS += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 OBJECTS += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1501,8 +1515,11 @@ GENERATED += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 GENERATED += $(OBJDIR)/caps_cpuid_linux_x86.o
 GENERATED += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 GENERATED += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+GENERATED += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 GENERATED += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1532,8 +1549,11 @@ OBJECTS += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 OBJECTS += $(OBJDIR)/caps_cpuid_linux_x86.o
 OBJECTS += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 OBJECTS += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+OBJECTS += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 OBJECTS += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1565,8 +1585,11 @@ GENERATED += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 GENERATED += $(OBJDIR)/caps_cpuid_linux_x64.o
 GENERATED += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 GENERATED += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+GENERATED += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 GENERATED += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1596,8 +1619,11 @@ OBJECTS += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 OBJECTS += $(OBJDIR)/caps_cpuid_linux_x64.o
 OBJECTS += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 OBJECTS += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+OBJECTS += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 OBJECTS += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1651,8 +1677,11 @@ GENERATED += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 GENERATED += $(OBJDIR)/caps_cpuid_linux_x86.o
 GENERATED += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 GENERATED += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+GENERATED += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 GENERATED += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1682,8 +1711,11 @@ OBJECTS += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 OBJECTS += $(OBJDIR)/caps_cpuid_linux_x86.o
 OBJECTS += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 OBJECTS += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+OBJECTS += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 OBJECTS += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1715,8 +1747,11 @@ GENERATED += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 GENERATED += $(OBJDIR)/caps_cpuid_linux_x64.o
 GENERATED += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 GENERATED += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+GENERATED += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 GENERATED += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 GENERATED += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 GENERATED += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -1746,8 +1781,11 @@ OBJECTS += $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o
 OBJECTS += $(OBJDIR)/caps_cpuid_linux_x64.o
 OBJECTS += $(OBJDIR)/im_compression_etc_decompress_sse4.o
 OBJECTS += $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o
+OBJECTS += $(OBJDIR)/im_sampler_point_bgra4_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_bgra8_avx2.o
 OBJECTS += $(OBJDIR)/im_sampler_point_dxt1_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_r32f_avx2.o
+OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o
 OBJECTS += $(OBJDIR)/im_sampler_point_rgba32f_avx2.o
 OBJECTS += $(OBJDIR)/mediums_effect_data_avx2.o
@@ -2081,6 +2119,9 @@ $(OBJDIR)/ir_optimizer_stage_cse.o: ../../ExternalLibs/Runtime/pk_compiler/src/c
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ir_optimizer_stage_dce.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_optimizer_stage_dce.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ir_optimizer_stage_dre.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_optimizer_stage_dre.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ir_optimizer_stage_icb.o: ../../ExternalLibs/Runtime/pk_compiler/src/cp_ir/ir_optimizer_stage_icb.cpp
@@ -3594,12 +3635,21 @@ $(OBJDIR)/im_compression_etc_decompress_sse4.o: ../../ExternalLibs/Runtime/pk_im
 $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_linear_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_bgra4_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra4_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_bgra8_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra8_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_dxt1_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_dxt1_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_r32f_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_r32f_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx2_f16c.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3617,13 +3667,13 @@ $(OBJDIR)/caps_cpu_x86-64_frequency.o: ../../ExternalLibs/Runtime/pk_kernel/laye
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpuid_linux_x86.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpuid_linux_x86.s
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_constants.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_constants.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3653,16 +3703,16 @@ $(OBJDIR)/simd_sse_type_converters_fp16.o: ../../ExternalLibs/Runtime/pk_maths/s
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_type_converters_fp16_f16c.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_type_converters_fp16_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/mediums_effect_data_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Mediums/mediums_effect_data_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c_avx2.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_effect_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_effect_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3677,7 +3727,7 @@ $(OBJDIR)/scripts_cpu_maths_pclmul.o: ../../ExternalLibs/Runtime/pk_particles/sr
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_8) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_view_avx.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_view_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 else ifeq ($(config),debug_x64)
 $(OBJDIR)/mesh_sampler_surface_sample_avx2.o: ../../ExternalLibs/Runtime/pk_geometrics/src/ge_mesh/mesh_sampler_surface_sample_avx2.cpp
@@ -3689,12 +3739,21 @@ $(OBJDIR)/im_compression_etc_decompress_sse4.o: ../../ExternalLibs/Runtime/pk_im
 $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_linear_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_bgra4_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra4_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_bgra8_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra8_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_dxt1_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_dxt1_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_r32f_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_r32f_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx2_f16c.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3712,13 +3771,13 @@ $(OBJDIR)/caps_cpu_x86-64_frequency.o: ../../ExternalLibs/Runtime/pk_kernel/laye
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpuid_linux_x64.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpuid_linux_x64.s
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_constants.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_constants.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3748,16 +3807,16 @@ $(OBJDIR)/simd_sse_type_converters_fp16.o: ../../ExternalLibs/Runtime/pk_maths/s
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_type_converters_fp16_f16c.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_type_converters_fp16_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/mediums_effect_data_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Mediums/mediums_effect_data_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c_avx2.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_effect_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_effect_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3772,7 +3831,7 @@ $(OBJDIR)/scripts_cpu_maths_pclmul.o: ../../ExternalLibs/Runtime/pk_particles/sr
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_8) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_view_avx.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_view_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 else ifeq ($(config),debug_arm64)
 $(OBJDIR)/caps_cpu_arm.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/arm/caps_cpu_arm.cpp
@@ -3816,12 +3875,21 @@ $(OBJDIR)/im_compression_etc_decompress_sse4.o: ../../ExternalLibs/Runtime/pk_im
 $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_linear_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_bgra4_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra4_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_bgra8_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra8_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_dxt1_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_dxt1_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_r32f_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_r32f_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx2_f16c.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3839,13 +3907,13 @@ $(OBJDIR)/caps_cpu_x86-64_frequency.o: ../../ExternalLibs/Runtime/pk_kernel/laye
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpuid_linux_x86.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpuid_linux_x86.s
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_constants.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_constants.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3875,16 +3943,16 @@ $(OBJDIR)/simd_sse_type_converters_fp16.o: ../../ExternalLibs/Runtime/pk_maths/s
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_type_converters_fp16_f16c.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_type_converters_fp16_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/mediums_effect_data_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Mediums/mediums_effect_data_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c_avx2.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_effect_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_effect_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3899,7 +3967,7 @@ $(OBJDIR)/scripts_cpu_maths_pclmul.o: ../../ExternalLibs/Runtime/pk_particles/sr
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_8) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_view_avx.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_view_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 else ifeq ($(config),release_x64)
 $(OBJDIR)/mesh_sampler_surface_sample_avx2.o: ../../ExternalLibs/Runtime/pk_geometrics/src/ge_mesh/mesh_sampler_surface_sample_avx2.cpp
@@ -3911,12 +3979,21 @@ $(OBJDIR)/im_compression_etc_decompress_sse4.o: ../../ExternalLibs/Runtime/pk_im
 $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_linear_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_bgra4_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra4_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_bgra8_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra8_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_dxt1_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_dxt1_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_r32f_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_r32f_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx2_f16c.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3934,13 +4011,13 @@ $(OBJDIR)/caps_cpu_x86-64_frequency.o: ../../ExternalLibs/Runtime/pk_kernel/laye
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpuid_linux_x64.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpuid_linux_x64.s
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_constants.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_constants.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3970,16 +4047,16 @@ $(OBJDIR)/simd_sse_type_converters_fp16.o: ../../ExternalLibs/Runtime/pk_maths/s
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_type_converters_fp16_f16c.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_type_converters_fp16_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/mediums_effect_data_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Mediums/mediums_effect_data_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c_avx2.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_effect_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_effect_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -3994,7 +4071,7 @@ $(OBJDIR)/scripts_cpu_maths_pclmul.o: ../../ExternalLibs/Runtime/pk_particles/sr
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_8) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_view_avx.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_view_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 else ifeq ($(config),release_arm64)
 $(OBJDIR)/caps_cpu_arm.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/arm/caps_cpu_arm.cpp
@@ -4038,12 +4115,21 @@ $(OBJDIR)/im_compression_etc_decompress_sse4.o: ../../ExternalLibs/Runtime/pk_im
 $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_linear_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_bgra4_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra4_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_bgra8_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra8_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_dxt1_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_dxt1_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_r32f_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_r32f_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx2_f16c.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -4061,13 +4147,13 @@ $(OBJDIR)/caps_cpu_x86-64_frequency.o: ../../ExternalLibs/Runtime/pk_kernel/laye
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpuid_linux_x86.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpuid_linux_x86.s
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_constants.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_constants.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -4097,16 +4183,16 @@ $(OBJDIR)/simd_sse_type_converters_fp16.o: ../../ExternalLibs/Runtime/pk_maths/s
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_type_converters_fp16_f16c.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_type_converters_fp16_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/mediums_effect_data_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Mediums/mediums_effect_data_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c_avx2.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_effect_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_effect_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -4121,7 +4207,7 @@ $(OBJDIR)/scripts_cpu_maths_pclmul.o: ../../ExternalLibs/Runtime/pk_particles/sr
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_8) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_view_avx.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_view_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 else ifeq ($(config),retail_x64)
 $(OBJDIR)/mesh_sampler_surface_sample_avx2.o: ../../ExternalLibs/Runtime/pk_geometrics/src/ge_mesh/mesh_sampler_surface_sample_avx2.cpp
@@ -4133,12 +4219,21 @@ $(OBJDIR)/im_compression_etc_decompress_sse4.o: ../../ExternalLibs/Runtime/pk_im
 $(OBJDIR)/im_sampler_linear_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_linear_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_bgra4_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra4_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_bgra8_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_bgra8_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_dxt1_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_dxt1_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_r32f_avx2.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_r32f_avx2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/im_sampler_point_rgba16f_avx2_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx2_f16c.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/im_sampler_point_rgba16f_avx_f16c.o: ../../ExternalLibs/Runtime/pk_imaging/src/im_samplers/im_sampler_point_rgba16f_avx_f16c.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_2) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -4156,13 +4251,13 @@ $(OBJDIR)/caps_cpu_x86-64_frequency.o: ../../ExternalLibs/Runtime/pk_kernel/laye
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpu_x86-64_microbench_avx2.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpu_x86-64_microbench_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/caps_cpuid_linux_x64.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/x86-64/caps_cpuid_linux_x64.s
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CC) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_constants.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_constants.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -4192,16 +4287,16 @@ $(OBJDIR)/simd_sse_type_converters_fp16.o: ../../ExternalLibs/Runtime/pk_maths/s
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/simd_sse_type_converters_fp16_f16c.o: ../../ExternalLibs/Runtime/pk_maths/src/simd/sse/simd_sse_type_converters_fp16_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/mediums_effect_data_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Mediums/mediums_effect_data_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_5) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/sampler_cpu_vectorfield_f16c_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Samplers/CPU/sampler_cpu_vectorfield_f16c_avx2.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_6) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_effect_avx2.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_effect_avx2.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -4216,7 +4311,7 @@ $(OBJDIR)/scripts_cpu_maths_pclmul.o: ../../ExternalLibs/Runtime/pk_particles/sr
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_8) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/scripts_cpu_view_avx.o: ../../ExternalLibs/Runtime/pk_particles/src/Scripts/CPU/scripts_cpu_view_avx.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) $(PERFILE_FLAGS_3) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_4) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 else ifeq ($(config),retail_arm64)
 $(OBJDIR)/caps_cpu_arm.o: ../../ExternalLibs/Runtime/pk_kernel/layer_1/kr_caps_cpu/arm/caps_cpu_arm.cpp

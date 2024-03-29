@@ -332,6 +332,7 @@ namespace PopcornFX
 	[Serializable]
 	public class SBatchDesc
 	{
+		public string				m_CustomName;
 		public ERendererType		m_Type;
 		public int					m_ShaderVariationFlags;
 		public EBlendMode			m_BlendMode;
@@ -371,13 +372,15 @@ namespace PopcornFX
 
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc)
 		{
+			string customName = null;
+			if (desc.m_CustomName != IntPtr.Zero)
+				customName = Marshal.PtrToStringUTF8(desc.m_CustomName);
+
 			string diffuseStr = null;
 			string emissiveStr = null;
 			string diffuseRampStr = null;
 			string emissiveRampStr = null;
 			string alphaRemapStr = null;
-
-			m_Type = type;
 
 			if (desc.m_DiffuseMap != IntPtr.Zero)
 				diffuseStr = Marshal.PtrToStringAnsi(desc.m_DiffuseMap);
@@ -390,6 +393,8 @@ namespace PopcornFX
 			if (desc.m_EmissiveRampMap != IntPtr.Zero)
 				emissiveRampStr = Marshal.PtrToStringAnsi(desc.m_EmissiveRampMap);
 
+			m_CustomName = customName;
+			m_Type = type;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
 			m_BlendMode = desc.m_BlendMode;
 			m_RotateUVs = desc.m_RotateTexture != 0 ? true : false;
@@ -425,6 +430,10 @@ namespace PopcornFX
 
 		public SBatchDesc(SMeshRendererDesc desc)
 		{
+			string customName = null;
+			if (desc.m_CustomName != IntPtr.Zero)
+				customName = Marshal.PtrToStringUTF8(desc.m_CustomName);
+
 			string diffuseStr = null;
 			string meshAssetStr = null;
 			string emissiveStr = null;
@@ -445,6 +454,7 @@ namespace PopcornFX
 			if (desc.m_EmissiveRampMap != IntPtr.Zero)
 				emissiveRampStr = Marshal.PtrToStringAnsi(desc.m_EmissiveRampMap);
 
+			m_CustomName = customName;
 			m_Type = ERendererType.Mesh;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
 			m_BlendMode = desc.m_BlendMode;

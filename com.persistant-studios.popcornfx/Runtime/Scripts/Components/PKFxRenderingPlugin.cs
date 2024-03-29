@@ -12,10 +12,6 @@ namespace PopcornFX
 	[RequireComponent(typeof(PKFxLogger))]
 	public class PKFxRenderingPlugin : MonoBehaviour
 	{
-		// Static data
-		private static int				g_LastFrameCount = -1;
-
-
 		// Exposed in "Advanced" Editor
 		[Tooltip("Loads a user-defined mesh to be used for particles world collisions.")]
 		[HideInInspector]

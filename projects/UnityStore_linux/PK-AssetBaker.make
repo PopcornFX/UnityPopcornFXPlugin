@@ -141,6 +141,7 @@ GENERATED :=
 OBJECTS :=
 
 GENERATED += $(OBJDIR)/AssetBaker.o
+GENERATED += $(OBJDIR)/AssetBaker_EditorMaterialProxy.o
 GENERATED += $(OBJDIR)/AssetBaker_SimulationInterfaces.o
 GENERATED += $(OBJDIR)/AssetBaker_Unzip.o
 GENERATED += $(OBJDIR)/AssetBaker_Upgrade.o
@@ -149,6 +150,7 @@ GENERATED += $(OBJDIR)/FxStartup.o
 GENERATED += $(OBJDIR)/precompiled.o
 GENERATED += $(OBJDIR)/unzip.o
 OBJECTS += $(OBJDIR)/AssetBaker.o
+OBJECTS += $(OBJDIR)/AssetBaker_EditorMaterialProxy.o
 OBJECTS += $(OBJDIR)/AssetBaker_SimulationInterfaces.o
 OBJECTS += $(OBJDIR)/AssetBaker_Unzip.o
 OBJECTS += $(OBJDIR)/AssetBaker_Upgrade.o
@@ -220,6 +222,9 @@ endif
 # #############################################
 
 $(OBJDIR)/AssetBaker.o: ../../ExternalLibs/PK-AssetBaker/AssetBaker.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_EditorMaterialProxy.o: ../../ExternalLibs/PK-AssetBaker/AssetBaker_EditorMaterialProxy.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_SimulationInterfaces.o: ../../ExternalLibs/PK-AssetBaker/AssetBaker_SimulationInterfaces.cpp

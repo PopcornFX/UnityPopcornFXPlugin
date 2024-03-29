@@ -27,6 +27,9 @@
     <ClInclude Include="..\..\SDK\Samples\ParticleSample\src\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_axis_system.h">
+      <Filter>Headers\Upgrader</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_core_upgrade.h">
       <Filter>Headers\Upgrader</Filter>
     </ClInclude>

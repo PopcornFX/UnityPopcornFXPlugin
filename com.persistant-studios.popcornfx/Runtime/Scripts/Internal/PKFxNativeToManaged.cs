@@ -110,6 +110,8 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SPopcornRendererDesc
 	{
+		public IntPtr m_CustomName;
+
 		public int m_ShaderVariationFlags;
 		public EBlendMode m_BlendMode;
 		public int m_RotateTexture;
@@ -136,6 +138,8 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SMeshRendererDesc
 	{
+		public IntPtr m_CustomName;
+
 		public IntPtr m_MeshAsset;
 		public int m_ShaderVariationFlags;
 		public EBlendMode m_BlendMode;
@@ -255,7 +259,7 @@ namespace PopcornFX
 		IsMeshSampler = (1 << 3),
 		IsTextureSampler = (1 << 4),
 
-		IsVatTexture = (1 << 5),
+		IsLookupTexture = (1 << 5),
 
 		IsThumbnail = (1 << 6),
 		IsAnimatedThumbnail = (1 << 7),
@@ -284,6 +288,8 @@ namespace PopcornFX
 		public static extern void SetDelegateOnResourceLoad(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnResourceWrite(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnResourceUnload(IntPtr delegatePtr);
 
 		// Not in this file:
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -382,7 +388,7 @@ namespace PopcornFX
 			{
 				if (ext == ".pkfx" && m_CurrentlyBuildAsset.AssetVirtualPath == path)
 				{ 
-					var pinned = PinnedData.PinAsset(m_CurrentlyBuildAsset);
+					var pinned = PinnedData.PinAsset(m_CurrentlyBuildAsset, path);
 					handler = pinned;
 					return (ulong)m_CurrentlyBuildAsset.m_Data.Length;
 				}
@@ -394,13 +400,13 @@ namespace PopcornFX
 						PKFxAsset		pkfxDependency = dependency.m_Object as PKFxAsset;
 						if (pkfxDependency)
 						{
-							var pinned = PinnedData.PinAsset(pkfxDependency);
+							var pinned = PinnedData.PinAsset(pkfxDependency, path);
 							handler = pinned;
 							return (ulong)pkfxDependency.m_Data.Length;
 						}
 						else if (depTex)
 						{
-							ulong len = PinnedData.PinTexture(depTex, ref handler);
+							ulong len = PinnedData.PinTexture(depTex, ref handler, path);
 							return len;
 						}
 						// Need to handle vectorfield files when implemented
@@ -415,42 +421,36 @@ namespace PopcornFX
 					PKFxRuntimeMeshAsset asset = go.GetComponent<PKFxRuntimeMeshAsset>();
 					if (asset.m_AssetVirtualPath == path)
 					{
-						var pinned = PinnedData.PinAsset(asset);
+						var pinned = PinnedData.PinAsset(asset, path);
 						handler = pinned;
 						return (ulong)asset.m_Data.Length;
 					}
 				}
 			}
+			Debug.Assert(false);
 			// On last resort: Load via general array of dependencies.
-			if (m_Dependencies != null)
+			if (m_Dependencies != null && PKFxUtils.ArrayContains(s_CustomFileTypes, ext))
 			{
-				if (PKFxUtils.ArrayContains(s_CustomFileTypes, ext))
+				foreach (KeyValuePair<int, PKFxAsset> pair in m_Dependencies)
 				{
-					foreach (PKFxAsset asset in m_Dependencies)
+					string virtualPath = pair.Value.AssetVirtualPath;
+					if (virtualPath == path)
 					{
-						string virtualPath = asset.AssetVirtualPath;
-						if (virtualPath == path)
-						{
-							var pinned = PinnedData.PinAsset(asset);
-							handler = pinned;
-
-							Debug.LogWarning("[PopcornFX] Perfomance issue: " + path + " found in general dependencies.");
-							return (ulong)asset.m_Data.Length;
-						}
+						var pinned = PinnedData.PinAsset(pair.Value, path);
+						handler = pinned;
+						Debug.LogWarning("[PopcornFX] Perfomance issue: " + path + " found in general dependencies.");
+						return (ulong)pair.Value.m_Data.Length;
 					}
 				}
-				else if (PKFxUtils.ArrayContains(s_TexFileTypes, ext))
+			}
+			if (m_TexDependencies != null && PKFxUtils.ArrayContains(s_TexFileTypes, ext))
+			{
+				Texture2D depTex;
+				if (m_TexDependencies.TryGetValue(path, out depTex))
 				{
-					foreach (var t in m_TexDependencies)
-					{
-						if (t.m_Path == path)
-						{
-							ulong len = PinnedData.PinTexture(t.m_Texture, ref handler);
-							
-							Debug.LogWarning("[PopcornFX] Perfomance issue: " + path + " found in general dependencies.");
-							return len;
-						}
-					}
+					ulong len = PinnedData.PinTexture(depTex, ref handler, path);
+					Debug.LogWarning("[PopcornFX] Perfomance issue: " + path + " found in general dependencies.");
+					return len;
 				}
 			}
 			Debug.LogError("[PopcornFX] " + path + " not found in dependencies.");
@@ -513,6 +513,28 @@ namespace PopcornFX
 #if !UNITY_EDITOR
 		return 0;
 #endif
+		}
+
+		//----------------------------------------------------------------------------
+
+		private delegate bool ResourceUnloadCallback(IntPtr path);
+
+		[MonoPInvokeCallback(typeof(ResourceWriteCallback))]
+		public static bool OnResourceUnload(IntPtr pathHandler)
+		{
+			Hash128 id = Hash128.Compute(Marshal.PtrToStringAnsi(pathHandler));
+			if (m_PinnedResource.ContainsKey(id))
+			{
+				PinnedData data = m_PinnedResource[id];
+				--data.m_RefCount;
+				if (data.m_RefCount <= 0)
+					m_PinnedResource.Remove(id);
+			}
+			else
+			{
+				Debug.LogWarning(Marshal.PtrToStringAnsi(pathHandler) + ": freed before being pinned");
+			}
+			return true;
 		}
 
 		//----------------------------------------------------------------------------
@@ -1015,7 +1037,7 @@ namespace PopcornFX
 			// We choose to use large indices or not here:
 			bool useLargeIndices = reserveVertexCount > UInt16.MaxValue;
 
-			Mesh mesh = filter.mesh;
+			Mesh mesh = filter.sharedMesh;
 
 			mesh.bounds = initBounds;
 
@@ -1296,7 +1318,7 @@ namespace PopcornFX
 					int* atlasesBSizePtr = (int*)rendererInfo.m_AtlasesBSize.ToPointer();
 					IntPtr* atlasesHandler = (IntPtr*)rendererInfo.m_AtlasesBHandler.ToPointer();
 
-					Mesh currentRendererMesh = renderer.m_Slice.mesh;
+					Mesh currentRendererMesh = renderer.m_Slice.sharedMesh;
 
 					if (currentRendererMesh == null)
 					{
@@ -1418,7 +1440,7 @@ namespace PopcornFX
 			b.max = new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ);
 
 			if (m_Renderers[rendererGUID].m_Slice != null)
-				m_Renderers[rendererGUID].m_Slice.mesh.bounds = b;
+				m_Renderers[rendererGUID].m_Slice.sharedMesh.bounds = b;
 			else if (m_Renderers[rendererGUID].m_Procedural != null)
 				m_Renderers[rendererGUID].m_Procedural.m_Bounds = b;
 		}

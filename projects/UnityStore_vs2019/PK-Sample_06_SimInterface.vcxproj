@@ -491,6 +491,9 @@
     <ProjectReference Include="PK-Plugin_CodecImage_TGA.vcxproj">
       <Project>{23F03C17-32A1-4155-7F68-489FEAC3F4D1}</Project>
     </ProjectReference>
+    <ProjectReference Include="PK-Plugin_CodecImage_HDR.vcxproj">
+      <Project>{23F008B9-32A1-4155-7F68-489FEAC305E2}</Project>
+    </ProjectReference>
     <ProjectReference Include="PK-Discretizers.vcxproj">
       <Project>{F866336F-906C-411B-8295-AABBCC2C47CE}</Project>
     </ProjectReference>

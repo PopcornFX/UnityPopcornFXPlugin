@@ -540,8 +540,6 @@ namespace PopcornFX
 								m_PropertyBlock.SetFloat(m_AlphaRemapCursorPropertyName, instanceAlphaCursor[i]);
 							if (instanceVATCursor != null && !string.IsNullOrEmpty(m_VATCursorPropertyName))
 								m_PropertyBlock.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
-							if (instanceVATCursor != null && !string.IsNullOrEmpty(m_VATCursorPropertyName))
-								m_PropertyBlock.SetFloat(m_VATCursorPropertyName, instanceVATCursor[i]);
 							if (atlasId != null && !string.IsNullOrEmpty(m_AtlasIdPropertyName))
 								m_PropertyBlock.SetFloat(m_AtlasIdPropertyName, atlasId[i]);
 							if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)

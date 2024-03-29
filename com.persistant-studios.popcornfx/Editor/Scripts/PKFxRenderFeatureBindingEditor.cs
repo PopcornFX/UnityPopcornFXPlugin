@@ -14,10 +14,6 @@ namespace PopcornFX
 	{
 		bool m_RendererFoldout = true;
 		bool m_BlendFoldout = true;
-		bool m_ShaderGraphFoldout = true;
-
-		//bool m_ShaderBindingFoldout = true;
-
 
 		static int[] m_BillboardingLocationsInt = new int[]
 		{

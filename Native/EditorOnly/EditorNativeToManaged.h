@@ -88,15 +88,15 @@ extern "C"
 
 	struct SAssetChangesDesc
 	{
-		const char*					m_Path;
-		const char*					m_PathOld;
+		const char					*m_Path;
+		const char					*m_PathOld;
 		int							m_Type;
 	};
 
 	struct SAssetImportError
 	{
-		const char*					m_Path;
-		const char*					m_ErrorMessage;
+		const char					*m_Path;
+		const char					*m_ErrorMessage;
 	};
 
 	enum EUseInfoFlag : int
@@ -109,7 +109,7 @@ extern "C"
 		IsMeshSampler				= (1 << 3),
 		IsTextureSampler			= (1 << 4),
 
-		IsVatTexture				= (1 << 5),
+		IsLookupTexture				= (1 << 5),
 
 		IsThumbnail					= (1 << 6), //Used by the Editor
 		IsAnimatedThumbnail			= (1 << 7), //Used by the Editor

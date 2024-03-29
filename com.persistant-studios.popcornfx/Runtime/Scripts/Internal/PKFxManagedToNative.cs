@@ -377,7 +377,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.18.6 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.19.0 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
@@ -403,33 +403,11 @@ namespace PopcornFX
 
 		// Resource dependencies:
 
-		public struct STextureDependency
-		{
-			public string m_Path;
-			public Texture2D m_Texture;
+		public static Dictionary<int, PKFxAsset> m_Dependencies = new Dictionary<int, PKFxAsset>();
+		public static Dictionary<string, Texture2D> m_TexDependencies = new Dictionary<string, Texture2D>();
+		public static Dictionary<string, AudioClip> m_SoundDependencies = new Dictionary<string, AudioClip>();
 
-			public STextureDependency(string path, Texture2D tex)
-			{
-				m_Path = path;
-				m_Texture = tex;
-			}
-			public override bool Equals(object oth)
-			{
-				if (!(oth is STextureDependency))
-					return false;
-				STextureDependency sTextureDependency = (STextureDependency)oth;
-				return m_Path == sTextureDependency.m_Path && m_Texture == sTextureDependency.m_Texture;
-			}
-
-			public override int GetHashCode()
-			{
-				return m_Path.GetHashCode() ^ m_Texture.GetHashCode();
-			}
-		}
-
-		public static List<PKFxAsset> m_Dependencies = new List<PKFxAsset>();
-		public static List<STextureDependency> m_TexDependencies = new List<STextureDependency>();
-		public static List<PinnedData> m_NeedsFreeing;
+		public static Dictionary<Hash128, PinnedData> m_PinnedResource = new Dictionary<Hash128, PinnedData>();
 
 		public static PKFxEffectAsset m_CurrentlyImportedAsset = null;
 		public static PKFxEffectAsset m_CurrentlyBuildAsset = null;
@@ -584,6 +562,7 @@ namespace PopcornFX
 
 			SetDelegateOnResourceLoad(delegateHandler.DelegateToFunctionPointer(new ResourceLoadCallback(OnResourceLoad)));
 			SetDelegateOnResourceWrite(delegateHandler.DelegateToFunctionPointer(new ResourceWriteCallback(OnResourceWrite)));
+			SetDelegateOnResourceUnload(delegateHandler.DelegateToFunctionPointer(new ResourceUnloadCallback(OnResourceUnload)));
 			SetDelegateOnRaycastStart(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastStartCallback(PKFxRaycasts.OnRaycastStart)));
 			SetDelegateOnRaycastEnd(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastEndCallback(PKFxRaycasts.OnRaycastEnd)));
 			SetDelegateOnRaycastPack(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastPackCallback(PKFxRaycasts.OnRaycastPack)));
@@ -683,22 +662,21 @@ namespace PopcornFX
 					continue;
 				}
 				PKFxAsset depAsset = depDesc.m_Object as PKFxAsset;
-
 				PKFxEffectAsset depFx = depDesc.m_Object as PKFxEffectAsset;
 				Texture2D depTex = depDesc.m_Object as Texture2D;
 				AudioClip depAudio = depDesc.m_Object as AudioClip;
 
-				if (depFx != null && !m_Dependencies.Contains(depFx))
+				if (depFx != null)
 				{
-					m_Dependencies.Add(depFx);
-					WalkDependencies(depFx);
+					if (m_Dependencies.TryAdd(depFx.GetInstanceID(), depFx))
+						WalkDependencies(depFx);
 				}
-				else if (depTex != null && !m_TexDependencies.Contains(new STextureDependency(depDesc.m_Path, depTex)))
-					m_TexDependencies.Add(new STextureDependency(depDesc.m_Path, depTex));
+				else if (depTex != null)
+					m_TexDependencies.TryAdd(depDesc.m_Path, depTex);
 				else if (depAudio != null)
-					PKFxManager.AddSound(depDesc);
-				else if (depAsset != null && !m_Dependencies.Contains(depAsset))
-					m_Dependencies.Add(depAsset);
+					m_SoundDependencies.TryAdd(depDesc.m_Path, depAudio);
+				else if (depAsset != null)
+					m_Dependencies.TryAdd(depAsset.GetInstanceID(), depAsset);
 			}
 		}
 
@@ -711,11 +689,8 @@ namespace PopcornFX
 				var loading = fxToPreload as PKFxAsset;
 				Debug.Assert(fxToPreload.m_Data.Length > 0);
 				Debug.Assert(loading.m_Data.Length > 0);
-				if (!m_Dependencies.Contains(loading))
-				{
-					m_Dependencies.Add(loading);
+				if (m_Dependencies.TryAdd(loading.GetInstanceID(), loading))
 					WalkDependencies(fxToPreload);
-				}
 				return true;
 			}
 			else
@@ -731,10 +706,7 @@ namespace PopcornFX
 			{
 				var loading = mesh as PKFxAsset;
 				Debug.Assert(mesh.m_Data.Length > 0, "scene mesh " + mesh.AssetVirtualPath + " len " + mesh.m_Data.Length);
-				if (!m_Dependencies.Contains(loading))
-				{
-					m_Dependencies.Add(loading);
-				}
+				m_Dependencies.TryAdd(loading.GetInstanceID(), loading);
 				return true;
 			}
 			else
@@ -747,12 +719,14 @@ namespace PopcornFX
 		public static void UnloadAllFxDependencies()
 		{
 			// May be null when recompiling C#
-			if (m_NeedsFreeing != null)
-				m_NeedsFreeing.Clear();
+			if (m_PinnedResource != null)
+				m_PinnedResource.Clear();
 			if (m_Dependencies != null)
 				m_Dependencies.Clear();
 			if (m_TexDependencies != null)
 				m_TexDependencies.Clear();
+			if (m_SoundDependencies != null)
+				m_SoundDependencies.Clear();
 		}
 
 		//----------------------------------------------------------------------------
@@ -761,7 +735,16 @@ namespace PopcornFX
 		{
 			// May be null when recompiling C#
 			if (m_Dependencies != null)
-				m_Dependencies.RemoveAll(x => x.AssetVirtualPath == path);
+			{
+				foreach (KeyValuePair<int, PKFxAsset> pair in m_Dependencies)
+				{
+					if (pair.Value.AssetVirtualPath == path)
+					{
+						m_Dependencies.Remove(pair.Key);
+						break;
+					}
+				}
+			}
 		}
 
 		//----------------------------------------------------------------------------
@@ -909,10 +892,10 @@ namespace PopcornFX
 				if (renderer.Meshes.Length == 0)
 					return -1;
 				var filter = renderingObject.AddComponent<MeshFilter>();
-				filter.mesh = renderer.Meshes[0].m_Mesh;
+				filter.sharedMesh = renderer.Meshes[0].m_Mesh;
 
 				m_Renderers.Add(new SMeshDesc(filter, mat, batchDesc, renderer, renderingObject));
-				Debug.Assert(m_Renderers[newId].m_Slice.mesh == filter.mesh);
+				Debug.Assert(m_Renderers[newId].m_Slice.sharedMesh == filter.sharedMesh);
 
 			}
 			catch (Exception e)

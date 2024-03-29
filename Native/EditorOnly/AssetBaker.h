@@ -132,6 +132,7 @@ public:
 
 	SBakeContext		&GetBakeContextData() { return m_BakeContext; }
 	CString				GetPopcornFXPackPath() { return m_PKPackPath; }
+	CString				GetDstBakePackPath() { return m_BakeContext.m_DstBakeTarget.m_TargetPath; }
 private:
 	const int					m_MaxBakeRetry = 5;
 

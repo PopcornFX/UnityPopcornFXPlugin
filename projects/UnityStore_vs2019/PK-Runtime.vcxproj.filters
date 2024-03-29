@@ -2103,6 +2103,9 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_particles_sort_common_hlsl.h">
       <Filter>Particles\Headers\_Private</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_particles_sort_common_pssl.h">
+      <Filter>Particles\Headers\_Private</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\src\include\pv_samplers.h">
       <Filter>Particles\Headers\_Private</Filter>
     </ClInclude>
@@ -2364,6 +2367,9 @@
       <Filter>Compiler\Sources\cp_ir</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_dce.cpp">
+      <Filter>Compiler\Sources\cp_ir</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_dre.cpp">
       <Filter>Compiler\Sources\cp_ir</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_compiler\src\cp_ir\ir_optimizer_stage_icb.cpp">
@@ -2819,6 +2825,9 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_bgra4.cpp">
       <Filter>Imaging\Sources\Samplers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_bgra4_avx2.cpp">
+      <Filter>Imaging\Sources\Samplers</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_bgra8.cpp">
       <Filter>Imaging\Sources\Samplers</Filter>
     </ClCompile>
@@ -2834,7 +2843,13 @@
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_r32f.cpp">
       <Filter>Imaging\Sources\Samplers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_r32f_avx2.cpp">
+      <Filter>Imaging\Sources\Samplers</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_rgba16f.cpp">
+      <Filter>Imaging\Sources\Samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_rgba16f_avx2_f16c.cpp">
       <Filter>Imaging\Sources\Samplers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\Runtime\pk_imaging\src\im_samplers\im_sampler_point_rgba16f_avx_f16c.cpp">

@@ -20,19 +20,23 @@ namespace	PKFX
 
 	enum	ERuntimePlugin
 	{
-		EPlugin_CompilerBackendVM	= 1 << 0,
+		EPlugin_ImageCodecDDS			= 1 << 0,
+		EPlugin_ImageCodecPNG			= 1 << 1,
+		EPlugin_ImageCodecJPG			= 1 << 2,
+		EPlugin_ImageCodecTGA			= 1 << 3,
+		EPlugin_ImageCodecTIFF			= 1 << 4,
+		EPlugin_ImageCodecPKM			= 1 << 5,
+		EPlugin_ImageCodecPVR			= 1 << 6,
+		EPlugin_ImageCodecHDR			= 1 << 7,
+		EPlugin_ImageCodecEXR			= 1 << 8,
 
-		EPlugin_ImageCodecDDS		= 1 << 1,
-		EPlugin_ImageCodecPNG		= 1 << 2,
-		EPlugin_ImageCodecJPG		= 1 << 3,
-		EPlugin_ImageCodecTGA		= 1 << 4,
-		EPlugin_ImageCodecTIFF		= 1 << 5,
-		EPlugin_ImageCodecPKM		= 1 << 6,
-		EPlugin_ImageCodecPVR		= 1 << 7,
-		EPlugin_ImageCodecHDR		= 1 << 8,
-		EPlugin_ImageCodecEXR		= 1 << 9,
+		EPlugin_MeshCodecFBX			= 1 << 16,
+		EPlugin_MeshCodecGranny			= 1 << 17,
 
-		EPlugin_MeshCodecFBX		= 1 << 10,
+		EPlugin_CompilerBackendVM		= 1 << 20,
+		EPlugin_CompilerBackendISPC		= 1 << 21,
+		EPlugin_CompilerBackendD3D		= 1 << 22,
+		EPlugin_CompilerBackendPSSLC	= 1 << 23,
 
 		EPlugin_Editor				=	EPlugin_CompilerBackendVM |
 										EPlugin_ImageCodecDDS |

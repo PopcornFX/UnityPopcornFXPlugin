@@ -72,6 +72,9 @@
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_EditorMaterialProxy.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -108,6 +111,9 @@
       <Filter>Sources\Common\PKFX</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_EditorMaterialProxy.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp">

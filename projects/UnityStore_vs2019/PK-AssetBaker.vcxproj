@@ -236,6 +236,7 @@
     <ClInclude Include="..\..\Native\Common\PKFX\FxPlugins.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h" />
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_EditorMaterialProxy.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\precompiled.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\unzip.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h" />
@@ -254,6 +255,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_EditorMaterialProxy.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_SimulationInterfaces.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Unzip.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker_Upgrade.cpp" />

@@ -3,6 +3,8 @@
 //----------------------------------------------------------------------------
 using System;
 using System.Runtime.InteropServices;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using static PopcornFX.PKFxEmitter;
 
@@ -33,7 +35,7 @@ namespace PopcornFX
 
 	internal static class PKImageConverter
 	{
-		public static void ARGB2BGRA(ref byte[] data)
+		public static void ARGB2BGRA(ref NativeArray<byte> data)
 		{
 			for (int id = 0; id < data.Length;)
 			{
@@ -45,7 +47,7 @@ namespace PopcornFX
 			}
 		}
 	
-		public static void RGBA2BGRA(ref byte[] data)
+		public static void RGBA2BGRA(ref NativeArray<byte> data)
 		{
 			for (int id = 0; id < data.Length; id += 4)
 			{
@@ -55,7 +57,7 @@ namespace PopcornFX
 			}
 		}
 	
-		public static void RGB2BGR(ref byte[] data)
+		public static void RGB2BGR(ref NativeArray<byte> data)
 		{
 			for (int id = 0; id < data.Length; id += 3)
 			{
@@ -69,7 +71,8 @@ namespace PopcornFX
 	//----------------------------------------------------------------------------
 	internal static class PKFxTextureUtils
 	{
-		internal static EImageFormat ResolveImageFormat(Texture2D t, ref byte[] data)
+		//Will reorder data on some image format: ARGB32, RGBA32, RGB24
+		internal static EImageFormat ResolveImageFormat(Texture2D t, ref NativeArray<byte> data)
 		{
 			if (t.format == TextureFormat.DXT1)
 				return EImageFormat.DXT1;
@@ -121,7 +124,7 @@ namespace PopcornFX
 
 		internal static IntPtr GetAndUpdateTextureToFill(Texture2D texture, Sampler.ETexcoordMode wrapMode)
 		{
-			byte[] data = GetRawTextureData(texture);
+			NativeArray<byte> data = GetRawTextureDataAsNativeArray(texture);
 			EImageFormat imageFormat = ResolveImageFormat(texture, ref data);
 			IntPtr textureToFillPtr = PKFxManager.GetTextureSamplerToFill(data.Length);
 
@@ -133,7 +136,9 @@ namespace PopcornFX
 					imageFormat == EImageFormat.Invalid)
 					return IntPtr.Zero;
 
-				Marshal.Copy(data, 0, textureToFill->m_TextureData, data.Length);
+				void* textureDataPtr = (void*)textureToFill->m_TextureData.ToPointer();
+				Buffer.MemoryCopy(NativeArrayUnsafeUtility.GetUnsafePtr(data), textureDataPtr, data.Length, data.Length);
+				
 				textureToFill->m_Width = texture.width;
 				textureToFill->m_Height = texture.height;
 				textureToFill->m_PixelFormat = (int)imageFormat;
@@ -142,10 +147,20 @@ namespace PopcornFX
 			return textureToFillPtr;
 		}
 
+		public static NativeArray<byte> GetRawTextureDataAsNativeArray(Texture2D texture)
+		{
+			NativeArray<byte> data = texture.GetRawTextureData<byte>();
+			if (data == null || data.Length == 0)
+				Debug.LogError("[PopcornFX] Please check the 'Read/Write' setting for the texture '" + texture.name + "'.");
+			return data;
+		}
+
+		/*
+		 * Warning: This funtion will alloc the byte[]
+		 */
 		public static byte[] GetRawTextureData(Texture2D texture)
 		{
 			byte[] data = texture.GetRawTextureData();
-
 			if (data == null || data.Length == 0)
 				Debug.LogError("[PopcornFX] Please check the 'Read/Write' setting for the texture '" + texture.name + "'.");
 			return data;

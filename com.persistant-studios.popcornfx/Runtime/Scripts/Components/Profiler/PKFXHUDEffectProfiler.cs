@@ -87,6 +87,9 @@ namespace PopcornFX
 			}
 
 			SetShortcuts();
+
+			if (m_ProfilerRunning)
+				PKFxManager.InteractiveProfilerEnable(m_ProfilerRunning);
 		}
 
 		void Update()
@@ -111,56 +114,61 @@ namespace PopcornFX
 
 			if (m_ProfilerRunning)
 			{
-				SStatsToFill	particleData = new SStatsToFill();
-				SStatsToFill	meshData = new SStatsToFill();
+				SStatsToFill		particleData = new SStatsToFill();
+				SStatsToFill		meshData = new SStatsToFill();
+				List<SEffectStats>	effectData = new List<SEffectStats>();
 
 				// Resetting counter
 				m_TotalParticles = 0;
 				m_TotalCalcutationTimeInSeconds = 0;
 
-				bool	result = PKFxManager.InteractiveProfilerPullData("Particles", ref particleData);
-				List<SEffectStats> effectData = new List<SEffectStats>();
-				if (!result)
-					return;
-				if (particleData.m_EffectsStatsCount > 0 && particleData.m_EffectsStats != null && particleData.m_EffectNames != null)
+				if (PKFxManager.InteractiveProfilerPullData("Particles", ref particleData))
 				{
-					string[]	effectNames = Marshal.PtrToStringAnsi(particleData.m_EffectNames).Split(' ');
-					unsafe
+					if (particleData.m_EffectsStatsCount > 0 && particleData.m_EffectsStats != null && particleData.m_EffectNames != null)
 					{
-						SEffectStatsToFill*	effectStats = (SEffectStatsToFill*)particleData.m_EffectsStats.ToPointer();
-
-						for (int i = 0; i < particleData.m_EffectsStatsCount; ++i)
+						string[] effectNames = Marshal.PtrToStringAnsi(particleData.m_EffectNames).Split(' ');
+						unsafe
 						{
-							SEffectStats stats = new SEffectStats(effectStats[i], Path.GetFileName(effectNames[i]));
+							SEffectStatsToFill* effectStats = (SEffectStatsToFill*)particleData.m_EffectsStats.ToPointer();
 
-							m_TotalParticles += stats.m_TotalParticleCount;
-							m_TotalCalcutationTimeInSeconds += (float)stats.m_TotalTimeAverageRaw; // TODO : remove once m_CollectionUpdateTimeInterval is fixed
-							
-							effectData.Add(stats);
+							for (int i = 0; i < particleData.m_EffectsStatsCount; ++i)
+							{
+								SEffectStats stats = new SEffectStats(effectStats[i], Path.GetFileName(effectNames[i]));
+
+								m_TotalParticles += stats.m_TotalParticleCount;
+								m_TotalCalcutationTimeInSeconds += (float)stats.m_TotalTimeAverageRaw; // TODO : remove once m_CollectionUpdateTimeInterval is fixed
+
+								effectData.Add(stats);
+							}
 						}
 					}
 				}
 
-				result = PKFxManager.InteractiveProfilerPullData("Meshes", ref meshData);
-				if (!result)
-					return;
-				if (meshData.m_EffectsStatsCount > 0 && meshData.m_EffectsStats != null && meshData.m_EffectNames != null)
+				if (PKFxManager.InteractiveProfilerPullData("Meshes", ref meshData))
 				{
-					string[] effectNames = Marshal.PtrToStringAnsi(meshData.m_EffectNames).Split(' ');
-					unsafe
+					if (meshData.m_EffectsStatsCount > 0 && meshData.m_EffectsStats != null && meshData.m_EffectNames != null)
 					{
-						SEffectStatsToFill* effectStats = (SEffectStatsToFill*)meshData.m_EffectsStats.ToPointer();
-				
-						for (int i = 0; i < meshData.m_EffectsStatsCount; ++i)
+						string[] effectNames = Marshal.PtrToStringAnsi(meshData.m_EffectNames).Split(' ');
+						unsafe
 						{
-							SEffectStats stats = new SEffectStats(effectStats[i], Path.GetFileName(effectNames[i]));
+							SEffectStatsToFill* effectStats = (SEffectStatsToFill*)meshData.m_EffectsStats.ToPointer();
 
-							m_TotalParticles += stats.m_TotalParticleCount;
-							m_TotalCalcutationTimeInSeconds += (float)stats.m_TotalTimeAverageRaw; // TODO : remove once m_CollectionUpdateTimeInterval is fixed
+							for (int i = 0; i < meshData.m_EffectsStatsCount; ++i)
+							{
+								SEffectStats stats = new SEffectStats(effectStats[i], Path.GetFileName(effectNames[i]));
 
-							effectData.Add(stats);
+								m_TotalParticles += stats.m_TotalParticleCount;
+								m_TotalCalcutationTimeInSeconds += (float)stats.m_TotalTimeAverageRaw; // TODO : remove once m_CollectionUpdateTimeInterval is fixed
+
+								effectData.Add(stats);
+							}
 						}
 					}
+				}
+				if (!PKFxManager.CanSkipUpdate())
+				{
+					if (effectData.Count == 0)
+						return;
 				}
 
 				if (m_SortByType == StatSortType.Emitter)

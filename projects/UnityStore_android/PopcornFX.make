@@ -352,67 +352,67 @@ ifneq (,$(PK_SampleLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-SampleLib.make config=$(PK_SampleLib_config)
 endif
 
-PK-Sample_02_FullIntegration: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_02_FullIntegration: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_02_FullIntegration_config))
 	@echo "==== Building PK-Sample_02_FullIntegration ($(PK_Sample_02_FullIntegration_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_02_FullIntegration.make config=$(PK_Sample_02_FullIntegration_config)
 endif
 
-PK-Sample_04_EffectInterface: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_04_EffectInterface: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_04_EffectInterface_config))
 	@echo "==== Building PK-Sample_04_EffectInterface ($(PK_Sample_04_EffectInterface_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_04_EffectInterface.make config=$(PK_Sample_04_EffectInterface_config)
 endif
 
-PK-Sample_05_Stats: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_05_Stats: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_05_Stats_config))
 	@echo "==== Building PK-Sample_05_Stats ($(PK_Sample_05_Stats_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_05_Stats.make config=$(PK_Sample_05_Stats_config)
 endif
 
-PK-Sample_06_SimInterface: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_06_SimInterface: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_06_SimInterface_config))
 	@echo "==== Building PK-Sample_06_SimInterface ($(PK_Sample_06_SimInterface_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_06_SimInterface.make config=$(PK_Sample_06_SimInterface_config)
 endif
 
-PK-Sample_06_SimInterfaceGPU: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_06_SimInterfaceGPU: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_06_SimInterfaceGPU_config))
 	@echo "==== Building PK-Sample_06_SimInterfaceGPU ($(PK_Sample_06_SimInterfaceGPU_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_06_SimInterfaceGPU.make config=$(PK_Sample_06_SimInterfaceGPU_config)
 endif
 
-PK-Sample_07_LOD: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_07_LOD: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_07_LOD_config))
 	@echo "==== Building PK-Sample_07_LOD ($(PK_Sample_07_LOD_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_07_LOD.make config=$(PK_Sample_07_LOD_config)
 endif
 
-PK-Sample_08_CustomCollision: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_08_CustomCollision: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_08_CustomCollision_config))
 	@echo "==== Building PK-Sample_08_CustomCollision ($(PK_Sample_08_CustomCollision_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_08_CustomCollision.make config=$(PK_Sample_08_CustomCollision_config)
 endif
 
-PK-Sample_09_AsyncLoading: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_09_AsyncLoading: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_09_AsyncLoading_config))
 	@echo "==== Building PK-Sample_09_AsyncLoading ($(PK_Sample_09_AsyncLoading_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_09_AsyncLoading.make config=$(PK_Sample_09_AsyncLoading_config)
 endif
 
-PK-Sample_10_AsyncRendering: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_10_AsyncRendering: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_10_AsyncRendering_config))
 	@echo "==== Building PK-Sample_10_AsyncRendering ($(PK_Sample_10_AsyncRendering_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_10_AsyncRendering.make config=$(PK_Sample_10_AsyncRendering_config)
 endif
 
-PK-Sample_11_ThreadPool: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_11_ThreadPool: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_11_ThreadPool_config))
 	@echo "==== Building PK-Sample_11_ThreadPool ($(PK_Sample_11_ThreadPool_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_11_ThreadPool.make config=$(PK_Sample_11_ThreadPool_config)
 endif
 
-PK-Sample_12_GBufferSampling: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
+PK-Sample_12_GBufferSampling: PK-SampleLib PK-RHI PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_HDR PK-Discretizers PK-ParticlesToolbox PK-Runtime PK-ZLib
 ifneq (,$(PK_Sample_12_GBufferSampling_config))
 	@echo "==== Building PK-Sample_12_GBufferSampling ($(PK_Sample_12_GBufferSampling_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-Sample_12_GBufferSampling.make config=$(PK_Sample_12_GBufferSampling_config)

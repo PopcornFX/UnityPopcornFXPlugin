@@ -32,14 +32,40 @@ namespace PopcornFX
 			if (asm != null)
 			{
 				Type[] types = asm.GetTypes();
+				Type ShaderGraphProjectSettingsType = null;
 				Type ShaderGraphPreferencesType = null;
 				foreach (var type in types)
 				{
 					if (type.FullName == "UnityEditor.ShaderGraph.ShaderGraphPreferences")
-					{
 						ShaderGraphPreferencesType = type;
+					if (type.FullName == "UnityEditor.ShaderGraph.ShaderGraphProjectSettings")
+						ShaderGraphProjectSettingsType = type;
+					if (ShaderGraphPreferencesType != null && ShaderGraphProjectSettingsType != null)
 						break;
+				}
+				if (ShaderGraphProjectSettingsType != null)
+				{
+					object settingInstance = ShaderGraphProjectSettingsType.BaseType.GetMethod("get_instance").Invoke(null, null);
+					MethodInfo[] methods = ShaderGraphProjectSettingsType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic);
+					MethodInfo save = null;
+					foreach (var method in methods)
+					{
+						if (method.Name == "GetSerializedObject")
+						{
+							SerializedObject obj = method.Invoke(settingInstance, null) as SerializedObject;
+							SerializedProperty prop = obj.FindProperty("shaderVariantLimit");
+							if (prop != null && prop.intValue < 256)
+							{
+								prop.intValue = 256;
+								obj.ApplyModifiedProperties();
+							}
+						}
+						if (method.Name == "Save")
+							save = method;
 					}
+					if (save != null)
+						save.Invoke(settingInstance, new object[] { true });
+
 				}
 				if (ShaderGraphPreferencesType != null)
 				{

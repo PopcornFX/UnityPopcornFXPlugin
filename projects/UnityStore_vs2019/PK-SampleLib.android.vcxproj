@@ -514,9 +514,6 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\sources\Billboard.geom" />
-  </ItemGroup>
-  <ItemGroup>
     <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -61,9 +61,6 @@
     <Filter Include="Shaders\Generated">
       <UniqueIdentifier>{4D14F45B-B92A-F2F1-02A2-7D136EF7C279}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Sources">
-      <UniqueIdentifier>{62FA50EC-CE85-BEB0-D796-41A543A11AB1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
     </Filter>
@@ -893,11 +890,6 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\Assets\ShaderIncludes\sources\Billboard.geom">
-      <Filter>Shaders\Sources</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">

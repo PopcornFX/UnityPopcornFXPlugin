@@ -9,110 +9,58 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug_x64)
-  PK_Runtime_config = debug_x64
-  PK_Discretizers_config = debug_x64
-  PK_ParticlesToolbox_config = debug_x64
-  PK_Plugin_CompilerBackend_CPU_VM_config = debug_x64
-  PK_Plugin_CodecImage_DDS_config = debug_x64
-  PK_Plugin_CodecImage_JPG_config = debug_x64
-  PK_Plugin_CodecImage_PNG_config = debug_x64
-  PK_Plugin_CodecImage_TGA_config = debug_x64
-  PK_Plugin_CodecImage_TIFF_config = debug_x64
-  PK_Plugin_CodecImage_PKM_config = debug_x64
-  PK_Plugin_CodecImage_PVR_config = debug_x64
-  PK_Plugin_CodecImage_HDR_config = debug_x64
-  PK_Plugin_CodecImage_EXR_config = debug_x64
-  PK_Plugin_CodecMesh_FBX_config = debug_x64
-  PK_ZLib_config = debug_x64
+  PK_Runtime_SDK1_config = debug_x64
+  PK_Discretizers_SDK1_config = debug_x64
+  PK_ParticlesToolbox_SDK1_config = debug_x64
   PK_AssetBakerLib_config = debug_x64
   PK_ImporterLib_config = debug_x64
   PK_UpgraderLib_config = debug_x64
-  PK_RenderHelpers_config = debug_x64
+  PK_RenderHelpers_SDK1_config = debug_x64
   PK_IntegrationUnity_config = debug_x64
 
 else ifeq ($(config),debug_arm64)
-  PK_Runtime_config = debug_arm64
-  PK_Discretizers_config = debug_arm64
-  PK_ParticlesToolbox_config = debug_arm64
-  PK_Plugin_CompilerBackend_CPU_VM_config = debug_arm64
-  PK_Plugin_CodecImage_DDS_config = debug_arm64
-  PK_Plugin_CodecImage_JPG_config = debug_arm64
-  PK_Plugin_CodecImage_PNG_config = debug_arm64
-  PK_Plugin_CodecImage_TGA_config = debug_arm64
-  PK_Plugin_CodecImage_TIFF_config = debug_arm64
-  PK_Plugin_CodecImage_PKM_config = debug_arm64
-  PK_Plugin_CodecImage_PVR_config = debug_arm64
-  PK_Plugin_CodecImage_HDR_config = debug_arm64
-  PK_Plugin_CodecImage_EXR_config = debug_arm64
-  PK_Plugin_CodecMesh_FBX_config = debug_arm64
-  PK_ZLib_config = debug_arm64
+  PK_Runtime_SDK1_config = debug_arm64
+  PK_Discretizers_SDK1_config = debug_arm64
+  PK_ParticlesToolbox_SDK1_config = debug_arm64
   PK_AssetBakerLib_config = debug_arm64
   PK_ImporterLib_config = debug_arm64
   PK_UpgraderLib_config = debug_arm64
-  PK_RenderHelpers_config = debug_arm64
+  PK_RenderHelpers_SDK1_config = debug_arm64
   PK_IntegrationUnity_config = debug_arm64
 
 else ifeq ($(config),release_x64)
-  PK_Runtime_config = release_x64
-  PK_Discretizers_config = release_x64
-  PK_ParticlesToolbox_config = release_x64
-  PK_Plugin_CompilerBackend_CPU_VM_config = release_x64
-  PK_Plugin_CodecImage_DDS_config = release_x64
-  PK_Plugin_CodecImage_JPG_config = release_x64
-  PK_Plugin_CodecImage_PNG_config = release_x64
-  PK_Plugin_CodecImage_TGA_config = release_x64
-  PK_Plugin_CodecImage_TIFF_config = release_x64
-  PK_Plugin_CodecImage_PKM_config = release_x64
-  PK_Plugin_CodecImage_PVR_config = release_x64
-  PK_Plugin_CodecImage_HDR_config = release_x64
-  PK_Plugin_CodecImage_EXR_config = release_x64
-  PK_Plugin_CodecMesh_FBX_config = release_x64
-  PK_ZLib_config = release_x64
+  PK_Runtime_SDK1_config = release_x64
+  PK_Discretizers_SDK1_config = release_x64
+  PK_ParticlesToolbox_SDK1_config = release_x64
   PK_AssetBakerLib_config = release_x64
   PK_ImporterLib_config = release_x64
   PK_UpgraderLib_config = release_x64
-  PK_RenderHelpers_config = release_x64
+  PK_RenderHelpers_SDK1_config = release_x64
   PK_IntegrationUnity_config = release_x64
 
 else ifeq ($(config),release_arm64)
-  PK_Runtime_config = release_arm64
-  PK_Discretizers_config = release_arm64
-  PK_ParticlesToolbox_config = release_arm64
-  PK_Plugin_CompilerBackend_CPU_VM_config = release_arm64
-  PK_Plugin_CodecImage_DDS_config = release_arm64
-  PK_Plugin_CodecImage_JPG_config = release_arm64
-  PK_Plugin_CodecImage_PNG_config = release_arm64
-  PK_Plugin_CodecImage_TGA_config = release_arm64
-  PK_Plugin_CodecImage_TIFF_config = release_arm64
-  PK_Plugin_CodecImage_PKM_config = release_arm64
-  PK_Plugin_CodecImage_PVR_config = release_arm64
-  PK_Plugin_CodecImage_HDR_config = release_arm64
-  PK_Plugin_CodecImage_EXR_config = release_arm64
-  PK_Plugin_CodecMesh_FBX_config = release_arm64
-  PK_ZLib_config = release_arm64
+  PK_Runtime_SDK1_config = release_arm64
+  PK_Discretizers_SDK1_config = release_arm64
+  PK_ParticlesToolbox_SDK1_config = release_arm64
   PK_AssetBakerLib_config = release_arm64
   PK_ImporterLib_config = release_arm64
   PK_UpgraderLib_config = release_arm64
-  PK_RenderHelpers_config = release_arm64
+  PK_RenderHelpers_SDK1_config = release_arm64
   PK_IntegrationUnity_config = release_arm64
 
 else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime PK-Discretizers PK-ParticlesToolbox PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-Plugin_CodecMesh_FBX PK-ZLib PK-AssetBakerLib PK-ImporterLib PK-UpgraderLib PK-RenderHelpers PK-IntegrationUnity
+PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-AssetBakerLib PK-ImporterLib PK-UpgraderLib PK-RenderHelpers_SDK1 PK-IntegrationUnity
 
-.PHONY: all clean help $(PROJECTS) Plugins Plugins/External Rendering Runtime Tools Tools/AssetBaker Tools/Upgrader Unity
+.PHONY: all clean help $(PROJECTS) Rendering Runtime Tools Tools/AssetBaker Tools/Upgrader Unity
 
 all: $(PROJECTS)
 
-Plugins: Plugins/External PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_EXR PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PKM PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecMesh_FBX PK-Plugin_CompilerBackend_CPU_VM
+Rendering: PK-RenderHelpers_SDK1
 
-Plugins/External: PK-ZLib
-
-Rendering: PK-RenderHelpers
-
-Runtime: PK-Discretizers PK-ParticlesToolbox PK-Runtime
+Runtime: PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-Runtime_SDK1
 
 Tools: Tools/AssetBaker Tools/Upgrader
 
@@ -122,94 +70,22 @@ Tools/Upgrader: PK-ImporterLib PK-UpgraderLib
 
 Unity: PK-IntegrationUnity
 
-PK-Runtime:
-ifneq (,$(PK_Runtime_config))
-	@echo "==== Building PK-Runtime ($(PK_Runtime_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Runtime.make config=$(PK_Runtime_config)
+PK-Runtime_SDK1:
+ifneq (,$(PK_Runtime_SDK1_config))
+	@echo "==== Building PK-Runtime_SDK1 ($(PK_Runtime_SDK1_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-Runtime_SDK1.make config=$(PK_Runtime_SDK1_config)
 endif
 
-PK-Discretizers:
-ifneq (,$(PK_Discretizers_config))
-	@echo "==== Building PK-Discretizers ($(PK_Discretizers_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Discretizers.make config=$(PK_Discretizers_config)
+PK-Discretizers_SDK1:
+ifneq (,$(PK_Discretizers_SDK1_config))
+	@echo "==== Building PK-Discretizers_SDK1 ($(PK_Discretizers_SDK1_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-Discretizers_SDK1.make config=$(PK_Discretizers_SDK1_config)
 endif
 
-PK-ParticlesToolbox:
-ifneq (,$(PK_ParticlesToolbox_config))
-	@echo "==== Building PK-ParticlesToolbox ($(PK_ParticlesToolbox_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-ParticlesToolbox.make config=$(PK_ParticlesToolbox_config)
-endif
-
-PK-Plugin_CompilerBackend_CPU_VM:
-ifneq (,$(PK_Plugin_CompilerBackend_CPU_VM_config))
-	@echo "==== Building PK-Plugin_CompilerBackend_CPU_VM ($(PK_Plugin_CompilerBackend_CPU_VM_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CompilerBackend_CPU_VM.make config=$(PK_Plugin_CompilerBackend_CPU_VM_config)
-endif
-
-PK-Plugin_CodecImage_DDS:
-ifneq (,$(PK_Plugin_CodecImage_DDS_config))
-	@echo "==== Building PK-Plugin_CodecImage_DDS ($(PK_Plugin_CodecImage_DDS_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_DDS.make config=$(PK_Plugin_CodecImage_DDS_config)
-endif
-
-PK-Plugin_CodecImage_JPG:
-ifneq (,$(PK_Plugin_CodecImage_JPG_config))
-	@echo "==== Building PK-Plugin_CodecImage_JPG ($(PK_Plugin_CodecImage_JPG_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_JPG.make config=$(PK_Plugin_CodecImage_JPG_config)
-endif
-
-PK-Plugin_CodecImage_PNG:
-ifneq (,$(PK_Plugin_CodecImage_PNG_config))
-	@echo "==== Building PK-Plugin_CodecImage_PNG ($(PK_Plugin_CodecImage_PNG_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_PNG.make config=$(PK_Plugin_CodecImage_PNG_config)
-endif
-
-PK-Plugin_CodecImage_TGA:
-ifneq (,$(PK_Plugin_CodecImage_TGA_config))
-	@echo "==== Building PK-Plugin_CodecImage_TGA ($(PK_Plugin_CodecImage_TGA_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_TGA.make config=$(PK_Plugin_CodecImage_TGA_config)
-endif
-
-PK-Plugin_CodecImage_TIFF:
-ifneq (,$(PK_Plugin_CodecImage_TIFF_config))
-	@echo "==== Building PK-Plugin_CodecImage_TIFF ($(PK_Plugin_CodecImage_TIFF_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_TIFF.make config=$(PK_Plugin_CodecImage_TIFF_config)
-endif
-
-PK-Plugin_CodecImage_PKM:
-ifneq (,$(PK_Plugin_CodecImage_PKM_config))
-	@echo "==== Building PK-Plugin_CodecImage_PKM ($(PK_Plugin_CodecImage_PKM_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_PKM.make config=$(PK_Plugin_CodecImage_PKM_config)
-endif
-
-PK-Plugin_CodecImage_PVR:
-ifneq (,$(PK_Plugin_CodecImage_PVR_config))
-	@echo "==== Building PK-Plugin_CodecImage_PVR ($(PK_Plugin_CodecImage_PVR_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_PVR.make config=$(PK_Plugin_CodecImage_PVR_config)
-endif
-
-PK-Plugin_CodecImage_HDR:
-ifneq (,$(PK_Plugin_CodecImage_HDR_config))
-	@echo "==== Building PK-Plugin_CodecImage_HDR ($(PK_Plugin_CodecImage_HDR_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_HDR.make config=$(PK_Plugin_CodecImage_HDR_config)
-endif
-
-PK-Plugin_CodecImage_EXR:
-ifneq (,$(PK_Plugin_CodecImage_EXR_config))
-	@echo "==== Building PK-Plugin_CodecImage_EXR ($(PK_Plugin_CodecImage_EXR_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_EXR.make config=$(PK_Plugin_CodecImage_EXR_config)
-endif
-
-PK-Plugin_CodecMesh_FBX:
-ifneq (,$(PK_Plugin_CodecMesh_FBX_config))
-	@echo "==== Building PK-Plugin_CodecMesh_FBX ($(PK_Plugin_CodecMesh_FBX_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecMesh_FBX.make config=$(PK_Plugin_CodecMesh_FBX_config)
-endif
-
-PK-ZLib:
-ifneq (,$(PK_ZLib_config))
-	@echo "==== Building PK-ZLib ($(PK_ZLib_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-ZLib.make config=$(PK_ZLib_config)
+PK-ParticlesToolbox_SDK1:
+ifneq (,$(PK_ParticlesToolbox_SDK1_config))
+	@echo "==== Building PK-ParticlesToolbox_SDK1 ($(PK_ParticlesToolbox_SDK1_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-ParticlesToolbox_SDK1.make config=$(PK_ParticlesToolbox_SDK1_config)
 endif
 
 PK-AssetBakerLib:
@@ -230,38 +106,26 @@ ifneq (,$(PK_UpgraderLib_config))
 	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make config=$(PK_UpgraderLib_config)
 endif
 
-PK-RenderHelpers:
-ifneq (,$(PK_RenderHelpers_config))
-	@echo "==== Building PK-RenderHelpers ($(PK_RenderHelpers_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers.make config=$(PK_RenderHelpers_config)
+PK-RenderHelpers_SDK1:
+ifneq (,$(PK_RenderHelpers_SDK1_config))
+	@echo "==== Building PK-RenderHelpers_SDK1 ($(PK_RenderHelpers_SDK1_config)) ===="
+	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers_SDK1.make config=$(PK_RenderHelpers_SDK1_config)
 endif
 
-PK-IntegrationUnity: PK-RenderHelpers PK-Plugin_CompilerBackend_CPU_VM PK-Plugin_CodecMesh_FBX PK-Plugin_CodecImage_DDS PK-Plugin_CodecImage_JPG PK-Plugin_CodecImage_PNG PK-Plugin_CodecImage_PVR PK-Plugin_CodecImage_TGA PK-Plugin_CodecImage_TIFF PK-Plugin_CodecImage_HDR PK-Plugin_CodecImage_EXR PK-UpgraderLib PK-ImporterLib PK-AssetBakerLib PK-ZLib PK-Plugin_CodecImage_PKM PK-ParticlesToolbox PK-Runtime
+PK-IntegrationUnity: PK-UpgraderLib PK-ImporterLib PK-AssetBakerLib
 ifneq (,$(PK_IntegrationUnity_config))
 	@echo "==== Building PK-IntegrationUnity ($(PK_IntegrationUnity_config)) ===="
 	@${MAKE} --no-print-directory -C . -f PK-IntegrationUnity.make config=$(PK_IntegrationUnity_config)
 endif
 
 clean:
-	@${MAKE} --no-print-directory -C . -f PK-Runtime.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Discretizers.make clean
-	@${MAKE} --no-print-directory -C . -f PK-ParticlesToolbox.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CompilerBackend_CPU_VM.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_DDS.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_JPG.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_PNG.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_TGA.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_TIFF.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_PKM.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_PVR.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_HDR.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecImage_EXR.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Plugin_CodecMesh_FBX.make clean
-	@${MAKE} --no-print-directory -C . -f PK-ZLib.make clean
+	@${MAKE} --no-print-directory -C . -f PK-Runtime_SDK1.make clean
+	@${MAKE} --no-print-directory -C . -f PK-Discretizers_SDK1.make clean
+	@${MAKE} --no-print-directory -C . -f PK-ParticlesToolbox_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-AssetBakerLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-ImporterLib.make clean
 	@${MAKE} --no-print-directory -C . -f PK-UpgraderLib.make clean
-	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers.make clean
+	@${MAKE} --no-print-directory -C . -f PK-RenderHelpers_SDK1.make clean
 	@${MAKE} --no-print-directory -C . -f PK-IntegrationUnity.make clean
 
 help:
@@ -276,25 +140,13 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
-	@echo "   PK-Runtime"
-	@echo "   PK-Discretizers"
-	@echo "   PK-ParticlesToolbox"
-	@echo "   PK-Plugin_CompilerBackend_CPU_VM"
-	@echo "   PK-Plugin_CodecImage_DDS"
-	@echo "   PK-Plugin_CodecImage_JPG"
-	@echo "   PK-Plugin_CodecImage_PNG"
-	@echo "   PK-Plugin_CodecImage_TGA"
-	@echo "   PK-Plugin_CodecImage_TIFF"
-	@echo "   PK-Plugin_CodecImage_PKM"
-	@echo "   PK-Plugin_CodecImage_PVR"
-	@echo "   PK-Plugin_CodecImage_HDR"
-	@echo "   PK-Plugin_CodecImage_EXR"
-	@echo "   PK-Plugin_CodecMesh_FBX"
-	@echo "   PK-ZLib"
+	@echo "   PK-Runtime_SDK1"
+	@echo "   PK-Discretizers_SDK1"
+	@echo "   PK-ParticlesToolbox_SDK1"
 	@echo "   PK-AssetBakerLib"
 	@echo "   PK-ImporterLib"
 	@echo "   PK-UpgraderLib"
-	@echo "   PK-RenderHelpers"
+	@echo "   PK-RenderHelpers_SDK1"
 	@echo "   PK-IntegrationUnity"
 	@echo ""
 	@echo "For more information, see https://github.com/premake/premake-core/wiki"

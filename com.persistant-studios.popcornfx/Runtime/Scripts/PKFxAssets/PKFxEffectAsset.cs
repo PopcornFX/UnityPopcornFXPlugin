@@ -344,7 +344,6 @@ namespace PopcornFX
 							m_Materials[info.m_InternalId] = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
 							AssetDatabase.RemoveObjectFromAsset(info);
 							mats.GetArrayElementAtIndex(info.m_InternalId).objectReferenceValue = PKFxSettings.MaterialFactory.EditorResolveMaterial(desc, this);
-							break;
 						}
 
 					}

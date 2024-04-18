@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{C196CD9C-2D76-4C38-368E-D70EA2ECB299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Natvis">
+      <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_compile.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_debug_symbols_provider.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_helpers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_init.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_legacy_timeline.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_morph.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_mesh_deformers_skin.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_overdraw.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_profiler_new.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_seek_interface.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_skeleton.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_skeleton_anim.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_trace.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_transforms.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis">
+      <Filter>_Natvis</Filter>
+    </Natvis>
+  </ItemGroup>
+</Project>

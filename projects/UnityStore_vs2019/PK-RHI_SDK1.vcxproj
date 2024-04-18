@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|Win32">
+      <Configuration>Retail</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|x64">
+      <Configuration>Retail</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Retail|ARM64">
+      <Configuration>Retail</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1822BA45-2535-4E66-FFFF-AAB284A46F5B}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PK-RHI_SDK1</RootNamespace>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+    <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Debug\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_d</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Debug\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_d</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\ARM64\Debug\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_d</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Release\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_r</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Release\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_r</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\ARM64\Release\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_r</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x32\Retail\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_s</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\x64\Retail\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_s</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'">
+    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64\</OutDir>
+    <IntDir>..\intermediate\UnityStore\VC142\ARM64\Retail\PK-RHI_SDK1\</IntDir>
+    <TargetName>PK-RHI_s</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>false</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rhi_precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <OmitFramePointers>true</OmitFramePointers>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ConformanceMode>true</ConformanceMode>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\AllInterfaces.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11All.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11ApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11BasicContext.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11CommandBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11ComputeState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11ConstantSampler.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11ConstantSet.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11FrameBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11GpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11PopcornEnumConversion.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11QueryPool.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11RHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11ReadBackTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11RenderPass.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11RenderState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11RenderTarget.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11ShaderModule.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11ShaderProgram.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D11\D3D11Texture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12All.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12BasicContext.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12CommandBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ComputeState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ConstantSampler.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ConstantSet.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12DescriptorAllocator.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12Fence.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12FrameBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12GpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12PopcornEnumConversion.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12QueryPool.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12RHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ReadBackTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12RenderPass.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12RenderState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12RenderTarget.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ShaderModule.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12ShaderProgram.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12Texture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3D12\D3D12XRHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3DCommon\D3DCompileShader.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\D3DCommon\D3DPopcornEnumConversion.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\EnumHelper.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\Enums.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\FakeBufferDigester.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\FwdAbstracts.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\FwdInterfaces.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\PixelFormatFallbacks.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\RHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\RHIConfig.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\RHIInit.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\ShaderConstantBindingGenerator.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\Startup.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\details\Template_DeclareAPI.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\details\Traits.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\CMemoryUsage.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\ICommandBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IConstantSampler.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IConstantSet.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IFrameBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IGpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IPipelineState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IQueryPool.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IRHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IReadBackTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IRenderPass.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IRenderState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IRenderTarget.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IShaderModule.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\IShaderProgram.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\ITexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SApiContext.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SComputeState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SConstantSetLayout.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SDrawIndirectArgs.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SRenderState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\SShaderBindings.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractCommandBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractConstantSet.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractFrameBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractGpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractRenderPass.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractRenderTarget.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\abstracts\AbstractTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\async\ASyncApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\interfaces\async\ASyncGpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullAll.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullCommandBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullComputeState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullConstantSampler.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullConstantSet.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullFrameBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullGpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullQueryPool.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullRHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullReadBackTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullRenderPass.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullRenderState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullRenderTarget.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullShaderModule.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullShaderProgram.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\null\NullTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLAll.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLBasicContext.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLCommandBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLComputeState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLConstantSampler.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLConstantSet.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLExtensions.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLFrameBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLGpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLPopcornEnumConversion.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLQueryPool.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLRHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLReadBackTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLRenderPass.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLRenderState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLRenderTarget.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLShaderModule.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLShaderProgram.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\opengl\OpenGLTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\orbis\cs_set_uint_c.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\orbis\pix_clear_p.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanAll.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanApiManager.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanBasicContext.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanCommandBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanComputeState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanConstantSampler.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanConstantSet.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanFrameBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanGpuBuffer.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanPlatformSpecificData.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanPopcornEnumConversion.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanQueryPool.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanRHI.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanReadBackTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanRenderPass.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanRenderState.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanRenderTarget.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanShaderModule.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanShaderProgram.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanTexture.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D11\pv_D3D11.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\src\D3D12\pv_D3D12.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\src\include\pv_ApiTester.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\src\null\pv_Null.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\src\opengl\pv_OpenGL.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled\rhi_precompiled.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\src\vulkan\pv_Vulkan.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_1.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_2.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_3.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_4.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glfw3native.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glxew.h" />
+    <ClInclude Include="..\..\ExternalLibs\GL\include\GL\wglew.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ExternalLibs\GL\src\glew.c">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <DisableSpecificWarnings>4668;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\Native\debugger\PopcornFX.natvis" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

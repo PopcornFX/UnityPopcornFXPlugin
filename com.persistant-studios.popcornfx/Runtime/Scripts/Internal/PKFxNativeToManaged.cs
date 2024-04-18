@@ -1326,25 +1326,6 @@ namespace PopcornFX
 			b.min = new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ);
 			b.max = new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ);
 
-#if UNITY_EDITOR
-			if (PKFxSettings.DebugEffectsBoundingBoxes && !PKFxSettings.UseGPUBillboarding)
-			{
-				Color boundsColor = m_Renderers[rendererGUID].m_BoundsDebugColor;
-
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MinX, bounds.m_MaxY, bounds.m_MinZ), new Vector3(bounds.m_MaxX, bounds.m_MaxY, bounds.m_MinZ), boundsColor);
-				Debug.DrawLine(new Vector3(bounds.m_MaxX, bounds.m_MinY, bounds.m_MaxZ), new Vector3(bounds.m_MinX, bounds.m_MinY, bounds.m_MaxZ), boundsColor);
-			}
-#endif
 			if (m_Renderers[rendererGUID].m_Slice != null)
 				m_Renderers[rendererGUID].m_Slice.mesh.bounds = b;
 			else if (m_Renderers[rendererGUID].m_Procedural != null)

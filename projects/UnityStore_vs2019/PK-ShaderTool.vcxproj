@@ -161,7 +161,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-RHI_d.lib;PK-RenderHelpers_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x86);$(VULKAN_SDK)\lib32;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -189,7 +189,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-RHI_d.lib;PK-RenderHelpers_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x64);$(VULKAN_SDK)\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -217,7 +217,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-RHI_d.lib;PK-RenderHelpers_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -252,7 +252,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-RHI_r.lib;PK-RenderHelpers_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x86);$(VULKAN_SDK)\lib32;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -286,7 +286,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-RHI_r.lib;PK-RenderHelpers_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x64);$(VULKAN_SDK)\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -320,7 +320,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-RHI_r.lib;PK-RenderHelpers_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -369,51 +369,6 @@
   <ItemGroup>
     <ProjectReference Include="PK-SampleLib.vcxproj">
       <Project>{89A78AC6-E37E-456E-B4B4-F944839A2FFC}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-MCPP.vcxproj">
-      <Project>{C43F305D-E37E-456E-B4B4-F944839A2FFC}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_DDS.vcxproj">
-      <Project>{23EFF7B6-32A1-4155-7F68-489FEAC3F4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_JPG.vcxproj">
-      <Project>{23F012BC-F8F8-4255-7F68-489FEF2EF4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_PKM.vcxproj">
-      <Project>{23F02BA3-32A1-4155-7F68-489FEAC3F4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_PNG.vcxproj">
-      <Project>{23F02C00-32A1-4255-7F68-489FEF2EF4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_PVR.vcxproj">
-      <Project>{23F02D13-32A2-4155-7F68-489FEAC3F4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_TGA.vcxproj">
-      <Project>{23F03C17-32A1-4155-7F68-489FEAC3F4D1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CodecImage_HDR.vcxproj">
-      <Project>{23F008B9-32A1-4155-7F68-489FEAC305E2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Plugin_CompilerBackend_CPU_VM.vcxproj">
-      <Project>{FBF093C7-32A1-4155-8968-4890F7C3F4DF}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-RHI.vcxproj">
-      <Project>{1822BA45-2535-4E66-B24D-AAB284A46F5B}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-RenderHelpers.vcxproj">
-      <Project>{1822BA45-2535-4E66-B24D-90B284A46F5B}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Discretizers.vcxproj">
-      <Project>{F866336F-906C-411B-8295-AABBCC2C47CE}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-ParticlesToolbox.vcxproj">
-      <Project>{1A87AB61-B71A-4EBA-8EC6-997BB30241A3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-Runtime.vcxproj">
-      <Project>{E21DB851-1449-42D8-B5FC-7FC2E9399524}</Project>
-    </ProjectReference>
-    <ProjectReference Include="PK-ZLib.vcxproj">
-      <Project>{C4467ADE-6081-4FC4-ABD0-30229F4EA1C9}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

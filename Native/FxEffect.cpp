@@ -111,7 +111,9 @@ int	CPKFXEffect::LoadFX(const CString &fx)
 	// GetAllAttributes doesn't check if m_EffectID is valid now
 	// and return the parent effect default container instead of null for newly instantiated emitters.
 	// So force create the attribute container here
-	m_Emitter->SetAllAttributes(null);	
+	if (m_Emitter == null)
+		return -1;
+	m_Emitter->SetAllAttributes(null);
 
 	if (CRuntimeManager::Instance().GetIsUnitTesting())
 	{
@@ -140,6 +142,8 @@ int	CPKFXEffect::LoadFX(const CString &fx)
 
 void	CPKFXEffect::RunFX(float delay, float prewarm)
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return;
 	// Setup the effect instance basic parameters
 	PopcornFX::SEffectStartCtl	effectStartCtl;
 	effectStartCtl.m_TimeFromStartOfFrame = delay;
@@ -268,6 +272,8 @@ void	CPKFXEffect::Update(float dt)
 
 SAttributesContainer::SAttrib	*CPKFXEffect::GetAttributesBuffer()
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return null;
 	if (m_Emitter->GetAllAttributes() == null)
 	{
 		m_Emitter->SetAllAttributes(null);
@@ -277,6 +283,8 @@ SAttributesContainer::SAttrib	*CPKFXEffect::GetAttributesBuffer()
 
 void	CPKFXEffect::UpdateAttributesBuffer()
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return;
 	m_Emitter->SetAllAttributes(m_Emitter->GetAllAttributes());
 }
 
@@ -466,6 +474,8 @@ bool	CPKFXEffect::EffectEndUpdateSamplerSkinning(u32 smpID)
 
 bool	CPKFXEffect::SetSamplerShapeBasics(u32 smpID, EShapeType type, const CFloat3 &size)
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	// Wait for the sampler change thread:
 	_WaitForSwitchSamplers(&samplerData);
@@ -724,6 +734,8 @@ bool	CPKFXEffect::SetSamplerShapeTransform(u32 smpID, const CFloat4x4 &transform
 
 bool	CPKFXEffect::SetSamplerCurve(u32 smpID, const SCurveSamplerToFill *curveData)
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	const float		CURVE_MINIMUM_DELTA = 0.0001f;
 
@@ -976,6 +988,8 @@ bool	CPKFXEffect::SetSamplerCurve(u32 smpID, const SCurveSamplerToFill *curveDat
 
 bool	CPKFXEffect::SetSamplerTexture(u32 smpID, const STextureSamplerToFill *texture)
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return false;
 	const u32				width = texture->m_Width;
 	const u32				height = texture->m_Height;
 	const u32				sizeInBytes = texture->m_SizeInBytes;
@@ -1075,6 +1089,8 @@ bool	CPKFXEffect::SetSamplerTexture(u32 smpID, const STextureSamplerToFill *text
 
 bool	CPKFXEffect::SetSamplerText(u32 smpID, const char *text)
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return false;
 	CString			textStr(text);
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 
@@ -1275,6 +1291,8 @@ PShapeDescriptor_Mesh	CPKFXEffect::_LoadSamplerShapeMeshFromPkmm(	CConstMemorySt
 
 bool	CPKFXEffect::_SetSamplerShapeMesh(u32 smpID, SSamplerData &samplerData, const PShapeDescriptor_Mesh &shapeDescriptor, const PResourceMeshBatch &meshBatch, const PPkFxSkinnedMesh &skinnedMesh)
 {
+	if (m_Emitter == null) //If effect is being stopped
+		return false;
 	if (!PK_VERIFY(samplerData.m_SamplerType == SamplerShape))
 	{
 		CLog::Log(PK_ERROR, "Set sampler mesh on another type of sampler");

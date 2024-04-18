@@ -55,6 +55,9 @@ namespace PopcornFX
 
 		public override void OnInspectorGUI()
 		{
+			// Update the serializedObject, the source asset can be changed during filewatcher events in PKFxAssetCreationUtils
+			serializedObject.Update();
+
 			m_BGColor.normal.background = EditorGUIUtility.whiteTexture;
 			EditorStyles.textField.wordWrap = true;
 

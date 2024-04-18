@@ -159,13 +159,13 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 
 	m_ParticleCount = allocBuffers.m_TotalParticleCount;
 
-	_UpdateThread_SetUnityMeshBounds(allocBuffers, views);
 
 	if (rendererType == Renderer_Billboard || rendererType == Renderer_Ribbon || rendererType == Renderer_Triangle)
 	{
 		m_VertexCount = allocBuffers.m_TotalVertexCount;
 		m_IndexCount = allocBuffers.m_TotalIndexCount;
 		_UpdateThread_ResizeUnityMesh(allocBuffers, ctx.m_RenderApiData);
+		_UpdateThread_SetUnityMeshBounds(allocBuffers, views);
 
 		if (!allocBuffers.m_DrawRequests.Empty())
 		{
@@ -639,7 +639,8 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 {
 	PK_SCOPEDPROFILE();
 	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
-	if (m_RendererType == Renderer_Mesh)
+	// No need to update the bounds for the light: Unity handle them itself
+	if (!PK_VERIFY(m_RendererType != Renderer_Mesh && m_RendererType != Renderer_Light && m_RendererType != Renderer_Sound))
 		return;
 
 	CAABB	bbox = CAABB::DEGENERATED;

@@ -175,6 +175,11 @@ namespace PopcornFX
 				}
 			}
 			PKFxManager.DrawMeshRenderers();
+
+#if UNITY_EDITOR
+			if (PKFxSettings.DebugEffectsBoundingBoxes && !PKFxSettings.UseGPUBillboarding)
+				PKFxManager.DrawBounds();
+#endif
 		}
 
 		//----------------------------------------------------------------------------

@@ -192,7 +192,7 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern int PopcornFXDllLoaded();
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
-		public static extern void PopcornFXStartup(ref SPopcornFxSettings settings);
+		public static extern bool PopcornFXStartup(ref SPopcornFxSettings settings);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void PopcornFXShutdown();
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
@@ -357,7 +357,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.15.17 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.15.18 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";

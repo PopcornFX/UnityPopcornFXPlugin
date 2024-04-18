@@ -287,7 +287,7 @@ extern "C"
 
 	// Ours:
 	MANAGED_TO_POPCORN_CONVENTION int								PopcornFXDllLoaded();
-	MANAGED_TO_POPCORN_CONVENTION bool 								PopcornFXStartup(const SPopcornFxSettings *settings); // Can be the first function called, create scene here IFN
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						PopcornFXStartup(const SPopcornFxSettings *settings); // Can be the first function called, create scene here IFN
 	MANAGED_TO_POPCORN_CONVENTION void 								PopcornFXShutdown();
 	//Log
 	MANAGED_TO_POPCORN_CONVENTION void								SetMaxLogStack(int maxLogStack);
@@ -304,14 +304,14 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void								GetStats(SStats *stats);
 	MANAGED_TO_POPCORN_CONVENTION void								PreloadFxIFN(const char *path, ManagedBool usesMeshRenderer);
 	MANAGED_TO_POPCORN_CONVENTION int								InstantiateFx(const SFxDesc *desc);
-	MANAGED_TO_POPCORN_CONVENTION bool								StartFx(int guid, float dt, float prewarm);
-	MANAGED_TO_POPCORN_CONVENTION bool								TerminateFx(int guid);
-	MANAGED_TO_POPCORN_CONVENTION bool								StopFx(int guid);
-	MANAGED_TO_POPCORN_CONVENTION bool								KillFx(int guid);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						StartFx(int guid, float dt, float prewarm);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						TerminateFx(int guid);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						StopFx(int guid);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						KillFx(int guid);
 
 	//Broadcasted event
-	MANAGED_TO_POPCORN_CONVENTION bool								RegisterExportedEvent(int guid, const char *eventName, unsigned int unityKey);
-	MANAGED_TO_POPCORN_CONVENTION bool								UnregisterExportedEvent(int guid, const char *eventName, unsigned int unityKey);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						RegisterExportedEvent(int guid, const char *eventName, unsigned int unityKey);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						UnregisterExportedEvent(int guid, const char *eventName, unsigned int unityKey);
 	MANAGED_TO_POPCORN_CONVENTION void								UnregisterEffectAllExportedEvent(int guid);
 	MANAGED_TO_POPCORN_CONVENTION void								UnregisterSceneAllExportedEvent();
 
@@ -319,40 +319,39 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void								*EffectGetAttributesBuffer(int guid);
 
 	// For the samplers shape:
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetSamplerShapeTransform(int guid, int samplerId, CFloat4x4 transform);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetSamplerShapeTransform(int guid, int samplerId, CFloat4x4 transform);
 	// Mesh sampler:
 	MANAGED_TO_POPCORN_CONVENTION SMeshDataToFill					*GetMeshDataToFillFromSampler(int vertexCount, int indexCount, int bonesCount, int flags);
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetMeshSampler(int guid, int samplerId, SMeshDataToFill *meshSampler, CFloat3 size, ManagedBool async);
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetMeshSamplerBaked(int guid, int samplerId, SMeshSamplerBaked *meshSamplerBaked, CFloat3 size, ManagedBool async);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetMeshSampler(int guid, int samplerId, SMeshDataToFill *meshSampler, CFloat3 size, ManagedBool async);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetMeshSamplerBaked(int guid, int samplerId, SMeshSamplerBaked *meshSamplerBaked, CFloat3 size, ManagedBool async);
 	// Skinning:
 	MANAGED_TO_POPCORN_CONVENTION CFloat4x4							*EffectUpdateSamplerSkinningSetMatrices(int guid, int samplerId);
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectBeginUpdateSamplerSkinning(int guid, int samplerId, float dt);
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectEndUpdateSamplerSkinning(int guid, int samplerId);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectBeginUpdateSamplerSkinning(int guid, int samplerId, float dt);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectEndUpdateSamplerSkinning(int guid, int samplerId);
 	// Other sampler shapes:
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetSamplerShape(int guid, int samplerId, EShapeType shapeType, CFloat3 size);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetSamplerShape(int guid, int samplerId, EShapeType shapeType, CFloat3 size);
 	// Curve sampler:
 	MANAGED_TO_POPCORN_CONVENTION SCurveSamplerToFill				*GetCurveSamplerData(int keyPointsCount, int curveDimension);
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetCurveSampler(int guid, int samplerId, SCurveSamplerToFill *meshSampler);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetCurveSampler(int guid, int samplerId, SCurveSamplerToFill *meshSampler);
 	// Texture sampler:
 	MANAGED_TO_POPCORN_CONVENTION STextureSamplerToFill				*GetTextureSamplerData(int byteSize);
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetTextureSampler(int guid, int samplerId, STextureSamplerToFill *meshSampler);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetTextureSampler(int guid, int samplerId, STextureSamplerToFill *meshSampler);
 	// Text sampler:
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetTextSampler(int guid, int samplerId, const char *text);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetTextSampler(int guid, int samplerId, const char *text);
 	// Any sampler:
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectResetDefaultSampler(int guid, int samplerId);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectResetDefaultSampler(int guid, int samplerId);
 
-	MANAGED_TO_POPCORN_CONVENTION bool								EffectSetTransforms(int guid, CFloat4x4 transforms);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						EffectSetTransforms(int guid, CFloat4x4 transforms);
 	//Scene Mesh
-	MANAGED_TO_POPCORN_CONVENTION bool								LoadPkmmAsSceneMesh(const char *pkmmVirtualPath);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						LoadPkmmAsSceneMesh(const char *pkmmVirtualPath);
 	MANAGED_TO_POPCORN_CONVENTION void								SceneMeshClear();
 	//Profiler
 	MANAGED_TO_POPCORN_CONVENTION void								WriteProfileReport(const char* path);
-	MANAGED_TO_POPCORN_CONVENTION void								ProfilerSetEnable(bool enable);
-
+	MANAGED_TO_POPCORN_CONVENTION void								ProfilerSetEnable(ManagedBool enable);
 	//Stats
-	MANAGED_TO_POPCORN_CONVENTION void 								StatsEnableFrameStats(bool enable);
-	MANAGED_TO_POPCORN_CONVENTION void 								StatsEnableEffectsStats(bool enable);
-	MANAGED_TO_POPCORN_CONVENTION bool								StatsPullFrameData(const char *reportName, SStatsToFill &data);
+	MANAGED_TO_POPCORN_CONVENTION void 								StatsEnableFrameStats(ManagedBool enable);
+	MANAGED_TO_POPCORN_CONVENTION void 								StatsEnableEffectsStats(ManagedBool enable);
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						StatsPullFrameData(const char *reportName, SStatsToFill &data);
 	// Reset:
 	MANAGED_TO_POPCORN_CONVENTION void								Reset();
 	MANAGED_TO_POPCORN_CONVENTION void								DeepReset();
@@ -363,7 +362,7 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION const char						*GetRuntimeVersion();
 
 	MANAGED_TO_POPCORN_CONVENTION void								SetApplicationLoopbackAudioVolume(float volume);
-	MANAGED_TO_POPCORN_CONVENTION bool								CanSkipUpdate();
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool						CanSkipUpdate();
 
 #if		defined(PK_COMPILER_CLANG) || defined(PK_COMPILER_GCC)
 #	pragma GCC visibility pop

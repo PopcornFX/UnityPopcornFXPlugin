@@ -1,13 +1,13 @@
 {
   "name": "com.persistant-studios.popcornfx.hdrp",
   "description": "HDRP Materials for PopcornFX.",
-  "version": "2.15.17",
+  "version": "2.15.18",
   "unity": "2020.2",
   "unityRelease": "",
   "displayName": "PopcornFX HDRP",
   "dependencies": {
     "com.unity.render-pipelines.core": "10.2.2",
     "com.unity.render-pipelines.high-definition": "10.2.2",
-    "com.persistant-studios.popcornfx": "2.15.17"
+    "com.persistant-studios.popcornfx": "2.15.18"
   }
 }

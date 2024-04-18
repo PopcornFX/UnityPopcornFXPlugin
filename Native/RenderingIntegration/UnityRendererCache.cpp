@@ -367,6 +367,11 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		CLog::Log(PK_WARN, "Legacy Lit render feature is not supported in Unity, Please use Lit instead (in PopcornFX editor)");
 	}
 
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_LightingLegacyOpaque) != 0)
+	{
+		CLog::Log(PK_WARN, "Legacy Lit Opaque render feature is not supported in Unity, Please use Lit instead (in PopcornFX editor)");
+	}
+
 	return true;
 }
 
@@ -477,6 +482,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	//const CGuid							distoColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Distortion_Color());
 	const SRendererFeaturePropertyValue	*lit = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Lit());
 	const SRendererFeaturePropertyValue	*litLegacy = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_LegacyLit());
+	const SRendererFeaturePropertyValue	*litLegacyOpaque = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_LegacyLitOpaque());
 	const SRendererFeaturePropertyValue	*alphaRemap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap());
 	const SRendererFeaturePropertyValue	*alphaRemapAlphaMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap_AlphaMap());
 	const CGuid							alphaRemapCursor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_AlphaRemap_Cursor());
@@ -511,6 +517,8 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Lighting;
 	if ((litLegacy != null && litLegacy->ValueB()))
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_LightingLegacy;
+	if ((litLegacyOpaque != null && litLegacyOpaque->ValueB()))
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_LightingLegacyOpaque;
 	if (softParticles != null && softParticles->ValueB() && softnessDistance != null && softnessDistance->ValueF().x() != 0.0f)
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Soft;
 	if (atlas != null && atlas->ValueB())
@@ -800,7 +808,10 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		//}
 		CLog::Log(PK_WARN, "Legacy Lit render feature is not supported in Unity, Please use Lit instead (in PopcornFX editor)");
 	}
-
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_LightingLegacyOpaque) != 0)
+	{
+		CLog::Log(PK_WARN, "Legacy Lit Opaque render feature is not supported in Unity, Please use Lit instead (in PopcornFX editor)");
+	}
 	return true;
 }
 

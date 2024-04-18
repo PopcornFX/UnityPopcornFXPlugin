@@ -76,7 +76,8 @@ namespace	ShaderVariationFlags
 		Has_SkeletalInterpol		= (1 << 20),
 		Has_SkeletalTrackInterpol	= (1 << 21),
 		Has_TransformUVs			= (1 << 22),
-		ShaderVariation_Count		= 23
+		Has_LightingLegacyOpaque	= (1 << 23),
+		ShaderVariation_Count		= 24
 	};
 }
 

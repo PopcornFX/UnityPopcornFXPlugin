@@ -106,6 +106,8 @@ struct	SUnityDependencyAppendHelper
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == BasicRendererProperties::SID_LegacyLit_NormalMap())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
+					else if (property->m_Name == BasicRendererProperties::SID_LegacyLitOpaque_NormalMap())
+						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaMap())
 						additionalUsageFlags |= SResourceDependency::UsageFlags_Image_Linear;
 					else if (property->m_Name == BasicRendererProperties::SID_Lit_NormalMap())

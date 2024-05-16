@@ -71,7 +71,7 @@ endif
 TARGETDIR = ../../../release/application/BinariesGM_linux_ARM64_d
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-AssetBaker
-DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE +=
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
@@ -118,7 +118,7 @@ endif
 TARGETDIR = ../../../release/application/BinariesGM_linux_ARM64_r
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-AssetBaker
-DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE +=
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu

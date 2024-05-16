@@ -390,6 +390,7 @@ namespace PopcornFX
 				ModelImporter modelImporter = assetImporter as ModelImporter;
 
 				modelImporter.isReadable = true;
+				modelImporter.sortHierarchyByName = false;
 				modelImporter.bakeAxisConversion = true;
 				modelImporter.SaveAndReimport();
 			}

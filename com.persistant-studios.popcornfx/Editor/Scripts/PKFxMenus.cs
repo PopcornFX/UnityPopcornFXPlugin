@@ -580,6 +580,7 @@ namespace PopcornFX
 					deleteCount++;
 				}
 			}
+			AssetDatabase.SaveAssets();
 			Debug.Log("[PopcornFX] " + deleteCount + " unused PKFx material deleted.");
 		}
 

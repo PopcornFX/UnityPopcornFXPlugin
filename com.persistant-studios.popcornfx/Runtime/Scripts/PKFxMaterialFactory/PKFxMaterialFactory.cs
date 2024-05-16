@@ -232,7 +232,6 @@ namespace PopcornFX
 				binding.SetMaterialKeywords(batchDesc, material);
 				binding.BindMaterialProperties(batchDesc, material, asset, logError);
 			}
-			AssetDatabase.SaveAssets();
 			return material;
 		}
 #endif

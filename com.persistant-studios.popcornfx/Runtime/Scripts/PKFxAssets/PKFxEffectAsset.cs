@@ -401,7 +401,10 @@ namespace PopcornFX
 				mat = curMat.m_CustomMaterial;
 			}
 			else
+			{
 				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false, false, false);
+				AssetDatabase.SaveAssets();
+			}
 
 			if (mat == null)
 			{
@@ -432,7 +435,10 @@ namespace PopcornFX
 				mat = curMat.m_CustomMaterial;
 			}
 			else
+			{
 				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false, false, false);
+				AssetDatabase.SaveAssets();
+			}
 
 			if (mat == null)
 			{

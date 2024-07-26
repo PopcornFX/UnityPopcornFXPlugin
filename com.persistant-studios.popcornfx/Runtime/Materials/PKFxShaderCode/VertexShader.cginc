@@ -77,7 +77,7 @@ SVertexOutput	vert(SVertexInput v)
 
 		o.UV0 = v.UVs.xy;
 		o.UV1 = v.UVs.zw;
-		o.FrameLerp = /*frac(*/v.AtlasIdAlphaCursorRotate.x;//);
+		o.FrameLerp = v.AtlasIdAlphaCursorRotate.x;
 
 		#if	PK_HAS_ALPHA_REMAP
 			o.AlphaCursor = v.AtlasIdAlphaCursorRotate.y;
@@ -103,6 +103,9 @@ SVertexOutput	vert(SVertexInput v)
 			o.TransformUVs_Rotate = v.AtlasIdAlphaCursorRotate.z;
 		#else
 			o.TransformUVs_Rotate = v.TransformUVs_Rotate;
+			#if PK_HAS_ATLAS
+				o.FrameLerp = v.AtlasIdAlphaCursorRotate.y;
+			#endif
 		#endif
 		o.TransformUVs_ScaleAndOffset = v.TransformUVs_ScaleAndOffset;
 	#endif

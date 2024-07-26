@@ -16,7 +16,7 @@ void	TransformUVs_float(in float2 uv, in float2 uv1, in float frameLerp, in floa
 	uv1Out = uv1;
 	dUVdx = float2(0.0f, 0.0f);
 	dUVdy = float2(0.0f, 0.0f);
-	frameLerpOut = frameLerp;
+	frameLerpOut = frac(frameLerp);
 	oldUV0 = uv;
 	oldUV1 = uv1;
 
@@ -27,19 +27,20 @@ void	TransformUVs_float(in float2 uv, in float2 uv1, in float frameLerp, in floa
 	float2		UVScale = scaleAndOffset.xy;
 	float2		UVOffset = scaleAndOffset.zw;
 	float4		rect0 = float4(1.0f, 1.0f, 0.0f, 0.0f);
-#	if	PK_HAS_ANIM_BLEND_ON
+#	if PK_HAS_ATLAS_ON
 	float	idf = abs(frameLerp);
 	uint	maxAtlasIdx = _Atlas.Load(0) - 1;
 	uint	idA = min(uint(floor(idf)), maxAtlasIdx);
 	rect0 = asfloat(_Atlas.Load4((idA + 1) * 4 * 4));
-	uint	idB = min(idA + 1U, maxAtlasIdx);
-	float4	rect1 = asfloat(_Atlas.Load4((idB + 1) * 4 * 4));
-	uv1 = ((uv1 - rect1.zw) / rect1.xy); // normalize (if atlas)
+	#	if	PK_HAS_ANIM_BLEND_ON
+		uint	idB = min(idA + 1U, maxAtlasIdx);
+		float4	rect1 = asfloat(_Atlas.Load4((idB + 1) * 4 * 4));
+		uv1 = ((uv1 - rect1.zw) / rect1.xy); // normalize (if atlas)
 
-	uv1 = transformUV(uv1, UVScale, UVRotation, UVOffset); // scale then rotate then translate UV
-	uv1Out = frac(uv1) * rect1.xy + rect1.zw; // undo normalize
-
-#	endif
+		uv1 = transformUV(uv1, UVScale, UVRotation, UVOffset); // scale then rotate then translate UV
+		uv1Out = frac(uv1) * rect1.xy + rect1.zw; // undo normalize
+	#	endif
+#endif
 	uv = ((uv - rect0.zw) / rect0.xy); // normalize (if atlas)
 	uv = transformUV(uv, UVScale, UVRotation, UVOffset); // scale then rotate then translate UV
 														 // For clean derivatives:

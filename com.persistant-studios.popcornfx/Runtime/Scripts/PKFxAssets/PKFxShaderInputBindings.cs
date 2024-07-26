@@ -489,9 +489,13 @@ namespace PopcornFX
 			{
 				_EnableMaterialKeywords(material, "PK_HAS_RIBBON_COMPLEX");
 			}
-			else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
+			else if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas))
 			{
-				_EnableMaterialKeywords(material, "PK_HAS_ANIM_BLEND");
+				_EnableMaterialKeywords(material, "PK_HAS_ATLAS");
+				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
+				{
+					_EnableMaterialKeywords(material, "PK_HAS_ANIM_BLEND");
+				}
 			}
 			else
 			{

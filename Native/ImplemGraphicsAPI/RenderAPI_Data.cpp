@@ -136,7 +136,7 @@ SFlagsToUseSemantic		flagsToUseSemantic[__Semantic_Count] =
 	{ 0U, ShaderVariationFlags::Has_CorrectDeformation },																				// Semantic_UvScaleAndOffset
 	{ ShaderVariationFlags::Has_CorrectDeformation, ShaderVariationFlags::Has_DiffuseMap | ShaderVariationFlags::Has_DistortionMap },	// Semantic_Uv0
 	{ 0U, ShaderVariationFlags::Has_AnimBlend },																						// Semantic_Uv1
-	{ 0U, ShaderVariationFlags::Has_AnimBlend },																						// Semantic_AtlasId
+	{ 0U, ShaderVariationFlags::Has_AnimBlend | ShaderVariationFlags::Has_TransformUVs },												// Semantic_AtlasId
 	{ 0U, ShaderVariationFlags::Has_AlphaRemap },																						// Semantic_AlphaCursor
 	{ 0U, ShaderVariationFlags::Has_Emissive },																							// Semantic_EmissiveColor
 	{ 0U, ShaderVariationFlags::Has_TransformUVs },																						// Semantic_TransformUvsRotate
@@ -311,7 +311,12 @@ u32	FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u
 			(shaderVariationFlags & ShaderVariationFlags::Has_AnimBlend) == 0)
 		{
 			offsetTable[Semantic_TransformUVsRotate] = vertexOffset;
-			vertexOffset += semanticSize[Semantic_TransformUVsRotate] + sizeof(float);// Padding;
+			vertexOffset += semanticSize[Semantic_TransformUVsRotate];
+			if ((shaderVariationFlags & ShaderVariationFlags::Has_Atlas) != 0)
+			{
+				offsetTable[Semantic_AtlasId] = vertexOffset;
+				vertexOffset += semanticSize[Semantic_AtlasId];
+			}
 		}
 		offsetTable[Semantic_TransformUVsScaleAndOffset] = vertexOffset;
 		vertexOffset += semanticSize[Semantic_TransformUVsScaleAndOffset];

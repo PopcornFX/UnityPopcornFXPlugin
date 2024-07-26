@@ -764,7 +764,7 @@ namespace PopcornFX
 
 		private ComputeBuffer m_AtlasInfo = null;
 		public IntPtr	GetNativeRawAtlasesBuffer() { return m_AtlasInfo == null ? IntPtr.Zero : m_AtlasInfo.GetNativeBufferPtr(); }
-		public int		NativeRawAtlasesBufferSize { get { return m_AtlasInfo == null ? 0 : 4112; } } /*257 * 16*/
+		public int		NativeRawAtlasesBufferSize { get { return m_AtlasInfo == null ? 0 : 8208; } } /*513 * 16*/
 
 		public SMeshDesc(Material mat, SBatchDesc batchDesc, GameObject renderingObject)
 		{
@@ -816,7 +816,7 @@ namespace PopcornFX
 			Clean();
 
 			if (HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas) && HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
-				m_AtlasInfo = new ComputeBuffer(257, 16, ComputeBufferType.Raw);
+				m_AtlasInfo = new ComputeBuffer(513, 16, ComputeBufferType.Raw);
 
 
 			m_Material.SetBuffer("_Atlas", m_AtlasInfo);

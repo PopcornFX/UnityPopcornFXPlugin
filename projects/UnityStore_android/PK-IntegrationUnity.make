@@ -51,7 +51,7 @@ DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon
 LIBS += -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lm -llog -lPK-ParticlesToolbox_d -lPK-Runtime_d -lEGL -lGLESv3
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android -shared -Wl,--no-undefined -Wl,--build-id -shared
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android -shared -Wl,--no-undefined -Wl,--build-id -shared -static-libstdc++
 
 else ifeq ($(config),debug_android64)
 ifeq ($(origin CC), default)
@@ -70,7 +70,7 @@ DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb
 LIBS += -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lm -llog -lPK-ParticlesToolbox_d -lPK-Runtime_d -lEGL -lGLESv3
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64 -shared -Wl,--no-undefined -Wl,--build-id -shared
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64 -shared -Wl,--no-undefined -Wl,--build-id -shared -static-libstdc++
 
 else ifeq ($(config),release_android)
 ifeq ($(origin CC), default)
@@ -89,7 +89,7 @@ DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon
 LIBS += -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lm -llog -lPK-ParticlesToolbox_r -lPK-Runtime_r -lEGL -lGLESv3
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android -shared -Wl,--no-undefined -Wl,--build-id -shared
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android -shared -Wl,--no-undefined -Wl,--build-id -shared -static-libstdc++
 
 else ifeq ($(config),release_android64)
 ifeq ($(origin CC), default)
@@ -108,7 +108,7 @@ DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math
 LIBS += -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lm -llog -lPK-ParticlesToolbox_r -lPK-Runtime_r -lEGL -lGLESv3
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64 -shared -Wl,--no-undefined -Wl,--build-id -shared
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64 -shared -Wl,--no-undefined -Wl,--build-id -shared -static-libstdc++
 
 #else
 #  $(error "invalid configuration $(config)")

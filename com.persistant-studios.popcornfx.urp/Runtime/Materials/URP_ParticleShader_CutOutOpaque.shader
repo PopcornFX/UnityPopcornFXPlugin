@@ -50,6 +50,7 @@ Shader "PopcornFX/URP/ParticleShader_CutOutOpaque"
 			#pragma shader_feature _ PK_HAS_TRANSFORM_UVS
 			#pragma shader_feature _ PK_HAS_DIFFUSE_RAMP
 			#pragma shader_feature _ PK_HAS_LIGHTING
+			#pragma shader_feature _ PK_HAS_ATLAS
 			#pragma shader_feature _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
 			//------------------------------------------------------------------------------------
 

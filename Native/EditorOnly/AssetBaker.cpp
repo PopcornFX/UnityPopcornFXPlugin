@@ -356,9 +356,20 @@ CEffectBaker::~CEffectBaker()
 {
 }
 
+
+bool	CEffectBaker::IsPathOnIgnorePath(const CString &path) const
+{
+	for (const CString &Ignoredpath : m_IgnoredPaths)
+	{
+		if (path.StartsWith(Ignoredpath))
+			return true;
+	}
+	return false;
+}
+
 //----------------------------------------------------------------------------
 
-void			CEffectBaker::FileAdded(const CString &path)
+void	CEffectBaker::FileAdded(const CString &path)
 {
 	if (path.EndsWith(".pkfx") == true)
 	{
@@ -368,6 +379,9 @@ void			CEffectBaker::FileAdded(const CString &path)
 			return;
 		CString		cleanPath = path.Extract(m_PKPackPath.SlashAppended().Length(), path.Length());
 		CFilePath::Purify(cleanPath);
+
+		if (IsPathOnIgnorePath(cleanPath))
+			return;
 		effect.m_EffectPath = cleanPath;
 		effect.m_Type = EAssetChangesType::Add;
 		effect.m_Try = 0;
@@ -390,6 +404,8 @@ void			CEffectBaker::FileRemoved(const CString &path)
 			return;
 		CString		cleanPath = path.Extract(m_PKPackPath.SlashAppended().Length(), path.Length());
 		CFilePath::Purify(cleanPath);
+		if (IsPathOnIgnorePath(cleanPath))
+			return;
 		effect.m_EffectPath = cleanPath;
 		effect.m_Type = EAssetChangesType::Remove;
 
@@ -411,6 +427,8 @@ void			CEffectBaker::FileChanged(const CString &path)
 			return;
 		CString		cleanPath = path.Extract(m_PKPackPath.SlashAppended().Length(), path.Length());
 		CFilePath::Purify(cleanPath);
+		if (IsPathOnIgnorePath(cleanPath))
+			return;
 
 		CEffectBaker::FileChangedRelativePath(cleanPath);
 	}
@@ -448,6 +466,8 @@ void			CEffectBaker::FileRenamed(const CString &oldPath, const CString &newPath)
 		CString		cleanOldPath = oldPath.Extract(m_PKPackPath.SlashAppended().Length(), oldPath.Length());
 		CFilePath::Purify(cleanPath);
 
+		if (IsPathOnIgnorePath(cleanPath))
+			return;
 		effect.m_EffectPath = cleanPath;
 		effect.m_EffectPathOld = cleanOldPath;
 		effect.m_Type = EAssetChangesType::Rename;
@@ -502,8 +522,11 @@ void			CEffectBaker::Initialize(const char *pKPackPath, const char *targetPlatfo
 	m_ProjectSettings->ApplyGlobalSettings();
 
 	PProjectSettingsGeneral		general = m_ProjectSettings->General();
+	PProjectSettingsAssets		asset = m_ProjectSettings->Assets();
 	const CString				relRoot = general->RootDir();
+	const CString				ignoredPath = asset->IgnoredPaths();
 
+	ignoredPath.Split(';', m_IgnoredPaths);
 	m_PKPackPath = relRoot.Compare(".") ? CString(pKPackPath) : CString(pKPackPath) + "/" + relRoot;
 	m_PKSourcePack = m_BakeContext.m_BakeFSController->MountPack(m_PKPackPath);
 

@@ -36,18 +36,20 @@ float4	frag(SVertexOutput i) : SV_Target
 		float2		UVScale = i.TransformUVs_ScaleAndOffset.xy;
 		float2		UVOffset = i.TransformUVs_ScaleAndOffset.zw;
 		float4		rect0 = float4(1.0f, 1.0f, 0.0f, 0.0f);
-		#	if	defined(PK_HAS_ANIM_BLEND)
+
+		#	if	defined(PK_HAS_ATLAS)
 			float	idf = abs(i.FrameLerp);
 			uint	maxAtlasIdx = _Atlas.Load(0) - 1;
 			uint	idA = min(uint(floor(idf)), maxAtlasIdx);
 			rect0 = asfloat(_Atlas.Load4((idA + 1) * 4 * 4));
-			uint	idB = min(idA + 1U, maxAtlasIdx);
-			float4	rect1 = asfloat(_Atlas.Load4((idB + 1) * 4 * 4));
-			uv1 = ((uv1 - rect1.zw) / rect1.xy); // normalize (if atlas)
+			#	if	defined(PK_HAS_ATLAS)
+				uint	idB = min(idA + 1U, maxAtlasIdx);
+				float4	rect1 = asfloat(_Atlas.Load4((idB + 1) * 4 * 4));
+				uv1 = ((uv1 - rect1.zw) / rect1.xy); // normalize (if atlas)
 
-			uv1 = transformUV(uv1, UVScale, UVRotation, UVOffset); // scale then rotate then translate UV
-			uv1 = frac(uv1) * rect1.xy + rect1.zw; // undo normalize
-
+				uv1 = transformUV(uv1, UVScale, UVRotation, UVOffset); // scale then rotate then translate UV
+				uv1 = frac(uv1) * rect1.xy + rect1.zw; // undo normalize
+			#endif
 		#	endif
 		uv = ((uv - rect0.zw) / rect0.xy); // normalize (if atlas)
 		uv = transformUV(uv, UVScale, UVRotation, UVOffset); // scale then rotate then translate UV
@@ -178,6 +180,8 @@ float4	frag(SVertexOutput i) : SV_Target
 	
 #if CUTOUT_OPAQUE
 		return float4((result * depthfade).rgb, 1);
+#elif PK_HAS_DISTORTION
+		return result;
 #else
 		return result * depthfade;
 #endif

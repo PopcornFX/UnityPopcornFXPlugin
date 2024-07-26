@@ -55,11 +55,8 @@ namespace PopcornFX
 		[SerializeField] private bool m_QualityCategory = true;
 
 		[SerializeField] private bool m_EnableRaycastForCollisions = false;
-
-#if UNITY_EDITOR
-		[SerializeField] private bool			m_EnableAssetPlatformVersion = false;
-		[SerializeField] private BuildTarget	m_CurrentPlatform = BuildTarget.NoTarget;
-#endif
+		[SerializeField] private bool m_UpdateSimManually = false;
+		[SerializeField] private bool m_UseApplicationAudioLoopback = false;
 
 		[SerializeField] public string[]	m_PopcornLayerName = new string[5];
 
@@ -91,6 +88,12 @@ namespace PopcornFX
 			set { Instance.m_UpdateSimManually = value; }
 		}
 
+		public static bool UseApplicationAudioLoopback
+		{
+			get { return Instance.m_UseApplicationAudioLoopback; }
+			set { Instance.m_UseApplicationAudioLoopback = value; }
+		}
+
 		public void GetRenderingLayerForBatchDesc(SBatchDesc batchDesc, out int layer)
 		{
 			Debug.Assert((batchDesc.m_CameraId >= 0 && batchDesc.m_CameraId < m_PopcornLayerName.Length), "[PKFX] Wrong camera ID feeded to materials factory");
@@ -101,30 +104,6 @@ namespace PopcornFX
 			else
 				layer = -1;
 		}
-
-#if UNITY_EDITOR
-		public static bool EnableAssetPlatformVersion
-		{
-			get { return Instance.m_EnableAssetPlatformVersion; }
-			set { Instance.m_EnableAssetPlatformVersion = value; }
-		}
-
-		public static string CurrentPlatformName
-		{
-			get
-			{
-				if (Instance.m_CurrentPlatform == BuildTarget.NoTarget)
-					return "Editor";
-				return Instance.m_CurrentPlatform.ToString();
-			}
-		}
-
-		public static BuildTarget CurrentPlatform
-		{
-			get { return Instance.m_CurrentPlatform; }
-			set { Instance.m_CurrentPlatform = value; }
-		}
-#endif
 
 		public int GetCameraLayer(int index)
 		{
@@ -188,7 +167,6 @@ namespace PopcornFX
 		[SerializeField] private PKFxMaterialFactory m_MaterialFactory = null;
 		[SerializeField] private bool m_EnableSoftParticles = true;
 		[SerializeField] private bool m_DisableDynamicEffectBounds = false;
-		[SerializeField] private bool m_UseApplicationAudioLoopback = false;
 
 		[SerializeField] private bool m_EnableThumbnails = true;
 		[SerializeField] private bool m_UseThumbnailsInBuilds = false;
@@ -205,7 +183,6 @@ namespace PopcornFX
 		[SerializeField] private bool m_ManualCameraLayer = false;
 		[SerializeField] private int m_MaxCameraSupport = 1;
 
-		[SerializeField] private bool m_UpdateSimManually = false;
 		[SerializeField] private bool m_EnablePopcornFXLight = false;
 		[SerializeField] private int m_MaxPopcornFXLights = 16;
 
@@ -243,12 +220,6 @@ namespace PopcornFX
 		{
 			get { return Instance.m_FrameCountBeforeFreeingUnusedBatches; }
 			set { Instance.m_FrameCountBeforeFreeingUnusedBatches = value; }
-		}
-
-		public static bool UseApplicationAudioLoopback
-		{
-			get { return Instance.m_UseApplicationAudioLoopback; }
-			set { Instance.m_UseApplicationAudioLoopback = value; }
 		}
 
 		public static bool EnableThumbnails
@@ -604,6 +575,11 @@ namespace PopcornFX
 		[SerializeField] private string m_PopcornPackFxPath = null;
 		[SerializeField] private string m_UnityPackFxPath = "/PopcornFXAssets";
 
+#if UNITY_EDITOR
+		[SerializeField] private bool m_EnableAssetPlatformVersion = false;
+		[SerializeField] private BuildTarget m_CurrentPlatform = BuildTarget.NoTarget;
+#endif
+
 		public static bool BakingCategory
 		{
 			get { return Instance.m_BakingCategory; }
@@ -684,6 +660,30 @@ namespace PopcornFX
 			get { return Instance.m_UseHashesAsMaterialName; }
 			set { Instance.m_UseHashesAsMaterialName = value; }
 		}
+
+#if UNITY_EDITOR
+		public static bool EnableAssetPlatformVersion
+		{
+			get { return Instance.m_EnableAssetPlatformVersion; }
+			set { Instance.m_EnableAssetPlatformVersion = value; }
+		}
+
+		public static string CurrentPlatformName
+		{
+			get
+			{
+				if (Instance.m_CurrentPlatform == BuildTarget.NoTarget)
+					return "Editor";
+				return Instance.m_CurrentPlatform.ToString();
+			}
+		}
+
+		public static BuildTarget CurrentPlatform
+		{
+			get { return Instance.m_CurrentPlatform; }
+			set { Instance.m_CurrentPlatform = value; }
+		}
+#endif
 
 #if UNITY_EDITOR
 

@@ -94,6 +94,7 @@ namespace PopcornFX
 			[FormerlySerializedAs("Name")]			public string			m_Name;
 			[FormerlySerializedAs("Description")]	public string			m_Description;
 													public string			m_DropNameList;
+													public bool				m_IsPrivate;
 
 			public SAttribContainer_Vector4 m_DefaultValue;
 			public SAttribContainer_Vector4 m_MinValue;
@@ -105,6 +106,7 @@ namespace PopcornFX
 				m_Semantic = desc.m_AttributeSemantic;
 				m_DropMode = desc.m_AttributeDropMode;
 				m_MinMaxFlag = (int)desc.m_MinMaxFlag;
+				m_IsPrivate = desc.m_IsPrivate;
 				m_Name = Marshal.PtrToStringAnsi(desc.m_AttributeName);
 				m_Description = Marshal.PtrToStringUni(desc.m_Description);
 				if (desc.m_DropNameList != IntPtr.Zero)
@@ -525,6 +527,7 @@ namespace PopcornFX
 			m_EventDescs = new List<SEventDesc>();
 			m_AttributeDescsHash = 0;
 			m_SamplerDescsHash = 0;
+			m_EventDescsHash = 0;
 			m_RendererDescsHash = 0;
 			m_RequiresGameThreadCollect = false;
 		}

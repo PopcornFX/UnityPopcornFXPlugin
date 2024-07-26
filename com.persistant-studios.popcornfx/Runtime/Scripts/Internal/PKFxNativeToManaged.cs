@@ -41,6 +41,8 @@ namespace PopcornFX
 		public SAttribContainer_Vector4 m_DefaultValue;
 		public SAttribContainer_Vector4 m_MinValue;
 		public SAttribContainer_Vector4 m_MaxValue;
+
+		public bool m_IsPrivate;
 	};
 
 	// Samplers:
@@ -553,14 +555,21 @@ namespace PopcornFX
 			depDesc.m_UsageFlags = useInfoFlags;
 
 			bool isMeshRenderer = (useInfoFlags & (int)EUseInfoFlag.IsMeshRenderer) != 0;
-			if (isMeshRenderer && Path.GetExtension(depDesc.m_Path).CompareTo(".pkmm") == 0)
-				depDesc.m_Path = Path.ChangeExtension(depDesc.m_Path, ".fbx");
+			bool isMeshSampler = (useInfoFlags & (int)EUseInfoFlag.IsMeshSampler) != 0;
+
+			if (isMeshRenderer)
+			{
+				if (Path.GetExtension(depDesc.m_Path).CompareTo(".pkmm") == 0)
+					depDesc.m_Path = Path.ChangeExtension(depDesc.m_Path, ".fbx");
+			}
 			else
 				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshRenderer;
 
-			bool isMeshSampler = (useInfoFlags & (int)EUseInfoFlag.IsMeshSampler) != 0;
-			if (isMeshSampler && Path.GetExtension(depDesc.m_Path).ToLower().CompareTo(".fbx") == 0)
-				depDesc.m_Path = Path.ChangeExtension(depDesc.m_Path, ".pkmm");
+			if (isMeshSampler)
+			{
+				if (Path.GetExtension(depDesc.m_Path).ToLower().CompareTo(".fbx") == 0)
+					depDesc.m_Path = Path.ChangeExtension(depDesc.m_Path, ".pkmm");
+			}
 			else
 				depDesc.m_UsageFlags &= ~(int)EUseInfoFlag.IsMeshSampler;
 
@@ -1076,43 +1085,43 @@ namespace PopcornFX
 				VertexAttribute additionalUVIdx = 0;
 
 				List<VertexAttributeDescriptor> layout = new List<VertexAttributeDescriptor>();
-				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Position, VertexAttributeFormat.Float32, 3));			// positions
+				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Position, VertexAttributeFormat.Float32, 3));				// positions
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
 				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Normal, VertexAttributeFormat.Float32, 3));		// normal
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Tangent, VertexAttributeFormat.Float32, 4));		// tangent
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Normal, VertexAttributeFormat.Float32, 3));			// normal
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Tangent, VertexAttributeFormat.Float32, 4));			// tangent
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
 				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4));			// color
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4));				// color
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
 				{
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) &&
 						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
 					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));   // uvFactors + alpha cursor + rotate uv
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));		// uvFactors + alpha cursor + transform uv rotate
 					}
 					else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) ||
 							 renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
 					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));   // uvFactors + alpha cursor | rotate uvs
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));		// uvFactors + alpha cursor | transform uv rotate
 					}
 					else
 					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));   // uvFactors
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uvFactors
 					}
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));       // uvScale/uvOffset
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 4));			// uvScale/uvOffset
 					additionalUVIdx = VertexAttribute.TexCoord2;
 				}
 				else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
 				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));     // uv0/uv1
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));			// uv0/uv1
 					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 3));   // atlas id and if Has_AlphaRemap, alpha cursor and transform uv rotate
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 3));		// atlas id and if Has_AlphaRemap, alpha cursor and transform uv rotate
 					else
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));   // atlas id and if Has_AlphaRemap, alpha cursor
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// atlas id and if Has_AlphaRemap, alpha cursor
 					additionalUVIdx = VertexAttribute.TexCoord2;
 				}
 				else
@@ -1122,11 +1131,11 @@ namespace PopcornFX
 					{
 						if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
 						{
-							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));   // uv0 + alpha cursor
+							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));	// uv0 + alpha cursor
 						}
 						else
 						{
-							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));   // uv0
+							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));	// uv0
 						}
 						additionalUVIdx = VertexAttribute.TexCoord1;
 					}
@@ -1134,7 +1143,7 @@ namespace PopcornFX
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 				{
-					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3));               // emissive color
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3));					// emissive color
 					additionalUVIdx = additionalUVIdx + 1;
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
@@ -1142,10 +1151,13 @@ namespace PopcornFX
 					if (!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex) &&
 						!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
 					{
-						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // TransformUVs rotate
+						if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas))
+							layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));			// TransformUVs rotate + AtlasID
+						else
+							layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 1));			// TransformUVs rotate
 						additionalUVIdx = additionalUVIdx + 1;
 					}
-					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));     // TransformUVs ScaleAndOffset
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));					// TransformUVs ScaleAndOffset
 					additionalUVIdx = additionalUVIdx + 1;
 				}
 

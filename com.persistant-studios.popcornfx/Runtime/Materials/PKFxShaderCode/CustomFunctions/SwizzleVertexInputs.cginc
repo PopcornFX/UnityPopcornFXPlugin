@@ -38,7 +38,7 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 	uv0 = vertexInputs[currentIdx].xy;
 	uv1 = vertexInputs[currentIdx++].zw;
 	int animBlendAlphaCursorIdx = currentIdx;
-	frameLerp = frac(vertexInputs[currentIdx++].x);
+	frameLerp = vertexInputs[currentIdx++].x;
 
 #	if	PK_HAS_ALPHA_REMAP_ON
 	alphaCursor = vertexInputs[animBlendAlphaCursorIdx].y;
@@ -59,9 +59,12 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 # endif
 
 #	if	PK_HAS_TRANSFORM_UVS_ON
-#if	!PK_HAS_RIBBON_COMPLEX_ON && !PK_HAS_ANIM_BLEND_ON
-	transformUvsRotate = vertexInputs[currentIdx++].x;
-#endif
-	transformUvsScaleAndOffset = vertexInputs[currentIdx++];
+#		if	!PK_HAS_RIBBON_COMPLEX_ON && !PK_HAS_ANIM_BLEND_ON
+#			if PK_HAS_ATLAS_ON
+				frameLerp = vertexInputs[currentIdx].y;
+#			endif
+			transformUvsRotate = vertexInputs[currentIdx++].x;
+#		endif
+		transformUvsScaleAndOffset = vertexInputs[currentIdx++];
 #	endif
 }

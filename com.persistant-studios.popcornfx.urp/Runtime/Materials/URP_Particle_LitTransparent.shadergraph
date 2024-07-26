@@ -52,6 +52,9 @@
         },
         {
             "m_Id": "e9de60eb6bce49658a3692554cea37cb"
+        },
+        {
+            "m_Id": "a27d9d70b94d4918945b3ef457e108fc"
         }
     ],
     "m_Dropdowns": [],
@@ -5918,6 +5921,9 @@
             "m_Id": "49be4ef2c7b14814aa94ea8eb14e610f"
         },
         {
+            "m_Id": "a27d9d70b94d4918945b3ef457e108fc"
+        },
+        {
             "m_Id": "387b7f4f81794ad893b8cff24556ccae"
         },
         {
@@ -8155,6 +8161,30 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "a27d9d70b94d4918945b3ef457e108fc",
+    "m_Guid": {
+        "m_GuidSerialized": "74535b70-9fc3-49a8-856c-0299e407dad3"
+    },
+    "m_Name": "PK_HAS_ATLAS",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "PK_HAS_ATLAS",
+    "m_DefaultReferenceName": "_PK_HAS_ATLAS",
+    "m_OverrideReferenceName": "PK_HAS_ATLAS_ON",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 0,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0,
+    "m_IsEditable": true
 }
 
 {

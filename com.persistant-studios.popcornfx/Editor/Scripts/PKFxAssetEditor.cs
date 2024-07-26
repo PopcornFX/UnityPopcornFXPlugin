@@ -441,6 +441,10 @@ namespace PopcornFX
 				for (int i = 0; i < attrsListSize; i++)
 				{
 					SerializedProperty attrDesc = attrs.GetArrayElementAtIndex(i);
+
+					SerializedProperty isPrivate = attrDesc.FindPropertyRelative("m_IsPrivate");
+					if (isPrivate.boolValue)
+						continue;
 					SerializedProperty attrName = attrDesc.FindPropertyRelative("m_Name");
 					SerializedProperty attrType = attrDesc.FindPropertyRelative("m_Type");
 					SerializedProperty attrSemantic = attrDesc.FindPropertyRelative("m_Semantic");

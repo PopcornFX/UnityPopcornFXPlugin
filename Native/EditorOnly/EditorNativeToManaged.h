@@ -40,6 +40,8 @@ extern "C"
 		CFloat4			m_DefaultValue;
 		CFloat4			m_MinValue;
 		CFloat4			m_MaxValue;
+
+		ManagedBool		m_IsPrivate;
 	};
 
 	// Samplers:

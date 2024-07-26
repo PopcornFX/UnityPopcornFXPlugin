@@ -76,7 +76,11 @@ struct SVertexInput
 
 #	if	PK_HAS_TRANSFORM_UVS
 #		if	!PK_HAS_RIBBON_COMPLEX && !PK_HAS_ANIM_BLEND
-		float2 TransformUVs_Rotate			: TRANSFORMUV0_TEXCOORD; // Only one float
+#			if PK_HAS_ATLAS
+				float2 TransformUVs_Rotate			: TRANSFORMUV0_TEXCOORD;
+#			else
+				float TransformUVs_Rotate			: TRANSFORMUV0_TEXCOORD;
+#			endif
 #		endif
 		float4 TransformUVs_ScaleAndOffset	: TRANSFORMUV1_TEXCOORD;
 #	endif

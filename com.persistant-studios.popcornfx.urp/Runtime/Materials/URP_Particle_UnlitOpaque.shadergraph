@@ -43,6 +43,9 @@
         },
         {
             "m_Id": "681dc1eb0e824b69905239a294d040e4"
+        },
+        {
+            "m_Id": "679ca3cf6f134f64b7fc40123bf4932c"
         }
     ],
     "m_Dropdowns": [],
@@ -3294,6 +3297,30 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "679ca3cf6f134f64b7fc40123bf4932c",
+    "m_Guid": {
+        "m_GuidSerialized": "1e60bcfe-8ac7-4880-800b-855ab0fe1323"
+    },
+    "m_Name": "PK_HAS_ATLAS",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "PK_HAS_ATLAS",
+    "m_DefaultReferenceName": "_PK_HAS_ATLAS",
+    "m_OverrideReferenceName": "PK_HAS_ATLAS_ON",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 0,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0,
+    "m_IsEditable": true
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "67b9f24171ba47219c0b0a51bcb0a558",
@@ -4394,6 +4421,9 @@
         },
         {
             "m_Id": "49be4ef2c7b14814aa94ea8eb14e610f"
+        },
+        {
+            "m_Id": "679ca3cf6f134f64b7fc40123bf4932c"
         },
         {
             "m_Id": "387b7f4f81794ad893b8cff24556ccae"

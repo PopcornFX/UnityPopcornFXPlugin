@@ -10,27 +10,58 @@ using static PopcornFX.PKFxEmitter;
 
 namespace PopcornFX
 {
-	internal enum EImageFormat : int
+	internal enum EImageFormat : int // Duplicate of PopcornFX::CImage::EFormat enum
 	{
-		Invalid = 0,
-		BGR8 = 3,
-		BGRA8,
-		BGRA8_sRGB,
-		DXT1 = 8,
-		DXT1_sRGB,
-		DXT3,
-		DXT3_sRGB,
-		DXT5,
-		DXT5_sRGB,
-		RGB8_ETC1 = 16,
-		RGB8_ETC2,
-		RGBA8_ETC2,
-		RGB8A1_ETC2,
-		RGB4_PVRTC1,
-		RGB2_PVRTC1,
-		RGBA4_PVRTC1,
-		RGBA2_PVRTC1,
-		Fp32_RGBA = 26
+		Format_Invalid = 0,
+
+		// Basic integer formats:
+		Format_Lum8,
+		Format_LumAlpha8,
+		Format_BGR8,
+		Format_BGRA8,
+		Format_BGRA8_sRGB,
+
+		// Packed integer format:
+		Format_BGRA4,       // 16bpp 4.4.4.4 BGRA Linear
+		Format_BGRA4_sRGB,  // 16bpp 4.4.4.4 BGRA sRGB
+
+		// 4 BC/DXT compressed formats:
+		Format_DXT1,
+		Format_DXT1_sRGB,
+		Format_DXT3,
+		Format_DXT3_sRGB,
+		Format_DXT5,
+		Format_DXT5_sRGB,
+
+		Format_BC5_UNorm,
+		Format_BC5_SNorm,
+
+		// Mobile-friendly compressed formats:
+		Format_RGB8_ETC1,
+		Format_RGB8_ETC2,
+		Format_RGBA8_ETC2,
+		Format_RGB8A1_ETC2,
+
+		Format_RGB4_PVRTC1,
+		Format_RGB4_PVRTC1_sRGB,
+		Format_RGB2_PVRTC1,
+		Format_RGB2_PVRTC1_sRGB,
+		Format_RGBA4_PVRTC1,
+		Format_RGBA4_PVRTC1_sRGB,
+		Format_RGBA2_PVRTC1,
+		Format_RGBA2_PVRTC1_sRGB,
+
+		// Fp32 versions of the basic formats:
+		Format_Fp32Lum,
+		Format_Fp32LumAlpha,
+		Format_Fp32RGBA,
+
+		// Fp16 versions of the basic formats:
+		Format_Fp16Lum,
+		Format_Fp16LumAlpha,
+		Format_Fp16RGBA,
+
+		__MaxImageFormats,
 	}
 
 	internal static class PKImageConverter
@@ -75,48 +106,48 @@ namespace PopcornFX
 		internal static EImageFormat ResolveImageFormat(Texture2D t, ref NativeArray<byte> data)
 		{
 			if (t.format == TextureFormat.DXT1)
-				return EImageFormat.DXT1;
+				return EImageFormat.Format_DXT1;
 			else if (t.format == TextureFormat.DXT5)
-				return EImageFormat.DXT5;
+				return EImageFormat.Format_DXT5;
 			else if (t.format == TextureFormat.ARGB32)
 			{
 				PKImageConverter.ARGB2BGRA(ref data);
-				return EImageFormat.BGRA8;
+				return EImageFormat.Format_BGRA8;
 			}
 			else if (t.format == TextureFormat.RGBA32)
 			{
 				PKImageConverter.RGBA2BGRA(ref data);
-				return EImageFormat.BGRA8;
+				return EImageFormat.Format_BGRA8;
 			}
 			else if (t.format == TextureFormat.BGRA32)
-				return EImageFormat.BGRA8;
+				return EImageFormat.Format_BGRA8;
 			else if (t.format == TextureFormat.RGB24)
 			{
 				PKImageConverter.RGB2BGR(ref data);
-				return EImageFormat.BGR8;
+				return EImageFormat.Format_BGR8;
 			}
 			else if (t.format == TextureFormat.PVRTC_RGB4)
-				return EImageFormat.RGB4_PVRTC1;
+				return EImageFormat.Format_RGB4_PVRTC1;
 			else if (t.format == TextureFormat.PVRTC_RGBA4)
-				return EImageFormat.RGBA4_PVRTC1;
+				return EImageFormat.Format_RGBA4_PVRTC1;
 			else if (t.format == TextureFormat.PVRTC_RGB2)
-				return EImageFormat.RGB2_PVRTC1;
+				return EImageFormat.Format_RGB2_PVRTC1;
 			else if (t.format == TextureFormat.PVRTC_RGBA2)
-				return EImageFormat.RGBA2_PVRTC1;
+				return EImageFormat.Format_RGBA2_PVRTC1;
 			else if (t.format == TextureFormat.ETC_RGB4)
-				return EImageFormat.RGB8_ETC1;
+				return EImageFormat.Format_RGB8_ETC1;
 			else if (t.format == TextureFormat.ETC2_RGB)
-				return EImageFormat.RGB8_ETC2;
+				return EImageFormat.Format_RGB8_ETC2;
 			else if (t.format == TextureFormat.ETC2_RGBA8)
-				return EImageFormat.RGBA8_ETC2;
+				return EImageFormat.Format_RGBA8_ETC2;
 			else if (t.format == TextureFormat.ETC2_RGBA1)
-				return EImageFormat.RGB8A1_ETC2;
+				return EImageFormat.Format_RGB8A1_ETC2;
 			else if (t.format == TextureFormat.RGBAFloat)
-				return EImageFormat.Fp32_RGBA;
+				return EImageFormat.Format_Fp32RGBA;
 			else
 			{
 				Debug.LogError("[PopcornFX] " + t.name + " texture format not supported : " + t.format);
-				return EImageFormat.Invalid;
+				return EImageFormat.Format_Invalid;
 			}
 		}
 
@@ -133,7 +164,7 @@ namespace PopcornFX
 				STextureSamplerToFill* textureToFill = (STextureSamplerToFill*)textureToFillPtr.ToPointer();
 
 				if (textureToFill->m_TextureData == IntPtr.Zero ||
-					imageFormat == EImageFormat.Invalid)
+					imageFormat == EImageFormat.Format_Invalid)
 					return IntPtr.Zero;
 
 				void* textureDataPtr = (void*)textureToFill->m_TextureData.ToPointer();

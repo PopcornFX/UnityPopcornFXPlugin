@@ -54,6 +54,7 @@ Shader "PopcornFX/URP/ParticleShader"
 			#pragma shader_feature _ PK_HAS_DIFFUSE_RAMP
 			#pragma shader_feature _ PK_HAS_SOFT
 			#pragma shader_feature _ PK_HAS_LIGHTING PK_HAS_DISTORTION
+			#pragma shader_feature _ PK_HAS_ATLAS
 			#pragma shader_feature _ PK_HAS_ANIM_BLEND PK_HAS_RIBBON_COMPLEX
 			//------------------------------------------------------------------------------------
 			// Unity defined keywords

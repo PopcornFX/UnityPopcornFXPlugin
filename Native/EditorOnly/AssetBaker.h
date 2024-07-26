@@ -95,6 +95,7 @@ public:
 	CEffectBaker();
 	~CEffectBaker();
 
+	bool				IsPathOnIgnorePath(const CString &path) const;
 	void				FileAdded(const CString &path);
 	void				FileRemoved(const CString &path);
 	void				FileChanged(const CString &path);
@@ -136,6 +137,7 @@ public:
 private:
 	const int					m_MaxBakeRetry = 5;
 
+	TArray<CString>				m_IgnoredPaths;
 	TArray<SAssetChange>		m_ToProcess;
 	TArray<SAssetChange>		m_ToBake;
 	CString						m_PKPackPath;

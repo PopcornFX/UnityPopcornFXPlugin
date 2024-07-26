@@ -43,6 +43,9 @@
         },
         {
             "m_Id": "61e9109302354915957febc7b03dc746"
+        },
+        {
+            "m_Id": "9977c2e27de94ce38ab373a48200c0b1"
         }
     ],
     "m_Dropdowns": [],
@@ -2440,6 +2443,9 @@
         },
         {
             "m_Id": "61e9109302354915957febc7b03dc746"
+        },
+        {
+            "m_Id": "9977c2e27de94ce38ab373a48200c0b1"
         }
     ]
 }
@@ -3788,8 +3794,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3017.0,
-            "y": -233.00003051757813,
+            "x": -2770.0,
+            "y": -256.0000305175781,
             "width": 255.0,
             "height": 238.0
         }
@@ -6250,6 +6256,30 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "9977c2e27de94ce38ab373a48200c0b1",
+    "m_Guid": {
+        "m_GuidSerialized": "329d50b4-be3e-4be3-b2ef-7f19db4d3565"
+    },
+    "m_Name": "PK_HAS_ATLAS",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "PK_HAS_ATLAS",
+    "m_DefaultReferenceName": "_PK_HAS_ATLAS",
+    "m_OverrideReferenceName": "PK_HAS_ATLAS_ON",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 0,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0,
+    "m_IsEditable": true
 }
 
 {

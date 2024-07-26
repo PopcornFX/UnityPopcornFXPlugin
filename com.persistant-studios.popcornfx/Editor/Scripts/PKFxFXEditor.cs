@@ -188,6 +188,15 @@ namespace PopcornFX
 
 		private void DrawEvents()
 		{
+			PKFxEmitter fx = target as PKFxEmitter;
+
+			//Asset as been updated by reimport.
+			if (fx.EffectAsset.m_EventDescsHash != fx.m_EventDescsHash)
+			{
+				fx.UpdateEffectAsset(fx.EffectAsset, false);
+				m_RequiresApplyModifiedProperties = true;
+			}
+
 			if (m_Events.arraySize == 0)
 				return;
 
@@ -257,6 +266,10 @@ namespace PopcornFX
 						for (int i = 0; i < m_FxAttributesDesc.arraySize; i++)
 						{
 							SerializedProperty attrDesc = m_FxAttributesDesc.GetArrayElementAtIndex(i);
+
+							SerializedProperty isPrivate = attrDesc.FindPropertyRelative("m_IsPrivate");
+							if (isPrivate.boolValue)
+								continue;
 							SerializedProperty propertyX = m_FxAttributesStartValues.GetArrayElementAtIndex(i * 4 + 0);
 							SerializedProperty propertyY = m_FxAttributesStartValues.GetArrayElementAtIndex(i * 4 + 1);
 							SerializedProperty propertyZ = m_FxAttributesStartValues.GetArrayElementAtIndex(i * 4 + 2);

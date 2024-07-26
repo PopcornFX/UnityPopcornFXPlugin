@@ -83,6 +83,20 @@ static CString	PatchPathForAnimTrack(const CString &path)
 	return patchedPath;
 }
 
+static CString	PatchPathForMeshSampler(const CString &path)
+{
+	CString		patchedPath;
+
+	if (path.EndsWith(".fbx", CaseInsensitive))
+	{
+		patchedPath = path.Extract(0, path.Length() - 4);
+		patchedPath += ".pkmm";
+	}
+	else
+		patchedPath = path;
+	return patchedPath;
+}
+
 struct	SUnityDependencyAppendHelper
 {
 	TArray<SResourceDependency>		*m_OutListUnique;
@@ -315,6 +329,8 @@ bool	CEffectBrowser::LoadAndBrowseEffect(void *pkfxContentPtr, int contentByteSi
 
 bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect, PBaseObjectFile &file, bool browseAttributes, bool &requiresGameThreadCollect)
 {
+	if (!PK_VERIFY(particleEffect != null))
+		return false;
 
 	TArray<SResourceDependency>		dependencies;
 	SUnityDependencyAppendHelper	dependenciesAppend(dependencies);
@@ -335,25 +351,21 @@ bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect, PBaseOb
 	if (!BrowseRenderers(particleEffect.Get(), file.Get(), requiresGameThreadCollect))
 		return false;
 
-	if (!BrowseExportedEvents(particleEffect.Get()))
-		return false;
-
 	if (browseAttributes)
 	{
-		if (PK_VERIFY(particleEffect != null))
+		if (!BrowseExportedEvents(particleEffect.Get()))
+			return false;
+
+		const CParticleAttributeList	*allAttribList = particleEffect->AttributeFlatList();
+		if (allAttribList != null)
 		{
-			const CParticleAttributeList *allAttribList = particleEffect->AttributeFlatList();
+			CParticleAttributeList::_TypeOfAttributeList	attributeList = allAttribList->AttributeList();
+			CParticleAttributeList::_TypeOfSamplerList		samplerList = allAttribList->SamplerList();
+			const TMemoryView<const u32>					attributeRemapIDs = allAttribList->UniqueAttributeIDs();
 
-			if (allAttribList != null)
-			{
-				CParticleAttributeList::_TypeOfAttributeList	attributeList = allAttribList->AttributeList();
-				CParticleAttributeList::_TypeOfSamplerList		samplerList = allAttribList->SamplerList();
-				const TMemoryView<const u32>					attributeRemapIDs = allAttribList->UniqueAttributeIDs();
-
-				if (!BrowseAttributes(attributeList, attributeRemapIDs) ||
-					!BrowseSamplers(samplerList))
-					return false;
-			}
+			if (!BrowseAttributes(attributeList, attributeRemapIDs) ||
+				!BrowseSamplers(samplerList))
+				return false;
 		}
 	}
 	return true;
@@ -402,6 +414,7 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 			if (dependency.m_Type == SResourceDependency::Type_Mesh) // && (dependency.m_Usage & SResourceDependency::UsageFlags_Mesh_Sample))
 			{
 				dependencyMask |= IsMeshSampler;
+				path = PatchPathForMeshSampler(path);
 			}
 			else if (dependency.m_Type == SResourceDependency::Type_Image &&
 					 ((dependency.m_Usage & SResourceDependency::UsageFlags_Image_Values) ||
@@ -411,7 +424,7 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 			}
 			else if (dependency.m_Type == SResourceDependency::Type_AnimTrack)
 			{
-				path = PatchPathForAnimTrack(path); // GOOD
+				path = PatchPathForAnimTrack(path);
 			}
 			::OnEffectDependencyFound(path.Data(), dependencyMask);
 		}
@@ -609,7 +622,7 @@ bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList::_TypeOfAttri
 				attribDesc.m_MinMaxFlag |= SFxAttributeDesc::EAttrDescFlag::HasMax;
 			attribDesc.m_AttributeName = attrib->ExportedName().Data();
 			attribDesc.m_Description = attrib->Description().MapDefault().Data();
-
+			attribDesc.m_IsPrivate = attrib->IsPrivate() ? ManagedBool_True : ManagedBool_False;
 			attribDesc.m_AttributeDropMode = attrib->DropDownMode();
 			
 			CString dropNameList = CString::EmptyString;
@@ -665,7 +678,7 @@ bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList::_TypeOfSampler
 	{
 		const CParticleAttributeSamplerDeclaration		*sampler = samplerList[i].Get();
 
-		if (sampler != null)
+		if (sampler != null && !sampler->IsPrivate())
 		{
 			CResourceDescriptor	*samplerData = sampler->AttribSamplerDefaultValue();
 			SFxSamplerDesc		samplerDesc;

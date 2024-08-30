@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <pk_render_helpers/include/frame_collector/rh_frame_collector.h>
+#include <pk_render_helpers/include/frame_collector/legacy/rh_frame_collector_legacy.h>
 
 class	IRenderAPIData;
 
@@ -29,7 +29,7 @@ struct	SUnityDrawOutputs
 {
 };
 
-struct	SViewUserData
+struct	SViewUserData : public PopcornFX::SSceneView
 {
 	CGuid		m_CamSlotIdxInMedCol;
 	CGuid		m_CamSlotIdxInMeshMedCol;
@@ -49,7 +49,7 @@ public:
 typedef TFrameCollector<CUnityParticleBatchTypes> 	CUnityFrameCollector;
 
 // Camera data with custom user data:
-typedef TSceneView<SViewUserData>					SUnitySceneView;
+typedef SViewUserData				SUnitySceneView;
 
 //----------------------------------------------------------------------------
 __PK_API_END

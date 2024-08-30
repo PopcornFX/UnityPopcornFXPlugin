@@ -4,6 +4,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using UnityEditor;
 using UnityEngine;
 
 namespace PopcornFX
@@ -71,7 +72,7 @@ namespace PopcornFX
 		Ribbon,
 		Mesh,
 		Triangle,
-		Decal, //Not supported yet
+		Decal,
 		Light,
 		Sound,
 		RendererType_Count
@@ -110,12 +111,12 @@ namespace PopcornFX
 		{
 			string name = "Lit_";
 
-			name += (m_NormalMap == null || m_NormalMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_NormalMap) +"_";
+			name += (m_NormalMap == null || m_NormalMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_NormalMap) + "_";
 			name += (m_RoughMetalMap == null || m_RoughMetalMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_RoughMetalMap) + "_";
 			name += m_CastShadows ? "S_" : "";
 			name += String.Format("{0:0.##}", m_NormalBendingFactor) + "_";
 			name += String.Format("{0:0.##}", m_Roughness) + "_";
-			name += String.Format("{0:0.##}", m_Metalness)  + "_";
+			name += String.Format("{0:0.##}", m_Metalness) + "_";
 
 			return name;
 		}
@@ -336,6 +337,7 @@ namespace PopcornFX
 		public ERendererType		m_Type;
 		public int					m_ShaderVariationFlags;
 		public EBlendMode			m_BlendMode;
+        public bool					m_IsLegacy;
 		public bool					m_RotateUVs;
 		public int					m_DrawOrder;
 		public string				m_DiffuseMap;
@@ -354,20 +356,24 @@ namespace PopcornFX
 		public string				m_GeneratedName;
 		public bool					m_TransformUVs_RGBOnly;
 		public bool					m_UseVertexColor = false;
-		// VAT:
-		public SBatchVatFeatureDesc m_VatFeature = null;
+		// For Decals:
+		public Vector4				m_DiffuseColor;
+		public Vector3				m_EmissiveColor;
+
+        // VAT:
+        public SBatchVatFeatureDesc m_VatFeature = null;
 		// Lit:
-		public SBatchLitFeatureDesc	m_LitFeature = null;
+		public SBatchLitFeatureDesc m_LitFeature = null;
 		// Skeletal anim:
 		public SBatchSkeletalAnimFeatureDesc m_SkeletalAnimFeature = null;
 
-		public Texture2D			m_AtlasSubRects = null;
+        public Texture2D m_AtlasSubRects = null;
 
 		//Internal
 		[SerializeField]
 		internal int				m_CameraId;
 
-		public int					m_UID;
+		public int m_UID;
 
 
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc)
@@ -397,6 +403,7 @@ namespace PopcornFX
 			m_Type = type;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
 			m_BlendMode = desc.m_BlendMode;
+            m_IsLegacy = desc.m_IsLegacy != 0 ? true : false;
 			m_RotateUVs = desc.m_RotateTexture != 0 ? true : false;
 			m_DrawOrder = desc.m_DrawOrder;
 			m_DiffuseMap = diffuseStr;
@@ -469,6 +476,7 @@ namespace PopcornFX
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
 			m_TransformUVs_RGBOnly = desc.m_TransformUVs_RGBOnly != 0 ? true : false;
 			m_UseVertexColor = desc.m_UseVertexColor != 0 ? true : false;
+			m_IsLegacy = desc.m_IsLegacy != 0 ? true : false;
 
 			m_SpecularMap = null;
 			m_MeshAsset = meshAssetStr;
@@ -496,7 +504,7 @@ namespace PopcornFX
 
 			unsafe
 			{
-				SRenderingFeatureSkeletalAnimDesc *skeletonAnimDesc = (SRenderingFeatureSkeletalAnimDesc*)desc.m_SkeletalAnim.ToPointer();
+				SRenderingFeatureSkeletalAnimDesc* skeletonAnimDesc = (SRenderingFeatureSkeletalAnimDesc*)desc.m_SkeletalAnim.ToPointer();
 				if (skeletonAnimDesc != null)
 					m_SkeletalAnimFeature = new SBatchSkeletalAnimFeatureDesc(*skeletonAnimDesc);
 				else
@@ -515,11 +523,11 @@ namespace PopcornFX
 				else
 				{
 					m_AtlasSubRects = new Texture2D(desc.m_TextureAtlasCount, 1, TextureFormat.RGBAFloat, false, true);
-					Vector4		*subRects = (Vector4*)desc.m_TextureAtlas.ToPointer();
+					Vector4 *subRects = (Vector4*)desc.m_TextureAtlas.ToPointer();
 					for (int i = 0; i < desc.m_TextureAtlasCount; ++i)
 					{
 						Vector4 curCol = subRects[i];
-						curCol.w = 1 - curCol.y - curCol.w; // Unity sampling is reversed in Y. 
+						curCol.w = 1 - curCol.y - curCol.w; // Unity sampling is reversed in Y.
 						m_AtlasSubRects.SetPixel(i, 0, curCol);
 					}
 				}
@@ -529,7 +537,56 @@ namespace PopcornFX
 			m_GeneratedName = GenerateNameFromDescription();
 		}
 
-		public bool HasShaderVariationFlag(EShaderVariationFlags flag)
+		public SBatchDesc(SDecalRendererDesc desc, Material mat = null, GameObject renderingObject = null)
+		{
+			m_Type = ERendererType.Decal;
+			m_BlendMode = EBlendMode.AlphaBlend;
+			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
+			m_IsLegacy = true; // Unity only support legacy decal for now
+
+			string diffuseStr = null;
+			string emissiveStr = null;
+
+			if (desc.m_DiffuseMap != IntPtr.Zero)
+				diffuseStr = Marshal.PtrToStringAnsi(desc.m_DiffuseMap);	
+			if (desc.m_EmissiveMap != IntPtr.Zero)
+				emissiveStr = Marshal.PtrToStringAnsi(desc.m_EmissiveMap);
+
+			m_DiffuseMap = diffuseStr;
+			m_EmissiveMap = emissiveStr;
+
+			m_DiffuseColor = desc.m_DiffuseColor; 
+            m_EmissiveColor = desc.m_EmissiveColor;
+
+            unsafe
+            {
+                // The atlas is null when the effect is imported at first
+                // This texture is only setup at runtime when the effect is preloaded
+                if (desc.m_TextureAtlasCount == 0 || desc.m_TextureAtlas == null)
+                {
+                    m_AtlasSubRects = new Texture2D(1, 1, TextureFormat.RGBAFloat, false, true);
+                    m_AtlasSubRects.SetPixel(0, 0, new Vector4(1, 1, 0, 0));
+                }
+                else
+                {
+					m_AtlasSubRects = new Texture2D(desc.m_TextureAtlasCount, 1, TextureFormat.RGBAFloat, false, true);
+
+					Vector4* subRects = (Vector4*)desc.m_TextureAtlas.ToPointer();
+					for (int i = 0; i < desc.m_TextureAtlasCount; ++i)
+					{
+						Vector4 curCol = subRects[i];
+						curCol.w = 1 - curCol.y - curCol.w; // Unity sampling is reversed in Y. 
+						m_AtlasSubRects.SetPixel(i, 0, curCol);
+					}
+                }
+                m_AtlasSubRects.Apply();
+            }
+			
+            m_UID = desc.m_UID;
+			m_GeneratedName = GenerateNameFromDescription();
+        }
+
+        public bool HasShaderVariationFlag(EShaderVariationFlags flag)
 		{
 			return (m_ShaderVariationFlags & (int)flag) == (int)flag;
 		}
@@ -539,7 +596,7 @@ namespace PopcornFX
 		{
 			string finalName = "";
 
-			if ((materialFlags & (int)EShaderVariationFlags.Has_RibbonComplex) != 0)
+            if ((materialFlags & (int)EShaderVariationFlags.Has_RibbonComplex) != 0)
 				finalName += " RibbonComplex";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
 				finalName += " TransformUVs";
@@ -571,7 +628,22 @@ namespace PopcornFX
 				finalName += " SoftVAT";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_RigidVAT) != 0)
 				finalName += " RigidVAT";
-			return finalName.Length == 0 ? " MaterialBasic" : finalName;
+            if ((materialFlags & (int)EShaderVariationFlags.Has_LightingLegacy) != 0)
+                finalName += " LightingLegacy";
+            if ((materialFlags & (int)EShaderVariationFlags.Has_Size2) != 0)
+                finalName += " Size2";
+            if ((materialFlags & (int)EShaderVariationFlags.Has_Emissive) != 0)
+                finalName += " Emissive";
+            if ((materialFlags & (int)EShaderVariationFlags.Has_EmissiveRamp) != 0)
+                finalName += " EmissiveRamp";
+            if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
+                finalName += " SkeletalAnim";
+            if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalInterpol) != 0)
+                finalName += " SkeletalInterpol";
+            if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalTrackInterpol) != 0)
+                finalName += " SkeletalTrackInterpol";
+
+            return finalName.Length == 0 ? " MaterialBasic" : finalName;
 		}
 
 		public string BlendModeToString(EBlendMode blendMode)
@@ -604,8 +676,12 @@ namespace PopcornFX
 				finalName = "Mesh";
 			else if (m_Type == ERendererType.Triangle)
 				finalName = "Triangle";
-			else
+            else if (m_Type == ERendererType.Decal)
+                finalName = "Decal";
+            else
 				finalName = "Unknown";
+            finalName += " ";
+            finalName += m_IsLegacy ? "Legacy" : "";
 			finalName += " ";
 			finalName += MaterialFlagsToString(m_ShaderVariationFlags);
 			finalName += " ";
@@ -619,7 +695,7 @@ namespace PopcornFX
 			finalName += " ";
 			finalName += m_EmissiveMap == null ? "(none)" : m_EmissiveMap;
 			finalName += " ";
-			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated)? "(none)" : m_LitFeature.GetGeneratedName();
+			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "(none)" : m_LitFeature.GetGeneratedName();
 			finalName += " ";
 			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "(none)" : m_VatFeature.GetGeneratedName();
 			finalName += " ";
@@ -721,7 +797,8 @@ namespace PopcornFX
 			else
 				finalName = "U";
 			finalName += "_";
-			finalName += MaterialFlagsToShortString(m_ShaderVariationFlags);
+            finalName += m_IsLegacy ? "L" : "";
+            finalName += MaterialFlagsToShortString(m_ShaderVariationFlags);
 			finalName += BlendModeToShortString(m_BlendMode);
 			finalName += m_RotateUVs ? "RUV_" : "UV_";
 			finalName += (m_DiffuseMap == null || m_DiffuseMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_DiffuseMap) + "_";
@@ -821,6 +898,28 @@ namespace PopcornFX
 
 			m_Material.SetBuffer("_Atlas", m_AtlasInfo);
 		}
+
+#if UNITY_EDITOR
+		public void ResetComputeBuffer()
+		{
+			m_Material.SetBuffer("_Atlas", m_AtlasInfo);
+		}
+#endif
+
 	}
 
+#if UNITY_EDITOR
+	// #13837: We have to reset the compute buffers when the shader is reloaded
+	// See: https://discussions.unity.com/t/shader-stops-rendering-when-assets-are-updated/872071
+	[InitializeOnLoad]
+	public class PKFxMeshDescComputeBufferResetter : AssetPostprocessor
+	{
+		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+		{
+			if (PKFxManager.RenderingPlugin != null)
+				PKFxManager.RenderingPlugin.ResetComputeBuffers();
+		}
+	}
+
+#endif
 }

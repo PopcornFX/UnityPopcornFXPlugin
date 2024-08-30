@@ -14,6 +14,7 @@
 #include <pk_render_helpers/include/batches/rh_triangle_batch.h>
 #include <pk_render_helpers/include/batches/rh_light_batch.h>
 #include <pk_render_helpers/include/batches/rh_sound_batch.h>
+#include <pk_render_helpers/include/batches/rh_decal_batch.h>
 
 
 #include <pk_particles/include/ps_event_map.h>
@@ -31,7 +32,7 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	const TArray<SUnitySceneView>	&views = RTManager.GetScene().SceneViews();
 	UnityGfxRenderer				deviceType = RTManager.GetDeviceType();
 
-	if (renderer->m_RendererType == Renderer_Mesh || renderer->m_RendererType == Renderer_Light || renderer->m_RendererType == Renderer_Sound)
+	if (renderer->m_RendererType == Renderer_Mesh || renderer->m_RendererType == Renderer_Light || renderer->m_RendererType == Renderer_Sound || renderer->m_RendererType == Renderer_Decal)
 	{
 		if (!PK_VERIFY(rendererCache->m_UnityMeshInfoPerViews.Resize(1)))
 			return null;
@@ -77,6 +78,10 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	{
 		succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataSound*>(renderer.Get()));
 	}
+	else if (renderer->m_RendererType == Renderer_Decal)
+	{
+	succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataDecal*>(renderer.Get()));
+	}
 
 	rendererCache->SetAssetName(particleDesc->ParentEffect()->HandlerName());
 
@@ -121,6 +126,14 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 				else if (renderer->m_RendererType == Renderer_Mesh)
 				{
 					SMeshRendererDesc	desc;
+					if (!rendererCache->GetRendererInfo(desc))
+						continue;
+
+					::OnRetrieveCustomMaterialInfo(renderer->m_RendererType, &desc, rendererCount, &hasCustomMaterial, &customMaterialID);
+				}
+				else if (renderer->m_RendererType == Renderer_Decal)
+				{
+					SDecalRendererDesc	desc;
 					if (!rendererCache->GetRendererInfo(desc))
 						continue;
 
@@ -172,6 +185,7 @@ CUnityRenderDataFactory::CBillboardingBatchInterface	*CUnityRenderDataFactory::C
 	typedef TTriangleBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CTriangleBillboardingBatch;
 	typedef TLightBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CLightBillboardingBatch;
 	typedef TSoundBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CSoundBillboardingBatch;
+	typedef TDecalBatch<	CUnityParticleBatchTypes,	CUnityBillboardingBatchPolicy>	CDecalBillboardingBatch;
 
 	if (!gpuStorage)
 	{
@@ -222,6 +236,14 @@ CUnityRenderDataFactory::CBillboardingBatchInterface	*CUnityRenderDataFactory::C
 		case	Renderer_Sound:
 		{
 			CSoundBillboardingBatch *batch = PK_NEW(CSoundBillboardingBatch);
+
+			policy = static_cast<CUnityBillboardingBatchPolicy*>(batch);
+			retValue = static_cast<CBillboardingBatchInterface*>(batch);
+		}
+		break;
+		case	Renderer_Decal:
+		{
+			CDecalBillboardingBatch *batch = PK_NEW(CDecalBillboardingBatch);
 
 			policy = static_cast<CUnityBillboardingBatchPolicy*>(batch);
 			retValue = static_cast<CBillboardingBatchInterface*>(batch);

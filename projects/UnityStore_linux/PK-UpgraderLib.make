@@ -220,6 +220,9 @@ GENERATED += $(OBJDIR)/core_upgrader_2_19_0_20554.o
 GENERATED += $(OBJDIR)/core_upgrader_2_19_0_20558.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 GENERATED += $(OBJDIR)/core_upgrader_2_1_0_53244.o
+GENERATED += $(OBJDIR)/core_upgrader_2_20_0_20910.o
+GENERATED += $(OBJDIR)/core_upgrader_2_20_0_21121.o
+GENERATED += $(OBJDIR)/core_upgrader_2_20_0_21896.o
 GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -245,6 +248,10 @@ GENERATED += $(OBJDIR)/upg_data_Animated_Mesh.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Basic.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Basic.pkfx1.o
 GENERATED += $(OBJDIR)/upg_data_BillboardMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Billboard_AnimatedMasked.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Billboard_Distortion.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Billboard_Opaque.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Billboard_Transparent.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Black.dds.o
 GENERATED += $(OBJDIR)/upg_data_Black.dds1.o
 GENERATED += $(OBJDIR)/upg_data_Blur.h.o
@@ -260,33 +267,44 @@ GENERATED += $(OBJDIR)/upg_data_CurvePresets_2.9.0.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Debug.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Debug_2.9.0.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_DecalMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Decal_Default.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Decal_Default.vert.o
+GENERATED += $(OBJDIR)/upg_data_Decal_Default.vert1.o
+GENERATED += $(OBJDIR)/upg_data_Default.pkri.o
 GENERATED += $(OBJDIR)/upg_data_Default_AlphaMap.dds.o
 GENERATED += $(OBJDIR)/upg_data_Default_AlphaMap.dds1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Billboard.frag.o
 GENERATED += $(OBJDIR)/upg_data_Default_Billboard.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Billboard.frag2.o
 GENERATED += $(OBJDIR)/upg_data_Default_Billboard.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Default_Billboard.pkma1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Decal.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Decal.frag1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Decal.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Default_Decal.vert.o
+GENERATED += $(OBJDIR)/upg_data_Default_Decal.vert1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Light.frag.o
 GENERATED += $(OBJDIR)/upg_data_Default_Light.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.frag2.o
 GENERATED += $(OBJDIR)/upg_data_Default_Light.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Default_Light.pkma1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Light.vert.o
 GENERATED += $(OBJDIR)/upg_data_Default_Light.vert1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Light.vert2.o
 GENERATED += $(OBJDIR)/upg_data_Default_Mesh.frag.o
 GENERATED += $(OBJDIR)/upg_data_Default_Mesh.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Mesh.frag2.o
 GENERATED += $(OBJDIR)/upg_data_Default_Mesh.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Default_Mesh.pkma1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.frag.o
 GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.frag2.o
 GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Default_Ribbon.pkma1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Sound.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Default_Sound.pkma1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Triangle.frag.o
+GENERATED += $(OBJDIR)/upg_data_Default_Triangle.frag1.o
 GENERATED += $(OBJDIR)/upg_data_Default_Triangle.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Diffuse.dds.o
 GENERATED += $(OBJDIR)/upg_data_Diffuse.dds1.o
@@ -294,9 +312,11 @@ GENERATED += $(OBJDIR)/upg_data_Distort.dds.o
 GENERATED += $(OBJDIR)/upg_data_Distort.dds1.o
 GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.frag.o
 GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.frag2.o
 GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Distortion_Billboard.pkma1.o
 GENERATED += $(OBJDIR)/upg_data_Distortion_Ribbon.frag.o
+GENERATED += $(OBJDIR)/upg_data_Distortion_Ribbon.frag1.o
 GENERATED += $(OBJDIR)/upg_data_Distortion_Ribbon.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Dynamics.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Dynamics_2.9.0.pkfx.o
@@ -336,55 +356,111 @@ GENERATED += $(OBJDIR)/upg_data_ExTriangle_Tinted.pkma.1.o
 GENERATED += $(OBJDIR)/upg_data_Experimental.pkri.o
 GENERATED += $(OBJDIR)/upg_data_FX_Simple.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_FX_Simple.pkfx1.o
+GENERATED += $(OBJDIR)/upg_data_FeatureAlphaMasks.h.o
 GENERATED += $(OBJDIR)/upg_data_FeatureAtlas.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureAtlas.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureDecal.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDecal.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureDiffuse.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDiffuse.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureDistortion.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDistortion.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureDithering.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureDithering.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureEmissive.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureEmissive.h1.o
+GENERATED += $(OBJDIR)/upg_data_FeatureFastLit.h.o
 GENERATED += $(OBJDIR)/upg_data_FeatureRibbonCorrectDeformation.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureRibbonCorrectDeformation.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureSoftParticles.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureSoftParticles.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureTint.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureTint.h1.o
 GENERATED += $(OBJDIR)/upg_data_FeatureTransformUVs.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureTransformUVs.h1.o
+GENERATED += $(OBJDIR)/upg_data_FeatureTransformedNoises.h.o
+GENERATED += $(OBJDIR)/upg_data_FeatureUVDistortions.h.o
 GENERATED += $(OBJDIR)/upg_data_Legacy.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Legacy.pkri.o
 GENERATED += $(OBJDIR)/upg_data_Legacy_2.9.0.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Animated_Mesh.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Default_Billboard.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Default_Decal.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Default_Light.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Default_Mesh.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Default_Ribbon.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Default_Sound.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Default_Triangle.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Distortion_Billboard.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Distortion_Ribbon.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Opaque_Billboard.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Opaque_Ribbon.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Opaque_Triangle.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Legacy_Transparent_Mesh.pkma.o
 GENERATED += $(OBJDIR)/upg_data_LightMaterial.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Light_Default.frag.o
+GENERATED += $(OBJDIR)/upg_data_Light_Default.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Light_Default.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Light_Default.vert.o
+GENERATED += $(OBJDIR)/upg_data_Light_Default.vert1.o
 GENERATED += $(OBJDIR)/upg_data_MeshAnim.pkri.o
 GENERATED += $(OBJDIR)/upg_data_MeshMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Mesh_AnimatedMasked.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Mesh_Emissive.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Mesh_Opaque.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Mesh_Tinted.pkma.o
 GENERATED += $(OBJDIR)/upg_data_NMap_Flat.dds.o
 GENERATED += $(OBJDIR)/upg_data_NMap_Flat.dds1.o
+GENERATED += $(OBJDIR)/upg_data_Noise_Billboard.frag.o
 GENERATED += $(OBJDIR)/upg_data_Opaque_Billboard.frag.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Billboard.frag1.o
 GENERATED += $(OBJDIR)/upg_data_Opaque_Billboard.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Opaque_Ribbon.frag.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Ribbon.frag1.o
 GENERATED += $(OBJDIR)/upg_data_Opaque_Ribbon.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Opaque_Triangle.frag.o
+GENERATED += $(OBJDIR)/upg_data_Opaque_Triangle.frag1.o
 GENERATED += $(OBJDIR)/upg_data_Opaque_Triangle.pkma.1.o
 GENERATED += $(OBJDIR)/upg_data_PKLighting.h.o
+GENERATED += $(OBJDIR)/upg_data_PKLighting.h1.o
 GENERATED += $(OBJDIR)/upg_data_PKOutputColor.h.o
+GENERATED += $(OBJDIR)/upg_data_PKOutputColor.h1.o
 GENERATED += $(OBJDIR)/upg_data_PKSurface.h.o
+GENERATED += $(OBJDIR)/upg_data_PKSurface.h1.o
 GENERATED += $(OBJDIR)/upg_data_Particle_Master.frag.o
 GENERATED += $(OBJDIR)/upg_data_Particle_Master.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Particle_Master.frag2.o
 GENERATED += $(OBJDIR)/upg_data_PingPong.fbx.o
 GENERATED += $(OBJDIR)/upg_data_PingPong.pkcf.o
 GENERATED += $(OBJDIR)/upg_data_Placement.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Placement_2.9.0.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_RibbonMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Ribbon_AnimatedMasked.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Distortion.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Opaque.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Transparent.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Ribbon_Distortion.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Ribbon_Opaque.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Ribbon_Transparent.pkma.o
 GENERATED += $(OBJDIR)/upg_data_SampleLibSettings.pkbo.o
 GENERATED += $(OBJDIR)/upg_data_SampleLibSettings.pkbo1.o
 GENERATED += $(OBJDIR)/upg_data_Samplers.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Samplers_2.9.0.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_SkeletalAnimationTexture.pkri.o
 GENERATED += $(OBJDIR)/upg_data_SoundMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Sound_Default.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Sphere.fbx.o
 GENERATED += $(OBJDIR)/upg_data_Trails.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Trails_2.9.0.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.frag.o
 GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.frag1.o
+GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.frag2.o
 GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Transparent_Mesh.pkma1.o
 GENERATED += $(OBJDIR)/upg_data_TriangleMaterial.pkfx.o
+GENERATED += $(OBJDIR)/upg_data_Triangle_Distortion.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Triangle_Opaque.pkma.o
+GENERATED += $(OBJDIR)/upg_data_Triangle_Transparent.pkma.o
 GENERATED += $(OBJDIR)/upg_data_Utils.h.o
 GENERATED += $(OBJDIR)/upg_data_Utils.pkfx.o
 GENERATED += $(OBJDIR)/upg_data_Utils_2.9.0.pkfx.o
@@ -428,6 +504,7 @@ GENERATED += $(OBJDIR)/upg_upgrades_v2.17.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.18.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.19.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.2.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.20.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -481,6 +558,9 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_19_0_20554.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_19_0_20558.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53018.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_1_0_53244.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_20_0_20910.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_20_0_21121.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_20_0_21896.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -506,6 +586,10 @@ OBJECTS += $(OBJDIR)/upg_data_Animated_Mesh.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Basic.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Basic.pkfx1.o
 OBJECTS += $(OBJDIR)/upg_data_BillboardMaterial.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Billboard_AnimatedMasked.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Billboard_Distortion.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Billboard_Opaque.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Billboard_Transparent.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Black.dds.o
 OBJECTS += $(OBJDIR)/upg_data_Black.dds1.o
 OBJECTS += $(OBJDIR)/upg_data_Blur.h.o
@@ -521,33 +605,44 @@ OBJECTS += $(OBJDIR)/upg_data_CurvePresets_2.9.0.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Debug.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Debug_2.9.0.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_DecalMaterial.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Decal_Default.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Decal_Default.vert.o
+OBJECTS += $(OBJDIR)/upg_data_Decal_Default.vert1.o
+OBJECTS += $(OBJDIR)/upg_data_Default.pkri.o
 OBJECTS += $(OBJDIR)/upg_data_Default_AlphaMap.dds.o
 OBJECTS += $(OBJDIR)/upg_data_Default_AlphaMap.dds1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Billboard.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Billboard.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Billboard.frag2.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Billboard.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Billboard.pkma1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Decal.frag.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Decal.frag1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Decal.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Decal.vert.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Decal.vert1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Light.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Light.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Light.frag2.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Light.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Light.pkma1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Light.vert.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Light.vert1.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Light.vert2.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Mesh.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Mesh.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Mesh.frag2.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Mesh.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Mesh.pkma1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Ribbon.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Ribbon.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Ribbon.frag2.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Ribbon.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Ribbon.pkma1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Sound.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Sound.pkma1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Triangle.frag.o
+OBJECTS += $(OBJDIR)/upg_data_Default_Triangle.frag1.o
 OBJECTS += $(OBJDIR)/upg_data_Default_Triangle.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Diffuse.dds.o
 OBJECTS += $(OBJDIR)/upg_data_Diffuse.dds1.o
@@ -555,9 +650,11 @@ OBJECTS += $(OBJDIR)/upg_data_Distort.dds.o
 OBJECTS += $(OBJDIR)/upg_data_Distort.dds1.o
 OBJECTS += $(OBJDIR)/upg_data_Distortion_Billboard.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Distortion_Billboard.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Distortion_Billboard.frag2.o
 OBJECTS += $(OBJDIR)/upg_data_Distortion_Billboard.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Distortion_Billboard.pkma1.o
 OBJECTS += $(OBJDIR)/upg_data_Distortion_Ribbon.frag.o
+OBJECTS += $(OBJDIR)/upg_data_Distortion_Ribbon.frag1.o
 OBJECTS += $(OBJDIR)/upg_data_Distortion_Ribbon.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Dynamics.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Dynamics_2.9.0.pkfx.o
@@ -597,55 +694,111 @@ OBJECTS += $(OBJDIR)/upg_data_ExTriangle_Tinted.pkma.1.o
 OBJECTS += $(OBJDIR)/upg_data_Experimental.pkri.o
 OBJECTS += $(OBJDIR)/upg_data_FX_Simple.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_FX_Simple.pkfx1.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureAlphaMasks.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureAtlas.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureAtlas.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureDecal.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureDecal.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureDiffuse.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureDiffuse.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureDistortion.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureDistortion.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureDithering.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureDithering.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureEmissive.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureEmissive.h1.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureFastLit.h.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureRibbonCorrectDeformation.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureRibbonCorrectDeformation.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureSoftParticles.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureSoftParticles.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureTint.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureTint.h1.o
 OBJECTS += $(OBJDIR)/upg_data_FeatureTransformUVs.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureTransformUVs.h1.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureTransformedNoises.h.o
+OBJECTS += $(OBJDIR)/upg_data_FeatureUVDistortions.h.o
 OBJECTS += $(OBJDIR)/upg_data_Legacy.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy.pkri.o
 OBJECTS += $(OBJDIR)/upg_data_Legacy_2.9.0.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Animated_Mesh.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Default_Billboard.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Default_Decal.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Default_Light.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Default_Mesh.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Default_Ribbon.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Default_Sound.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Default_Triangle.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Distortion_Billboard.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Distortion_Ribbon.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Opaque_Billboard.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Opaque_Ribbon.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Opaque_Triangle.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Legacy_Transparent_Mesh.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_LightMaterial.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Light_Default.frag.o
+OBJECTS += $(OBJDIR)/upg_data_Light_Default.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Light_Default.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Light_Default.vert.o
+OBJECTS += $(OBJDIR)/upg_data_Light_Default.vert1.o
 OBJECTS += $(OBJDIR)/upg_data_MeshAnim.pkri.o
 OBJECTS += $(OBJDIR)/upg_data_MeshMaterial.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Mesh_AnimatedMasked.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Mesh_Emissive.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Mesh_Opaque.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Mesh_Tinted.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_NMap_Flat.dds.o
 OBJECTS += $(OBJDIR)/upg_data_NMap_Flat.dds1.o
+OBJECTS += $(OBJDIR)/upg_data_Noise_Billboard.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Opaque_Billboard.frag.o
+OBJECTS += $(OBJDIR)/upg_data_Opaque_Billboard.frag1.o
 OBJECTS += $(OBJDIR)/upg_data_Opaque_Billboard.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Opaque_Ribbon.frag.o
+OBJECTS += $(OBJDIR)/upg_data_Opaque_Ribbon.frag1.o
 OBJECTS += $(OBJDIR)/upg_data_Opaque_Ribbon.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Opaque_Triangle.frag.o
+OBJECTS += $(OBJDIR)/upg_data_Opaque_Triangle.frag1.o
 OBJECTS += $(OBJDIR)/upg_data_Opaque_Triangle.pkma.1.o
 OBJECTS += $(OBJDIR)/upg_data_PKLighting.h.o
+OBJECTS += $(OBJDIR)/upg_data_PKLighting.h1.o
 OBJECTS += $(OBJDIR)/upg_data_PKOutputColor.h.o
+OBJECTS += $(OBJDIR)/upg_data_PKOutputColor.h1.o
 OBJECTS += $(OBJDIR)/upg_data_PKSurface.h.o
+OBJECTS += $(OBJDIR)/upg_data_PKSurface.h1.o
 OBJECTS += $(OBJDIR)/upg_data_Particle_Master.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Particle_Master.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Particle_Master.frag2.o
 OBJECTS += $(OBJDIR)/upg_data_PingPong.fbx.o
 OBJECTS += $(OBJDIR)/upg_data_PingPong.pkcf.o
 OBJECTS += $(OBJDIR)/upg_data_Placement.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Placement_2.9.0.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_RibbonMaterial.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Ribbon_AnimatedMasked.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Distortion.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Opaque.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Transparent.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Ribbon_Distortion.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Ribbon_Opaque.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Ribbon_Transparent.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_SampleLibSettings.pkbo.o
 OBJECTS += $(OBJDIR)/upg_data_SampleLibSettings.pkbo1.o
 OBJECTS += $(OBJDIR)/upg_data_Samplers.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Samplers_2.9.0.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_SkeletalAnimationTexture.pkri.o
 OBJECTS += $(OBJDIR)/upg_data_SoundMaterial.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Sound_Default.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Sphere.fbx.o
 OBJECTS += $(OBJDIR)/upg_data_Trails.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Trails_2.9.0.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Transparent_Mesh.frag.o
 OBJECTS += $(OBJDIR)/upg_data_Transparent_Mesh.frag1.o
+OBJECTS += $(OBJDIR)/upg_data_Transparent_Mesh.frag2.o
 OBJECTS += $(OBJDIR)/upg_data_Transparent_Mesh.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Transparent_Mesh.pkma1.o
 OBJECTS += $(OBJDIR)/upg_data_TriangleMaterial.pkfx.o
+OBJECTS += $(OBJDIR)/upg_data_Triangle_Distortion.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Triangle_Opaque.pkma.o
+OBJECTS += $(OBJDIR)/upg_data_Triangle_Transparent.pkma.o
 OBJECTS += $(OBJDIR)/upg_data_Utils.h.o
 OBJECTS += $(OBJDIR)/upg_data_Utils.pkfx.o
 OBJECTS += $(OBJDIR)/upg_data_Utils_2.9.0.pkfx.o
@@ -689,6 +842,7 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.17.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.18.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.19.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.2.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.20.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -904,6 +1058,15 @@ $(OBJDIR)/core_upgrader_2_19_0_20558.o: ../../ExternalLibs/pk_upgraderlib/src/Up
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_20910.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.20910/core_upgrader_2_20_0_20910.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21121.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21121/core_upgrader_2_20_0_21121.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21896.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21896/core_upgrader_2_20_0_21896.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
@@ -1149,10 +1312,16 @@ $(OBJDIR)/upg_data_Basic.pkfx1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades
 $(OBJDIR)/upg_data_FX_Simple.pkfx1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Editor/Templates/upg_data_FX_Simple.pkfx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_Default.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Editor_2.9.0.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_Editor_2.9.0.pkri.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Experimental.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_Experimental.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_Legacy.pkri.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_MeshAnim.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_MeshAnim.pkri.cpp
@@ -1161,7 +1330,64 @@ $(OBJDIR)/upg_data_MeshAnim.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrad
 $(OBJDIR)/upg_data_SkeletalAnimationTexture.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Interface/upg_data_SkeletalAnimationTexture.pkri.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Opaque_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Opaque_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Legacy_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/Legacy/upg_data_Legacy_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Billboard_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Billboard_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Billboard_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Billboard_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Billboard_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Billboard_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Billboard_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Billboard_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Decal_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Decal_Default.pkma.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Default_Decal.pkma.cpp
@@ -1254,7 +1480,55 @@ $(OBJDIR)/upg_data_ExTriangle_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib
 $(OBJDIR)/upg_data_ExTriangle_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_ExTriangle_Tinted.pkma.1.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Light_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Light_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Mesh_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Mesh_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Mesh_Emissive.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Mesh_Emissive.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Mesh_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Mesh_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Mesh_Tinted.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Mesh_Tinted.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Opaque_Triangle.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Opaque_Triangle.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Ribbon_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Ribbon_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Ribbon_CorrectDeformation_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Ribbon_CorrectDeformation_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Ribbon_CorrectDeformation_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Ribbon_CorrectDeformation_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Ribbon_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Ribbon_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Ribbon_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Ribbon_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Ribbon_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Ribbon_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Sound_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Sound_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Triangle_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Triangle_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Triangle_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Triangle_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Triangle_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Materials/upg_data_Triangle_Transparent.pkma.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Experimental/includes/upg_data_FeatureAtlas.h.cpp
@@ -1308,25 +1582,133 @@ $(OBJDIR)/upg_data_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/U
 $(OBJDIR)/upg_data_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Experimental/upg_data_Particle_Master.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Billboard.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Light.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Light.vert1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Mesh.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Ribbon.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Distortion_Billboard.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Opaque_Billboard.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Opaque_Ribbon.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Particle_Master.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Transparent_Mesh.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/Legacy/upg_data_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureAlphaMasks.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureAlphaMasks.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureAtlas.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureDecal.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureDiffuse.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureDistortion.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureDithering.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureEmissive.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureFastLit.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureFastLit.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureRibbonCorrectDeformation.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureSoftParticles.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureTint.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureTransformUVs.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureTransformedNoises.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureTransformedNoises.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_FeatureUVDistortions.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_FeatureUVDistortions.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_PKLighting.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_PKOutputColor.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_PKSurface.h1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/includes/upg_data_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_AnimatedMesh.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_AnimatedMesh.vert.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Default_Decal.frag.cpp
+$(OBJDIR)/upg_data_Decal_Default.vert1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Decal_Default.vert.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Default_Decal.vert.cpp
+$(OBJDIR)/upg_data_Default_Decal.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Default_Decal.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Default_Triangle.frag.cpp
+$(OBJDIR)/upg_data_Default_Decal.vert1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Default_Decal.vert.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Distortion_Ribbon.frag.cpp
+$(OBJDIR)/upg_data_Default_Triangle.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Default_Triangle.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Opaque_Triangle.frag.cpp
+$(OBJDIR)/upg_data_Distortion_Ribbon.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Distortion_Ribbon.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Particle_Master.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Particle_Master.frag.cpp
+$(OBJDIR)/upg_data_Light_Default.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Light_Default.vert1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Noise_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Noise_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Opaque_Triangle.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_data_Particle_Master.frag2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Library/PopcornFXCore/Shaders/upg_data_Particle_Master.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_data_Black.dds1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Materials/DefaultTextures/upg_data_Black.dds.cpp
@@ -1383,25 +1765,25 @@ $(OBJDIR)/upg_data_Blur.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data
 $(OBJDIR)/upg_data_Utils.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/ShaderInclude/upg_data_Utils.h.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Billboard.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Billboard.frag.cpp
+$(OBJDIR)/upg_data_Default_Billboard.frag2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Billboard.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Light.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Light.frag.cpp
+$(OBJDIR)/upg_data_Default_Light.frag2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Light.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Light.vert1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Light.vert.cpp
+$(OBJDIR)/upg_data_Default_Light.vert2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Light.vert.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Mesh.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Mesh.frag.cpp
+$(OBJDIR)/upg_data_Default_Mesh.frag2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Mesh.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Default_Ribbon.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Ribbon.frag.cpp
+$(OBJDIR)/upg_data_Default_Ribbon.frag2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Default_Ribbon.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Distortion_Billboard.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Distortion_Billboard.frag.cpp
+$(OBJDIR)/upg_data_Distortion_Billboard.frag2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Distortion_Billboard.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/upg_data_Transparent_Mesh.frag1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Transparent_Mesh.frag.cpp
+$(OBJDIR)/upg_data_Transparent_Mesh.frag2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Shaders/upg_data_Transparent_Mesh.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/manifest1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/manifest.cpp
@@ -1483,6 +1865,9 @@ $(OBJDIR)/upg_upgrades_v2.19.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.20.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.20.0.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp

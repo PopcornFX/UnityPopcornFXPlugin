@@ -48,22 +48,24 @@ namespace PopcornFX
 					object settingInstance = ShaderGraphProjectSettingsType.BaseType.GetMethod("get_instance").Invoke(null, null);
 					MethodInfo[] methods = ShaderGraphProjectSettingsType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic);
 					MethodInfo save = null;
+					bool dirty = false;
 					foreach (var method in methods)
 					{
 						if (method.Name == "GetSerializedObject")
 						{
 							SerializedObject obj = method.Invoke(settingInstance, null) as SerializedObject;
 							SerializedProperty prop = obj.FindProperty("shaderVariantLimit");
-							if (prop != null && prop.intValue < 256)
+							if (prop != null && prop.intValue < 512)
 							{
-								prop.intValue = 256;
+								prop.intValue = 512;
 								obj.ApplyModifiedProperties();
+								dirty = true;
 							}
 						}
 						if (method.Name == "Save")
 							save = method;
 					}
-					if (save != null)
+					if (save != null && dirty)
 						save.Invoke(settingInstance, new object[] { true });
 
 				}
@@ -74,8 +76,8 @@ namespace PopcornFX
 					{
 						System.Object value = prop.GetValue(null);
 						int intValue = (int)value;
-						if (intValue < 256)
-							prop.SetValue(null, 256);
+						if (intValue < 512)
+							prop.SetValue(null, 512);
 					}
 				}
 			}
@@ -102,30 +104,44 @@ namespace PopcornFX
 		public Shader DistortionShader;
 		public Shader BlurShader;
 
-		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshUnlitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshUnlitLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_EmissiveMeshUnlitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshUnlitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshUnlitDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshLitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshLitLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitSkinnedDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitSkinnedLegacy;
 
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueParticleUnlitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueParticleUnlitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentParticleUnlitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentParticleUnlitDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveParticleUnlitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveParticleUnlitLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueCorrectDeformationUnlitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueCorrectDeformationUnlitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentCorrectDeformationUnlitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentCorrectDeformationUnlitDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveCorrectDeformationUnlitDefault;
 
+		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveCorrectDeformationUnlitLegacy;
+
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueParticleLitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueParticleLitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentParticleLitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentParticleLitDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveParticleLitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveParticleLitLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueCorrectDeformationLitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueCorrectDeformationLitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentCorrectDeformationLitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentCorrectDeformationLitDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveCorrectDeformationLitDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_AdditiveCorrectDeformationLitLegacy;
 
-		[HideInInspector] public PKFxRenderFeatureBinding			m_CPUParticleDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_CPUParticleOpaqueDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_VertexBillboardingDefault;
-		[HideInInspector] public PKFxRenderFeatureBinding			m_VertexBillboardingOpaqueDefault;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_AlphaBlendDecal;
+
+		[HideInInspector] public PKFxRenderFeatureBinding			m_CPUParticleLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_CPUParticleOpaqueLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_VertexBillboardingLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_VertexBillboardingOpaqueLegacy;
 
 		[HideInInspector]public PKFxRenderFeatureBinding			m_CPUParticleDistortion;
 		[HideInInspector]public PKFxRenderFeatureBinding			m_VertexBillboardingDistortion;
@@ -196,7 +212,7 @@ namespace PopcornFX
 			PKFxRenderFeatureBinding binding = ResolveBatchBinding(batchDesc);
 			Material material = null;
 
-			if (binding == null)
+			if (binding == null || binding.m_Shader == null)
 			{
 				Debug.LogError("[PopcornFX] Error No shader found for " + batchDesc.m_GeneratedName + "in effect: " + asset.name);
 				return null;
@@ -642,6 +658,33 @@ namespace PopcornFX
 			light.color = info.m_Color;
 			light.intensity = info.m_Intensity;
 			light.transform.position = info.m_Position;
+		}
+
+
+		public virtual GameObject GetDecalTemplate()
+		{
+			GameObject template = new GameObject("PopcornFX URP Decal");
+			template.AddComponent<PKFxDecalData>();
+			return template;
+		}
+
+		public virtual void SetDecalValue(PKFxDecalData data, PKFxDecalPool.SDecalInfo info)
+		{
+			data.m_UID = info.m_UID;
+
+			foreach (SMeshDesc desc in PKFxManagerImpl.m_Renderers) 
+			{
+				if (desc.m_BatchDesc.m_Type == ERendererType.Decal && desc.m_RenderingObject.GetComponent<PKFxDecalData>().m_UID == info.m_UID)
+				{
+					if (data.m_MaterialID != desc.m_Material.name)
+					{
+						data.m_AtlasRects = desc.m_BatchDesc.m_AtlasSubRects;
+						
+						data.m_Material = new Material(desc.m_Material);
+						data.m_MaterialID = desc.m_Material.name;
+					}
+				}
+			}
 		}
 	}
 }

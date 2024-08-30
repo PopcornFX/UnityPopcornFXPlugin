@@ -90,11 +90,12 @@ namespace PopcornFX
 			[FormerlySerializedAs("Type")]			public EAttributeType		m_Type;
 													public EAttributeSemantic	m_Semantic;
 													public EAttributeDropMode	m_DropMode;
-			[FormerlySerializedAs("MinMaxFlag")]	public int				m_MinMaxFlag;
-			[FormerlySerializedAs("Name")]			public string			m_Name;
-			[FormerlySerializedAs("Description")]	public string			m_Description;
-													public string			m_DropNameList;
-													public bool				m_IsPrivate;
+			[FormerlySerializedAs("MinMaxFlag")]	public int					m_MinMaxFlag;
+			[FormerlySerializedAs("Name")]			public string				m_Name;
+			[FormerlySerializedAs("Description")]	public string				m_Description;
+			[FormerlySerializedAs("Category")]		public string				m_Category;
+													public string				m_DropNameList;
+													public bool					m_IsPrivate;
 
 			public SAttribContainer_Vector4 m_DefaultValue;
 			public SAttribContainer_Vector4 m_MinValue;
@@ -109,7 +110,8 @@ namespace PopcornFX
 				m_IsPrivate = desc.m_IsPrivate;
 				m_Name = Marshal.PtrToStringAnsi(desc.m_AttributeName);
 				m_Description = Marshal.PtrToStringUni(desc.m_Description);
-				if (desc.m_DropNameList != IntPtr.Zero)
+				m_Category = Marshal.PtrToStringUni(desc.m_Category);
+                if (desc.m_DropNameList != IntPtr.Zero)
 					m_DropNameList = Marshal.PtrToStringAnsi(desc.m_DropNameList);
 				else
 					m_DropNameList = "";
@@ -412,7 +414,7 @@ namespace PopcornFX
 			{
 				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
 				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
-				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
+				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + "in following batch desc: " + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
 				
 				return;
 			}
@@ -446,13 +448,44 @@ namespace PopcornFX
 			{
 				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
 				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
-				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + " in following batch desc" + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
+				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + " in following batch desc: " + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
 				return;
 			}
 			m_Materials[idx] = mat;
 		}
 
-		public void LinkRenderer(int GlobalIdx, string qualityLevel, int UID)
+		public void AddRenderer(ERendererType type, SDecalRendererDesc renderer, int idx)
+        {
+            SBatchDesc batch = new SBatchDesc(renderer);
+            m_RendererDescs.Add(batch);
+
+            while (idx >= m_Materials.Count)
+                m_Materials.Add(null);
+
+
+            Material mat = null;
+            RemoveOutdatedCustomMaterials(batch);
+            PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batch);
+            if (curMat != null && curMat.m_CustomMaterial != null)
+            {
+                curMat.SetMaterialKeywords(batch, curMat.m_CustomMaterial);
+                curMat.BindMaterialProperties(batch, curMat.m_CustomMaterial, this, true);
+                mat = curMat.m_CustomMaterial;
+            }
+            else
+                mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false, false, false);
+
+            if (mat == null)
+            {
+                string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
+                PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
+                Debug.LogError("Can't find a material for asset " + AssetVirtualPath + " in following batch desc: " + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
+                return;
+            }
+            m_Materials[idx] = mat;
+        }
+
+        public void LinkRenderer(int GlobalIdx, string qualityLevel, int UID)
 		{
 			MaterialUIDToIndex index = m_MaterialIndexes.Find(item => item.m_UID == UID && item.m_Quality == qualityLevel);
 			if (index == null)

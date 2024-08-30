@@ -19,6 +19,7 @@ namespace PopcornFX
 
 		public bool[]					m_RenderTypes;
 		public bool[]					m_BlendMode;
+        public bool                     m_IsLegacy;
 		[FormerlySerializedAs("m_ShaderMask")]
 		public EShaderVariationFlags	m_SupportedShaderMask = 0;
 		public EShaderVariationFlags	m_MandatoryShaderMask = 0;
@@ -28,6 +29,7 @@ namespace PopcornFX
 		{
 			m_BlendMode = new bool[(int)EBlendMode.UniformFlags_Count];
 			m_RenderTypes = new bool[(int)ERendererType.RendererType_Count];
+			m_IsLegacy = false;
 		}
 
 		public void Awake()
@@ -58,6 +60,9 @@ namespace PopcornFX
 
 		public bool IsMatchingRendererDesc(SBatchDesc desc)
 		{
+			if (desc.m_IsLegacy != m_IsLegacy)
+				return false;
+
 			if (!m_RenderTypes[(int)desc.m_Type])
 				return false;
 			if (desc.m_Type == ERendererType.Billboard &&

@@ -21,7 +21,8 @@ namespace PopcornFX
 		public static string	ImportedAssetPath { get; set; }
 		public static string 	ExtractedPkkg { get; set; }
 		public static string	DistortionLayer { get { return PKFxManagerImpl.m_DistortionLayer; } }
-		public static int		DistortionLayerID { get { return LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer); } }
+		public static string	EditorCameraLayer { get { return PKFxManagerImpl.m_EditorCameraLayer; } }
+		public static string[]	CameraLayers { get { return PKFxManagerImpl.m_CameraLayers; } }
 
 		public static float					TimeMultiplier = 1.0f;
 		public static int					MaxCameraSupport = 1;
@@ -33,6 +34,8 @@ namespace PopcornFX
 
 		private static Dictionary<string, AudioClip> m_SoundDependencies = new Dictionary<string, AudioClip>();
 		public static PKFxAudioPool					 SoundPool = null;
+
+		public static PKFxDecalPool			DecalPool = null;
 
 		public static string				StoredQualityLevel = "Medium";
 		public static string[]				QualitiesLevelDescription;
@@ -233,6 +236,8 @@ namespace PopcornFX
 
 			settings.m_SoundRendererEnabled = PKFxSettings.EnablePopcornFXSound;
 
+			settings.m_DecalRendererEnabled = PKFxSettings.EnablePopcornFXDecal;
+
 			settings.m_FreeUnusedBatches = PKFxSettings.FreeUnusedBatches;
 			settings.m_FrameCountBeforeFreeingUnusedBatches = PKFxSettings.FrameCountBeforeFreeingUnusedBatches;
 
@@ -270,7 +275,24 @@ namespace PopcornFX
 			}
 			settings.m_RaycastHitSize = UnsafeUtility.SizeOf<RaycastHit>();
 			settings.m_RaycastCommandSize = UnsafeUtility.SizeOf<RaycastCommand>();
+			settings.m_SpherecastHitSize = UnsafeUtility.SizeOf<RaycastHit>(); // Same as Raycast hit for now, keep it in case it change in the next versions.
+			settings.m_SpherecastCommandSize = UnsafeUtility.SizeOf<SpherecastCommand>();
+
+#if UNITY_2023_3_OR_NEWER
+			settings.m_UnityVersion = 2023;
+#elif UNITY_2022_3_OR_NEWER
+			settings.m_UnityVersion = 2022;
+#elif UNITY_2021_3_OR_NEWER
+			settings.m_UnityVersion = 2021;
+#elif UNITY_2020_3_OR_NEWER
+			settings.m_UnityVersion = 2020;
+#endif
+
 			settings.m_CPPMarkerMaxDepth = PKFxSettings.CPPMarkersMaxDepth;
+			settings.m_LODMinDistance = PKFxSettings.LODMinDistance;
+			settings.m_LODMaxDistance = PKFxSettings.LODMaxDistance;
+			settings.m_LODMinMinDistance = PKFxSettings.LODMinMinDistance;
+
 			if (!PKFxManagerImpl.PopcornFXStartup(ref settings))
 			{
 				Debug.LogError("[PopcornFX] PopcornFX failed initialization, please check native logs");
@@ -680,6 +702,10 @@ namespace PopcornFX
 		{
 			return PKFxManagerImpl.EffectSetTextSampler(effectGUID, samplerId, text);
 		}
+		public static bool SetGridSampler(int effectGUID, int samplerId, SGridSamplerToFill gridSampler)
+		{
+			return PKFxManagerImpl.EffectSetGridSampler(effectGUID, samplerId, gridSampler);
+		}
 		#endregion Samplers
 
 		#region Get/Set
@@ -749,8 +775,8 @@ namespace PopcornFX
 
 		public static AudioClip GetSoundFromPath(string path)
 		{
-			if (m_SoundDependencies.ContainsKey(path))
-				return m_SoundDependencies[path];
+            if (PKFxManagerImpl.m_SoundDependencies.ContainsKey(path))
+				return PKFxManagerImpl.m_SoundDependencies[path];
 			return null;
 		}
 
@@ -798,10 +824,10 @@ namespace PopcornFX
 			ClearRenderers();
 			SetMaxCameraCount(MaxCameraSupport);
 
-			foreach (PKFxEmitter effect in killedEffects)
-			{
-				effect.StartEffect();
-			}
+            foreach (PKFxEmitter effect in killedEffects)
+            {
+                effect.StartEffect();
+            }
 		}
 
 		public static void SetQualityLevelSettings()

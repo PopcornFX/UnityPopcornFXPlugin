@@ -42,6 +42,8 @@ extern "C"
 
 		ManagedBool				m_SoundRendererEnabled;
 
+		ManagedBool				m_DecalRendererEnabled;
+
 		// Threading:
 		ManagedBool				m_SingleThreadedExecution;
 		ManagedBool				m_OverrideThreadPool;
@@ -51,8 +53,19 @@ extern "C"
 		// Raycast structs
 		int						m_RaycastHitSize;
 		int						m_RaycastCommandSize;
+		int						m_SpherecastHitSize;
+		int						m_SpherecastCommandSize;
+
+
+		//Unity Version
+		int						m_UnityVersion;
 
 		unsigned int			m_CPPMarkerMaxDepth;
+
+		// LOD
+		float					m_LODMinDistance;
+		float					m_LODMaxDistance;
+		float					m_LODMinMinDistance;
 
 		void					PrettyPrintSettings() const
 		{
@@ -67,7 +80,8 @@ extern "C"
 			settings += "[PKFX Unity Settings] OverrideThreadPool: ................. %s\r\n";
 			settings += "[PKFX Unity Settings] LocalizedPages: ..................... %s, %s\r\n";
 			settings += "[PKFX Unity Settings] FreeUnusedBatches: ...................%s\r\n";
-			settings += "[PKFX Unity Settings] FrameCountBeforeFreeingUnusedBatches: %u";
+			settings += "[PKFX Unity Settings] FrameCountBeforeFreeingUnusedBatches: %u\r\n";
+			settings += "[PKFX Unity Settings] LOD Distances: Min = %f ; Max = %f ; Min Min = %f";
 
 
 			if (m_OverrideThreadPool == ManagedBool_True)
@@ -85,6 +99,7 @@ extern "C"
 					, MANAGED_BOOL_2_STR(m_EnableLocalizedPages), MANAGED_BOOL_2_STR(m_EnableLocalizedByDefault)
 					, MANAGED_BOOL_2_STR(m_FreeUnusedBatches)
 					, m_FrameCountBeforeFreeingUnusedBatches
+					, m_LODMinDistance , m_LODMaxDistance , m_LODMinMinDistance
 					, m_WorkerCount
 					, m_WorkerAffinities != null ? "true" : "false");
 			}
@@ -99,7 +114,8 @@ extern "C"
 					, MANAGED_BOOL_2_STR(m_OverrideThreadPool)
 					, MANAGED_BOOL_2_STR(m_EnableLocalizedPages), MANAGED_BOOL_2_STR(m_EnableLocalizedByDefault)
 					, MANAGED_BOOL_2_STR(m_FreeUnusedBatches)
-					, m_FrameCountBeforeFreeingUnusedBatches);
+					, m_FrameCountBeforeFreeingUnusedBatches
+					, m_LODMinDistance , m_LODMaxDistance , m_LODMinMinDistance);
 			}
 		}
 	};
@@ -245,6 +261,16 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	struct SSamplerGrid
+	{
+		u32				m_GridOrder;
+		int				m_GridType;
+		CUint4			m_Dimensions;
+		void			*m_Data;
+	};
+
+	//----------------------------------------------------------------------------
+
 	struct SLightInfo
 	{
 		CFloat3	m_Position;
@@ -266,6 +292,21 @@ extern "C"
 		float		m_Volume;
 		bool		m_Audible;
 		char*		m_SoundData;
+	};
+
+	//----------------------------------------------------------------------------
+
+	struct SDecalInfo
+	{
+		CFloat3		 m_Position;
+		CFloat3		 m_Scale;
+		CQuaternion  m_Orientation;
+		char		*m_DiffuseMap;
+		char		*m_EmissiveMap;
+		CFloat4		 m_DiffuseColor;
+		CFloat4		 m_EmissiveColor;
+		CFloat1		 m_AtlasID;
+		int			 m_UID;
 	};
 
 	//----------------------------------------------------------------------------

@@ -724,6 +724,12 @@ void		SOnCreateUnityRenderer::ExecuteUnityCallback()
 	{
 		*m_RendererGUID = _OnSetupNewRibbonRenderer(&desc);
 	}
+	else if (m_RendererType == Drawers::Renderer_Decal &&
+		PK_VERIFY(_OnSetupNewDecalRenderer != null))
+	{
+		*m_RendererGUID = _OnSetupNewDecalRenderer(&desc);
+
+	}
 	else
 	{
 		PK_ASSERT_NOT_REACHED();

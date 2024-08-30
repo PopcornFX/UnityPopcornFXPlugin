@@ -173,7 +173,7 @@ float4	frag(SVertexOutput i) : SV_Target
 		#if	PK_HAS_EMISSIVE_WITH_RAMP
 			emissiveColor1 = SampleEmissiveRampTexture(float2(emissiveColor1.x,0.0)).rgb;
 		#endif
-		emissiveColor1 *= i.EmissiveColor;
+		emissiveColor1 *= i.EmissiveColor.rgb;
 
 		result.rgb += emissiveColor1.rgb;
 	#endif

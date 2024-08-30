@@ -71,7 +71,7 @@ struct SVertexInput
 		//------------------------------------------
 #	endif
 #	if	!PK_HAS_EMISSIVE_NONE
-		float3 EmissiveColor				: EMISSIVETEXCOORD;
+		float4 EmissiveColor			: EMISSIVETEXCOORD;
 #	endif
 
 #	if	PK_HAS_TRANSFORM_UVS

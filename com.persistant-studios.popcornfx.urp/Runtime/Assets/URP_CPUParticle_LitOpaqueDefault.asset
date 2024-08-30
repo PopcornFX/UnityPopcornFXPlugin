@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
-  m_Name: URP_Mesh_LitOpaque
+  m_Name: URP_CPUParticle_LitOpaqueDefault
   m_EditorClassIdentifier: 
   m_SourceBlendPropertyName: _SrcBlendMode
   m_DestinationBlendPropertyName: _DstBlendMode
   m_MaskThresholdPropertyName: _CutOutAlpha
-  m_RotateUVsPropertyName: 
+  m_RotateUVsPropertyName: _RotateUVs
   m_DiffuseMapPropertyName: _MainTex
   m_DistortionMapPropertyName: _MainTex
   m_EmissiveMapPropertyName: _EmissiveMap
   m_EmissiveRampMapPropertyName: _EmissiveRampMap
   m_AlphaRemapPropertyName: _AlphaMap
   m_DiffuseRampMapPropertyName: _DiffuseRampMap
-  m_InvSoftnessDistancePropertyName: 
+  m_InvSoftnessDistancePropertyName: _InvSoftnessDistance
   m_NormalMapPropertyName: _NormalMap
   m_RoughMetalMapPropertyName: 
   m_RoughnessPropertyName: _Roughness
@@ -30,7 +30,13 @@ MonoBehaviour:
   m_MeshDiffuseColorPropertyName: _BaseColor
   m_MeshEmissiveColorPropertyName: _EmissiveColor
   m_MeshAlphaCursorPropertyName: _AlphaCursor
-  m_MeshCullingModePropertyName: _Cull
+  m_MeshCullingModePropertyName: 
+  m_DecalDiffuseColorPropertyName: _DiffuseColor
+  m_DecalEmissiveColorPropertyName: _EmissiveColor
+  m_DecalHasAtlasPropertyName: _HasAtlas
+  m_DecalAtlasIdPropertyName: _AtlasId
+  m_DecalTextureAtlasPropertyName: _AtlasRects
+  m_DecalAtlasCountPropertyName: _AtlasCount
   m_MeshVATCursorPropertyName: _VATCursor
   m_VATPositionMapPropertyName: _VATPositionMap
   m_VATNormalMapPropertyName: _VATNormalMap
@@ -65,13 +71,14 @@ MonoBehaviour:
   m_AtlasCountPropertyName: _AtlasCount
   m_AtlasIdPropertyName: _AtlasId
   m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
+  m_UseVertexColorPropertyName: _UseVertexColor
   m_UseShader: 1
-  m_Shader: {fileID: -6465566751694194690, guid: 8dfa1be6dc082b34bb6eb143ebce042d,
+  m_Shader: {fileID: -6465566751694194690, guid: cbac7cfd865053146aad35732676ed21,
     type: 3}
   m_Material: {fileID: 0}
-  m_RenderTypes: 00000100000000
+  m_RenderTypes: 01010001000000
   m_BlendMode: 000000000101
-  m_DoubleSided: 0
-  m_SupportedShaderMask: 4718511
+  m_IsLegacy: 0
+  m_SupportedShaderMask: 8388606
   m_MandatoryShaderMask: 8
   m_BillboardingLocation: 0

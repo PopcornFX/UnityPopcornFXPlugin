@@ -215,7 +215,7 @@
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_DDS_d;PK-Plugin_CodecImage_PNG_d;PK-Plugin_CodecImage_JPG_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_PKIM_d;PK-Plugin_CodecImage_DDS_d;PK-Plugin_CodecImage_PNG_d;PK-Plugin_CodecImage_JPG_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
@@ -237,7 +237,7 @@
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_DDS_d;PK-Plugin_CodecImage_PNG_d;PK-Plugin_CodecImage_JPG_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_PKIM_d;PK-Plugin_CodecImage_DDS_d;PK-Plugin_CodecImage_PNG_d;PK-Plugin_CodecImage_JPG_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
@@ -265,7 +265,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_DDS_r;PK-Plugin_CodecImage_PNG_r;PK-Plugin_CodecImage_JPG_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_PKIM_r;PK-Plugin_CodecImage_DDS_r;PK-Plugin_CodecImage_PNG_r;PK-Plugin_CodecImage_JPG_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
@@ -293,7 +293,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_DDS_r;PK-Plugin_CodecImage_PNG_r;PK-Plugin_CodecImage_JPG_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_PKIM_r;PK-Plugin_CodecImage_DDS_r;PK-Plugin_CodecImage_PNG_r;PK-Plugin_CodecImage_JPG_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
@@ -321,7 +321,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_DDS_s;PK-Plugin_CodecImage_PNG_s;PK-Plugin_CodecImage_JPG_s;PK-Plugin_CompilerBackend_CPU_VM_s;PK-ZLib_s;log;PK-ParticlesToolbox_s;PK-Runtime_s;EGL;GLESv3</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_PKIM_s;PK-Plugin_CodecImage_DDS_s;PK-Plugin_CodecImage_PNG_s;PK-Plugin_CodecImage_JPG_s;PK-Plugin_CompilerBackend_CPU_VM_s;PK-ZLib_s;log;PK-ParticlesToolbox_s;PK-Runtime_s;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>
@@ -349,7 +349,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_DDS_s;PK-Plugin_CodecImage_PNG_s;PK-Plugin_CodecImage_JPG_s;PK-Plugin_CompilerBackend_CPU_VM_s;PK-ZLib_s;log;PK-ParticlesToolbox_s;PK-Runtime_s;EGL;GLESv3</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);PK-Plugin_CodecImage_PKIM_s;PK-Plugin_CodecImage_DDS_s;PK-Plugin_CodecImage_PNG_s;PK-Plugin_CodecImage_JPG_s;PK-Plugin_CompilerBackend_CPU_VM_s;PK-ZLib_s;log;PK-ParticlesToolbox_s;PK-Runtime_s;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <AdditionalOptions>-shared %(AdditionalOptions)</AdditionalOptions>

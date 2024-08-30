@@ -16,7 +16,6 @@ namespace PopcornFX
 		bool		m_PreloadEffectsCategory;
 
 		GUIContent timeMultiplierLabel = new GUIContent(" Time scale for the particle simulation");
-		GUIContent cameraNumberLabel = new GUIContent(" Max number of camera supported");
 
 		SerializedProperty m_TimeMultiplier;
 		SerializedProperty m_ShowAdvanced;
@@ -80,23 +79,18 @@ namespace PopcornFX
 			}
 			EditorGUILayout.EndHorizontal();
 
-			if (renderingPlugin.MaxCameraSupport() != PKFxSettings.MaxCameraSupport)
-			{
-				int[] prevCameraLayers = renderingPlugin.CameraLayers;
-				int[] newCameraLayers = new int[PKFxSettings.MaxCameraSupport];
-				m_CameraLayers.arraySize = PKFxSettings.MaxCameraSupport;
-
-				for (int i = 0; i < PKFxSettings.MaxCameraSupport; i++)
-				{
-					int cameraLayerID = i < prevCameraLayers.Length ? prevCameraLayers[i] : PKFxSettings.Instance.GetCameraLayer(i);
-					m_CameraLayers.GetArrayElementAtIndex(i).intValue = cameraLayerID;
-					newCameraLayers[i] = cameraLayerID;
-				}
-				renderingPlugin.CameraLayers = newCameraLayers;
+			if (renderingPlugin.UpdateCameraLayerIFN())
 				EditorUtility.SetDirty(renderingPlugin);
-			}
+
+			EditorGUI.BeginDisabledGroup(!PKFxSettings.ManualCameraLayer);
 			for (int i = 0; i < renderingPlugin.CameraLayers.Length; i++)
 			{
+				GUIContent text;
+				if (PKFxSettings.EnableEditorCamera && i == renderingPlugin.CameraLayers.Length - 1)
+					text = new GUIContent(" Editor Camera layer");
+				else
+					text = new GUIContent(" Camera " + i + " layer");
+
 				EditorGUI.BeginChangeCheck();
 				int cameraLayerID = EditorGUILayout.LayerField(new GUIContent(" Camera " + i + " layer"), renderingPlugin.CameraLayers[i]);
 				if (EditorGUI.EndChangeCheck())
@@ -106,6 +100,7 @@ namespace PopcornFX
 					renderingPlugin.UpdateLayerMask();
 				}
 			}
+			EditorGUI.EndDisabledGroup();
 
 			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(m_PreloadEffectsCategory, "Preload effects setup")))
 			{

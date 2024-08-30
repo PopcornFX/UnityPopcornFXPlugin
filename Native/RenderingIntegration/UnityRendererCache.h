@@ -123,6 +123,9 @@ public:
 
 	s32						m_DrawOrder;
 
+	// Relates to editor legacy or default materials
+	bool					m_IsLegacy;
+
 	CParticleMaterialDescFlags();
 
 	bool		HasShaderVariationFlags(u32 flags) const;
@@ -171,8 +174,6 @@ public:
 	CParticleMaterialDescBillboard();
 
 	bool		InitFromRenderer(const CRendererDataBase &renderer);
-	bool		InitFromRenderer(const CRendererDataSound &renderer);
-
 
 	bool		operator == (const CParticleMaterialDescBillboard &oth) const;
 };
@@ -254,6 +255,20 @@ public:
 	bool InitFromRenderer(const CRendererDataSound &renderer);
 
 	bool		operator == (const CParticleMaterialDescSound &oth) const;
+};
+
+class CParticleMaterialDescDecal
+{
+public:
+	CParticleMaterialDescFlags	m_Flags;
+	CStringId					m_DiffuseMap;
+	CStringId					m_EmissiveMap;
+	CFloat4						m_DiffuseColor;
+	CFloat3 					m_EmissiveColor;
+
+	bool InitFromRenderer(const CRendererDataDecal &renderer);
+
+	bool		operator == (const CParticleMaterialDescDecal &oth) const;
 };
 
 struct	SUnityMeshInfoPerView
@@ -356,6 +371,7 @@ public:
 
 	void								GetRendererLitFeatureInfo(SRenderingFeatureLitDesc **litRenderingdesc);
 	bool								GetRendererInfo(SPopcornRendererDesc &desc);
+	bool								GetRendererInfo(SDecalRendererDesc &desc);
 	bool								GetRendererInfo(SMeshRendererDesc &desc);
 
 	void								CreateUnityMesh(u32 idx, bool gpuBillboarding);
@@ -376,6 +392,7 @@ public:
 	// For the Meshes:
 	CParticleMaterialDescMesh					m_MaterialDescMesh;
 	CParticleMaterialDescSound					m_MaterialDescSound;
+	CParticleMaterialDescDecal					m_MaterialDescDecal;
 
 	CString										m_AssetName;
 	

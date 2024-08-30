@@ -842,6 +842,28 @@ extern "C"
 
 	//----------------------------------------------------------------------------
 
+	MANAGED_TO_POPCORN_CONVENTION ManagedBool	EffectSetGridSampler(int guid, int samplerId, SSamplerGrid *gridSampler)
+	{
+		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);
+		if (!PK_VERIFY(gridSampler != null))
+			return ManagedBool_False;
+		PK_SCOPEDPROFILE();
+
+		CPKFXEffect* effect = CRuntimeManager::Instance().FxGet(guid);
+
+		if (effect != null)
+		{
+			bool		success;
+
+			success = effect->SetSamplerGrid(samplerId, gridSampler);
+			return success ? ManagedBool_True : ManagedBool_False;
+		}
+		return ManagedBool_False;
+	}
+
+
+	//----------------------------------------------------------------------------
+
 	MANAGED_TO_POPCORN_CONVENTION ManagedBool	EffectResetDefaultSampler(int guid, int samplerId)
 	{
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return ManagedBool_False);

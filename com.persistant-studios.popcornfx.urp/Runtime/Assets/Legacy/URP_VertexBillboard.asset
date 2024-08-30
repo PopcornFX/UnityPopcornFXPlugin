@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
-  m_Name: URP_CPURibbonCorrectDeformation_UnlitTransparent
+  m_Name: URP_VertexBillboard
   m_EditorClassIdentifier: 
   m_SourceBlendPropertyName: _SrcBlendMode
   m_DestinationBlendPropertyName: _DstBlendMode
@@ -23,14 +23,20 @@ MonoBehaviour:
   m_AlphaRemapPropertyName: _AlphaMap
   m_DiffuseRampMapPropertyName: _DiffuseRampMap
   m_InvSoftnessDistancePropertyName: _InvSoftnessDistance
-  m_NormalMapPropertyName: _NormalMap
+  m_NormalMapPropertyName: 
   m_RoughMetalMapPropertyName: 
   m_RoughnessPropertyName: _Roughness
   m_MetalnessPropertyName: _Metalness
   m_MeshDiffuseColorPropertyName: _BaseColor
   m_MeshEmissiveColorPropertyName: _EmissiveColor
   m_MeshAlphaCursorPropertyName: _AlphaCursor
-  m_MeshCullingModePropertyName: 
+  m_MeshCullingModePropertyName: _Cull
+  m_DecalDiffuseColorPropertyName: _DiffuseColor
+  m_DecalEmissiveColorPropertyName: _EmissiveColor
+  m_DecalHasAtlasPropertyName: _HasAtlas
+  m_DecalAtlasIdPropertyName: _AtlasId
+  m_DecalTextureAtlasPropertyName: _AtlasRects
+  m_DecalAtlasCountPropertyName: _AtlasCount
   m_MeshVATCursorPropertyName: _VATCursor
   m_VATPositionMapPropertyName: _VATPositionMap
   m_VATNormalMapPropertyName: _VATNormalMap
@@ -65,13 +71,13 @@ MonoBehaviour:
   m_AtlasCountPropertyName: _AtlasCount
   m_AtlasIdPropertyName: _AtlasId
   m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
+  m_UseVertexColorPropertyName: _UseVertexColor
   m_UseShader: 1
-  m_Shader: {fileID: -6465566751694194690, guid: a7fccfe337aa5ba4c96caeb5b7f7532b,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: e9ab78a0216d26846b27a5cefce89d9f, type: 3}
   m_Material: {fileID: 0}
-  m_RenderTypes: 00010000000000
+  m_RenderTypes: 01000001000000
   m_BlendMode: 010101010000
-  m_DoubleSided: 0
-  m_SupportedShaderMask: 8388533
-  m_MandatoryShaderMask: 1
-  m_BillboardingLocation: 0
+  m_IsLegacy: 1
+  m_SupportedShaderMask: -1
+  m_MandatoryShaderMask: 0
+  m_BillboardingLocation: 1

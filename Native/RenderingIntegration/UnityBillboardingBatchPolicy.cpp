@@ -11,7 +11,6 @@
 #include <pk_render_helpers/include/render_features/rh_features_vat_static.h>
 #include <pk_render_helpers/include/render_features/rh_features_vat_skeletal.h>
 
-
 __PK_API_BEGIN
 //----------------------------------------------------------------------------
 
@@ -90,6 +89,11 @@ bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::STriangle_DrawReque
 	return true;
 }
 
+bool	CUnityBillboardingBatchPolicy::CanRender(const Drawers::SDecal_DrawRequest*, const PRendererCacheBase&, SUnityRenderContext&)
+{
+	return true;
+}
+
 //----------------------------------------------------------------------------
 
 bool	CUnityBillboardingBatchPolicy::Tick(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &)
@@ -145,11 +149,11 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 		m_MaterialDescMesh = rendererCache->m_MaterialDescMesh;
 		u32 viewCount = 1;
 
-		if (!(m_RendererType == Renderer_Mesh || m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound))
+		if (!(m_RendererType == Renderer_Mesh || m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound || m_RendererType == Renderer_Decal))
 			viewCount = views.Count();
 
-		if (m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound)
-			viewCount = 0;
+		//if (m_RendererType == Renderer_Light || m_RendererType == Renderer_Sound || m_RendererType == Renderer_Decal)
+		//	viewCount = 0;
 
 		if (viewCount > 0)
 		{
@@ -436,6 +440,12 @@ bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext & ctx, const 
 	return true;
 }
 
+bool	CUnityBillboardingBatchPolicy::MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SDecalBatchJobs *batchJobs, const SGeneratedInputs &toMap)
+{
+	(void)ctx; (void)views; (void)batchJobs; (void)toMap;
+	return true;
+}
+
 bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SBillboard_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch)
 {
 	(void)ctx; (void)drawRequests; (void)batch;
@@ -523,6 +533,19 @@ bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, 
 	return true;
 }
 
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SDecal_DrawRequest * const> &drawRequests, Drawers::CDecal_CPU *batch)
+{
+	(void)ctx; (void)drawRequests; (void)batch;
+	return true;
+}
+
+bool	CUnityBillboardingBatchPolicy::LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SDecal_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU* batch)
+{
+	(void)ctx; (void)drawRequests; (void)batch;
+	return true;
+}
+
+
 bool	CUnityBillboardingBatchPolicy::WaitForCustomTasks(SUnityRenderContext &ctx)
 {
 	(void)ctx;
@@ -597,6 +620,9 @@ bool	CUnityBillboardingBatchPolicy::AreBillboardingBatchable(const PCRendererCac
 bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const SDrawCallDesc &toEmit, SUnityDrawOutputs &output)
 {
 	PK_SCOPEDPROFILE();
+
+	if (toEmit.m_ViewIndex != 0)
+		return true;
 	if (toEmit.m_Renderer == Renderer_Light)
 	{
 		m_LightDatas.Clear();
@@ -624,6 +650,21 @@ bool	CUnityBillboardingBatchPolicy::EmitDrawCall(SUnityRenderContext &ctx, const
 				if (!PK_VERIFY(matCache != null))
 					return true;
 				_UpdateThread_IssueDrawCallSound(soundRequest, matCache, totalParticleCount);
+			}
+		}
+	}
+	else if (toEmit.m_Renderer == Renderer_Decal)
+	{
+		u32 &totalParticleCount = CRuntimeManager::Instance().GetScene().GetTotalDecalParticleCount();
+		for (u32 i = 0; i < toEmit.m_DrawRequests.Count(); ++i)
+		{
+			const Drawers::SDecal_DrawRequest *DecalRequest = static_cast<const Drawers::SDecal_DrawRequest*>(toEmit.m_DrawRequests[i]);
+			if (DecalRequest != null)
+			{
+				CUnityRendererCache *matCache = static_cast<CUnityRendererCache*>(toEmit.m_RendererCaches[i].Get());
+				if (!PK_VERIFY(matCache != null))
+					return true;
+				_UpdateThread_IssueDrawCallDecal(DecalRequest, matCache, totalParticleCount);
 			}
 		}
 	}
@@ -725,6 +766,123 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallLight(const Drawe
 	return true;
 }
 
+bool CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallDecal(const Drawers::SDecal_DrawRequest *decalRequest, CUnityRendererCache *rdrCache, u32 &totalParticleCount)
+{
+	TArray<SDecalInfo>  &decalDatas				 = CRuntimeManager::Instance().GetScene().GetDecalDatas();
+	const u32			drawRequestParticleCount = decalRequest->RenderedParticleCount();
+
+	PK_ASSERT(!decalRequest->Empty());
+	PK_ASSERT(drawRequestParticleCount > 0);
+
+	if (!decalDatas.Reserve(decalDatas.Count() + drawRequestParticleCount))
+	{
+		PK_ASSERT_NOT_REACHED();
+		return false;
+	}
+
+	totalParticleCount += drawRequestParticleCount;
+
+	const PopcornFX::Drawers::SDecal_BillboardingRequest& bbRequest = static_cast<const PopcornFX::Drawers::SDecal_BillboardingRequest&>(decalRequest->BaseBillboardingRequest());
+	if (decalRequest->StorageClass() != PopcornFX::CParticleStorageManager_MainMemory::DefaultStorageClass())
+	{
+		PK_ASSERT_NOT_REACHED();
+		return false;
+	}
+
+	const PopcornFX::CParticleStreamToRender_MainMemory *lockedStream = decalRequest->StreamToRender_MainMemory();
+
+	const u32	pageCount = lockedStream->PageCount();
+	for (u32 pagei = 0; pagei < pageCount; ++pagei)
+	{
+		const PopcornFX::CParticlePageToRender_MainMemory *page = lockedStream->Page(pagei);
+		PK_ASSERT(page != null);
+		const u32	pcount = page == null ? 0 : page->InputParticleCount();
+		if (pcount == 0)
+			continue;
+
+		// Position
+		TStridedMemoryView<const CFloat3>		positions	  = page->StreamForReading<CFloat3>(bbRequest.m_PositionStreamId);
+		// Scales
+		TStridedMemoryView<const CFloat3>		scales		  = page->StreamForReading<CFloat3>(bbRequest.m_ScaleStreamId);
+		// Orientation
+		TStridedMemoryView<const CQuaternion>	orientations  = page->StreamForReading<CQuaternion>(bbRequest.m_OrientationStreamId);
+
+
+		CGuid legacyDiffuseColorId  = decalRequest->StreamId(BasicRendererProperties::SID_Diffuse_Color());
+		CGuid diffuseColorId = decalRequest->StreamId(BasicRendererProperties::SID_Diffuse_DiffuseColor());
+		CGuid emissiveColorId = decalRequest->StreamId(BasicRendererProperties::SID_Emissive_EmissiveColor());
+		CGuid atlasTextureId = decalRequest->StreamId(BasicRendererProperties::SID_Atlas_TextureID());
+
+		// Diffuse Color
+		TStridedMemoryView<const CFloat4> diffuseColor;
+		bool hasLegacyDiffuseColor = legacyDiffuseColorId.Valid();
+		bool hasDiffuseColor = diffuseColorId.Valid();
+
+		if (hasLegacyDiffuseColor)
+			diffuseColor = page->StreamForReading<CFloat4>(legacyDiffuseColorId);
+
+		if (hasDiffuseColor)
+			diffuseColor = page->StreamForReading<CFloat4>(diffuseColorId);
+
+		// Emissive Color
+		TStridedMemoryView<const CFloat4> emissiveColor;
+		bool hasEmissiveColor = emissiveColorId.Valid();
+		
+		if (hasEmissiveColor)
+		{
+			emissiveColor = page->StreamForReading<CFloat4>(emissiveColorId);
+		}
+
+		// Atlas ID
+		TStridedMemoryView<const CFloat1> atlasId;
+		bool hasAtlas = atlasTextureId.Valid();
+		atlasId = page->StreamForReading<CFloat1>(atlasTextureId);
+
+		PK_ASSERT(positions.Count() == pcount);
+
+		const u8						enabledTrue = u8(-1);
+		TStridedMemoryView<const u8>	enabledParticles = (bbRequest.m_EnabledStreamId.Valid()) ? page->StreamForReading<bool>(bbRequest.m_EnabledStreamId) : TStridedMemoryView<const u8>(&enabledTrue, pcount, 0);
+
+		for (u32 parti = 0; parti < pcount; ++parti)
+		{
+			if (!enabledParticles[parti])
+				continue;
+
+
+			PopcornFX::CGuid ldatai = decalDatas.PushBack();
+			SDecalInfo &decalData = decalDatas[ldatai];
+
+			decalData.m_Position	  = positions[parti];
+
+			// Invert y and z axis since in Unity the forward projection is inverted compare to popcornFX .
+			CFloat3 tempScale		  = scales[parti];
+			const float scaleY		  = tempScale.y();
+			tempScale.y()			  = tempScale.z();
+			tempScale.z()			  = scaleY;
+			decalData.m_Scale		  = tempScale;
+
+			decalData.m_Orientation	   = orientations[parti];
+
+			if (rdrCache->m_MaterialDescDecal.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_DiffuseMap) && hasDiffuseColor)
+			{
+				decalData.m_DiffuseColor = diffuseColor[parti];
+			}
+
+			if (rdrCache->m_MaterialDescDecal.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Emissive) && hasEmissiveColor)
+			{
+				decalData.m_EmissiveColor = emissiveColor[parti];
+			}
+
+			if (rdrCache->m_MaterialDescDecal.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Atlas) && hasAtlas)
+			{
+				decalData.m_AtlasID = atlasId[parti];
+			}
+			decalData.m_UID			  = rdrCache->m_UID;
+		}
+	}
+	return true;
+}
+
 
 bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawers::SSound_DrawRequest *soundRequest, CUnityRendererCache *rdrCache, u32 &totalParticleCount)
 {
@@ -742,13 +900,13 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 	}
 	totalParticleCount += drawRequestParticleCount;
 
-	const PopcornFX::Drawers::SSound_BillboardingRequest& bbRequest = static_cast<const PopcornFX::Drawers::SSound_BillboardingRequest&>(soundRequest->BaseBillboardingRequest());
-	if (soundRequest->StorageClass() != PopcornFX::CParticleStorageManager_MainMemory::DefaultStorageClass())
+	const Drawers::SSound_BillboardingRequest	&bbRequest = static_cast<const Drawers::SSound_BillboardingRequest&>(soundRequest->BaseBillboardingRequest());
+	if (soundRequest->StorageClass() != CParticleStorageManager_MainMemory::DefaultStorageClass())
 	{
 		PK_ASSERT_NOT_REACHED();
 		return false;
 	}
-	const PopcornFX::CParticleStreamToRender_MainMemory* lockedStream = soundRequest->StreamToRender_MainMemory();
+	const CParticleStreamToRender_MainMemory	*lockedStream = soundRequest->StreamToRender_MainMemory();
 	if (!PK_VERIFY(lockedStream != null))
 		return true;
 
@@ -757,20 +915,20 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 
 	for (u32 pagei = 0; pagei < pageCount; ++pagei)
 	{
-		const PopcornFX::CParticlePageToRender_MainMemory	*page = lockedStream->Page(pagei);
+		const CParticlePageToRender_MainMemory	*page = lockedStream->Page(pagei);
 		PK_ASSERT(page != null && !page->Empty());
 		const u32		pcount = page->InputParticleCount();
 		const float		dopplerFactor = bbRequest.m_DopplerFactor;
-		const float		isBlended = false;
+		const bool		isBlended = false;
 
-		PopcornFX::TStridedMemoryView<const float>		lifeRatios = page->StreamForReading<float>(bbRequest.m_LifeRatioStreamId);
-		PopcornFX::TStridedMemoryView<const float>		invLives = page->StreamForReading<float>(bbRequest.m_InvLifeStreamId);
-		PopcornFX::TStridedMemoryView<const CInt2>		selfIDs = page->StreamForReading<CInt2>(bbRequest.m_SelfIDStreamId);
-		PopcornFX::TStridedMemoryView<const CFloat3>	positions = page->StreamForReading<CFloat3>(bbRequest.m_PositionStreamId);
+		TStridedMemoryView<const float>		lifeRatios = page->StreamForReading<float>(bbRequest.m_LifeRatioStreamId);
+		TStridedMemoryView<const float>		invLives = page->StreamForReading<float>(bbRequest.m_InvLifeStreamId);
+		TStridedMemoryView<const CInt2>		selfIDs = page->StreamForReading<CInt2>(bbRequest.m_SelfIDStreamId);
+		TStridedMemoryView<const CFloat3>	positions = page->StreamForReading<CFloat3>(bbRequest.m_PositionStreamId);
 
-		PopcornFX::TStridedMemoryView<const CFloat3>	velocities = bbRequest.m_VelocityStreamId.Valid() ? page->StreamForReading<CFloat3>(bbRequest.m_VelocityStreamId) : PopcornFX::TStridedMemoryView<const CFloat3>(&CFloat4::ZERO.xyz(), positions.Count(), 0);
-		PopcornFX::TStridedMemoryView<const float>		volumes = bbRequest.m_VolumeStreamId.Valid() ? page->StreamForReading<float>(bbRequest.m_VolumeStreamId) : PopcornFX::TStridedMemoryView<const float>(&CFloat4::ONE.x(), positions.Count(), 0);
-		PopcornFX::TStridedMemoryView<const float>		radii = bbRequest.m_RangeStreamId.Valid() ? page->StreamForReading<float>(bbRequest.m_RangeStreamId) : PopcornFX::TStridedMemoryView<const float>(&CFloat4::ONE.x(), positions.Count(), 0);
+		TStridedMemoryView<const CFloat3>	velocities = bbRequest.m_VelocityStreamId.Valid() ? page->StreamForReading<CFloat3>(bbRequest.m_VelocityStreamId) : TStridedMemoryView<const CFloat3>(&CFloat4::ZERO.xyz(), positions.Count(), 0);
+		TStridedMemoryView<const float>		volumes = bbRequest.m_VolumeStreamId.Valid() ? page->StreamForReading<float>(bbRequest.m_VolumeStreamId) : TStridedMemoryView<const float>(&CFloat4::ONE.x(), positions.Count(), 0);
+		TStridedMemoryView<const float>		radii = bbRequest.m_RangeStreamId.Valid() ? page->StreamForReading<float>(bbRequest.m_RangeStreamId) : TStridedMemoryView<const float>(&CFloat4::ONE.x(), positions.Count(), 0);
 
 		const u8										enabledTrue = u8(-1);
 		TStridedMemoryView<const u8>					enabledParticles = (bbRequest.m_EnabledStreamId.Valid()) ? page->StreamForReading<bool>(bbRequest.m_EnabledStreamId) : TStridedMemoryView<const u8>(&enabledTrue, pcount, 0);
@@ -800,7 +958,7 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 
 
 			const float		soundId = 0;
-			const float		soundIdFrac = PopcornFX::PKFrac(soundId) * isBlended;
+			const float		soundIdFrac = PKFrac(soundId) * isBlended;
 			const u32		soundId0 = u32(soundId);
 
 			PopcornFX::CGuid	ldatai = soundDatas.PushBack();
@@ -904,7 +1062,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_SetUnityMeshBounds(const SBuff
 	PK_SCOPEDPROFILE();
 	// No need to update the bounds for the meshes: Unity doesn't need the global draw call bounds
 	// No need to update the bounds for the light: Unity handle them itself
-	if (!PK_VERIFY(m_RendererType != Renderer_Mesh && m_RendererType != Renderer_Light && m_RendererType != Renderer_Sound))
+	if (!PK_VERIFY(m_RendererType != Renderer_Mesh && m_RendererType != Renderer_Light && m_RendererType != Renderer_Sound || m_RendererType != Renderer_Decal))
 		return;
 
 	CAABB	bbox = CAABB::DEGENERATED;
@@ -967,14 +1125,14 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 	{
 		const SRendererFeatureFieldDefinition	&addInput = allocBuffers.m_ToGenerate.m_AdditionalGeneratedInputs[i];
 
-		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		if ((addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() || addInput.m_Name == BasicRendererProperties::SID_Diffuse_DiffuseColor()) && addInput.m_Type == BaseType_Float4)
 		{
 			perMeshDataSize += sizeof(CFloat4);
 			hasDiffuseColor = true;
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float4 || addInput.m_Type == BaseType_Float3))
 		{
-			perMeshDataSize += sizeof(CFloat3);
+			perMeshDataSize += sizeof(CFloat4);
 			hasEmissiveColor = true;
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_Atlas_TextureID() && addInput.m_Type == BaseType_Float)
@@ -1060,8 +1218,8 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 		if (hasEmissiveColor)
 		{
 			// Emissive colors:
-			meshBuff.m_EmissiveColors = TMemoryView<CFloat3>(static_cast<CFloat3*>(inputOffset), particleCount);
-			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat3));
+			meshBuff.m_EmissiveColors = TMemoryView<CFloat4>(static_cast<CFloat4*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat4));
 		}
 		if (hasAlphaRemap)
 		{
@@ -1204,9 +1362,11 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 
 		if (_FindAdditionalInput(BasicRendererProperties::SID_Diffuse_Color(), BaseType_Float4, genInputs))
 			m_ParticleBuffers.m_Colors.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_Diffuse_DiffuseColor(), BaseType_Float4, genInputs))
+			m_ParticleBuffers.m_Colors.ResizeIFN(m_VertexCount);
 		if (_FindAdditionalInput(BasicRendererProperties::SID_Atlas_TextureID(), BaseType_Float, genInputs))
 			m_ParticleBuffers.m_AtlasId.ResizeIFN(m_VertexCount);
-		if (_FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float3, genInputs))
+		if (_FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float4, genInputs) || _FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float3, genInputs))
 			m_ParticleBuffers.m_EmissiveColors.ResizeIFN(m_VertexCount);
 		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_Cursor(), BaseType_Float, genInputs))
 			m_ParticleBuffers.m_AlphaCursor.ResizeIFN(m_VertexCount);
@@ -1283,12 +1443,6 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 			return false;
 		billboardBatch->m_Exec_Texcoords.m_Texcoords2 = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords1.m_Ptr, m_VertexCount);
 	}
-	if ((toMap.m_GeneratedInputs & Drawers::GenInput_AtlasId) != 0)
-	{
-		if (!PK_VERIFY(m_ParticleBuffers.m_AtlasId.m_Ptr != null))
-			return false;
-		billboardBatch->m_Exec_Texcoords.m_AtlasIds = TMemoryView<float>(m_ParticleBuffers.m_AtlasId.m_Ptr, m_VertexCount);
-	}
 
 	// Map only the color and alpha cursor
 	// We only handle max 8 additional fields:
@@ -1298,7 +1452,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 	{
 		const SRendererFeatureFieldDefinition &addInput = toMap.m_AdditionalGeneratedInputs[i];
 
-		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		if ((addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() || addInput.m_Name == BasicRendererProperties::SID_Diffuse_DiffuseColor()) && addInput.m_Type == BaseType_Float4)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1320,7 +1474,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_AtlasId.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float3 || addInput.m_Type == BaseType_Float4))
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1329,7 +1483,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat3);
+			field.m_Storage.m_Stride = sizeof(CFloat4);
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -1483,7 +1637,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersGeomBillboards(con
 		void											*rawptr = Mem::AdvanceRawPointer(mappedVtxBuffer, rawBufferOffset * m_UnityMeshInfo.m_VBElemCount);
 		const SRendererFeatureFieldDefinition			&addInput = toMap.m_AdditionalGeneratedInputs[i];
 
-		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		if ((addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() || addInput.m_Name == BasicRendererProperties::SID_Diffuse_DiffuseColor()) && addInput.m_Type == BaseType_Float4)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1598,7 +1752,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 	{
 		const SRendererFeatureFieldDefinition	&addInput = toMap.m_AdditionalGeneratedInputs[i];
 
-		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		if ((addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() || addInput.m_Name == BasicRendererProperties::SID_Diffuse_DiffuseColor()) && addInput.m_Type == BaseType_Float4)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1608,7 +1762,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(CFloat4);
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float3 || addInput.m_Type == BaseType_Float4))
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1616,7 +1770,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 			field.m_AdditionalInputIndex = i;
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat3);
+			field.m_Storage.m_Stride = sizeof(CFloat4);
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -1722,7 +1876,7 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 	{
 		const SRendererFeatureFieldDefinition	 &addInput = toMap.m_AdditionalGeneratedInputs[i];
 
-		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		if ((addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() || addInput.m_Name == BasicRendererProperties::SID_Diffuse_DiffuseColor()) && addInput.m_Type == BaseType_Float4)
 		{
 			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
 				return false;
@@ -1736,7 +1890,7 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
 			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AlphaRemapCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float3 || addInput.m_Type == BaseType_Float4))
 		{
 			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
 				return false;
@@ -1887,7 +2041,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 	{
 		const SRendererFeatureFieldDefinition	&addInput = toMap.m_AdditionalGeneratedInputs[i];
 
-		if (addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() && addInput.m_Type == BaseType_Float4)
+		if ((addInput.m_Name == BasicRendererProperties::SID_Diffuse_Color() || addInput.m_Name == BasicRendererProperties::SID_Diffuse_DiffuseColor()) && addInput.m_Type == BaseType_Float4)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1897,7 +2051,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_Colors.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(CFloat4);
 		}
-		if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && addInput.m_Type == BaseType_Float3)
+		if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float3 || addInput.m_Type == BaseType_Float4))
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1905,7 +2059,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 			field.m_AdditionalInputIndex = i;
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat3);
+			field.m_Storage.m_Stride = sizeof(CFloat4);
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -2051,9 +2205,12 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 		}
 		else
 		{
-			FillUV0(&(m_ParticleBuffers.m_TexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
-			if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
-				FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with UV0
+			if (PK_VERIFY(m_ParticleBuffers.m_TexCoords0 != null))
+			{
+				FillUV0(&(m_ParticleBuffers.m_TexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
+				if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
+						FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with UV0
+			}
 		}
 
 		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0)
@@ -2112,6 +2269,9 @@ void	CUnityBillboardingBatchPolicy::CBilboard_Exec_BillboardInfo::_Prepare(const
 			info.m_Flags |= 8U;
 		if (br.m_Flags.m_HasAtlasBlending)
 			info.m_Flags |= 16U;
+		if (br.m_Flags.m_FlipU)
+			info.m_Flags |= 32U;
+
 		info.m_NormalBendingFactor = br.m_NormalsBendingFactor;
 	}
 

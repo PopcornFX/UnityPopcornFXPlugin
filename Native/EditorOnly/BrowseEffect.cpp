@@ -359,12 +359,8 @@ bool	CEffectBrowser::BrowseEffect(const PParticleEffect &particleEffect, PBaseOb
 		const CParticleAttributeList	*allAttribList = particleEffect->AttributeFlatList();
 		if (allAttribList != null)
 		{
-			CParticleAttributeList::_TypeOfAttributeList	attributeList = allAttribList->AttributeList();
-			CParticleAttributeList::_TypeOfSamplerList		samplerList = allAttribList->SamplerList();
-			const TMemoryView<const u32>					attributeRemapIDs = allAttribList->UniqueAttributeIDs();
-
-			if (!BrowseAttributes(attributeList, attributeRemapIDs) ||
-				!BrowseSamplers(samplerList))
+			if (!BrowseAttributes(allAttribList) ||
+				!BrowseSamplers(allAttribList))
 				return false;
 		}
 	}
@@ -562,6 +558,19 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				++m_UniqueRendererCount;
 				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
 			}
+			else if (renderer->m_RendererType == Renderer_Decal && CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_DecalRenderer)
+			{
+				SDecalRendererDesc				unityDecalDesc;
+				const CRendererDataDecal		*dataDecal = static_cast<const CRendererDataDecal*>(renderer.Get());
+				dummyCache.GameThread_SetupRenderer(dataDecal);
+				dummyCache.GetRendererInfo(unityDecalDesc);
+				::OnEffectRendererFound(&unityDecalDesc, renderer->m_RendererType, m_UniqueRendererCount);
+				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
+				
+				requiresGameThreadCollect = true;
+				++m_UniqueRendererCount;
+				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
+			}
 			++count;
 		}
 	}
@@ -592,22 +601,19 @@ bool	CEffectBrowser::BrowseExportedEvents(CParticleEffect *particleEffect)
 
 //----------------------------------------------------------------------------
 
-bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList::_TypeOfAttributeList &attributeList, const TMemoryView<const u32> &remapIds)
+bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList *attribList)
 {
 	CFloat4			fMin(TNumericTraits<float>::kMin);
 	CFloat4			fMax(TNumericTraits<float>::kMax);
 	CUint4			uMin(TNumericTraits<u32>::kMin);
 	CUint4			uMax(TNumericTraits<u32>::kMax);
 
-	if (!PK_VERIFY(attributeList.Count() == remapIds.Count()))
-	{
-		CLog::Log(PK_WARN, "PopcornFX: Attributes are inconsistent. Fix them inside PopcornFX editor and try reimporting your FX.");
-		return false;
-	}
+	TMemoryView<const CParticleAttributeDeclaration * const>	attributeList = attribList->UniqueAttributeList();
+
+
 	for (u32 i = 0; i < attributeList.Count(); ++i)
 	{
-		u32										declId = remapIds[i]; // We register the attributes in the order they are in the attribute container
-		const CParticleAttributeDeclaration		*attrib = attributeList[declId].Get();
+		const CParticleAttributeDeclaration *attrib = attributeList[i];
 
 		if (attrib != null)
 		{
@@ -622,8 +628,9 @@ bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList::_TypeOfAttri
 				attribDesc.m_MinMaxFlag |= SFxAttributeDesc::EAttrDescFlag::HasMax;
 			attribDesc.m_AttributeName = attrib->ExportedName().Data();
 			attribDesc.m_Description = attrib->Description().MapDefault().Data();
-			attribDesc.m_IsPrivate = attrib->IsPrivate() ? ManagedBool_True : ManagedBool_False;
+			attribDesc.m_Category = attrib->CategoryName().MapDefault().Data();
 			attribDesc.m_AttributeDropMode = attrib->DropDownMode();
+			attribDesc.m_IsPrivate = attrib->IsPrivate() ? ManagedBool_True : ManagedBool_False;
 			
 			CString dropNameList = CString::EmptyString;
 			for (u32 j = 0; j < attrib->EnumList().Count(); ++j)
@@ -672,11 +679,13 @@ bool	CEffectBrowser::BrowseAttributes(const CParticleAttributeList::_TypeOfAttri
 
 //----------------------------------------------------------------------------
 
-bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerList)
+bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList *attribList)
 {
+	TMemoryView<const CParticleAttributeSamplerDeclaration * const>	samplerList = attribList->UniqueSamplerList();
+
 	for (u32 i = 0; i < samplerList.Count(); ++i)
 	{
-		const CParticleAttributeSamplerDeclaration		*sampler = samplerList[i].Get();
+		const CParticleAttributeSamplerDeclaration		*sampler = samplerList[i];
 
 		if (sampler != null && !sampler->IsPrivate())
 		{
@@ -701,6 +710,9 @@ bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList::_TypeOfSampler
 				case SParticleDeclaration::SSampler::ESamplerType::Sampler_Curve:
 					samplerDesc.m_SamplerType = SamplerCurve;
 					break;
+				case SParticleDeclaration::SSampler::ESamplerType::Sampler_Grid:
+					samplerDesc.m_SamplerType = SamplerGrid;
+					break;
 				default:
 					samplerDesc.m_SamplerType = SamplerUnsupported;
 					break;
@@ -713,6 +725,7 @@ bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList::_TypeOfSampler
 				CResourceDescriptor_Image	*imageData = HBO::Cast<CResourceDescriptor_Image>(samplerData);
 				CResourceDescriptor_Text	*textData = HBO::Cast<CResourceDescriptor_Text>(samplerData);
 				CResourceDescriptor_Curve	*curveData = HBO::Cast<CResourceDescriptor_Curve>(samplerData);
+				CResourceDescriptor_Grid	*gridData = HBO::Cast<CResourceDescriptor_Grid>(samplerData);
 
 				if (shapeData != null)
 				{
@@ -733,12 +746,20 @@ bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList::_TypeOfSampler
 					samplerDesc.m_CurveFloatValues = curveData->FloatValues().RawDataPointer();
 					samplerDesc.m_SamplerType = SamplerCurve;
 				}
+				else if (gridData != null)
+				{
+					samplerDesc.m_GridOrder = gridData->Order();
+					samplerDesc.m_GridType = gridData->BaseType();
+					samplerDesc.m_GridDimensions = gridData->Dimensions();
+					samplerDesc.m_SamplerType = SamplerGrid;
+				}
 				else
 					samplerDesc.m_SamplerType = SamplerUnsupported;
 			}
 			samplerDesc.m_SamplerUsageFlags = sampler->UsageFlags();
 			samplerDesc.m_SamplerName = sampler->ExportedName().Data();
 			samplerDesc.m_Description = sampler->Description().MapDefault().Data();
+			samplerDesc.m_Category = sampler->CategoryName().MapDefault().Data();
 
 			::OnEffectSamplerFound(&samplerDesc);
 		}

@@ -243,6 +243,18 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_init.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_1d.h">
+      <Filter>EngineUtils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_1d_sampling.h">
+      <Filter>EngineUtils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_1d_sampling.inl">
+      <Filter>EngineUtils\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_2d.h">
+      <Filter>EngineUtils\Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_random.h">
       <Filter>EngineUtils\Headers</Filter>
     </ClInclude>
@@ -391,6 +403,9 @@
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_config_dump.h">
+      <Filter>Imaging\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_density.h">
       <Filter>Imaging\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_downsampling.h">
@@ -1207,6 +1222,9 @@
       <Filter>Particles\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image.h">
+      <Filter>Particles\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image_atlas.h">
       <Filter>Particles\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_shape.h">

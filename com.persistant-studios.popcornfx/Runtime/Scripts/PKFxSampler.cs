@@ -5,6 +5,9 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
+using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -17,6 +20,7 @@ namespace PopcornFX
 		SamplerCurve,
 		SamplerImage,
 		SamplerText,
+		SamplerGrid,
 		SamplerUnsupported
 	};
 
@@ -125,6 +129,21 @@ namespace PopcornFX
 		[FormerlySerializedAs("Type")] public ESamplerType m_Type;
 		[FormerlySerializedAs("Name")] public string m_Name;
 		[FormerlySerializedAs("Description")] public string m_Description;
+        [FormerlySerializedAs("Category")] public string m_Category;
+
+		public int m_UsageFlags;
+
+		// For shape samplers:
+		public ShapeTransform m_ShapeDefaultTransform;
+		public CurveDefaultValue m_CurveDefaultValue;
+
+		// For sampler grid
+		public uint			m_GridOrder;
+		public EBaseTypeID	m_GridType;
+		public Vector2Int	m_GridDimensionsXY;
+		public Vector2Int	m_GridDimensionsZW;
+
+		public int GridSize {  get { return m_GridDimensionsXY.x * m_GridDimensionsXY.y * m_GridDimensionsZW.x * m_GridDimensionsZW.y; } }
 
 		public enum ESamplerUsageFlags : int
 		{
@@ -157,19 +176,14 @@ namespace PopcornFX
 			return ret;
 		}
 
-		public int m_UsageFlags;
-
-		// For shape samplers:
-		public ShapeTransform m_ShapeDefaultTransform;
-		public CurveDefaultValue m_CurveDefaultValue;
-
 		// Copy constructor:
 		public SamplerDesc(SamplerDesc desc)
 		{
 			m_Type = desc.m_Type;
 			m_Name = desc.m_Name;
 			m_Description = desc.m_Description;
-			m_UsageFlags = desc.m_UsageFlags;
+            m_Category = desc.m_Category;
+            m_UsageFlags = desc.m_UsageFlags;
 			m_ShapeDefaultTransform = desc.m_ShapeDefaultTransform;
 		}
 
@@ -179,13 +193,27 @@ namespace PopcornFX
 			m_Type = (ESamplerType)desc.m_SamplerType;
 			m_Name = Marshal.PtrToStringAnsi(desc.m_SamplerName);
 			m_Description = Marshal.PtrToStringUni(desc.m_Description);
-			m_UsageFlags = desc.m_SamplerUsageFlags;
+            m_Category = Marshal.PtrToStringUni(desc.m_Category);
+            m_UsageFlags = desc.m_SamplerUsageFlags;
 			m_ShapeDefaultTransform = new ShapeTransform(desc.m_ShapePosition, desc.m_ShapeRotation, Vector3.one);
 			m_CurveDefaultValue = new CurveDefaultValue(desc.m_CurveDimension,
 														desc.m_CurveKeyCount,
 														desc.m_CurveTimes,
 														desc.m_CurveFloatValues,
 														desc.m_CurveFloatTangents);
+
+			m_GridOrder = desc.m_GridOrder;
+			m_GridType = (EBaseTypeID)desc.m_GridType;
+			m_GridDimensionsXY = new Vector2Int(desc.m_GridDimensions.x, desc.m_GridDimensions.y);
+			if (m_GridDimensionsXY.x == 0)
+				m_GridDimensionsXY.x = 1;
+			if (m_GridDimensionsXY.y == 0)
+				m_GridDimensionsXY.y = 1;
+			m_GridDimensionsZW = new Vector2Int(desc.m_GridDimensions.z, desc.m_GridDimensions.w);
+			if (m_GridDimensionsZW.x == 0)
+				m_GridDimensionsZW.x = 1;
+			if (m_GridDimensionsZW.y == 0)
+				m_GridDimensionsZW.y = 1;
 		}
 
 		public SamplerDesc(string name, ESamplerType type)
@@ -428,9 +456,134 @@ namespace PopcornFX
 		}
 	}
 
-	[System.Serializable]
+	[Serializable]
+	public class SGenericNativeArray
+	{
+		public EBaseTypeID				m_Type;
+		
+		private NativeArray<byte>		m_Data;
+
+		public SGenericNativeArray(EBaseTypeID type = EBaseTypeID.BaseType_Evolved)
+		{
+			m_Type = type;
+		}
+
+		public void SetType(EBaseTypeID type = EBaseTypeID.BaseType_Evolved)
+		{
+			m_Type = type;
+		}
+
+		public NativeArray<T> GetNativeArray<T>() where T : struct
+		{
+			return m_Data.Reinterpret<T>(sizeof(byte));
+		}
+
+		public int GetDataLength()
+		{
+			return m_Data.Length;
+		}
+
+		public bool GetDataIsCreated()
+		{
+			return m_Data.IsCreated;
+		}
+
+		public bool DisposeData()
+		{
+			if (m_Data.IsCreated)
+			{
+				m_Data.Dispose();
+			}
+			return true;
+		}
+
+		public bool UnsafeAllocNativePtrByType(int size)
+		{
+			DisposeData();
+			unsafe
+			{
+				switch (m_Type)
+				{
+					case EBaseTypeID.BaseType_Bool:
+						m_Data = new NativeArray<byte>(size * sizeof(bool), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Bool2:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector2Bool), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Bool3:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector3Bool), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Bool4:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector4Bool), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_U32:
+						m_Data = new NativeArray<byte>(size * sizeof(uint), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_UInt2:
+						m_Data = new NativeArray<byte>(size * sizeof(uint) * 2, Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_UInt3:
+						m_Data = new NativeArray<byte>(size * sizeof(uint) * 3, Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_UInt4:
+						m_Data = new NativeArray<byte>(size * sizeof(uint) * 4, Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_I32:
+						m_Data = new NativeArray<byte>(size * sizeof(int), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Int2:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector2Int), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Int3:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector3Int), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Int4:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector4Int), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Float:
+						m_Data = new NativeArray<byte>(size * sizeof(float), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Float2:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector2), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Float3:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector3), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Float4:
+						m_Data = new NativeArray<byte>(size * sizeof(Vector4), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Double:
+						m_Data = new NativeArray<byte>(size * sizeof(double), Allocator.Persistent);
+						break;
+					case EBaseTypeID.BaseType_Quaternion:
+						m_Data = new NativeArray<byte>(size * sizeof(Quaternion), Allocator.Persistent);
+						break;
+					default:
+						Debug.LogError("[PopcornFX]: AllocNativePtrByType type not supported");
+						return false;
+				}
+				return true;
+			}
+		}
+
+		public IntPtr UnsafeGetNativePtr()
+		{
+			unsafe
+			{
+				return (IntPtr)NativeArrayUnsafeUtility.GetUnsafeBufferPointerWithoutChecks(m_Data);
+			}
+		}
+
+	}
+
+	[Serializable]
 	public class Sampler
 	{
+		[System.Serializable]
+		public class PKFxGridInitCallback : UnityEvent<SamplerDesc, SGenericNativeArray>
+		{
+		}
+
 		public enum ETexcoordMode : int
 		{
 			Clamp = 0,
@@ -492,6 +645,10 @@ namespace PopcornFX
 		// For sampler text:
 		public string m_Text = "";
 
+		// For sampler grid
+		public PKFxGridInitCallback m_GridInitCallback;
+		public SGenericNativeArray m_GridData;
+
 		// Was modified:
 		public bool m_WasModified = true;
 
@@ -506,6 +663,10 @@ namespace PopcornFX
 			// Set the curve default values:
 			m_CurveIsOverride = false;
 			UpdateDefaultCurveValueIFN(dsc);
+			if (m_Descriptor.m_Type == ESamplerType.SamplerGrid)
+			{
+				m_GridData = new SGenericNativeArray(m_Descriptor.m_GridType);
+			}
 		}
 
 		public Sampler(string name, SamplerDescShapeBox dsc)
@@ -633,6 +794,18 @@ namespace PopcornFX
 			m_Descriptor = new SamplerDesc(name, ESamplerType.SamplerText);
 			m_Text = text;
 			m_ShapeType = EShapeType.ShapeUnsupported;
+		}
+
+		public void Clean()
+		{
+			if (m_GridData != null)
+				m_GridData.DisposeData();
+			m_GridInitCallback?.RemoveAllListeners();
+		}
+
+		~Sampler()
+		{
+			Clean();
 		}
 
 		public void UpdateDefaultCurveValueIFN(SamplerDesc dsc)

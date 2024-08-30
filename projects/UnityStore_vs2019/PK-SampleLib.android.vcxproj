@@ -400,8 +400,8 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy_Vertex.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_CPUsim.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_GPUsim.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHICustomTasks.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGPUSorter.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGraphicResources.h" />
@@ -409,7 +409,6 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIRenderIntegrationConfig.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHITypePolicy.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.h" />
@@ -437,6 +436,8 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\VulkanShaderGenerator.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterfaces.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.h" />
@@ -473,14 +474,13 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy_Vertex.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_CPUsim.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_GPUsim.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHICustomTasks.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGPUSorter.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIGraphicResources.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIParticleRenderDataFactory.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DownSampleTexture.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\GBuffer.cpp" />
@@ -508,6 +508,8 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderGenerator\VulkanShaderGenerator.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ShaderLoader.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterface_GBufferSampling.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.cpp" />

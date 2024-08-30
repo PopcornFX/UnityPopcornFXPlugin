@@ -36,7 +36,8 @@ namespace PopcornFX
 
 		public IntPtr m_AttributeName;
 		public IntPtr m_Description;
-		public IntPtr m_DropNameList;
+        public IntPtr m_Category;
+        public IntPtr m_DropNameList;
 
 		public SAttribContainer_Vector4 m_DefaultValue;
 		public SAttribContainer_Vector4 m_MinValue;
@@ -52,7 +53,8 @@ namespace PopcornFX
 		public ESamplerType m_SamplerType;
 		public IntPtr m_SamplerName;
 		public IntPtr m_Description;
-		public int m_SamplerUsageFlags;
+        public IntPtr m_Category;
+        public int m_SamplerUsageFlags;
 
 		public Quaternion m_ShapeRotation; // Rotation quaternion
 		public Vector3 m_ShapePosition;
@@ -62,6 +64,10 @@ namespace PopcornFX
 		public IntPtr m_CurveTimes;
 		public IntPtr m_CurveFloatValues;
 		public IntPtr m_CurveFloatTangents;
+
+		public uint			m_GridOrder;
+		public int			m_GridType;
+		public Vector4Int	m_GridDimensions;
 	};
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -116,6 +122,7 @@ namespace PopcornFX
 
 		public int m_ShaderVariationFlags;
 		public EBlendMode m_BlendMode;
+		public int m_IsLegacy;
 		public int m_RotateTexture;
 
 		public IntPtr m_DiffuseMap;
@@ -145,6 +152,7 @@ namespace PopcornFX
 		public IntPtr m_MeshAsset;
 		public int m_ShaderVariationFlags;
 		public EBlendMode m_BlendMode;
+        public int m_IsLegacy;
 		public int m_HasMeshAtlas;
 
 		public IntPtr m_DiffuseMap;
@@ -166,6 +174,24 @@ namespace PopcornFX
 		public int		m_TransformUVs_RGBOnly;
 		public int		m_UseVertexColor;
 	};
+
+	// Decals:
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SDecalRendererDesc
+	{
+        public int		m_ShaderVariationFlags;
+
+        public IntPtr	m_DiffuseMap;
+		public IntPtr	m_EmissiveMap;
+
+		public Vector4	m_DiffuseColor;
+		public Vector4	m_EmissiveColor;
+
+        public int		m_TextureAtlasCount;
+        public IntPtr	m_TextureAtlas;
+
+        public int		m_UID;
+    };
 
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -283,6 +309,52 @@ namespace PopcornFX
 		public uint m_Length;
 	};
 
+	//Mirror the PopcornFX SDK enum
+	public enum EBaseTypeID : int
+	{
+		BaseType_Evolved = -1,
+		BaseType_Void = 0,
+		BaseType_Bool,
+		BaseType_Bool2,
+		BaseType_Bool3,
+		BaseType_Bool4,
+		BaseType_U8,
+		BaseType_UByte2,
+		BaseType_UByte3,
+		BaseType_UByte4,
+		BaseType_I8,
+		BaseType_Byte2,
+		BaseType_Byte3,
+		BaseType_Byte4,
+		BaseType_U16,
+		BaseType_UWord2,
+		BaseType_UWord3,
+		BaseType_UWord4,
+		BaseType_I16,
+		BaseType_Word2,
+		BaseType_Word3,
+		BaseType_Word4,
+		BaseType_U32,
+		BaseType_UInt2,
+		BaseType_UInt3,
+		BaseType_UInt4,
+		BaseType_I32,
+		BaseType_Int2,
+		BaseType_Int3,
+		BaseType_Int4,
+		BaseType_U64,
+		BaseType_I64,
+		BaseType_Float,
+		BaseType_Float2,
+		BaseType_Float3,
+		BaseType_Float4,
+		BaseType_Double,
+		BaseType_Quaternion,
+
+		__MaxBaseTypes
+	};
+
+
 	internal partial class PKFxManagerImpl : object
 	{
 		// Native to managed delegates:
@@ -297,9 +369,11 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRaycastStart(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
-		public static extern void SetDelegateOnRaycastEnd(IntPtr delegatePtr);
-		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRaycastPack(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnSpherecastStart(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnSpherecastPack(IntPtr delegatePtr);
 		//Fx lifetime functions
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnFxStopped(IntPtr delegatePtr);
@@ -318,6 +392,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnSetupNewMeshRenderer(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnSetupNewDecalRenderer(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnSetupNewTriangleRenderer(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnResizeRenderer(IntPtr delegatePtr);
@@ -334,6 +410,8 @@ namespace PopcornFX
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnSetSoundsBuffer(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnSetDecalsBuffer(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)] 
 		public static extern void SetDelegateOnRetrieveCustomMaterialInfo(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnRetrieveRendererBufferInfo(IntPtr delegatePtr);
@@ -375,6 +453,8 @@ namespace PopcornFX
 		public static extern void SetDelegateOnPrintUnityConsole(IntPtr delegatePtr);
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern void SetDelegateOnPkkgExtracted(IntPtr delegatePtr);
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern void SetDelegateOnProjectSettingsUpdated(IntPtr delegatePtr);
 #endif
 		//----------------------------------------------------------------------------
 
@@ -429,7 +509,6 @@ namespace PopcornFX
 					}
 				}
 			}
-			Debug.Assert(false);
 			// On last resort: Load via general array of dependencies.
 			if (m_Dependencies != null && PKFxUtils.ArrayContains(s_CustomFileTypes, ext))
 			{
@@ -656,6 +735,15 @@ namespace PopcornFX
 					m_CurrentlyImportedAsset.AddRenderer(etype, *nativeRendererDesc, idx);
 				}
 			}
+			else if (etype == ERendererType.Decal)
+            {
+                unsafe
+                {
+                    SDecalRendererDesc* nativeRendererDesc = (SDecalRendererDesc*)RendererDescPtr.ToPointer();
+                    m_CurrentlyImportedAsset.AddRenderer(etype, *nativeRendererDesc, idx);
+                }
+
+            }
 			else
 			{
 				unsafe
@@ -813,7 +901,7 @@ namespace PopcornFX
 
 			unsafe
 			{
-				SPopcornRendererDesc* desc = (SPopcornRendererDesc*)rendererDescPtr.ToPointer();
+				SPopcornRendererDesc *desc = (SPopcornRendererDesc*)rendererDescPtr.ToPointer();
 				batchDesc = new SBatchDesc(ERendererType.Ribbon, *desc);
 			}
 
@@ -854,6 +942,34 @@ namespace PopcornFX
 				mat.enableInstancing = false;
 			GameObject renderingObject = GetNewRenderingObject(batchDesc.m_GeneratedName);
 			return SetupMeshRenderingObject(renderingObject, batchDesc, mat);
+		}
+
+		//----------------------------------------------------------------------------
+		// Decal
+
+		[MonoPInvokeCallback(typeof(RendererSetupCallback))]
+		public static int OnNewDecalRendererSetup(IntPtr rendererDescPtr, int idx)
+		{
+			SBatchDesc batchDesc = null;
+
+			unsafe
+			{
+				SDecalRendererDesc* desc = (SDecalRendererDesc*)rendererDescPtr.ToPointer();
+
+				batchDesc = new SBatchDesc(*desc);
+			}
+
+			// Create the material description:
+			Material mat = PKFxSettings.MaterialFactory.ResolveParticleMaterial(batchDesc);
+
+			if (mat == null)
+			{
+				Debug.LogError("Could not find the material for renderer " + batchDesc.GenerateNameFromDescription());
+				return -1;
+			}
+
+			GameObject renderingObject = GetNewRenderingObject(batchDesc.m_GeneratedName);
+			return SetupDecalRenderingObject(renderingObject, batchDesc, mat);
 		}
 
 		//----------------------------------------------------------------------------
@@ -978,6 +1094,8 @@ namespace PopcornFX
 
 		public static bool OnRendererMeshResize(int rendererGUID, int vertexCount, int indexCount)
 		{
+			if (m_Renderers[rendererGUID].m_BatchDesc.m_Type == ERendererType.Decal)
+				return true;
 			Debug.Assert(m_Renderers.Count > rendererGUID);
 			Debug.Assert(indexCount % 3 == 0);
 
@@ -1143,7 +1261,7 @@ namespace PopcornFX
 
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
 				{
-					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3));					// emissive color
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));					// emissive color
 					additionalUVIdx = additionalUVIdx + 1;
 				}
 				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
@@ -1233,7 +1351,7 @@ namespace PopcornFX
 		{
 			if (PKFxManager.RenderingPlugin != null)
 			{
-				PKFxManager.RenderingPlugin.SetLightsBuffer(lightInfos, count);
+				PKFxManager.RenderingPlugin.AddLightBuffer(lightInfos, count);
 			}
 		}
 
@@ -1247,6 +1365,19 @@ namespace PopcornFX
 			if (PKFxManager.RenderingPlugin != null)
 			{
 				PKFxManager.RenderingPlugin.SetSoundsBuffer(soundInfos, count);
+			}
+		}
+
+		//----------------------------------------------------------------------------
+
+		private delegate void SetDecalsBufferCallback(IntPtr decalInfos, int count);
+
+		[MonoPInvokeCallback(typeof(SetDecalsBufferCallback))]
+		public static void OnSetDecalsBuffer(IntPtr decalInfos, int count)
+		{
+			if (PKFxManager.RenderingPlugin != null)
+			{
+				PKFxManager.RenderingPlugin.AddDecalBuffer(decalInfos, count);
 			}
 		}
 
@@ -1598,6 +1729,16 @@ namespace PopcornFX
 		public static void OnPkkgExtracted(string path)
 		{
 			PKFxManager.ExtractedPkkg = path;
+		}
+
+		private delegate void ProjectSettingsUpdatedCallback([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] float lodMinDistance, float lodMaxDistance, float lodMinMinDistance);
+
+		[MonoPInvokeCallback(typeof(GetAllAssetPathCallback))]
+		public static void OnProjectSettingsUpdated([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] float lodMinDistance, float lodMaxDistance, float lodMinMinDistance)
+		{
+			PKFxSettings.LODDefaultMinDistance = lodMinDistance;
+			PKFxSettings.LODDefaultMaxDistance = lodMaxDistance;
+			PKFxSettings.LODDefaultMinMinDistance = lodMinMinDistance;
 		}
 #endif
 	}

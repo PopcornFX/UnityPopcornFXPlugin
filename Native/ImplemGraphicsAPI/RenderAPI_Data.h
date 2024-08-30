@@ -174,7 +174,7 @@ PK_INLINE void	FillEmissiveColors(void *const stream, volatile void *const dstPt
 
 	norm_s.StoreFloat3(dst);
 #else
-	*(CFloat3 *)dst = *(const CFloat3 *)stream;
+	*(CFloat4 *)dst = *(const CFloat4 *)stream;
 #endif
 }
 

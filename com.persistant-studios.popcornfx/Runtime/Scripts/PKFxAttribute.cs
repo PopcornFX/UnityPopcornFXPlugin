@@ -9,7 +9,9 @@ namespace PopcornFX
 {
 	// Public structure to access the attribute types:
 	// For float4 we just use Vector4
-	public class Vector4Int
+	[StructLayout(LayoutKind.Sequential)]
+	[Serializable]
+	public struct Vector4Int
 	{
 		private int		m_X;
 		private int		m_Y;
@@ -33,9 +35,40 @@ namespace PopcornFX
 			m_Z = z;
 			m_W = w;
 		}
+		
+		public static bool operator ==(Vector4Int s1, Vector4Int s2)
+		{
+			return (s1.m_X == s2.m_X && s1.m_Y == s2.m_Y && s1.m_Z == s2.m_Z && s1.m_W == s2.m_W);
+		}
+
+		public static bool operator !=(Vector4Int s1, Vector4Int s2)
+		{
+			return !(s1 == s2);
+		}
+
+		public override bool Equals(object obj) 
+		{
+			Vector4Int? s2 = obj as Vector4Int?;
+			if (s2 != null)
+				return this == s2;
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			const int kPrime = 0xF378B;
+			int hash = 0;
+			hash = hash * kPrime + m_X;
+			hash = hash * kPrime + m_Y;
+			hash = hash * kPrime + m_Z;
+			hash = hash * kPrime + m_W;
+			return hash;
+		}
 	}
 
-	public class Vector2Bool
+	[StructLayout(LayoutKind.Sequential)]
+	[Serializable]
+	public struct Vector2Bool
 	{
 		private bool m_X;
 		private bool m_Y;
@@ -55,7 +88,9 @@ namespace PopcornFX
 		}
 	}
 
-	public class Vector3Bool
+	[StructLayout(LayoutKind.Sequential)]
+	[Serializable]
+	public struct Vector3Bool
 	{
 		private bool m_X;
 		private bool m_Y;
@@ -78,7 +113,9 @@ namespace PopcornFX
 		}
 	}
 
-	public class Vector4Bool
+	[StructLayout(LayoutKind.Sequential)]
+	[Serializable]
+	public struct Vector4Bool
 	{
 		private bool		m_X;
 		private bool		m_Y;

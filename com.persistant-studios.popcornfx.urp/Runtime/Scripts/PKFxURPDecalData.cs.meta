@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: be7d51d5c2637d4478cd7340044a8f81
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_DecalShader: {fileID: -6465566751694194690, guid: a5b3224db0fd47e43b5331cd37cfbce9, type: 3}
+  - m_DecalProjector: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

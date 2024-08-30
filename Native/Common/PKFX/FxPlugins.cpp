@@ -64,6 +64,7 @@
 #	endif
 
 #	if defined(USE_IMAGE_PLUGINS)
+		PK_PLUGIN_DECLARE(CImagePKIMCodec);
 		PK_PLUGIN_DECLARE(CImageDDSCodec);
 		PK_PLUGIN_DECLARE(CImagePNGCodec);
 		PK_PLUGIN_DECLARE(CImageTGACodec);
@@ -160,6 +161,13 @@ namespace	PKFX
 			success &= (backend != null && CPluginManager::PluginRegister(backend, true, backendPath));
 		}
 #	endif	// defined(USE_COMPILER_BACKEND_UNKNOWN2)
+
+		if (selected & EPlugin_ImageCodecPKIM)
+		{
+			const char		*codecPath = "Plugins/image_codec_pkim" PK_PLUGIN_POSTFIX_BUILD PK_PLUGIN_POSTFIX_EXT;
+			IPluginModule	*codec = StartupPlugin_CImagePKIMCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
+		}
 
 		if (selected & EPlugin_ImageCodecDDS)
 		{
@@ -300,6 +308,13 @@ namespace	PKFX
 			ShutdownPlugin_CCompilerBackendGPU_PSSLC();
 		}
 #	endif	// defined(USE_COMPILER_BACKEND_UNKNOWN2)
+
+		if (g_LoadedPlugins & EPlugin_ImageCodecPKIM)
+		{
+			IPluginModule	*codec = GetPlugin_CImagePKIMCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
+			ShutdownPlugin_CImagePKIMCodec();
+		}
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecDDS)
 		{

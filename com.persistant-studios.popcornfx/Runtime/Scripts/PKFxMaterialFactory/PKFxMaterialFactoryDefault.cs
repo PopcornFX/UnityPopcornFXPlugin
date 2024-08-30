@@ -80,49 +80,71 @@ namespace PopcornFX
 		public override void SetupFallBackFeatureBinding()
 		{
 			// Meshes:
-			if (m_TransparentMeshUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDefault);
-			if (m_OpaqueMeshUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
-			if (m_TransparentMeshLitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentMeshLitDefault);
-			if (m_OpaqueMeshLitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
-			// Particles Unlit:
-			if (m_OpaqueParticleUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
-			if (m_TransparentParticleUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
-			if (m_AdditiveParticleUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitDefault);
-			if (m_OpaqueCorrectDeformationUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitDefault);
-			if (m_TransparentCorrectDeformationUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitDefault);
-			if (m_AdditiveCorrectDeformationUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationUnlitDefault);
+			if (m_TransparentMeshUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitLegacy);
+            if (m_EmissiveMeshUnlitDefault != null)
+                m_RenderFeatureBindings.Add(m_EmissiveMeshUnlitDefault);
+            if (m_OpaqueMeshUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitLegacy);
+            if (m_OpaqueMeshUnlitDefault != null)
+                m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
+            if (m_TransparentMeshLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitLegacy);
+            if (m_OpaqueMeshLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitLegacy);
+            if (m_OpaqueMeshLitDefault != null)
+                m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
+            // Particles Unlit:
+            if (m_OpaqueParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitLegacy);
+            if (m_OpaqueParticleUnlitDefault != null)
+                m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
+            if (m_TransparentParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitLegacy);
+            if (m_TransparentParticleUnlitDefault != null)
+                m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
+            if (m_AdditiveParticleUnlitLegacy != null)
+                m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitLegacy);
+			if (m_OpaqueCorrectDeformationUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitLegacy);
+            if (m_OpaqueCorrectDeformationUnlitDefault != null)
+                m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitDefault);
+            if (m_TransparentCorrectDeformationUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitLegacy);
+            if (m_TransparentCorrectDeformationUnlitDefault != null)
+                m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitDefault);
+            if (m_AdditiveCorrectDeformationUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationUnlitLegacy);
 			// Particles Lit:
-			if (m_OpaqueParticleLitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueParticleLitDefault);
-			if (m_TransparentParticleLitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentParticleLitDefault);
-			if (m_AdditiveParticleLitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveParticleLitDefault);
-			if (m_OpaqueCorrectDeformationLitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitDefault);
-			if (m_TransparentCorrectDeformationLitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitDefault);
-			if (m_AdditiveCorrectDeformationLitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitDefault);
+			if (m_OpaqueParticleLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleLitLegacy);
+            if (m_OpaqueParticleLitDefault != null)
+                m_RenderFeatureBindings.Add(m_OpaqueParticleLitDefault);
+            if (m_TransparentParticleLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleLitLegacy);
+            if (m_TransparentParticleLitDefault != null)
+                m_RenderFeatureBindings.Add(m_TransparentParticleLitDefault);
+            if (m_AdditiveParticleLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleLitLegacy);
+			if (m_OpaqueCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitLegacy);
+            if (m_OpaqueCorrectDeformationLitDefault != null)
+                m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitDefault);
+            if (m_TransparentCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitLegacy);
+            if (m_TransparentCorrectDeformationLitDefault != null)
+                m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitDefault);
+            if (m_AdditiveCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitLegacy);
 			// Default shader fallback:
-			if (m_CPUParticleDefault != null)
-				m_RenderFeatureBindings.Add(m_CPUParticleDefault);
-			if (m_CPUParticleOpaqueDefault != null)
-				m_RenderFeatureBindings.Add(m_CPUParticleOpaqueDefault);
-			if (m_VertexBillboardingDefault != null)
-				m_RenderFeatureBindings.Add(m_VertexBillboardingDefault);
-			if (m_VertexBillboardingOpaqueDefault != null)
-				m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueDefault);
+			if (m_CPUParticleLegacy != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleLegacy);
+			if (m_CPUParticleOpaqueLegacy != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleOpaqueLegacy);
+			if (m_VertexBillboardingLegacy != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingLegacy);
+			if (m_VertexBillboardingOpaqueLegacy != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueLegacy);
 		}
 
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)

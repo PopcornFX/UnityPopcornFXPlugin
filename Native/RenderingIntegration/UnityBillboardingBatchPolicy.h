@@ -34,6 +34,8 @@ public:
 	static bool		CanRender(const Drawers::SLight_DrawRequest *request, const PRendererCacheBase &rendererCache, SUnityRenderContext &ctx);
 	static bool		CanRender(const Drawers::SSound_DrawRequest *request, const PRendererCacheBase &rendererCache, SUnityRenderContext &ctx);
 	static bool		CanRender(const Drawers::STriangle_DrawRequest *request, const PRendererCacheBase &rendererCache, SUnityRenderContext &ctx);
+	static bool		CanRender(const Drawers::SDecal_DrawRequest *request, const PRendererCacheBase &rendererCache, SUnityRenderContext &ctx);
+
 	static bool		IsStateless() { return false; }
 
 	// Do not remove
@@ -49,6 +51,7 @@ public:
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPURibbonBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SMeshBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, STriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
+	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SDecalBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 	
 	bool		MapBuffers(SUnityRenderContext &ctx, const TMemoryView<SUnitySceneView> &views, SGPUTriangleBatchJobs *batchJobs, const SGeneratedInputs &toMap);
 
@@ -62,6 +65,8 @@ public:
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SLight_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch);
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SSound_DrawRequest * const> &drawRequests, Drawers::CBillboard_CPU *batch);
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SSound_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch);
+	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SDecal_DrawRequest * const> &drawRequests, Drawers::CDecal_CPU *batch);
+	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::SDecal_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch);
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::STriangle_DrawRequest * const> &drawRequests, Drawers::CTriangle_CPU *batch);
 	bool		LaunchCustomTasks(SUnityRenderContext &ctx, const TMemoryView<const Drawers::STriangle_DrawRequest * const> &drawRequests, Drawers::CCopyStream_CPU *batch);
 
@@ -79,6 +84,7 @@ private:
 	void		_UpdateThread_SetUnityMeshBounds(const SBuffersToAlloc &allocBuffers, const TMemoryView<SUnitySceneView> &views);
 
 	bool		_UpdateThread_IssueDrawCallLight(const Drawers::SLight_DrawRequest *lightRequest, CUnityRendererCache *rdrCache);
+	bool		_UpdateThread_IssueDrawCallDecal(const Drawers::SDecal_DrawRequest *decalRequest, CUnityRendererCache *rdrCache, u32 &totalParticleCount);
 	bool		_UpdateThread_IssueDrawCallSound(const Drawers::SSound_DrawRequest *soundRequest, CUnityRendererCache *rdrCache, u32 &totalParticleCount);
 
 	void		_UpdateThread_ResizeUnityMeshInstanceCount(const SBuffersToAlloc &allocBuffers, IRenderAPIData *renderApiData);
@@ -236,12 +242,12 @@ private:
 		SPerView				m_ViewIndependantGeom;
 		SSizedBuffer<CFloat2>	m_TexCoords0;
 		SSizedBuffer<CFloat2>	m_TexCoords1;
-		SSizedBuffer<float>		m_AtlasId;
 		SSizedBuffer<CFloat4>	m_UVRemap;
 
 		// Additional fields that we handle:
+		SSizedBuffer<float>		m_AtlasId;
 		SSizedBuffer<CFloat4>	m_Colors;
-		SSizedBuffer<CFloat3>	m_EmissiveColors;
+		SSizedBuffer<CFloat4>	m_EmissiveColors;
 		SSizedBuffer<float>		m_AlphaCursor;
 		SSizedBuffer<float>		m_TransformUVsRotate;
 		SSizedBuffer<CFloat2>	m_TransformUVsScale;
@@ -281,7 +287,7 @@ private:
 	{
 		TStridedMemoryView<CFloat4x4>			m_Transforms;
 		TStridedMemoryView<CFloat4>				m_Colors;
-		TStridedMemoryView<CFloat3>				m_EmissiveColors;
+		TStridedMemoryView<CFloat4>				m_EmissiveColors;
 		TStridedMemoryView<float>				m_AlphaRemapCursor;
 		TStridedMemoryView<float>				m_VATCursors;
 
@@ -327,7 +333,7 @@ private:
 		float					*m_AtlasId;
 		CFloat4					*m_UVRemap;
 		CFloat4					*m_Colors;
-		CFloat3					*m_EmissiveColors;
+		CFloat4					*m_EmissiveColors;
 		float					*m_AlphaCursor;
 
 		float					*m_TransformUVsRotate;

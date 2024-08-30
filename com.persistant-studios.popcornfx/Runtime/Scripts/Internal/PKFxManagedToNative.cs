@@ -75,6 +75,8 @@ namespace PopcornFX
 
 		public bool m_SoundRendererEnabled;
 
+		public bool m_DecalRendererEnabled;
+
 		// Threading
 		public bool m_SingleThreadedExecution;
 		public bool m_OverrideThreadPool;
@@ -84,8 +86,16 @@ namespace PopcornFX
 		// Raycast structs
 		public int m_RaycastHitSize;
 		public int m_RaycastCommandSize;
+		public int m_SpherecastHitSize;
+		public int m_SpherecastCommandSize;
+
+		public int m_UnityVersion;
 
 		public uint m_CPPMarkerMaxDepth;
+
+		public float m_LODMinDistance;
+		public float m_LODMaxDistance;
+		public float m_LODMinMinDistance;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -124,6 +134,15 @@ namespace PopcornFX
 		public int m_SizeInBytes;
 		public int m_PixelFormat;
 		public int m_WrapMode;
+	};
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SGridSamplerToFill
+	{
+		public uint			m_GridOrder;
+		public int			m_GridType;
+		public Vector4Int	m_Dimensions;
+		public IntPtr		m_Data;
 	};
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -292,6 +311,9 @@ namespace PopcornFX
 		// Sampler text:
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool EffectSetTextSampler(int guid, int samplerId, string text);
+		// Sampler grid:
+		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
+		public static extern bool EffectSetGridSampler(int guid, int samplerId, SGridSamplerToFill gridsampler);
 		// Any sampler:
 		[DllImport(kPopcornPluginName, CallingConvention = kCallingConvention)]
 		public static extern bool EffectResetDefaultSampler(int guid, int samplerId);
@@ -377,10 +399,12 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.19.7 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.20.0 for " + m_UnityVersion;
 		public static string m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
+		public static string	m_EditorCameraLayer = "PopcornFX_Editor";
+		public static string[]	m_CameraLayers = new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" };
 
 		public static GameObject m_RenderersRoot = null;
 		public static int m_CurrentRenderersGUID = 0;
@@ -394,7 +418,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		public static string[] s_CustomFileTypes = { ".pkat", ".pkfx", ".pkmm", ".pkfm", ".pksc", ".pkan", ".pkvf" };
-		public static string[] s_TexFileTypes = { ".dds", ".png", ".jpg", ".jpeg", ".tga", ".exr", ".hdr", ".tif", ".tiff", ".pkm", ".pvr" };
+		public static string[] s_TexFileTypes = { ".dds", ".png", ".jpg", ".jpeg", ".tga", ".exr", ".hdr", ".tif", ".tiff", ".pkm", ".pvr", ".pkim" };
 		public static string[] s_MeshFileTypes = { ".fbx" };
 		public static string[] s_SoundFileTypes = { ".mp3", ".wav", ".ogg" };
 		public static string[] s_SimcacheFileTypes = { ".pksc" };
@@ -564,8 +588,9 @@ namespace PopcornFX
 			SetDelegateOnResourceWrite(delegateHandler.DelegateToFunctionPointer(new ResourceWriteCallback(OnResourceWrite)));
 			SetDelegateOnResourceUnload(delegateHandler.DelegateToFunctionPointer(new ResourceUnloadCallback(OnResourceUnload)));
 			SetDelegateOnRaycastStart(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastStartCallback(PKFxRaycasts.OnRaycastStart)));
-			SetDelegateOnRaycastEnd(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastEndCallback(PKFxRaycasts.OnRaycastEnd)));
 			SetDelegateOnRaycastPack(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.RaycastPackCallback(PKFxRaycasts.OnRaycastPack)));
+			SetDelegateOnSpherecastStart(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.SpherecastStartCallback(PKFxRaycasts.OnSpherecastStart)));
+			SetDelegateOnSpherecastPack(delegateHandler.DelegateToFunctionPointer(new PKFxRaycasts.SpherecastPackCallback(PKFxRaycasts.OnSpherecastPack)));
 			SetDelegateOnFxStopped(delegateHandler.DelegateToFunctionPointer(new FxCallback(OnFxStopped)));
 			SetDelegateOnRaiseEvent(delegateHandler.DelegateToFunctionPointer(new RaiseEventCallback(OnRaiseEvent)));
 			SetDelegateOnAudioWaveformData(delegateHandler.DelegateToFunctionPointer(new AudioCallback(OnAudioWaveformData)));
@@ -573,6 +598,7 @@ namespace PopcornFX
 			SetDelegateOnSetupNewBillboardRenderer(delegateHandler.DelegateToFunctionPointer(new RendererSetupCallback(OnNewBillboardRendererSetup)));
 			SetDelegateOnSetupNewRibbonRenderer(delegateHandler.DelegateToFunctionPointer(new RendererSetupCallback(OnNewRibbonRendererSetup)));
 			SetDelegateOnSetupNewMeshRenderer(delegateHandler.DelegateToFunctionPointer(new RendererSetupCallback(OnNewMeshRendererSetup)));
+			SetDelegateOnSetupNewDecalRenderer(delegateHandler.DelegateToFunctionPointer(new RendererSetupCallback(OnNewDecalRendererSetup)));
 			SetDelegateOnSetupNewTriangleRenderer(delegateHandler.DelegateToFunctionPointer(new RendererSetupCallback(OnNewTriangleRendererSetup)));
 			SetDelegateOnResizeRenderer(delegateHandler.DelegateToFunctionPointer(new RendererResizeCallback(OnRendererResize)));
 			SetDelegateOnSetParticleCount(delegateHandler.DelegateToFunctionPointer(new SetParticleCountCallback(OnSetParticleCount)));
@@ -581,6 +607,7 @@ namespace PopcornFX
 			SetDelegateOnSetMeshInstancesBuffer(delegateHandler.DelegateToFunctionPointer(new SetMeshInstancesBufferCallback(OnSetMeshInstancesBuffer)));
 			SetDelegateOnSetLightsBuffer(delegateHandler.DelegateToFunctionPointer(new SetLightsBufferCallback(OnSetLightsBuffer)));
 			SetDelegateOnSetSoundsBuffer(delegateHandler.DelegateToFunctionPointer(new SetSoundsBufferCallback(OnSetSoundsBuffer)));
+			SetDelegateOnSetDecalsBuffer(delegateHandler.DelegateToFunctionPointer(new SetDecalsBufferCallback(OnSetDecalsBuffer)));
 			SetDelegateOnRetrieveCustomMaterialInfo(delegateHandler.DelegateToFunctionPointer(new RetrieveCustomMaterialInfoCallback(OnRetrieveCustomMaterialInfo)));
 			SetDelegateOnRetrieveRendererBufferInfo(delegateHandler.DelegateToFunctionPointer(new RetrieveRendererBufferInfoCallback(OnRetrieveRendererBufferInfo)));
 			SetDelegateOnUpdateRendererBounds(delegateHandler.DelegateToFunctionPointer(new RendererBoundsUpdateCallback(OnRendererBoundsUpdate)));
@@ -599,6 +626,7 @@ namespace PopcornFX
 			SetDelegateOnGetEffectInfo(delegateHandler.DelegateToFunctionPointer(new GetEffectInfoCallback(OnGetEffectInfo)));
 			SetDelegateOnGetAllAssetPath(delegateHandler.DelegateToFunctionPointer(new GetAllAssetPathCallback(OnGetAllAssetPath)));
 			SetDelegateOnPkkgExtracted(delegateHandler.DelegateToFunctionPointer(new PkkgExtractedCallback(OnPkkgExtracted)));
+			SetDelegateOnProjectSettingsUpdated(delegateHandler.DelegateToFunctionPointer(new ProjectSettingsUpdatedCallback(OnProjectSettingsUpdated)));
 			// Startup the editor manager:
 			PopcornFXEditorStartup();
 #endif
@@ -904,6 +932,27 @@ namespace PopcornFX
 				return -1;
 			}
 			m_CurrentRenderersGUID++;
+			return newId;
+		}
+
+		//----------------------------------------------------------------------------
+
+		public static int SetupDecalRenderingObject(GameObject renderingObject, SBatchDesc batchDesc, Material mat)
+		{
+			int newId = m_CurrentRenderersGUID++;
+
+			renderingObject.name += " " + newId;
+
+			var renderer = renderingObject.AddComponent<PKFxDecalData>();
+			renderer.m_Material = mat;
+			renderer.m_UID = batchDesc.m_UID;
+
+			renderer.m_AtlasRects = batchDesc.m_AtlasSubRects;
+
+            renderer.m_Material.SetTexture("m_AtlasRects", batchDesc.m_AtlasSubRects); 
+
+            m_Renderers.Add(new SMeshDesc(mat, batchDesc, renderingObject));
+
 			return newId;
 		}
 

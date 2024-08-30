@@ -31,7 +31,7 @@ SVertexOutput	vert(SVertexInput v)
 	#endif
 	
 	#if	!PK_HAS_EMISSIVE_NONE
-		o.EmissiveColor = v.EmissiveColor;
+		o.EmissiveColor = v.EmissiveColor.rgb;
 	#endif
 
 	#if	PK_HAS_LIGHTING

@@ -161,7 +161,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x86);$(VULKAN_SDK)\lib32;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -189,7 +189,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x64);$(VULKAN_SDK)\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -217,7 +217,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -252,7 +252,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;fmodex_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x86);$(VULKAN_SDK)\lib32;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -286,7 +286,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;fmodex64_vc.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;$(WindowsSDK_LibraryPath_x64);$(VULKAN_SDK)\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -320,7 +320,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-MCPP.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;version.lib;psapi.lib;dxgi.lib;opengl32.lib;vulkan-1.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -334,17 +334,32 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12compatibility.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12video.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_barriers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_check_feature_support.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_core.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_default.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_pipeline_state_stream.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_property_format_table.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_render_pass.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_resource_helpers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_root_signature.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_state_object.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcapi.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcerrors.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcisense.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h" />
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h" />
-    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h" />
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />

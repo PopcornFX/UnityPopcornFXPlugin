@@ -24,6 +24,11 @@ namespace PopcornFX
 			Selection.activeObject = settings;
 		}
 
+		public static GUIContent overrideLODSettingsLabel = new GUIContent(" Override LOD Settings");
+		public static GUIContent LODMinDistanceLabelAndTooltip = new GUIContent(" Min Distance", "Distance below which the LOD level is at highest detail (lod = 0.0)");
+		public static GUIContent LODMaxDistanceLabelAndTooltip = new GUIContent(" Max Distance", "Distance above which the LOD level is at lowest detail (lod = 1.0)");
+		public static GUIContent LODMinMinDistanceLabelAndTooltip = new GUIContent(" Min Min Distance", "Distance to view below which no other metrics are taken into account except the distance. (no frustum, no occlusion...)");
+
 		public static GUIContent enableThumbnails = new GUIContent(" Enable thumbnails");
 		public static GUIContent useThumbnailsInBuilds = new GUIContent(" Use effects thumbnails in builds");
 		public static GUIContent enableAnimatedThumbnails = new GUIContent(" Enable animated thumbnails");
@@ -51,6 +56,7 @@ namespace PopcornFX
 		public static GUIContent useHashAsMaterialNameLabel = new GUIContent(" Use hashes as material name");
 		public static GUIContent manualCameraLayerLabel = new GUIContent(" Manual control of rendering layers");
 		public static GUIContent MaxCameraSupportLabel = new GUIContent(" Max number of cameras supported for billboarding");
+		public static GUIContent enableEditorCameraLabel = new GUIContent(" Enable rendering for SceneView camera");
 		public static GUIContent useHashAsMaterialNameDialogMessageLabel = new GUIContent("Warning, this action will delete all existing generated materials and recreate them. \nContinue ?");
 
 		public static GUIContent enableLocalizedPages = new GUIContent(" Enable Localized Pages");
@@ -69,6 +75,7 @@ namespace PopcornFX
 
 		public static GUIContent enablePopcornFXLightsLabel = new GUIContent(" Enable Light from PopcornFX Effects");
 		public static GUIContent enablePopcornFXAudiosLabel = new GUIContent(" Enable Audio from PopcornFX Effects");
+		public static GUIContent enablePopcornFXDecalsLabel = new GUIContent(" Enable Decal from PopcornFX Effects");
 
 		public static GUIContent useMeshInstancingLabel = new GUIContent(" Enable Mesh Instancing (per instance color in not supported by URP/HDRP yet)");
 
@@ -136,6 +143,14 @@ namespace PopcornFX
 					}
 					EditorGUILayout.LabelField("Current Quality Level:\t\t" + PKFxSettings.CurrentQualityVersionName);
 					EditorGUILayout.LabelField("Stored Unity quality levels:\t" + string.Join(":", PKFxSettings.QualityVersionNames));
+				}
+			}
+			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(PKFxSettings.LODCategory, "LOD")))
+			{
+				PKFxSettings.LODCategory = category.IsExpanded();
+				if (category.IsExpanded())
+				{
+					DisplayLODCategory();
 				}
 			}
 			using (var category = new PKFxEditorCategory(() => EditorGUILayout.Foldout(PKFxSettings.ThreadingCategory, "Multithreading")))
@@ -283,10 +298,26 @@ namespace PopcornFX
 			int maxCamValue = EditorGUILayout.IntSlider(MaxCameraSupportLabel, PKFxSettings.MaxCameraSupport, 1, 4);
 			if (maxCamValue != PKFxSettings.MaxCameraSupport)
 			{
-				PKFxSettings.MaxCameraSupport = maxCamValue;
-				if (!PKFxSettings.ManualCameraLayer)
+				if (Application.isPlaying)
+					Debug.LogError("Cannot modify max camera support while playing");
+				else
 				{
-					PKFxSettingsEditor._AddCameraLayersIFN(PKFxSettings.MaxCameraSupport, PKFxSettings.EnableDistortion);
+					PKFxSettings.MaxCameraSupport = maxCamValue;
+					PKFxSettingsEditor._AddCameraLayersIFN();
+				}
+			}
+			EditorGUILayout.EndHorizontal();
+
+			EditorGUILayout.BeginHorizontal();
+			bool editorCamera = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.enableEditorCameraLabel, PKFxSettings.EnableEditorCamera);
+			if (editorCamera != PKFxSettings.EnableEditorCamera)
+			{
+				if (Application.isPlaying)
+					Debug.LogError("Cannot enable editor camera while playing");
+				else
+				{
+					PKFxSettings.EnableEditorCamera = editorCamera;
+					PKFxSettingsEditor._AddCameraLayersIFN();
 				}
 			}
 			EditorGUILayout.EndHorizontal();
@@ -316,6 +347,27 @@ namespace PopcornFX
 			}
 			DisplayPopcornFxRenderers(showBuffers);
 
+		}
+
+		private static void DisplayLODCategory()
+		{
+			PKFxSettings.OverrideLODSettings = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.overrideLODSettingsLabel, PKFxSettings.OverrideLODSettings);
+
+			using (new EditorGUI.DisabledScope(!PKFxSettings.OverrideLODSettings))
+			{
+				EditorGUI.indentLevel++;
+				PKFxSettings.LODMinDistance = EditorGUILayout.FloatField(PKFxSettingsUIUtils.LODMinDistanceLabelAndTooltip, PKFxSettings.LODMinDistance);
+				PKFxSettings.LODMaxDistance = EditorGUILayout.FloatField(PKFxSettingsUIUtils.LODMaxDistanceLabelAndTooltip, PKFxSettings.LODMaxDistance);
+				using (var LODAdvanceCategory = new PKFxEditorCategory(() => EditorGUILayout.Foldout(PKFxSettings.LODAdvanceCategory, "Distance (Advanced)")))
+				{
+					PKFxSettings.LODAdvanceCategory = LODAdvanceCategory.IsExpanded();
+					if (LODAdvanceCategory.IsExpanded())
+					{
+						PKFxSettings.LODMinMinDistance = EditorGUILayout.FloatField(PKFxSettingsUIUtils.LODMinMinDistanceLabelAndTooltip, PKFxSettings.LODMinMinDistance);
+					}
+				}
+				EditorGUI.indentLevel--;
+			}
 		}
 
 		private static void DisplayThreadingCategory()
@@ -443,23 +495,22 @@ namespace PopcornFX
 
 			using (new EditorGUI.DisabledScope(!PKFxSettings.EnableThumbnails))
 			{
-				EditorGUI.indentLevel++;
 				PKFxSettings.UseThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useThumbnailsInBuilds, PKFxSettings.UseThumbnailsInBuilds);
-				EditorGUI.indentLevel--;
 			}
 			PKFxSettings.EnableAnimatedThumbnails = EditorGUILayout.ToggleLeft(enableAnimatedThumbnails, PKFxSettings.EnableAnimatedThumbnails);
 			using (new EditorGUI.DisabledScope(!PKFxSettings.EnableAnimatedThumbnails))
 			{
-				EditorGUI.indentLevel++;
 				PKFxSettings.UseAnimatedThumbnailsInBuilds = EditorGUILayout.ToggleLeft(useAnimatedThumbnailsInBuilds, PKFxSettings.UseAnimatedThumbnailsInBuilds);
-				EditorGUI.indentLevel--;
 			}
 
-			EditorGUILayout.BeginHorizontal();
 			bool hotreload = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.hotreloadLabel, PKFxSettings.EnableEffectHotreload);
 			if (hotreload != PKFxSettings.EnableEffectHotreload)
 				PKFxSettings.EnableEffectHotreload = hotreload;
-			EditorGUILayout.EndHorizontal();
+
+			using (new EditorGUI.DisabledScope(!PKFxSettings.EnableAnimatedThumbnails))
+			{
+				PKFxSettings.EnableHotreloadInPlayMode = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.hotreloadInPlayLabel, PKFxSettings.EnableHotreloadInPlayMode);
+			}
 
 			bool value = EditorGUILayout.ToggleLeft(PKFxSettingsUIUtils.useHashAsMaterialNameLabel, PKFxSettings.UseHashesAsMaterialName);
 			if (PKFxSettings.UseHashesAsMaterialName != value)
@@ -478,9 +529,7 @@ namespace PopcornFX
 				};
 			}
 
-			EditorGUILayout.BeginHorizontal();
 			bool enableAssetPlatformVersion = EditorGUILayout.ToggleLeft(PlatformVersionLabel, PKFxSettings.EnableAssetPlatformVersion);
-			EditorGUILayout.EndHorizontal();
 
 			if (enableAssetPlatformVersion != PKFxSettings.EnableAssetPlatformVersion)
 			{
@@ -516,10 +565,7 @@ namespace PopcornFX
 			if (enableDistortion != PKFxSettings.EnableDistortion)
 			{
 				PKFxSettings.EnableDistortion = enableDistortion;
-				if (!PKFxSettings.ManualCameraLayer)
-				{
-					PKFxSettingsEditor._AddCameraLayersIFN(PKFxSettings.MaxCameraSupport, PKFxSettings.EnableDistortion);
-				}
+				PKFxSettingsEditor._AddCameraLayersIFN();
 			}
 			PKFxSettings.EnableBlur = EditorGUILayout.ToggleLeft("Enable blur", PKFxSettings.EnableBlur);
 			if (PKFxSettings.EnableBlur)
@@ -573,6 +619,18 @@ namespace PopcornFX
 			{
 				PKFxSettings.MaxPopcornFXSounds = EditorGUILayout.IntSlider(PKFxSettings.MaxPopcornFXSounds, 0, 256);
 			}
+
+			bool decalValue = EditorGUILayout.ToggleLeft(enablePopcornFXDecalsLabel, PKFxSettings.EnablePopcornFXDecal);
+			if (PKFxSettings.EnablePopcornFXDecal != decalValue)
+			{
+				PKFxSettings.EnablePopcornFXDecal = decalValue;
+			}
+
+			if (PKFxSettings.EnablePopcornFXDecal)
+			{
+				PKFxSettings.MaxPopcornFXDecals = EditorGUILayout.IntSlider(PKFxSettings.MaxPopcornFXDecals, 0, 256);
+			}
+
 		}
 
 		private static void DisplayDebugCategory()
@@ -767,7 +825,7 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		static internal void _AddCameraLayersIFN(int maxCameraSupport, bool distortionEnabled = true)
+		static internal void _AddCameraLayersIFN()
 		{
 			if (PKFxSettings.ManualCameraLayer)
 				return;
@@ -779,10 +837,12 @@ namespace PopcornFX
 			SerializedObject tagsAndLayersManager = new SerializedObject(tagManager[0]);
 			SerializedProperty layersProp = tagsAndLayersManager.FindProperty("layers");
 
-			List<string> cameraLayerName = new List<string>(new string[] { "PopcornFX_0", "PopcornFX_1", "PopcornFX_2", "PopcornFX_3" });
-			string distortionLayerName = PKFxManager.DistortionLayer;
-
-			PKFxSettings.Instance.m_PopcornLayerName = new string[cameraLayerName.Count() + 1];
+			List<string> layersToAdd = new List<string>(PKFxManager.CameraLayers);
+			layersToAdd.RemoveRange(PKFxSettings.MaxCameraSupport, layersToAdd.Count - PKFxSettings.MaxCameraSupport);
+			if (PKFxSettings.EnableEditorCamera)
+				layersToAdd.Add(PKFxManager.EditorCameraLayer);
+			if (PKFxSettings.EnableDistortion)
+				layersToAdd.Add(PKFxManager.DistortionLayer);
 
 			//search if the sorting layer already exist
 			for (int i = 0; i < layersProp.arraySize; ++i)
@@ -791,29 +851,30 @@ namespace PopcornFX
 
 				if (layer != null && layer.stringValue.Length != 0)
 				{
-					if (cameraLayerName.Contains(layer.stringValue))
+					if (PKFxManager.CameraLayers.Contains(layer.stringValue))
 					{
-						int idx = cameraLayerName.IndexOf(layer.stringValue);
-						if (idx >= maxCameraSupport)
+						int idx = Array.IndexOf(PKFxManager.CameraLayers, layer.stringValue);
+						if (idx >= PKFxSettings.MaxCameraSupport)
 							layer.stringValue = "";
-						PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
-						cameraLayerName[idx] = "";
 					}
-					else if (distortionLayerName == layer.stringValue)
+					else if (PKFxManager.EditorCameraLayer == layer.stringValue)
 					{
-						if (!distortionEnabled)
+						if (!PKFxSettings.EnableEditorCamera)
 							layer.stringValue = "";
-						PKFxSettings.Instance.m_PopcornLayerName[PKFxSettings.Instance.m_PopcornLayerName.Length - 1] = layer.stringValue;
-						distortionLayerName = "";
 					}
+					else if (PKFxManager.DistortionLayer == layer.stringValue)
+					{
+						if (!PKFxSettings.EnableDistortion)
+							layer.stringValue = "";
+					}
+
+					int toAddIdx = layersToAdd.IndexOf(layer.stringValue);
+					if (toAddIdx != -1)
+						layersToAdd.RemoveAt(toAddIdx);
 				}
 			}
-			cameraLayerName.RemoveRange(maxCameraSupport, cameraLayerName.Count - maxCameraSupport);
-			if (distortionEnabled)
-				cameraLayerName.Add(distortionLayerName);
-			cameraLayerName = cameraLayerName.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
 
-			if (cameraLayerName.Count == 0)
+			if (layersToAdd.Count == 0)
 			{
 				// Nothing to add
 				tagsAndLayersManager.ApplyModifiedProperties();
@@ -826,14 +887,9 @@ namespace PopcornFX
 
 				if (layer != null && layer.stringValue.Length == 0)
 				{
-					layer.stringValue = cameraLayerName[0];
-
-					int idx = ArrayUtility.IndexOf(PKFxSettings.Instance.m_PopcornLayerName, null);
-
-					PKFxSettings.Instance.m_PopcornLayerName[idx] = layer.stringValue;
-
-					cameraLayerName.RemoveAt(0);
-					if (cameraLayerName.Count == 0)
+					layer.stringValue = layersToAdd[0];
+					layersToAdd.RemoveAt(0);
+					if (layersToAdd.Count == 0)
 						break;
 				}
 			}
@@ -882,7 +938,7 @@ namespace PopcornFX
 			PKFxManager.SetQualityLevelSettings();
 			_AddSortingLayerIFN("PopcornFX", newInstance);
 			_AddSortingLayerIFN("PopcornFXUI", newInstance);
-			_AddCameraLayersIFN(PKFxSettings.MaxCameraSupport, PKFxSettings.EnableDistortion);
+			_AddCameraLayersIFN();
 
 			PKFxMaterialFactory factory = PKFxSettings.MaterialFactory;
 			if (factory == null)

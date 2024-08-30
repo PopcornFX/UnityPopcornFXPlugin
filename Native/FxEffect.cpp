@@ -15,6 +15,7 @@
 #include <pk_particles/include/ps_samplers_image.h>
 #include <pk_particles/include/ps_samplers_text.h>
 #include <pk_particles/include/ps_samplers_curve.h>
+#include <pk_particles/include/ps_samplers_grid.h>
 
 #include <pk_geometrics/include/ge_matrix_tools.h>
 #include <pk_geometrics/include/ge_mesh_kdtree.h>
@@ -57,6 +58,7 @@ CPKFXEffect::CPKFXEffect(bool requiresGameThreadCollect, const CFloat4x4 &transf
 ,	m_Effect(null)
 ,	m_Emitter(null)
 ,	m_AttributesDescriptor(null)
+,	m_AttributesContainer(null)
 {
 	m_WorldTransformsCurrent = RemoveScale(transforms);
 	m_WorldTransformsPrevious = m_WorldTransformsCurrent;
@@ -79,6 +81,9 @@ CPKFXEffect::~CPKFXEffect()
 		// /!\ This will crash at next update as the effect is not terminated and the matrices are free,
 		// This is meant to be terminated or killed before being destroyed OR destroyed just before a mediumCollection.Clear();
 	}
+
+	if (m_AttributesContainer != null)
+		m_AttributesContainer->Destroy();
 }
 
 //----------------------------------------------------------------------------
@@ -112,13 +117,8 @@ int	CPKFXEffect::LoadFX(const CString &fx)
 
 	// instantiate and add the new effect
 	m_Emitter = m_Effect->Instantiate(m_MediumCollection);
-	// Fix #12945: Caused by fix #12901,
-	// GetAllAttributes doesn't check if m_EffectID is valid now
-	// and return the parent effect default container instead of null for newly instantiated emitters.
-	// So force create the attribute container here
 	if (m_Emitter == null)
 		return -1;
-	m_Emitter->SetAllAttributes(null);
 
 	if (CRuntimeManager::Instance().GetIsUnitTesting())
 	{
@@ -277,20 +277,17 @@ void	CPKFXEffect::Update(float dt)
 
 SAttributesContainer::SAttrib	*CPKFXEffect::GetAttributesBuffer()
 {
-	if (m_Emitter == null) //If effect is being stopped
+	if (m_Emitter == null || m_AttributesContainer == null)	//If effect is being stopped or no attributes
 		return null;
-	if (m_Emitter->GetAllAttributes() == null)
-	{
-		m_Emitter->SetAllAttributes(null);
-	}
-	return const_cast<SAttributesContainer::SAttrib	*>(m_Emitter->GetAllAttributes()->AttributesBegin());
+
+	return m_AttributesContainer->AttributesBegin();
 }
 
 void	CPKFXEffect::UpdateAttributesBuffer()
 {
 	if (m_Emitter == null) //If effect is being stopped
 		return;
-	m_Emitter->SetAllAttributes(m_Emitter->GetAllAttributes());
+	m_Emitter->SetAllAttributes(m_AttributesContainer, true, false);
 }
 
 //----------------------------------------------------------------------------
@@ -417,6 +414,8 @@ bool	CPKFXEffect::ResetSamplerToDefault(u32 smpID)
 
 CFloat4x4	*CPKFXEffect::EffectUpdateSamplerSkinningSetMatrices(u32 smpID)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return null;
 	const SSamplerData	&samplerData = m_SamplersData[smpID];
 
 	{
@@ -437,6 +436,8 @@ CFloat4x4	*CPKFXEffect::EffectUpdateSamplerSkinningSetMatrices(u32 smpID)
 
 bool	CPKFXEffect::EffectBeginUpdateSamplerSkinning(u32 smpID, float dt)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
 	const SSamplerData	&samplerData = m_SamplersData[smpID];
 
 	{
@@ -458,6 +459,8 @@ bool	CPKFXEffect::EffectBeginUpdateSamplerSkinning(u32 smpID, float dt)
 
 bool	CPKFXEffect::EffectEndUpdateSamplerSkinning(u32 smpID)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
 	const SSamplerData	&samplerData = m_SamplersData[smpID];
 
 	{
@@ -479,7 +482,7 @@ bool	CPKFXEffect::EffectEndUpdateSamplerSkinning(u32 smpID)
 
 bool	CPKFXEffect::SetSamplerShapeBasics(u32 smpID, EShapeType type, const CFloat3 &size)
 {
-	if (m_Emitter == null) //If effect is being stopped
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
 		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	// Wait for the sampler change thread:
@@ -537,6 +540,8 @@ bool	CPKFXEffect::SetSamplerShapeBasics(u32 smpID, EShapeType type, const CFloat
 
 bool	CPKFXEffect::SetSamplerShapeMesh(u32 smpID, SMeshDataToFill *meshSampler, const CFloat3 &size)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	// Wait for the sampler change thread:
 	_WaitForSwitchSamplers(&samplerData);
@@ -632,6 +637,8 @@ bool	CPKFXEffect::SetSamplerShapeMesh(u32 smpID, SMeshDataToFill *meshSampler, c
 
 bool	CPKFXEffect::SetSamplerShapeMesh_Async(u32 smpID, SMeshDataToFill *sampler, const CFloat3 &size)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	// Wait for the sampler change thread:
 	_WaitForSwitchSamplers(&samplerData);
@@ -663,6 +670,8 @@ bool	CPKFXEffect::SetSamplerShapeMesh_Async(u32 smpID, SMeshDataToFill *sampler,
 
 bool	CPKFXEffect::SetSamplerShapeMeshFromPkmm(u32 smpID, SMeshSamplerBaked *meshSamplerBaked, const CFloat3 &size)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	// Wait for the sampler change thread:
 	_WaitForSwitchSamplers(&samplerData);
@@ -687,6 +696,8 @@ bool	CPKFXEffect::SetSamplerShapeMeshFromPkmm(u32 smpID, SMeshSamplerBaked *mesh
 
 bool	CPKFXEffect::SetSamplerShapeMeshFromPkmm_Async(u32 smpID, SMeshSamplerBaked *meshSamplerBaked, const CFloat3 &size)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	// Wait for the sampler change thread:
 	_WaitForSwitchSamplers(&samplerData);
@@ -722,6 +733,8 @@ bool	CPKFXEffect::SetSamplerShapeMeshFromPkmm_Async(u32 smpID, SMeshSamplerBaked
 
 bool	CPKFXEffect::SetSamplerShapeTransform(u32 smpID, const CFloat4x4 &transforms)
 {
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 
 	if (!PK_VERIFY(samplerData.m_SamplerType == SamplerShape))
@@ -739,7 +752,7 @@ bool	CPKFXEffect::SetSamplerShapeTransform(u32 smpID, const CFloat4x4 &transform
 
 bool	CPKFXEffect::SetSamplerCurve(u32 smpID, const SCurveSamplerToFill *curveData)
 {
-	if (m_Emitter == null) //If effect is being stopped
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
 		return false;
 	SSamplerData	&samplerData = m_SamplersData[smpID];
 	const float		CURVE_MINIMUM_DELTA = 0.0001f;
@@ -993,7 +1006,7 @@ bool	CPKFXEffect::SetSamplerCurve(u32 smpID, const SCurveSamplerToFill *curveDat
 
 bool	CPKFXEffect::SetSamplerTexture(u32 smpID, const STextureSamplerToFill *texture)
 {
-	if (m_Emitter == null) //If effect is being stopped
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
 		return false;
 	const u32				width = texture->m_Width;
 	const u32				height = texture->m_Height;
@@ -1094,7 +1107,7 @@ bool	CPKFXEffect::SetSamplerTexture(u32 smpID, const STextureSamplerToFill *text
 
 bool	CPKFXEffect::SetSamplerText(u32 smpID, const char *text)
 {
-	if (m_Emitter == null) //If effect is being stopped
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
 		return false;
 	CString			textStr(text);
 	SSamplerData	&samplerData = m_SamplersData[smpID];
@@ -1125,6 +1138,63 @@ bool	CPKFXEffect::SetSamplerText(u32 smpID, const char *text)
 			CLog::Log(PK_ERROR, "Could not setup the text descriptor");
 			return false;
 		}
+	}
+	return m_Emitter->SetAttributeSampler(smpID, desc);
+}
+
+//----------------------------------------------------------------------------
+//
+//	Grid sampler:
+//
+//----------------------------------------------------------------------------
+
+bool	CPKFXEffect::SetSamplerGrid(u32 smpID, SSamplerGrid *grid)
+{
+	if (m_Emitter == null || smpID >= m_SamplersData.Count()) //If effect is being stopped
+		return false;
+	SSamplerData	&samplerData = m_SamplersData[smpID];
+
+	if (!PK_VERIFY(samplerData.m_SamplerType == SamplerGrid))
+	{
+		CLog::Log(PK_ERROR, "Set sampler grid on another type of sampler");
+		return false;
+	}
+	CParticleSamplerDescriptor_Grid_Default	*desc = static_cast<CParticleSamplerDescriptor_Grid_Default*>(samplerData.m_SamplerDescriptor.Get());
+
+	if (desc == null)
+	{
+		desc = PK_NEW(CParticleSamplerDescriptor_Grid_Default());
+		samplerData.m_SamplerDescriptor = desc;
+	}
+
+	if (desc != null)
+	{
+		desc->m_GridDimensions = grid->m_Dimensions;
+
+		desc->m_DataType = (EBaseTypeID)grid->m_GridType;
+		desc->m_RawDataPtr = null;
+		desc->m_RawDataByteCount = 0;
+
+		const u32	dataSizeInBytes = desc->m_GridDimensions.AxialProduct() * CBaseTypeTraits::Traits(desc->m_DataType).Size;
+		if (grid->m_Data)
+		{
+			desc->m_RawDataPtr = grid->m_Data;
+			desc->m_RawDataByteCount = dataSizeInBytes;
+			desc->m_RawDataRef = CRefCountedMemoryBuffer::FromExistingBuffer(desc->m_RawDataPtr, desc->m_RawDataByteCount);
+		}
+		else
+		{
+			const bool	alreadyHasLargeEnoughBuffer = (desc->m_RawDataRef != null && desc->m_RawDataRef->DataSizeInBytes() >= dataSizeInBytes);
+			if (dataSizeInBytes != 0 && !alreadyHasLargeEnoughBuffer)
+				desc->m_RawDataRef = CRefCountedMemoryBuffer::CallocAligned(dataSizeInBytes, 0x10);
+
+			if (desc->m_RawDataRef != null)
+			{
+				desc->m_RawDataPtr = desc->m_RawDataRef->Data<u8>();
+				desc->m_RawDataByteCount = desc->m_RawDataRef->DataSizeInBytes();
+			}
+		}
+		PK_ASSERT(desc->Valid());
 	}
 	return m_Emitter->SetAttributeSampler(smpID, desc);
 }
@@ -1171,7 +1241,6 @@ void	CPKFXEffect::WaitForAll()
 void	CPKFXEffect::_OnFXStoppedAutoDestroy(const PParticleEffectInstance &effectInstance)
 {
 	_OnFXStopped(effectInstance);
-	CRuntimeManager::Instance().OnFxStopped(m_GUID);
 }
 
 //----------------------------------------------------------------------------
@@ -1181,6 +1250,7 @@ void	CPKFXEffect::_OnFXStopped(const PParticleEffectInstance &effectInstance)
 	(void)effectInstance;
 	WaitForAll();
 	m_Emitter = null;
+	CRuntimeManager::Instance().OnFxStopped(m_GUID);
 }
 
 //----------------------------------------------------------------------------
@@ -1189,21 +1259,20 @@ void	CPKFXEffect::_RebuildAttributes(CParticleAttributeList *descriptor)
 {
 	PK_ASSERT(descriptor != null);
 	const u32	attrCount = descriptor->UniqueAttributeList().Count();
-	const u32	sampCount = descriptor->SamplerList().Count();
+	const u32	sampCount = descriptor->UniqueSamplerList().Count();
 
 	if (attrCount != 0 || sampCount != 0)
 	{
-		u32		samplerCount = 0;
-
 		// just clone the default attributes:
 		if (*(descriptor->DefaultAttributes()) != null)
-			samplerCount = (*descriptor->DefaultAttributes())->Samplers().Count();
-
-		m_SamplersData.HardResize(samplerCount);
+		{
+			m_AttributesContainer = (*descriptor->DefaultAttributes())->Copy();
+			m_SamplersData.HardResize(m_AttributesContainer->SamplerCount());
+		}
 
 		for (u32 i = 0; i < sampCount; ++i)
 		{
-			CParticleAttributeSamplerDeclaration			*samplerDecl = m_AttributesDescriptor->SamplerList()[i];
+			CParticleAttributeSamplerDeclaration			*samplerDecl = m_AttributesDescriptor->UniqueSamplerList()[i];
 			SParticleDeclaration::SSampler::ESamplerType	type = (SParticleDeclaration::SSampler::ESamplerType)samplerDecl->ExportedType();
 
 			// We set the effect ptr on the sampler class so that the async set samplers can access the effect instance:
@@ -1222,6 +1291,9 @@ void	CPKFXEffect::_RebuildAttributes(CParticleAttributeList *descriptor)
 				break;
 			case SParticleDeclaration::SSampler::ESamplerType::Sampler_Curve:
 				m_SamplersData[i].m_SamplerType = SamplerCurve;
+				break;
+			case SParticleDeclaration::SSampler::ESamplerType::Sampler_Grid:
+				m_SamplersData[i].m_SamplerType = SamplerGrid;
 				break;
 			default:
 				m_SamplersData[i].m_SamplerType = SamplerUnsupported;

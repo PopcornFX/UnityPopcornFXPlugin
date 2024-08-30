@@ -22,6 +22,7 @@ CParticleMaterialDescFlags::CParticleMaterialDescFlags()
 ,	m_BlendMode(BlendMode::Solid)
 ,	m_UVGenerationFlags(0)
 ,	m_DrawOrder(0)
+,	m_IsLegacy(false)
 {
 }
 
@@ -102,7 +103,8 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 
 	const SRendererFeaturePropertyValue	*size2 = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_EnableSize2D());
 
-	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());//a
+	const CGuid							legacyDiffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());//a
+	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_DiffuseColor());
 	
 	// Basic Transform feature (flips U and V independently):
 	const SRendererFeaturePropertyValue	*transformUVs = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs());
@@ -143,6 +145,8 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	const SRendererFeaturePropertyValue	*correctDeformation = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_CorrectDeformation());
 
 	m_Flags.m_ShaderVariationFlags = 0;
+	m_Flags.m_IsLegacy = renderer.m_Declaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
+
 	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseMap;
 	if (size2 != null && size2->ValueB())
@@ -182,7 +186,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Soft;
 	if (distortion != null && distortion->ValueB() && distortionMap != null && !distortionMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DistortionMap;
-	if (diffuseColorInput.Valid())
+	if (diffuseColorInput.Valid() || legacyDiffuseColorInput.Valid())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
 	if (diffuseRamp != null && diffuseRamp->ValueB() && diffuseRampMap != null && !diffuseRampMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseRamp;
@@ -208,7 +212,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	// Default draw order zero:
 	m_Flags.m_DrawOrder = 0;
 
-	if (transparent != null && transparent->ValueB() && transparentType != null)
+	if (transparent != null && transparent->ValueB())
 	{
 		const SRendererFeaturePropertyValue    *globalSortOverride = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Transparent_GlobalSortOverride());
 		// We handle the draw order only for the semi-transparent particles
@@ -225,21 +229,29 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		{
 			m_Flags.m_DrawOrder = globalSortOverride != null ? globalSortOverride->ValueI().x() : 0;
 		}
-		if (transparentType->ValueI().x() == BasicRendererProperties::Additive)
-		{
-			m_Flags.m_BlendMode = BlendMode::Additive;
-		}
-		else if (transparentType->ValueI().x() == BasicRendererProperties::AdditiveNoAlpha)
-		{
-			m_Flags.m_BlendMode = BlendMode::AdditiveNoAlpha;
-		}
-		else if (transparentType->ValueI().x() == BasicRendererProperties::AlphaBlend)
-		{
-			m_Flags.m_BlendMode = BlendMode::AlphaBlend;
-		}
-		else if (transparentType->ValueI().x() == BasicRendererProperties::PremultipliedAlpha)
+
+		if (transparentType == null)
 		{
 			m_Flags.m_BlendMode = BlendMode::PremultipliedAlpha;
+		}
+		else
+		{
+			if (transparentType->ValueI().x() == BasicRendererProperties::Additive)
+			{
+				m_Flags.m_BlendMode = BlendMode::Additive;
+			}
+			else if (transparentType->ValueI().x() == BasicRendererProperties::AdditiveNoAlpha)
+			{
+				m_Flags.m_BlendMode = BlendMode::AdditiveNoAlpha;
+			}
+			else if (transparentType->ValueI().x() == BasicRendererProperties::AlphaBlend)
+			{
+				m_Flags.m_BlendMode = BlendMode::AlphaBlend;
+			}
+			else if (transparentType->ValueI().x() == BasicRendererProperties::PremultipliedAlpha)
+			{
+				m_Flags.m_BlendMode = BlendMode::PremultipliedAlpha;
+			}
 		}
 	}
 	else if (m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_DistortionMap))
@@ -315,6 +327,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_UVGenerationFlags |= (basicTransformUVsFlipV != null && basicTransformUVsFlipV->ValueB()) ? UVGeneration::FlipV : 0;
 		m_Flags.m_UVGenerationFlags |= (basicTransformUVsRotateUV != null && basicTransformUVsRotateUV->ValueB()) ? UVGeneration::RotateUV : 0;
 	}
+
 		
 	// ----------------------------
 	// Lighting Features
@@ -387,6 +400,88 @@ bool	CParticleMaterialDescSound::InitFromRenderer(const CRendererDataSound &rend
 		m_SoundData = CStringId(soundData->ValuePath());
 	}
 	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CParticleMaterialDescDecal::InitFromRenderer(const CRendererDataDecal &renderer)
+{
+	PK_ASSERT(renderer.m_RendererType == Renderer_Decal);
+
+	const SRendererFeaturePropertyValue *diffuse								= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse());
+	const SRendererFeaturePropertyValue *diffuseMap								= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse_DiffuseMap());
+	const CGuid							legacyDiffuseColor						= renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());
+	const CGuid							diffuseColor							= renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_DiffuseColor());
+
+	const SRendererFeaturePropertyValue *emissive								= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Emissive());
+	const SRendererFeaturePropertyValue *emissiveMap							= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Emissive_EmissiveMap());
+	const CGuid							emissiveColor							= renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Emissive_EmissiveColor());
+
+	const SRendererFeaturePropertyValue *fadeTop								= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Decal_FadeTop());
+	const SRendererFeaturePropertyValue *fadeBottom								= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Decal_FadeBottom());
+	const SRendererFeaturePropertyValue *fadeAngle								= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Decal_FadeAngle());
+
+	const SRendererFeaturePropertyValue *atlas									= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
+	const SRendererFeaturePropertyValue *atlasBlending							= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
+
+	m_Flags.m_IsLegacy = renderer.m_RendererDeclaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
+
+	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty() && legacyDiffuseColor.Valid() && diffuseColor.Valid())
+	{
+		m_DiffuseMap = CStringId(diffuseMap->ValuePath());
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseMap;
+	}
+	else
+	{
+		m_Flags.m_ShaderVariationFlags &= ~ShaderVariationFlags::Has_DiffuseMap;
+	}
+
+	if (emissive != null && emissive->m_ValueB && emissiveMap != null && !emissiveMap->ValuePath().Empty() && emissiveColor.Valid())
+	{
+		m_EmissiveMap = CStringId(emissiveMap->ValuePath());
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Emissive;
+	}
+	else
+	{
+		m_Flags.m_ShaderVariationFlags &= ~ShaderVariationFlags::Has_Emissive;
+	}
+	//ToDo
+	if (fadeTop != null)
+	{
+	
+	}
+	if (fadeBottom != null)
+	{
+	
+	}
+	if (fadeAngle != null)
+	{
+	
+	}
+
+
+	if (atlas != null && atlas->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Atlas;
+	else
+	{
+		m_Flags.m_ShaderVariationFlags &= ~ShaderVariationFlags::Has_Atlas;
+	}
+	if (atlasBlending != null && atlasBlending->ValueI().x() == 1)
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AnimBlend;
+	else
+	{
+		m_Flags.m_ShaderVariationFlags &= ~ShaderVariationFlags::Has_AnimBlend;
+	}
+
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+bool	CParticleMaterialDescDecal::operator == (const CParticleMaterialDescDecal& oth) const
+{
+
+	return m_DiffuseMap == oth.m_DiffuseMap && m_EmissiveMap == oth.m_EmissiveMap;
 }
 
 //----------------------------------------------------------------------------
@@ -478,7 +573,10 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	// For Meshes:
 	const SRendererFeaturePropertyValue	*diffuse = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse());
 	const SRendererFeaturePropertyValue	*diffuseMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Diffuse_DiffuseMap());
-	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());
+
+	const CGuid							legacyDiffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_Color());
+	const CGuid							diffuseColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Diffuse_DiffuseColor());
+	
 	//const CGuid							distoColorInput = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_Distortion_Color());
 	const SRendererFeaturePropertyValue	*lit = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Lit());
 	const SRendererFeaturePropertyValue	*litLegacy = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_LegacyLit());
@@ -486,6 +584,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue	*alphaRemap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap());
 	const SRendererFeaturePropertyValue	*alphaRemapAlphaMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaRemap_AlphaMap());
 	const CGuid							alphaRemapCursor = renderer.m_Declaration.FindAdditionalFieldIndex(BasicRendererProperties::SID_AlphaRemap_Cursor());
+
 	const SRendererFeaturePropertyValue	*diffuseRamp = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_DiffuseRamp());
 	const SRendererFeaturePropertyValue	*diffuseRampMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_DiffuseRamp_RampMap());
 	const SRendererFeaturePropertyValue	*emissive = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Emissive());
@@ -501,6 +600,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue	*transformUVsRGBOnly = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs_RGBOnly());
 	const SRendererFeaturePropertyValue	*doubleSided = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Culling_DoubleSided());
 
+	m_Flags.m_IsLegacy = renderer.m_RendererDeclaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
 	m_Flags.m_ShaderVariationFlags = 0;
 
 	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty())
@@ -534,7 +634,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	if (doubleSided != null && doubleSided->ValueB())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DoubleSided;
 
-	if (diffuseColorInput.Valid())
+	if (diffuseColorInput.Valid() || legacyDiffuseColorInput.Valid())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
 
 	// Animated mesh:
@@ -572,26 +672,35 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	// Default blend mode is solid:
 	m_Flags.m_BlendMode = BlendMode::Solid;
 
-	if (transparent != null && transparent->ValueB() && transparentType != null)
+	if (transparent != null && transparent->ValueB())
 	{		
 		const SRendererFeaturePropertyValue *globalSortOverride = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Transparent_GlobalSortOverride());
 		m_Flags.m_DrawOrder = globalSortOverride != null ? globalSortOverride->ValueI().x() : 0;
-	
-		if (transparentType->ValueI().x() == BasicRendererProperties::Additive)
+
+		if (!m_Flags.m_IsLegacy)
 		{
-			m_Flags.m_BlendMode = BlendMode::Additive;
+			m_Flags.m_BlendMode = BlendMode::PremultipliedAlpha; // Allows for both AlphaBlend and Additive in the same shader
+			if (!diffuse)
+				m_Flags.m_BlendMode = BlendMode::Additive;
 		}
-		else if (transparentType->ValueI().x() == BasicRendererProperties::AdditiveNoAlpha)
+		else if (transparentType != null)
 		{
-			m_Flags.m_BlendMode = BlendMode::AdditiveNoAlpha;
-		}
-		else if (transparentType->ValueI().x() == BasicRendererProperties::AlphaBlend)
-		{
-			m_Flags.m_BlendMode = BlendMode::AlphaBlend;
-		}
-		else if (transparentType->ValueI().x() == BasicRendererProperties::PremultipliedAlpha)
-		{
-			m_Flags.m_BlendMode = BlendMode::PremultipliedAlpha;
+			if (transparentType->ValueI().x() == BasicRendererProperties::Additive)
+			{
+				m_Flags.m_BlendMode = BlendMode::Additive;
+			}
+			else if (transparentType->ValueI().x() == BasicRendererProperties::AdditiveNoAlpha)
+			{
+				m_Flags.m_BlendMode = BlendMode::AdditiveNoAlpha;
+			}
+			else if (transparentType->ValueI().x() == BasicRendererProperties::AlphaBlend)
+			{
+				m_Flags.m_BlendMode = BlendMode::AlphaBlend;
+			}
+			else if (transparentType->ValueI().x() == BasicRendererProperties::PremultipliedAlpha)
+			{
+				m_Flags.m_BlendMode = BlendMode::PremultipliedAlpha;
+			}
 		}
 	}
 	else if (opaque != null && opaque->ValueB() && opaqueType != null)
@@ -894,6 +1003,10 @@ bool	CUnityRendererCache::operator==(const CUnityRendererCache &oth) const
 	{
 		return	m_MaterialDescSound == oth.m_MaterialDescSound;
 	}
+	if (m_RendererType == Renderer_Decal)
+	{
+		return m_MaterialDescDecal == oth.m_MaterialDescDecal;
+	}
 	return false;
 }
 
@@ -931,15 +1044,28 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 {
 	desc.m_ShaderVariationFlags = m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags;
 	desc.m_BlendMode = m_MaterialDescBillboard.m_Flags.m_BlendMode;
-	desc.m_RotateUvs = m_MaterialDescBillboard.m_Flags.HasUVGenerationFlags(UVGeneration::RotateUV) &&
-		m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_CorrectDeformation) ? ManagedBool_True : ManagedBool_False;
+	desc.m_IsLegacy = m_MaterialDescBillboard.m_Flags.m_IsLegacy ? ManagedBool_True : ManagedBool_False;
+	desc.m_RotateUvs = m_MaterialDescBillboard.m_Flags.HasUVGenerationFlags(UVGeneration::RotateUV) ? ManagedBool_True : ManagedBool_False;
 	desc.m_DiffuseMap = m_MaterialDescBillboard.m_DiffuseMap.ToStringData();
 	desc.m_EmissiveMap = m_MaterialDescBillboard.m_EmissiveMap.ToStringData();
 	desc.m_AlphaRemap = m_MaterialDescBillboard.m_AlphaMap.ToStringData();
 	desc.m_DiffuseRampMap = m_MaterialDescBillboard.m_DiffuseRampMap.ToStringData();
 	desc.m_EmissiveRampMap = m_MaterialDescBillboard.m_EmissiveRampMap.ToStringData();
 	desc.m_InvSoftnessDistance = m_MaterialDescBillboard.m_InvSoftnessDistance;
-	desc.m_BillboardMode = m_RendererType == ERendererClass::Renderer_Billboard ? m_BillboardBR.m_Mode : 0;
+
+	switch (m_RendererType) {
+
+		case ERendererClass::Renderer_Billboard:
+			desc.m_BillboardMode = m_BillboardBR.m_Mode;
+			break;
+		case ERendererClass::Renderer_Ribbon:
+			desc.m_BillboardMode = m_RibbonBR.m_Mode;
+			break;
+		default:
+			desc.m_BillboardMode = 0;
+			break;
+	}
+
 	desc.m_DrawOrder = m_MaterialDescBillboard.m_Flags.m_DrawOrder;
 	desc.m_AlphaClipThreshold = m_MaterialDescBillboard.m_AlphaThreshold;
 	desc.m_TransformUVs_RGBOnly = m_MaterialDescBillboard.m_TransformUVs_RGBOnly  ? ManagedBool_True : ManagedBool_False;
@@ -965,6 +1091,32 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 	return true;
 }
 
+bool	CUnityRendererCache::GetRendererInfo(SDecalRendererDesc &desc)
+{
+	if (m_MaterialDescDecal.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_DiffuseMap) &&
+		!m_MaterialDescDecal.m_DiffuseMap.Valid() ||
+		m_MaterialDescDecal.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Emissive) &&
+		!m_MaterialDescDecal.m_EmissiveMap.Valid())
+		return false;
+
+	desc.m_ShaderVariationFlags		= m_MaterialDescDecal.m_Flags.m_ShaderVariationFlags;
+
+	desc.m_DiffuseMap				= m_MaterialDescDecal.m_DiffuseMap.ToStringData();
+	desc.m_EmissiveMap				= m_MaterialDescDecal.m_EmissiveMap.ToStringData();
+	desc.m_DiffuseColor				= m_MaterialDescDecal.m_DiffuseColor;
+	desc.m_EmissiveColor			= m_MaterialDescDecal.m_EmissiveColor;
+	desc.m_UID						= m_UID;
+
+	if (m_Atlas != null)
+	{
+		desc.m_TextureAtlasCount = m_Atlas->AtlasRectCount();
+		desc.m_TextureAtlas = static_cast<CFloat4 *>(PK_MALLOC(m_Atlas->AtlasRectCount() * sizeof(CFloat4)));
+		Mem::Copy(desc.m_TextureAtlas, m_Atlas->m_RectsFp32.RawDataPointer(), desc.m_TextureAtlasCount * sizeof(CFloat4));
+	}
+
+	return true;
+}
+
 bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 {
 	desc.m_UID = m_UID;
@@ -973,6 +1125,7 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 		return false;
 	desc.m_ShaderVariationFlags = m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags;
 	desc.m_BlendMode = m_MaterialDescMesh.m_Flags.m_BlendMode;
+	desc.m_IsLegacy = m_MaterialDescMesh.m_Flags.m_IsLegacy ? ManagedBool_True : ManagedBool_False;
 	desc.m_HasMeshAtlas = m_MaterialDescMesh.m_HasMeshAtlas ? ManagedBool_True : ManagedBool_False;
 	desc.m_DiffuseMap = m_MaterialDescMesh.m_DiffuseMap.ToStringData();
 	desc.m_InvSoftnessDistance = m_MaterialDescMesh.m_InvSoftnessDistance;
@@ -1079,7 +1232,7 @@ void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 {
 	for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
 	{
-		if (m_RendererType == Renderer_Billboard || m_RendererType == Renderer_Ribbon || m_RendererType == Renderer_Triangle)
+		if (m_RendererType == Renderer_Billboard || m_RendererType == Renderer_Ribbon || m_RendererType == Renderer_Triangle || m_RendererType == Renderer_Decal)
 		{
 			// Renderer info in case we need to update the renderer's buffers:
 			SRetrieveRendererInfo	rendererInfo;
@@ -1106,24 +1259,33 @@ void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 			rendererInfo.m_UseComputeBuffers = &useComputeBuffers;
 
 			// We alloc the Unity mesh here:
-			SPopcornRendererDesc	desc;
-			GetRendererInfo(desc);
-			desc.m_CameraID = i;
+			if (m_RendererType == Renderer_Decal)
+			{
+				SDecalRendererDesc desc;
+				GetRendererInfo(desc);
+				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewDecalRenderer(&desc, idx);
+			}
+			else
+			{
+				SPopcornRendererDesc desc;
+				GetRendererInfo(desc);
+				desc.m_CameraID = i;
 
-			if (m_RendererType == Renderer_Billboard)
-			{
-				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewBillboardRenderer(&desc, idx);
+				if (m_RendererType == Renderer_Billboard)
+				{
+					m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewBillboardRenderer(&desc, idx);
+				}
+				else if (m_RendererType == Renderer_Ribbon)
+				{
+					m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewRibbonRenderer(&desc, idx);
+				}
+				else if (m_RendererType == Renderer_Triangle)
+				{
+					m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewTriangleRenderer(&desc, idx);
+				}
 			}
-			else if (m_RendererType == Renderer_Ribbon)
-			{
-				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewRibbonRenderer(&desc, idx);
-			}
-			else if (m_RendererType == Renderer_Triangle)
-			{
-				m_UnityMeshInfoPerViews[i].m_RendererGUID = ::OnSetupNewTriangleRenderer(&desc, idx);
-			}
+
 			PK_ASSERT(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1);
-
 			if (m_UnityMeshInfoPerViews[i].m_RendererGUID < 0)
 				return;
 
@@ -1296,6 +1458,21 @@ bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataSound>(const CRe
 		return false;
 	m_RendererType = renderer->m_RendererType;
 	m_UID = renderer->m_Declaration.m_RendererUID;
+	return true;
+}
+
+//----------------------------------------------------------------------------
+
+template<>
+bool	CUnityRendererCache::GameThread_SetupRenderer<CRendererDataDecal>(const CRendererDataDecal *renderer)
+{
+	m_UID = renderer->m_Declaration.m_RendererUID;
+	m_RendererType = renderer->m_RendererType;
+
+	if (!PK_VERIFY(m_MaterialDescDecal.InitFromRenderer(*renderer)))
+		return false;
+
+	m_RendererType = renderer->m_RendererType;
 	return true;
 }
 

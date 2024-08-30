@@ -222,7 +222,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -250,7 +250,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -278,7 +278,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -313,7 +313,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -347,7 +347,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -381,7 +381,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -416,7 +416,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_s.lib;PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -450,7 +450,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_s.lib;PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
@@ -484,7 +484,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_s.lib;PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>

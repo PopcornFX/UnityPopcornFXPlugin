@@ -35,6 +35,7 @@ extern "C"
 
 		const char		*m_AttributeName;
 		const u16		*m_Description;
+		const u16		*m_Category;
 		const char		*m_DropNameList; // List of string `|` separated
 
 		CFloat4			m_DefaultValue;
@@ -50,6 +51,7 @@ extern "C"
 		int				m_SamplerType;
 		const char		*m_SamplerName;
 		const u16		*m_Description;
+		const u16		*m_Category;
 		int				m_SamplerUsageFlags;
 
 		// For sampler shape:
@@ -63,10 +65,17 @@ extern "C"
 		const float		*m_CurveFloatValues;
 		const float		*m_CurveFloatTangents;
 
+		// For sampler grid
+		u32				m_GridOrder;
+		int				m_GridType;
+		CUint4			m_GridDimensions;
+		
+
 		SFxSamplerDesc()
 		:	m_SamplerType(SamplerUnsupported)
 		,	m_SamplerName(null)
 		,	m_Description(null)
+		,	m_Category(null)
 		,	m_SamplerUsageFlags(0)
 		,	m_ShapeRotation(CQuaternion::IDENTITY)
 		,	m_ShapePosition(0)
@@ -75,6 +84,9 @@ extern "C"
 		,	m_CurveTimes(null)
 		,	m_CurveFloatValues(null)
 		,	m_CurveFloatTangents(null)
+		,	m_GridOrder(0)
+		,	m_GridType(-1)
+		,	m_GridDimensions(CUint4::ZERO)
 		{
 		}
 	};
@@ -161,6 +173,9 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnPkkgExtracted(void *delegatePtr);
 	void										OnPkkgExtracted(const char *dirPath);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnProjectSettingsUpdated(void *delegatePtr);
+	void										OnProjectSettingsUpdated(float lodMinDistance, float lodMaxDistance, float lodMinMinDistance);
 
 	void										ClearNativeToManagedEditorCallbacks();
 }

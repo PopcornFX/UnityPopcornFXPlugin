@@ -43,6 +43,9 @@
     <Filter Include="Headers\SimInterfaces">
       <UniqueIdentifier>{BD14FE9D-2981-B998-F274-51F65EA0DB00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\SoundIntegrationFMod">
+      <UniqueIdentifier>{634B5945-4F06-49F1-F8BD-C13BE4579381}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\WindowContext">
       <UniqueIdentifier>{CDDC95C7-3949-51C2-023D-E91F6E68732A}</UniqueIdentifier>
     </Filter>
@@ -100,6 +103,9 @@
     <Filter Include="Sources\SimInterfaces">
       <UniqueIdentifier>{85D2F324-F13E-AF1F-BA32-477D265ED187}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\SoundIntegrationFMod">
+      <UniqueIdentifier>{2BB846F4-1773-36A0-C02A-AFEAACC48030}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\WindowContext">
       <UniqueIdentifier>{959A8B4E-0107-4749-CAFA-DEA6362669B1}</UniqueIdentifier>
     </Filter>
@@ -117,6 +123,9 @@
     </Filter>
     <Filter Include="_External\DX\include">
       <UniqueIdentifier>{250E8582-119D-0E4C-BABB-2247A6291FF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX\include\d3dx12">
+      <UniqueIdentifier>{6AD515A9-D6E2-438F-5FC9-3F7ACBD50F46}</UniqueIdentifier>
     </Filter>
     <Filter Include="_External\GL">
       <UniqueIdentifier>{09555DA7-F5B7-EC4B-9E3D-25028A7FB8CE}</UniqueIdentifier>
@@ -171,16 +180,64 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12compatibility.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12video.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_barriers.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_check_feature_support.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_core.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_default.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_pipeline_state_stream.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_property_format_table.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_render_pass.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_resource_helpers.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_root_signature.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_state_object.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcapi.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcerrors.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcisense.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h">
@@ -199,9 +256,6 @@
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h">
-      <Filter>_External\DX\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">
@@ -585,10 +639,10 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy.h">
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_CPUsim.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy_Vertex.h">
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_GPUsim.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHICustomTasks.h">
@@ -610,9 +664,6 @@
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.h">
-      <Filter>Headers\RenderIntegrationRHI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.h">
@@ -695,6 +746,12 @@
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterfaces.h">
       <Filter>Headers\SimInterfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.h">
+      <Filter>Headers\SoundIntegrationFMod</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.h">
+      <Filter>Headers\SoundIntegrationFMod</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h">
       <Filter>Headers\WindowContext</Filter>
@@ -785,10 +842,10 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.cpp">
       <Filter>Sources\RenderIntegrationRHI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy.cpp">
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_CPUsim.cpp">
       <Filter>Sources\RenderIntegrationRHI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatchPolicy_Vertex.cpp">
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_GPUsim.cpp">
       <Filter>Sources\RenderIntegrationRHI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHICustomTasks.cpp">
@@ -804,9 +861,6 @@
       <Filter>Sources\RenderIntegrationRHI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RendererCache.cpp">
-      <Filter>Sources\RenderIntegrationRHI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\SoundPoolCache.cpp">
       <Filter>Sources\RenderIntegrationRHI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderPasses\DirectionalShadows.cpp">
@@ -889,6 +943,12 @@
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SimInterfaces\SimInterface_GBufferSampling.cpp">
       <Filter>Sources\SimInterfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.cpp">
+      <Filter>Sources\SoundIntegrationFMod</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.cpp">
+      <Filter>Sources\SoundIntegrationFMod</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp">
       <Filter>Sources\WindowContext</Filter>

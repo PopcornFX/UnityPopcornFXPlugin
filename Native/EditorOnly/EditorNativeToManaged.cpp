@@ -23,6 +23,7 @@ extern "C"
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnAssetChange)(const SAssetChangesDesc *assetChanges) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnGetAllAssetPath)(const char **pathArray, int size) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnPkkgExtracted)(const char *effectName) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION *_OnProjectSettingsUpdated)(float lodMinDistance, float lodMaxDistance, float lodMinMinDistance) = null;
 
 	//----------------------------------------------------------------------------
 
@@ -82,6 +83,10 @@ extern "C"
 		_OnPkkgExtracted = (void (POPCORN_TO_MANAGED_CONVENTION *)(const char *dirPath))delegatePtr;
 	}
 
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnProjectSettingsUpdated(void *delegatePtr)
+	{
+		_OnProjectSettingsUpdated = (void (POPCORN_TO_MANAGED_CONVENTION *)(float lodMinDistance, float lodMaxDistance, float lodMinMinDistance))delegatePtr;
+	}
 
 	//----------------------------------------------------------------------------
 
@@ -197,6 +202,16 @@ extern "C"
 		}
 	}
 
+	void										OnProjectSettingsUpdated(float lodMinDistance, float lodMaxDistance, float lodMinMinDistance)
+	{
+		PK_SCOPEDPROFILE();
+		PK_ASSERT(CCurrentThread::IsMainThread());
+		if (PK_VERIFY(_OnProjectSettingsUpdated != null))
+		{
+			_OnProjectSettingsUpdated(lodMinDistance, lodMaxDistance, lodMinMinDistance);
+		}
+	}
+
 	void										ClearNativeToManagedEditorCallbacks()
 	{
 		_OnEffectDependencyFound = null;
@@ -207,5 +222,6 @@ extern "C"
 		_OnAssetChange = null;
 		_OnGetAllAssetPath = null;
 		_OnPkkgExtracted = null;
+		_OnProjectSettingsUpdated = null;
 	}
 }

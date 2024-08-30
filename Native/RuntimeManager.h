@@ -239,6 +239,7 @@ public:
 		bool								m_GPUBillboarding;
 		bool								m_LightRenderer;
 		bool								m_SoundRenderer;
+		bool								m_DecalRenderer;
 	};
 	SPopcornFXRuntimeData				*m_PopcornFXRuntimeData;
 

@@ -146,13 +146,16 @@ namespace PopcornFX
 					else
 						transforms[h] = instanceTransform[offset + h] * meshTransform;
 
-					Vector4* instanceColor = (Vector4*)currentPtr;
-					diffuseColors[h] = instanceColor[offset + h];
-					currentPtr = instanceColor + count;
 
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Color) != 0)
+					{
+						Vector4* instanceColor = (Vector4*)currentPtr;
+						diffuseColors[h] = instanceColor[offset + h];
+						currentPtr = instanceColor + count;
+					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
 					{
-						Vector3* instanceEmissiveColor = (Vector3*)currentPtr;
+						Vector4* instanceEmissiveColor = (Vector4*)currentPtr;
 						emissiveColors[h] = instanceEmissiveColor[offset + h];
 						currentPtr = instanceEmissiveColor + count;
 					}
@@ -440,7 +443,7 @@ namespace PopcornFX
 					{
 						Matrix4x4* instanceTransform = null;
 						Vector4* instanceDiffuseColor = null;
-						Vector3* instanceEmissiveColor = null;
+						Vector4* instanceEmissiveColor = null;
 						float* instanceAlphaCursor = null;
 						float* instanceVATCursor = null;
 						float* atlasId = null;
@@ -467,7 +470,7 @@ namespace PopcornFX
 
 						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
 						{
-							instanceEmissiveColor = (Vector3*)currentPtr;
+							instanceEmissiveColor = (Vector4*)currentPtr;
 							currentPtr = instanceEmissiveColor + instanceCount;
 						}
 						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)

@@ -155,7 +155,7 @@ u32		semanticSize[__Semantic_Count] =
 	2 * sizeof(float),									// Semantic_Uv1
 	1 * sizeof(float),									// Semantic_AtlasId
 	1 * sizeof(float),									// Semantic_AlphaCursor
-	3 * sizeof(float),									// Semantic_EmissiveColor
+	4 * sizeof(float),									// Semantic_EmissiveColor
 	1 * sizeof(float),									// Semantic_TransformUvsRotate
 	4 * sizeof(float),									// Semantic_TransformUvsScaleAndOffset
 };

@@ -40,6 +40,7 @@ enum EUnitySupportedSamplerType : int
 	SamplerCurve,
 	SamplerImage,
 	SamplerText,
+	SamplerGrid,
 	SamplerUnsupported
 };
 

@@ -21,8 +21,9 @@ extern "C"
 
 	// Particles to Unity interactions:
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastStart)(int count, void **cmd) = null;
-	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastEnd)() = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaycastPack)(void **res) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnSpherecastStart)(int count, void** cmd) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnSpherecastPack)(void** res) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnFxStopped)(int guid) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRaiseEvent)(int guid, int key, const char *eventName, unsigned int payloadCount, void* payloadDescs, void* payloadValues) = null;
 	void				*(POPCORN_TO_MANAGED_CONVENTION	*_OnGetAudioWaveformData)(const char *name, int *nbSamples) = null;
@@ -33,6 +34,7 @@ extern "C"
 	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnSetupNewBillboardRenderer)(const SPopcornRendererDesc *rendererDesc, int idx) = null;
 	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnSetupNewRibbonRenderer)(const SPopcornRendererDesc *rendererDesc, int idx) = null;
 	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnSetupNewMeshRenderer)(const SMeshRendererDesc *rendererDesc, int idx) = null;
+	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnSetupNewDecalRenderer)(const SDecalRendererDesc *rendererDesc, int idx) = null;
 	int					(POPCORN_TO_MANAGED_CONVENTION	*_OnSetupNewTriangleRenderer)(const SPopcornRendererDesc *rendererDesc, int idx) = null;
 
 	ManagedBool			(POPCORN_TO_MANAGED_CONVENTION	*_OnResizeRenderer)(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount) = null;
@@ -42,8 +44,9 @@ extern "C"
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnSetMeshInstancesCount)(int rendererGUID, int submesh, int instancesCount) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnSetMeshInstancesBuffer)(int rendererGUID, int submesh, void *instanceBuffer) = null;
 
-	void				(POPCORN_TO_MANAGED_CONVENTION *_OnSetLightsBuffer)(void *lightInfos, int count) = null;
-	void				(POPCORN_TO_MANAGED_CONVENTION *_OnSetSoundsBuffer)(void *soundInfos, int count) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION  *_OnSetLightsBuffer)(void *lightInfos, int count) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION  *_OnSetSoundsBuffer)(void *soundInfos, int count) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION  *_OnSetDecalsBuffer)(void *decalInfos, int count) = null;
 
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveCustomMaterialInfo)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveRendererBufferInfo)(int rendererGUID, const SRetrieveRendererInfo *info) = null;
@@ -77,14 +80,19 @@ extern "C"
 		_OnRaycastStart = (void (POPCORN_TO_MANAGED_CONVENTION *)(int count, void **cmd))delegatePtr;
 	}
 
-	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastEnd(void *delegatePtr)
-	{
-		_OnRaycastEnd = (void (POPCORN_TO_MANAGED_CONVENTION *)())delegatePtr;
-	}
-
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastPack(void *delegatePtr)
 	{
 		_OnRaycastPack = (void (POPCORN_TO_MANAGED_CONVENTION *)(void** res))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSpherecastStart(void *delegatePtr)
+	{
+		_OnSpherecastStart = (void (POPCORN_TO_MANAGED_CONVENTION *)(int count, void **cmd))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSpherecastPack(void *delegatePtr)
+	{
+		_OnSpherecastPack = (void (POPCORN_TO_MANAGED_CONVENTION *)(void** res))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnFxStopped(void *delegatePtr)
@@ -122,6 +130,11 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewMeshRenderer(void *delegatePtr)
 	{
 		_OnSetupNewMeshRenderer = (int (POPCORN_TO_MANAGED_CONVENTION *)(const SMeshRendererDesc *rendererDesc, int idx))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewDecalRenderer(void *delegatePtr)
+	{
+		_OnSetupNewDecalRenderer = (int (POPCORN_TO_MANAGED_CONVENTION*)(const SDecalRendererDesc *rendererDesc, int idx))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewTriangleRenderer(void *delegatePtr)
@@ -162,6 +175,11 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetSoundsBuffer(void *delegatePtr)
 	{
 		_OnSetSoundsBuffer = (void (POPCORN_TO_MANAGED_CONVENTION*)(void *soundInfos, int count))delegatePtr;
+	}
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetDecalsBuffer(void *delegatePtr)
+	{
+		_OnSetDecalsBuffer = (void (POPCORN_TO_MANAGED_CONVENTION*)(void *decalInfos, int count))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr)
@@ -255,20 +273,6 @@ extern "C"
 		}
 	}
 
-	void	OnRaycastEnd()
-	{
-		PK_SCOPEDPROFILE();
-		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
-		{
-			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
-			return;
-		}
-		if (PK_VERIFY(_OnRaycastEnd != null))
-		{
-			_OnRaycastEnd();
-		}
-	}
-
 	void	OnRaycastPack(void **res)
 	{
 		PK_SCOPEDPROFILE();
@@ -280,6 +284,34 @@ extern "C"
 		if (PK_VERIFY(_OnRaycastPack != null))
 		{
 			_OnRaycastPack(res);
+		}
+	}
+
+	void	OnSpherecastStart(int count, void **cmd)
+	{
+		PK_SCOPEDPROFILE();
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
+			return;
+		}
+		if (PK_VERIFY(_OnSpherecastStart != null))
+		{
+			_OnSpherecastStart(count, cmd);
+		}
+	}
+
+	void	OnSpherecastPack(void **res)
+	{
+		PK_SCOPEDPROFILE();
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnRaycastPack not called on main thread: callback ignored");
+			return;
+		}
+		if (PK_VERIFY(_OnSpherecastPack != null))
+		{
+			_OnSpherecastPack(res);
 		}
 	}
 
@@ -386,6 +418,7 @@ extern "C"
 		return -1;
 	}
 
+
 	int	OnSetupNewTriangleRenderer(const SPopcornRendererDesc *rendererDesc, int idx)
 	{
 		PK_SCOPEDPROFILE();
@@ -397,6 +430,20 @@ extern "C"
 		if (PK_VERIFY(_OnSetupNewTriangleRenderer != null))
 		{
 			return _OnSetupNewTriangleRenderer(rendererDesc, idx);
+		}
+		return -1;
+	}
+
+	int	OnSetupNewDecalRenderer(const SDecalRendererDesc *rendererDesc, int idx)
+	{
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnSetupNewDecalRenderer not called on main thread: callback ignored");
+			return -1;
+		}
+		if (PK_VERIFY(_OnSetupNewDecalRenderer != null))
+		{
+			return _OnSetupNewDecalRenderer(rendererDesc, idx);
 		}
 		return -1;
 	}
@@ -500,6 +547,18 @@ extern "C"
 		}
 	}
 
+	void	OnSetDecalsBuffer(void* decalInfos, int count)
+	{
+		if (!PK_VERIFY(CCurrentThread::IsMainThread()))
+		{
+			CLog::Log(PK_ERROR, "OnSetDecalsBuffer not called on main thread: callback ignored");
+			return;
+		}
+		if (PK_VERIFY(_OnSetDecalsBuffer != null))
+		{
+			_OnSetDecalsBuffer(decalInfos, count);
+		}
+	}
 
 	void	OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int *customMaterialID)
 	{
@@ -593,6 +652,9 @@ extern "C"
 		_OnResourceWrite = null;
 		_OnResourceUnload = null;
 		_OnRaycastPack = null;
+		_OnRaycastStart = null;
+		_OnSpherecastPack = null;
+		_OnSpherecastStart = null;
 		_OnFxStopped = null;
 		_OnRaiseEvent = null;
 		_OnGetAudioWaveformData = null;
@@ -600,6 +662,7 @@ extern "C"
 		_OnSetupNewBillboardRenderer = null;
 		_OnSetupNewRibbonRenderer = null;
 		_OnSetupNewMeshRenderer = null;
+		_OnSetupNewDecalRenderer = null;
 		_OnSetupNewTriangleRenderer = null;
 		_OnResizeRenderer = null;
 		_OnSetParticleCount = null;
@@ -608,6 +671,7 @@ extern "C"
 		_OnSetMeshInstancesBuffer = null;
 		_OnSetLightsBuffer = null;
 		_OnSetSoundsBuffer = null;
+		_OnSetDecalsBuffer = null;
 		_OnRetrieveCustomMaterialInfo = null;
 		_OnRetrieveRendererBufferInfo = null;
 		_OnUpdateRendererBounds = null;

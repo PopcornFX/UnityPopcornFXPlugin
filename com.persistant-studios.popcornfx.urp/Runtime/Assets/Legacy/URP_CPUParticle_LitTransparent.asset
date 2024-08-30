@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
+  m_Name: URP_CPUParticle_LitTransparent
+  m_EditorClassIdentifier: 
+  m_SourceBlendPropertyName: _SrcBlendMode
+  m_DestinationBlendPropertyName: _DstBlendMode
+  m_MaskThresholdPropertyName: _CutOutAlpha
+  m_RotateUVsPropertyName: _RotateUVs
+  m_DiffuseMapPropertyName: _MainTex
+  m_DistortionMapPropertyName: _MainTex
+  m_EmissiveMapPropertyName: _EmissiveMap
+  m_EmissiveRampMapPropertyName: _EmissiveRampMap
+  m_AlphaRemapPropertyName: _AlphaMap
+  m_DiffuseRampMapPropertyName: _DiffuseRampMap
+  m_InvSoftnessDistancePropertyName: _InvSoftnessDistance
+  m_NormalMapPropertyName: _NormalMap
+  m_RoughMetalMapPropertyName: 
+  m_RoughnessPropertyName: _Roughness
+  m_MetalnessPropertyName: _Metalness
+  m_MeshDiffuseColorPropertyName: _BaseColor
+  m_MeshEmissiveColorPropertyName: _EmissiveColor
+  m_MeshAlphaCursorPropertyName: _AlphaCursor
+  m_MeshCullingModePropertyName: 
+  m_DecalDiffuseColorPropertyName: _DiffuseColor
+  m_DecalEmissiveColorPropertyName: _EmissiveColor
+  m_DecalHasAtlasPropertyName: _HasAtlas
+  m_DecalAtlasIdPropertyName: _AtlasId
+  m_DecalTextureAtlasPropertyName: _AtlasRects
+  m_DecalAtlasCountPropertyName: _AtlasCount
+  m_MeshVATCursorPropertyName: _VATCursor
+  m_VATPositionMapPropertyName: _VATPositionMap
+  m_VATNormalMapPropertyName: _VATNormalMap
+  m_VATColorMapPropertyName: _VATColorMap
+  m_VATRotationMapPropertyName: _VATRotationMap
+  m_VATNumFramesPropertyName: _VATNumFrames
+  m_VATPackedDataPropertyName: _VATPackedData
+  m_VATColorPropertyName: 
+  m_VATBoundsPivotPropertyName: _VATPivot
+  m_VATNormalizedDataPropertyName: _VATNormalizedData
+  m_VATBoundsPositionPropertyName: _VATBounds
+  m_VATPadToPowerOf2PropertyName: _VATPadToPowerOf2
+  m_VATPaddedRatioPropertyName: _VATPaddedRatio
+  m_SkeletalAnimTexturePropertyName: _SkeletalAnimTexture
+  m_SkeletalAnimTextureResolPropertyName: _SkeletalAnimTextureResol
+  m_SkeletalAnimCountPropertyName: _SkeletalAnimCount
+  m_SkeletalAnimUseBoneScalePropertyName: _SkeletalAnimUseBoneScale
+  m_SkeletalAnimCursor0PropertyName: _SkeletalAnimCursor0
+  m_SkeletalAnimIdx0PropertyName: _SkeletalAnimIdx0
+  m_SkeletalAnimCursor1PropertyName: _SkeletalAnimCursor1
+  m_SkeletalAnimIdx1PropertyName: _SkeletalAnimIdx1
+  m_SkeletalAnimTransitionPropertyName: _SkeletalAnimTransition
+  m_SkeletalAnimTranslationBoundsMinPropertyName: _SkeletalAnimTranslationBoundsMin
+  m_SkeletalAnimTranslationBoundsMaxPropertyName: _SkeletalAnimTranslationBoundsMax
+  m_SkeletalAnimScaleBoundsMinPropertyName: _SkeletalAnimScaleBoundsMin
+  m_SkeletalAnimScaleBoundsMaxPropertyName: _SkeletalAnimScaleBoundsMax
+  m_MeshTransformRow0PropertyName: _SkeletalMeshTransform0
+  m_MeshTransformRow1PropertyName: _SkeletalMeshTransform1
+  m_MeshTransformRow2PropertyName: _SkeletalMeshTransform2
+  m_MeshTransformRow3PropertyName: _SkeletalMeshTransform3
+  m_TextureAtlasPropertyName: _AtlasRects
+  m_AtlasCountPropertyName: _AtlasCount
+  m_AtlasIdPropertyName: _AtlasId
+  m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
+  m_UseVertexColorPropertyName: _UseVertexColor
+  m_UseShader: 1
+  m_Shader: {fileID: -6465566751694194690, guid: 68fb51c98bac3934aa9c05b1c4f33346,
+    type: 3}
+  m_Material: {fileID: 0}
+  m_RenderTypes: 01010001000000
+  m_BlendMode: 010101010000
+  m_IsLegacy: 1
+  m_SupportedShaderMask: 8388542
+  m_MandatoryShaderMask: 8
+  m_BillboardingLocation: 0

@@ -33,6 +33,7 @@ namespace PopcornFX
 		SerializedProperty m_KillEffectOnDestroy;
 
 		SerializedProperty m_PreWarm;
+		SerializedProperty m_Timescale;
 		SerializedProperty m_Events;
 
 		Texture2D m_CtrlPlayIcon;
@@ -55,6 +56,7 @@ namespace PopcornFX
 			m_FxAttributesStartValues = serializedObject.FindProperty("m_FxAttributesStartValues");
 			m_FxAttributesDesc = serializedObject.FindProperty("m_FxAttributesDesc");
 			m_PreWarm = serializedObject.FindProperty("m_PreWarm");
+			m_Timescale = serializedObject.FindProperty("m_Timescale");
 			m_Events = serializedObject.FindProperty("m_Events");
 
 			m_CtrlPlayIcon = Resources.Load<Texture2D>("Icons/CtrlPlay");
@@ -78,6 +80,7 @@ namespace PopcornFX
 			serializedObject.CopyFromSerializedProperty(updatedObject.FindProperty("m_FxAttributesDescHash"));
 			serializedObject.CopyFromSerializedProperty(updatedObject.FindProperty("m_FxSamplersDescHash"));
 			serializedObject.CopyFromSerializedProperty(updatedObject.FindProperty("m_PreWarm"));
+			serializedObject.CopyFromSerializedProperty(updatedObject.FindProperty("m_Timescale"));
 			serializedObject.CopyFromSerializedProperty(updatedObject.FindProperty("m_Events"));
 			m_RequiresApplyModifiedProperties = true;
 		}
@@ -177,6 +180,18 @@ namespace PopcornFX
 						EditorGUILayout.PropertyField(m_TriggerAndForget);
 						EditorGUILayout.PropertyField(m_KillEffectOnDestroy);
 						EditorGUILayout.PropertyField(m_PreWarm);
+
+						float oldTimescale = m_Timescale.floatValue;
+						EditorGUILayout.PropertyField(m_Timescale);
+						if (m_Timescale.floatValue != oldTimescale)
+						{
+							Object[] effects = serializedObject.targetObjects;
+							foreach (PKFxEmitter fx in effects)
+							{
+								if (fx.Alive)
+									fx.SetTimescale(m_Timescale.floatValue);
+							}
+						}
 					}
 					if (EditorGUI.EndChangeCheck())
 					{
@@ -263,7 +278,9 @@ namespace PopcornFX
 
 						PKFxEmitter inspectedObject = m_FxAttributesStartValues.serializedObject.targetObject as PKFxEmitter;
 
-						for (int i = 0; i < m_FxAttributesDesc.arraySize; i++)
+						SerializedProperty m_currentCategory = null;
+
+                        for (int i = 0; i < m_FxAttributesDesc.arraySize; i++)
 						{
 							SerializedProperty attrDesc = m_FxAttributesDesc.GetArrayElementAtIndex(i);
 
@@ -279,92 +296,106 @@ namespace PopcornFX
 
 							SerializedProperty m_Type = attrDesc.FindPropertyRelative("m_Type");
 							SerializedProperty m_DropMode = attrDesc.FindPropertyRelative("m_DropMode");
+							SerializedProperty m_Category = attrDesc.FindPropertyRelative("m_Category");
 							SerializedProperty x, y, z, w;
 
-							if (m_DropMode.intValue == (int)EAttributeDropMode.None)
+							EditorGUI.indentLevel++;
+							if(m_currentCategory == null || m_Category.stringValue != m_currentCategory.stringValue)
 							{
-								switch ((EAttributeType)m_Type.intValue)
-								{
-									case EAttributeType.Bool:
-									case EAttributeType.Bool2:
-									case EAttributeType.Bool3:
-									case EAttributeType.Bool4:
-										//To fix
-										x = propertyX.FindPropertyRelative("f1");
-
-										if (PKFxAttributePropertyDrawer.DrawAttributeBool(attrDesc, x))
-										{
-											if (attribContainer != null)
-												attribContainer.SetAttributeUnsafe(i, x.floatValue, 0, 0, 0);
-										}
-
-										break;
-									case EAttributeType.Float:
-									case EAttributeType.Float2:
-									case EAttributeType.Float3:
-									case EAttributeType.Float4:
-										x = propertyX.FindPropertyRelative("f1");
-										y = propertyY.FindPropertyRelative("f1");
-										z = propertyZ.FindPropertyRelative("f1");
-										w = propertyW.FindPropertyRelative("f1");
-
-										if (PKFxAttributePropertyDrawer.DrawAttributeFloat(attrDesc, x, y, z, w))
-										{
-											if (attribContainer != null)
-												attribContainer.SetAttributeUnsafe(i, x.floatValue, y.floatValue, z.floatValue, w.floatValue);
-										}
-										break;
-									case EAttributeType.Int:
-									case EAttributeType.Int2:
-									case EAttributeType.Int3:
-									case EAttributeType.Int4:
-										x = propertyX.FindPropertyRelative("f1");
-										y = propertyY.FindPropertyRelative("f1");
-										z = propertyZ.FindPropertyRelative("f1");
-										w = propertyW.FindPropertyRelative("f1");
-
-										if (PKFxAttributePropertyDrawer.DrawAttributeInt(attrDesc, x, y, z, w))
-										{
-											if (attribContainer != null)
-												attribContainer.SetAttributeUnsafe(i, PKFxUtils.Float2Int(x.floatValue),
-																					  PKFxUtils.Float2Int(y.floatValue),
-																					  PKFxUtils.Float2Int(z.floatValue),
-																					  PKFxUtils.Float2Int(w.floatValue));
-										}
-										break;
-									case EAttributeType.Quaternion:
-										x = propertyX.FindPropertyRelative("f1");
-										y = propertyY.FindPropertyRelative("f1");
-										z = propertyZ.FindPropertyRelative("f1");
-										w = propertyW.FindPropertyRelative("f1");
-
-										if (PKFxAttributePropertyDrawer.DrawAttributeQuaternion(attrDesc, x, y, z, w))
-										{
-											if (attribContainer != null)
-												attribContainer.SetAttributeUnsafe(i, x.floatValue, y.floatValue, z.floatValue, w.floatValue);
-										}
-										break;
-								}
-
+								m_currentCategory = m_Category;
+								if (m_currentCategory.stringValue == "")
+									m_currentCategory.stringValue = "General";
+								m_currentCategory.isExpanded = EditorGUILayout.Foldout(m_currentCategory.isExpanded, m_currentCategory.stringValue.ToUpper(), true);
 							}
-							else
+
+							if (m_currentCategory.isExpanded)
 							{
-								SerializedProperty m_DropList = attrDesc.FindPropertyRelative("m_DropNameList");
-
-								++EditorGUI.indentLevel;
-								x = propertyX.FindPropertyRelative("f1");
-								EditorGUILayout.BeginHorizontal();
-								PKFxAttributePropertyDrawer.DrawAttributeName(attrDesc);
-								int newValue = EditorGUILayout.Popup((int)x.floatValue, m_DropList.stringValue.Split('|').Where(x => !string.IsNullOrEmpty(x)).ToArray());
-								if (newValue != (int)x.floatValue)
+								if (m_DropMode.intValue == (int)EAttributeDropMode.None)
 								{
-									x.floatValue = newValue;
-									if (attribContainer != null)
-										attribContainer.SetAttributeUnsafe(i, PKFxUtils.Float2Int(newValue));
+									switch ((EAttributeType)m_Type.intValue)
+									{
+										case EAttributeType.Bool:
+										case EAttributeType.Bool2:
+										case EAttributeType.Bool3:
+										case EAttributeType.Bool4:
+											//To fix
+											x = propertyX.FindPropertyRelative("f1");
+
+											if (PKFxAttributePropertyDrawer.DrawAttributeBool(attrDesc, x))
+											{
+												if (attribContainer != null)
+													attribContainer.SetAttributeUnsafe(i, x.floatValue, 0, 0, 0);
+											}
+
+											break;
+										case EAttributeType.Float:
+										case EAttributeType.Float2:
+										case EAttributeType.Float3:
+										case EAttributeType.Float4:
+											x = propertyX.FindPropertyRelative("f1");
+											y = propertyY.FindPropertyRelative("f1");
+											z = propertyZ.FindPropertyRelative("f1");
+											w = propertyW.FindPropertyRelative("f1");
+
+											if (PKFxAttributePropertyDrawer.DrawAttributeFloat(attrDesc, x, y, z, w))
+											{
+												if (attribContainer != null)
+													attribContainer.SetAttributeUnsafe(i, x.floatValue, y.floatValue, z.floatValue, w.floatValue);
+											}
+											break;
+										case EAttributeType.Int:
+										case EAttributeType.Int2:
+										case EAttributeType.Int3:
+										case EAttributeType.Int4:
+											x = propertyX.FindPropertyRelative("f1");
+											y = propertyY.FindPropertyRelative("f1");
+											z = propertyZ.FindPropertyRelative("f1");
+											w = propertyW.FindPropertyRelative("f1");
+
+											if (PKFxAttributePropertyDrawer.DrawAttributeInt(attrDesc, x, y, z, w))
+											{
+												if (attribContainer != null)
+													attribContainer.SetAttributeUnsafe(i, PKFxUtils.Float2Int(x.floatValue),
+																							PKFxUtils.Float2Int(y.floatValue),
+																							PKFxUtils.Float2Int(z.floatValue),
+																							PKFxUtils.Float2Int(w.floatValue));
+											}
+											break;
+										case EAttributeType.Quaternion:
+											x = propertyX.FindPropertyRelative("f1");
+											y = propertyY.FindPropertyRelative("f1");
+											z = propertyZ.FindPropertyRelative("f1");
+											w = propertyW.FindPropertyRelative("f1");
+
+											if (PKFxAttributePropertyDrawer.DrawAttributeQuaternion(attrDesc, x, y, z, w))
+											{
+												if (attribContainer != null)
+													attribContainer.SetAttributeUnsafe(i, x.floatValue, y.floatValue, z.floatValue, w.floatValue);
+											}
+											break;
+									}
+
 								}
-								EditorGUILayout.EndHorizontal();
-								--EditorGUI.indentLevel;
+								else
+								{
+									SerializedProperty m_DropList = attrDesc.FindPropertyRelative("m_DropNameList");
+
+									++EditorGUI.indentLevel;
+									x = propertyX.FindPropertyRelative("f1");
+									EditorGUILayout.BeginHorizontal();
+									PKFxAttributePropertyDrawer.DrawAttributeName(attrDesc);
+									int newValue = EditorGUILayout.Popup((int)x.floatValue, m_DropList.stringValue.Split('|').Where(x => !string.IsNullOrEmpty(x)).ToArray());
+									if (newValue != (int)x.floatValue)
+									{
+										x.floatValue = newValue;
+										if (attribContainer != null)
+											attribContainer.SetAttributeUnsafe(i, PKFxUtils.Float2Int(newValue));
+									}
+									EditorGUILayout.EndHorizontal();
+									--EditorGUI.indentLevel;
+								}
 							}
+							EditorGUI.indentLevel--;
 							EditorGUILayout.EndVertical();
 							++numLine;
 						}
@@ -373,11 +404,7 @@ namespace PopcornFX
 							PkFxEditorSplitter.Splitter(0);
 						}
 
-						for (int i = 0; i < m_FxSamplers.arraySize; i++)
-						{
-							SerializedProperty smp = m_FxSamplers.GetArrayElementAtIndex(i);
-							SamplerField(smp);
-						}
+						DrawSamplers();
 					}
 
 					//Clear FxName, Attributes and Samplers if the asset is None
@@ -428,13 +455,13 @@ namespace PopcornFX
 		private bool DrawAttributesHeader()
 		{
 			EditorGUILayout.BeginHorizontal();
-			m_FxAttributesDesc.isExpanded = EditorGUILayout.Foldout(m_FxAttributesDesc.isExpanded, "Attribute", true);
+			m_FxAttributesDesc.isExpanded = EditorGUILayout.Foldout(m_FxAttributesDesc.isExpanded, "Attributes", true);
 
-			DrawHeader("Attribute");
+			DrawHeader("Attributes");
 			return (m_FxAttributesDesc.isExpanded);
 		}
 
-		private void DrawHeader(string title)
+        private void DrawHeader(string title)
 		{
 			EditorGUILayout.Separator();
 
@@ -532,140 +559,224 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		private SerializedProperty SamplerField(SerializedProperty sampler)
+		private void DrawSamplers()
 		{
-			bool hasChanged = false;
-			SerializedProperty samplerName = sampler.FindPropertyRelative("m_Descriptor.m_Name");
-			SerializedProperty samplerType = sampler.FindPropertyRelative("m_Descriptor.m_Type");
-			SerializedProperty descriptionProp = sampler.FindPropertyRelative("m_Descriptor.m_Description");
-			string description = descriptionProp.stringValue.Replace("\\n", "\n");
+            SerializedProperty m_currentCategory = null;
+            int numLine = 0;
 
-			EditorGUI.indentLevel++;
-			sampler.isExpanded = EditorGUILayout.Foldout(sampler.isExpanded, new GUIContent(samplerName.stringValue, description), true);
-			if (!sampler.isExpanded)
-			{
-				EditorGUI.indentLevel--;
-				return sampler;
-			}
+            for (int i = 0; i < m_FxSamplers.arraySize; i++)
+            {
+				SerializedProperty sampler = m_FxSamplers.GetArrayElementAtIndex(i);
+				bool hasChanged = false;
+				SerializedProperty samplerName = sampler.FindPropertyRelative("m_Descriptor.m_Name");
+				SerializedProperty samplerType = sampler.FindPropertyRelative("m_Descriptor.m_Type");
+				SerializedProperty descriptionProp = sampler.FindPropertyRelative("m_Descriptor.m_Description");
+				SerializedProperty samplerCategory = sampler.FindPropertyRelative("m_Descriptor.m_Category");
+				SetColorBackgroundByParity(numLine);
 
-			ESamplerType eType = (ESamplerType)samplerType.intValue;
+				string description = descriptionProp.stringValue.Replace("\\n", "\n");
 
-			if (eType == ESamplerType.SamplerShape)
-			{
-				SerializedProperty m_ShapeType = sampler.FindPropertyRelative("m_ShapeType");
-
-				int oldType = m_ShapeType.intValue;
-
-				m_ShapeType.intValue = EditorGUILayout.Popup(m_ShapeType.intValue, ShapeTypes);
-
-				bool shapeHasChanged = oldType != m_ShapeType.intValue;
-				bool meshHasChanged = false;
-
-				SerializedProperty worldSpaceSampling = sampler.FindPropertyRelative("m_WorldSpaceSampling");
-
-				// Show world space:
-				worldSpaceSampling.boolValue = EditorGUILayout.Toggle("Show in world space", worldSpaceSampling.boolValue);
-
-				if (m_ShapeType.intValue == (int)Sampler.EShapeType.BoxShape)
-					BoxField(sampler, shapeHasChanged);
-				else if (m_ShapeType.intValue == (int)Sampler.EShapeType.SphereShape)
-					SphereField(sampler, shapeHasChanged);
-				else if (m_ShapeType.intValue == (int)Sampler.EShapeType.CylinderShape)
-					CylinderField(sampler, shapeHasChanged);
-				else if (m_ShapeType.intValue == (int)Sampler.EShapeType.CapsuleShape)
-					CapsuleField(sampler, shapeHasChanged);
-				else if (m_ShapeType.intValue == (int)Sampler.EShapeType.MeshShape)
-					meshHasChanged = MeshField(sampler, shapeHasChanged);
-				else if (m_ShapeType.intValue == (int)Sampler.EShapeType.MeshFilterShape)
-					meshHasChanged = MeshFilterField(sampler, shapeHasChanged);
-				else if (m_ShapeType.intValue == (int)Sampler.EShapeType.SkinnedMeshShape)
-					meshHasChanged = SkinnedMeshField(sampler, shapeHasChanged);
-				else if (m_ShapeType.intValue == (int)Sampler.EShapeType.BakedMeshShape)
-					meshHasChanged = BakedMeshField(sampler, shapeHasChanged);
-				else
+				EditorGUI.indentLevel++;
+				if (m_currentCategory == null || samplerCategory.stringValue != m_currentCategory.stringValue)
 				{
-					SerializedProperty m_Transform = sampler.FindPropertyRelative("m_ShapeTransform");
-					SerializedProperty m_TransformRef = sampler.FindPropertyRelative("m_ShapeTransformReference");
-
-					DrawShapeTransform(m_Transform, m_TransformRef);
+					m_currentCategory = samplerCategory;
+					if (m_currentCategory.stringValue == "")
+						m_currentCategory.stringValue = "General";
+					samplerCategory.isExpanded = EditorGUILayout.Foldout(m_currentCategory.isExpanded, m_currentCategory.stringValue.ToUpper(), true);
 				}
 
-				hasChanged = shapeHasChanged || meshHasChanged;
-			}
-			else if (eType == ESamplerType.SamplerCurve)
-			{
-				SerializedProperty m_CurvesArray = sampler.FindPropertyRelative("m_CurvesArray");
-				SerializedProperty m_CurvesTimeKeys = sampler.FindPropertyRelative("m_CurvesTimeKeys");
-				SerializedProperty m_CurveIsOverride = sampler.FindPropertyRelative("m_CurveIsOverride");
-
-				hasChanged = MultipleCurvesEditor(m_CurvesArray);
-
-				if (hasChanged)
-					m_CurveIsOverride.boolValue = true;
-
-				if (m_CurvesArray.arraySize != 0)
+				if (m_currentCategory.isExpanded)
 				{
-					int iKey = 0;
-					m_CurvesTimeKeys.arraySize = m_CurvesArray.GetArrayElementAtIndex(0).animationCurveValue.keys.Length;
+                    EditorGUI.indentLevel++;
 
-					Keyframe[] keyframes = m_CurvesArray.GetArrayElementAtIndex(0).animationCurveValue.keys;
+                    sampler.isExpanded = EditorGUILayout.Foldout(sampler.isExpanded, new GUIContent(samplerName.stringValue, description), true);
+					if (sampler.isExpanded)
+					{
+						ESamplerType eType = (ESamplerType)samplerType.intValue;
 
-					foreach (var key in keyframes)
-						m_CurvesTimeKeys.GetArrayElementAtIndex(iKey++).floatValue = key.time;
-				}
-				else
-					m_CurvesTimeKeys.arraySize = 0;
-			}
-			else if (eType == ESamplerType.SamplerImage)
-			{
-				SerializedProperty m_Tex = sampler.FindPropertyRelative("m_Texture");
-				SerializedProperty m_TextureTexcoordMode = sampler.FindPropertyRelative("m_TextureTexcoordMode");
+						if (eType == ESamplerType.SamplerShape)
+						{
+							SerializedProperty m_ShapeType = sampler.FindPropertyRelative("m_ShapeType");
 
-				Texture2D newTex = (Texture2D)EditorGUILayout.ObjectField("Texture", m_Tex.objectReferenceValue, typeof(Texture2D), false);
+							int oldType = m_ShapeType.intValue;
 
-				if (newTex != m_Tex.objectReferenceValue)
-				{
-					m_Tex.objectReferenceValue = newTex;
-					hasChanged = true;
-				}
-				EditorGUILayout.LabelField("Texcoord Mode");
-				Sampler.ETexcoordMode newType = (Sampler.ETexcoordMode)EditorGUILayout.EnumPopup((Sampler.ETexcoordMode)m_TextureTexcoordMode.intValue);
-				m_TextureTexcoordMode.intValue = (int)newType;
-			}
-			else if (eType == ESamplerType.SamplerText)
-			{
-				SerializedProperty m_Text = sampler.FindPropertyRelative("m_Text");
+							m_ShapeType.intValue = EditorGUILayout.Popup(m_ShapeType.intValue, ShapeTypes);
 
-				string newValue = EditorGUILayout.TextField(m_Text.stringValue);
+							bool shapeHasChanged = oldType != m_ShapeType.intValue;
+							bool meshHasChanged = false;
 
-				if (m_Text.stringValue != newValue)
-				{
-					m_Text.stringValue = newValue;
-					hasChanged = true;
-				}
-			}
-			else if (eType == ESamplerType.SamplerUnsupported)
-			{
-				EditorGUI.BeginDisabledGroup(true);
-				EditorGUILayout.LabelField("Edits not supported");
-				EditorGUI.EndDisabledGroup();
-			}
-			else
-			{
-				Debug.LogWarning("[PopcornFX] Unknown Sampler type.");
-			}
+							SerializedProperty worldSpaceSampling = sampler.FindPropertyRelative("m_WorldSpaceSampling");
 
-			if (hasChanged)
-			{
-				SerializedProperty wasModified = sampler.FindPropertyRelative("m_WasModified");
-				wasModified.boolValue = true;
-				m_RequiresApplyModifiedProperties = true;
-			}
-			EditorGUI.indentLevel--;
-			return sampler;
-		}
+							// Show world space:
+							worldSpaceSampling.boolValue = EditorGUILayout.Toggle("Show in world space", worldSpaceSampling.boolValue);
 
-		public bool MultipleCurvesEditor(SerializedProperty curvesArray)
+							if (m_ShapeType.intValue == (int)Sampler.EShapeType.BoxShape)
+								BoxField(sampler, shapeHasChanged);
+							else if (m_ShapeType.intValue == (int)Sampler.EShapeType.SphereShape)
+								SphereField(sampler, shapeHasChanged);
+							else if (m_ShapeType.intValue == (int)Sampler.EShapeType.CylinderShape)
+								CylinderField(sampler, shapeHasChanged);
+							else if (m_ShapeType.intValue == (int)Sampler.EShapeType.CapsuleShape)
+								CapsuleField(sampler, shapeHasChanged);
+							else if (m_ShapeType.intValue == (int)Sampler.EShapeType.MeshShape)
+								meshHasChanged = MeshField(sampler, shapeHasChanged);
+							else if (m_ShapeType.intValue == (int)Sampler.EShapeType.MeshFilterShape)
+								meshHasChanged = MeshFilterField(sampler, shapeHasChanged);
+							else if (m_ShapeType.intValue == (int)Sampler.EShapeType.SkinnedMeshShape)
+								meshHasChanged = SkinnedMeshField(sampler, shapeHasChanged);
+							else if (m_ShapeType.intValue == (int)Sampler.EShapeType.BakedMeshShape)
+								meshHasChanged = BakedMeshField(sampler, shapeHasChanged);
+							else
+							{
+								SerializedProperty m_Transform = sampler.FindPropertyRelative("m_ShapeTransform");
+								SerializedProperty m_TransformRef = sampler.FindPropertyRelative("m_ShapeTransformReference");
+
+								DrawShapeTransform(m_Transform, m_TransformRef);
+							}
+
+							hasChanged = shapeHasChanged || meshHasChanged;
+						}
+						else if (eType == ESamplerType.SamplerCurve)
+						{
+							SerializedProperty m_CurvesArray = sampler.FindPropertyRelative("m_CurvesArray");
+							SerializedProperty m_CurvesTimeKeys = sampler.FindPropertyRelative("m_CurvesTimeKeys");
+							SerializedProperty m_CurveIsOverride = sampler.FindPropertyRelative("m_CurveIsOverride");
+
+							hasChanged = MultipleCurvesEditor(m_CurvesArray);
+
+							if (hasChanged)
+								m_CurveIsOverride.boolValue = true;
+
+							if (m_CurvesArray.arraySize != 0)
+							{
+								int iKey = 0;
+								m_CurvesTimeKeys.arraySize = m_CurvesArray.GetArrayElementAtIndex(0).animationCurveValue.keys.Length;
+
+								Keyframe[] keyframes = m_CurvesArray.GetArrayElementAtIndex(0).animationCurveValue.keys;
+
+								foreach (var key in keyframes)
+									m_CurvesTimeKeys.GetArrayElementAtIndex(iKey++).floatValue = key.time;
+							}
+							else
+								m_CurvesTimeKeys.arraySize = 0;
+						}
+						else if (eType == ESamplerType.SamplerImage)
+						{
+							SerializedProperty m_Tex = sampler.FindPropertyRelative("m_Texture");
+							SerializedProperty m_TextureTexcoordMode = sampler.FindPropertyRelative("m_TextureTexcoordMode");
+
+							Texture2D newTex = (Texture2D)EditorGUILayout.ObjectField("Texture", m_Tex.objectReferenceValue, typeof(Texture2D), false);
+
+							if (newTex != m_Tex.objectReferenceValue)
+							{
+								m_Tex.objectReferenceValue = newTex;
+								hasChanged = true;
+							}
+							EditorGUILayout.LabelField("Texcoord Mode");
+							Sampler.ETexcoordMode newType = (Sampler.ETexcoordMode)EditorGUILayout.EnumPopup((Sampler.ETexcoordMode)m_TextureTexcoordMode.intValue);
+							m_TextureTexcoordMode.intValue = (int)newType;
+						}
+						else if (eType == ESamplerType.SamplerText)
+						{
+							SerializedProperty m_Text = sampler.FindPropertyRelative("m_Text");
+
+							string newValue = EditorGUILayout.TextField(m_Text.stringValue);
+
+							if (m_Text.stringValue != newValue)
+							{
+								m_Text.stringValue = newValue;
+								hasChanged = true;
+							}
+						}
+						else if (eType == ESamplerType.SamplerGrid)
+						{
+							SerializedProperty GridData = sampler.FindPropertyRelative("m_GridData");
+							SerializedProperty samplerDesc = sampler.FindPropertyRelative("m_Descriptor");
+
+							if (samplerDesc != null)// && GridData != null)
+							{
+								int gridOrder = samplerDesc.FindPropertyRelative("m_GridOrder").intValue;
+								int gridType = samplerDesc.FindPropertyRelative("m_GridType").intValue;
+
+								SerializedProperty m_GridDimensionsXY = samplerDesc.FindPropertyRelative("m_GridDimensionsXY");
+								SerializedProperty m_GridDimensionsZW = samplerDesc.FindPropertyRelative("m_GridDimensionsZW");
+
+								Vector4Int gridDim = new Vector4Int(m_GridDimensionsXY.vector2IntValue.x, m_GridDimensionsXY.vector2IntValue.y, m_GridDimensionsZW.vector2IntValue.x, m_GridDimensionsZW.vector2IntValue.y);
+								Vector4Int gridDimNew = new Vector4Int(1);
+
+								EditorGUILayout.LabelField(string.Format("Grid Order: {0}", gridOrder));
+								EditorGUILayout.LabelField(string.Format("Grid Type:  {0}", PKFxUtils.EBaseTypeIDToString((EBaseTypeID)gridType)));
+								switch (gridOrder)
+								{
+									case 4:
+										gridDimNew.x = EditorGUILayout.IntField("X Dimensions", gridDim.x);
+										gridDimNew.y = EditorGUILayout.IntField("Y Dimensions", gridDim.y);
+										gridDimNew.z = EditorGUILayout.IntField("Z Dimensions", gridDim.z);
+										gridDimNew.w = EditorGUILayout.IntField("W Dimensions", gridDim.w);
+										break;
+									case 3:
+										gridDimNew.x = EditorGUILayout.IntField("X Dimensions", gridDim.x);
+										gridDimNew.y = EditorGUILayout.IntField("Y Dimensions", gridDim.y);
+										gridDimNew.z = EditorGUILayout.IntField("Z Dimensions", gridDim.z);
+										break;
+									case 2:
+										gridDimNew.x = EditorGUILayout.IntField("X Dimensions", gridDim.x);
+										gridDimNew.y = EditorGUILayout.IntField("Y Dimensions", gridDim.y);
+										break;
+									case 1:
+										gridDimNew.x = EditorGUILayout.IntField("X Dimensions", gridDim.x);
+										break;
+									default:
+										break;
+								}
+								if (gridDim != gridDimNew)
+								{
+									hasChanged = true;
+									if (gridDimNew.x < 1)
+										gridDimNew.x = 1;
+									if (gridDimNew.y < 1)
+										gridDimNew.y = 1;
+									if (gridDimNew.z < 1)
+										gridDimNew.z = 1;
+									if (gridDimNew.w < 1)
+										gridDimNew.w = 1;
+									m_GridDimensionsXY.vector2IntValue = new Vector2Int(gridDimNew.x, gridDimNew.y);
+									m_GridDimensionsZW.vector2IntValue = new Vector2Int(gridDimNew.z, gridDimNew.w);
+								}
+
+								SerializedProperty GridInitCallback = sampler.FindPropertyRelative("m_GridInitCallback");
+								if (GridInitCallback != null)
+									EditorGUILayout.PropertyField(GridInitCallback);
+							}
+
+						}
+						else if (eType == ESamplerType.SamplerUnsupported)
+						{
+							EditorGUI.BeginDisabledGroup(true);
+							EditorGUILayout.LabelField("Edits not supported");
+							EditorGUI.EndDisabledGroup();
+						}
+						else
+						{
+							Debug.LogWarning("[PopcornFX] Unknown Sampler type.");
+						}
+
+						if (hasChanged)
+						{
+							SerializedProperty wasModified = sampler.FindPropertyRelative("m_WasModified");
+							wasModified.boolValue = true;
+							m_RequiresApplyModifiedProperties = true;
+						}
+                    }
+                    EditorGUI.indentLevel--;
+                }
+                EditorGUI.indentLevel--;
+				EditorGUILayout.EndVertical();
+				++numLine;
+            }
+        }
+
+        public bool MultipleCurvesEditor(SerializedProperty curvesArray)
 		{
 			bool hasChanged = false;
 			for (int i = 0; i < curvesArray.arraySize; ++i)

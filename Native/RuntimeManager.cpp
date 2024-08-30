@@ -610,9 +610,9 @@ void	CRuntimeManager::SetMaxCameraCount(int count)
 
 	for (u32 i = 0; i < sceneViews.Count(); ++i)
 	{
-		medCol->UnregisterView(sceneViews[i].m_UserData.m_CamSlotIdxInMedCol);
+		medCol->UnregisterView(sceneViews[i].m_CamSlotIdxInMedCol);
 		if (medCol != medColMeshes)
-			medColMeshes->UnregisterView(sceneViews[i].m_UserData.m_CamSlotIdxInMeshMedCol);
+			medColMeshes->UnregisterView(sceneViews[i].m_CamSlotIdxInMeshMedCol);
 	}
 
 	if (!sceneViews.Resize(count))
@@ -621,9 +621,9 @@ void	CRuntimeManager::SetMaxCameraCount(int count)
 	for (u32 i = 0; i < sceneViews.Count(); ++i)
 	{
 		sceneViews[i].m_InvViewMatrix = CFloat4x4::IDENTITY;
-		sceneViews[i].m_UserData.m_CamSlotIdxInMedCol = medCol->RegisterView();
+		sceneViews[i].m_CamSlotIdxInMedCol = medCol->RegisterView();
 		if (medCol != medColMeshes)
-			sceneViews[i].m_UserData.m_CamSlotIdxInMeshMedCol = medColMeshes->RegisterView();
+			sceneViews[i].m_CamSlotIdxInMeshMedCol = medColMeshes->RegisterView();
 	}
 }
 
@@ -775,6 +775,7 @@ bool	CRuntimeManager::PopcornFXChangeSettings(const SPopcornFxSettings &settings
 	m_PopcornFXRuntimeData->m_LightRenderer = settings.m_LightRendererEnabled == ManagedBool_True ? true : false;
 
 	m_PopcornFXRuntimeData->m_SoundRenderer = settings.m_SoundRendererEnabled == ManagedBool_True ? true : false;
+	m_PopcornFXRuntimeData->m_DecalRenderer = settings.m_DecalRendererEnabled == ManagedBool_True ? true : false;
 
 	g_MaxDepthProfiling = settings.m_CPPMarkerMaxDepth;
 
@@ -1195,10 +1196,7 @@ void	CRuntimeManager::ClearFxInstances(const char *fxPath)
 	for (u32 i = 0; i < m_Effects.Count(); ++i)
 	{
 		if (m_Effects[i] != null && m_Effects[i]->Path() == pathToClear)
-		{
-			m_Effects[i]->KillFX();
 			OnFxStopped(i);
-		}
 	}
 	m_PreloadedFx.Remove(CStringId(pathToClear));
 	CParticleEffect::Unload(pathToClear);
@@ -1947,16 +1945,16 @@ void	CRuntimeManager::_ExecUpdateCamDesc(int camID, SCamDesc desc, bool update)
 	sceneView.m_InvViewMatrix = camW2V.Inverse();
 
 	// We update the "view" namespace in the script
-	if (sceneView.m_UserData.m_CamSlotIdxInMedCol.Valid())
+	if (sceneView.m_CamSlotIdxInMedCol.Valid())
 	{
-		medCol->UpdateView(	sceneView.m_UserData.m_CamSlotIdxInMedCol,
+		medCol->UpdateView(	sceneView.m_CamSlotIdxInMedCol,
 							camW2V * toYUp,
 							camW2P,
 							CUint2(desc.m_ViewportWidth, desc.m_ViewportHeight));
 	}
-	if (sceneView.m_UserData.m_CamSlotIdxInMeshMedCol.Valid())
+	if (sceneView.m_CamSlotIdxInMeshMedCol.Valid())
 	{
-		medColMeshes->UpdateView(	sceneView.m_UserData.m_CamSlotIdxInMeshMedCol,
+		medColMeshes->UpdateView(	sceneView.m_CamSlotIdxInMeshMedCol,
 									camW2V * toYUp,
 									camW2P,
 									CUint2(desc.m_ViewportWidth, desc.m_ViewportHeight));
@@ -2126,12 +2124,14 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup(IUnityInterfaces *
 		m_GPUBillboarding = m_Settings->m_EnableGPUBillboarding == ManagedBool_True ? true : false;
 		m_LightRenderer = m_Settings->m_LightRendererEnabled == ManagedBool_True ? true : false;
 		m_SoundRenderer = m_Settings->m_SoundRendererEnabled == ManagedBool_True ? true : false;
+		m_DecalRenderer = m_Settings->m_DecalRendererEnabled == ManagedBool_True ? true : false;
 	}
 	else
 	{
 		m_GPUBillboarding = false;
 		m_LightRenderer = false;
 		m_SoundRenderer = false;
+		m_DecalRenderer = false;
 	}
 	SDllVersion			engineVersion(PK_VERSION_MAJOR, PK_VERSION_MINOR, PK_VERSION_PATCH, PK_VERSION_REVID, debugMode);
 	CPKKernel::Config	configKernel;

@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.XR;
 using System.Collections.Generic;
-using System;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace PopcornFX
 {
@@ -31,7 +33,7 @@ namespace PopcornFX
 		[HideInInspector]
 		public short					m_CameraID = -1;
 		protected short					m_VRReservedID = 0;
-		public short					m_CurrentCameraID = 0;
+		protected short					m_CurrentCameraID = 0;
 		protected Camera				m_Camera;
 		protected SCamDesc				m_CameraDescription;
 		protected uint					m_CurrentFrameID = 0;
@@ -44,6 +46,10 @@ namespace PopcornFX
 
 		private bool					m_EnableDistortion = false;
 		private bool					m_EnableBlur = false;
+
+		private bool					m_IsEditorCamera = false;
+		public bool						IsEditorCamera { get { return m_IsEditorCamera; } }
+		private int						m_EditorCameraOriginMask;
 
 		//----------------------------------------------------------------------------
 
@@ -145,10 +151,26 @@ namespace PopcornFX
 			m_Camera = GetComponent<Camera>();
 			if (m_Camera == null)
 			{
-				Debug.LogError("[PopcornFX] PopcornFX need a game object with PKFxRenderingPlugin script attached. (Hierarchy > PopcornFX > Rendering Plugin Manager)");
-				return;
+#if UNITY_EDITOR
+				if (GetComponent<PKFxRenderingPlugin>() != null)
+				{
+					m_Camera = SceneView.lastActiveSceneView.camera;
+					m_IsEditorCamera = true;
+					m_EditorCameraOriginMask = m_Camera.cullingMask;
+				}
+				else
+#endif
+				{
+					Debug.LogError("[PopcornFX] PopcornFX need a game object with PKFxRenderingPlugin script attached. (Hierarchy > PopcornFX > Rendering Plugin Manager)");
+					return;
+				}
 			}
+
+#if UNITY_6000_0_OR_NEWER
+			PKFxRenderingPlugin[] rendering = FindObjectsByType<PKFxRenderingPlugin>(FindObjectsSortMode.None);
+#else
 			PKFxRenderingPlugin[] rendering = FindObjectsOfType<PKFxRenderingPlugin>();
+#endif
 			if (rendering.Length != 1)
 			{
 				if (rendering.Length == 0)
@@ -166,7 +188,11 @@ namespace PopcornFX
 			if (Application.platform != RuntimePlatform.IPhonePlayer && UnityEngine.XR.XRSettings.enabled)
 			{
 				List<XRDisplaySubsystem> xrDisplaySubsystems = new List<XRDisplaySubsystem>();
+#if UNITY_6000_0_OR_NEWER
+				SubsystemManager.GetSubsystems<XRDisplaySubsystem>(xrDisplaySubsystems);
+#else
 				SubsystemManager.GetInstances<XRDisplaySubsystem>(xrDisplaySubsystems);
+#endif
 				foreach (var xrDisplay in xrDisplaySubsystems)
 				{
 					if (xrDisplay.running)
@@ -188,7 +214,7 @@ namespace PopcornFX
 		{
 			m_CurrentCameraID = ID;
 			int cull = m_Camera.cullingMask;// << Origin Mask
-			m_Camera.cullingMask = (cull & (~allPKMask)) | targetMask;
+			cull = (cull & (~allPKMask)) | targetMask;
 
 			if (PKFxSettings.EnableDistortion)
 			{
@@ -196,12 +222,25 @@ namespace PopcornFX
 					PKFxSettings.MaterialFactory.m_FactoryType != PKFxMaterialFactory.FactoryType.HDRP)
 				{
 					// We disable the rendering of the distortion objects, this is going to be handled in a command buffer:
-					m_Camera.cullingMask &= ~(1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer));
+					cull &= ~(1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer));
 				}
 				else
-					m_Camera.cullingMask |= 1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
+					cull |= 1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
 			}
+			if (m_IsEditorCamera)
+				Tools.visibleLayers = cull;
+			else
+				m_Camera.cullingMask = cull;
 		}
+
+		//----------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+		public void ResetEditorCameraMask()
+		{
+			Tools.visibleLayers = m_EditorCameraOriginMask;
+		}
+#endif
 
 		//----------------------------------------------------------------------------
 

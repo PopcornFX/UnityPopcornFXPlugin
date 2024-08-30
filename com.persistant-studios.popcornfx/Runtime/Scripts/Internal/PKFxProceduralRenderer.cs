@@ -271,7 +271,8 @@ namespace PopcornFX
 					break;
 
 				default:
-					break;
+                    Debug.LogError("[PopcornFX] unsupported billboarding mode");
+                    break;
 			}
 			if (desc.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
 			{
@@ -303,7 +304,12 @@ namespace PopcornFX
 			mat.SetBuffer("_BillboardInfo", m_BillboardInfo);
 			mat.SetBuffer("_InputOffsets", m_InputOffsets);
 #endif
+
+#if UNITY_6000_0_OR_NEWER
+			m_RenderingPlugin = FindAnyObjectByType<PKFxRenderingPlugin>();
+#else
 			m_RenderingPlugin = FindObjectOfType<PKFxRenderingPlugin>();
+#endif
 		}
 
 		[ExecuteAlways]
@@ -321,7 +327,7 @@ namespace PopcornFX
 			{
 				for (int i = 0; i < m_RenderingPlugin.m_Cameras.Count; ++i)
 				{
-					if (i < m_RenderingPlugin.MaxCameraSupport())
+					if (i < PKFxSettings.MaxCameraCount)
 					{
 						RenderParticles(m_RenderingPlugin.m_Cameras[i].GetComponent<Camera>());
 					}

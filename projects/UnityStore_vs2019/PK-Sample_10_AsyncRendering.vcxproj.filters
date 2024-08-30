@@ -25,6 +25,9 @@
     <Filter Include="_External\DX\include">
       <UniqueIdentifier>{250E8582-119D-0E4C-BABB-2247A6291FF2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_External\DX\include\d3dx12">
+      <UniqueIdentifier>{6AD515A9-D6E2-438F-5FC9-3F7ACBD50F46}</UniqueIdentifier>
+    </Filter>
     <Filter Include="_External\GL">
       <UniqueIdentifier>{09555DA7-F5B7-EC4B-9E3D-25028A7FB8CE}</UniqueIdentifier>
     </Filter>
@@ -72,16 +75,64 @@
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12compatibility.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12video.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_barriers.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_check_feature_support.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_core.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_default.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_pipeline_state_stream.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_property_format_table.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_render_pass.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_resource_helpers.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_root_signature.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_state_object.h">
+      <Filter>_External\DX\include\d3dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcapi.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcerrors.h">
+      <Filter>_External\DX\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcisense.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h">
@@ -100,9 +151,6 @@
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h">
-      <Filter>_External\DX\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgitype.h">
       <Filter>_External\DX\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h">

@@ -98,6 +98,75 @@ public:
 		int				collider;
 	};
 
+	struct QueryParameters
+	{
+		int				layerMask = -5;
+		int				padding = 0;
+		int				queryTriggerInteraction = 0;
+		bool			hitBackfaces = false;
+		bool			hitMultipleFaces = false;
+	};
+
+	struct RaycastCommand2022orNewer
+	{
+		CFloat3				from;
+		CFloat3				direction;
+		int					padding = 0; //PhysicsScene
+		float				distance;
+		QueryParameters		queryParams;
+	};
+
+	struct RaycastHit2022orNewer
+	{
+		CFloat3			point;
+		CFloat3			normal;
+		unsigned int	faceID;
+		float			distance;
+		CFloat2			uv;
+		int				collider;
+	};
+
+	struct SphereCastCommand
+	{
+		CFloat3				from;
+		float				radius = 0.0f;
+		CFloat3				direction;
+		float				distance;
+		int					layerMask = 0;
+		int					maxHit; // Private member
+		int					padding = 0; //PhysicsScene
+	};
+
+	struct SphereCastHit
+	{
+		CFloat3			point;
+		CFloat3			normal;
+		unsigned int	faceID;
+		float			distance;
+		CFloat2			uv;
+		int				collider;
+	};
+
+	struct SphereCastCommand2022orNewer
+	{
+		CFloat3				from;
+		float				radius = 0.0f;
+		CFloat3				direction;
+		float				distance;
+		int					padding = 0; //PhysicsScene
+		QueryParameters		queryParams;
+	};
+
+	struct SphereCastHit2022orNewer
+	{
+		CFloat3			point;
+		CFloat3			normal;
+		unsigned int	faceID;
+		float			distance;
+		CFloat2			uv;
+		int				collider;
+	};
+
 public:
 	CPKFXScene();
 	~CPKFXScene();
@@ -286,6 +355,9 @@ public:
 	inline TArray<SSoundInfo>		&GetSoundDatas(){ return m_SoundDatas;}
 	inline u32						&GetTotalSoundParticleCount() { return m_TotalSoundParticleCount; }
 
+	inline TArray<SDecalInfo>		&GetDecalDatas() { return m_DecalDatas; }
+	inline u32						&GetTotalDecalParticleCount() { return m_TotalDecalParticleCount; }
+
 protected:
 
 	bool								_ResetParticleMediumCollections();
@@ -298,6 +370,23 @@ protected:
 	bool								m_CollisionMeshUseTransforms;
 
 private:
+	struct SMediumCollectionSettings
+	{
+		bool	m_Initialized;
+		bool	m_EnableDynamicEffectBounds;
+		bool	m_EnableLocalizedPages;
+		bool	m_EnableLocalizedByDefault;
+		float	m_LODMinDist;
+		float	m_LODMaxDist;
+		float	m_LODMinMinDist;
+
+		SMediumCollectionSettings()
+		:	m_Initialized(false)
+		{
+		}
+	};
+
+	SMediumCollectionSettings					m_MediumCollectionSettings;
 	bool										m_IsMediumCollectionInitialized;
 
 	// Unity render context:
@@ -318,6 +407,9 @@ private:
 	TArray<SSoundInfo>							m_SoundDatas;
 	u32											m_TotalSoundParticleCount = 0;
 
+	TArray<SDecalInfo>							m_DecalDatas;
+	u32											m_TotalDecalParticleCount = 0;
+
 	bool										m_EnableRaycastCollisions;
 
 	bool										m_IsSingleThreaded;
@@ -332,6 +424,8 @@ private:
 
 	Threads::CCriticalSection					m_test;
 	PopcornFX::CTimer							m_UpdateTimer;
+
+	s32											m_UnityVersion = 0;
 };
 PK_DECLARE_REFPTRCLASS(PKFXScene);
 

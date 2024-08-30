@@ -37,6 +37,7 @@
 #	endif
 
 #	if (USE_IMAGE_PLUGINS != 0)
+		PK_PLUGIN_DECLARE(CImagePKIMCodec);
 		PK_PLUGIN_DECLARE(CImageDDSCodec);
 		PK_PLUGIN_DECLARE(CImagePNGCodec);
 		PK_PLUGIN_DECLARE(CImageTGACodec);
@@ -89,6 +90,13 @@ namespace	PKFX
 			success &= (backend != null && CPluginManager::PluginRegister(backend, true, backendPath));
 		}
 #	if (USE_IMAGE_PLUGINS != 0)
+		if (selected & EPlugin_ImageCodecPKIM)
+		{
+			const char		*codecPath = "Plugins/image_codec_pkim" PK_PLUGIN_POSTFIX_BUILD;
+			IPluginModule	*codec = StartupPlugin_CImagePKIMCodec();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
+		}
+
 		if (selected & EPlugin_ImageCodecDDS)
 		{
 			const char		*codecPath = "Plugins/image_codec_dds" PK_PLUGIN_POSTFIX_BUILD;
@@ -185,6 +193,13 @@ namespace	PKFX
 		}
 
 #	if (USE_IMAGE_PLUGINS != 0)
+		if (g_LoadedPlugins & EPlugin_ImageCodecPKIM)
+		{
+			IPluginModule	*codec = GetPlugin_CImagePKIMCodec();
+			(codec != null && CPluginManager::PluginRelease(codec));
+			ShutdownPlugin_CImagePKIMCodec();
+		}
+
 		if (g_LoadedPlugins & EPlugin_ImageCodecDDS)
 		{
 			IPluginModule	*codec = GetPlugin_CImageDDSCodec();

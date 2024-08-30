@@ -82,6 +82,8 @@ public:
 	bool							SetSamplerTexture(u32 smpID, const STextureSamplerToFill *texture);
 	// Text:
 	bool							SetSamplerText(u32 smpID, const char *text);
+	// Grid:bool	
+	bool							SetSamplerGrid(u32 smpID, SSamplerGrid *grid);
 
 	void							SetGUID(CGuid guid) { m_GUID = guid; }
 	CGuid							GUID() const { return m_GUID; }
@@ -207,7 +209,6 @@ private:
 		CFloat4x4							m_PreviousMat;	// Previous transform of the shape
 		// Sampler images:
 		PRefCountedMemoryBuffer				m_ImageDataBuffer;
-
 		// Async sampler switch:
 		SSetSamplerTask						m_AsyncSetSamplerFunctor;
 		SSetBakedSamplerTask				m_AsyncSetBakedSamplerFunctor;
@@ -221,6 +222,7 @@ private:
 		CImageSampler						*m_ImageDesc;
 		CCurveDescriptor					*m_CurveDesc;
 		SDensitySamplerData					*m_DensitySampler;
+
 
 		void			AsyncSwitchIFN();
 		bool			WaitSwitchIFN();
@@ -254,6 +256,7 @@ private:
 	PParticleEffect					m_Effect;
 	PParticleEffectInstance			m_Emitter;
 	PParticleAttributeList			m_AttributesDescriptor;
+	SAttributesContainer			*m_AttributesContainer;
 	TArray<SSamplerData>			m_SamplersData;
 	CAABB							m_Bounds;
 	CParticleMediumCollection		*m_MediumCollection;

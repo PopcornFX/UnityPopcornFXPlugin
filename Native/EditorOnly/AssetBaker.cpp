@@ -268,6 +268,7 @@ bool	SBakeContext::Init()
 	COvenBakeConfig_Base::RegisterHandler();
 	COvenBakeConfig_HBO::RegisterHandler();
 	COvenBakeConfig_Mesh::RegisterHandler();
+	COvenBakeConfig_TextureLookup::RegisterHandler();
 	COvenBakeConfig_Texture::RegisterHandler();
 	COvenBakeConfig_TextureAtlas::RegisterHandler();
 	COvenBakeConfig_VectorField::RegisterHandler();
@@ -312,6 +313,7 @@ void	SBakeContext::Destroy()
 	COvenBakeConfig_VectorField::UnregisterHandler();
 	COvenBakeConfig_TextureAtlas::UnregisterHandler();
 	COvenBakeConfig_Texture::UnregisterHandler();
+	COvenBakeConfig_TextureLookup::UnregisterHandler();
 	COvenBakeConfig_Mesh::UnregisterHandler();
 	COvenBakeConfig_HBO::UnregisterHandler();
 	COvenBakeConfig_Base::UnregisterHandler();
@@ -343,7 +345,8 @@ void	SBakeContext::_RemapResourcesPath(CString &path, bool &, CMessageStream &)
 //----------------------------------------------------------------------------
 
 CEffectBaker::CEffectBaker()
-	: m_PKSourcePack(null)
+	: m_ReloadProjectSettings(false)
+	, m_PKSourcePack(null)
 	, m_ProjectSettings(null)
 	, m_BakeConfigParticle(null)
 {
@@ -432,6 +435,19 @@ void			CEffectBaker::FileChanged(const CString &path)
 
 		CEffectBaker::FileChangedRelativePath(cleanPath);
 	}
+	else if (path.EndsWith(".pkproj"))
+	{
+		if (m_ProjectSettings == null)
+			return;
+
+		CString		cleanPath = path.Extract(m_PKPackPath.SlashAppended().Length(), path.Length());
+		CFilePath::Purify(cleanPath);
+
+		if (cleanPath != m_ProjectSettings->FilePath())
+			return;
+
+		m_ReloadProjectSettings = true;
+	}
 }
 
 void			CEffectBaker::FileChangedRelativePath(const CString &path)
@@ -481,26 +497,35 @@ void			CEffectBaker::FileRenamed(const CString &oldPath, const CString &newPath)
 
 //----------------------------------------------------------------------------
 
-void			CEffectBaker::Initialize(const char *pKPackPath, const char *targetPlatformName, u32 qualitySettingsCount)
+void			CEffectBaker::SetPackSettings(const char *pKPackPath, const char *targetPlatformName, u32 qualitySettingsCount)
+{
+	m_UnityPackSettings.m_PackPath = pKPackPath;
+	m_UnityPackSettings.m_TargetPlatformName = targetPlatformName;
+	m_UnityPackSettings.m_QualitySettingsCount = qualitySettingsCount;
+}
+
+//----------------------------------------------------------------------------
+
+void			CEffectBaker::Initialize()
 {
 	m_BakeContext.m_BakeContext->UnloadAllFiles();
 	m_BakeContext.m_BakeFSController->UnmountAllPacks();
 
-	if (pKPackPath == null)
+	if (m_UnityPackSettings.m_PackPath.Empty())
 		return;
 
 	IFileSystem				*fs = m_BakeContext.m_BakeFSController;
 	HBO::CContext			*context = m_BakeContext.m_BakeContext;
 
 	// Find source pack root path:
-	CProjectSettingsFinder	finder(pKPackPath, fs);
+	CProjectSettingsFinder	finder(m_UnityPackSettings.m_PackPath, fs);
 	finder.Walk();
 
 	const CString	projectSettingsFilePath = finder.ProjectSettingsPath();
 	if (projectSettingsFilePath.Empty() ||
 		!fs->Exists(projectSettingsFilePath, true))
 	{
-		CLog::Log(PK_ERROR, "Could not find Project Settings in pack \"%s\"", pKPackPath);
+		CLog::Log(PK_ERROR, "Could not find Project Settings in pack \"%s\"", m_UnityPackSettings.m_PackPath.Data());
 		return;
 	}
 
@@ -527,7 +552,7 @@ void			CEffectBaker::Initialize(const char *pKPackPath, const char *targetPlatfo
 	const CString				ignoredPath = asset->IgnoredPaths();
 
 	ignoredPath.Split(';', m_IgnoredPaths);
-	m_PKPackPath = relRoot.Compare(".") ? CString(pKPackPath) : CString(pKPackPath) + "/" + relRoot;
+	m_PKPackPath = relRoot.Compare(".") ? m_UnityPackSettings.m_PackPath : m_UnityPackSettings.m_PackPath + "/" + relRoot;
 	m_PKSourcePack = m_BakeContext.m_BakeFSController->MountPack(m_PKPackPath);
 
 	CFilePath::Purify(m_PKPackPath);
@@ -571,6 +596,7 @@ void			CEffectBaker::Initialize(const char *pKPackPath, const char *targetPlatfo
 	// map all known extensions to the appropriate oven:
 	m_BakeContext.m_Cookery.MapOven("fbx", ovenIdMesh);				// FBX mesh
 	m_BakeContext.m_Cookery.MapOven("pkmm", ovenIdMesh);			// PopcornFX multi-mesh
+	m_BakeContext.m_Cookery.MapOven("pkim", ovenIdTexture);			// pkim image
 	m_BakeContext.m_Cookery.MapOven("dds", ovenIdTexture);			// dds image
 	m_BakeContext.m_Cookery.MapOven("png", ovenIdTexture);			// png image
 	m_BakeContext.m_Cookery.MapOven("jpg", ovenIdTexture);			// jpg image
@@ -601,8 +627,9 @@ void			CEffectBaker::Initialize(const char *pKPackPath, const char *targetPlatfo
 
 	m_BakeContext.m_Cookery.AddOvenFlags(COven::Flags_BakeMemoryVersion);
 
-	SetTargetPlatform(targetPlatformName, qualitySettingsCount);
+	SetTargetPlatform(m_UnityPackSettings.m_TargetPlatformName, m_UnityPackSettings.m_QualitySettingsCount);
 	UpdateCookeryConfigFile();
+	_UpdateProjectSettings();
 }
 
 //----------------------------------------------------------------------------
@@ -643,6 +670,12 @@ void	CEffectBaker::CancelAllFileChanges()
 
 int	CEffectBaker::PopFileChanges()
 {
+	if (m_ReloadProjectSettings)
+	{
+		Initialize();
+		m_ReloadProjectSettings = false;
+	}
+
 	SAssetChangesDesc	assetChange;
 
 	assetChange.m_Type = EAssetChangesType::Undefined;
@@ -1055,6 +1088,14 @@ bool	CEffectBaker::DeleteFolderRec(const CString &absDirPath)
 	}
 	
 	return true;
+}
+
+//----------------------------------------------------------------------------
+
+void	CEffectBaker::_UpdateProjectSettings()
+{
+	if (m_ProjectSettings != null)
+		::OnProjectSettingsUpdated(m_ProjectSettings->LOD()->MinDistance(), m_ProjectSettings->LOD()->MaxDistance(), m_ProjectSettings->LOD()->MinMinDistance());
 }
 
 //----------------------------------------------------------------------------

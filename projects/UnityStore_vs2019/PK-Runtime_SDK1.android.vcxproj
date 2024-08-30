@@ -381,6 +381,10 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_config_dump.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_init.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_1d.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_1d_sampling.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_1d_sampling.inl" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_probability_function_2d.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_random.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_engine_utils\include\eu_samplers_curve.h" />
@@ -431,6 +435,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_compression.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_config.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_config_dump.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_density.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_downsampling.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_image.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_imaging\include\im_init.h" />
@@ -692,6 +697,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_event_stream.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_grid.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_image_atlas.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_shape.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_text.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\ps_samplers_vectorfield.h" />

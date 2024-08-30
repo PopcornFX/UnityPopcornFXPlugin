@@ -15,6 +15,7 @@
 #include <pk_particles/include/ps_effect.h>
 #include <pk_particles/include/ps_system.h>
 #include <pk_particles/include/ps_stats.h>
+#include <pk_particles/include/ps_lod.h>
 #include <pk_geometrics/include/ge_mesh_kdtree.h>
 #include <pk_maths/include/pk_maths_primitives_plane.h>	// used for basic collisions against a ground plane
 #include <pk_imaging/include/im_image.h>
@@ -94,21 +95,75 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 	// Single threaded:
 	m_IsSingleThreaded = (settings.m_SingleThreadedExecution == ManagedBool_True);
 	m_EnableRaycastCollisions = (settings.m_EnableRaycastForCollisions == ManagedBool_True);
+	m_UnityVersion = settings.m_UnityVersion;
 	if (m_EnableRaycastCollisions)
 	{
-		if (settings.m_RaycastCommandSize != sizeof(RaycastCommand))
+		if (settings.m_UnityVersion <= 2021)
 		{
-			CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
-			m_EnableRaycastCollisions = false;
-		}
+			if (settings.m_RaycastCommandSize != sizeof(RaycastCommand))
+			{
+				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+				m_EnableRaycastCollisions = false;
+			}
 
-		if (settings.m_RaycastHitSize != sizeof(RaycastHit))
+			if (settings.m_RaycastHitSize != sizeof(RaycastHit))
+			{
+				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+				m_EnableRaycastCollisions = false;
+			}
+		}
+		else
 		{
-			CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
-			m_EnableRaycastCollisions = false;
+			if (settings.m_RaycastCommandSize != sizeof(RaycastCommand2022orNewer))
+			{
+				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+				m_EnableRaycastCollisions = false;
+			}
+
+			if (settings.m_RaycastHitSize != sizeof(RaycastHit2022orNewer))
+			{
+				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+				m_EnableRaycastCollisions = false;
+			}
+		}
+		if (settings.m_UnityVersion <= 2021)
+		{
+			if (settings.m_SpherecastCommandSize != sizeof(SphereCastCommand))
+			{
+				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+				m_EnableRaycastCollisions = false;
+			}
+
+			if (settings.m_SpherecastHitSize != sizeof(SphereCastHit))
+			{
+				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+				m_EnableRaycastCollisions = false;
+			}
+		}
+		else
+		{
+				if (settings.m_SpherecastCommandSize != sizeof(SphereCastCommand2022orNewer))
+				{
+					CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+					m_EnableRaycastCollisions = false;
+				}
+
+				if (settings.m_SpherecastHitSize != sizeof(SphereCastHit2022orNewer))
+				{
+					CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
+					m_EnableRaycastCollisions = false;
+				}
 		}
 	}
 	m_WaitForUpdateOnRenderThread = (!m_IsSingleThreaded && !m_EnableRaycastCollisions); //settings.m_SingleThreadedExecution == 0 && settings.m_EnableRaycastForCollisions == 0;
+
+	m_MediumCollectionSettings.m_EnableDynamicEffectBounds = !(settings.m_DisableDynamicEffectBounds == ManagedBool_True);
+	m_MediumCollectionSettings.m_EnableLocalizedPages = (settings.m_EnableLocalizedPages == ManagedBool_True);
+	m_MediumCollectionSettings.m_EnableLocalizedByDefault = (settings.m_EnableLocalizedByDefault == ManagedBool_True);
+	m_MediumCollectionSettings.m_LODMinDist = settings.m_LODMinDistance;
+	m_MediumCollectionSettings.m_LODMaxDist = settings.m_LODMaxDistance;
+	m_MediumCollectionSettings.m_LODMinMinDist = settings.m_LODMinMinDistance;
+	m_MediumCollectionSettings.m_Initialized = true;
 
 	// Reset the medium collections:
 	if (!_ResetParticleMediumCollections())
@@ -137,25 +192,13 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 		}
 		m_RenderThreadRegistered = false;
 	}
-	const bool		enableDynamicEffectBounds = !(settings.m_DisableDynamicEffectBounds == ManagedBool_True);
-	const bool		enableLocalizedPages = (settings.m_EnableLocalizedPages == ManagedBool_True);
-	const bool		enableLocalizedByDefault = (settings.m_EnableLocalizedByDefault == ManagedBool_True);
 
-	// Enable/Disable bounds
-	m_ParticleMediumCollection->EnableBounds(enableDynamicEffectBounds);
-	m_ParticleMediumCollection->EnableLocalizedPages(enableLocalizedPages, enableLocalizedByDefault);
-	if (m_GameThreadMediumCollection != null)
-	{
-		m_GameThreadMediumCollection->EnableBounds(enableDynamicEffectBounds);
-		m_GameThreadMediumCollection->EnableLocalizedPages(enableLocalizedPages, enableLocalizedByDefault);
-	}
 	// Split double sided materials:
 	m_RenderDataFactory.SetGPUBillboarding(settings.m_EnableGPUBillboarding == ManagedBool_True);
 
 	m_RenderContext.m_FreeUnusedBatches = settings.m_FreeUnusedBatches == ManagedBool_True;
 	m_RenderContext.m_FrameCountBeforeFreeingUnusedBatches = settings.m_FrameCountBeforeFreeingUnusedBatches;
 
-	m_IsMediumCollectionInitialized = true;
 	return true;
 }
 
@@ -224,6 +267,10 @@ void	CPKFXScene::LaunchUpdate(float dt)
 	//ResetSoundBuffer
 	m_TotalSoundParticleCount = 0;
 	m_SoundDatas.Clear();
+
+	// ResetDecalBuffer
+	m_TotalDecalParticleCount = 0;
+	m_DecalDatas.Clear();
 
 	if (UpdateMode() != UpdateMode_NoUpdate)
 	{
@@ -327,8 +374,13 @@ void	CPKFXScene::LaunchUpdate(float dt)
 			}
 		}
 	}
+
 	// SetSoundBuffer
 	::OnSetSoundsBuffer(m_SoundDatas.RawDataPointer(), m_TotalSoundParticleCount);
+
+	// SetDecalBuffer
+	::OnSetDecalsBuffer(m_DecalDatas.RawDataPointer(), m_TotalDecalParticleCount);
+
 	m_GameThreadCalled = true;
 }
 
@@ -468,59 +520,180 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 	{
 		PK_NAMEDSCOPEDPROFILE("CParticleSceneInterface: RayTracePacket Dynamic Collision");
 
-		void	*cmd = null;
+		const bool		sphereSweepDisabled = packet.m_RaySweepRadii_Aligned16.Empty();
 
-		::OnRaycastStart(packet.m_RayOrigins_Aligned16.Count() , &cmd);
-
-		RaycastCommand	*cmdBuffer = (RaycastCommand*)cmd;
-
-		const CFloat4	*origins = packet.m_RayOrigins_Aligned16.Data();
-		const CFloat4	*directions = packet.m_RayDirectionsAndLengths_Aligned16.Data();
-		s32				layerMask = traceFilter.m_FilterFlags == 0 ? -5/*Physics.DefaultRaycastLayers*/ : (1 << traceFilter.m_FilterFlags);
-
-		for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+		if (sphereSweepDisabled)
 		{
-			cmdBuffer[i].from = origins[i].xyz();
-			cmdBuffer[i].direction = directions[i].xyz();
-			cmdBuffer[i].layerMask = layerMask;
-			cmdBuffer[i].distance = directions[i].w();
-			cmdBuffer[i].maxHits = 1;
-		}
+			void* cmd = null;
 
-		CGuid	currentThreadId = CCurrentThread::ThreadID();
+			::OnRaycastStart(packet.m_RayOrigins_Aligned16.Count(), &cmd);
 
-		if (!currentThreadId.Valid()) // Cannot resolve the ray-cast without a threadID
-			return;
+			const CFloat4* origins = packet.m_RayOrigins_Aligned16.Data();
+			const CFloat4* directions = packet.m_RayDirectionsAndLengths_Aligned16.Data();
+			s32				layerMask = traceFilter.m_FilterFlags == 0 ? -5/*Physics.DefaultRaycastLayers*/ : (1 << traceFilter.m_FilterFlags);
 
-		void	*res = null;
-
-		::OnRaycastPack(&res);
-
-		RaycastHit	*resBuffer = (RaycastHit*)res;
-
-		for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
-		{
-			if (resBuffer[i].collider != 0)
+			if (m_UnityVersion <= 2021)
 			{
-				results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
-				if (results.m_ContactNormals_Aligned16 != null)
-					results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
-				if (results.m_ContactPoints_Aligned16 != null)
-					results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
-
-				if (results.m_ContactObjects_Aligned16 != null)
+				RaycastCommand* cmdBuffer = (RaycastCommand*)cmd;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
 				{
-					if (results.m_HitTimes_Aligned16[i] < directions[i].w())
+					cmdBuffer[i].from = origins[i].xyz();
+					cmdBuffer[i].direction = directions[i].xyz();
+					cmdBuffer[i].layerMask = layerMask;
+					cmdBuffer[i].distance = directions[i].w();
+					cmdBuffer[i].maxHits = 1;
+				}
+			}
+			else
+			{
+				RaycastCommand2022orNewer* cmdBuffer2022orNewer = (RaycastCommand2022orNewer*)cmd;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+				{
+					cmdBuffer2022orNewer[i].from = origins[i].xyz();
+					cmdBuffer2022orNewer[i].direction = directions[i].xyz();
+					cmdBuffer2022orNewer[i].queryParams.layerMask = layerMask;
+					cmdBuffer2022orNewer[i].distance = directions[i].w();
+				}
+			}
+
+			CGuid	currentThreadId = CCurrentThread::ThreadID();
+
+			if (!currentThreadId.Valid()) // Cannot resolve the ray-cast without a threadID
+				return;
+
+			void* res = null;
+
+			::OnRaycastPack(&res);
+
+
+
+			if (m_UnityVersion <= 2021)
+			{
+				RaycastHit* resBuffer = (RaycastHit*)res;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+				{
+					if (resBuffer[i].collider != 0)
 					{
-						results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
+						results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
+						if (results.m_ContactNormals_Aligned16 != null)
+							results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
+						if (results.m_ContactPoints_Aligned16 != null)
+							results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
+
+						if (results.m_ContactObjects_Aligned16 != null)
+						{
+							if (results.m_HitTimes_Aligned16[i] < directions[i].w())
+							{
+								results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
+							}
+							else
+							{
+								results.m_ContactObjects_Aligned16[i] = null;
+							}
+						}
 					}
-					else
+				}
+			}
+			else
+			{
+				RaycastHit2022orNewer* resBuffer = (RaycastHit2022orNewer*)res;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+				{
+					if (resBuffer[i].collider != 0)
 					{
-						results.m_ContactObjects_Aligned16[i] = null;
+						results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
+						if (results.m_ContactNormals_Aligned16 != null)
+							results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
+						if (results.m_ContactPoints_Aligned16 != null)
+							results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
+
+						if (results.m_ContactObjects_Aligned16 != null)
+						{
+							if (results.m_HitTimes_Aligned16[i] < directions[i].w())
+							{
+								results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
+							}
+							else
+							{
+								results.m_ContactObjects_Aligned16[i] = null;
+							}
+						}
 					}
 				}
 			}
 		}
+		else
+		{
+			void* cmd = null;
+
+			::OnSpherecastStart(packet.m_RayOrigins_Aligned16.Count(), &cmd);
+
+			const CFloat4	*origins = packet.m_RayOrigins_Aligned16.Data();
+			const CFloat4	*directions = packet.m_RayDirectionsAndLengths_Aligned16.Data();
+			const float		*radii = packet.m_RaySweepRadii_Aligned16.Data();
+			s32				layerMask = traceFilter.m_FilterFlags == 0 ? -5/*Physics.DefaultRaycastLayers*/ : (1 << traceFilter.m_FilterFlags);
+
+			if (m_UnityVersion <= 2021)
+			{
+				SphereCastCommand	*cmdBuffer = (SphereCastCommand*)cmd;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+				{
+					cmdBuffer[i].from = origins[i].xyz();
+					cmdBuffer[i].direction = directions[i].xyz();
+					cmdBuffer[i].layerMask = layerMask;
+					cmdBuffer[i].distance = directions[i].w();
+					cmdBuffer[i].radius = radii[i];
+					cmdBuffer[i].maxHit = 1;
+				}
+			}
+			else
+			{
+				SphereCastCommand2022orNewer	*cmdBuffer = (SphereCastCommand2022orNewer*)cmd;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+				{
+					cmdBuffer[i].from = origins[i].xyz();
+					cmdBuffer[i].direction = directions[i].xyz();
+					cmdBuffer[i].queryParams.layerMask = layerMask;
+					cmdBuffer[i].distance = directions[i].w();
+					cmdBuffer[i].radius = radii[i];
+				}
+			}
+
+			CGuid	currentThreadId = CCurrentThread::ThreadID();
+
+			if (!currentThreadId.Valid()) // Cannot resolve the ray-cast without a threadID
+				return;
+
+			void	*res = null;
+
+			::OnSpherecastPack(&res);
+
+			SphereCastHit	*resBuffer = (SphereCastHit*)res;
+			for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+			{
+				if (resBuffer[i].collider != 0)
+				{
+					results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
+					if (results.m_ContactNormals_Aligned16 != null)
+						results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
+					if (results.m_ContactPoints_Aligned16 != null)
+						results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
+
+					if (results.m_ContactObjects_Aligned16 != null)
+					{
+						if (results.m_HitTimes_Aligned16[i] < directions[i].w())
+						{
+							results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
+						}
+						else
+						{
+							results.m_ContactObjects_Aligned16[i] = null;
+						}
+					}
+				}
+			}
+		}
+
 	}
 }
 
@@ -1036,6 +1209,9 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 	if(CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_SoundRenderer)
 		enabledRenderer = enabledRenderer | (1U << Renderer_Sound);
 
+	if (CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_DecalRenderer)
+		enabledRenderer = enabledRenderer | (1U << Renderer_Decal);
+
 	CUnityFrameCollector::SFrameCollectorInit	init_Meshes(&m_RenderDataFactory, enabledRenderer);
 	PK_VERIFY(m_GameThreadFrameCollector->UpdateThread_Initialize(init_Meshes));
 
@@ -1061,6 +1237,33 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 		// Instal the game thread frame collector:
 		m_GameThreadFrameCollector->UpdateThread_InstallToMediumCollection(m_ParticleMediumCollection);
 	}
+
+	if (m_MediumCollectionSettings.m_Initialized)
+	{
+		// Enable/Disable bounds
+		m_ParticleMediumCollection->EnableBounds(m_MediumCollectionSettings.m_EnableDynamicEffectBounds);
+		m_ParticleMediumCollection->EnableLocalizedPages(	m_MediumCollectionSettings.m_EnableLocalizedPages,
+			m_MediumCollectionSettings.m_EnableLocalizedByDefault);
+		if (m_GameThreadMediumCollection != null)
+		{
+			m_GameThreadMediumCollection->EnableBounds(m_MediumCollectionSettings.m_EnableDynamicEffectBounds);
+			m_GameThreadMediumCollection->EnableLocalizedPages(	m_MediumCollectionSettings.m_EnableLocalizedPages,
+				m_MediumCollectionSettings.m_EnableLocalizedByDefault);
+		}
+
+		// LOD
+		LOD::SConfig	lodConfig = m_ParticleMediumCollection->LODConfig();
+		lodConfig.m_MinDist = m_MediumCollectionSettings.m_LODMinDist;
+		lodConfig.m_MaxDist = m_MediumCollectionSettings.m_LODMaxDist;
+		lodConfig.m_MinMinDist = m_MediumCollectionSettings.m_LODMinMinDist;
+
+		m_ParticleMediumCollection->SetLODConfig(&lodConfig);
+		if (m_GameThreadMediumCollection != null)
+			m_GameThreadMediumCollection->SetLODConfig(&lodConfig);
+	}
+
+	m_IsMediumCollectionInitialized = true;
+
 	return true;
 }
 

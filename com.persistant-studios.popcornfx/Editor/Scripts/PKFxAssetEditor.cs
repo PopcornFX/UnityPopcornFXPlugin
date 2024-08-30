@@ -10,21 +10,22 @@ using System.Linq;
 
 namespace PopcornFX
 {
+
 	[CustomEditor(typeof(PKFxEffectAsset))]
 	public class PKFxAssetEditor : Editor
 	{
-		private MaterialEditor	m_MaterialEditor = null;
-		GUIStyle				m_BGColor = new GUIStyle();
+		private MaterialEditor m_MaterialEditor = null;
+		GUIStyle m_BGColor = new GUIStyle();
 
-		static bool[]			m_ShowQualities = null;
+		static bool[] m_ShowQualities = null;
 
-		private double			m_LastFrameEditorTime;
-		private float			m_CurrentTime;
-		private Material		m_AnimatedThumbnailMaterial;
-		static readonly int		s_ShaderColorMask = Shader.PropertyToID("_ColorMaskBits");
-		static readonly int		s_ShaderSliceIndex = Shader.PropertyToID("_SliceIndex");
-		static readonly int		s_ShaderToSrgb = Shader.PropertyToID("_ToSRGB");
-		static readonly int		s_ShaderIsNormalMap = Shader.PropertyToID("_IsNormalMap");
+		private double m_LastFrameEditorTime;
+		private float m_CurrentTime;
+		private Material m_AnimatedThumbnailMaterial;
+		static readonly int s_ShaderColorMask = Shader.PropertyToID("_ColorMaskBits");
+		static readonly int s_ShaderSliceIndex = Shader.PropertyToID("_SliceIndex");
+		static readonly int s_ShaderToSrgb = Shader.PropertyToID("_ToSRGB");
+		static readonly int s_ShaderIsNormalMap = Shader.PropertyToID("_IsNormalMap");
 
 		//----------------------------------------------------------------------------
 
@@ -123,8 +124,10 @@ namespace PopcornFX
 
 		public override bool RequiresConstantRepaint()
 		{
-			PKFxEffectAsset asset = target as PKFxEffectAsset;
-			return asset != null && (asset.m_EditorAnimatedThumbnail != null);
+			// This is too heavy to repaint everything for the animated thumnail, find another way
+			//PKFxEffectAsset asset = target as PKFxEffectAsset;
+			//return asset != null && (asset.m_EditorAnimatedThumbnail != null);
+			return false;
 		}
 
 		//----------------------------------------------------------------------------
@@ -205,7 +208,7 @@ namespace PopcornFX
 			Texture2D[] colors = new Texture2D[] { MakeGUITexture(backgroundColor * 1.2f), MakeGUITexture(backgroundColor * 1.35f) };
 
 			//
-			int[]	usedRenderers = new int[rdrsListSize];
+			int[] usedRenderers = new int[rdrsListSize];
 			if (PKFxManager.QualitiesLevelDescription != null)
 			{
 				EditorGUI.indentLevel++;
@@ -371,8 +374,8 @@ namespace PopcornFX
 				}
 				if (showUnusedRendererWarning)
 				{
-					GUIStyle	warnStyle = new GUIStyle();
-					Texture2D	colorWarn = MakeGUITexture(new Color32(200, 56, 56, 255));
+					GUIStyle warnStyle = new GUIStyle();
+					Texture2D colorWarn = MakeGUITexture(new Color32(200, 56, 56, 255));
 
 					warnStyle.normal.background = colorWarn;
 					warnStyle.alignment = TextAnchor.MiddleCenter;
@@ -437,8 +440,9 @@ namespace PopcornFX
 			{
 				EditorGUILayout.LabelField("Attributes : ");
 				EditorGUI.indentLevel++;
+                SerializedProperty m_currentCategory = null;
 
-				for (int i = 0; i < attrsListSize; i++)
+                for (int i = 0; i < attrsListSize; i++)
 				{
 					SerializedProperty attrDesc = attrs.GetArrayElementAtIndex(i);
 
@@ -447,12 +451,23 @@ namespace PopcornFX
 						continue;
 					SerializedProperty attrName = attrDesc.FindPropertyRelative("m_Name");
 					SerializedProperty attrType = attrDesc.FindPropertyRelative("m_Type");
+					SerializedProperty m_Category = attrDesc.FindPropertyRelative("m_Category");
 					SerializedProperty attrSemantic = attrDesc.FindPropertyRelative("m_Semantic");
 					SerializedProperty minMaxFlag = attrDesc.FindPropertyRelative("m_MinMaxFlag");
 					EAttributeType baseType = (EAttributeType)attrType.intValue;
 					EAttributeSemantic semantic = (EAttributeSemantic)attrSemantic.intValue;
 
-					bool showMinMax = false;
+
+                    if (m_currentCategory == null || m_Category.stringValue != m_currentCategory.stringValue)
+                    {
+                        m_currentCategory = m_Category;
+                        if (m_currentCategory.stringValue == "")
+                            m_currentCategory.stringValue = "General";
+						EditorGUILayout.LabelField(m_currentCategory.stringValue);
+                    }
+                    EditorGUI.indentLevel++;
+
+                    bool showMinMax = false;
 					string minValDesc = "";
 					string maxValDesc = "";
 					string defaultValStr = "";
@@ -517,6 +532,7 @@ namespace PopcornFX
 					}
 					EditorGUI.indentLevel--;
 					EditorGUI.indentLevel--;
+					EditorGUI.indentLevel--;
 				}
 				EditorGUI.indentLevel--;
 			}
@@ -528,17 +544,46 @@ namespace PopcornFX
 			{
 				EditorGUILayout.LabelField("Samplers : ");
 				EditorGUI.indentLevel++;
+                SerializedProperty m_currentCategory = null;
 
-				for (int i = 0; i < smplrsListSize; i++)
+                for (int i = 0; i < smplrsListSize; i++)
 				{
 					SerializedProperty smplrsDesc = smplrs.GetArrayElementAtIndex(i);
 					SerializedProperty smplrsName = smplrsDesc.FindPropertyRelative("m_Name");
 					SerializedProperty smplrsType = smplrsDesc.FindPropertyRelative("m_Type");
+					SerializedProperty m_Category = smplrsDesc.FindPropertyRelative("m_Category");
 					SerializedProperty usageFlags = smplrsDesc.FindPropertyRelative("m_UsageFlags");
 
-					EditorGUI.indentLevel++;
+                    if (m_currentCategory == null || m_Category.stringValue != m_currentCategory.stringValue)
+                    {
+                        m_currentCategory = m_Category;
+                        if (m_currentCategory.stringValue == "")
+                            m_currentCategory.stringValue = "General";
+                        EditorGUILayout.LabelField(m_currentCategory.stringValue);
+                    }
+                    EditorGUI.indentLevel++;
+
+                    EditorGUI.indentLevel++;
 					EditorGUILayout.LabelField(smplrsType.enumNames[smplrsType.enumValueIndex] + " " + smplrsName.stringValue);
-					EditorGUILayout.LabelField("Usage: " + SamplerDesc.UsageFlagsToString(usageFlags.intValue));
+					string usageString = SamplerDesc.UsageFlagsToString(usageFlags.intValue);
+					if (usageString != null && usageString.Length != 0)
+						EditorGUILayout.LabelField("Usage: " + SamplerDesc.UsageFlagsToString(usageFlags.intValue));
+					if (smplrsType.enumValueIndex == (int)ESamplerType.SamplerGrid)
+					{
+						EditorGUI.indentLevel++;
+
+						SerializedProperty smplrsGridOrder = smplrsDesc.FindPropertyRelative("m_GridOrder");
+						SerializedProperty smplrsGridType = smplrsDesc.FindPropertyRelative("m_GridType");
+						SerializedProperty smplrsXY = smplrsDesc.FindPropertyRelative("m_GridDimensionsXY");
+						SerializedProperty smplrsZW = smplrsDesc.FindPropertyRelative("m_GridDimensionsZW");
+						EditorGUILayout.LabelField(string.Format("Grid Order: {0}", smplrsGridOrder.intValue));
+						EditorGUILayout.LabelField(string.Format("Grid Type:  {0}", PKFxUtils.EBaseTypeIDToString((EBaseTypeID)smplrsGridType.intValue)));
+						EditorGUILayout.LabelField(string.Format("Grid Dims:  {0},{1},{2},{3}", smplrsXY.vector2IntValue.x, smplrsXY.vector2IntValue.y,
+																								smplrsZW.vector2IntValue.x, smplrsZW.vector2IntValue.y));
+						EditorGUI.indentLevel--;
+
+					}
+					EditorGUI.indentLevel--;
 					EditorGUI.indentLevel--;
 				}
 				EditorGUI.indentLevel--;

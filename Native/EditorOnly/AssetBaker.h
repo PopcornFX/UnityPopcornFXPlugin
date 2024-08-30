@@ -54,6 +54,13 @@ public:
 class	CEffectBaker : public CRefCountedObject
 {
 private:
+	struct	SUnityPackSettings
+	{
+		CString					m_PackPath;
+		CString					m_TargetPlatformName;
+		u32						m_QualitySettingsCount;
+	};
+
 	struct	SAssetChange
 	{
 		CString					m_EffectPath;
@@ -102,7 +109,8 @@ public:
 	void				FileChangedRelativePath(const CString &path);
 	void				FileRenamed(const CString &oldPath, const CString &newPath);
 
-	void				Initialize(const char *pKPackPath, const char* targetPlatformName, u32 qualitySettingsCount);
+	void				SetPackSettings(const char *pKPackPath, const char* targetPlatformName, u32 qualitySettingsCount);
+	void				Initialize();
 	void				Clear();
 
 	void				Lock();
@@ -135,11 +143,16 @@ public:
 	CString				GetPopcornFXPackPath() { return m_PKPackPath; }
 	CString				GetDstBakePackPath() { return m_BakeContext.m_DstBakeTarget.m_TargetPath; }
 private:
+	void				_UpdateProjectSettings();
+
+	SUnityPackSettings			m_UnityPackSettings;
+
 	const int					m_MaxBakeRetry = 5;
 
 	TArray<CString>				m_IgnoredPaths;
 	TArray<SAssetChange>		m_ToProcess;
 	TArray<SAssetChange>		m_ToBake;
+	bool						m_ReloadProjectSettings;
 	CString						m_PKPackPath;
 	CString						m_PlatformName;
 	u32							m_QualitySettingCount = 0;

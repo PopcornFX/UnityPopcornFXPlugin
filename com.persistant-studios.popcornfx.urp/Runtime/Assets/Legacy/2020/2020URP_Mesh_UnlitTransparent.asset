@@ -31,6 +31,12 @@ MonoBehaviour:
   m_MeshEmissiveColorPropertyName: _EmissiveColor
   m_MeshAlphaCursorPropertyName: _AlphaCursor
   m_MeshCullingModePropertyName: _Cull
+  m_DecalDiffuseColorPropertyName: _DiffuseColor
+  m_DecalEmissiveColorPropertyName: _EmissiveColor
+  m_DecalHasAtlasPropertyName: _HasAtlas
+  m_DecalAtlasIdPropertyName: _AtlasId
+  m_DecalTextureAtlasPropertyName: _AtlasRects
+  m_DecalAtlasCountPropertyName: _AtlasCount
   m_MeshVATCursorPropertyName: _VATCursor
   m_VATPositionMapPropertyName: _VATPositionMap
   m_VATNormalMapPropertyName: _VATNormalMap
@@ -67,10 +73,12 @@ MonoBehaviour:
   m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
   m_UseVertexColorPropertyName: _UseVertexColor
   m_UseShader: 1
-  m_Shader: {fileID: -6465566751694194690, guid: 5063809327388d542aad72108afb7f6d, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 5063809327388d542aad72108afb7f6d,
+    type: 3}
   m_Material: {fileID: 2100000, guid: fae10d89de9b465428a4b0d759f5af61, type: 2}
   m_RenderTypes: 00000100000000
   m_BlendMode: 010101010000
+  m_IsLegacy: 1
   m_SupportedShaderMask: 523751
   m_MandatoryShaderMask: 0
   m_BillboardingLocation: 0

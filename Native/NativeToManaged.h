@@ -46,6 +46,7 @@ extern "C"
 
 		int							m_ShaderVariationFlags;
 		int							m_BlendMode;
+		ManagedBool					m_IsLegacy;
 		ManagedBool					m_RotateUvs;
 
 		const char					*m_DiffuseMap;
@@ -69,6 +70,7 @@ extern "C"
 		:	m_CustomName(null)
 		,	m_ShaderVariationFlags(0)
 		,	m_BlendMode(0)
+		,	m_IsLegacy(ManagedBool_True)
 		,	m_RotateUvs(ManagedBool_False)
 		,	m_DiffuseMap(null)
 		,	m_EmissiveMap(null)
@@ -141,6 +143,36 @@ extern "C"
 		}
 	};
 
+	// Decals:
+	struct SDecalRendererDesc
+	{
+		int				 m_ShaderVariationFlags;
+
+		const char		 *m_DiffuseMap;
+		const char		 *m_EmissiveMap;
+
+		CFloat4			 m_DiffuseColor;
+		CFloat3			 m_EmissiveColor;
+
+		int				 m_TextureAtlasCount;
+		CFloat4			 *m_TextureAtlas;
+
+		int				 m_UID;
+
+		SDecalRendererDesc()
+			: m_ShaderVariationFlags(0)
+			, m_DiffuseMap(null)
+			, m_EmissiveMap(null)
+			, m_DiffuseColor(CFloat4::ZERO)
+			, m_EmissiveColor(CFloat3::ZERO)
+			, m_TextureAtlasCount(0)
+			, m_TextureAtlas(null)
+			, m_UID(-1)
+		{
+		}
+	};
+
+
 	// Meshes:
 	struct SMeshRendererDesc
 	{
@@ -150,6 +182,7 @@ extern "C"
 		const char					*m_MeshAsset;
 		int							m_ShaderVariationFlags;
 		int							m_BlendMode;
+		ManagedBool					m_IsLegacy;
 		// ------------------------------
 		ManagedBool					m_HasMeshAtlas;
 
@@ -179,6 +212,7 @@ extern "C"
 			, m_MeshAsset(null)
 			, m_ShaderVariationFlags(0)
 			, m_BlendMode(0)
+			, m_IsLegacy(ManagedBool_True)
 			, m_HasMeshAtlas(ManagedBool_False)
 			, m_DiffuseMap(null)
 			, m_EmissiveMap(null)
@@ -267,11 +301,14 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastStart(void *delegatePtr);
 	void										OnRaycastStart(int count, void **cmd);
 
-	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastEnd(void *delegatePtr);
-	void										OnRaycastEnd();
-
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRaycastPack(void *delegatePtr);
-	void										OnRaycastPack(void** res);
+	void										OnRaycastPack(void **res);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSpherecastStart(void *delegatePtr);
+	void										OnSpherecastStart(int count, void **cmd);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSpherecastPack(void *delegatePtr);
+	void										OnSpherecastPack(void **res);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnFxStopped(void *delegatePtr);
 	void										OnFxStopped(int guid);
@@ -299,6 +336,9 @@ extern "C"
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewTriangleRenderer(void *delegatePtr);
 	int											OnSetupNewTriangleRenderer(const SPopcornRendererDesc *rendererDesc, int idx);
 
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetupNewDecalRenderer(void *delegatePtr);
+	int											OnSetupNewDecalRenderer(const SDecalRendererDesc *rendererDesc, int idx);
+
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnResizeRenderer(void *delegatePtr);
 	ManagedBool									OnResizeRenderer(int rendererGUID, int particleCount, int reservedVertexCount, int reservedIndexCount);
 
@@ -319,6 +359,9 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetSoundsBuffer(void *delegatePtr);
 	void										OnSetSoundsBuffer(void *soundInfos, int count);
+
+	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnSetDecalsBuffer(void *delegatePtr);
+	void										OnSetDecalsBuffer(void *decalInfos, int count);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr);
 	void										OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID);

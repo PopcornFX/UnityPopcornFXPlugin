@@ -165,5 +165,91 @@ namespace PopcornFX
 			return Mathf.Pow(channel, 2.2f);
 #endif
 		}
+
+		public static string EBaseTypeIDToString(EBaseTypeID id)
+		{
+			switch (id)
+			{
+				case (EBaseTypeID.BaseType_Evolved):
+					return "Evolved";
+				case (EBaseTypeID.BaseType_Void):
+					return "Void";
+				case (EBaseTypeID.BaseType_Bool):
+					return "Bool";
+				case (EBaseTypeID.BaseType_Bool2):
+					return "Bool2";
+				case (EBaseTypeID.BaseType_Bool3):
+					return "Bool3";
+				case (EBaseTypeID.BaseType_Bool4):
+					return "Bool4";
+				case (EBaseTypeID.BaseType_U8):
+					return "UByte";
+				case (EBaseTypeID.BaseType_UByte2):
+					return "UByte2";
+				case (EBaseTypeID.BaseType_UByte3):
+					return "UByte3";
+				case (EBaseTypeID.BaseType_UByte4):
+					return "UByte4";
+				case (EBaseTypeID.BaseType_I8):
+					return "Byte";
+				case (EBaseTypeID.BaseType_Byte2):
+					return "Byte2";
+				case (EBaseTypeID.BaseType_Byte3):
+					return "Byte3";
+				case (EBaseTypeID.BaseType_Byte4):
+					return "Byte4";
+				case (EBaseTypeID.BaseType_U16):
+					return "UWord";
+				case (EBaseTypeID.BaseType_UWord2):
+					return "UWord2";
+				case (EBaseTypeID.BaseType_UWord3):
+					return "UWord3";
+				case (EBaseTypeID.BaseType_UWord4):
+					return "UWord4";
+				case (EBaseTypeID.BaseType_I16):
+					return "Word";
+				case (EBaseTypeID.BaseType_Word2):
+					return "Word2";
+				case (EBaseTypeID.BaseType_Word3):
+					return "Word3";
+				case (EBaseTypeID.BaseType_Word4):
+					return "Word4";
+				case (EBaseTypeID.BaseType_U32):
+					return "UInt";
+				case (EBaseTypeID.BaseType_UInt2):
+					return "UInt2";
+				case (EBaseTypeID.BaseType_UInt3):
+					return "UInt3";
+				case (EBaseTypeID.BaseType_UInt4):
+					return "UInt4";
+				case (EBaseTypeID.BaseType_I32):
+					return "Int";
+				case (EBaseTypeID.BaseType_Int2):
+					return "Int2";
+				case (EBaseTypeID.BaseType_Int3):
+					return "Int3";
+				case (EBaseTypeID.BaseType_Int4):
+					return "Int4";
+				case (EBaseTypeID.BaseType_U64):
+					return "UInt64";
+				case (EBaseTypeID.BaseType_I64):
+					return "Int64";
+				case (EBaseTypeID.BaseType_Float):
+					return "Float";
+				case (EBaseTypeID.BaseType_Float2):
+					return "Float2";
+				case (EBaseTypeID.BaseType_Float3):
+					return "Float3";
+				case (EBaseTypeID.BaseType_Float4):
+					return "Float4";
+				case (EBaseTypeID.BaseType_Double):
+					return "Double";
+				case (EBaseTypeID.BaseType_Quaternion):
+					return "Quaternion";
+				default:
+					return "Type not supported";
+
+			}
+		}
 	}
 }

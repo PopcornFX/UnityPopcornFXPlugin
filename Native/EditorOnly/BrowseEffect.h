@@ -46,8 +46,8 @@ public:
 	bool	BrowseObjectForDependencies(TArray<SResourceDependency> &dependencies, bool &requiresGameThreadCollect);
 	bool	BrowseRenderers(CParticleEffect *particleEffect, CBaseObjectFile *file, bool &requiresGameThreadCollect);
 	bool	BrowseExportedEvents(CParticleEffect *particleEffect);
-	bool	BrowseAttributes(const CParticleAttributeList::_TypeOfAttributeList &attributeList, const TMemoryView<const u32> &remapIds);
-	bool	BrowseSamplers(const CParticleAttributeList::_TypeOfSamplerList &samplerList);
+	bool	BrowseAttributes(const CParticleAttributeList *attribList);
+	bool	BrowseSamplers(const CParticleAttributeList *attribList);
 };
 
 

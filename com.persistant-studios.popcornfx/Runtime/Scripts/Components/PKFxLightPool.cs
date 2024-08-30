@@ -26,9 +26,9 @@ namespace PopcornFX
 		private GameObject	m_Template;
 		private GameObject	m_LightRoot;
 
-		private IntPtr		m_Buffer;
-		private int			m_BufferCount;
-		private int			m_MaxActive;
+		private List<IntPtr>	m_Buffer = new List<IntPtr>();
+		private List<int>		m_BufferCount = new List<int>();
+		private uint			m_MaxActive;
 
 		private PKFxMaterialFactory m_Factory;
 
@@ -54,27 +54,37 @@ namespace PopcornFX
 			m_MaxActive = 0;
 		}
 
-		public void SetLightBuffer(IntPtr lightInfos, int count)
+		public void AddLightBuffer(IntPtr lightInfos, int count)
 		{
-			m_Buffer = lightInfos;
-			m_BufferCount = Mathf.Min(count, m_MaxLightNumber);
+			m_Buffer.Add(lightInfos);
+			m_BufferCount.Add(Mathf.Min(count, m_MaxLightNumber));
 		}
 
 		public void DrawLightRenderers()
 		{
-			int i = 0;
+			int		i = 0;
+			uint	activeAtFrame = 0;
+			int		lightsCount = Mathf.Min(m_Buffer.Count, m_MaxLightNumber);
 
 			unsafe
 			{
-				SLightInfo* currentPtr = (SLightInfo*)m_Buffer.ToPointer();
-				while (i < m_BufferCount)
+				for (int j = 0; j < m_Buffer.Count; j++)
 				{
-					SLightInfo	lightInfo = currentPtr[i];
-					Light		light = m_Light[i];
+					IntPtr ptr = m_Buffer[j];
+					SLightInfo* currentPtr = (SLightInfo*)ptr.ToPointer();
 
-					light.gameObject.SetActive(true);
-					m_Factory.SetLightValue(light, lightInfo);
-					++i;
+					uint k = 0;
+					while (k < m_BufferCount[j] && i < m_MaxLightNumber)
+					{
+						SLightInfo	lightInfo = currentPtr[k];
+						Light		light = m_Light[i];
+
+						light.gameObject.SetActive(true);
+						m_Factory.SetLightValue(light, lightInfo);
+						++i;
+						++k;
+					}
+					activeAtFrame += k;
 				}
 			}
 			while (i < m_MaxActive)
@@ -82,9 +92,9 @@ namespace PopcornFX
 				m_Light[i].gameObject.SetActive(false);
 				++i;
 			}
-			m_MaxActive = m_BufferCount;
-
-			m_BufferCount = 0;
+			m_MaxActive = activeAtFrame;
+			m_Buffer.Clear();
+			m_BufferCount.Clear();
 		}
 	}
 }

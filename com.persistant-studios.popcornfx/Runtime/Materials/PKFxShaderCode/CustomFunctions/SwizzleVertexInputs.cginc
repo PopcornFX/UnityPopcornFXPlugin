@@ -4,7 +4,7 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 									out float2 uv0, out float2 uv1, out float frameLerp,
 									out float2 uvFactors, out float2 uvScale, out float2 uvOffset,
 									out float alphaCursor,
-									out float3 emissiveColor, out float transformUvsRotate, out float4 transformUvsScaleAndOffset)
+									out float4 emissiveColor, out float transformUvsRotate, out float4 transformUvsScaleAndOffset)
 {
 	float4 	vertexInputs[4] = { texCoord0, texCoord1, texCoord2, texCoord3 };
 	int 	currentIdx = 0;
@@ -16,7 +16,7 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 	uvScale = float2(0.0f, 0.0f);
 	uvOffset = float2(0.0f, 0.0f);
 	alphaCursor = 0.0f;
-	emissiveColor = float3(0.0f, 0.0f, 0.0f);
+	emissiveColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	transformUvsRotate = 0.0f;
 	transformUvsScaleAndOffset = float4(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -55,7 +55,7 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 # endif
 
 # if	PK_HAS_EMISSIVE_BASIC || PK_HAS_EMISSIVE_WITH_RAMP
-	emissiveColor = vertexInputs[currentIdx++].xyz;
+	emissiveColor = vertexInputs[currentIdx++];
 # endif
 
 #	if	PK_HAS_TRANSFORM_UVS_ON

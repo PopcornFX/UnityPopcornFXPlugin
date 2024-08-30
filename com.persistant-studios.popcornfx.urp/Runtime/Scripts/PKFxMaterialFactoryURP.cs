@@ -5,7 +5,9 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using System;
+using System.Runtime.InteropServices;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -25,7 +27,7 @@ namespace PopcornFX
 				m_CreateFactory = true;
 			}
 		}
-		
+
 		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 		{
 			if (m_CreateFactory)
@@ -41,24 +43,24 @@ namespace PopcornFX
 	[Serializable]
 	public class PKFxMaterialFactoryURP : PKFxMaterialFactory
 	{
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitSkinned2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshUnlitDoubleSided2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshUnlitDoubleSided2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentMeshLitDoubleSided2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitDoubleSided2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueMeshLitSkinnedDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentMeshUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentMeshLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshLitSkinned2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentMeshUnlitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshUnlitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentMeshLitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshLitDoubleSided2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueMeshLitSkinnedDoubleSided2020;
 
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueParticleUnlit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentParticleUnlit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_AdditiveParticleUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueParticleUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentParticleUnlit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_AdditiveParticleUnlit2020;
 
-		[HideInInspector] public PKFxRenderFeatureBinding	m_OpaqueParticleLit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_TransparentParticleLit2020;
-		[HideInInspector] public PKFxRenderFeatureBinding	m_AdditiveParticleLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_OpaqueParticleLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_TransparentParticleLit2020;
+		[HideInInspector] public PKFxRenderFeatureBinding m_AdditiveParticleLit2020;
 
 		public enum SurfaceType
 		{
@@ -97,42 +99,66 @@ namespace PopcornFX
 		{
 #if UNITY_2021_1_OR_NEWER
 			// Meshes:
-			if (m_TransparentMeshUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDefault);
+			if (m_TransparentMeshUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitLegacy);
+			if (m_EmissiveMeshUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_EmissiveMeshUnlitDefault);
+			if (m_OpaqueMeshUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitLegacy);
 			if (m_OpaqueMeshUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
-			if (m_TransparentMeshLitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentMeshLitDefault);
+			if (m_TransparentMeshLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitLegacy);
+			if (m_OpaqueMeshLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitLegacy);
 			if (m_OpaqueMeshLitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
-			if (m_OpaqueMeshLitSkinnedDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedDefault);
+			if (m_OpaqueMeshLitSkinnedLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedLegacy);
 			// Particles Unlit:
+			if (m_OpaqueParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitLegacy);
 			if (m_OpaqueParticleUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
+			if (m_TransparentParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitLegacy);
 			if (m_TransparentParticleUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
-			if (m_AdditiveParticleUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitDefault);
+			if (m_AdditiveParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitLegacy);
+			if (m_OpaqueCorrectDeformationUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitLegacy);
 			if (m_OpaqueCorrectDeformationUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitDefault);
+			if (m_TransparentCorrectDeformationUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitLegacy);
 			if (m_TransparentCorrectDeformationUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitDefault);
-			if (m_AdditiveCorrectDeformationUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationUnlitDefault);
+			if (m_AdditiveCorrectDeformationUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationUnlitLegacy);
 			// Particles Lit:
+			if (m_OpaqueParticleLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleLitLegacy);
 			if (m_OpaqueParticleLitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueParticleLitDefault);
+			if (m_TransparentParticleLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleLitLegacy);
 			if (m_TransparentParticleLitDefault != null)
 				m_RenderFeatureBindings.Add(m_TransparentParticleLitDefault);
-			if (m_AdditiveParticleLitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveParticleLitDefault);
+			if (m_AdditiveParticleLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleLitLegacy);
+			if (m_OpaqueCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitLegacy);
 			if (m_OpaqueCorrectDeformationLitDefault != null)
 				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitDefault);
+			if (m_TransparentCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitLegacy);
 			if (m_TransparentCorrectDeformationLitDefault != null)
 				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitDefault);
-			if (m_AdditiveCorrectDeformationLitDefault != null)
-				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitDefault);
+			if (m_AdditiveCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitLegacy);
+			if (m_AlphaBlendDecal != null)
+				m_RenderFeatureBindings.Add(m_AlphaBlendDecal);
 #elif UNITY_2020_3_OR_NEWER
 			// Meshes:
 			if (m_TransparentMeshUnlit2020 != null)
@@ -170,14 +196,14 @@ namespace PopcornFX
 			if (m_AdditiveParticleLit2020 != null)
 				m_RenderFeatureBindings.Add(m_AdditiveParticleLit2020);
 #endif
-			if (m_CPUParticleDefault != null)
-				m_RenderFeatureBindings.Add(m_CPUParticleDefault);
-			if (m_CPUParticleOpaqueDefault != null)
-				m_RenderFeatureBindings.Add(m_CPUParticleOpaqueDefault);
-			if (m_VertexBillboardingDefault != null)
-				m_RenderFeatureBindings.Add(m_VertexBillboardingDefault);
-			if (m_VertexBillboardingOpaqueDefault != null)
-				m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueDefault);
+			if (m_CPUParticleLegacy != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleLegacy);
+			if (m_CPUParticleOpaqueLegacy != null)
+				m_RenderFeatureBindings.Add(m_CPUParticleOpaqueLegacy);
+			if (m_VertexBillboardingLegacy != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingLegacy);
+			if (m_VertexBillboardingOpaqueLegacy != null)
+				m_RenderFeatureBindings.Add(m_VertexBillboardingOpaqueLegacy);
 		}
 
 		public override void SetupMeshRenderer(SBatchDesc batchDesc, GameObject gameObject, PKFxMeshInstancesRenderer meshRenderer)
@@ -204,6 +230,42 @@ namespace PopcornFX
 				return null;
 			material.renderQueue = m_RenderQueue + batchDesc.m_DrawOrder;
 			return material;
+		}
+
+		public override GameObject GetDecalTemplate()
+		{
+			GameObject template = new GameObject("PopcornFX URP Decal");
+			PKFxURPDecalData data = template.AddComponent<PKFxURPDecalData>();
+			DecalProjector decalProjector = template.AddComponent<DecalProjector>();
+			decalProjector.pivot = Vector3.zero;
+			data.m_DecalProjector = decalProjector;
+
+			return template;
+		}
+
+		public override void SetDecalValue(PKFxDecalData data, PKFxDecalPool.SDecalInfo info)
+		{
+			base.SetDecalValue(data, info);
+
+			PKFxURPDecalData URPData = data as PKFxURPDecalData;
+			if (URPData == null)
+				return;
+
+			URPData.m_DecalProjector.transform.position = info.m_Position;
+			URPData.m_DecalProjector.size = info.m_Scale;
+
+			// Tweak orientation to match Unity's decal renderers' starting point
+			info.m_Orientation *= Quaternion.Euler(Vector3.right * 90);
+
+			URPData.m_DecalProjector.transform.rotation = info.m_Orientation;
+
+			URPData.m_DecalProjector.material = data.m_Material;
+
+			URPData.m_DecalProjector.material.SetVector("_BaseColor", info.m_DiffuseColor);
+			URPData.m_DecalProjector.material.SetVector("_EmissiveColor", info.m_EmissiveColor);
+
+			URPData.m_DecalProjector.material.SetTexture("_AtlasRects", data.m_AtlasRects);
+			URPData.m_DecalProjector.material.SetFloat("_AtlasId", info.m_AtlasID);
 		}
 	}
 }

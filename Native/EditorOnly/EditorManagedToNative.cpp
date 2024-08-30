@@ -52,7 +52,8 @@ extern "C"
 
 		CEffectBaker		*effectBaker = CEditorManager::Instance().GetEffectBaker();
 
-		effectBaker->Initialize(settings->m_PopcornPackFxPath, settings->m_PlatformName, settings->m_QualityLevelCount);
+		effectBaker->SetPackSettings(settings->m_PopcornPackFxPath, settings->m_PlatformName, settings->m_QualityLevelCount);
+		effectBaker->Initialize();
 		effectBaker->Clear();
 		return true;
 	}

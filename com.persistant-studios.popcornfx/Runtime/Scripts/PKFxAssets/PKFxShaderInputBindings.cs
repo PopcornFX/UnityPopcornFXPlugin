@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if		UNITY_EDITOR
+#if     UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine.Rendering;
@@ -47,9 +47,21 @@ namespace PopcornFX
 		public string 			m_MeshAlphaCursorPropertyName = "_AlphaCursor";
 		public string 			m_MeshCullingModePropertyName = "_Cull";
 		// --------------------------------------
-		// VAT render feature:
+		// Decal renderer:
 		// --------------------------------------
-		public string			m_MeshVATCursorPropertyName = "_VATCursor";
+		public string m_DecalDiffuseColorPropertyName = "_DiffuseColor";
+		public string m_DecalEmissiveColorPropertyName = "_EmissiveColor";
+
+        public string m_DecalHasAtlasPropertyName = "_HasAtlas";
+        public string m_DecalAtlasIdPropertyName = "_AtlasId";
+
+        public string m_DecalTextureAtlasPropertyName = "_AtlasRects";
+        public string m_DecalAtlasCountPropertyName = "_AtlasCount";
+
+        // --------------------------------------
+        // VAT render feature:
+        // --------------------------------------
+        public string			m_MeshVATCursorPropertyName = "_VATCursor";
 		public string 			m_VATPositionMapPropertyName = "_VATPositionMap";
 		public string 			m_VATNormalMapPropertyName = "_VATNormalMap";
 		public string 			m_VATColorMapPropertyName = "_VATColorMap";
@@ -91,7 +103,7 @@ namespace PopcornFX
 		public string			m_UseVertexColorPropertyName = "_UseVertexColor";
 
 
-		public enum UnityBlendMode : int // Duplicate of AlphaMode that is EditorOnly from shadergraph...
+        public enum UnityBlendMode : int // Duplicate of AlphaMode that is EditorOnly from shadergraph...
 		{
 			Alpha,
 			Premultiply,
@@ -289,9 +301,9 @@ namespace PopcornFX
 				if (!string.IsNullOrEmpty(m_MeshCullingModePropertyName))
 				{
 					if (isDoubleSided)
-						material.SetInt(m_MeshCullingModePropertyName, (int) UnityEngine.Rendering.CullMode.Off);
+						material.SetInt(m_MeshCullingModePropertyName, (int)UnityEngine.Rendering.CullMode.Off);
 					else
-						material.SetInt(m_MeshCullingModePropertyName, (int) UnityEngine.Rendering.CullMode.Back);
+						material.SetInt(m_MeshCullingModePropertyName, (int)UnityEngine.Rendering.CullMode.Back);
 				}
 
 				if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting) && (batchDesc.m_LitFeature != null && batchDesc.m_LitFeature.m_Activated))
@@ -410,7 +422,18 @@ namespace PopcornFX
 						material.SetVector(m_SkeletalAnimScaleBoundsMaxPropertyName, batchDesc.m_SkeletalAnimFeature.m_ScaleBoundsMax);
 					}
 				}
-			}
+            }
+			else if (batchDesc.m_Type == ERendererType.Decal)
+			{
+                if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas))
+                {
+                    if (!string.IsNullOrEmpty(m_DecalHasAtlasPropertyName))
+						material.SetInt(m_DecalHasAtlasPropertyName, 1);		
+
+                    if (!string.IsNullOrEmpty(m_DecalTextureAtlasPropertyName))
+						material.SetTexture(m_DecalTextureAtlasPropertyName, batchDesc.m_AtlasSubRects);
+                }
+            }
 		}
 
 #if UNITY_EDITOR
@@ -430,7 +453,7 @@ namespace PopcornFX
 			material.SetFloat(keyword + "_ON", 0.0f);
 		}
 
-		public void SetMaterialKeywords(SBatchDesc batchDesc, Material material)
+        public void SetMaterialKeywords(SBatchDesc batchDesc, Material material)
 		{
 			if (batchDesc.m_Type == ERendererType.Mesh)
 			{
@@ -484,8 +507,12 @@ namespace PopcornFX
 				else
 					_DisableMaterialKeywords(material, "PK_HAS_SKELETAL_ANIM_INTERPOL_TRACKS");
 			}
-			// Anim-blend / ribbon-complex : PK_HAS_RIBBON_COMPLEX or PK_HAS_ANIM_BLEND
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
+            if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap))
+                _EnableMaterialKeywords(material, "PK_HAS_DIFFUSE_MAP");
+            else
+                _DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_MAP");
+            // Anim-blend / ribbon-complex : PK_HAS_RIBBON_COMPLEX or PK_HAS_ANIM_BLEND
+            if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
 			{
 				_EnableMaterialKeywords(material, "PK_HAS_RIBBON_COMPLEX");
 			}
@@ -560,7 +587,16 @@ namespace PopcornFX
 				_EnableMaterialKeywords(material, "PK_HAS_TRANSFORM_UVS");
 			else
 				_DisableMaterialKeywords(material, "PK_HAS_TRANSFORM_UVS");
-		}
+            if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas))
+                _EnableMaterialKeywords(material, "PK_HAS_ATLAS");
+            else
+                _DisableMaterialKeywords(material, "PK_HAS_ATLAS");
+            // Basic Transform UVs
+            if (batchDesc.m_RotateUVs && batchDesc.m_Type != ERendererType.Ribbon)
+                _EnableMaterialKeywords(material, "PK_HAS_ROTATE_UVS");
+            else
+                _DisableMaterialKeywords(material, "PK_HAS_ROTATE_UVS");
+        }
 
 		private bool m_ShowBindings = false;
 
@@ -572,6 +608,7 @@ namespace PopcornFX
 													batchDesc.m_BlendMode != EBlendMode.Solid && batchDesc.m_BlendMode != EBlendMode.Masked,
 													batchDesc.m_BlendMode != EBlendMode.Masked,
 													batchDesc.m_Type == ERendererType.Mesh,
+													batchDesc.m_Type == ERendererType.Decal,
 													headerGroup);
 		}
 
@@ -579,6 +616,7 @@ namespace PopcornFX
 													bool bindingHasTransparent,
 													bool bindingHasMasked,
 													bool bindingHasMeshRenderer,
+													bool bindingHasDecalRenderer,
 													bool headerGroup = false)
 		{
 			SerializedObject serializedObject = new SerializedObject(this);
@@ -746,6 +784,29 @@ namespace PopcornFX
 					SerializedProperty useVertexColorPropertyName = serializedObject.FindProperty("m_UseVertexColorPropertyName");
 					useVertexColorPropertyName.stringValue = EditorGUILayout.TextField("Use Vertex Color (Bool): ", useVertexColorPropertyName.stringValue);
 				}
+				if (bindingHasDecalRenderer)
+				{
+					SerializedProperty decalDiffuseColorPropertyName = serializedObject.FindProperty("m_DecalDiffuseColorPropertyName");
+					decalDiffuseColorPropertyName.stringValue = EditorGUILayout.TextField("Decal Diffuse Color (Vec4): ", decalDiffuseColorPropertyName.stringValue);
+					SerializedProperty decalEmissiveColorPropertyName = serializedObject.FindProperty("m_DecalEmissiveColorPropertyName");
+					decalEmissiveColorPropertyName.stringValue = EditorGUILayout.TextField("Decal Emissive Color (Vec4): ", decalEmissiveColorPropertyName.stringValue);
+
+                    if (HasShaderVariationFlag(shaderVariationFlags, EShaderVariationFlags.Has_Atlas))
+                    {
+                        SerializedProperty decalHasAtlasPropertyName = serializedObject.FindProperty("m_DecalHasAtlasPropertyName");
+                        decalHasAtlasPropertyName.stringValue = EditorGUILayout.TextField("Decal Has Atlas (Bool): ", decalHasAtlasPropertyName.stringValue);
+
+                        SerializedProperty decalAtlasDefinitionPropertyName = serializedObject.FindProperty("m_DecalAtlasDefinitionPropertyName");
+                        decalAtlasDefinitionPropertyName.stringValue = EditorGUILayout.TextField("Decal Atlas Definition (Texture2D): ", decalAtlasDefinitionPropertyName.stringValue);
+
+                        SerializedProperty decalAtlasSubdivsPropertyName = serializedObject.FindProperty("m_DecalAtlasSubdivsPropertyName");
+                        decalAtlasSubdivsPropertyName.stringValue = EditorGUILayout.TextField("Decal Atlas Subdivs (Vec2): ", decalAtlasSubdivsPropertyName.stringValue);
+
+                        SerializedProperty decalAtlasIdPropertyName = serializedObject.FindProperty("m_DecalAtlasIdPropertyName");
+                        decalAtlasIdPropertyName.stringValue = EditorGUILayout.TextField("Decal Atlas ID (Float): ", decalAtlasIdPropertyName.stringValue);
+                    }
+				}
+
 			}
 			if (headerGroup)
 				EditorGUILayout.EndFoldoutHeaderGroup();

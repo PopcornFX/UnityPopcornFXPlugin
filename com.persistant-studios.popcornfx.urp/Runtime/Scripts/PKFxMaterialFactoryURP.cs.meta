@@ -6,89 +6,57 @@ MonoImporter:
   defaultReferences:
   - DistortionShader: {fileID: 4800000, guid: d148465e45222432f85a1d3e92677308, type: 3}
   - BlurShader: {fileID: 4800000, guid: 0dc1a323808c03945a1db3a1cfacef2a, type: 3}
-  - m_TransparentMeshUnlitDefault: {fileID: 11400000, guid: cc08dd3254da5034eb19c14432b63a08,
-      type: 2}
-  - m_OpaqueMeshUnlitDefault: {fileID: 11400000, guid: 41bbba4cd50bba04482e9b14afb8aaa5,
-      type: 2}
-  - m_TransparentMeshLitDefault: {fileID: 11400000, guid: 2627064787a8bb241ab1c02182d135c6,
-      type: 2}
-  - m_OpaqueMeshLitDefault: {fileID: 11400000, guid: 51a736b97c31cc245a9f8741c69c9de1,
-      type: 2}
-  - m_OpaqueMeshLitSkinnedDefault: {fileID: 11400000, guid: df4de29e90149464680240164aaa0631,
-      type: 2}
-  - m_OpaqueParticleUnlitDefault: {fileID: 11400000, guid: 1a2e5419c582c37468963b8ebd96ca6b,
-      type: 2}
-  - m_TransparentParticleUnlitDefault: {fileID: 11400000, guid: bd2b4c6e6268ac94f946cdb86d746070,
-      type: 2}
-  - m_AdditiveParticleUnlitDefault: {fileID: 11400000, guid: a1ac7f34f70e96a428085c727600babf,
-      type: 2}
-  - m_OpaqueCorrectDeformationUnlitDefault: {fileID: 11400000, guid: 96f0bc8a857018242a3d2814efb75b7e,
-      type: 2}
-  - m_TransparentCorrectDeformationUnlitDefault: {fileID: 11400000, guid: 17b7748486754e043a4e8ada5f20eab1,
-      type: 2}
-  - m_AdditiveCorrectDeformationUnlitDefault: {fileID: 11400000, guid: 0f08a8378328a1d4dbffd59dd1e691fa,
-      type: 2}
-  - m_OpaqueParticleLitDefault: {fileID: 11400000, guid: cec41497ddb65b2428e85a7807339894,
-      type: 2}
-  - m_TransparentParticleLitDefault: {fileID: 11400000, guid: 46c0b61e9e253104f959d52d8a32c5c9,
-      type: 2}
-  - m_AdditiveParticleLitDefault: {fileID: 11400000, guid: c73ded59bffe89e4083878dab4e38e0b,
-      type: 2}
-  - m_OpaqueCorrectDeformationLitDefault: {fileID: 11400000, guid: bbc3fd6dd37044d42a2b36ae6228a425,
-      type: 2}
-  - m_TransparentCorrectDeformationLitDefault: {fileID: 11400000, guid: 1f2a1bbe02f12cb4a803e8c9839a0566,
-      type: 2}
-  - m_AdditiveCorrectDeformationLitDefault: {fileID: 11400000, guid: 6e502a4a1e21954488d69e9c225bdbae,
-      type: 2}
-  - m_CPUParticleDefault: {fileID: 11400000, guid: 0424bb726ab77574d9b199426f7abb38,
-      type: 2}
-  - m_CPUParticleOpaqueDefault: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
-      type: 2}
-  - m_VertexBillboardingDefault: {fileID: 11400000, guid: aca9aef425f77a0449dfb339cfa7a245,
-      type: 2}
-  - m_VertexBillboardingOpaqueDefault: {fileID: 11400000, guid: 78047b4352375684a9d26590a82cf9db,
-      type: 2}
+  - m_TransparentMeshUnlitLegacy: {fileID: 11400000, guid: cc08dd3254da5034eb19c14432b63a08, type: 2}
+  - m_EmissiveMeshUnlitDefault: {fileID: 11400000, guid: cf4ebe304e8f6a148a0568c306268e07, type: 2}
+  - m_OpaqueMeshUnlitLegacy: {fileID: 11400000, guid: 41bbba4cd50bba04482e9b14afb8aaa5, type: 2}
+  - m_OpaqueMeshUnlitDefault: {fileID: 11400000, guid: 982935d1ed8a482449ca8cae8c99f773, type: 2}
+  - m_TransparentMeshLitLegacy: {fileID: 11400000, guid: 2627064787a8bb241ab1c02182d135c6, type: 2}
+  - m_OpaqueMeshLitLegacy: {fileID: 11400000, guid: 51a736b97c31cc245a9f8741c69c9de1, type: 2}
+  - m_OpaqueMeshLitDefault: {fileID: 11400000, guid: f41c7ceb6b5ca3b43ba3ac1104d5b18b, type: 2}
+  - m_OpaqueMeshLitSkinnedLegacy: {fileID: 11400000, guid: df4de29e90149464680240164aaa0631, type: 2}
+  - m_OpaqueParticleUnlitLegacy: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85, type: 2}
+  - m_OpaqueParticleUnlitDefault: {fileID: 11400000, guid: 0abdff83048445444be109d3003e8eb4, type: 2}
+  - m_TransparentParticleUnlitLegacy: {fileID: 11400000, guid: a1ac7f34f70e96a428085c727600babf, type: 2}
+  - m_TransparentParticleUnlitDefault: {fileID: 11400000, guid: ca7971de9893fc44d950f2bec67581c5, type: 2}
+  - m_AdditiveParticleUnlitLegacy: {fileID: 11400000, guid: a1ac7f34f70e96a428085c727600babf, type: 2}
+  - m_OpaqueCorrectDeformationUnlitLegacy: {instanceID: 0}
+  - m_OpaqueCorrectDeformationUnlitDefault: {instanceID: 0}
+  - m_TransparentCorrectDeformationUnlitLegacy: {instanceID: 0}
+  - m_TransparentCorrectDeformationUnlitDefault: {instanceID: 0}
+  - m_AdditiveCorrectDeformationUnlitLegacy: {instanceID: 0}
+  - m_OpaqueParticleLitLegacy: {fileID: 11400000, guid: cec41497ddb65b2428e85a7807339894, type: 2}
+  - m_OpaqueParticleLitDefault: {fileID: 11400000, guid: 5919ff6dcf2589b47973c9268414734b, type: 2}
+  - m_TransparentParticleLitLegacy: {fileID: 11400000, guid: c73ded59bffe89e4083878dab4e38e0b, type: 2}
+  - m_TransparentParticleLitDefault: {fileID: 11400000, guid: d0c2eb4b5f0f02d4894b1c7d217fe33e, type: 2}
+  - m_AdditiveParticleLitLegacy: {fileID: 11400000, guid: c73ded59bffe89e4083878dab4e38e0b, type: 2}
+  - m_OpaqueCorrectDeformationLitLegacy: {instanceID: 0}
+  - m_OpaqueCorrectDeformationLitDefault: {instanceID: 0}
+  - m_TransparentCorrectDeformationLitLegacy: {instanceID: 0}
+  - m_TransparentCorrectDeformationLitDefault: {instanceID: 0}
+  - m_AdditiveCorrectDeformationLitLegacy: {instanceID: 0}
+  - m_AlphaBlendDecal: {fileID: 11400000, guid: 62a2ab3807387174c82829a46ff0bbe2, type: 2}
+  - m_CPUParticleLegacy: {fileID: 11400000, guid: 42c4cd98ec9966142ba5118051d18f5e, type: 2}
+  - m_CPUParticleOpaqueLegacy: {fileID: 11400000, guid: 55f3db6beebff084da8144594da18bab, type: 2}
+  - m_VertexBillboardingLegacy: {fileID: 11400000, guid: 0b7d6fe980a45e646a51602b5365cf20, type: 2}
+  - m_VertexBillboardingOpaqueLegacy: {fileID: 11400000, guid: d19a42aac00a18d4a8d50480e52271a7, type: 2}
   - m_CPUParticleDistortion: {instanceID: 0}
   - m_VertexBillboardingDistortion: {instanceID: 0}
-  - m_TransparentMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: 3b9a0723935f4954b9df91a8f39b1e0a,
-      type: 2}
-  - m_OpaqueMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: 63ab276fe8e0e4642a4db91ed5c64f40,
-      type: 2}
-  - m_TransparentMeshLitDoubleSidedDefault: {fileID: 11400000, guid: 51da6e51a56e15e4687f9b38c4efc132,
-      type: 2}
-  - m_OpaqueMeshLitDoubleSidedDefault: {fileID: 11400000, guid: d3876f91d22afa24a8057b7d94f7218f,
-      type: 2}
-  - m_OpaqueMeshLitSkinnedDoubleSidedDefault: {fileID: 11400000, guid: fd0fe8ed8647ecb4ab4807aa1b1e1743,
-      type: 2}
-  - m_TransparentMeshUnlit2020: {fileID: 11400000, guid: 5f97069cae9ee2c45955649abd3f8dd6,
-      type: 2}
-  - m_OpaqueMeshUnlit2020: {fileID: 11400000, guid: 8302134102371f3458b94a24f20b68f7,
-      type: 2}
-  - m_TransparentMeshLit2020: {fileID: 11400000, guid: b1a53680d51c8834fa0729df59373d10,
-      type: 2}
-  - m_OpaqueMeshLit2020: {fileID: 11400000, guid: 9541e66461dfd5a4cb9e8d276351a749,
-      type: 2}
-  - m_OpaqueMeshLitSkinned2020: {fileID: 11400000, guid: bf23050381922e54fa1d976a7b3d41a8,
-      type: 2}
-  - m_TransparentMeshUnlitDoubleSided2020: {fileID: 11400000, guid: 4670233dc40591540b43f340fd9d8d46,
-      type: 2}
-  - m_OpaqueMeshUnlitDoubleSided2020: {fileID: 11400000, guid: 16dd3d9fd7d88294a9d395d123e806f3,
-      type: 2}
-  - m_TransparentMeshLitDoubleSided2020: {fileID: 11400000, guid: 7d60b8cae5bac7340a6efcd2076ad82c,
-      type: 2}
-  - m_OpaqueMeshLitDoubleSided2020: {fileID: 11400000, guid: 2ba9ad5420f3f674c831e3afd10df895,
-      type: 2}
-  - m_OpaqueMeshLitSkinnedDoubleSided2020: {fileID: 11400000, guid: d829417c2888e6a4fb5d14b3a277c518,
-      type: 2}
+  - m_TransparentMeshUnlit2020: {fileID: 11400000, guid: 5f97069cae9ee2c45955649abd3f8dd6, type: 2}
+  - m_OpaqueMeshUnlit2020: {fileID: 11400000, guid: 8302134102371f3458b94a24f20b68f7, type: 2}
+  - m_TransparentMeshLit2020: {fileID: 11400000, guid: b1a53680d51c8834fa0729df59373d10, type: 2}
+  - m_OpaqueMeshLit2020: {fileID: 11400000, guid: 9541e66461dfd5a4cb9e8d276351a749, type: 2}
+  - m_OpaqueMeshLitSkinned2020: {fileID: 11400000, guid: bf23050381922e54fa1d976a7b3d41a8, type: 2}
+  - m_TransparentMeshUnlitDoubleSided2020: {fileID: 11400000, guid: 4670233dc40591540b43f340fd9d8d46, type: 2}
+  - m_OpaqueMeshUnlitDoubleSided2020: {fileID: 11400000, guid: 16dd3d9fd7d88294a9d395d123e806f3, type: 2}
+  - m_TransparentMeshLitDoubleSided2020: {fileID: 11400000, guid: 7d60b8cae5bac7340a6efcd2076ad82c, type: 2}
+  - m_OpaqueMeshLitDoubleSided2020: {fileID: 11400000, guid: 2ba9ad5420f3f674c831e3afd10df895, type: 2}
+  - m_OpaqueMeshLitSkinnedDoubleSided2020: {fileID: 11400000, guid: d829417c2888e6a4fb5d14b3a277c518, type: 2}
   - m_OpaqueParticleUnlit2020: {instanceID: 0}
   - m_TransparentParticleUnlit2020: {instanceID: 0}
   - m_AdditiveParticleUnlit2020: {instanceID: 0}
-  - m_OpaqueParticleLit2020: {fileID: 11400000, guid: 1322216e39779bc4c8ae6eaa0104868c,
-      type: 2}
-  - m_TransparentParticleLit2020: {fileID: 11400000, guid: e30f6286b47299740a5e42c3c6af3093,
-      type: 2}
-  - m_AdditiveParticleLit2020: {fileID: 11400000, guid: 2b667db90a9a7624fa5f6e2d65eebd8a,
-      type: 2}
+  - m_OpaqueParticleLit2020: {fileID: 11400000, guid: 1322216e39779bc4c8ae6eaa0104868c, type: 2}
+  - m_TransparentParticleLit2020: {fileID: 11400000, guid: e30f6286b47299740a5e42c3c6af3093, type: 2}
+  - m_AdditiveParticleLit2020: {fileID: 11400000, guid: 2b667db90a9a7624fa5f6e2d65eebd8a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

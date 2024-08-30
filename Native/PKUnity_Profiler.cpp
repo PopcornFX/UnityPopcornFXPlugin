@@ -192,8 +192,7 @@ void	CLiveProfiler::AddReport(const char *reportName, CParticleMediumCollection 
 			mediumStats->ComputeGlobalStats(mediumStatsReport);
 
 			effectTimings.m_TotalStatsReport += mediumStatsReport;
-			if (PK_VERIFY(medium->ParticleStorage() != null) &&
-				PK_VERIFY(medium->ParticleStorage()->Manager() != null))
+			if (PK_VERIFY(medium->ParticleStorage() != null))
 			{
 				effectTimings.m_TotalParticleCount_CPU += medium->ParticleStorage()->ActiveParticleCount();
 				effectTimings.m_TotalTimeAverage += mediumStatsReport.m_PipelineStages[PopcornFX::SEvolveStatsReport::PipelineStage_Total].m_Time;

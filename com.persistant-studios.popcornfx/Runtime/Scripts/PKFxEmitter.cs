@@ -7,6 +7,8 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 
 namespace PopcornFX
 {
@@ -58,7 +60,8 @@ namespace PopcornFX
 		public bool m_TriggerAndForget = false;
 		public bool m_KillEffectOnDestroy = false;
 
-		[SerializeField] private float m_PreWarm = 0;
+		[SerializeField] [MinAttribute(0)] private float m_Timescale = 1.0f;
+		[SerializeField] [MinAttribute(0)] private float m_PreWarm = 0.0f;
 
 		//Used in editor and startup
 		[SerializeField] private List<PkFxUserEventCallback>					m_Events;
@@ -161,6 +164,7 @@ namespace PopcornFX
 				m_Events.Clear();
 			if (m_DelayedCallbacks != null)
 				m_DelayedCallbacks.Clear();
+			ClearAllAttributesAndSamplers();
 		}
 		#endregion
 
@@ -250,6 +254,8 @@ namespace PopcornFX
 				SetPlayingState(true);  // Do that BEFORE the call to StartEffect as it can call inline the OnFxStopped delegate
 				// Start the FX in the native plugin:
 				PKFxManager.StartEffect(m_FXGUID, dt, m_PreWarm);
+				if (m_Timescale != 1.0f)
+					PKFxManager.SetFxTimescale(m_FXGUID, m_Timescale);
 
 				foreach (var it in m_DelayedCallbacks)
 				{
@@ -474,7 +480,6 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		// Will not actually change the asset, just retrieve the attributes and samplers from it
 		public bool UpdateEffectAsset(PKFxEffectAsset updatedAsset, bool resetAllAttributes, bool mismatchAttribsWarning = false)
 		{
 			m_FxAsset = updatedAsset;
@@ -536,7 +541,12 @@ namespace PopcornFX
 			m_FxAttributesDescHash = -1;
 
 			if (m_FxSamplersList != null)
+			{
+				foreach (Sampler sampler in m_FxSamplersList)
+					sampler.Clean();
 				m_FxSamplersList.Clear();
+			}
+				
 			m_FxSamplersDescHash = -1;
 
 			if (m_Events != null)
@@ -717,6 +727,46 @@ namespace PopcornFX
 							PKFxManager.SetDefaultSampler(m_FXGUID, samplerId);
 						}
 					}
+				}
+				else if (curSampler.m_Descriptor.m_Type == ESamplerType.SamplerGrid)
+				{
+					if (forceUpdate || curSampler.m_WasModified)
+					{
+						if (curSampler.m_GridData != null && curSampler.m_GridData.m_Type != EBaseTypeID.BaseType_Evolved)
+						{
+							SGridSamplerToFill gridSampler = new SGridSamplerToFill();
+
+							unsafe
+							{
+								int size = 0;
+								
+								// Additionnal order dimensions should be normalized to 1
+								size = curSampler.m_Descriptor.m_GridDimensionsXY.x * curSampler.m_Descriptor.m_GridDimensionsXY.y * curSampler.m_Descriptor.m_GridDimensionsZW.x * curSampler.m_Descriptor.m_GridDimensionsZW.y;
+								if (curSampler.m_GridData.GetDataLength() != size)
+								{
+									if (curSampler.m_GridData.GetDataIsCreated())
+										curSampler.m_GridData.DisposeData();
+									curSampler.m_GridData.UnsafeAllocNativePtrByType(size);
+                                    if (curSampler.m_GridInitCallback != null)
+										curSampler.m_GridInitCallback.Invoke(curSampler.m_Descriptor, curSampler.m_GridData);
+								}
+								gridSampler.m_Data = curSampler.m_GridData.UnsafeGetNativePtr();
+							}
+							gridSampler.m_GridOrder = curSampler.m_Descriptor.m_GridOrder;
+							gridSampler.m_GridType = (int)curSampler.m_Descriptor.m_GridType;
+							gridSampler.m_Dimensions = new Vector4Int(curSampler.m_Descriptor.m_GridDimensionsXY.x,
+																		curSampler.m_Descriptor.m_GridDimensionsXY.y,
+																		curSampler.m_Descriptor.m_GridDimensionsZW.x,
+																		curSampler.m_Descriptor.m_GridDimensionsZW.y);
+
+							PKFxManager.SetGridSampler(m_FXGUID, samplerId, gridSampler);
+						}
+						else
+						{
+							PKFxManager.SetDefaultSampler(m_FXGUID, samplerId);
+						}
+					}
+
 				}
 				// The sampler is now up to date:
 				curSampler.m_WasModified = false;
@@ -1492,8 +1542,12 @@ namespace PopcornFX
 		{
 			SetAttributeSafe(attribID, value.x, value.y, value.z, value.w);
 		}
+        public void SetAttributeSafe(int attribID, Vector3 value)
+        {
+            SetAttributeSafe(attribID, value.x, value.y, value.z);
+        }
 
-		public void SetAttributeSafe(int attribId, bool valueX)
+        public void SetAttributeSafe(int attribId, bool valueX)
 		{
 			if (m_FxAsset.m_AttributeDescs == null || attribId < 0 || attribId >= m_FxAsset.m_AttributeDescs.Count)
 				return;

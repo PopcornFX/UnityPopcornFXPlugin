@@ -58,8 +58,6 @@ namespace PopcornFX
 		[SerializeField] private bool m_UpdateSimManually = false;
 		[SerializeField] private bool m_UseApplicationAudioLoopback = false;
 
-		[SerializeField] public string[]	m_PopcornLayerName = new string[5];
-
 		public static bool GeneralCategory
 		{
 			get { return Instance.m_GeneralCategory; }
@@ -96,9 +94,12 @@ namespace PopcornFX
 
 		public void GetRenderingLayerForBatchDesc(SBatchDesc batchDesc, out int layer)
 		{
-			Debug.Assert((batchDesc.m_CameraId >= 0 && batchDesc.m_CameraId < m_PopcornLayerName.Length), "[PKFX] Wrong camera ID feeded to materials factory");
-
+			Debug.Assert((batchDesc.m_CameraId >= 0 && batchDesc.m_CameraId < MaxCameraCount), "[PKFX] Wrong camera ID feeded to materials factory");
+#if UNITY_6000_0_OR_NEWER
+			PKFxRenderingPlugin renderingPlugin = FindAnyObjectByType<PKFxRenderingPlugin>();
+#else
 			PKFxRenderingPlugin renderingPlugin = FindObjectOfType<PKFxRenderingPlugin>();
+#endif
 			if (renderingPlugin != null)
 				layer = renderingPlugin.GetLayerForCameraID(batchDesc.m_CameraId);
 			else
@@ -109,10 +110,12 @@ namespace PopcornFX
 		{
 			if (ManualCameraLayer)
 				return 0;
-			if (index < m_PopcornLayerName.Length)
-			{
-				return LayerMask.NameToLayer(m_PopcornLayerName[index]);
-			}
+			if (index < MaxCameraSupport)
+				return LayerMask.NameToLayer(PKFxManager.CameraLayers[index]);
+#if UNITY_EDITOR
+			else if (index == MaxCameraSupport)
+				return LayerMask.NameToLayer(PKFxManager.EditorCameraLayer);
+#endif
 			return 0;
 		}
 
@@ -182,6 +185,7 @@ namespace PopcornFX
 		[SerializeField] private uint m_FrameCountBeforeFreeingUnusedBatches = 240;
 		[SerializeField] private bool m_ManualCameraLayer = false;
 		[SerializeField] private int m_MaxCameraSupport = 1;
+		[SerializeField] private bool m_EnableEditorCamera = true;
 
 		[SerializeField] private bool m_EnablePopcornFXLight = false;
 		[SerializeField] private int m_MaxPopcornFXLights = 16;
@@ -189,7 +193,11 @@ namespace PopcornFX
 		[SerializeField] private bool m_EnablePopcornFXSound = false;
 		[SerializeField] private int  m_MaxPopcornFXSounds	 = 16;
 
-		private PKFxRaycasts.RaycastPackCallback m_CustomRaycast = null;
+        [SerializeField] private bool m_EnablePopcornFXDecal = false;
+        [SerializeField] private int m_MaxPopcornFXDecals = 16;
+
+        private PKFxRaycasts.RaycastPackCallback	m_CustomRaycast = null;
+		private PKFxRaycasts.SpherecastPackCallback m_CustomSpherecast = null;
 
 		public ERenderPipeline RenderPipeline { get => CheckRenderPipeline(); }
 
@@ -208,6 +216,24 @@ namespace PopcornFX
 		{
 			get { return Instance.m_MaxCameraSupport; }
 			set { Instance.m_MaxCameraSupport = value; }
+		}
+
+		public static int MaxCameraCount
+		{
+			get
+			{
+#if UNITY_EDITOR
+				if (Instance.m_EnableEditorCamera)
+					return Instance.m_MaxCameraSupport + 1;
+#endif
+				return Instance.m_MaxCameraSupport;
+			}
+		}
+
+		public static bool EnableEditorCamera
+		{
+			get { return Instance.m_EnableEditorCamera; }
+			set { Instance.m_EnableEditorCamera = value; }
 		}
 
 		public static bool FreeUnusedBatches
@@ -343,8 +369,20 @@ namespace PopcornFX
 			set { Instance.m_MaxPopcornFXSounds = value; }
 		}
 
-		// Threading:
-		[SerializeField] private bool m_ThreadingCategory = false;
+        public static bool EnablePopcornFXDecal
+        {
+            get { return Instance.m_EnablePopcornFXDecal; }
+            set { Instance.m_EnablePopcornFXDecal = value; }
+        }
+
+        public static int MaxPopcornFXDecals
+        {
+            get { return Instance.m_MaxPopcornFXDecals; }
+            set { Instance.m_MaxPopcornFXDecals = value; }
+        }
+
+        // Threading:
+        [SerializeField] private bool m_ThreadingCategory = false;
 		[SerializeField] private bool m_SingleThreadedExecution = false;
 		[SerializeField] private bool m_OverrideThreadPoolConfig = false;
 		[SerializeField] private List<int> m_ThreadsAffinity = new List<int>();
@@ -377,6 +415,100 @@ namespace PopcornFX
 		{
 			get { return Instance.m_CustomRaycast; }
 			set { Instance.m_CustomRaycast = value; }
+		}
+		public static PKFxRaycasts.SpherecastPackCallback CustomSpherecast
+		{
+			get { return Instance.m_CustomSpherecast; }
+			set { Instance.m_CustomSpherecast = value; }
+		}
+
+		// LOD
+
+		[SerializeField] private bool m_LODCategory = true;
+		[SerializeField] private bool m_LODAdvanceCategory = false;
+		[SerializeField] private bool m_OverrideLODSettings = false;
+		[SerializeField] private float m_LODDefaultMinDistance = 5.0f;
+		[SerializeField] private float m_LODDefaultMaxDistance = 200.0f;
+		[SerializeField] private float m_LODDefaultMinMinDistance = 2.0f;
+		[SerializeField] private float m_LODMinDistance = 5.0f;
+		[SerializeField] private float m_LODMaxDistance = 200.0f;
+		[SerializeField] private float m_LODMinMinDistance = 2.0f;
+
+		public static bool LODCategory
+		{
+			get { return Instance.m_LODCategory; }
+			set { Instance.m_LODCategory = value; }
+		}
+
+		public static bool LODAdvanceCategory
+		{
+			get { return Instance.m_LODAdvanceCategory; }
+			set { Instance.m_LODAdvanceCategory = value; }
+		}
+
+		public static bool OverrideLODSettings
+		{
+			get { return Instance.m_OverrideLODSettings; }
+			set
+			{
+				Instance.m_OverrideLODSettings = value;
+				if (!Instance.m_OverrideLODSettings)
+				{
+					Instance.m_LODMinDistance = Instance.m_LODDefaultMinDistance;
+					Instance.m_LODMaxDistance = Instance.m_LODDefaultMaxDistance;
+					Instance.m_LODMinMinDistance = Instance.m_LODDefaultMinMinDistance;
+				}
+			}
+		}
+
+		public static float LODDefaultMinDistance
+		{
+			get { return Instance.m_LODDefaultMinDistance; }
+			set
+			{
+				Instance.m_LODDefaultMinDistance = value;
+				if (!Instance.m_OverrideLODSettings)
+					Instance.m_LODMinDistance = value;
+			}
+		}
+
+		public static float LODDefaultMaxDistance
+		{
+			get { return Instance.m_LODDefaultMaxDistance; }
+			set
+			{
+				Instance.m_LODDefaultMaxDistance = value;
+				if (!Instance.m_OverrideLODSettings)
+					Instance.m_LODMaxDistance = value;
+			}
+		}
+		public static float LODDefaultMinMinDistance
+		{
+			get { return Instance.m_LODDefaultMinMinDistance; }
+			set
+			{
+				Instance.m_LODDefaultMinMinDistance = value;
+				if (!Instance.m_OverrideLODSettings)
+					Instance.m_LODMinMinDistance = value;
+			}
+		}
+
+		public static float LODMinDistance
+		{
+			get { return Instance.m_LODMinDistance; }
+			set { Instance.m_LODMinDistance = value; }
+		}
+
+		public static float LODMaxDistance
+		{
+			get { return Instance.m_LODMaxDistance; }
+			set { Instance.m_LODMaxDistance = value; }
+		}
+
+		public static float LODMinMinDistance
+		{
+			get { return Instance.m_LODMinMinDistance; }
+			set { Instance.m_LODMinMinDistance = value; }
 		}
 
 		// Profiler

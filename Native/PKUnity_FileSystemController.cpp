@@ -281,7 +281,8 @@ void	CFileStreamFS_Unity::_InternalCloseIFN()
 		PK_ONLY_IF_ASSERTS(u64 writtenSize = )::OnResourceWrite(m_Path.Data(), m_PseudoFileHandle, 0, m_Size);
 		PK_ASSERT(writtenSize == m_Size);
 	}
-	PK_ASSERT(::OnResourceUnload(m_Path.Data()));
+	if (!PK_VERIFY(::OnResourceUnload(m_Path.Data())))
+		CLog::Log(PK_ERROR, "OnResourceUnload could not free \'%s\'", m_Path.Data());
 	if (m_OwnBuffer)
 		PK_FREE(m_PseudoFileHandle);
 	m_PseudoFileHandle = null;

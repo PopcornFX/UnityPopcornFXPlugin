@@ -47,9 +47,11 @@ namespace PopcornFX
 		private bool					m_EnableDistortion = false;
 		private bool					m_EnableBlur = false;
 
+#if UNITY_EDITOR
 		private bool					m_IsEditorCamera = false;
 		public bool						IsEditorCamera { get { return m_IsEditorCamera; } }
 		private int						m_EditorCameraOriginMask;
+#endif
 
 		//----------------------------------------------------------------------------
 
@@ -227,9 +229,11 @@ namespace PopcornFX
 				else
 					cull |= 1 << LayerMask.NameToLayer(PKFxManagerImpl.m_DistortionLayer);
 			}
+#if UNITY_EDITOR
 			if (m_IsEditorCamera)
 				Tools.visibleLayers = cull;
 			else
+#endif
 				m_Camera.cullingMask = cull;
 		}
 

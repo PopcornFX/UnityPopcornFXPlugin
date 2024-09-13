@@ -825,12 +825,12 @@ bool CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallDecal(const Drawe
 			diffuseColor = page->StreamForReading<CFloat4>(diffuseColorId);
 
 		// Emissive Color
-		TStridedMemoryView<const CFloat4> emissiveColor;
+		TStridedMemoryView<const CFloat3> emissiveColor;
 		bool hasEmissiveColor = emissiveColorId.Valid();
 		
 		if (hasEmissiveColor)
 		{
-			emissiveColor = page->StreamForReading<CFloat4>(emissiveColorId);
+			emissiveColor = page->StreamForReading<CFloat3>(emissiveColorId);
 		}
 
 		// Atlas ID

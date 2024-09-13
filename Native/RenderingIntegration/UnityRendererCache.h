@@ -264,11 +264,11 @@ public:
 	CStringId					m_DiffuseMap;
 	CStringId					m_EmissiveMap;
 	CFloat4						m_DiffuseColor;
-	CFloat3 					m_EmissiveColor;
+	CFloat3						m_EmissiveColor;
 
-	bool InitFromRenderer(const CRendererDataDecal &renderer);
+	bool	InitFromRenderer(const CRendererDataDecal &renderer);
 
-	bool		operator == (const CParticleMaterialDescDecal &oth) const;
+	bool	operator == (const CParticleMaterialDescDecal &oth) const;
 };
 
 struct	SUnityMeshInfoPerView
@@ -350,7 +350,7 @@ public:
 	,	m_AssetName("")
 	,	m_HasCustomMat(false)
 	,	m_CustomMatID(-1)
-	,	m_UID(-1)
+	,	m_UID(0)
 	{
 	}
 
@@ -401,7 +401,7 @@ public:
 
 	bool										m_HasCustomMat;
 	int											m_CustomMatID;
-	int											m_UID;
+	unsigned int								m_UID;
 };
 PK_DECLARE_REFPTRCLASS(UnityRendererCache);
 

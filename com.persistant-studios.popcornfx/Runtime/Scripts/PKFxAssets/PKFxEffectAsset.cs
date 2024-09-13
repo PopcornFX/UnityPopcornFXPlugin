@@ -28,11 +28,11 @@ namespace PopcornFX
 		[Serializable]
 		public class MaterialUIDToIndex
 		{
-			public int		m_UID = -1;
+			public uint		m_UID = 0;
 			public int		m_Idx = -1;
 			public string	m_Quality = "Medium";
 
-			public MaterialUIDToIndex(int uid = -1, int idx = -1, string quality = "Medium")
+			public MaterialUIDToIndex(uint uid = 0, int idx = -1, string quality = "Medium")
 			{
 				m_UID = uid;
 				m_Idx = idx;
@@ -300,7 +300,7 @@ namespace PopcornFX
 			EditorGUI.indentLevel -= 1;
 		}
 
-		public void AddCustomMaterial(SerializedProperty prop, SBatchDesc sBatchDesc, Material newMat, int id)
+		public void AddCustomMaterial(SerializedProperty prop, SBatchDesc sBatchDesc, Material newMat, uint id)
 		{
 			if (m_CustomMaterials == null)
 				m_CustomMaterials = new List<PKFxCustomMaterialInfo>();
@@ -322,7 +322,7 @@ namespace PopcornFX
 				so = new SerializedObject(customRule);
 				so.FindProperty("m_AssetVirtualPath").stringValue = AssetVirtualPath;
 				so.FindProperty("m_BatchDescName").stringValue = sBatchDesc.m_GeneratedName;
-				so.FindProperty("m_UID").intValue = id;
+				so.FindProperty("m_UID").intValue = (int)id;
 				so.FindProperty("m_CustomMaterial").objectReferenceValue = newMat;
 			}
 			else
@@ -455,37 +455,37 @@ namespace PopcornFX
 		}
 
 		public void AddRenderer(ERendererType type, SDecalRendererDesc renderer, int idx)
-        {
-            SBatchDesc batch = new SBatchDesc(renderer);
-            m_RendererDescs.Add(batch);
+		{
+			SBatchDesc batch = new SBatchDesc(renderer);
+			m_RendererDescs.Add(batch);
 
-            while (idx >= m_Materials.Count)
-                m_Materials.Add(null);
+			while (idx >= m_Materials.Count)
+				m_Materials.Add(null);
 
 
-            Material mat = null;
-            RemoveOutdatedCustomMaterials(batch);
-            PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batch);
-            if (curMat != null && curMat.m_CustomMaterial != null)
-            {
-                curMat.SetMaterialKeywords(batch, curMat.m_CustomMaterial);
-                curMat.BindMaterialProperties(batch, curMat.m_CustomMaterial, this, true);
-                mat = curMat.m_CustomMaterial;
-            }
-            else
-                mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false, false, false);
+			Material mat = null;
+			RemoveOutdatedCustomMaterials(batch);
+			PKFxCustomMaterialInfo curMat = FindCustomMaterialInfo(batch);
+			if (curMat != null && curMat.m_CustomMaterial != null)
+			{
+				curMat.SetMaterialKeywords(batch, curMat.m_CustomMaterial);
+				curMat.BindMaterialProperties(batch, curMat.m_CustomMaterial, this, true);
+				mat = curMat.m_CustomMaterial;
+			}
+			else
+				mat = PKFxSettings.MaterialFactory.EditorResolveMaterial(batch, this, false, false, false);
 
-            if (mat == null)
-            {
-                string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
-                PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
-                Debug.LogError("Can't find a material for asset " + AssetVirtualPath + " in following batch desc: " + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
-                return;
-            }
-            m_Materials[idx] = mat;
-        }
+			if (mat == null)
+			{
+				string assetFullPath = "Assets" + PKFxSettings.UnityPackFxPath + "/" + AssetVirtualPath + ".asset";
+				PKFxEffectAsset asset = (PKFxEffectAsset)AssetDatabase.LoadAssetAtPath(assetFullPath, typeof(PKFxEffectAsset));
+				Debug.LogError("Can't find a material for asset " + AssetVirtualPath + " in following batch desc: " + m_RendererDescs[m_RendererDescs.Count - 1].m_GeneratedName, asset);
+				return;
+			}
+			m_Materials[idx] = mat;
+		}
 
-        public void LinkRenderer(int GlobalIdx, string qualityLevel, int UID)
+		public void LinkRenderer(int GlobalIdx, string qualityLevel, uint UID)
 		{
 			MaterialUIDToIndex index = m_MaterialIndexes.Find(item => item.m_UID == UID && item.m_Quality == qualityLevel);
 			if (index == null)

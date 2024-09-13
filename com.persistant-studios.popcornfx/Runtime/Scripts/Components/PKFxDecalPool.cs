@@ -15,9 +15,9 @@ public class PKFxDecalPool : MonoBehaviour
 		public IntPtr		m_DiffuseMap;
 		public IntPtr		m_EmissiveMap;
 		public Vector4		m_DiffuseColor;
-		public Vector4		m_EmissiveColor;
+		public Vector3		m_EmissiveColor;
 		public float		m_AtlasID;
-		public int			m_UID;
+		public uint			m_UID;
 	}
 
 	public List<PKFxDecalData> m_Decals = new List<PKFxDecalData>();

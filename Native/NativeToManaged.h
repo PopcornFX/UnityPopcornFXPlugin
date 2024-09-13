@@ -64,7 +64,7 @@ extern "C"
 		SRenderingFeatureLitDesc	*m_LitRendering;
 
 		int							m_CameraID;
-		int							m_UID;
+		unsigned int				m_UID;
 
 		SPopcornRendererDesc()
 		:	m_CustomName(null)
@@ -84,7 +84,7 @@ extern "C"
 		,	m_DrawOrder(0)
 		,	m_LitRendering(null)
 		,	m_CameraID(0)
-		,	m_UID(-1)
+		,	m_UID(0)
 		{
 		}
 	};
@@ -146,18 +146,18 @@ extern "C"
 	// Decals:
 	struct SDecalRendererDesc
 	{
-		int				 m_ShaderVariationFlags;
+		int				m_ShaderVariationFlags;
 
-		const char		 *m_DiffuseMap;
-		const char		 *m_EmissiveMap;
+		const char		*m_DiffuseMap;
+		const char		*m_EmissiveMap;
 
-		CFloat4			 m_DiffuseColor;
-		CFloat3			 m_EmissiveColor;
+		CFloat4			m_DiffuseColor;
+		CFloat3			m_EmissiveColor;
 
-		int				 m_TextureAtlasCount;
-		CFloat4			 *m_TextureAtlas;
+		int				m_TextureAtlasCount;
+		CFloat4			*m_TextureAtlas;
 
-		int				 m_UID;
+		unsigned int	m_UID;
 
 		SDecalRendererDesc()
 			: m_ShaderVariationFlags(0)
@@ -167,7 +167,7 @@ extern "C"
 			, m_EmissiveColor(CFloat3::ZERO)
 			, m_TextureAtlasCount(0)
 			, m_TextureAtlas(null)
-			, m_UID(-1)
+			, m_UID(0)
 		{
 		}
 	};
@@ -201,7 +201,7 @@ extern "C"
 		int							m_TextureAtlasCount;
 		CFloat4						*m_TextureAtlas;
 
-		int							m_UID;
+		unsigned int				m_UID;
 		int							m_DrawOrder;
 
 		ManagedBool					m_TransformUVs_RGBOnly;
@@ -226,7 +226,7 @@ extern "C"
 			, m_AnimDescRendering(null)
 			, m_TextureAtlasCount(0)
 			, m_TextureAtlas(null)
-			, m_UID(-1)
+			, m_UID(0)
 			, m_DrawOrder(0)
 			, m_TransformUVs_RGBOnly(ManagedBool_False)
 			, m_UseVertexColor(ManagedBool_False)

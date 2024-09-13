@@ -614,6 +614,7 @@ namespace PopcornFX
 			if (PKFxSettings.EnablePopcornFXSound != soundValue)
 			{
 				PKFxSettings.EnablePopcornFXSound = soundValue;
+				PKFxManager.SetupPopcornFxSettings(false);
 			}
 			if (PKFxSettings.EnablePopcornFXSound)
 			{
@@ -624,6 +625,7 @@ namespace PopcornFX
 			if (PKFxSettings.EnablePopcornFXDecal != decalValue)
 			{
 				PKFxSettings.EnablePopcornFXDecal = decalValue;
+				PKFxManager.SetupPopcornFxSettings(false);
 			}
 
 			if (PKFxSettings.EnablePopcornFXDecal)

@@ -373,7 +373,7 @@ namespace PopcornFX
 		[SerializeField]
 		internal int				m_CameraId;
 
-		public int m_UID;
+		public uint					m_UID;
 
 
 		public SBatchDesc(ERendererType type, SPopcornRendererDesc desc)

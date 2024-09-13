@@ -14,7 +14,7 @@ extern "C"
 	// Import effect callbacks:
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnEffectDependencyFound)(const char *dependencyPath, int isLinearTexture) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnEffectRendererFound)(const void *rendererDesc, int type, int idx) = null;
-	void				(POPCORN_TO_MANAGED_CONVENTION* _OnEffectRendererLink)(int globalIdx, const char *currentQualityLevel, int uid) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION* _OnEffectRendererLink)(int globalIdx, const char *currentQualityLevel, unsigned int uid) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnEffectEventFound)(const SFxEventDesc *attribDesc) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnEffectAttributeFound)(const SFxAttributeDesc *attribDesc) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION *_OnEffectSamplerFound)(const SFxSamplerDesc *samplerDesc) = null;
@@ -40,7 +40,7 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnEffectRendererLink(void *delegatePtr)
 	{
-		_OnEffectRendererLink = (void (POPCORN_TO_MANAGED_CONVENTION*)(int globalIdx, const char *currentQualityLevel, int uid))delegatePtr;
+		_OnEffectRendererLink = (void (POPCORN_TO_MANAGED_CONVENTION*)(int globalIdx, const char *currentQualityLevel, unsigned int uid))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnEffectEventFound(void *delegatePtr)
@@ -110,7 +110,7 @@ extern "C"
 		}
 	}
 
-	void										OnEffectRendererLink(int globalIdx, const char *currentQualityLevel, int uid)
+	void										OnEffectRendererLink(int globalIdx, const char *currentQualityLevel, unsigned int uid)
 	{
 		PK_SCOPEDPROFILE();
 		PK_ASSERT(CCurrentThread::IsMainThread());

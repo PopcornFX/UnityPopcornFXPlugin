@@ -80,7 +80,7 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 	}
 	else if (renderer->m_RendererType == Renderer_Decal)
 	{
-	succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataDecal*>(renderer.Get()));
+		succeeded = rendererCache->GameThread_SetupRenderer(static_cast<const CRendererDataDecal*>(renderer.Get()));
 	}
 
 	rendererCache->SetAssetName(particleDesc->ParentEffect()->HandlerName());

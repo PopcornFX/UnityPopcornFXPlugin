@@ -148,7 +148,7 @@ extern "C"
 	void										OnEffectRendererFound(const void *effectRdrDesc, int type, int idx);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnEffectRendererLink(void* delegatePtr);
-	void										OnEffectRendererLink(int globalIdx, const char *currentQualityLevel, int uid);
+	void										OnEffectRendererLink(int globalIdx, const char *currentQualityLevel, unsigned int uid);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnEffectEventFound(void *delegatePtr);
 	void										OnEffectEventFound(const SFxEventDesc *attribDesc);

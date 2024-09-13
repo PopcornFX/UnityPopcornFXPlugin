@@ -17,7 +17,7 @@ namespace PopcornFX
 		public enum ERenderPipeline
 		{
 			Legacy,
-			URP	  ,
+			URP,
 			HDRP
 		}
 

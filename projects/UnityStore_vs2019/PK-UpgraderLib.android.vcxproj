@@ -919,6 +919,14 @@
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.0.21896\Library_PopcornFXCore_Templates_Samplers_pkfx_2_20_0_21896.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.0.21896\Library_PopcornFXCore_Templates_Trails_pkfx_2_20_0_21896.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.0.21896\Library_PopcornFXCore_Templates_Utils_pkfx_2_20_0_21896.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Materials_Billboard_AnimatedMasked_pkma_2_20_1_21978.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Materials_Interface_Default_pkri_2_20_1_21978.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Materials_Mesh_AnimatedMasked_pkma_2_20_1_21978.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Materials_Ribbon_AnimatedMasked_pkma_2_20_1_21978.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Shaders_includes_FeatureAlphaMasks_h_2_20_1_21978.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Shaders_includes_FeatureDithering_h_2_20_1_21978.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Shaders_includes_FeatureEmissive_h_2_20_1_21978.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Templates_Core_pkfx_2_20_1_21978.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\Editor_Templates_Basic_pkfx_2_3_0_59136.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\Editor_Templates_FX_Simple_pkfx_2_3_0_59136.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\Library_PopcornFXCore_Materials_Default_Billboard_pkma_2_3_0_59136.h" />
@@ -1245,6 +1253,7 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.0.20910\core_upgrader_2_20_0_20910.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.0.21121\core_upgrader_2_20_0_21121.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.0.21896\core_upgrader_2_20_0_21896.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\core_upgrader_2_20_1_21978.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\core_upgrader_2_3_0_59136.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59175\core_upgrader_2_3_0_59175.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59344\core_upgrader_2_3_0_59344.cpp" />

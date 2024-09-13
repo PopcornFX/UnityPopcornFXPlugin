@@ -298,15 +298,15 @@ extern "C"
 
 	struct SDecalInfo
 	{
-		CFloat3		 m_Position;
-		CFloat3		 m_Scale;
-		CQuaternion  m_Orientation;
+		CFloat3		m_Position;
+		CFloat3		m_Scale;
+		CQuaternion	m_Orientation;
 		char		*m_DiffuseMap;
 		char		*m_EmissiveMap;
-		CFloat4		 m_DiffuseColor;
-		CFloat4		 m_EmissiveColor;
-		CFloat1		 m_AtlasID;
-		int			 m_UID;
+		CFloat4		m_DiffuseColor;
+		CFloat3		m_EmissiveColor;
+		CFloat1		m_AtlasID;
+		int			m_UID;
 	};
 
 	//----------------------------------------------------------------------------

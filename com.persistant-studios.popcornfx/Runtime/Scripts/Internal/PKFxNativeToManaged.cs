@@ -140,7 +140,7 @@ namespace PopcornFX
 		public IntPtr m_LitRendering;
 
 		public int	m_CameraId;
-		public int	m_UID;
+		public uint	m_UID;
 	};
 
 	// Meshes:
@@ -169,7 +169,7 @@ namespace PopcornFX
 
 		public int		m_TextureAtlasCount;
 		public IntPtr	m_TextureAtlas;
-		public int		m_UID;
+		public uint		m_UID;
 		public int		m_DrawOrder;
 		public int		m_TransformUVs_RGBOnly;
 		public int		m_UseVertexColor;
@@ -179,19 +179,19 @@ namespace PopcornFX
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SDecalRendererDesc
 	{
-        public int		m_ShaderVariationFlags;
+		public int		m_ShaderVariationFlags;
 
-        public IntPtr	m_DiffuseMap;
+		public IntPtr	m_DiffuseMap;
 		public IntPtr	m_EmissiveMap;
 
 		public Vector4	m_DiffuseColor;
-		public Vector4	m_EmissiveColor;
+		public Vector3	m_EmissiveColor;
 
-        public int		m_TextureAtlasCount;
-        public IntPtr	m_TextureAtlas;
+		public int		m_TextureAtlasCount;
+		public IntPtr	m_TextureAtlas;
 
-        public int		m_UID;
-    };
+		public uint		m_UID;
+	};
 
 
 	[StructLayout(LayoutKind.Sequential)]
@@ -736,14 +736,14 @@ namespace PopcornFX
 				}
 			}
 			else if (etype == ERendererType.Decal)
-            {
-                unsafe
-                {
-                    SDecalRendererDesc* nativeRendererDesc = (SDecalRendererDesc*)RendererDescPtr.ToPointer();
-                    m_CurrentlyImportedAsset.AddRenderer(etype, *nativeRendererDesc, idx);
-                }
+			{
+				unsafe
+				{
+					SDecalRendererDesc* nativeRendererDesc = (SDecalRendererDesc*)RendererDescPtr.ToPointer();
+					m_CurrentlyImportedAsset.AddRenderer(etype, *nativeRendererDesc, idx);
+				}
 
-            }
+			}
 			else
 			{
 				unsafe
@@ -757,10 +757,10 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
-		public delegate void EffectRendererLinkCallback(int GlobalIdx, string qualityLevel, int UID);
+		public delegate void EffectRendererLinkCallback(int GlobalIdx, string qualityLevel, uint UID);
 
 		[MonoPInvokeCallback(typeof(EffectRendererLinkCallback))]
-		private static void OnEffectRendererLink(int globalIdx, string qualityLevel, int UID)
+		private static void OnEffectRendererLink(int globalIdx, string qualityLevel, uint UID)
 		{
 #if UNITY_EDITOR
 			m_CurrentlyImportedAsset.LinkRenderer(globalIdx, qualityLevel, UID);

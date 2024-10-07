@@ -125,6 +125,10 @@ namespace PopcornFX
 			if (m_CameraID >= 0)
 				m_RenderingPlugin.UnRegisterCamera(this);
 			Clean();
+#if UNITY_EDITOR
+			if (m_IsEditorCamera)
+				SceneView.lastActiveSceneViewChanged -= OnSceneChanged;
+#endif
 		}
 
 		public void OnEnable()
@@ -156,9 +160,10 @@ namespace PopcornFX
 #if UNITY_EDITOR
 				if (GetComponent<PKFxRenderingPlugin>() != null)
 				{
-					m_Camera = SceneView.lastActiveSceneView.camera;
+					SceneView.lastActiveSceneViewChanged += OnSceneChanged;
 					m_IsEditorCamera = true;
-					m_EditorCameraOriginMask = m_Camera.cullingMask;
+					m_EditorCameraOriginMask = Tools.visibleLayers;
+					_SetEditorCamera(SceneView.lastActiveSceneView);
 				}
 				else
 #endif
@@ -205,7 +210,7 @@ namespace PopcornFX
 			}
 #endif
 			//Enable depth texture on mobile
-			if (PKFxSettings.EnableSoftParticles)
+			if (PKFxSettings.EnableSoftParticles && m_Camera != null)
 				m_Camera.depthTextureMode = DepthTextureMode.Depth;
 
 			m_EnableDistortion = PKFxSettings.EnableDistortion;
@@ -214,6 +219,9 @@ namespace PopcornFX
 
 		internal void SetCullingMask(short ID, LayerMask targetMask, LayerMask allPKMask)
 		{
+			if (m_Camera == null)
+				return;
+
 			m_CurrentCameraID = ID;
 			int cull = m_Camera.cullingMask;// << Origin Mask
 			cull = (cull & (~allPKMask)) | targetMask;
@@ -240,6 +248,37 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 #if UNITY_EDITOR
+		private void _SetEditorCamera(SceneView sceneView)
+		{
+			// Unregister old camera
+			if (m_RenderingPlugin != null && m_Camera != null)
+			{
+				if (m_CameraID >= 0 && m_RenderingPlugin != null)
+					m_RenderingPlugin.UnRegisterCamera(this);
+			}
+
+			if (sceneView == null)
+				m_Camera = null;
+			else
+				m_Camera = sceneView.camera;
+
+			// Register new camera
+			if (m_RenderingPlugin != null && m_Camera != null)
+			{
+				int id = m_RenderingPlugin.RegisterCamera(this);
+				if (id >= 0)
+					m_CameraID = (short)id;
+			}
+		}
+
+		//----------------------------------------------------------------------------
+		public void OnSceneChanged(SceneView oldScene, SceneView newScene)
+		{
+			Clean();
+			_SetEditorCamera(newScene);
+		}
+
+		//----------------------------------------------------------------------------
 		public void ResetEditorCameraMask()
 		{
 			Tools.visibleLayers = m_EditorCameraOriginMask;
@@ -305,6 +344,10 @@ namespace PopcornFX
 		public void UpdateCamera()
 		{
 			m_CurrentFrameID++;
+
+			if (m_Camera == null)
+				return;
+
 			UpdateFrame();
 
 			if (m_EnableDistortion || m_EnableBlur)

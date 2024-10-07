@@ -358,9 +358,10 @@ namespace PopcornFX
 					else
 						newCameraLayers[i] = PKFxSettings.Instance.GetCameraLayer(i);
 				}
-				CameraLayers = newCameraLayers;
+				CameraLayers = newCameraLayers; // UpdateLayerMask will be called in the setter
 				return true;
 			}
+			UpdateLayerMask();
 			return false;
 		}
 

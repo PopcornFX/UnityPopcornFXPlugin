@@ -44,6 +44,24 @@ else ifeq ($(config),release_arm64)
   PK_RenderHelpers_SDK1_config = release_arm64
   PK_IntegrationUnity_config = release_arm64
 
+else ifeq ($(config),retail_x64)
+  PK_Runtime_SDK1_config = retail_x64
+  PK_Discretizers_SDK1_config = retail_x64
+  PK_ParticlesToolbox_SDK1_config = retail_x64
+  PK_AssetBakerLib_config = retail_x64
+  PK_UpgraderLib_config = retail_x64
+  PK_RenderHelpers_SDK1_config = retail_x64
+  PK_IntegrationUnity_config = retail_x64
+
+else ifeq ($(config),retail_arm64)
+  PK_Runtime_SDK1_config = retail_arm64
+  PK_Discretizers_SDK1_config = retail_arm64
+  PK_ParticlesToolbox_SDK1_config = retail_arm64
+  PK_AssetBakerLib_config = retail_arm64
+  PK_UpgraderLib_config = retail_arm64
+  PK_RenderHelpers_SDK1_config = retail_arm64
+  PK_IntegrationUnity_config = retail_arm64
+
 else
   $(error "invalid configuration $(config)")
 endif
@@ -125,6 +143,8 @@ help:
 	@echo "  debug_arm64"
 	@echo "  release_x64"
 	@echo "  release_arm64"
+	@echo "  retail_x64"
+	@echo "  retail_arm64"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"

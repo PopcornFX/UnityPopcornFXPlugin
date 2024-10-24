@@ -83,6 +83,47 @@ namespace PopcornFX
 		public float m_Metalness;
 	};
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SRenderingFeatureAlphaMasksDesc
+	{
+        public IntPtr m_AlphaMasks1Map;
+        public IntPtr m_AlphaMasks2Map;
+
+        public float m_AlphaMask1Intensity;
+        public float m_AlphaMask2Intensity;
+        public float m_AlphaMask1Weight;
+        public float m_AlphaMask2Weight;
+        public Vector2 m_AlphaMask1Scale;
+        public Vector2 m_AlphaMask2Scale;
+        public float m_AlphaMask1RotationSpeed;
+        public float m_AlphaMask2RotationSpeed;
+        public Vector2 m_AlphaMask1TranslationSpeed;
+        public Vector2 m_AlphaMask2TranslationSpeed;
+    };
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SRenderingFeatureUVDistortionsDesc
+	{
+		public IntPtr m_UVDistortions1Map;
+		public IntPtr m_UVDistortions2Map;
+
+		public float m_UVDistortions1Intensity;
+		public float m_UVDistortions2Intensity;
+		public Vector2 m_UVDistortions1Scale;
+		public Vector2 m_UVDistortions2Scale;
+		public float m_UVDistortions1RotationSpeed;
+		public float m_UVDistortions2RotationSpeed;
+		public Vector2 m_UVDistortions1TranslationSpeed;
+		public Vector2 m_UVDistortions2TranslationSpeed;
+	};
+
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SRenderingFeatureDissolveDesc
+	{
+		public IntPtr m_DissolveMap;
+		public float m_DissolveSoftness;
+	}
+
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SRenderingFeatureVATDesc
 	{
@@ -130,7 +171,8 @@ namespace PopcornFX
 		public IntPtr m_AlphaRemap;
 		public IntPtr m_DiffuseRampMap;
 		public IntPtr m_EmissiveRampMap;
-		public float m_InvSoftnessDistance;
+
+        public float m_InvSoftnessDistance;
 		public float m_AlphaClipThreshold;
 		public int m_TransformUVs_RGBOnly;
 
@@ -138,6 +180,9 @@ namespace PopcornFX
 		public int m_DrawOrder;
 
 		public IntPtr m_LitRendering;
+        public IntPtr m_AlphaMasks;
+		public IntPtr m_UVDistortions;
+		public IntPtr m_Dissolve;
 
 		public int	m_CameraId;
 		public uint	m_UID;
@@ -166,6 +211,9 @@ namespace PopcornFX
 		public IntPtr m_LitRendering;
 		public IntPtr m_VatRendering;
 		public IntPtr m_SkeletalAnim;
+		public IntPtr m_AlphaMasks;
+		public IntPtr m_UVDistortions;
+		public IntPtr m_Dissolve;
 
 		public int		m_TextureAtlasCount;
 		public IntPtr	m_TextureAtlas;
@@ -1276,6 +1324,37 @@ namespace PopcornFX
 						additionalUVIdx = additionalUVIdx + 1;
 					}
 					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));					// TransformUVs ScaleAndOffset
+					additionalUVIdx = additionalUVIdx + 1;
+				}
+
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks) && renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions)) 
+				{
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4)); // AlphaMasks cursors + UVDistortions
+					additionalUVIdx = additionalUVIdx + 1;
+				}
+				else
+				{
+					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks))
+					{
+						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // AlphaMasks cursors
+						additionalUVIdx = additionalUVIdx + 1;
+					}
+
+					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions))
+					{
+						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // UVDistortions cursors
+						additionalUVIdx = additionalUVIdx + 1;
+					}
+				}
+
+				if ((renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks) ||
+					renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions)) &&
+					renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas) || renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
+				{
+					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
+						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3));     // Dissolve Cursor + RawUV0s
+					else
+						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // RawUV0s
 					additionalUVIdx = additionalUVIdx + 1;
 				}
 

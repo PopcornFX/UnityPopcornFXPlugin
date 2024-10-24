@@ -66,6 +66,8 @@ namespace PopcornFX
 
 		public string	m_TransformUVRotatePropertyName = "_TransformUVRotate";
 		public string	m_TransformUVOffsetScalePropertyName = "_TransformUVOffsetScale";
+		public string   m_AlphaMasksUVDistortionsCursorsPropertyName = "_AlphaMasksUVDistortionsCursors";
+		public string   m_DissolveCursorAndRawUV0PropertyName = "_DissolveCursorAndRawUV0";
 
 		NativeArray<Matrix4x4> m_Transforms;
 		NativeArray<Vector4> m_DiffuseColors;
@@ -80,6 +82,8 @@ namespace PopcornFX
 		NativeArray<float> m_AtlasId;
 		NativeArray<float> m_TransformUVRotate;
 		NativeArray<Vector4> m_TransformUVOffsetScale;
+		NativeArray<Vector4> m_AlphaMasksUVDistortionsCursors;
+		NativeArray<Vector4> m_DissolveCursorAndRawUV0;
 
 		Matrix4x4[] m_TransformsArray;
 		Vector4[] m_DiffuseColorsArray;
@@ -94,6 +98,8 @@ namespace PopcornFX
 		float[] m_AtlasIdArray;
 		float[] m_TransformUVRotateArray;
 		Vector4[] m_TransformUVOffsetScaleArray;
+		Vector4[] m_AlphaMasksUVDistortionsCursorsArray;
+		Vector4[] m_DissolveCursorAndRawUV0Array;
 
 		MaterialPropertyBlock m_PropertyBlock;
 
@@ -131,12 +137,14 @@ namespace PopcornFX
 			public NativeArray<Vector4> transformUVOffsetScale;
 
 			public Vector4 transformUVOffsetScaleVec;
+            public NativeArray<Vector4> alphaMasksAndUVDistortionAnimationCursors;
+			public NativeArray<Vector4> dissolveAnimationCursorAndRawUVs;
 
 			public void Execute(int h)
 			{
 				unsafe
 				{
-					void* currentPtr = buffer.ToPointer();
+					void *currentPtr = buffer.ToPointer();
 
 					Matrix4x4* instanceTransform = (Matrix4x4*)currentPtr;
 					currentPtr = instanceTransform + count;
@@ -149,25 +157,25 @@ namespace PopcornFX
 
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Color) != 0)
 					{
-						Vector4* instanceColor = (Vector4*)currentPtr;
+						Vector4 *instanceColor = (Vector4*)currentPtr;
 						diffuseColors[h] = instanceColor[offset + h];
 						currentPtr = instanceColor + count;
 					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Emissive) != 0)
 					{
-						Vector4* instanceEmissiveColor = (Vector4*)currentPtr;
+						Vector4 *instanceEmissiveColor = (Vector4*)currentPtr;
 						emissiveColors[h] = instanceEmissiveColor[offset + h];
 						currentPtr = instanceEmissiveColor + count;
 					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaRemap) != 0)
 					{
-						float* instanceAlphaCursor = (float*)currentPtr;
+						float *instanceAlphaCursor = (float*)currentPtr;
 						alphaCursors[h] = instanceAlphaCursor[offset + h];
 						currentPtr = instanceAlphaCursor + count;
 					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0)
 					{
-						float* instanceAtlasId = (float*)currentPtr;
+						float *instanceAtlasId = (float*)currentPtr;
 						atlasId[h] = instanceAtlasId[offset + h];
 						currentPtr = instanceAtlasId + count;
 					}
@@ -175,41 +183,84 @@ namespace PopcornFX
 						(m_ShaderVariation & (int)EShaderVariationFlags.Has_RigidVAT) != 0 ||
 						(m_ShaderVariation & (int)EShaderVariationFlags.Has_SoftVAT) != 0)
 					{
-						float* instanceCursor = (float*)currentPtr;
+						float *instanceCursor = (float*)currentPtr;
 						vatCursors[h] = instanceCursor[offset + h];
 					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
 					{
-						uint* instanceCursorAnimIdx = (uint*)currentPtr;
+						uint *instanceCursorAnimIdx = (uint*)currentPtr;
 						animIdx0[h] = (float)instanceCursorAnimIdx[offset + h];
 						currentPtr = instanceCursorAnimIdx + count;
-						float* instanceCursorAnim0 = (float*)currentPtr;
+						float *instanceCursorAnim0 = (float*)currentPtr;
 						animCursor0[h] = instanceCursorAnim0[offset + h];
 						currentPtr = instanceCursorAnim0 + count;
 					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_SkeletalTrackInterpol) != 0)
 					{
-						uint* instanceCursorAnim1Idx = (uint*)currentPtr;
+						uint *instanceCursorAnim1Idx = (uint*)currentPtr;
 						animIdx1[h] = (float)instanceCursorAnim1Idx[offset + h];
 						currentPtr = instanceCursorAnim1Idx + count;
-						float* instanceCursorAnim1 = (float*)currentPtr;
+						float *instanceCursorAnim1 = (float*)currentPtr;
 						animCursor1[h] = instanceCursorAnim1[offset + h];
 						currentPtr = instanceCursorAnim1 + count;
-						float* instanceTransitionCursorAnim1 = (float*)currentPtr;
+						float *instanceTransitionCursorAnim1 = (float*)currentPtr;
 						animTransition[h] = instanceTransitionCursorAnim1[offset + h];
 						currentPtr = instanceTransitionCursorAnim1 + count;
 					}
 					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
 					{
-						float* instanceTransformRotate = (float*)currentPtr;
+						float *instanceTransformRotate = (float*)currentPtr;
 						transformUVRotate[h] = instanceTransformRotate[offset + h];
 						currentPtr = instanceTransformRotate + count;
-						Vector2* instanceTransformOffset = (Vector2*)currentPtr;
+						Vector2 *instanceTransformOffset = (Vector2*)currentPtr;
 						currentPtr = instanceTransformOffset + count;
-						Vector2* instanceTransformScale = (Vector2*)currentPtr;
+						Vector2 *instanceTransformScale = (Vector2*)currentPtr;
 						currentPtr = instanceTransformScale + count;
 						transformUVOffsetScaleVec.Set(instanceTransformOffset[offset + h].x, instanceTransformOffset[offset + h].y, instanceTransformScale[offset + h].x, instanceTransformScale[offset + h].y);
 						transformUVOffsetScale.ReinterpretStore(h, transformUVOffsetScaleVec);
+					}
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaMasks) != 0 && (m_ShaderVariation & (int)EShaderVariationFlags.Has_UVDistortions) != 0)
+					{
+						Vector2 *instanceAnimationCursors = (Vector2*)currentPtr;
+						Vector2 alphaMasksCursors = instanceAnimationCursors[offset + h];
+						currentPtr = instanceAnimationCursors + count;
+						instanceAnimationCursors = (Vector2*)currentPtr;
+						Vector4 alphaMasksAndUVDistortionAnimationCursorsVec = new Vector4(alphaMasksCursors.x, alphaMasksCursors.y, instanceAnimationCursors[offset + h].x, instanceAnimationCursors[offset + h].y);
+						alphaMasksAndUVDistortionAnimationCursors.ReinterpretStore(h, alphaMasksAndUVDistortionAnimationCursorsVec);
+						currentPtr = instanceAnimationCursors + count;
+					}
+					else
+					{
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaMasks) != 0)
+						{
+							Vector2 *instanceAnimationCursors = (Vector2*)currentPtr;
+							alphaMasksAndUVDistortionAnimationCursors[h] = new Vector4(instanceAnimationCursors[offset + h].x, instanceAnimationCursors[offset + h].y, 0.0f, 0.0f);
+							currentPtr = instanceAnimationCursors + count;
+						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_UVDistortions) != 0)
+						{
+							Vector2 *instanceAnimationCursors = (Vector2*)currentPtr;
+							alphaMasksAndUVDistortionAnimationCursors[h] = new Vector4(0.0f, 0.0f, instanceAnimationCursors[offset + h].x, instanceAnimationCursors[offset + h].y);
+							currentPtr = instanceAnimationCursors + count;
+						}
+					}
+					if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Dissolve) != 0)
+					{
+						float *instanceCursor = (float*)currentPtr;
+						float dissolveCursor = instanceCursor[offset + h];
+						currentPtr = instanceCursor + count;
+						Vector4 dissolveCursorAndRawUV0Vec;
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0)
+						{
+							Vector2 *instanceRawUV0 = (Vector2*)currentPtr;
+							Vector2 rawUV0 = instanceRawUV0[offset + h];
+							dissolveCursorAndRawUV0Vec = new Vector4(dissolveCursor, rawUV0.x, rawUV0.y, 0.0f);
+							currentPtr = instanceRawUV0 + count;
+						}
+						else
+							dissolveCursorAndRawUV0Vec = new Vector4(dissolveCursor, 0.0f, 0.0f, 0.0f);
+						dissolveAnimationCursorAndRawUVs.ReinterpretStore(h, dissolveCursorAndRawUV0Vec);
+						
 					}
 				}
 			}
@@ -258,6 +309,8 @@ namespace PopcornFX
 				m_AnimTransition = new NativeArray<float>(1023, Allocator.Persistent);
 				m_TransformUVRotate = new NativeArray<float>(1023, Allocator.Persistent);
 				m_TransformUVOffsetScale = new NativeArray<Vector4>(1023, Allocator.Persistent);
+				m_AlphaMasksUVDistortionsCursors = new NativeArray<Vector4>(1023, Allocator.Persistent);
+				m_DissolveCursorAndRawUV0 = new NativeArray<Vector4>(1023, Allocator.Persistent);
 
 				m_TransformsArray = new Matrix4x4[1023];
 				m_DiffuseColorsArray = new Vector4[1023];
@@ -272,6 +325,8 @@ namespace PopcornFX
 				m_AtlasIdArray = new float[1023];
 				m_TransformUVRotateArray = new float[1023];
 				m_TransformUVOffsetScaleArray = new Vector4[1023];
+				m_AlphaMasksUVDistortionsCursorsArray = new Vector4[1023];
+				m_DissolveCursorAndRawUV0Array = new Vector4[1023];
 
 			}
 			m_PropertyBlock = new MaterialPropertyBlock();
@@ -294,6 +349,8 @@ namespace PopcornFX
 				m_AnimTransition.Dispose();
 				m_TransformUVRotate.Dispose();
 				m_TransformUVOffsetScale.Dispose();
+				m_AlphaMasksUVDistortionsCursors.Dispose();
+				m_DissolveCursorAndRawUV0.Dispose();
 			}
 		}
 
@@ -356,6 +413,9 @@ namespace PopcornFX
 								job.transformUVRotate = m_TransformUVRotate;
 								job.transformUVOffsetScale = m_TransformUVOffsetScale;
 
+								job.alphaMasksAndUVDistortionAnimationCursors = m_AlphaMasksUVDistortionsCursors;
+								job.dissolveAnimationCursorAndRawUVs = m_DissolveCursorAndRawUV0;
+
 								//In data
 								job.meshTransform = meshToDraw.m_ImportTransform;
 								job.offset = i;
@@ -415,6 +475,15 @@ namespace PopcornFX
 									m_PropertyBlock.SetVectorArray(m_TransformUVOffsetScalePropertyName, CopyNativeArrayToArray(m_TransformUVOffsetScale, m_TransformUVOffsetScaleArray, dataLeft));
 								}
 
+								if ((m_ShaderVariation & ((int)EShaderVariationFlags.Has_AlphaMasks) | (int)EShaderVariationFlags.Has_UVDistortions) != 0)
+								{
+									m_PropertyBlock.SetVectorArray(m_AlphaMasksUVDistortionsCursorsPropertyName, CopyNativeArrayToArray(m_AlphaMasksUVDistortionsCursors, m_AlphaMasksUVDistortionsCursorsArray, dataLeft));
+								}
+								if ((m_ShaderVariation & ((int)EShaderVariationFlags.Has_Dissolve | (int)EShaderVariationFlags.Has_Atlas))  != 0)
+								{
+									m_PropertyBlock.SetVectorArray(m_DissolveCursorAndRawUV0PropertyName, CopyNativeArrayToArray(m_DissolveCursorAndRawUV0, m_DissolveCursorAndRawUV0Array, dataLeft));
+								}
+
 								Graphics.DrawMeshInstanced(
 									meshToDraw.m_Mesh,
 									meshToDraw.m_SubMeshId,
@@ -458,6 +527,11 @@ namespace PopcornFX
 						float* instanceTransformUVRotate = null;
 						Vector2* instanceTransformUVOffset = null;
 						Vector2* instanceTransformUVScale = null;
+
+						Vector2* instanceAlphaMasksCursors = null;
+						Vector2* instanceUVDistortionsCursors = null;
+						float* instanceDissolveCursors = null;
+						Vector2* instanceRawUV0 = null;
 
 						void* currentPtr = m_PerInstanceBuffer[bufferIdx].ToPointer();
 						int instanceCount = m_InstancesCount[bufferIdx];
@@ -527,6 +601,23 @@ namespace PopcornFX
 							instanceTransformUVScale = (Vector2*)currentPtr;
 							currentPtr = instanceTransformUVScale + instanceCount;
 						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_AlphaMasks) != 0)
+						{
+							instanceAlphaMasksCursors = (Vector2*)currentPtr;
+							currentPtr = instanceAlphaMasksCursors + instanceCount;
+						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_UVDistortions) != 0)
+						{
+							instanceUVDistortionsCursors = (Vector2*)currentPtr;
+							currentPtr = instanceUVDistortionsCursors + instanceCount;
+						}
+						if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Dissolve) != 0) 
+						{ 
+							instanceDissolveCursors = (float*)currentPtr;
+							currentPtr = instanceDissolveCursors + instanceCount;
+							instanceRawUV0 = (Vector2*)(currentPtr);
+							currentPtr = instanceRawUV0 + instanceCount;
+						}
 
 						for (int i = 0; i < m_InstancesCount[bufferIdx]; i++)
 						{
@@ -568,6 +659,36 @@ namespace PopcornFX
 								if (instanceTransformUVOffset != null && instanceTransformUVScale != null && !string.IsNullOrEmpty(m_TransformUVOffsetScalePropertyName))
 								{
 									m_PropertyBlock.SetVector(m_TransformUVOffsetScalePropertyName, new Vector4(instanceTransformUVOffset[i].x, instanceTransformUVOffset[i].y, instanceTransformUVScale[i].x, instanceTransformUVScale[i].y));
+								}
+							}
+							if ((m_ShaderVariation & ((int)EShaderVariationFlags.Has_AlphaMasks | (int)EShaderVariationFlags.Has_UVDistortions)) != 0)
+							{
+								Vector4 alphaMasksUVDistortions = new Vector4();
+								if (instanceAlphaMasksCursors != null && !string.IsNullOrEmpty(m_AlphaMasksUVDistortionsCursorsPropertyName))
+								{
+									alphaMasksUVDistortions.x = instanceAlphaMasksCursors[i].x;
+									alphaMasksUVDistortions.y = instanceAlphaMasksCursors[i].y;
+								}
+								if (instanceUVDistortionsCursors != null && !string.IsNullOrEmpty(m_AlphaMasksUVDistortionsCursorsPropertyName))
+								{
+									alphaMasksUVDistortions.z = instanceUVDistortionsCursors[i].x;
+									alphaMasksUVDistortions.w = instanceUVDistortionsCursors[i].y;
+								}		
+							}
+							if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Dissolve) != 0)
+							{
+								Vector3 dissolveAndRawUV0 = new Vector3();
+								if (!string.IsNullOrEmpty(m_DissolveCursorAndRawUV0PropertyName))
+								{
+									if (instanceDissolveCursors != null)
+									{
+										dissolveAndRawUV0.x = instanceDissolveCursors[i];
+									}
+									if ((m_ShaderVariation & (int)EShaderVariationFlags.Has_Atlas) != 0 && (instanceRawUV0 != null))
+									{
+										dissolveAndRawUV0.y = instanceRawUV0[i].x;
+										dissolveAndRawUV0.z = instanceRawUV0[i].y;
+									}
 								}
 
 							}

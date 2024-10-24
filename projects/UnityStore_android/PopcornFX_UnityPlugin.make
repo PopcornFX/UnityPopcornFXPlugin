@@ -40,6 +40,22 @@ else ifeq ($(config),release_android64)
   PK_RenderHelpers_SDK1_config = release_android64
   PK_IntegrationUnity_config = release_android64
 
+else ifeq ($(config),retail_android)
+  PK_Runtime_SDK1_config = retail_android
+  PK_Discretizers_SDK1_config = retail_android
+  PK_ParticlesToolbox_SDK1_config = retail_android
+  PK_UpgraderLib_config = retail_android
+  PK_RenderHelpers_SDK1_config = retail_android
+  PK_IntegrationUnity_config = retail_android
+
+else ifeq ($(config),retail_android64)
+  PK_Runtime_SDK1_config = retail_android64
+  PK_Discretizers_SDK1_config = retail_android64
+  PK_ParticlesToolbox_SDK1_config = retail_android64
+  PK_UpgraderLib_config = retail_android64
+  PK_RenderHelpers_SDK1_config = retail_android64
+  PK_IntegrationUnity_config = retail_android64
+
 else
   $(error "invalid configuration $(config)")
 endif
@@ -112,6 +128,8 @@ help:
 	@echo "  debug_android64"
 	@echo "  release_android"
 	@echo "  release_android64"
+	@echo "  retail_android"
+	@echo "  retail_android64"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"

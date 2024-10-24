@@ -4,7 +4,8 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 									out float2 uv0, out float2 uv1, out float frameLerp,
 									out float2 uvFactors, out float2 uvScale, out float2 uvOffset,
 									out float alphaCursor,
-									out float4 emissiveColor, out float transformUvsRotate, out float4 transformUvsScaleAndOffset)
+									out float4 emissiveColor, out float transformUvsRotate, out float4 transformUvsScaleAndOffset,
+									out float2 alphaMasksAnimationCursors, out float2 uvDistortionsAnimationCursors, out float dissolveCursor, out float2 rawTexCoord0)
 {
 	float4 	vertexInputs[4] = { texCoord0, texCoord1, texCoord2, texCoord3 };
 	int 	currentIdx = 0;
@@ -19,6 +20,10 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 	emissiveColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
 	transformUvsRotate = 0.0f;
 	transformUvsScaleAndOffset = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	alphaMasksAnimationCursors = float2(0.0f, 0.0f);
+	uvDistortionsAnimationCursors = float2(0.0f, 0.0f);
+	dissolveCursor = 0.0f;
+	rawTexCoord0 = uv0;
 
 # if PK_HAS_RIBBON_COMPLEX_ON
 	uvFactors = vertexInputs[currentIdx].xy;
@@ -66,5 +71,30 @@ void	SwizzleVertexInputs_float(	in float4 texCoord0, in float4 texCoord1,
 			transformUvsRotate = vertexInputs[currentIdx++].x;
 #		endif
 		transformUvsScaleAndOffset = vertexInputs[currentIdx++];
+#	endif
+
+#	if PK_HAS_ALPHA_MASKS && PK_HAS_UV_DISTORTIONS
+	alphaMasksAnimationCursors = vertexInputs[currentIdx].xy;
+	uvDistortionsAnimationCursors = vertexInputs[currentIdx++].zw;
+#	else
+#		if PK_HAS_ALPHA_MASKS
+	alphaMasksAnimationCursors = vertexInputs[currentIdx++].xy;
+#		endif
+#		if PK_HAS_UV_DISTORTIONS
+	uvDistortionsAnimationCursors = vertexInputs[currentIdx++].xy;
+#		endif // PK_HAS_UV_DISTORTIONS
+#	endif
+
+#if PK_HAS_DISSOLVE
+	dissolveCursor = vertexInputs[currentIdx].x;
+#	endif
+#	if PK_HAS_ATLAS && (PK_HAS_ALPHA_MASKS || PK_HAS_UV_DISTORTIONS || PK_HAS_DISSOLVE)
+#		if PK_HAS_DISSOLVE
+	rawTexCoord0 = vertexInputs[currentIdx].yz;
+#		else
+	rawTexCoord0 = vertexInputs[currentIdx].xy;
+#		endif
+#	else
+	rawTexCoord0 = texCoord0.xy;
 #	endif
 }

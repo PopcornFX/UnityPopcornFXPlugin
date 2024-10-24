@@ -101,6 +101,8 @@ namespace PopcornFX
 			// Meshes:
 			if (m_TransparentMeshUnlitLegacy != null)
 				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitLegacy);
+			if (m_TransparentMeshUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshUnlitDefault);
 			if (m_EmissiveMeshUnlitDefault != null)
 				m_RenderFeatureBindings.Add(m_EmissiveMeshUnlitDefault);
 			if (m_OpaqueMeshUnlitLegacy != null)
@@ -109,6 +111,8 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_OpaqueMeshUnlitDefault);
 			if (m_TransparentMeshLitLegacy != null)
 				m_RenderFeatureBindings.Add(m_TransparentMeshLitLegacy);
+			if (m_TransparentMeshLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentMeshLitDefault);
 			if (m_OpaqueMeshLitLegacy != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitLegacy);
 			if (m_OpaqueMeshLitDefault != null)

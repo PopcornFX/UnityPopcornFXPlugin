@@ -50,7 +50,11 @@ namespace PopcornFX
 		Has_SkeletalAnim = (1 << 19),
 		Has_SkeletalInterpol = (1 << 20),
 		Has_SkeletalTrackInterpol = (1 << 21),
-		Has_TransformUVs = (1 << 22)
+		Has_TransformUVs = (1 << 22),
+        Has_LegacyLightingOpaque = (1 << 23),
+        Has_AlphaMasks = (1 << 24),
+		Has_UVDistortions = (1 << 25),
+		Has_Dissolve = (1 << 26),
 	};
 
 	public enum EBlendMode : int
@@ -137,6 +141,222 @@ namespace PopcornFX
 			name += String.Format("{0:0.##}", m_Roughness);
 			name += " ";
 			name += String.Format("{0:0.##}", m_Metalness);
+
+			name += "]";
+			return name;
+		}
+	}
+
+    [Serializable]
+    public class SBatchAlphaMasksFeatureDesc
+    {
+        public bool m_Activated = false;
+
+        public string m_AlphaMasks1Map;
+        public string m_AlphaMasks2Map;
+        public float m_AlphaMask1Intensity;
+        public float m_AlphaMask2Intensity;
+        public float m_AlphaMask1Weight;
+        public float m_AlphaMask2Weight;
+        public Vector2 m_AlphaMask1Scale;
+        public Vector2 m_AlphaMask2Scale;
+        public float m_AlphaMask1RotationSpeed;
+        public float m_AlphaMask2RotationSpeed;
+        public Vector2 m_AlphaMask1TranslationSpeed;
+        public Vector2 m_AlphaMask2TranslationSpeed;
+
+        public SBatchAlphaMasksFeatureDesc(SRenderingFeatureAlphaMasksDesc desc)
+        {
+            if (desc.m_AlphaMasks1Map != IntPtr.Zero)
+                m_AlphaMasks1Map = Marshal.PtrToStringAnsi(desc.m_AlphaMasks1Map);
+            if (desc.m_AlphaMasks2Map != IntPtr.Zero)
+                m_AlphaMasks2Map = Marshal.PtrToStringAnsi(desc.m_AlphaMasks2Map);
+
+            m_AlphaMask1Intensity = desc.m_AlphaMask1Intensity;
+            m_AlphaMask2Intensity = desc.m_AlphaMask2Intensity;
+            m_AlphaMask1Weight = desc.m_AlphaMask1Weight;
+            m_AlphaMask2Weight = desc.m_AlphaMask2Weight;
+            m_AlphaMask1Scale = desc.m_AlphaMask1Scale;
+            m_AlphaMask2Scale = desc.m_AlphaMask2Scale;
+            m_AlphaMask1RotationSpeed = desc.m_AlphaMask1RotationSpeed;
+            m_AlphaMask2RotationSpeed = desc.m_AlphaMask2RotationSpeed;
+            m_AlphaMask1TranslationSpeed = desc.m_AlphaMask1TranslationSpeed;
+            m_AlphaMask2TranslationSpeed = desc.m_AlphaMask2TranslationSpeed;
+        }
+
+        internal string GetGeneratedShortName()
+        {
+            string name = "AlphaMasks_";
+
+            name += (m_AlphaMasks1Map == null || m_AlphaMasks1Map.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaMasks1Map) + "_";
+			name += String.Format("{0:0.##}", m_AlphaMask1Intensity);
+			name += String.Format("{0:0.##}", m_AlphaMask1Weight);
+			name += m_AlphaMask1Scale.ToString("F2");
+			name += String.Format("{0:0.##}", m_AlphaMask1RotationSpeed);
+			name += m_AlphaMask1TranslationSpeed.ToString("F2");
+
+			name += (m_AlphaMasks2Map == null || m_AlphaMasks2Map.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaMasks2Map) + "_";
+			name += String.Format("{0:0.##}", m_AlphaMask2Intensity);
+			name += String.Format("{0:0.##}", m_AlphaMask2Weight);
+			name += m_AlphaMask2Scale.ToString("F2");
+			name += String.Format("{0:0.##}", m_AlphaMask2RotationSpeed);
+			name += m_AlphaMask2TranslationSpeed.ToString("F2");
+			return name;
+        }
+
+        internal string GetGeneratedName()
+        {
+            string name = "[AlphaMasks:";
+
+                name += " ";
+                name += m_AlphaMasks1Map == null ? "none" : m_AlphaMasks1Map;
+                name += " ";
+				name += m_AlphaMask1Intensity;
+				name += " ";
+				name += m_AlphaMask1Weight;
+				name += " ";
+				name += m_AlphaMask1Scale.ToString("F2");
+				name += " ";
+				name += m_AlphaMask1RotationSpeed;
+				name += " ";
+				name += m_AlphaMask1TranslationSpeed;
+
+				name += " ";
+				name += m_AlphaMasks2Map == null ? "none" : m_AlphaMasks2Map;
+				name += " ";
+				name += m_AlphaMask2Intensity;
+				name += " ";
+				name += m_AlphaMask2Weight;
+				name += " ";
+				name += m_AlphaMask2Scale.ToString("F2");
+				name += " ";
+				name += m_AlphaMask2RotationSpeed;
+				name += " ";
+				name += m_AlphaMask2TranslationSpeed;
+
+			name += "]";
+            return name;
+        }
+    }
+
+	[Serializable]
+	public class SBatchUVDistortionsFeatureDesc
+	{
+		public bool m_Activated = false;
+
+		public string m_UVDistortions1Map;
+		public string m_UVDistortions2Map;
+		public float m_UVDistortions1Intensity;
+		public float m_UVDistortions2Intensity;
+		public Vector2 m_UVDistortions1Scale;
+		public Vector2 m_UVDistortions2Scale;
+		public float m_UVDistortions1RotationSpeed;
+		public float m_UVDistortions2RotationSpeed;
+		public Vector2 m_UVDistortions1TranslationSpeed;
+		public Vector2 m_UVDistortions2TranslationSpeed;
+
+		public SBatchUVDistortionsFeatureDesc(SRenderingFeatureUVDistortionsDesc desc)
+		{
+			if (desc.m_UVDistortions1Map != IntPtr.Zero)
+				m_UVDistortions1Map = Marshal.PtrToStringAnsi(desc.m_UVDistortions1Map);
+			if (desc.m_UVDistortions2Map != IntPtr.Zero)
+				m_UVDistortions2Map = Marshal.PtrToStringAnsi(desc.m_UVDistortions2Map);
+
+			m_UVDistortions1Intensity = desc.m_UVDistortions1Intensity;
+			m_UVDistortions2Intensity = desc.m_UVDistortions2Intensity;
+			m_UVDistortions1Scale = desc.m_UVDistortions1Scale;
+			m_UVDistortions2Scale = desc.m_UVDistortions2Scale;
+			m_UVDistortions1RotationSpeed = desc.m_UVDistortions1RotationSpeed;
+			m_UVDistortions2RotationSpeed = desc.m_UVDistortions2RotationSpeed;
+			m_UVDistortions1TranslationSpeed = desc.m_UVDistortions1TranslationSpeed;
+			m_UVDistortions2TranslationSpeed = desc.m_UVDistortions2TranslationSpeed;
+		}
+
+		internal string GetGeneratedShortName()
+		{
+			string name = "UVDistortions_";
+
+			name += (m_UVDistortions1Map == null || m_UVDistortions1Map.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_UVDistortions1Map) + "_";
+			name += String.Format("{0:0.##}", m_UVDistortions1Intensity);
+			name += m_UVDistortions1Scale.ToString("F2");
+			name += String.Format("{0:0.##}", m_UVDistortions1RotationSpeed);
+			name += m_UVDistortions1TranslationSpeed.ToString("F2");
+
+			name += (m_UVDistortions2Map == null || m_UVDistortions2Map.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_UVDistortions2Map) + "_";
+			name += String.Format("{0:0.##}", m_UVDistortions2Intensity);
+			name += m_UVDistortions2Scale.ToString("F2");
+			name += String.Format("{0:0.##}", m_UVDistortions2RotationSpeed);
+			name += m_UVDistortions2TranslationSpeed.ToString("F2");
+
+			return name;
+		}
+
+		internal string GetGeneratedName()
+		{
+			string name = "[UVDistortions:";
+
+			name += " ";
+			name += m_UVDistortions1Map == null ? "none" : m_UVDistortions1Map;
+			name += " ";
+			name += m_UVDistortions1Intensity;
+			name += " ";
+			name += m_UVDistortions1Scale.ToString("F2");
+			name += " ";
+			name += m_UVDistortions1RotationSpeed;
+			name += " ";
+			name += m_UVDistortions1TranslationSpeed.ToString("F2");
+
+			name += " ";
+			name += m_UVDistortions2Map == null ? "none" : m_UVDistortions2Map;
+			name += " ";
+			name += m_UVDistortions2Intensity;
+			name += " ";
+			name += m_UVDistortions2Scale.ToString("F2");
+			name += " ";
+			name += m_UVDistortions2RotationSpeed;
+			name += " ";
+			name += m_UVDistortions2TranslationSpeed.ToString("F2");
+			name += " ";
+
+			name += "]";
+			return name;
+		}
+	}
+
+	[Serializable]
+	public class SBatchDissolveFeatureDesc
+	{
+		public bool m_Activated = false;
+
+		public string m_DissolveMap;
+		public float m_DissolveSoftness;
+
+		public SBatchDissolveFeatureDesc(SRenderingFeatureDissolveDesc desc)
+		{
+			if (desc.m_DissolveMap != IntPtr.Zero)
+				m_DissolveMap = Marshal.PtrToStringAnsi(desc.m_DissolveMap);
+
+			m_DissolveSoftness = desc.m_DissolveSoftness;
+		}
+
+		internal string GetGeneratedShortName()
+		{
+			string name = "Dissolve_";
+			// TODO BOTH
+			name += (m_DissolveMap == null || m_DissolveMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_DissolveMap) + "_";
+			name += String.Format("{0:0.##}", m_DissolveSoftness);
+			return name;
+		}
+
+		internal string GetGeneratedName()
+		{
+			string name = "[Dissolve:";
+
+			name += " ";
+			name += m_DissolveMap == null ? "none" : m_DissolveMap;
+			name += " ";
+			name += m_DissolveSoftness;
+			name += " ";
 
 			name += "]";
 			return name;
@@ -364,6 +584,12 @@ namespace PopcornFX
         public SBatchVatFeatureDesc m_VatFeature = null;
 		// Lit:
 		public SBatchLitFeatureDesc m_LitFeature = null;
+
+		// AnimatedMasked features
+        public SBatchAlphaMasksFeatureDesc m_AlphaMasksFeature = null;
+		public SBatchUVDistortionsFeatureDesc m_UVDistortionsFeature = null;
+		public SBatchDissolveFeatureDesc m_DissolveFeature = null;
+
 		// Skeletal anim:
 		public SBatchSkeletalAnimFeatureDesc m_SkeletalAnimFeature = null;
 
@@ -388,7 +614,7 @@ namespace PopcornFX
 			string emissiveRampStr = null;
 			string alphaRemapStr = null;
 
-			if (desc.m_DiffuseMap != IntPtr.Zero)
+            if (desc.m_DiffuseMap != IntPtr.Zero)
 				diffuseStr = Marshal.PtrToStringAnsi(desc.m_DiffuseMap);
 			if (desc.m_EmissiveMap != IntPtr.Zero)
 				emissiveStr = Marshal.PtrToStringAnsi(desc.m_EmissiveMap);
@@ -411,7 +637,8 @@ namespace PopcornFX
 			m_DiffuseRampMap = diffuseRampStr;
 			m_EmissiveRampMap = emissiveRampStr;
 			m_AlphaRemap = alphaRemapStr;
-			m_BillboardMode = desc.m_BillboardMode;
+           
+            m_BillboardMode = desc.m_BillboardMode;
 			m_InvSoftnessDistance = desc.m_InvSoftnessDistance;
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
 			m_TransformUVs_RGBOnly = desc.m_TransformUVs_RGBOnly != 0 ? true : false;
@@ -430,6 +657,24 @@ namespace PopcornFX
 					m_LitFeature = new SBatchLitFeatureDesc(*litDesc);
 				else
 					m_LitFeature = null;
+
+                SRenderingFeatureAlphaMasksDesc* animatedMaskedDesc = (SRenderingFeatureAlphaMasksDesc*)desc.m_AlphaMasks.ToPointer();
+                if (animatedMaskedDesc != null)
+                    m_AlphaMasksFeature = new SBatchAlphaMasksFeatureDesc(*animatedMaskedDesc);
+                else
+                    m_AlphaMasksFeature = null;
+
+				SRenderingFeatureUVDistortionsDesc* uvDistortionsDesc = (SRenderingFeatureUVDistortionsDesc*)desc.m_UVDistortions.ToPointer();
+				if (uvDistortionsDesc != null)
+					m_UVDistortionsFeature = new SBatchUVDistortionsFeatureDesc(*uvDistortionsDesc);
+				else
+					m_UVDistortionsFeature = null;
+
+				SRenderingFeatureDissolveDesc* dissolveDesc = (SRenderingFeatureDissolveDesc*)desc.m_Dissolve.ToPointer();
+				if (dissolveDesc != null)
+					m_DissolveFeature = new SBatchDissolveFeatureDesc(*dissolveDesc);
+				else
+					m_DissolveFeature = null;
 			}
 
 			m_GeneratedName = GenerateNameFromDescription();
@@ -500,6 +745,24 @@ namespace PopcornFX
 					m_LitFeature = new SBatchLitFeatureDesc(*litDesc);
 				else
 					m_LitFeature = null;
+
+				SRenderingFeatureAlphaMasksDesc* animatedMaskedDesc = (SRenderingFeatureAlphaMasksDesc*)desc.m_AlphaMasks.ToPointer();
+				if (animatedMaskedDesc != null)
+					m_AlphaMasksFeature = new SBatchAlphaMasksFeatureDesc(*animatedMaskedDesc);
+				else
+					m_AlphaMasksFeature = null;
+
+				SRenderingFeatureUVDistortionsDesc* uvDistortionsDesc = (SRenderingFeatureUVDistortionsDesc*)desc.m_UVDistortions.ToPointer();
+				if (uvDistortionsDesc != null)
+					m_UVDistortionsFeature = new SBatchUVDistortionsFeatureDesc(*uvDistortionsDesc);
+				else
+					m_UVDistortionsFeature = null;
+
+				SRenderingFeatureDissolveDesc* dissolveDesc = (SRenderingFeatureDissolveDesc*)desc.m_Dissolve.ToPointer();
+				if (dissolveDesc != null)
+					m_DissolveFeature = new SBatchDissolveFeatureDesc(*dissolveDesc);
+				else
+					m_DissolveFeature = null;
 			}
 
 			unsafe
@@ -695,10 +958,11 @@ namespace PopcornFX
 			finalName += " ";
 			finalName += m_EmissiveMap == null ? "(none)" : m_EmissiveMap;
 			finalName += " ";
-			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "(none)" : m_LitFeature.GetGeneratedName();
+            finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "(none)" : m_LitFeature.GetGeneratedName();
 			finalName += " ";
 			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "(none)" : m_VatFeature.GetGeneratedName();
 			finalName += " ";
+            finalName += m_AlphaMasksFeature.GetGeneratedName();
 			finalName += (m_SkeletalAnimFeature == null || !m_SkeletalAnimFeature.m_Activated) ? "(none)" : m_SkeletalAnimFeature.GetGeneratedName();
 			if (m_Type != ERendererType.Mesh)
 			{
@@ -803,9 +1067,10 @@ namespace PopcornFX
 			finalName += m_RotateUVs ? "RUV_" : "UV_";
 			finalName += (m_DiffuseMap == null || m_DiffuseMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_DiffuseMap) + "_";
 			finalName += (m_EmissiveMap == null || m_EmissiveMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_EmissiveMap) + "_";
-			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "U_" : m_LitFeature.GetGeneratedShortName();
+            finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "U_" : m_LitFeature.GetGeneratedShortName();
 			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "U_" : m_VatFeature.GetGeneratedShortName();
 			finalName += (m_SkeletalAnimFeature == null || !m_SkeletalAnimFeature.m_Activated) ? "U_" : m_SkeletalAnimFeature.GetGeneratedShortName();
+            finalName += (m_AlphaMasksFeature == null || !m_AlphaMasksFeature.m_Activated) ? "U_" : m_AlphaMasksFeature.GetGeneratedShortName();
 			if (m_Type != ERendererType.Mesh)
 			{
 				finalName += (m_AlphaRemap == null || m_AlphaRemap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaRemap) + "_";

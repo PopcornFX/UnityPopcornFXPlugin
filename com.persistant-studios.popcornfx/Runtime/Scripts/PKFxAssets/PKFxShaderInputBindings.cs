@@ -101,9 +101,43 @@ namespace PopcornFX
 		// Transform UVs:
 		public string			m_TransformUVsRGBOnlyPropertyName = "_TransformUVs_RGBOnly";
 		public string			m_UseVertexColorPropertyName = "_UseVertexColor";
+        // AlphaMasks:
+        public string			m_AlphaMask1MapPropertyName = "_AlphaMasksTex1";
+        public string			m_AlphaMask2MapPropertyName = "_AlphaMasksTex2";
+        public string			m_AlphaMask1IntensityPropertyName = "_AlphaMask1Intensity";
+		public string			m_AlphaMask2IntensityPropertyName = "_AlphaMask2Intensity";
+		public string			m_AlphaMask1WeightPropertyName = "_AlphaMask1Weight";
+		public string			m_AlphaMask2WeightPropertyName = "_AlphaMask2Weight";
+		public string			m_AlphaMask1ScaleXPropertyName = "_AlphaMask1ScaleX";
+		public string			m_AlphaMask1ScaleYPropertyName = "_AlphaMask1ScaleY";
+		public string			m_AlphaMask2ScaleXPropertyName = "_AlphaMask2ScaleX";
+		public string			m_AlphaMask2ScaleYPropertyName = "_AlphaMask2ScaleY";
+		public string			m_AlphaMask1RotationSpeedPropertyName = "_AlphaMask1RotationSpeed";
+		public string			m_AlphaMask2RotationSpeedPropertyName = "_AlphaMask2RotationSpeed";
+		public string			m_AlphaMask1TranslationSpeedXPropertyName = "_AlphaMask1TranslationSpeedX";
+		public string			m_AlphaMask1TranslationSpeedYPropertyName = "_AlphaMask1TranslationSpeedY";
+		public string			m_AlphaMask2TranslationSpeedXPropertyName = "_AlphaMask2TranslationSpeedX";
+		public string			m_AlphaMask2TranslationSpeedYPropertyName = "_AlphaMask2TranslationSpeedY";
+		// UVDistortions:
+		public string			m_UVDistortions1MapPropertyName = "_UVDistortionsTex1";
+		public string			m_UVDistortions2MapPropertyName = "_UVDistortionsTex2";
+        public string			m_UVDistortions1IntensityPropertyName = "_UVDistortions1Intensity";
+		public string			m_UVDistortions2IntensityPropertyName = "_UVDistortions2Intensity";
+		public string			m_UVDistortions1ScaleXPropertyName = "_UVDistortions1ScaleX";
+		public string			m_UVDistortions1ScaleYPropertyName = "_UVDistortions1ScaleY";
+		public string			m_UVDistortions2ScaleXPropertyName = "_UVDistortions2ScaleX";
+		public string			m_UVDistortions2ScaleYPropertyName = "_UVDistortions2ScaleY";
+		public string			m_UVDistortions1RotationSpeedPropertyName = "_UVDistortions1RotationSpeed";
+		public string			m_UVDistortions2RotationSpeedPropertyName = "_UVDistortions2RotationSpeed";
+		public string			m_UVDistortions1TranslationSpeedXPropertyName = "_UVDistortions1TranslationSpeedX";
+		public string			m_UVDistortions1TranslationSpeedYPropertyName = "_UVDistortions1TranslationSpeedY";
+		public string			m_UVDistortions2TranslationSpeedXPropertyName = "_UVDistortions2ranslationSpeedX";
+		public string			m_UVDistortions2TranslationSpeedYPropertyName = "_UVDistortions2TranslationSpeedY";
+		// Dissolve:
+		public string			m_DissolveMapPropertyName = "_DissolveTex";
+		public string			m_DissolveSoftnessPropertyName = "_DissolveSoftness";
 
-
-        public enum UnityBlendMode : int // Duplicate of AlphaMode that is EditorOnly from shadergraph...
+		public enum UnityBlendMode : int // Duplicate of AlphaMode that is EditorOnly from shadergraph...
 		{
 			Alpha,
 			Premultiply,
@@ -289,6 +323,146 @@ namespace PopcornFX
 					material.SetFloat(m_MetalnessPropertyName, batchDesc.m_LitFeature.m_Metalness);
 				}
 			}
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks))
+			{
+				if (!string.IsNullOrEmpty(m_AlphaMask1MapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_AlphaMasksFeature.m_AlphaMasks1Map))
+				{
+					Texture alphaMask1 = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_AlphaMasksFeature.m_AlphaMasks1Map, true, TextureWrapMode.Clamp);
+					if (logError && alphaMask1 == null)
+					{
+						Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_AlphaMasksFeature.m_AlphaMasks1Map, asset.AssetVirtualPath));
+					}
+					material.SetTexture(m_AlphaMask1MapPropertyName, alphaMask1);
+				}
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2MapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_AlphaMasksFeature.m_AlphaMasks2Map))
+				{
+					Texture alphaMask2 = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_AlphaMasksFeature.m_AlphaMasks2Map, true, TextureWrapMode.Clamp);
+					if (logError && alphaMask2 == null)
+					{
+						Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_AlphaMasksFeature.m_AlphaMasks2Map, asset.AssetVirtualPath));
+					}
+					material.SetTexture(m_AlphaMask2MapPropertyName, alphaMask2);
+				}
+
+				if (!string.IsNullOrEmpty(m_AlphaMask1IntensityPropertyName))
+					material.SetFloat(m_AlphaMask1IntensityPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask1Intensity);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2IntensityPropertyName))
+					material.SetFloat(m_AlphaMask2IntensityPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask2Intensity);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask1WeightPropertyName))
+					material.SetFloat(m_AlphaMask1WeightPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask1Weight);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2WeightPropertyName))
+					material.SetFloat(m_AlphaMask2WeightPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask2Weight);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask1RotationSpeedPropertyName))
+					material.SetFloat(m_AlphaMask1RotationSpeedPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask1RotationSpeed);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2RotationSpeedPropertyName))
+					material.SetFloat(m_AlphaMask2RotationSpeedPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask2RotationSpeed);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask1ScaleXPropertyName))
+					material.SetFloat(m_AlphaMask1ScaleXPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask1Scale.x);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask1ScaleYPropertyName))
+					material.SetFloat(m_AlphaMask1ScaleYPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask1Scale.y);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2ScaleXPropertyName))
+					material.SetFloat(m_AlphaMask2ScaleXPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask2Scale.x);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2ScaleYPropertyName))
+					material.SetFloat(m_AlphaMask2ScaleYPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask2Scale.y);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask1TranslationSpeedXPropertyName))
+					material.SetFloat(m_AlphaMask1TranslationSpeedXPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask1TranslationSpeed.x);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask1TranslationSpeedYPropertyName))
+					material.SetFloat(m_AlphaMask1TranslationSpeedYPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask1TranslationSpeed.y);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2TranslationSpeedXPropertyName))
+					material.SetFloat(m_AlphaMask2TranslationSpeedXPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask2TranslationSpeed.x);
+
+				if (!string.IsNullOrEmpty(m_AlphaMask2TranslationSpeedYPropertyName))
+					material.SetFloat(m_AlphaMask2TranslationSpeedYPropertyName, batchDesc.m_AlphaMasksFeature.m_AlphaMask2TranslationSpeed.y);
+			}
+
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions))
+			{
+				if (!string.IsNullOrEmpty(m_UVDistortions1MapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_UVDistortionsFeature.m_UVDistortions1Map))
+				{
+					Texture uvDistortions1Map = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_UVDistortionsFeature.m_UVDistortions1Map, true, TextureWrapMode.Clamp);
+					if (logError && uvDistortions1Map == null)
+					{
+						Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_UVDistortionsFeature.m_UVDistortions1Map, asset.AssetVirtualPath));
+					}
+					material.SetTexture(m_UVDistortions1MapPropertyName, uvDistortions1Map);
+				}
+
+				if (!string.IsNullOrEmpty(m_UVDistortions2MapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_UVDistortionsFeature.m_UVDistortions2Map))
+				{
+					Texture uvDistortions2Map = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_UVDistortionsFeature.m_UVDistortions2Map, true, TextureWrapMode.Clamp);
+					if (logError && uvDistortions2Map == null)
+					{
+						Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_UVDistortionsFeature.m_UVDistortions2Map, asset.AssetVirtualPath));
+					}
+					material.SetTexture(m_UVDistortions2MapPropertyName, uvDistortions2Map);
+				}
+
+				if (!string.IsNullOrEmpty(m_UVDistortions1IntensityPropertyName))
+					material.SetFloat(m_UVDistortions1IntensityPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions1Intensity);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions2IntensityPropertyName))
+					material.SetFloat(m_UVDistortions2IntensityPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions2Intensity);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions1RotationSpeedPropertyName))
+					material.SetFloat(m_UVDistortions1RotationSpeedPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions1RotationSpeed);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions2RotationSpeedPropertyName))
+					material.SetFloat(m_UVDistortions2RotationSpeedPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions2RotationSpeed);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions1ScaleXPropertyName))
+					material.SetFloat(m_UVDistortions1ScaleXPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions1Scale.x);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions1ScaleYPropertyName))
+					material.SetFloat(m_UVDistortions1ScaleYPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions1Scale.y);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions2ScaleXPropertyName))
+					material.SetFloat(m_UVDistortions2ScaleXPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions2Scale.x);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions2ScaleYPropertyName))
+					material.SetFloat(m_UVDistortions2ScaleYPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions2Scale.y);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions1TranslationSpeedXPropertyName))
+					material.SetFloat(m_UVDistortions1TranslationSpeedXPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions1TranslationSpeed.x);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions1TranslationSpeedYPropertyName))
+					material.SetFloat(m_UVDistortions1TranslationSpeedYPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions1TranslationSpeed.y);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions2TranslationSpeedXPropertyName))
+					material.SetFloat(m_UVDistortions2TranslationSpeedXPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions2TranslationSpeed.x);
+
+				if (!string.IsNullOrEmpty(m_UVDistortions2TranslationSpeedYPropertyName))
+					material.SetFloat(m_UVDistortions2TranslationSpeedYPropertyName, batchDesc.m_UVDistortionsFeature.m_UVDistortions2TranslationSpeed.y);
+			}
+
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
+			{
+				if (!string.IsNullOrEmpty(m_DissolveMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_DissolveFeature.m_DissolveMap))
+				{
+					Texture dissolveMap = PKFxMaterialFactory.GetTextureAsset(asset, batchDesc.m_DissolveFeature.m_DissolveMap, true, TextureWrapMode.Clamp);
+					if (logError && dissolveMap == null)
+					{
+						Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_DissolveFeature.m_DissolveMap, asset.AssetVirtualPath));
+					}
+					material.SetTexture(m_DissolveMapPropertyName, dissolveMap);
+				}
+
+				if (!string.IsNullOrEmpty(m_DissolveSoftnessPropertyName))
+					material.SetFloat(m_DissolveSoftnessPropertyName, batchDesc.m_DissolveFeature.m_DissolveSoftness);
+			}
+
 			if (batchDesc.m_Type == ERendererType.Mesh)
 			{
 				bool hasFluidVAT = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_FluidVAT);
@@ -596,7 +770,19 @@ namespace PopcornFX
                 _EnableMaterialKeywords(material, "PK_HAS_ROTATE_UVS");
             else
                 _DisableMaterialKeywords(material, "PK_HAS_ROTATE_UVS");
-        }
+            if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks))
+                _EnableMaterialKeywords(material, "PK_HAS_ALPHA_MASKS");
+            else
+                _DisableMaterialKeywords(material, "PK_HAS_ALPHA_MASKS");
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions))
+				_EnableMaterialKeywords(material, "PK_HAS_UV_DISTORTIONS");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_UV_DISTORTIONS");
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
+				_EnableMaterialKeywords(material, "PK_HAS_DISSOLVE");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_DISSOLVE");
+		}
 
 		private bool m_ShowBindings = false;
 

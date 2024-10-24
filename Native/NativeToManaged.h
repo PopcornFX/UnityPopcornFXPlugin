@@ -38,39 +38,116 @@ extern "C"
 		}
 	};
 
+
+	struct SRenderingFeatureAlphaMasksDesc
+	{
+		const char					*m_AlphaMasks1Map;
+		const char					*m_AlphaMasks2Map;
+		float						m_AlphaMasks1Intensity;
+		float						m_AlphaMasks2Intensity;
+		float						m_AlphaMasks1Weight;
+		float						m_AlphaMasks2Weight;
+		CFloat2						m_AlphaMasks1Scale;
+		CFloat2						m_AlphaMasks2Scale;
+		float						m_AlphaMasks1RotationSpeed;
+		float						m_AlphaMasks2RotationSpeed;
+		CFloat2						m_AlphaMasks1TranslationSpeed;
+		CFloat2						m_AlphaMasks2TranslationSpeed;
+
+		SRenderingFeatureAlphaMasksDesc()
+			: m_AlphaMasks1Map(null)
+			, m_AlphaMasks2Map(null)
+			, m_AlphaMasks1Intensity(0.f)
+			, m_AlphaMasks2Intensity(0.f)
+			, m_AlphaMasks1Weight(0.f)
+			, m_AlphaMasks2Weight(0.f)
+			, m_AlphaMasks1Scale(CFloat2(0.f, 0.f))
+			, m_AlphaMasks2Scale(CFloat2(0.f, 0.f))
+			, m_AlphaMasks1RotationSpeed(0.f)
+			, m_AlphaMasks2RotationSpeed(0.f)
+			, m_AlphaMasks1TranslationSpeed(CFloat2(0.f, 0.f))
+			, m_AlphaMasks2TranslationSpeed(CFloat2(0.f, 0.f))
+		{
+		}
+	};
+
+	struct SRenderingFeatureUVDistortionsDesc
+	{
+		const char					*m_UVDistortions1Map;
+		const char					*m_UVDistortions2Map;
+		float						m_UVDistortions1Intensity;
+		float						m_UVDistortions2Intensity;
+		CFloat2						m_UVDistortions1Scale;
+		CFloat2						m_UVDistortions2Scale;
+		float						m_UVDistortions1RotationSpeed;
+		float						m_UVDistortions2RotationSpeed;
+		CFloat2						m_UVDistortions1TranslationSpeed;
+		CFloat2						m_UVDistortions2TranslationSpeed;
+
+		SRenderingFeatureUVDistortionsDesc()
+			: m_UVDistortions1Map(null)
+			, m_UVDistortions2Map(null)
+			, m_UVDistortions1Intensity(0.f)
+			, m_UVDistortions2Intensity(0.f)
+			, m_UVDistortions1Scale(CFloat2(0.f, 0.f))
+			, m_UVDistortions2Scale(CFloat2(0.f, 0.f))
+			, m_UVDistortions1RotationSpeed(0.f)
+			, m_UVDistortions2RotationSpeed(0.f)
+			, m_UVDistortions1TranslationSpeed(CFloat2(0.f, 0.f))
+			, m_UVDistortions2TranslationSpeed(CFloat2(0.f, 0.f))
+		{
+		}
+	};
+
+	struct SRenderingFeatureDissolveDesc
+	{
+		const char	*m_DissolveMap;
+		float		m_DissolveSoftness;
+
+		SRenderingFeatureDissolveDesc()
+			: m_DissolveMap(null)
+			, m_DissolveSoftness(0.f)
+		{
+		}
+	};
+
 	// Create Renderers:
 	// Billboards and ribbons:
 	struct SPopcornRendererDesc
 	{
-		const char					*m_CustomName;
+		const char								*m_CustomName;
 
-		int							m_ShaderVariationFlags;
-		int							m_BlendMode;
-		ManagedBool					m_IsLegacy;
-		ManagedBool					m_RotateUvs;
+		int										m_ShaderVariationFlags;
+		int										m_BlendMode;
+		ManagedBool								m_IsLegacy;
+		ManagedBool								m_RotateUvs;
 
-		const char					*m_DiffuseMap;
-		const char					*m_EmissiveMap;
-		const char					*m_AlphaRemap;
-		const char					*m_DiffuseRampMap;
-		const char					*m_EmissiveRampMap;
-		float						m_InvSoftnessDistance;
-		float						m_AlphaClipThreshold;
-		ManagedBool					m_TransformUVs_RGBOnly;
+		const char								*m_DiffuseMap;
+		const char								*m_EmissiveMap;
+		const char								*m_AlphaRemap;
+		const char								*m_DiffuseRampMap;
+		const char								*m_EmissiveRampMap;
 
-		int							m_BillboardMode;
-		int							m_DrawOrder;
+		float									m_InvSoftnessDistance;
+		float									m_AlphaClipThreshold;
+		ManagedBool								m_TransformUVs_RGBOnly;
 
-		SRenderingFeatureLitDesc	*m_LitRendering;
+		int										m_BillboardMode;
+		int										m_DrawOrder;
 
-		int							m_CameraID;
-		unsigned int				m_UID;
+		SRenderingFeatureLitDesc				*m_LitRendering;
+		SRenderingFeatureAlphaMasksDesc			*m_AlphaMasks;
+		SRenderingFeatureUVDistortionsDesc		*m_UVDistortions;
+		SRenderingFeatureDissolveDesc			*m_Dissolve;
+
+		int										m_CameraID;
+		int										m_UID;
 
 		SPopcornRendererDesc()
 		:	m_CustomName(null)
 		,	m_ShaderVariationFlags(0)
 		,	m_BlendMode(0)
-		,	m_IsLegacy(ManagedBool_True)
+		,	m_IsLegacy(ManagedBool_False)
 		,	m_RotateUvs(ManagedBool_False)
 		,	m_DiffuseMap(null)
 		,	m_EmissiveMap(null)
@@ -83,9 +160,27 @@ extern "C"
 		,	m_BillboardMode(0)
 		,	m_DrawOrder(0)
 		,	m_LitRendering(null)
+		,	m_AlphaMasks(null)
+		,	m_UVDistortions(null)
+		,	m_Dissolve(null)
 		,	m_CameraID(0)
 		,	m_UID(0)
 		{
+		}
+
+		~SPopcornRendererDesc()
+		{
+			PK_SAFE_DELETE(m_LitRendering);
+			m_LitRendering = null;
+
+			PK_SAFE_DELETE(m_AlphaMasks);
+			m_AlphaMasks = null;
+
+			PK_SAFE_DELETE(m_UVDistortions);
+			m_UVDistortions = null;
+
+			PK_SAFE_DELETE(m_Dissolve);
+			m_Dissolve = null;
 		}
 	};
 
@@ -197,6 +292,9 @@ extern "C"
 		SRenderingFeatureLitDesc			*m_LitRendering;
 		SRenderingFeatureVATDesc			*m_VatRendering;
 		SRenderingFeatureSkeletalAnimDesc	*m_AnimDescRendering;
+		SRenderingFeatureAlphaMasksDesc		*m_AlphaMasks;
+		SRenderingFeatureUVDistortionsDesc	*m_UVDistortions;
+		SRenderingFeatureDissolveDesc		*m_Dissolve;
 
 		int							m_TextureAtlasCount;
 		CFloat4						*m_TextureAtlas;
@@ -212,7 +310,7 @@ extern "C"
 			, m_MeshAsset(null)
 			, m_ShaderVariationFlags(0)
 			, m_BlendMode(0)
-			, m_IsLegacy(ManagedBool_True)
+			, m_IsLegacy(ManagedBool_False)
 			, m_HasMeshAtlas(ManagedBool_False)
 			, m_DiffuseMap(null)
 			, m_EmissiveMap(null)
@@ -224,6 +322,9 @@ extern "C"
 			, m_LitRendering(null)
 			, m_VatRendering(null)
 			, m_AnimDescRendering(null)
+			, m_AlphaMasks(null)
+			, m_UVDistortions(null)
+			, m_Dissolve(null)
 			, m_TextureAtlasCount(0)
 			, m_TextureAtlas(null)
 			, m_UID(0)
@@ -243,6 +344,15 @@ extern "C"
 
 			PK_SAFE_DELETE(m_AnimDescRendering);
 			m_AnimDescRendering = null;
+
+			PK_SAFE_DELETE(m_AlphaMasks);
+			m_AlphaMasks = null;
+
+			PK_SAFE_DELETE(m_UVDistortions);
+			m_UVDistortions = null;
+
+			PK_SAFE_DELETE(m_Dissolve);
+			m_Dissolve = null;
 
 			PK_FREE(m_TextureAtlas);
 			m_TextureAtlas = null;

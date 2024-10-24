@@ -77,7 +77,10 @@ namespace	ShaderVariationFlags
 		Has_SkeletalTrackInterpol	= (1 << 21),
 		Has_TransformUVs			= (1 << 22),
 		Has_LightingLegacyOpaque	= (1 << 23),
-		ShaderVariation_Count		= 24
+		Has_AlphaMasks				= (1 << 24),
+		Has_UVDistortions			= (1 << 25),
+		Has_Dissolve				= (1 << 26),
+		ShaderVariation_Count		= 27
 	};
 }
 
@@ -168,6 +171,36 @@ public:
 	CStringId					m_EmissiveMap;
 	CStringId					m_EmissiveRampMap;
 
+	// Animated Masked Feature
+	CStringId					m_AlphaMasks1Map;
+	CStringId					m_AlphaMasks2Map;
+	float						m_AlphaMasks1Intensity;
+	float						m_AlphaMasks2Intensity;
+	float						m_AlphaMasks1Weight;
+	float						m_AlphaMasks2Weight;
+	CFloat2						m_AlphaMasks1Scale;
+	CFloat2						m_AlphaMasks2Scale;
+	float						m_AlphaMasks1RotationSpeed;
+	float						m_AlphaMasks2RotationSpeed;
+	CFloat2						m_AlphaMasks1TranslationSpeed;
+	CFloat2						m_AlphaMasks2TranslationSpeed;
+
+	// UV Distortion Features
+	CStringId					m_UVDistortions1Map;
+	CStringId					m_UVDistortions2Map;
+	float						m_UVDistortions1Intensity;
+	float						m_UVDistortions2Intensity;
+	CFloat2						m_UVDistortions1Scale;
+	CFloat2						m_UVDistortions2Scale;
+	float						m_UVDistortions1RotationSpeed;
+	float						m_UVDistortions2RotationSpeed;
+	CFloat2						m_UVDistortions1TranslationSpeed;
+	CFloat2						m_UVDistortions2TranslationSpeed;
+
+	// Dissolve
+	CStringId					m_DissolveMap;
+	float						m_DissolveSoftness;
+
 	//TransformUVs Feature
 	bool						m_TransformUVs_RGBOnly;
 
@@ -227,6 +260,36 @@ public:
 	CStringId								m_EmissiveMap;
 	CStringId								m_EmissiveRampMap;
 	CStringId								m_AlphaMap;
+
+	// Animated Masked Feature
+	CStringId								m_AlphaMasks1Map;
+	CStringId								m_AlphaMasks2Map;
+	float									m_AlphaMasks1Intensity;
+	float									m_AlphaMasks2Intensity;
+	float									m_AlphaMasks1Weight;
+	float									m_AlphaMasks2Weight;
+	CFloat2									m_AlphaMasks1Scale;
+	CFloat2									m_AlphaMasks2Scale;
+	float									m_AlphaMasks1RotationSpeed;
+	float									m_AlphaMasks2RotationSpeed;
+	CFloat2									m_AlphaMasks1TranslationSpeed;
+	CFloat2									m_AlphaMasks2TranslationSpeed;
+
+	// UV Distortion Features
+	CStringId								m_UVDistortions1Map;
+	CStringId								m_UVDistortions2Map;
+	float									m_UVDistortions1Intensity;
+	float									m_UVDistortions2Intensity;
+	CFloat2									m_UVDistortions1Scale;
+	CFloat2									m_UVDistortions2Scale;
+	float									m_UVDistortions1RotationSpeed;
+	float									m_UVDistortions2RotationSpeed;
+	CFloat2									m_UVDistortions1TranslationSpeed;
+	CFloat2									m_UVDistortions2TranslationSpeed;
+
+	// Dissolve
+	CStringId								m_DissolveMap;
+	float									m_DissolveSoftness;
 
 	float									m_InvSoftnessDistance;
 	float									m_AlphaThreshold;

@@ -84,6 +84,30 @@ CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 ,	m_DiffuseRampMap(CStringId::Null)
 ,	m_EmissiveMap(CStringId::Null)
 ,	m_EmissiveRampMap(CStringId::Null)
+,	m_AlphaMasks1Map(CStringId::Null)
+,	m_AlphaMasks2Map(CStringId::Null)
+,	m_AlphaMasks1Intensity(0.f)
+,	m_AlphaMasks2Intensity(0.f)
+,	m_AlphaMasks1Weight(0.f)
+,	m_AlphaMasks2Weight(0.f)
+,	m_AlphaMasks1Scale(0.f)
+,	m_AlphaMasks2Scale(0.f)
+,	m_AlphaMasks1RotationSpeed(0.f)
+,	m_AlphaMasks2RotationSpeed(0.f)
+,	m_AlphaMasks1TranslationSpeed(0.f, 0.f)
+,	m_AlphaMasks2TranslationSpeed(0.f, 0.f)
+,	m_UVDistortions1Map(CStringId::Null)
+,	m_UVDistortions2Map(CStringId::Null)
+,	m_UVDistortions1Intensity(0.f)
+,	m_UVDistortions2Intensity(0.f)
+,	m_UVDistortions1Scale(0.f)
+,	m_UVDistortions2Scale(0.f)
+,	m_UVDistortions1RotationSpeed(0.f)
+,	m_UVDistortions2RotationSpeed(0.f)
+,	m_UVDistortions1TranslationSpeed(0.f)
+,	m_UVDistortions2TranslationSpeed(0.f)
+,	m_DissolveMap(CStringId::Null)
+,	m_DissolveSoftness(0.f)
 ,	m_TransformUVs_RGBOnly(false)
 {
 }
@@ -144,6 +168,37 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	// For ribbons only:
 	const SRendererFeaturePropertyValue	*correctDeformation = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_CorrectDeformation());
 
+	// Animated Masked
+	const SRendererFeaturePropertyValue *alphaMasks = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks());
+	const SRendererFeaturePropertyValue *alphaMask1Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Map());
+	const SRendererFeaturePropertyValue *alphaMask2Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Map());
+	const SRendererFeaturePropertyValue *alphaMask1Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Intensity());
+	const SRendererFeaturePropertyValue *alphaMask2Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Intensity());
+	const SRendererFeaturePropertyValue *alphaMask1Weight = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Weight());
+	const SRendererFeaturePropertyValue *alphaMask2Weight = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Weight());
+	const SRendererFeaturePropertyValue *alphaMask1RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1RotationSpeed());
+	const SRendererFeaturePropertyValue *alphaMask2RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2RotationSpeed());
+	const SRendererFeaturePropertyValue *alphaMask1Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Scale());
+	const SRendererFeaturePropertyValue *alphaMask2Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Scale());
+	const SRendererFeaturePropertyValue *alphaMask1TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1TranslationSpeed());
+	const SRendererFeaturePropertyValue *alphaMask2TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2TranslationSpeed());
+
+	const SRendererFeaturePropertyValue *uvDistortions = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions());
+	const SRendererFeaturePropertyValue *uvDistortions1Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1Map());
+	const SRendererFeaturePropertyValue *uvDistortions2Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2Map());
+	const SRendererFeaturePropertyValue *uvDistortions1Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1Intensity());
+	const SRendererFeaturePropertyValue *uvDistortions2Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2Intensity());
+	const SRendererFeaturePropertyValue *uvDistortions1RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1RotationSpeed());
+	const SRendererFeaturePropertyValue *uvDistortions2RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2RotationSpeed());
+	const SRendererFeaturePropertyValue *uvDistortions1Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1Scale());
+	const SRendererFeaturePropertyValue *uvDistortions2Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2Scale());
+	const SRendererFeaturePropertyValue *uvDistortions1TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1TranslationSpeed());
+	const SRendererFeaturePropertyValue *uvDistortions2TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2TranslationSpeed());
+
+	const SRendererFeaturePropertyValue *dissolve = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve());
+	const SRendererFeaturePropertyValue *dissolveMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve_DissolveMap());
+	const SRendererFeaturePropertyValue *dissolveSoftness = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve_DissolveSoftness());
+
 	m_Flags.m_ShaderVariationFlags = 0;
 	m_Flags.m_IsLegacy = renderer.m_Declaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
 
@@ -196,6 +251,13 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_CorrectDeformation;
 	if (emissive != null && emissive->ValueB() && emissiveColor.Valid() && emissiveMap != null && !emissiveMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Emissive;
+	if (alphaMasks != null && alphaMasks->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AlphaMasks;
+	if (uvDistortions != null && uvDistortions->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_UVDistortions;
+	if (dissolve != null && dissolve->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Dissolve;
+
 
 	//-----------------------------
 	// Choose the blending mode:
@@ -233,6 +295,10 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		if (transparentType == null)
 		{
 			m_Flags.m_BlendMode = BlendMode::PremultipliedAlpha;
+			if (lit->ValueB())
+			{
+				m_Flags.m_BlendMode = BlendMode::AlphaBlend;
+			}
 		}
 		else
 		{
@@ -292,6 +358,40 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		m_EmissiveMap = CStringId(emissiveMap->ValuePath());
 	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_EmissiveRamp) != 0)
 		m_EmissiveRampMap = CStringId(emissiveRampMap->ValuePath());
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaMasks) != 0)
+	{
+		m_AlphaMasks1Map = CStringId(alphaMask1Map->ValuePath());
+		m_AlphaMasks2Map = CStringId(alphaMask2Map->ValuePath());
+		m_AlphaMasks1Intensity = alphaMask1Intensity->ValueF().x();
+		m_AlphaMasks2Intensity = alphaMask2Intensity->ValueF().x();
+		m_AlphaMasks1Weight = alphaMask1Weight->ValueF().x();
+		m_AlphaMasks2Weight = alphaMask2Weight->ValueF().x();
+		m_AlphaMasks1Scale = alphaMask1Scale->ValueF().xy();
+		m_AlphaMasks2Scale = alphaMask2Scale->ValueF().xy();
+		m_AlphaMasks1RotationSpeed = alphaMask1RotationSpeed->ValueF().x();
+		m_AlphaMasks2RotationSpeed = alphaMask2RotationSpeed->ValueF().x();
+		m_AlphaMasks1TranslationSpeed = alphaMask1TranslationSpeed->ValueF().xy();
+		m_AlphaMasks2TranslationSpeed = alphaMask2TranslationSpeed->ValueF().xy();	
+	}
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_UVDistortions) != 0)
+	{
+		m_UVDistortions1Map = CStringId(uvDistortions1Map->ValuePath());
+		m_UVDistortions2Map = CStringId(uvDistortions2Map->ValuePath());
+		m_UVDistortions1Intensity = uvDistortions1Intensity->ValueF().x();
+		m_UVDistortions2Intensity = uvDistortions2Intensity->ValueF().x();
+		m_UVDistortions1Scale = uvDistortions1Scale->ValueF().xy();
+		m_UVDistortions2Scale = uvDistortions2Scale->ValueF().xy();
+		m_UVDistortions1RotationSpeed = uvDistortions1RotationSpeed->ValueF().x();
+		m_UVDistortions2RotationSpeed = uvDistortions2RotationSpeed->ValueF().x();
+		m_UVDistortions1TranslationSpeed = uvDistortions1TranslationSpeed->ValueF().xy();
+		m_UVDistortions2TranslationSpeed = uvDistortions2TranslationSpeed->ValueF().xy();	
+	}
+
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Dissolve) != 0)
+	{
+		m_DissolveMap = CStringId(dissolveMap->ValuePath());
+		m_DissolveSoftness = dissolveSoftness->ValueF().x();
+	}
 
 	//-----------------------------
 	// Get the UV generation flags:
@@ -510,6 +610,29 @@ bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBil
 			m_DiffuseRampMap == oth.m_DiffuseRampMap &&
 			m_EmissiveMap == oth.m_EmissiveMap &&
 			m_EmissiveRampMap == oth.m_EmissiveRampMap &&
+			m_AlphaMasks1Map == oth.m_AlphaMasks1Map &&
+			m_AlphaMasks2Map == oth.m_AlphaMasks2Map &&
+			m_AlphaMasks1Intensity == oth.m_AlphaMasks1Intensity &&
+			m_AlphaMasks2Intensity == oth.m_AlphaMasks2Intensity &&
+			m_AlphaMasks1Weight == oth.m_AlphaMasks1Weight &&
+			m_AlphaMasks2Weight == oth.m_AlphaMasks2Weight &&
+			m_AlphaMasks1Scale == oth.m_AlphaMasks1Scale &&
+			m_AlphaMasks2Scale == oth.m_AlphaMasks2Scale &&
+			m_AlphaMasks1RotationSpeed == oth.m_AlphaMasks1RotationSpeed &&
+			m_AlphaMasks2RotationSpeed == oth.m_AlphaMasks2RotationSpeed &&
+			m_AlphaMasks1TranslationSpeed == oth.m_AlphaMasks1TranslationSpeed &&
+			m_AlphaMasks2TranslationSpeed == oth.m_AlphaMasks2TranslationSpeed &&
+			m_UVDistortions1Map == oth.m_UVDistortions1Map &&
+			m_UVDistortions2Map == oth.m_UVDistortions2Map &&
+			m_UVDistortions1Intensity == oth.m_UVDistortions1Intensity &&
+			m_UVDistortions2Intensity == oth.m_UVDistortions2Intensity &&
+			m_UVDistortions1Scale == oth.m_UVDistortions1Scale &&
+			m_UVDistortions2Scale == oth.m_UVDistortions2Scale &&
+			m_UVDistortions1RotationSpeed == oth.m_UVDistortions1RotationSpeed &&
+			m_UVDistortions2RotationSpeed == oth.m_UVDistortions2RotationSpeed &&
+			m_UVDistortions1TranslationSpeed == oth.m_UVDistortions1TranslationSpeed &&
+			m_UVDistortions2TranslationSpeed == oth.m_UVDistortions2TranslationSpeed &&
+			m_DissolveMap == oth.m_DissolveMap &&
 			m_AtlasDefinition == oth.m_AtlasDefinition &&
 			m_AtlasSubdivX == oth.m_AtlasSubdivX &&
 			m_AtlasSubdivY == oth.m_AtlasSubdivY &&
@@ -600,6 +723,37 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue	*transformUVsRGBOnly = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_TransformUVs_RGBOnly());
 	const SRendererFeaturePropertyValue	*doubleSided = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Culling_DoubleSided());
 
+	// Animated Masked
+	const SRendererFeaturePropertyValue *alphaMasks = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks());
+	const SRendererFeaturePropertyValue *alphaMask1Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Map());
+	const SRendererFeaturePropertyValue *alphaMask2Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Map());
+	const SRendererFeaturePropertyValue *alphaMask1Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Intensity());
+	const SRendererFeaturePropertyValue *alphaMask2Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Intensity());
+	const SRendererFeaturePropertyValue *alphaMask1Weight = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Weight());
+	const SRendererFeaturePropertyValue *alphaMask2Weight = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Weight());
+	const SRendererFeaturePropertyValue *alphaMask1RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1RotationSpeed());
+	const SRendererFeaturePropertyValue *alphaMask2RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2RotationSpeed());
+	const SRendererFeaturePropertyValue *alphaMask1Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1Scale());
+	const SRendererFeaturePropertyValue *alphaMask2Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2Scale());
+	const SRendererFeaturePropertyValue *alphaMask1TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask1TranslationSpeed());
+	const SRendererFeaturePropertyValue *alphaMask2TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_AlphaMasks_Mask2TranslationSpeed());
+
+	const SRendererFeaturePropertyValue *uvDistortions = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions());
+	const SRendererFeaturePropertyValue *uvDistortions1Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1Map());
+	const SRendererFeaturePropertyValue *uvDistortions2Map = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2Map());
+	const SRendererFeaturePropertyValue *uvDistortions1Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1Intensity());
+	const SRendererFeaturePropertyValue *uvDistortions2Intensity = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2Intensity());
+	const SRendererFeaturePropertyValue *uvDistortions1RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1RotationSpeed());
+	const SRendererFeaturePropertyValue *uvDistortions2RotationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2RotationSpeed());
+	const SRendererFeaturePropertyValue *uvDistortions1Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1Scale());
+	const SRendererFeaturePropertyValue *uvDistortions2Scale = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2Scale());
+	const SRendererFeaturePropertyValue *uvDistortions1TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion1TranslationSpeed());
+	const SRendererFeaturePropertyValue *uvDistortions2TranslationSpeed = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_UVDistortions_Distortion2TranslationSpeed());
+
+	const SRendererFeaturePropertyValue *dissolve = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve());
+	const SRendererFeaturePropertyValue *dissolveMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve_DissolveMap());
+	const SRendererFeaturePropertyValue *dissolveSoftness = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve_DissolveSoftness());
+
 	m_Flags.m_IsLegacy = renderer.m_RendererDeclaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
 	m_Flags.m_ShaderVariationFlags = 0;
 
@@ -636,6 +790,12 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 
 	if (diffuseColorInput.Valid() || legacyDiffuseColorInput.Valid())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Color;
+	if (alphaMasks != null && alphaMasks->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_AlphaMasks;
+	if (uvDistortions != null && uvDistortions->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_UVDistortions;
+	if (dissolve != null && dissolve->ValueB())
+		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_Dissolve;
 
 	// Animated mesh:
 	const SRendererFeaturePropertyValue	*skeletalAnim = renderer.m_Declaration.FindProperty(SkeletalAnimationTexture::SID_SkeletalAnimation());
@@ -658,6 +818,43 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		if (skeletalAnimInterpolateTracks != null && skeletalAnimInterpolateTracks->ValueB())
 			m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_SkeletalTrackInterpol;
 	}
+
+	// Animated Masked
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaMasks) != 0)
+	{
+		m_AlphaMasks1Map = CStringId(alphaMask1Map->ValuePath());
+		m_AlphaMasks2Map = CStringId(alphaMask2Map->ValuePath());
+		m_AlphaMasks1Intensity = alphaMask1Intensity->ValueF().x();
+		m_AlphaMasks2Intensity = alphaMask2Intensity->ValueF().x();
+		m_AlphaMasks1Weight = alphaMask1Weight->ValueF().x();
+		m_AlphaMasks2Weight = alphaMask2Weight->ValueF().x();
+		m_AlphaMasks1Scale = alphaMask1Scale->ValueF().xy();
+		m_AlphaMasks2Scale = alphaMask2Scale->ValueF().xy();
+		m_AlphaMasks1RotationSpeed = alphaMask1RotationSpeed->ValueF().x();
+		m_AlphaMasks2RotationSpeed = alphaMask2RotationSpeed->ValueF().x();
+		m_AlphaMasks1TranslationSpeed = alphaMask1TranslationSpeed->ValueF().xy();
+		m_AlphaMasks2TranslationSpeed = alphaMask2TranslationSpeed->ValueF().xy();	
+	}
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_UVDistortions) != 0)
+	{
+		m_UVDistortions1Map = CStringId(uvDistortions1Map->ValuePath());
+		m_UVDistortions2Map = CStringId(uvDistortions2Map->ValuePath());
+		m_UVDistortions1Intensity = uvDistortions1Intensity->ValueF().x();
+		m_UVDistortions2Intensity = uvDistortions2Intensity->ValueF().x();
+		m_UVDistortions1Scale = uvDistortions1Scale->ValueF().xy();
+		m_UVDistortions2Scale = uvDistortions2Scale->ValueF().xy();
+		m_UVDistortions1RotationSpeed = uvDistortions1RotationSpeed->ValueF().x();
+		m_UVDistortions2RotationSpeed = uvDistortions2RotationSpeed->ValueF().x();
+		m_UVDistortions1TranslationSpeed = uvDistortions1TranslationSpeed->ValueF().xy();
+		m_UVDistortions2TranslationSpeed = uvDistortions2TranslationSpeed->ValueF().xy();	
+	}
+
+	if ((m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Dissolve) != 0)
+	{
+		m_DissolveMap = CStringId(dissolveMap->ValuePath());
+		m_DissolveSoftness = dissolveSoftness->ValueF().x();
+	}
+
 
 	//-----------------------------
 	// Choose the blending mode:
@@ -957,6 +1154,10 @@ void	CUnityRendererCache::UpdateThread_BuildBillboardingFlags(const PRendererDat
 	m_Flags.m_HasRibbonCorrectDeformation = m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_CorrectDeformation);
 	m_Flags.m_HasNormal = m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Lighting);
 	m_Flags.m_HasTangent = m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Lighting);
+	m_Flags.m_HasRawUV0 =	 m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Atlas) &&
+							(m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_AlphaMasks) ||
+							m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_UVDistortions) ||
+							m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Dissolve));
 }
 
 //----------------------------------------------------------------------------
@@ -1051,6 +1252,50 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 	desc.m_AlphaRemap = m_MaterialDescBillboard.m_AlphaMap.ToStringData();
 	desc.m_DiffuseRampMap = m_MaterialDescBillboard.m_DiffuseRampMap.ToStringData();
 	desc.m_EmissiveRampMap = m_MaterialDescBillboard.m_EmissiveRampMap.ToStringData();
+
+
+	
+
+
+	if (m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaMasks)
+	{
+		desc.m_AlphaMasks = PK_NEW(SRenderingFeatureAlphaMasksDesc);
+		desc.m_AlphaMasks->m_AlphaMasks1Map = m_MaterialDescBillboard.m_AlphaMasks1Map.ToStringData();
+		desc.m_AlphaMasks->m_AlphaMasks2Map = m_MaterialDescBillboard.m_AlphaMasks2Map.ToStringData();
+		desc.m_AlphaMasks->m_AlphaMasks1Intensity = m_MaterialDescBillboard.m_AlphaMasks1Intensity;
+		desc.m_AlphaMasks->m_AlphaMasks2Intensity = m_MaterialDescBillboard.m_AlphaMasks2Intensity;
+		desc.m_AlphaMasks->m_AlphaMasks1Weight = m_MaterialDescBillboard.m_AlphaMasks1Weight;
+		desc.m_AlphaMasks->m_AlphaMasks2Weight = m_MaterialDescBillboard.m_AlphaMasks2Weight;
+		desc.m_AlphaMasks->m_AlphaMasks1Scale = m_MaterialDescBillboard.m_AlphaMasks1Scale;
+		desc.m_AlphaMasks->m_AlphaMasks2Scale = m_MaterialDescBillboard.m_AlphaMasks2Scale;
+		desc.m_AlphaMasks->m_AlphaMasks1RotationSpeed = m_MaterialDescBillboard.m_AlphaMasks1RotationSpeed;
+		desc.m_AlphaMasks->m_AlphaMasks2RotationSpeed = m_MaterialDescBillboard.m_AlphaMasks2RotationSpeed;
+		desc.m_AlphaMasks->m_AlphaMasks1TranslationSpeed = m_MaterialDescBillboard.m_AlphaMasks1TranslationSpeed;
+		desc.m_AlphaMasks->m_AlphaMasks2TranslationSpeed = m_MaterialDescBillboard.m_AlphaMasks2TranslationSpeed;
+	}
+	
+	if (m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_UVDistortions)
+	{
+		desc.m_UVDistortions = PK_NEW(SRenderingFeatureUVDistortionsDesc);
+		desc.m_UVDistortions->m_UVDistortions1Map = m_MaterialDescBillboard.m_UVDistortions1Map.ToStringData();
+		desc.m_UVDistortions->m_UVDistortions2Map = m_MaterialDescBillboard.m_UVDistortions2Map.ToStringData();
+		desc.m_UVDistortions->m_UVDistortions1Intensity = m_MaterialDescBillboard.m_UVDistortions1Intensity;
+		desc.m_UVDistortions->m_UVDistortions2Intensity = m_MaterialDescBillboard.m_UVDistortions2Intensity;
+		desc.m_UVDistortions->m_UVDistortions1Scale = m_MaterialDescBillboard.m_UVDistortions1Scale;
+		desc.m_UVDistortions->m_UVDistortions2Scale = m_MaterialDescBillboard.m_UVDistortions2Scale;
+		desc.m_UVDistortions->m_UVDistortions1RotationSpeed = m_MaterialDescBillboard.m_UVDistortions1RotationSpeed;
+		desc.m_UVDistortions->m_UVDistortions2RotationSpeed = m_MaterialDescBillboard.m_UVDistortions2RotationSpeed;
+		desc.m_UVDistortions->m_UVDistortions1TranslationSpeed = m_MaterialDescBillboard.m_UVDistortions1TranslationSpeed;
+		desc.m_UVDistortions->m_UVDistortions2TranslationSpeed = m_MaterialDescBillboard.m_UVDistortions2TranslationSpeed;
+	}
+
+	if (m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Dissolve)
+	{
+		desc.m_Dissolve = PK_NEW(SRenderingFeatureDissolveDesc);
+		desc.m_Dissolve->m_DissolveMap = m_MaterialDescBillboard.m_DissolveMap.ToStringData();
+		desc.m_Dissolve->m_DissolveSoftness = m_MaterialDescBillboard.m_DissolveSoftness;
+	}
+
 	desc.m_InvSoftnessDistance = m_MaterialDescBillboard.m_InvSoftnessDistance;
 
 	switch (m_RendererType) {
@@ -1133,6 +1378,45 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	desc.m_DrawOrder = m_MaterialDescMesh.m_Flags.m_DrawOrder;
 	desc.m_TransformUVs_RGBOnly = m_MaterialDescMesh.m_TransformUVs_RGBOnly  ? ManagedBool_True : ManagedBool_False;
 	desc.m_UseVertexColor = m_MaterialDescMesh.m_UseVertexColor ? ManagedBool_True : ManagedBool_False;
+
+	if ((m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaMasks) != 0)
+	{
+		desc.m_AlphaMasks = PK_NEW(SRenderingFeatureAlphaMasksDesc);
+		desc.m_AlphaMasks->m_AlphaMasks1Map = m_MaterialDescMesh.m_AlphaMasks1Map.ToStringData();
+		desc.m_AlphaMasks->m_AlphaMasks2Map = m_MaterialDescMesh.m_AlphaMasks2Map.ToStringData();
+		desc.m_AlphaMasks->m_AlphaMasks1Intensity = m_MaterialDescMesh.m_AlphaMasks1Intensity;
+		desc.m_AlphaMasks->m_AlphaMasks2Intensity = m_MaterialDescMesh.m_AlphaMasks2Intensity;
+		desc.m_AlphaMasks->m_AlphaMasks1Weight = m_MaterialDescMesh.m_AlphaMasks1Weight;
+		desc.m_AlphaMasks->m_AlphaMasks2Weight = m_MaterialDescMesh.m_AlphaMasks2Weight;
+		desc.m_AlphaMasks->m_AlphaMasks1Scale = m_MaterialDescMesh.m_AlphaMasks1Scale;
+		desc.m_AlphaMasks->m_AlphaMasks2Scale = m_MaterialDescMesh.m_AlphaMasks2Scale;
+		desc.m_AlphaMasks->m_AlphaMasks1RotationSpeed = m_MaterialDescMesh.m_AlphaMasks1RotationSpeed;
+		desc.m_AlphaMasks->m_AlphaMasks2RotationSpeed = m_MaterialDescMesh.m_AlphaMasks2RotationSpeed;
+		desc.m_AlphaMasks->m_AlphaMasks1TranslationSpeed = m_MaterialDescMesh.m_AlphaMasks1TranslationSpeed;
+		desc.m_AlphaMasks->m_AlphaMasks2TranslationSpeed = m_MaterialDescMesh.m_AlphaMasks2TranslationSpeed;
+	}
+	
+	if ((m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_UVDistortions) != 0)
+	{
+		desc.m_UVDistortions = PK_NEW(SRenderingFeatureUVDistortionsDesc);
+		desc.m_UVDistortions->m_UVDistortions1Map = m_MaterialDescMesh.m_UVDistortions1Map.ToStringData();
+		desc.m_UVDistortions->m_UVDistortions2Map = m_MaterialDescMesh.m_UVDistortions2Map.ToStringData();
+		desc.m_UVDistortions->m_UVDistortions1Intensity = m_MaterialDescMesh.m_UVDistortions1Intensity;
+		desc.m_UVDistortions->m_UVDistortions2Intensity = m_MaterialDescMesh.m_UVDistortions2Intensity;
+		desc.m_UVDistortions->m_UVDistortions1Scale = m_MaterialDescMesh.m_UVDistortions1Scale;
+		desc.m_UVDistortions->m_UVDistortions2Scale = m_MaterialDescMesh.m_UVDistortions2Scale;
+		desc.m_UVDistortions->m_UVDistortions1RotationSpeed = m_MaterialDescMesh.m_UVDistortions1RotationSpeed;
+		desc.m_UVDistortions->m_UVDistortions2RotationSpeed = m_MaterialDescMesh.m_UVDistortions2RotationSpeed;
+		desc.m_UVDistortions->m_UVDistortions1TranslationSpeed = m_MaterialDescMesh.m_UVDistortions1TranslationSpeed;
+		desc.m_UVDistortions->m_UVDistortions2TranslationSpeed = m_MaterialDescMesh.m_UVDistortions2TranslationSpeed;
+	}
+
+	if ((m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_Dissolve) != 0)
+	{
+		desc.m_Dissolve = PK_NEW(SRenderingFeatureDissolveDesc);
+		desc.m_Dissolve->m_DissolveMap = m_MaterialDescMesh.m_DissolveMap.ToStringData();
+		desc.m_Dissolve->m_DissolveSoftness = m_MaterialDescMesh.m_DissolveSoftness;
+	}
 
 	bool fluidVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_FluidVAT) != 0;
 	bool softVAT = (m_MaterialDescMesh.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_SoftVAT) != 0;

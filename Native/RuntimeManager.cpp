@@ -1978,7 +1978,7 @@ void		CRuntimeManager::_ExecOnFxStopped(CGuid fxId)
 }
 
 //----------------------------------------------------------------------------
-
+#if !defined(PK_RETAIL)
 bool		ProfileRecordEventStart(void *arg, const PopcornFX::Profiler::SNodeDescriptor *nodeDescriptor)
 {
 	(void)arg;
@@ -2039,7 +2039,7 @@ void	ProfileRecordEventEnd(void *arg, const PopcornFX::Profiler::SNodeDescriptor
 	}
 	g_ThreadReentryGuards[cThread] = false;
 }
-
+#endif
 //----------------------------------------------------------------------------
 
 void		ProfileRecordRegisterThread()
@@ -2140,7 +2140,7 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup(IUnityInterfaces *
 	configKernel.m_AddDefaultLogListeners = &AddDefaultLogListenersOverride;
 	configKernel.m_UserHandle = this;
 
-#if	defined(KR_PROFILER_ENABLED)
+#if	defined(KR_PROFILER_ENABLED) && !defined(PK_RETAIL)
 	g_UnityProfiler = unityInterfaces->Get<IUnityProfiler>();
 	if (g_UnityProfiler != null)
 		g_IsDevelopmentBuild = g_UnityProfiler->IsAvailable() != 0;
@@ -2214,7 +2214,7 @@ bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup(IUnityInterfaces *
 		PK_LOG_MODULE_INIT_END;
 		CLog::Log(PK_INFO, "PopcornFX Runtime initialisation OK");
 
-#if	defined(KR_PROFILER_ENABLED)
+#if	defined(KR_PROFILER_ENABLED) && !defined(PK_RETAIL)
 		if (g_IsDevelopmentBuild)
 			Profiler::MainEngineProfiler()->Activate(g_IsDevelopmentBuild);
 #endif

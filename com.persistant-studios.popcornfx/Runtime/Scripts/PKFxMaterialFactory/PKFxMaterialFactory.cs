@@ -55,9 +55,9 @@ namespace PopcornFX
 						{
 							SerializedObject obj = method.Invoke(settingInstance, null) as SerializedObject;
 							SerializedProperty prop = obj.FindProperty("shaderVariantLimit");
-							if (prop != null && prop.intValue < 512)
+							if (prop != null && prop.intValue < 4096)
 							{
-								prop.intValue = 512;
+								prop.intValue = 4096;
 								obj.ApplyModifiedProperties();
 								dirty = true;
 							}
@@ -76,8 +76,8 @@ namespace PopcornFX
 					{
 						System.Object value = prop.GetValue(null);
 						int intValue = (int)value;
-						if (intValue < 512)
-							prop.SetValue(null, 512);
+						if (intValue < 4096)
+							prop.SetValue(null, 4096);
 					}
 				}
 			}
@@ -105,10 +105,12 @@ namespace PopcornFX
 		public Shader BlurShader;
 
 		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshUnlitLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshUnlitDefault;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_EmissiveMeshUnlitDefault;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshUnlitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshUnlitDefault;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshLitLegacy;
+		[HideInInspector] public PKFxRenderFeatureBinding			m_TransparentMeshLitDefault;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitLegacy;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitDefault;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitSkinnedLegacy;

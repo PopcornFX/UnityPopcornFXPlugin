@@ -24,6 +24,14 @@ else ifeq ($(config),release_ios64)
   PK_RenderHelpers_SDK1_config = release_ios64
   PK_IntegrationUnity_config = release_ios64
 
+else ifeq ($(config),retail_ios64)
+  PK_Runtime_SDK1_config = retail_ios64
+  PK_Discretizers_SDK1_config = retail_ios64
+  PK_ParticlesToolbox_SDK1_config = retail_ios64
+  PK_UpgraderLib_config = retail_ios64
+  PK_RenderHelpers_SDK1_config = retail_ios64
+  PK_IntegrationUnity_config = retail_ios64
+
 else
   $(error "invalid configuration $(config)")
 endif
@@ -94,6 +102,7 @@ help:
 	@echo "CONFIGURATIONS:"
 	@echo "  debug_ios64"
 	@echo "  release_ios64"
+	@echo "  retail_ios64"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"

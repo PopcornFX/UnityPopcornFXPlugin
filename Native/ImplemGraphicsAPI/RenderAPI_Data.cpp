@@ -141,6 +141,9 @@ SFlagsToUseSemantic		flagsToUseSemantic[__Semantic_Count] =
 	{ 0U, ShaderVariationFlags::Has_Emissive },																							// Semantic_EmissiveColor
 	{ 0U, ShaderVariationFlags::Has_TransformUVs },																						// Semantic_TransformUvsRotate
 	{ 0U, ShaderVariationFlags::Has_TransformUVs },																						// Semantic_TransformUvsScaleAndOffset
+	{ ShaderVariationFlags::Has_TransformUVs, ShaderVariationFlags::Has_AlphaMasks },													// Semantic_AlphaMasksCursors
+	{ ShaderVariationFlags::Has_TransformUVs, ShaderVariationFlags::Has_UVDistortions },												// Semantic_UVDistortionCursors
+	{ ShaderVariationFlags::Has_TransformUVs | ShaderVariationFlags::Has_AlphaRemap, ShaderVariationFlags::Has_Dissolve },				// Semantic_DissolveCursor
 };
 
 u32		semanticSize[__Semantic_Count] =
@@ -158,6 +161,10 @@ u32		semanticSize[__Semantic_Count] =
 	4 * sizeof(float),									// Semantic_EmissiveColor
 	1 * sizeof(float),									// Semantic_TransformUvsRotate
 	4 * sizeof(float),									// Semantic_TransformUvsScaleAndOffset
+	2 * sizeof(float),									// Semantic_AlphaMasksCursors
+	2 * sizeof(float),									// Semantic_UVDistortionsCursors
+	1 * sizeof(float),									// Semantic_DissolveCursor
+	2 * sizeof(float),									// Semantic_RawUv0
 };
 
 //----------------------------------------------------------------------------
@@ -321,6 +328,28 @@ u32	FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u
 		offsetTable[Semantic_TransformUVsScaleAndOffset] = vertexOffset;
 		vertexOffset += semanticSize[Semantic_TransformUVsScaleAndOffset];
 	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_AlphaMasks) != 0)
+	{
+		offsetTable[Semantic_AlphaMasksCursors] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_AlphaMasksCursors];
+	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_UVDistortions) != 0)
+	{
+		offsetTable[Semantic_UVDistortionsCursors] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_UVDistortionsCursors];
+	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_Dissolve) != 0)
+	{
+		offsetTable[Semantic_DissolveCursor] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_DissolveCursor];
+	}
+	if ((shaderVariationFlags & ShaderVariationFlags::Has_Atlas) != 0 &&
+		(shaderVariationFlags & (ShaderVariationFlags::Has_AlphaMasks | ShaderVariationFlags::Has_UVDistortions | ShaderVariationFlags::Has_Dissolve)) != 0)
+	{
+		offsetTable[Semantic_RawUv0] = vertexOffset;
+		vertexOffset += semanticSize[Semantic_RawUv0];
+	}
+
 	return vertexOffset;
 }
 

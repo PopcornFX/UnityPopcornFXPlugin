@@ -27,7 +27,7 @@ namespace PopcornFX
 			"Vertex",
 		};
 		static string[] m_ShaderVariationFlagsString = new string[]
-		{
+        {
 			"RibbonComplex",
 			"AnimBlend",
 			"AlphaRemap",
@@ -50,7 +50,11 @@ namespace PopcornFX
 			"SkeletonAnimation",
 			"SkeletonAnimationInterpolate",
 			"SkeletonAnimationInterpolateTracks",
-			"TransformUVs"
+			"TransformUVs",
+			"LegacyLightingOpaque", // TODO the shader variation flag was never supported
+			"AlphaMasks",
+			"UVDistortions",
+			"Dissolve",
 		};
 
         public static string GetSelectedPathOrFallback()

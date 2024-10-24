@@ -140,6 +140,9 @@ private:
 	u32								m_UnusedFrameCount;
 
 	bool							m_HasTransformUV;
+	bool							m_HasAlphaMasks;
+	bool							m_HasUVDistortions;
+	bool							m_HasDissolve;
 
 	// ----------------------------------------------------------------------------
 	// FILLED ON RENDER THREAD - ALLOC BILLBOARDING BUFFERS:
@@ -242,6 +245,7 @@ private:
 		SPerView				m_ViewIndependantGeom;
 		SSizedBuffer<CFloat2>	m_TexCoords0;
 		SSizedBuffer<CFloat2>	m_TexCoords1;
+		SSizedBuffer<CFloat2>	m_RawTexCoords0;
 		SSizedBuffer<CFloat4>	m_UVRemap;
 
 		// Additional fields that we handle:
@@ -252,6 +256,11 @@ private:
 		SSizedBuffer<float>		m_TransformUVsRotate;
 		SSizedBuffer<CFloat2>	m_TransformUVsScale;
 		SSizedBuffer<CFloat2>	m_TransformUVsOffset;
+		SSizedBuffer<float>		m_AlphaMask1Cursor;
+		SSizedBuffer<float>		m_AlphaMask2Cursor;
+		SSizedBuffer<float>		m_UVDistortion1Cursor;
+		SSizedBuffer<float>		m_UVDistortion2Cursor;
+		SSizedBuffer<float>		m_DissolveCursor;
 
 		// View on the additional fields, all are null except for color and alpha cursor:
 		TArray<Drawers::SCopyFieldDesc>		m_AdditionalFieldsBuffers;
@@ -268,6 +277,7 @@ private:
 			m_PerViewGeom.Clear();
 			m_TexCoords0.FreeIFN();
 			m_TexCoords1.FreeIFN();
+			m_RawTexCoords0.FreeIFN();
 			m_AtlasId.FreeIFN();
 			m_UVRemap.FreeIFN();
 			m_Colors.FreeIFN();
@@ -277,6 +287,13 @@ private:
 			m_TransformUVsRotate.FreeIFN();
 			m_TransformUVsScale.FreeIFN();
 			m_TransformUVsOffset.FreeIFN();
+
+			m_AlphaMask1Cursor.FreeIFN();
+			m_AlphaMask2Cursor.FreeIFN();
+			m_UVDistortion1Cursor.FreeIFN();
+			m_UVDistortion2Cursor.FreeIFN();
+			m_DissolveCursor.FreeIFN();
+
 		}
 	};
 
@@ -303,6 +320,13 @@ private:
 		TStridedMemoryView<float>				m_TransformUVRotate;
 		TStridedMemoryView<CFloat2>				m_TransformUVOffset;
 		TStridedMemoryView<CFloat2>				m_TransformUVScale;
+
+		TStridedMemoryView<float>				m_AlphaMask1AnimationCursor;
+		TStridedMemoryView<float>				m_AlphaMask2AnimationCursor;
+		TStridedMemoryView<float>				m_UVDistortion1AnimationCursor;
+		TStridedMemoryView<float>				m_UVDistortion2AnimationCursor;
+		TStridedMemoryView<float>				m_DissolveCursor;
+		TStridedMemoryView<CFloat2>				m_RawUV0;
 	};
 
 	TArray<Drawers::SCopyFieldDescPerMesh>	m_MeshAdditionalField;
@@ -330,6 +354,7 @@ private:
 		CFloat2					*m_UVFactors;
 		CFloat2					*m_TexCoords0;
 		CFloat2					*m_TexCoords1;
+		CFloat2					*m_RawTexCoords0;
 		float					*m_AtlasId;
 		CFloat4					*m_UVRemap;
 		CFloat4					*m_Colors;
@@ -339,6 +364,12 @@ private:
 		float					*m_TransformUVsRotate;
 		CFloat2					*m_TransformUVsOffset;
 		CFloat2					*m_TransformUVsScale;
+
+		float					*m_AlphaMasksCursor1;
+		float					*m_AlphaMasksCursor2;
+		float					*m_UVDistortionsCursor1;
+		float					*m_UVDistortionsCursor2;
+		float					*m_DissolveCursor;
 
 		SParticleSourceBuffers()
 		{
@@ -370,6 +401,7 @@ private:
 
 			m_TexCoords0 = buffers.m_TexCoords0.m_Ptr;
 			m_TexCoords1 = buffers.m_TexCoords1.m_Ptr;
+			m_RawTexCoords0 = buffers.m_RawTexCoords0.m_Ptr;
 			m_AtlasId = buffers.m_AtlasId.m_Ptr;
 			m_UVRemap = buffers.m_UVRemap.m_Ptr;
 			m_Colors = buffers.m_Colors.m_Ptr;
@@ -378,6 +410,11 @@ private:
 			m_TransformUVsRotate = buffers.m_TransformUVsRotate.m_Ptr;
 			m_TransformUVsOffset = buffers.m_TransformUVsOffset.m_Ptr;
 			m_TransformUVsScale = buffers.m_TransformUVsScale.m_Ptr;
+			m_AlphaMasksCursor1 = buffers.m_AlphaMask1Cursor.m_Ptr;
+			m_AlphaMasksCursor2 = buffers.m_AlphaMask2Cursor.m_Ptr;
+			m_UVDistortionsCursor1 = buffers.m_UVDistortion1Cursor.m_Ptr;
+			m_UVDistortionsCursor2 = buffers.m_UVDistortion2Cursor.m_Ptr;
+			m_DissolveCursor = buffers.m_DissolveCursor.m_Ptr;
 
 			if (buffers.m_PerViewGeom.Count() > viewIdx)
 			{
@@ -403,6 +440,7 @@ private:
 			m_UVFactors = null;
 			m_TexCoords0 = null;
 			m_TexCoords1 = null;
+			m_RawTexCoords0 = null;
 			m_AtlasId = null;
 			m_UVRemap = null;
 			m_Colors = null;
@@ -410,6 +448,11 @@ private:
 			m_TransformUVsRotate = null;
 			m_TransformUVsOffset = null;
 			m_TransformUVsScale = null;
+			m_AlphaMasksCursor1 = null;
+			m_AlphaMasksCursor2 = null;
+			m_UVDistortionsCursor1 = null;
+			m_UVDistortionsCursor2 = null;
+			m_DissolveCursor = null;
 		}
 	};
 

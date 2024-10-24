@@ -33,6 +33,9 @@ CUnityBillboardingBatchPolicy::CUnityBillboardingBatchPolicy()
 ,	m_MappedAtlasesBuffer(null)
 ,	m_HasAtlas(false)
 ,	m_HasTransformUV(false)
+,	m_HasAlphaMasks(false)
+,	m_HasUVDistortions(false)
+,	m_HasDissolve(false)
 {
 }
 
@@ -1119,6 +1122,7 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 	bool	hasAlphaRemap = false;
 	bool	hasVAT = false;
 	u32		skeletalAnimMask = 0;
+	bool	alphaMasksOrUVDistortionsAdded = false;
 
 	PK_ASSERT((allocBuffers.m_ToGenerate.m_GeneratedInputs & Drawers::GenInput_Matrices) != 0);
 	for (u32 i = 0; i < allocBuffers.m_ToGenerate.m_AdditionalGeneratedInputs.Count(); ++i)
@@ -1172,6 +1176,49 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			perMeshDataSize += sizeof(CFloat2);
 		else if (addInput.m_Name == BasicRendererProperties::SID_TransformUVs_UVScale() && addInput.m_Type == BaseType_Float2)
 			perMeshDataSize += sizeof(CFloat2);
+		// AlphaMasks and UVDistortion cursors are packed in a float4 even if both aren't enabled
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			m_HasAlphaMasks = true;
+			if (!alphaMasksOrUVDistortionsAdded)
+			{
+				perMeshDataSize += sizeof(CFloat4);
+				alphaMasksOrUVDistortionsAdded = true;
+			}
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			m_HasAlphaMasks = true;
+			if (!alphaMasksOrUVDistortionsAdded)
+			{
+				perMeshDataSize += sizeof(CFloat4);
+				alphaMasksOrUVDistortionsAdded = true;
+			}
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			m_HasUVDistortions = true;
+			if (!alphaMasksOrUVDistortionsAdded)
+			{
+				perMeshDataSize += sizeof(CFloat4);
+				alphaMasksOrUVDistortionsAdded = true;	
+			}	
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			m_HasUVDistortions = true;
+			if (!alphaMasksOrUVDistortionsAdded)
+			{
+				perMeshDataSize += sizeof(CFloat4);
+				alphaMasksOrUVDistortionsAdded = true;	
+			}
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Dissolve_DissolveAnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			perMeshDataSize += sizeof(float);
+			m_HasDissolve = true;
+		}
+			
 	}
 
 	m_UseSkeletalAnimData = (skeletalAnimMask & 0x3) == 0x3;
@@ -1265,6 +1312,29 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(CFloat2));
 
 		}
+		// AlphaMasks and UVDistortions cursors are packed in a Vector4 to be used as a vertex attribute, even if there is only one feature enabled
+		if (m_HasAlphaMasks || m_HasUVDistortions) 
+		{
+			meshBuff.m_AlphaMask1AnimationCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+			meshBuff.m_AlphaMask2AnimationCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+			meshBuff.m_UVDistortion1AnimationCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+			meshBuff.m_UVDistortion2AnimationCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+		}
+		if (m_HasDissolve)
+		{
+			meshBuff.m_DissolveCursor = TMemoryView<float>(static_cast<float*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+		}
+		if (m_HasAtlas && (m_HasAlphaMasks || m_HasUVDistortions || m_HasDissolve))
+		{
+			meshBuff.m_RawUV0 = TMemoryView<CFloat2>(static_cast<CFloat2*>(inputOffset), particleCount);
+			inputOffset = Mem::AdvanceRawPointer(inputOffset, particleCount * sizeof(float));
+		}
+
 		::OnSetMeshInstancesCount(rdrGUID, subMesh, particleCount);
 	}
 
@@ -1359,6 +1429,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 		m_ParticleBuffers.m_TexCoords0.ResizeIFN(Drawers::GenInput_UV0, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
 		m_ParticleBuffers.m_TexCoords1.ResizeIFN(Drawers::GenInput_UV1, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
 		m_ParticleBuffers.m_UVRemap.ResizeIFN(Drawers::GenInput_UVRemap, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
+		m_ParticleBuffers.m_RawTexCoords0.ResizeIFN(Drawers::GenInput_RawUV0, genInputs.m_GeneratedInputs, m_ParticleBuffers.m_GeneratedInputs, m_VertexCount);
 
 		if (_FindAdditionalInput(BasicRendererProperties::SID_Diffuse_Color(), BaseType_Float4, genInputs))
 			m_ParticleBuffers.m_Colors.ResizeIFN(m_VertexCount);
@@ -1377,6 +1448,16 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 			m_ParticleBuffers.m_TransformUVsOffset.ResizeIFN(m_VertexCount);
 		if (_FindAdditionalInput(BasicRendererProperties::SID_TransformUVs_UVScale(), BaseType_Float2, genInputs))
 			m_ParticleBuffers.m_TransformUVsScale.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaMasks_Mask1AnimationCursor(), BaseType_Float, genInputs))
+			m_ParticleBuffers.m_AlphaMask1Cursor.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaMasks_Mask2AnimationCursor(), BaseType_Float, genInputs))
+			m_ParticleBuffers.m_AlphaMask2Cursor.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_UVDistortions_Distortion1AnimationCursor(), BaseType_Float, genInputs))
+			m_ParticleBuffers.m_UVDistortion1Cursor.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_UVDistortions_Distortion2AnimationCursor(), BaseType_Float, genInputs))
+			m_ParticleBuffers.m_UVDistortion2Cursor.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_Dissolve_DissolveAnimationCursor(), BaseType_Float, genInputs))
+			m_ParticleBuffers.m_DissolveCursor.ResizeIFN(m_VertexCount);
 
 		m_ParticleBuffers.m_GeneratedInputs = genInputs.m_GeneratedInputs;
 	}
@@ -1442,6 +1523,12 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 		if (!PK_VERIFY(m_ParticleBuffers.m_TexCoords1.m_Ptr != null))
 			return false;
 		billboardBatch->m_Exec_Texcoords.m_Texcoords2 = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords1.m_Ptr, m_VertexCount);
+	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_RawUV0) != 0)
+	{                                                                                                                                                                                                                            
+		if (!PK_VERIFY(m_ParticleBuffers.m_RawTexCoords0.m_Ptr != null))
+			return false;
+		billboardBatch->m_Exec_Texcoords.m_RawTexcoords = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_RawTexCoords0.m_Ptr, m_VertexCount);
 	}
 
 	// Map only the color and alpha cursor
@@ -1523,6 +1610,56 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 			field.m_AdditionalInputIndex = i;
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsRotate.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaMask1Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaMask2Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_UVDistortion1Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_UVDistortion2Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Dissolve_DissolveAnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_DissolveCursor.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
 	}
@@ -1737,6 +1874,12 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 			return false;
 		ribbonBatch->m_Exec_Texcoords.m_Texcoords = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords0.m_Ptr, m_VertexCount);
 	}
+	if ((toMap.m_GeneratedInputs & Drawers::GenInput_RawUV0) != 0)
+	{
+		if (!PK_VERIFY(m_ParticleBuffers.m_RawTexCoords0.m_Ptr != null))
+			return false;
+		ribbonBatch->m_Exec_Texcoords.m_RawTexcoords = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_RawTexCoords0.m_Ptr, m_VertexCount);
+	}
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_UVRemap) != 0)
 	{
 		if (!PK_VERIFY(m_ParticleBuffers.m_UVRemap.m_Ptr != null))
@@ -1810,6 +1953,56 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 			field.m_AdditionalInputIndex = i;
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsRotate.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaMask1Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaMask2Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_UVDistortion1Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_UVDistortion2Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Dissolve_DissolveAnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_DissolveCursor.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
 	}
@@ -1970,7 +2163,43 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
 			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_TransformUVScale), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
+		else if (m_HasAlphaMasks && addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AlphaMask1AnimationCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_HasAlphaMasks && addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_AlphaMask2AnimationCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_HasUVDistortions && addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_UVDistortion1AnimationCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_HasUVDistortions && addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_UVDistortion2AnimationCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
+		else if (m_HasDissolve && addInput.m_Name == BasicRendererProperties::SID_Dissolve_DissolveAnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
+				return false;
+			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
+			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_DissolveCursor), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
+		}
 	}
+	
 	meshBatch->m_Exec_Matrices.m_MatricesPerMesh = TStridedMemoryView<TStridedMemoryView<CFloat4x4> >(&m_PerMeshBuffers.First().m_Transforms, m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 	if (!m_MeshAdditionalField.Empty())
 	{
@@ -2099,6 +2328,56 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 			field.m_AdditionalInputIndex = i;
 			field.m_Storage.m_Count = m_VertexCount;
 			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_TransformUVsRotate.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaMask1Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaMasks_Mask2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_AlphaMask2Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion1AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_UVDistortion1Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_UVDistortions_Distortion2AnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_UVDistortion2Cursor.m_Ptr;
+			field.m_Storage.m_Stride = sizeof(float);
+		}
+		else if (addInput.m_Name == BasicRendererProperties::SID_Dissolve_DissolveAnimationCursor() && addInput.m_Type == BaseType_Float)
+		{
+			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
+				return false;
+			Drawers::SCopyFieldDesc		&field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
+			field.m_AdditionalInputIndex = i;
+			field.m_Storage.m_Count = m_VertexCount;
+			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_DissolveCursor.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
 	}
@@ -2230,6 +2509,24 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 			}
 			FillTransformUVsScaleAndOffset(&(((CFloat2*)m_ParticleBuffers.m_TransformUVsScale)[vertexID]), &(((CFloat2*)m_ParticleBuffers.m_TransformUVsOffset)[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaMasks))
+		{
+			FillAnimatedMaskedCursors(&(m_ParticleBuffers.m_AlphaMasksCursor1[vertexID]), &(m_ParticleBuffers.m_AlphaMasksCursor2[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_UVDistortions))
+		{
+			FillUVDistortionsCursors(&(m_ParticleBuffers.m_UVDistortionsCursor1[vertexID]), &(m_ParticleBuffers.m_UVDistortionsCursor2[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Dissolve))
+		{
+			FillDissolveCursor(&(m_ParticleBuffers.m_DissolveCursor[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+		if (m_ParticleBuffers.m_RawTexCoords0 != null)
+		{
+			FillRawUV0(&(m_ParticleBuffers.m_RawTexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
+		}
+			
 		bfPtr = Mem::AdvanceRawPointer(bfPtr, m_VertexStride);
 	}
 }

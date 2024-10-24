@@ -46,6 +46,7 @@
 #include <pk_render_helpers/include/draw_requests/rh_billboard.h>
 
 __PK_API_BEGIN
+#if !defined(PK_RETAIL)
 //----------------------------------------------------------------------------
 
 // Check if the mirrored enum in the C# for the attribute types is up to date:
@@ -768,4 +769,6 @@ bool	CEffectBrowser::BrowseSamplers(const CParticleAttributeList *attribList)
 }
 
 //----------------------------------------------------------------------------
+#endif // !defined(PK_RETAIL)
 __PK_API_END
+

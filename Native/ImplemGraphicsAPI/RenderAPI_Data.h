@@ -96,6 +96,11 @@ enum	EVertexSemantic
 	Semantic_TransformUVsRotate,
 	Semantic_TransformUVsScaleAndOffset,
 
+	Semantic_AlphaMasksCursors,
+	Semantic_UVDistortionsCursors,
+	Semantic_DissolveCursor,
+	Semantic_RawUv0,
+
 	__Semantic_Count
 };
 
@@ -218,6 +223,14 @@ PK_INLINE void	FillUV1(void * const stream, volatile void * const dstPtr, const 
 
 //-------------------------------------------------------------------------------------
 
+PK_INLINE void	FillRawUV0(void * const stream, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_RawUv0]);
+	*(CFloat2*)dst = *(const CFloat2*)stream;
+}
+
+//-------------------------------------------------------------------------------------
+
 PK_INLINE void	FillAtlasId(void * const stream, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
 {
 	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_AtlasId]);
@@ -250,5 +263,26 @@ PK_INLINE void	FillTransformUVsScaleAndOffset(void * const streamScale, void * c
 	*(CFloat2*)dst = *(const CFloat2*)streamOffset;
 }
 
+PK_INLINE void	FillAnimatedMaskedCursors(void * const streamOne, void * const streamTwo, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_AlphaMasksCursors]);
+	*(float*)dst = *(const float*)streamOne;
+	dst = Mem::AdvanceRawPointer(dst, sizeof(float));
+	*(float*)dst = *(const float*)streamTwo;
+}
+
+PK_INLINE void	FillUVDistortionsCursors(void * const streamOne, void * const streamTwo, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_UVDistortionsCursors]);
+	*(float*)dst = *(const float*)streamOne;
+	dst = Mem::AdvanceRawPointer(dst, sizeof(float));
+	*(float*)dst = *(const float*)streamTwo;
+}
+
+PK_INLINE void	FillDissolveCursor(void * const stream, volatile void * const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void	*dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_DissolveCursor]);
+	*(float*)dst = *(const float*)stream;
+}
 #undef SIMDFY
 //-------------------------------------------------------------------------------------

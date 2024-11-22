@@ -211,6 +211,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
@@ -233,6 +234,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
@@ -259,6 +261,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
@@ -287,6 +290,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
@@ -315,6 +319,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
@@ -343,6 +348,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>

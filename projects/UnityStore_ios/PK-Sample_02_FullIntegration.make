@@ -11,7 +11,7 @@ endif
 .PHONY: clean prebuild
 
 SHELLTYPE := posix
-ifeq (.exe,$(findstring .exe,$(ComSpec)))
+ifeq ($(shell echo "test"), "test")
 	SHELLTYPE := msdos
 endif
 
@@ -30,7 +30,7 @@ endif
 PCH = ../../SDK/Samples/PK-Samples/precompiled/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration -I../../SDK/Samples/PK-Samples/precompiled -I../../SDK/Samples/PK-Samples -I../../SDK/Samples/External/imgui
+INCLUDES += -I../../SDK/Samples/PK-Samples/PK-Sample_02_FullIntegration -I../../SDK/Samples/PK-Samples/precompiled -I../../SDK/Samples/PK-Samples -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../SDK/Samples/ParticleSample/src -I../../ExternalLibs/pk_upgraderlib/src/include -I../../Native/Common/PKFX -I../../SDK/Samples/External/imgui
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -90,11 +90,13 @@ PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -pipe -isysroot `xcrun --sdk iphoneos --show-s
 GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/FxPlatformGeneric.o
 GENERATED += $(OBJDIR)/GPUContext_D3D.o
 GENERATED += $(OBJDIR)/Main.o
 GENERATED += $(OBJDIR)/PopcornScene.o
 GENERATED += $(OBJDIR)/SampleScene.o
 GENERATED += $(OBJDIR)/precompiled.o
+OBJECTS += $(OBJDIR)/FxPlatformGeneric.o
 OBJECTS += $(OBJDIR)/GPUContext_D3D.o
 OBJECTS += $(OBJDIR)/Main.o
 OBJECTS += $(OBJDIR)/PopcornScene.o
@@ -166,6 +168,9 @@ endif
 # File Rules
 # #############################################
 
+$(OBJDIR)/FxPlatformGeneric.o: ../../Native/Common/PKFX/FxPlatformGeneric.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/precompiled/precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

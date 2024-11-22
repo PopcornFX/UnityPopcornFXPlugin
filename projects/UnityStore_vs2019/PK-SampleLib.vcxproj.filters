@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
@@ -48,6 +48,9 @@
     </Filter>
     <Filter Include="Headers\WindowContext">
       <UniqueIdentifier>{CDDC95C7-3949-51C2-023D-E91F6E68732A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\WindowContext\NXContext">
+      <UniqueIdentifier>{07A7C41F-738A-D35F-7C8D-019CE8EF99B0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\WindowContext\OffscreenContext">
       <UniqueIdentifier>{DC5DCDD0-C8AF-A4C0-B1CE-E1D09DBFBDA9}</UniqueIdentifier>
@@ -108,6 +111,9 @@
     </Filter>
     <Filter Include="Sources\WindowContext">
       <UniqueIdentifier>{959A8B4E-0107-4749-CAFA-DEA6362669B1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\WindowContext\NXContext">
+      <UniqueIdentifier>{CF3E383F-3B22-477F-4425-75BBB0870DD0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\WindowContext\OffscreenContext">
       <UniqueIdentifier>{A464DF18-90B6-B608-79D5-F31865C6CFF1}</UniqueIdentifier>
@@ -756,6 +762,9 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h">
       <Filter>Headers\WindowContext</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\NXContext\NXApplicationContext.h">
+      <Filter>Headers\WindowContext\NXContext</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.h">
       <Filter>Headers\WindowContext\OffscreenContext</Filter>
     </ClInclude>
@@ -952,6 +961,9 @@
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp">
       <Filter>Sources\WindowContext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\NXContext\NXApplicationContext.cpp">
+      <Filter>Sources\WindowContext\NXContext</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.cpp">
       <Filter>Sources\WindowContext\OffscreenContext</Filter>

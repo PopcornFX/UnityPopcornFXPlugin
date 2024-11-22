@@ -11,7 +11,7 @@ endif
 .PHONY: clean prebuild
 
 SHELLTYPE := posix
-ifeq (.exe,$(findstring .exe,$(ComSpec)))
+ifeq ($(shell echo "test"), "test")
 	SHELLTYPE := msdos
 endif
 
@@ -116,6 +116,7 @@ GENERATED += $(OBJDIR)/LightEntity.o
 GENERATED += $(OBJDIR)/MaterialToRHI.o
 GENERATED += $(OBJDIR)/MeshEntity.o
 GENERATED += $(OBJDIR)/MetalShaderGenerator.o
+GENERATED += $(OBJDIR)/NXApplicationContext.o
 GENERATED += $(OBJDIR)/OffscreenContext.o
 GENERATED += $(OBJDIR)/PKPix.o
 GENERATED += $(OBJDIR)/PKSampleInit.o
@@ -181,6 +182,7 @@ OBJECTS += $(OBJDIR)/LightEntity.o
 OBJECTS += $(OBJDIR)/MaterialToRHI.o
 OBJECTS += $(OBJDIR)/MeshEntity.o
 OBJECTS += $(OBJDIR)/MetalShaderGenerator.o
+OBJECTS += $(OBJDIR)/NXApplicationContext.o
 OBJECTS += $(OBJDIR)/OffscreenContext.o
 OBJECTS += $(OBJDIR)/PKPix.o
 OBJECTS += $(OBJDIR)/PKSampleInit.o
@@ -458,6 +460,9 @@ $(OBJDIR)/SoundPoolCache.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/SoundInteg
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AWindowContext.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/WindowContext/AWindowContext.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/NXApplicationContext.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/WindowContext/NXContext/NXApplicationContext.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/OffscreenContext.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/WindowContext/OffscreenContext/OffscreenContext.cpp

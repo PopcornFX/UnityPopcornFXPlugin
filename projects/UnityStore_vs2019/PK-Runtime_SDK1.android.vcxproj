@@ -203,6 +203,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -229,6 +230,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -255,6 +257,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -281,6 +284,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -307,6 +311,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -333,6 +338,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>

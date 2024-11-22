@@ -214,6 +214,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -250,6 +251,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -270,8 +272,8 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -286,6 +288,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -320,6 +323,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -356,6 +360,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -375,8 +380,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -392,6 +397,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -426,6 +432,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -459,6 +466,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -475,8 +483,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_SDL=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\SDL2\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\fmodex-4.44.19\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -492,6 +500,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
@@ -702,6 +711,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\NXContext\NXApplicationContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.h" />
@@ -771,6 +781,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\NXContext\NXApplicationContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp">

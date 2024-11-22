@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Headers">
@@ -9,6 +9,18 @@
     </Filter>
     <Filter Include="Precompiled">
       <UniqueIdentifier>{99BE8D1E-0574-0614-8E68-00EBFA1CFD17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK">
+      <UniqueIdentifier>{071D880B-7326-887C-FCA1-9E7C68AA937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\Samples">
+      <UniqueIdentifier>{2B132C9B-97C8-A490-20BD-9E678C719B94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\Samples\Common">
+      <UniqueIdentifier>{0382D829-EF65-997F-58C6-93D244C98301}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\Samples\Common\PKFX">
+      <UniqueIdentifier>{4BE2F859-B719-41F1-C023-A5142CDA67EA}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{89565304-F535-D29F-FE4D-5D766AAC3801}</UniqueIdentifier>
@@ -419,6 +431,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Native\Common\PKFX\FxPlatformGeneric.cpp">
+      <Filter>SDK\Samples\Common\PKFX</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\GPUContext_D3D.cpp">
       <Filter>Sources</Filter>
     </ClCompile>

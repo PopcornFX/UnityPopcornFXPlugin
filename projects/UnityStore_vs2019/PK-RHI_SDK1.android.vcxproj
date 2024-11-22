@@ -193,8 +193,8 @@
       <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -203,6 +203,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -219,8 +220,8 @@
       <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -229,6 +230,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -244,8 +246,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -255,6 +257,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -270,8 +273,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -281,6 +284,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -296,8 +300,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -307,6 +311,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -322,8 +327,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../ExternalLibs/Runtime/pk_rhi/src/precompiled/rhi_precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_rhi\include;..\..\ExternalLibs\Runtime\pk_rhi\src;..\..\ExternalLibs\Runtime\pk_rhi\src\precompiled;..\..\SDK\Samples\PK-Samples\Common;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -333,6 +338,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>

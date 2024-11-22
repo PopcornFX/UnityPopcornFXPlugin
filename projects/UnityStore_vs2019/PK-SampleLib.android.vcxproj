@@ -193,8 +193,8 @@
       <PrecompiledHeaderFile>../../SDK/Samples/PK-Samples/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -204,6 +204,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -220,8 +221,8 @@
       <PrecompiledHeaderFile>../../SDK/Samples/PK-Samples/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -231,6 +232,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -246,8 +248,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../SDK/Samples/PK-Samples/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -258,6 +260,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -273,8 +276,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../SDK/Samples/PK-Samples/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -285,6 +288,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -300,8 +304,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../SDK/Samples/PK-Samples/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -312,6 +316,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -327,8 +332,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>../../SDK/Samples/PK-Samples/precompiled/precompiled.h</PrecompiledHeaderFile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;GLEW_EGL;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_SDL=0;PK_BUILD_WITH_FMODEX_SUPPORT=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-SampleLib;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -339,6 +344,7 @@
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <AdditionalOptions>-fno-math-errno -fno-trapping-math -pipe -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -439,6 +445,7 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.h" />
+    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\NXContext\NXApplicationContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.h" />
@@ -511,6 +518,7 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\FModBillboardingBatchPolicy.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\SoundIntegrationFMod\SoundPoolCache.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\AWindowContext.cpp" />
+    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\NXContext\NXApplicationContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\OffscreenContext\OffscreenContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\WindowContext\SdlContext\SdlContext.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\precompiled\precompiled.cpp" />

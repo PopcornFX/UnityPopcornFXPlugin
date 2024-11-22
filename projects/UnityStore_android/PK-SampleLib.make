@@ -11,7 +11,7 @@ endif
 .PHONY: clean prebuild
 
 SHELLTYPE := posix
-ifeq (.exe,$(findstring .exe,$(ComSpec)))
+ifeq ($(shell echo "test"), "test")
 	SHELLTYPE := msdos
 endif
 
@@ -21,7 +21,7 @@ endif
 PCH = ../../SDK/Samples/PK-Samples/precompiled/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../SDK/Samples/PK-Samples -I../../SDK/Samples/PK-Samples/precompiled -I../../SDK/Samples/PK-Samples/PK-SampleLib -I../../ExternalLibs/GL/include -I../../SDK/Samples/External/imgui
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../SDK/Samples/PK-Samples -I../../SDK/Samples/PK-Samples/precompiled -I../../SDK/Samples/PK-Samples/PK-SampleLib -I../../ExternalLibs/GL/include -I"$(VULKAN_SDK)/include" -I../../SDK/Samples/External/imgui
 FORCE_INCLUDE += -include pk_compiler_warnings.h
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
@@ -51,9 +51,9 @@ endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-SampleLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/android/Debug/PK-SampleLib
-DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
+DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),debug_android64)
@@ -69,9 +69,9 @@ endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-SampleLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/android64/Debug/PK-SampleLib
-DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
+DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_android)
@@ -87,9 +87,9 @@ endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-SampleLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/android/Release/PK-SampleLib
-DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_android64)
@@ -105,9 +105,9 @@ endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-SampleLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/android64/Release/PK-SampleLib
-DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fvisibility-inlines-hidden -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),retail_android)
@@ -123,9 +123,9 @@ endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-SampleLib_s.a
 OBJDIR = ../intermediate/UnityStore/GM/android/Retail/PK-SampleLib
-DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fvisibility-inlines-hidden -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fvisibility-inlines-hidden -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS) -s
 
 else ifeq ($(config),retail_android64)
@@ -141,9 +141,9 @@ endif
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-SampleLib_s.a
 OBJDIR = ../intermediate/UnityStore/GM/android64/Retail/PK-SampleLib
-DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -Wall -Wextra -std=gnu++0x -fno-exceptions -fvisibility-inlines-hidden -fno-rtti -fvisibility=hidden -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DGLEW_EGL -DPK_BUILD_WITH_VULKAN_SUPPORT=1 -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fvisibility-inlines-hidden -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fvisibility-inlines-hidden -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
 ALL_LDFLAGS += $(LDFLAGS) -s
 
 #else
@@ -189,6 +189,7 @@ GENERATED += $(OBJDIR)/LightEntity.o
 GENERATED += $(OBJDIR)/MaterialToRHI.o
 GENERATED += $(OBJDIR)/MeshEntity.o
 GENERATED += $(OBJDIR)/MetalShaderGenerator.o
+GENERATED += $(OBJDIR)/NXApplicationContext.o
 GENERATED += $(OBJDIR)/OffscreenContext.o
 GENERATED += $(OBJDIR)/PKPix.o
 GENERATED += $(OBJDIR)/PKSampleInit.o
@@ -254,6 +255,7 @@ OBJECTS += $(OBJDIR)/LightEntity.o
 OBJECTS += $(OBJDIR)/MaterialToRHI.o
 OBJECTS += $(OBJDIR)/MeshEntity.o
 OBJECTS += $(OBJDIR)/MetalShaderGenerator.o
+OBJECTS += $(OBJDIR)/NXApplicationContext.o
 OBJECTS += $(OBJDIR)/OffscreenContext.o
 OBJECTS += $(OBJDIR)/PKPix.o
 OBJECTS += $(OBJDIR)/PKSampleInit.o
@@ -531,6 +533,9 @@ $(OBJDIR)/SoundPoolCache.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/SoundInteg
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AWindowContext.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/WindowContext/AWindowContext.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/NXApplicationContext.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/WindowContext/NXContext/NXApplicationContext.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/OffscreenContext.o: ../../SDK/Samples/PK-Samples/PK-SampleLib/WindowContext/OffscreenContext/OffscreenContext.cpp

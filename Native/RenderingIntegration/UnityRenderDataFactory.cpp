@@ -8,6 +8,8 @@
 #include "UnityRendererCache.h"
 #include "UnityBillboardingBatchPolicy.h"
 
+#include <pk_render_helpers/include/render_features/rh_features_basic.h>
+
 #include <pk_render_helpers/include/batches/rh_ribbon_batch.h>
 #include <pk_render_helpers/include/batches/rh_billboard_batch.h>
 #include <pk_render_helpers/include/batches/rh_mesh_batch.h>
@@ -153,7 +155,9 @@ PRendererCacheBase	CUnityRenderDataFactory::UpdateThread_CreateRendererCache(con
 						}
 					}
 				}
-				rendererCache->CreateUnityMesh(rendererCount, m_UseGPUBillboarding);
+				const SRendererDeclaration::SAdditionalFieldDefinition *emissive = renderer->m_Declaration.FindAdditionalFieldDefinition(BasicRendererProperties::SID_Emissive_EmissiveColor());
+				bool isEmissive3 = (emissive != null &&  emissive->m_Type == BaseType_Float3) ? true : false;
+				rendererCache->CreateUnityMesh(rendererCount, m_UseGPUBillboarding, isEmissive3);
 				{
 					PK_SCOPEDLOCK_WRITE(m_CacheLock);
 					m_RendererCaches.PushBack(rendererCache);

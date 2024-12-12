@@ -143,6 +143,7 @@ private:
 	bool							m_HasAlphaMasks;
 	bool							m_HasUVDistortions;
 	bool							m_HasDissolve;
+	bool							m_IsEmissive3 = false;
 
 	// ----------------------------------------------------------------------------
 	// FILLED ON RENDER THREAD - ALLOC BILLBOARDING BUFFERS:
@@ -251,7 +252,8 @@ private:
 		// Additional fields that we handle:
 		SSizedBuffer<float>		m_AtlasId;
 		SSizedBuffer<CFloat4>	m_Colors;
-		SSizedBuffer<CFloat4>	m_EmissiveColors;
+		SSizedBuffer<CFloat3>	m_EmissiveColors3;
+		SSizedBuffer<CFloat4>	m_EmissiveColors4;
 		SSizedBuffer<float>		m_AlphaCursor;
 		SSizedBuffer<float>		m_TransformUVsRotate;
 		SSizedBuffer<CFloat2>	m_TransformUVsScale;
@@ -281,7 +283,8 @@ private:
 			m_AtlasId.FreeIFN();
 			m_UVRemap.FreeIFN();
 			m_Colors.FreeIFN();
-			m_EmissiveColors.FreeIFN();
+			m_EmissiveColors3.FreeIFN();
+			m_EmissiveColors4.FreeIFN();
 			m_AlphaCursor.FreeIFN();
 
 			m_TransformUVsRotate.FreeIFN();
@@ -358,7 +361,8 @@ private:
 		float					*m_AtlasId;
 		CFloat4					*m_UVRemap;
 		CFloat4					*m_Colors;
-		CFloat4					*m_EmissiveColors;
+		CFloat3					*m_EmissiveColors3;
+		CFloat4					*m_EmissiveColors4;
 		float					*m_AlphaCursor;
 
 		float					*m_TransformUVsRotate;
@@ -405,7 +409,8 @@ private:
 			m_AtlasId = buffers.m_AtlasId.m_Ptr;
 			m_UVRemap = buffers.m_UVRemap.m_Ptr;
 			m_Colors = buffers.m_Colors.m_Ptr;
-			m_EmissiveColors = buffers.m_EmissiveColors.m_Ptr;
+			m_EmissiveColors3 = buffers.m_EmissiveColors3.m_Ptr;
+			m_EmissiveColors4 = buffers.m_EmissiveColors4.m_Ptr;
 			m_AlphaCursor = buffers.m_AlphaCursor.m_Ptr;
 			m_TransformUVsRotate = buffers.m_TransformUVsRotate.m_Ptr;
 			m_TransformUVsOffset = buffers.m_TransformUVsOffset.m_Ptr;
@@ -461,6 +466,7 @@ private:
 	public:
 		u32						m_IdxView = 0;
 		u32						m_ShaderVariationFlags;
+		bool					m_IsEmissive3 = false;
 
 		SParticleSourceBuffers	m_ParticleBuffers;		// Src
 		TArray<void*>			m_MappedVertexBuffer;	// Dst vtx

@@ -1228,6 +1228,124 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		private static List<VertexAttributeDescriptor> BuildVertexLayout(SMeshDesc renderer)
+		{
+			VertexAttribute additionalUVIdx = 0;
+
+			List<VertexAttributeDescriptor> layout = new List<VertexAttributeDescriptor>();
+			layout.Add(new VertexAttributeDescriptor(VertexAttribute.Position, VertexAttributeFormat.Float32, 3));              // positions
+
+			if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
+			{
+				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Normal, VertexAttributeFormat.Float32, 3));            // normal
+				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Tangent, VertexAttributeFormat.Float32, 4));           // tangent
+			}
+			if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
+			{
+				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4));             // color
+			}
+			if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
+			{
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) &&
+					renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+				{
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));     // uvFactors + alpha cursor + transform uv rotate
+				}
+				else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) ||
+						 renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+				{
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));     // uvFactors + alpha cursor | transform uv rotate
+				}
+				else
+				{
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));     // uvFactors
+				}
+				layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 4));         // uvScale/uvOffset
+				additionalUVIdx = VertexAttribute.TexCoord2;
+			}
+			else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
+			{
+				layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));         // uv0/uv1
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 3));     // atlas id and if Has_AlphaRemap, alpha cursor and transform uv rotate
+				else
+					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));     // atlas id and if Has_AlphaRemap, alpha cursor
+				additionalUVIdx = VertexAttribute.TexCoord2;
+			}
+			else
+			{
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) ||
+					renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive) ||
+					renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
+				{
+					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
+					{
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3)); // uv0 + alpha cursor
+					}
+					else
+					{
+						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2)); // uv0
+					}
+					additionalUVIdx = VertexAttribute.TexCoord1;
+				}
+			}
+
+			if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
+			{
+				layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));                   // emissive color
+				additionalUVIdx = additionalUVIdx + 1;
+			}
+			if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
+			{
+				if (!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex) &&
+					!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
+				{
+					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas))
+						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));           // TransformUVs rotate + AtlasID
+					else
+						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 1));           // TransformUVs rotate
+					additionalUVIdx = additionalUVIdx + 1;
+				}
+				layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));                   // TransformUVs ScaleAndOffset
+				additionalUVIdx = additionalUVIdx + 1;
+			}
+
+			if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks) && renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions))
+			{
+				layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4)); // AlphaMasks cursors + UVDistortions
+				additionalUVIdx = additionalUVIdx + 1;
+			}
+			else
+			{
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks))
+				{
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // AlphaMasks cursors
+					additionalUVIdx = additionalUVIdx + 1;
+				}
+
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions))
+				{
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // UVDistortions cursors
+					additionalUVIdx = additionalUVIdx + 1;
+				}
+			}
+
+			if ((renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks) ||
+				renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions)) &&
+				renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas) || renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
+			{
+				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3));     // Dissolve Cursor + RawUV0s
+				else
+					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // RawUV0s
+				additionalUVIdx = additionalUVIdx + 1;
+			}
+
+			return layout;
+		}
+
+		//----------------------------------------------------------------------------
+
 		private static bool ResizeParticleMeshBuffer(Mesh mesh,
 														SMeshDesc renderer,
 														uint usedVertexCount,
@@ -1240,136 +1358,42 @@ namespace PopcornFX
 
 			if (renderer.m_VertexCount < usedVertexCount)
 			{
-				// We only do the transition from uint16 to uint32 because the transition clear the index buffer...
-				if (useLargeIdx == true && mesh.indexFormat == IndexFormat.UInt16)
-					mesh.indexFormat = IndexFormat.UInt32;
-				else if (useLargeIdx == false && mesh.indexFormat == IndexFormat.UInt32)
-					mesh.indexFormat = IndexFormat.UInt16;
-
-				mesh.Clear();
-
-				VertexAttribute additionalUVIdx = 0;
-
-				List<VertexAttributeDescriptor> layout = new List<VertexAttributeDescriptor>();
-				layout.Add(new VertexAttributeDescriptor(VertexAttribute.Position, VertexAttributeFormat.Float32, 3));				// positions
-
-				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Lighting))
+				if (mesh.GetVertexAttributes().Length == 0)
 				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Normal, VertexAttributeFormat.Float32, 3));			// normal
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Tangent, VertexAttributeFormat.Float32, 4));			// tangent
-				}
-				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
-				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4));				// color
-				}
-				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex))
-				{
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) &&
-						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
-					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));		// uvFactors + alpha cursor + transform uv rotate
-					}
-					else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap) ||
-							 renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
-					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));		// uvFactors + alpha cursor | transform uv rotate
-					}
-					else
-					{
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));		// uvFactors
-					}
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 4));			// uvScale/uvOffset
-					additionalUVIdx = VertexAttribute.TexCoord2;
-				}
-				else if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
-				{
-					layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 4));			// uv0/uv1
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 3));		// atlas id and if Has_AlphaRemap, alpha cursor and transform uv rotate
-					else
-						layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord1, VertexAttributeFormat.Float32, 2));		// atlas id and if Has_AlphaRemap, alpha cursor
-					additionalUVIdx = VertexAttribute.TexCoord2;
+					List<VertexAttributeDescriptor> layout = BuildVertexLayout(renderer);
+					mesh.SetVertexBufferParams((int)reservedVertexCount, layout.ToArray());
 				}
 				else
-				{
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseMap) ||
-						renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_DistortionMap))
-					{
-						if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaRemap))
-						{
-							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 3));	// uv0 + alpha cursor
-						}
-						else
-						{
-							layout.Add(new VertexAttributeDescriptor(VertexAttribute.TexCoord0, VertexAttributeFormat.Float32, 2));	// uv0
-						}
-						additionalUVIdx = VertexAttribute.TexCoord1;
-					}
-				}
+					mesh.SetVertexBufferParams((int)reservedVertexCount, mesh.GetVertexAttributes());
 
-				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Emissive))
-				{
-					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));					// emissive color
-					additionalUVIdx = additionalUVIdx + 1;
-				}
-				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_TransformUVs))
-				{
-					if (!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_RibbonComplex) &&
-						!renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AnimBlend))
-					{
-						if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas))
-							layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));			// TransformUVs rotate + AtlasID
-						else
-							layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 1));			// TransformUVs rotate
-						additionalUVIdx = additionalUVIdx + 1;
-					}
-					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4));					// TransformUVs ScaleAndOffset
-					additionalUVIdx = additionalUVIdx + 1;
-				}
-
-				if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks) && renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions)) 
-				{
-					layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 4)); // AlphaMasks cursors + UVDistortions
-					additionalUVIdx = additionalUVIdx + 1;
-				}
-				else
-				{
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks))
-					{
-						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // AlphaMasks cursors
-						additionalUVIdx = additionalUVIdx + 1;
-					}
-
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions))
-					{
-						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // UVDistortions cursors
-						additionalUVIdx = additionalUVIdx + 1;
-					}
-				}
-
-				if ((renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_AlphaMasks) ||
-					renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_UVDistortions)) &&
-					renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Atlas) || renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
-				{
-					if (renderer.HasShaderVariationFlag(EShaderVariationFlags.Has_Dissolve))
-						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 3));     // Dissolve Cursor + RawUV0s
-					else
-						layout.Add(new VertexAttributeDescriptor(additionalUVIdx, VertexAttributeFormat.Float32, 2));     // RawUV0s
-					additionalUVIdx = additionalUVIdx + 1;
-				}
-
-				mesh.SetVertexBufferParams((int)reservedVertexCount, layout.ToArray());
 				renderer.m_VertexCount = (int)reservedVertexCount;
-
 				hasBeenResized = true;
 			}
 
-			if (hasBeenResized || renderer.m_IndexCount < usedIndexCount)
-			{
-				mesh.SetIndexBufferParams((int)reservedIndexCount, mesh.indexFormat);
-				renderer.m_IndexCount = (int)reservedIndexCount;
+			bool indexFormatChanged = false;
 
-				mesh.subMeshCount = 1;
+			if (useLargeIdx == true && mesh.indexFormat == IndexFormat.UInt16)
+			{
+				indexFormatChanged = true;
+				mesh.indexFormat = IndexFormat.UInt32;
+			}
+			else if (useLargeIdx == false && mesh.indexFormat == IndexFormat.UInt32)
+			{
+				indexFormatChanged = true;
+				mesh.indexFormat = IndexFormat.UInt16;
+			}
+
+			if (indexFormatChanged || renderer.m_IndexCount < usedIndexCount)
+			{
+				mesh.triangles = null; // Fix: if we don't clear the indices, unity does not reallocate them...
+				mesh.SetIndexBufferParams((int)reservedIndexCount, mesh.indexFormat);
+				
+				renderer.m_IndexCount = (int)reservedIndexCount;
+				hasBeenResized = true;
+			}
+
+			if (hasBeenResized)
+			{
 				SubMeshDescriptor desc = new SubMeshDescriptor();
 				desc.topology = MeshTopology.Triangles;
 				desc.firstVertex = 0;
@@ -1378,8 +1402,6 @@ namespace PopcornFX
 				desc.vertexCount = renderer.m_VertexCount;
 				desc.indexCount = renderer.m_IndexCount;
 				mesh.SetSubMesh(0, desc, MeshUpdateFlags.DontRecalculateBounds);
-
-				hasBeenResized = true;
 			}
 
 			return hasBeenResized;

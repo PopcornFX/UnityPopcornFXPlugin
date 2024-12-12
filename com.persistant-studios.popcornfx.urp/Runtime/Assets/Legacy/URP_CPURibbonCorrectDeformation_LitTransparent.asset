@@ -72,6 +72,38 @@ MonoBehaviour:
   m_AtlasIdPropertyName: _AtlasId
   m_TransformUVsRGBOnlyPropertyName: _TransformUVs_RGBOnly
   m_UseVertexColorPropertyName: _UseVertexColor
+  m_AlphaMask1MapPropertyName: _AlphaMasksTex1
+  m_AlphaMask2MapPropertyName: _AlphaMasksTex2
+  m_AlphaMask1IntensityPropertyName: _AlphaMask1Intensity
+  m_AlphaMask2IntensityPropertyName: _AlphaMask2Intensity
+  m_AlphaMask1WeightPropertyName: _AlphaMask1Weight
+  m_AlphaMask2WeightPropertyName: _AlphaMask2Weight
+  m_AlphaMask1ScaleXPropertyName: _AlphaMask1ScaleX
+  m_AlphaMask1ScaleYPropertyName: _AlphaMask1ScaleY
+  m_AlphaMask2ScaleXPropertyName: _AlphaMask2ScaleX
+  m_AlphaMask2ScaleYPropertyName: _AlphaMask2ScaleY
+  m_AlphaMask1RotationSpeedPropertyName: _AlphaMask1RotationSpeed
+  m_AlphaMask2RotationSpeedPropertyName: _AlphaMask2RotationSpeed
+  m_AlphaMask1TranslationSpeedXPropertyName: _AlphaMask1TranslationSpeedX
+  m_AlphaMask1TranslationSpeedYPropertyName: _AlphaMask1TranslationSpeedY
+  m_AlphaMask2TranslationSpeedXPropertyName: _AlphaMask2TranslationSpeedX
+  m_AlphaMask2TranslationSpeedYPropertyName: _AlphaMask2TranslationSpeedY
+  m_UVDistortions1MapPropertyName: _UVDistortionsTex1
+  m_UVDistortions2MapPropertyName: _UVDistortionsTex2
+  m_UVDistortions1IntensityPropertyName: _UVDistortions1Intensity
+  m_UVDistortions2IntensityPropertyName: _UVDistortions2Intensity
+  m_UVDistortions1ScaleXPropertyName: _UVDistortions1ScaleX
+  m_UVDistortions1ScaleYPropertyName: _UVDistortions1ScaleY
+  m_UVDistortions2ScaleXPropertyName: _UVDistortions2ScaleX
+  m_UVDistortions2ScaleYPropertyName: _UVDistortions2ScaleY
+  m_UVDistortions1RotationSpeedPropertyName: _UVDistortions1RotationSpeed
+  m_UVDistortions2RotationSpeedPropertyName: _UVDistortions2RotationSpeed
+  m_UVDistortions1TranslationSpeedXPropertyName: _UVDistortions1TranslationSpeedX
+  m_UVDistortions1TranslationSpeedYPropertyName: _UVDistortions1TranslationSpeedY
+  m_UVDistortions2TranslationSpeedXPropertyName: _UVDistortions2ranslationSpeedX
+  m_UVDistortions2TranslationSpeedYPropertyName: _UVDistortions2TranslationSpeedY
+  m_DissolveMapPropertyName: _DissolveTex
+  m_DissolveSoftnessPropertyName: _DissolveSoftness
   m_UseShader: 1
   m_Shader: {fileID: -6465566751694194690, guid: c8da94dbab42cb24cad0e6551b536dde,
     type: 3}

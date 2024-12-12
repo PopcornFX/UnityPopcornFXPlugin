@@ -475,6 +475,7 @@ void	CPKFXScene::Reset()
 void	CPKFXScene::HardReset()
 {
 	_ResetParticleMediumCollections();
+	m_RenderDataFactory.EmptyAllBatches();
 	m_RenderDataFactory.Reset();
 }
 
@@ -718,6 +719,8 @@ bool	CPKFXScene::GameThread_WaitForUpdateEnd()
 	// Can get called before update startup (med col creation)
 	if (m_WaitForUpdateOnRenderThread && m_ParticleMediumCollection != null)
 		m_ParticleMediumCollection->UpdateFence();
+	else if (m_GameThreadMediumCollection != null)
+		m_GameThreadMediumCollection->UpdateFence();
 	return true;
 }
 
@@ -1169,6 +1172,18 @@ void	CPKFXScene::BroadcastEvent(	Threads::SThreadContext				*threadCtx,
 
 bool	CPKFXScene::_ResetParticleMediumCollections()
 {
+	m_IsMediumCollectionInitialized = false;
+	if (m_GameThreadMediumCollection && m_GameThreadFrameCollector)
+	{
+		// Release the collected frame prior to deleting the medium collection
+		m_GameThreadFrameCollector->ReleaseRenderedFrame();
+		m_GameThreadFrameCollector->UpdateThread_UninstallFromMediumCollection(m_GameThreadMediumCollection);
+	}
+	if (m_ParticleMediumCollection && m_ParticleFrameCollector)
+	{
+		m_ParticleFrameCollector->ReleaseRenderedFrame();
+		m_ParticleFrameCollector->UpdateThread_UninstallFromMediumCollection(m_ParticleMediumCollection);
+	}
 	PK_SAFE_DELETE(m_ParticleMediumCollection);
 	PK_SAFE_DELETE(m_GameThreadMediumCollection);
 
@@ -1237,7 +1252,6 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 		// Instal the game thread frame collector:
 		m_GameThreadFrameCollector->UpdateThread_InstallToMediumCollection(m_ParticleMediumCollection);
 	}
-
 	if (m_MediumCollectionSettings.m_Initialized)
 	{
 		// Enable/Disable bounds
@@ -1263,7 +1277,6 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 	}
 
 	m_IsMediumCollectionInitialized = true;
-
 	return true;
 }
 

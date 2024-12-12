@@ -51,8 +51,8 @@ namespace PopcornFX
 		Has_SkeletalInterpol = (1 << 20),
 		Has_SkeletalTrackInterpol = (1 << 21),
 		Has_TransformUVs = (1 << 22),
-        Has_LegacyLightingOpaque = (1 << 23),
-        Has_AlphaMasks = (1 << 24),
+		Has_LegacyLightingOpaque = (1 << 23),
+		Has_AlphaMasks = (1 << 24),
 		Has_UVDistortions = (1 << 25),
 		Has_Dissolve = (1 << 26),
 	};
@@ -147,48 +147,48 @@ namespace PopcornFX
 		}
 	}
 
-    [Serializable]
-    public class SBatchAlphaMasksFeatureDesc
-    {
-        public bool m_Activated = false;
+	[Serializable]
+	public class SBatchAlphaMasksFeatureDesc
+	{
+		public bool m_Activated = false;
 
-        public string m_AlphaMasks1Map;
-        public string m_AlphaMasks2Map;
-        public float m_AlphaMask1Intensity;
-        public float m_AlphaMask2Intensity;
-        public float m_AlphaMask1Weight;
-        public float m_AlphaMask2Weight;
-        public Vector2 m_AlphaMask1Scale;
-        public Vector2 m_AlphaMask2Scale;
-        public float m_AlphaMask1RotationSpeed;
-        public float m_AlphaMask2RotationSpeed;
-        public Vector2 m_AlphaMask1TranslationSpeed;
-        public Vector2 m_AlphaMask2TranslationSpeed;
+		public string m_AlphaMasks1Map;
+		public string m_AlphaMasks2Map;
+		public float m_AlphaMask1Intensity;
+		public float m_AlphaMask2Intensity;
+		public float m_AlphaMask1Weight;
+		public float m_AlphaMask2Weight;
+		public Vector2 m_AlphaMask1Scale;
+		public Vector2 m_AlphaMask2Scale;
+		public float m_AlphaMask1RotationSpeed;
+		public float m_AlphaMask2RotationSpeed;
+		public Vector2 m_AlphaMask1TranslationSpeed;
+		public Vector2 m_AlphaMask2TranslationSpeed;
 
-        public SBatchAlphaMasksFeatureDesc(SRenderingFeatureAlphaMasksDesc desc)
-        {
-            if (desc.m_AlphaMasks1Map != IntPtr.Zero)
-                m_AlphaMasks1Map = Marshal.PtrToStringAnsi(desc.m_AlphaMasks1Map);
-            if (desc.m_AlphaMasks2Map != IntPtr.Zero)
-                m_AlphaMasks2Map = Marshal.PtrToStringAnsi(desc.m_AlphaMasks2Map);
+		public SBatchAlphaMasksFeatureDesc(SRenderingFeatureAlphaMasksDesc desc)
+		{
+			if (desc.m_AlphaMasks1Map != IntPtr.Zero)
+				m_AlphaMasks1Map = Marshal.PtrToStringAnsi(desc.m_AlphaMasks1Map);
+			if (desc.m_AlphaMasks2Map != IntPtr.Zero)
+				m_AlphaMasks2Map = Marshal.PtrToStringAnsi(desc.m_AlphaMasks2Map);
 
-            m_AlphaMask1Intensity = desc.m_AlphaMask1Intensity;
-            m_AlphaMask2Intensity = desc.m_AlphaMask2Intensity;
-            m_AlphaMask1Weight = desc.m_AlphaMask1Weight;
-            m_AlphaMask2Weight = desc.m_AlphaMask2Weight;
-            m_AlphaMask1Scale = desc.m_AlphaMask1Scale;
-            m_AlphaMask2Scale = desc.m_AlphaMask2Scale;
-            m_AlphaMask1RotationSpeed = desc.m_AlphaMask1RotationSpeed;
-            m_AlphaMask2RotationSpeed = desc.m_AlphaMask2RotationSpeed;
-            m_AlphaMask1TranslationSpeed = desc.m_AlphaMask1TranslationSpeed;
-            m_AlphaMask2TranslationSpeed = desc.m_AlphaMask2TranslationSpeed;
-        }
+			m_AlphaMask1Intensity = desc.m_AlphaMask1Intensity;
+			m_AlphaMask2Intensity = desc.m_AlphaMask2Intensity;
+			m_AlphaMask1Weight = desc.m_AlphaMask1Weight;
+			m_AlphaMask2Weight = desc.m_AlphaMask2Weight;
+			m_AlphaMask1Scale = desc.m_AlphaMask1Scale;
+			m_AlphaMask2Scale = desc.m_AlphaMask2Scale;
+			m_AlphaMask1RotationSpeed = desc.m_AlphaMask1RotationSpeed;
+			m_AlphaMask2RotationSpeed = desc.m_AlphaMask2RotationSpeed;
+			m_AlphaMask1TranslationSpeed = desc.m_AlphaMask1TranslationSpeed;
+			m_AlphaMask2TranslationSpeed = desc.m_AlphaMask2TranslationSpeed;
+		}
 
-        internal string GetGeneratedShortName()
-        {
-            string name = "AlphaMasks_";
+		internal string GetGeneratedShortName()
+		{
+			string name = "AlphaMasks_";
 
-            name += (m_AlphaMasks1Map == null || m_AlphaMasks1Map.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaMasks1Map) + "_";
+			name += (m_AlphaMasks1Map == null || m_AlphaMasks1Map.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaMasks1Map) + "_";
 			name += String.Format("{0:0.##}", m_AlphaMask1Intensity);
 			name += String.Format("{0:0.##}", m_AlphaMask1Weight);
 			name += m_AlphaMask1Scale.ToString("F2");
@@ -202,15 +202,15 @@ namespace PopcornFX
 			name += String.Format("{0:0.##}", m_AlphaMask2RotationSpeed);
 			name += m_AlphaMask2TranslationSpeed.ToString("F2");
 			return name;
-        }
+		}
 
-        internal string GetGeneratedName()
-        {
-            string name = "[AlphaMasks:";
+		internal string GetGeneratedName()
+		{
+			string name = "[AlphaMasks:";
 
-                name += " ";
-                name += m_AlphaMasks1Map == null ? "none" : m_AlphaMasks1Map;
-                name += " ";
+				name += " ";
+				name += m_AlphaMasks1Map == null ? "none" : m_AlphaMasks1Map;
+				name += " ";
 				name += m_AlphaMask1Intensity;
 				name += " ";
 				name += m_AlphaMask1Weight;
@@ -235,9 +235,9 @@ namespace PopcornFX
 				name += m_AlphaMask2TranslationSpeed;
 
 			name += "]";
-            return name;
-        }
-    }
+			return name;
+		}
+	}
 
 	[Serializable]
 	public class SBatchUVDistortionsFeatureDesc
@@ -557,7 +557,7 @@ namespace PopcornFX
 		public ERendererType		m_Type;
 		public int					m_ShaderVariationFlags;
 		public EBlendMode			m_BlendMode;
-        public bool					m_IsLegacy;
+		public bool					m_IsLegacy;
 		public bool					m_RotateUVs;
 		public int					m_DrawOrder;
 		public string				m_DiffuseMap;
@@ -580,20 +580,20 @@ namespace PopcornFX
 		public Vector4				m_DiffuseColor;
 		public Vector3				m_EmissiveColor;
 
-        // VAT:
-        public SBatchVatFeatureDesc m_VatFeature = null;
+		// VAT:
+		public SBatchVatFeatureDesc m_VatFeature = null;
 		// Lit:
 		public SBatchLitFeatureDesc m_LitFeature = null;
 
 		// AnimatedMasked features
-        public SBatchAlphaMasksFeatureDesc m_AlphaMasksFeature = null;
+		public SBatchAlphaMasksFeatureDesc m_AlphaMasksFeature = null;
 		public SBatchUVDistortionsFeatureDesc m_UVDistortionsFeature = null;
 		public SBatchDissolveFeatureDesc m_DissolveFeature = null;
 
 		// Skeletal anim:
 		public SBatchSkeletalAnimFeatureDesc m_SkeletalAnimFeature = null;
 
-        public Texture2D m_AtlasSubRects = null;
+		public Texture2D m_AtlasSubRects = null;
 
 		//Internal
 		[SerializeField]
@@ -614,7 +614,7 @@ namespace PopcornFX
 			string emissiveRampStr = null;
 			string alphaRemapStr = null;
 
-            if (desc.m_DiffuseMap != IntPtr.Zero)
+			if (desc.m_DiffuseMap != IntPtr.Zero)
 				diffuseStr = Marshal.PtrToStringAnsi(desc.m_DiffuseMap);
 			if (desc.m_EmissiveMap != IntPtr.Zero)
 				emissiveStr = Marshal.PtrToStringAnsi(desc.m_EmissiveMap);
@@ -629,7 +629,7 @@ namespace PopcornFX
 			m_Type = type;
 			m_ShaderVariationFlags = desc.m_ShaderVariationFlags;
 			m_BlendMode = desc.m_BlendMode;
-            m_IsLegacy = desc.m_IsLegacy != 0 ? true : false;
+			m_IsLegacy = desc.m_IsLegacy != 0 ? true : false;
 			m_RotateUVs = desc.m_RotateTexture != 0 ? true : false;
 			m_DrawOrder = desc.m_DrawOrder;
 			m_DiffuseMap = diffuseStr;
@@ -637,8 +637,8 @@ namespace PopcornFX
 			m_DiffuseRampMap = diffuseRampStr;
 			m_EmissiveRampMap = emissiveRampStr;
 			m_AlphaRemap = alphaRemapStr;
-           
-            m_BillboardMode = desc.m_BillboardMode;
+			
+			m_BillboardMode = desc.m_BillboardMode;
 			m_InvSoftnessDistance = desc.m_InvSoftnessDistance;
 			m_AlphaClipThreshold = desc.m_AlphaClipThreshold;
 			m_TransformUVs_RGBOnly = desc.m_TransformUVs_RGBOnly != 0 ? true : false;
@@ -658,11 +658,11 @@ namespace PopcornFX
 				else
 					m_LitFeature = null;
 
-                SRenderingFeatureAlphaMasksDesc* animatedMaskedDesc = (SRenderingFeatureAlphaMasksDesc*)desc.m_AlphaMasks.ToPointer();
-                if (animatedMaskedDesc != null)
-                    m_AlphaMasksFeature = new SBatchAlphaMasksFeatureDesc(*animatedMaskedDesc);
-                else
-                    m_AlphaMasksFeature = null;
+				SRenderingFeatureAlphaMasksDesc* animatedMaskedDesc = (SRenderingFeatureAlphaMasksDesc*)desc.m_AlphaMasks.ToPointer();
+				if (animatedMaskedDesc != null)
+					m_AlphaMasksFeature = new SBatchAlphaMasksFeatureDesc(*animatedMaskedDesc);
+				else
+					m_AlphaMasksFeature = null;
 
 				SRenderingFeatureUVDistortionsDesc* uvDistortionsDesc = (SRenderingFeatureUVDistortionsDesc*)desc.m_UVDistortions.ToPointer();
 				if (uvDistortionsDesc != null)
@@ -819,19 +819,19 @@ namespace PopcornFX
 			m_EmissiveMap = emissiveStr;
 
 			m_DiffuseColor = desc.m_DiffuseColor; 
-            m_EmissiveColor = desc.m_EmissiveColor;
+			m_EmissiveColor = desc.m_EmissiveColor;
 
-            unsafe
-            {
-                // The atlas is null when the effect is imported at first
-                // This texture is only setup at runtime when the effect is preloaded
-                if (desc.m_TextureAtlasCount == 0 || desc.m_TextureAtlas == null)
-                {
-                    m_AtlasSubRects = new Texture2D(1, 1, TextureFormat.RGBAFloat, false, true);
-                    m_AtlasSubRects.SetPixel(0, 0, new Vector4(1, 1, 0, 0));
-                }
-                else
-                {
+			unsafe
+			{
+				// The atlas is null when the effect is imported at first
+				// This texture is only setup at runtime when the effect is preloaded
+				if (desc.m_TextureAtlasCount == 0 || desc.m_TextureAtlas == null)
+				{
+					m_AtlasSubRects = new Texture2D(1, 1, TextureFormat.RGBAFloat, false, true);
+					m_AtlasSubRects.SetPixel(0, 0, new Vector4(1, 1, 0, 0));
+				}
+				else
+				{
 					m_AtlasSubRects = new Texture2D(desc.m_TextureAtlasCount, 1, TextureFormat.RGBAFloat, false, true);
 
 					Vector4* subRects = (Vector4*)desc.m_TextureAtlas.ToPointer();
@@ -841,15 +841,15 @@ namespace PopcornFX
 						curCol.w = 1 - curCol.y - curCol.w; // Unity sampling is reversed in Y. 
 						m_AtlasSubRects.SetPixel(i, 0, curCol);
 					}
-                }
-                m_AtlasSubRects.Apply();
-            }
+				}
+				m_AtlasSubRects.Apply();
+			}
 			
-            m_UID = desc.m_UID;
+			m_UID = desc.m_UID;
 			m_GeneratedName = GenerateNameFromDescription();
-        }
+		}
 
-        public bool HasShaderVariationFlag(EShaderVariationFlags flag)
+		public bool HasShaderVariationFlag(EShaderVariationFlags flag)
 		{
 			return (m_ShaderVariationFlags & (int)flag) == (int)flag;
 		}
@@ -859,7 +859,7 @@ namespace PopcornFX
 		{
 			string finalName = "";
 
-            if ((materialFlags & (int)EShaderVariationFlags.Has_RibbonComplex) != 0)
+			if ((materialFlags & (int)EShaderVariationFlags.Has_RibbonComplex) != 0)
 				finalName += " RibbonComplex";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_TransformUVs) != 0)
 				finalName += " TransformUVs";
@@ -891,22 +891,22 @@ namespace PopcornFX
 				finalName += " SoftVAT";
 			if ((materialFlags & (int)EShaderVariationFlags.Has_RigidVAT) != 0)
 				finalName += " RigidVAT";
-            if ((materialFlags & (int)EShaderVariationFlags.Has_LightingLegacy) != 0)
-                finalName += " LightingLegacy";
-            if ((materialFlags & (int)EShaderVariationFlags.Has_Size2) != 0)
-                finalName += " Size2";
-            if ((materialFlags & (int)EShaderVariationFlags.Has_Emissive) != 0)
-                finalName += " Emissive";
-            if ((materialFlags & (int)EShaderVariationFlags.Has_EmissiveRamp) != 0)
-                finalName += " EmissiveRamp";
-            if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
-                finalName += " SkeletalAnim";
-            if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalInterpol) != 0)
-                finalName += " SkeletalInterpol";
-            if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalTrackInterpol) != 0)
-                finalName += " SkeletalTrackInterpol";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_LightingLegacy) != 0)
+				finalName += " LightingLegacy";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_Size2) != 0)
+				finalName += " Size2";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_Emissive) != 0)
+				finalName += " Emissive";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_EmissiveRamp) != 0)
+				finalName += " EmissiveRamp";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalAnim) != 0)
+				finalName += " SkeletalAnim";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalInterpol) != 0)
+				finalName += " SkeletalInterpol";
+			if ((materialFlags & (int)EShaderVariationFlags.Has_SkeletalTrackInterpol) != 0)
+				finalName += " SkeletalTrackInterpol";
 
-            return finalName.Length == 0 ? " MaterialBasic" : finalName;
+			return finalName.Length == 0 ? " MaterialBasic" : finalName;
 		}
 
 		public string BlendModeToString(EBlendMode blendMode)
@@ -939,12 +939,12 @@ namespace PopcornFX
 				finalName = "Mesh";
 			else if (m_Type == ERendererType.Triangle)
 				finalName = "Triangle";
-            else if (m_Type == ERendererType.Decal)
-                finalName = "Decal";
-            else
+			else if (m_Type == ERendererType.Decal)
+				finalName = "Decal";
+			else
 				finalName = "Unknown";
-            finalName += " ";
-            finalName += m_IsLegacy ? "Legacy" : "";
+			finalName += " ";
+			finalName += m_IsLegacy ? "Legacy" : "";
 			finalName += " ";
 			finalName += MaterialFlagsToString(m_ShaderVariationFlags);
 			finalName += " ";
@@ -958,11 +958,12 @@ namespace PopcornFX
 			finalName += " ";
 			finalName += m_EmissiveMap == null ? "(none)" : m_EmissiveMap;
 			finalName += " ";
-            finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "(none)" : m_LitFeature.GetGeneratedName();
+			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "(none)" : m_LitFeature.GetGeneratedName();
 			finalName += " ";
 			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "(none)" : m_VatFeature.GetGeneratedName();
 			finalName += " ";
-            finalName += m_AlphaMasksFeature.GetGeneratedName();
+			finalName += (m_AlphaMasksFeature == null || !m_AlphaMasksFeature.m_Activated) ? "(none)" : m_AlphaMasksFeature.GetGeneratedName();
+			finalName += " ";
 			finalName += (m_SkeletalAnimFeature == null || !m_SkeletalAnimFeature.m_Activated) ? "(none)" : m_SkeletalAnimFeature.GetGeneratedName();
 			if (m_Type != ERendererType.Mesh)
 			{
@@ -1061,16 +1062,16 @@ namespace PopcornFX
 			else
 				finalName = "U";
 			finalName += "_";
-            finalName += m_IsLegacy ? "L" : "";
-            finalName += MaterialFlagsToShortString(m_ShaderVariationFlags);
+			finalName += m_IsLegacy ? "L" : "";
+			finalName += MaterialFlagsToShortString(m_ShaderVariationFlags);
 			finalName += BlendModeToShortString(m_BlendMode);
 			finalName += m_RotateUVs ? "RUV_" : "UV_";
 			finalName += (m_DiffuseMap == null || m_DiffuseMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_DiffuseMap) + "_";
 			finalName += (m_EmissiveMap == null || m_EmissiveMap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_EmissiveMap) + "_";
-            finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "U_" : m_LitFeature.GetGeneratedShortName();
+			finalName += (m_LitFeature == null || !m_LitFeature.m_Activated) ? "U_" : m_LitFeature.GetGeneratedShortName();
 			finalName += (m_VatFeature == null || !m_VatFeature.m_Activated) ? "U_" : m_VatFeature.GetGeneratedShortName();
 			finalName += (m_SkeletalAnimFeature == null || !m_SkeletalAnimFeature.m_Activated) ? "U_" : m_SkeletalAnimFeature.GetGeneratedShortName();
-            finalName += (m_AlphaMasksFeature == null || !m_AlphaMasksFeature.m_Activated) ? "U_" : m_AlphaMasksFeature.GetGeneratedShortName();
+			finalName += (m_AlphaMasksFeature == null || !m_AlphaMasksFeature.m_Activated) ? "U_" : m_AlphaMasksFeature.GetGeneratedShortName();
 			if (m_Type != ERendererType.Mesh)
 			{
 				finalName += (m_AlphaRemap == null || m_AlphaRemap.Length == 0) ? "U_" : Path.GetFileNameWithoutExtension(m_AlphaRemap) + "_";

@@ -71,6 +71,7 @@ void	*CDX11Data::BeginModifyNativeBuffer(SBufferHandles &bufferHandle, bool isId
 	GET_IMMEDIATE_CONTEXT(device, immediateCtx, return null);
 	D3D11_BUFFER_DESC	deviceLocalDesc = {};
 	deviceLocalBuff->GetDesc(&deviceLocalDesc);
+	PK_ASSERT(deviceLocalDesc.ByteWidth == fullSize);
 	if ((deviceLocalDesc.CPUAccessFlags & D3D11_CPU_ACCESS_WRITE) != 0)
 	{
 		immediateCtx->Map(deviceLocalBuff, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);

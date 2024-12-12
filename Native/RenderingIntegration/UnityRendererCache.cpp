@@ -200,7 +200,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 	const SRendererFeaturePropertyValue *dissolveSoftness = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve_DissolveSoftness());
 
 	m_Flags.m_ShaderVariationFlags = 0;
-	m_Flags.m_IsLegacy = renderer.m_Declaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
+	m_Flags.m_IsLegacy = renderer.m_Declaration.m_MaterialPath.Contains("Library/PopcornFXCore/Materials/Legacy");
 
 	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty())
 		m_Flags.m_ShaderVariationFlags |= ShaderVariationFlags::Has_DiffuseMap;
@@ -524,7 +524,7 @@ bool	CParticleMaterialDescDecal::InitFromRenderer(const CRendererDataDecal &rend
 	const SRendererFeaturePropertyValue *atlas									= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas());
 	const SRendererFeaturePropertyValue *atlasBlending							= renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Atlas_Blending());
 
-	m_Flags.m_IsLegacy = renderer.m_RendererDeclaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
+	m_Flags.m_IsLegacy = renderer.m_RendererDeclaration.m_MaterialPath.Contains("Library/PopcornFXCore/Materials/Legacy");
 
 	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty() && legacyDiffuseColor.Valid() && diffuseColor.Valid())
 	{
@@ -754,7 +754,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 	const SRendererFeaturePropertyValue *dissolveMap = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve_DissolveMap());
 	const SRendererFeaturePropertyValue *dissolveSoftness = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_Dissolve_DissolveSoftness());
 
-	m_Flags.m_IsLegacy = renderer.m_RendererDeclaration.m_MaterialPath.StartsWith("Library/PopcornFXCore/Materials/Legacy");
+	m_Flags.m_IsLegacy = renderer.m_RendererDeclaration.m_MaterialPath.Contains("Library/PopcornFXCore/Materials/Legacy");
 	m_Flags.m_ShaderVariationFlags = 0;
 
 	if (diffuse != null && diffuse->ValueB() && diffuseMap != null && !diffuseMap->ValuePath().Empty())
@@ -1146,6 +1146,7 @@ void	CUnityRendererCache::UpdateThread_BuildBillboardingFlags(const PRendererDat
 	(void)rendererData;
 	m_Flags.m_NeedSort = m_MaterialDescBillboard.m_Flags.NeedSort();
 	m_Flags.m_HasUV =	m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_DiffuseMap) ||
+						m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_Emissive) ||
 						m_MaterialDescBillboard.m_Flags.HasShaderVariationFlags(ShaderVariationFlags::Has_DistortionMap);
 	m_Flags.m_FlipU = m_MaterialDescBillboard.m_Flags.HasUVGenerationFlags(UVGeneration::FlipU);
 	m_Flags.m_FlipV = m_MaterialDescBillboard.m_Flags.HasUVGenerationFlags(UVGeneration::FlipV);
@@ -1252,10 +1253,6 @@ bool	CUnityRendererCache::GetRendererInfo(SPopcornRendererDesc &desc)
 	desc.m_AlphaRemap = m_MaterialDescBillboard.m_AlphaMap.ToStringData();
 	desc.m_DiffuseRampMap = m_MaterialDescBillboard.m_DiffuseRampMap.ToStringData();
 	desc.m_EmissiveRampMap = m_MaterialDescBillboard.m_EmissiveRampMap.ToStringData();
-
-
-	
-
 
 	if (m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaMasks)
 	{
@@ -1512,7 +1509,7 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 	return true;
 }
 
-void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
+void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding, bool isEmissive3)
 {
 	for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
 	{
@@ -1583,7 +1580,7 @@ void		CUnityRendererCache::CreateUnityMesh(u32 idx, bool gpuBillboarding)
 			}
 			else
 			{
-				m_UnityMeshInfo.m_VertexStride = FillOffsetTableAndGetVertexBufferStride(m_UnityMeshInfo.m_SemanticOffsets, m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags);
+				m_UnityMeshInfo.m_VertexStride = FillOffsetTableAndGetVertexBufferStride(m_UnityMeshInfo.m_SemanticOffsets, m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags, isEmissive3);
 			}
 			m_HasCustomMat = hasCustomMat == ManagedBool_True ? true : false;
 

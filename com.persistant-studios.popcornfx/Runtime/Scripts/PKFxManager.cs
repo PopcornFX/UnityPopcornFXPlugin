@@ -123,6 +123,18 @@ namespace PopcornFX
 			return logRemaining;
 		}
 
+		public static void StopAllEffects()
+		{
+			Dictionary<int, PKFxEmitter> fxs = new Dictionary<int, PKFxEmitter>(PKFxEmitter.g_PlayingEffectsToUpdate);
+			foreach (var fx in PKFxEmitter.g_PlayingEffectsToUpdate)
+			{
+				if (fx.Value.Alive)
+				{
+					fx.Value.KillEffect();
+				}
+			}
+		}
+
 		public static void ResetAllEffects()
 		{
 			PKFxManagerImpl.Reset();

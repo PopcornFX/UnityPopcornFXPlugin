@@ -170,6 +170,7 @@ public:
 	CStringId					m_DiffuseRampMap;
 	CStringId					m_EmissiveMap;
 	CStringId					m_EmissiveRampMap;
+	bool						m_IsEmissive3 = false;
 
 	// Animated Masked Feature
 	CStringId					m_AlphaMasks1Map;
@@ -437,7 +438,7 @@ public:
 	bool								GetRendererInfo(SDecalRendererDesc &desc);
 	bool								GetRendererInfo(SMeshRendererDesc &desc);
 
-	void								CreateUnityMesh(u32 idx, bool gpuBillboarding);
+	void								CreateUnityMesh(u32 idx, bool gpuBillboarding, bool isEmissive3);
 
 	virtual void						UpdateThread_BuildBillboardingFlags(const PRendererDataBase &renderer) override;
 

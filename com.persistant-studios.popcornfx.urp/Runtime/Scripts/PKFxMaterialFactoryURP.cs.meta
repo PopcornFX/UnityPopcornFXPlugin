@@ -26,7 +26,7 @@ MonoImporter:
       type: 2}
   - m_OpaqueMeshLitSkinnedLegacy: {fileID: 11400000, guid: df4de29e90149464680240164aaa0631,
       type: 2}
-  - m_OpaqueParticleUnlitLegacy: {fileID: 11400000, guid: 9340f2abf2503194a93008d20b9f2e85,
+  - m_OpaqueParticleUnlitLegacy: {fileID: 11400000, guid: 1a2e5419c582c37468963b8ebd96ca6b,
       type: 2}
   - m_OpaqueParticleUnlitDefault: {fileID: 11400000, guid: 0abdff83048445444be109d3003e8eb4,
       type: 2}
@@ -36,11 +36,14 @@ MonoImporter:
       type: 2}
   - m_AdditiveParticleUnlitLegacy: {fileID: 11400000, guid: a1ac7f34f70e96a428085c727600babf,
       type: 2}
-  - m_OpaqueCorrectDeformationUnlitLegacy: {instanceID: 0}
+  - m_OpaqueCorrectDeformationUnlitLegacy: {fileID: 11400000, guid: 96f0bc8a857018242a3d2814efb75b7e,
+      type: 2}
   - m_OpaqueCorrectDeformationUnlitDefault: {instanceID: 0}
-  - m_TransparentCorrectDeformationUnlitLegacy: {instanceID: 0}
+  - m_TransparentCorrectDeformationUnlitLegacy: {fileID: 11400000, guid: 0f08a8378328a1d4dbffd59dd1e691fa,
+      type: 2}
   - m_TransparentCorrectDeformationUnlitDefault: {instanceID: 0}
-  - m_AdditiveCorrectDeformationUnlitLegacy: {instanceID: 0}
+  - m_AdditiveCorrectDeformationUnlitLegacy: {fileID: 11400000, guid: 0f08a8378328a1d4dbffd59dd1e691fa,
+      type: 2}
   - m_OpaqueParticleLitLegacy: {fileID: 11400000, guid: cec41497ddb65b2428e85a7807339894,
       type: 2}
   - m_OpaqueParticleLitDefault: {fileID: 11400000, guid: 5919ff6dcf2589b47973c9268414734b,
@@ -51,11 +54,14 @@ MonoImporter:
       type: 2}
   - m_AdditiveParticleLitLegacy: {fileID: 11400000, guid: c73ded59bffe89e4083878dab4e38e0b,
       type: 2}
-  - m_OpaqueCorrectDeformationLitLegacy: {instanceID: 0}
+  - m_OpaqueCorrectDeformationLitLegacy: {fileID: 11400000, guid: bbc3fd6dd37044d42a2b36ae6228a425,
+      type: 2}
   - m_OpaqueCorrectDeformationLitDefault: {instanceID: 0}
-  - m_TransparentCorrectDeformationLitLegacy: {instanceID: 0}
+  - m_TransparentCorrectDeformationLitLegacy: {fileID: 11400000, guid: 6e502a4a1e21954488d69e9c225bdbae,
+      type: 2}
   - m_TransparentCorrectDeformationLitDefault: {instanceID: 0}
-  - m_AdditiveCorrectDeformationLitLegacy: {instanceID: 0}
+  - m_AdditiveCorrectDeformationLitLegacy: {fileID: 11400000, guid: 6e502a4a1e21954488d69e9c225bdbae,
+      type: 2}
   - m_AlphaBlendDecal: {fileID: 11400000, guid: 62a2ab3807387174c82829a46ff0bbe2,
       type: 2}
   - m_CPUParticleLegacy: {fileID: 11400000, guid: 42c4cd98ec9966142ba5118051d18f5e,

@@ -134,11 +134,12 @@ SFlagsToUseSemantic		flagsToUseSemantic[__Semantic_Count] =
 	{ 0U, ShaderVariationFlags::Has_Color },																							// Semantic_Color0
 	{ 0U, ShaderVariationFlags::Has_CorrectDeformation },																				// Semantic_UvFactors
 	{ 0U, ShaderVariationFlags::Has_CorrectDeformation },																				// Semantic_UvScaleAndOffset
-	{ ShaderVariationFlags::Has_CorrectDeformation, ShaderVariationFlags::Has_DiffuseMap | ShaderVariationFlags::Has_DistortionMap },	// Semantic_Uv0
+	{ ShaderVariationFlags::Has_CorrectDeformation, ShaderVariationFlags::Has_DiffuseMap | ShaderVariationFlags::Has_DistortionMap | ShaderVariationFlags::Has_Emissive },	// Semantic_Uv0
 	{ 0U, ShaderVariationFlags::Has_AnimBlend },																						// Semantic_Uv1
 	{ 0U, ShaderVariationFlags::Has_AnimBlend | ShaderVariationFlags::Has_TransformUVs },												// Semantic_AtlasId
 	{ 0U, ShaderVariationFlags::Has_AlphaRemap },																						// Semantic_AlphaCursor
-	{ 0U, ShaderVariationFlags::Has_Emissive },																							// Semantic_EmissiveColor
+	{ 0U, ShaderVariationFlags::Has_Emissive },																							// Semantic_EmissiveColor3
+	{ 0U, ShaderVariationFlags::Has_Emissive },																							// Semantic_EmissiveColor4
 	{ 0U, ShaderVariationFlags::Has_TransformUVs },																						// Semantic_TransformUvsRotate
 	{ 0U, ShaderVariationFlags::Has_TransformUVs },																						// Semantic_TransformUvsScaleAndOffset
 	{ ShaderVariationFlags::Has_TransformUVs, ShaderVariationFlags::Has_AlphaMasks },													// Semantic_AlphaMasksCursors
@@ -158,7 +159,8 @@ u32		semanticSize[__Semantic_Count] =
 	2 * sizeof(float),									// Semantic_Uv1
 	1 * sizeof(float),									// Semantic_AtlasId
 	1 * sizeof(float),									// Semantic_AlphaCursor
-	4 * sizeof(float),									// Semantic_EmissiveColor
+	3 * sizeof(float),									// Semantic_EmissiveColor3
+	4 * sizeof(float),									// Semantic_EmissiveColor4
 	1 * sizeof(float),									// Semantic_TransformUvsRotate
 	4 * sizeof(float),									// Semantic_TransformUvsScaleAndOffset
 	2 * sizeof(float),									// Semantic_AlphaMasksCursors
@@ -235,7 +237,7 @@ IRenderAPIData *IRenderAPIData::GetRenderAPISpecificData(UnityGfxRenderer device
 
 //----------------------------------------------------------------------------
 
-u32	FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u32 shaderVariationFlags)
+u32	FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u32 shaderVariationFlags, bool isEmissive3 /*= false*/)
 {
 	u32	vertexOffset = 0;
 
@@ -309,8 +311,16 @@ u32	FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u
 	}
 	if ((shaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0)
 	{
-		offsetTable[Semantic_EmissiveColor] = vertexOffset;
-		vertexOffset += semanticSize[Semantic_EmissiveColor];
+		if (isEmissive3)
+		{
+			offsetTable[Semantic_EmissiveColor3] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_EmissiveColor3] + sizeof(float);
+		}
+		else
+		{
+			offsetTable[Semantic_EmissiveColor4] = vertexOffset;
+			vertexOffset += semanticSize[Semantic_EmissiveColor4];
+		}
 	}
 	if ((shaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
 	{

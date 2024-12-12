@@ -91,7 +91,8 @@ enum	EVertexSemantic
 	Semantic_AtlasId,
 
 	Semantic_AlphaCursor,
-	Semantic_EmissiveColor,
+	Semantic_EmissiveColor3,
+	Semantic_EmissiveColor4,
 
 	Semantic_TransformUVsRotate,
 	Semantic_TransformUVsScaleAndOffset,
@@ -104,7 +105,7 @@ enum	EVertexSemantic
 	__Semantic_Count
 };
 
-u32		FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u32 shaderVariationFlags);
+u32		FillOffsetTableAndGetVertexBufferStride(u32 offsetTable[__Semantic_Count], u32 shaderVariationFlags, bool isEmissive3 = false);
 u32		GetGeomBillboardVertexBufferStride(EBillboardMode bbMode, u32 shaderVariationFlags);
 
 #define SIMDFY	0
@@ -173,7 +174,7 @@ PK_INLINE void	FillColors(void * const stream, volatile void * const dstPtr, con
 
 PK_INLINE void	FillEmissiveColors(void *const stream, volatile void *const dstPtr, const u32(&offsetTable)[__Semantic_Count])
 {
-	volatile void *dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_EmissiveColor]);
+	volatile void *dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_EmissiveColor4]);
 #if	(SIMDFY != 0)
 	const SIMD::Float4 norm_s = SIMD::Float4::LoadAligned16(stream);
 
@@ -182,6 +183,21 @@ PK_INLINE void	FillEmissiveColors(void *const stream, volatile void *const dstPt
 	*(CFloat4 *)dst = *(const CFloat4 *)stream;
 #endif
 }
+
+//-------------------------------------------------------------------------------------
+
+PK_INLINE void	FillEmissiveColors3(void *const stream, volatile void *const dstPtr, const u32(&offsetTable)[__Semantic_Count])
+{
+	volatile void *dst = Mem::AdvanceRawPointer(dstPtr, offsetTable[Semantic_EmissiveColor3]);
+#if	(SIMDFY != 0)
+	const SIMD::Float4 norm_s = SIMD::Float4::LoadAligned16(stream);
+
+	norm_s.StoreFloat3(dst);
+#else
+	*(CFloat3 *)dst = *(const CFloat3 *)stream;
+#endif
+}
+
 
 //-------------------------------------------------------------------------------------
 

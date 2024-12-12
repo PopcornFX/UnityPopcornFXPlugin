@@ -119,17 +119,19 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitDefault);
 			if (m_OpaqueMeshLitSkinnedLegacy != null)
 				m_RenderFeatureBindings.Add(m_OpaqueMeshLitSkinnedLegacy);
-			// Particles Unlit:
-			if (m_OpaqueParticleUnlitLegacy != null)
-				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitLegacy);
-			if (m_OpaqueParticleUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
-			if (m_TransparentParticleUnlitLegacy != null)
-				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitLegacy);
-			if (m_TransparentParticleUnlitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
-			if (m_AdditiveParticleUnlitLegacy != null)
-				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitLegacy);
+			//Ribbons
+			// Lit:
+			if (m_OpaqueCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitLegacy);
+			if (m_OpaqueCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitDefault);
+			if (m_TransparentCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitLegacy);
+			if (m_TransparentCorrectDeformationLitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitDefault);
+			if (m_AdditiveCorrectDeformationLitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitLegacy);
+			// Unlit:
 			if (m_OpaqueCorrectDeformationUnlitLegacy != null)
 				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationUnlitLegacy);
 			if (m_OpaqueCorrectDeformationUnlitDefault != null)
@@ -140,6 +142,8 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationUnlitDefault);
 			if (m_AdditiveCorrectDeformationUnlitLegacy != null)
 				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationUnlitLegacy);
+			
+
 			// Particles Lit:
 			if (m_OpaqueParticleLitLegacy != null)
 				m_RenderFeatureBindings.Add(m_OpaqueParticleLitLegacy);
@@ -151,16 +155,18 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_TransparentParticleLitDefault);
 			if (m_AdditiveParticleLitLegacy != null)
 				m_RenderFeatureBindings.Add(m_AdditiveParticleLitLegacy);
-			if (m_OpaqueCorrectDeformationLitLegacy != null)
-				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitLegacy);
-			if (m_OpaqueCorrectDeformationLitDefault != null)
-				m_RenderFeatureBindings.Add(m_OpaqueCorrectDeformationLitDefault);
-			if (m_TransparentCorrectDeformationLitLegacy != null)
-				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitLegacy);
-			if (m_TransparentCorrectDeformationLitDefault != null)
-				m_RenderFeatureBindings.Add(m_TransparentCorrectDeformationLitDefault);
-			if (m_AdditiveCorrectDeformationLitLegacy != null)
-				m_RenderFeatureBindings.Add(m_AdditiveCorrectDeformationLitLegacy);
+			// Particles Unlit:
+			if (m_OpaqueParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitLegacy);
+			if (m_OpaqueParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_OpaqueParticleUnlitDefault);
+			if (m_TransparentParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitLegacy);
+			if (m_TransparentParticleUnlitDefault != null)
+				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
+			if (m_AdditiveParticleUnlitLegacy != null)
+				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitLegacy);
+
 			if (m_AlphaBlendDecal != null)
 				m_RenderFeatureBindings.Add(m_AlphaBlendDecal);
 #elif UNITY_2020_3_OR_NEWER

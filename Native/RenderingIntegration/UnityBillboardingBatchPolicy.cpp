@@ -201,6 +201,15 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 					if (PK_VERIFY(bbRequest != null))
 						m_AtlasList = bbRequest->m_Atlas;
 				}
+				for (u32 i = 0; i < allocBuffers.m_ToGenerate.m_AdditionalGeneratedInputs.Count(); ++i)
+				{
+					const SRendererFeatureFieldDefinition	&addInput = allocBuffers.m_ToGenerate.m_AdditionalGeneratedInputs[i];
+					if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float4 || addInput.m_Type == BaseType_Float3))
+					{
+						if (addInput.m_Type == BaseType_Float3)
+							m_IsEmissive3 = true;
+					}
+				}
 			}
 		}
 	}
@@ -1136,6 +1145,8 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float4 || addInput.m_Type == BaseType_Float3))
 		{
+			if (addInput.m_Type == BaseType_Float3)
+				m_IsEmissive3 = true;
 			perMeshDataSize += sizeof(CFloat4);
 			hasEmissiveColor = true;
 		}
@@ -1218,7 +1229,6 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			perMeshDataSize += sizeof(float);
 			m_HasDissolve = true;
 		}
-			
 	}
 
 	m_UseSkeletalAnimData = (skeletalAnimMask & 0x3) == 0x3;
@@ -1437,8 +1447,10 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 			m_ParticleBuffers.m_Colors.ResizeIFN(m_VertexCount);
 		if (_FindAdditionalInput(BasicRendererProperties::SID_Atlas_TextureID(), BaseType_Float, genInputs))
 			m_ParticleBuffers.m_AtlasId.ResizeIFN(m_VertexCount);
-		if (_FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float4, genInputs) || _FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float3, genInputs))
-			m_ParticleBuffers.m_EmissiveColors.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float4, genInputs))
+			m_ParticleBuffers.m_EmissiveColors4.ResizeIFN(m_VertexCount);
+		if (_FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float3, genInputs))
+			m_ParticleBuffers.m_EmissiveColors3.ResizeIFN(m_VertexCount);
 		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_Cursor(), BaseType_Float, genInputs))
 			m_ParticleBuffers.m_AlphaCursor.ResizeIFN(m_VertexCount);
 
@@ -1561,7 +1573,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_AtlasId.m_Ptr;
 			field.m_Storage.m_Stride = sizeof(float);
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor() && (addInput.m_Type == BaseType_Float3 || addInput.m_Type == BaseType_Float4))
+		else if (addInput.m_Name == BasicRendererProperties::SID_Emissive_EmissiveColor())
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1569,8 +1581,16 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 			field.m_AdditionalInputIndex = i;
 
 			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat4);
+			if (addInput.m_Type == BaseType_Float3)
+			{
+				field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors3.m_Ptr;
+				field.m_Storage.m_Stride = sizeof(CFloat3);
+			}
+			else if (addInput.m_Type == BaseType_Float4)
+			{
+				field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors4.m_Ptr;
+				field.m_Storage.m_Stride = sizeof(CFloat4);
+			}
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -1912,8 +1932,16 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 			Drawers::SCopyFieldDesc& field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
 			field.m_AdditionalInputIndex = i;
 			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8*)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat4);
+			if (addInput.m_Type == BaseType_Float3)
+			{
+				field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors3.m_Ptr;
+				field.m_Storage.m_Stride = sizeof(CFloat3);
+			}
+			else if (addInput.m_Type == BaseType_Float4)
+			{
+				field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors4.m_Ptr;
+				field.m_Storage.m_Stride = sizeof(CFloat4);
+			}
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -2287,8 +2315,16 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 			Drawers::SCopyFieldDesc &field = m_ParticleBuffers.m_AdditionalFieldsBuffers.Last();
 			field.m_AdditionalInputIndex = i;
 			field.m_Storage.m_Count = m_VertexCount;
-			field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors.m_Ptr;
-			field.m_Storage.m_Stride = sizeof(CFloat4);
+			if (addInput.m_Type == BaseType_Float3)
+			{
+				field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors3.m_Ptr;
+				field.m_Storage.m_Stride = sizeof(CFloat3);
+			}
+			else if (addInput.m_Type == BaseType_Float4)
+			{
+				field.m_Storage.m_RawDataPtr = (u8 *)m_ParticleBuffers.m_EmissiveColors4.m_Ptr;
+				field.m_Storage.m_Stride = sizeof(CFloat4);
+			}
 		}
 		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
 		{
@@ -2410,6 +2446,7 @@ bool	CUnityBillboardingBatchPolicy::_PrepareCopySOA2AOS(const SUnityRenderContex
 	{
 		m_Exec_SAO2AOS[idx].m_IdxView = idx;
 		m_Exec_SAO2AOS[idx].m_ShaderVariationFlags = m_MaterialDescBillboard.m_Flags.m_ShaderVariationFlags;
+		m_Exec_SAO2AOS[idx].m_IsEmissive3 = m_IsEmissive3;
 		m_Exec_SAO2AOS[idx].m_ParticleBuffers.Clear();
 		m_Exec_SAO2AOS[idx].m_ParticleBuffers.FromParticleBuffers(m_ParticleBuffers, idx);
 		m_Exec_SAO2AOS[idx].m_SemanticOffsets = &m_UnityMeshInfo.m_SemanticOffsets;
@@ -2488,13 +2525,16 @@ void	CUnityBillboardingBatchPolicy::CBillboard_Exec_SOA_OAS::_CopyData(u32 verte
 			{
 				FillUV0(&(m_ParticleBuffers.m_TexCoords0[vertexID]), bfPtr, *m_SemanticOffsets);
 				if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_AlphaRemap) != 0)
-						FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with UV0
+					FillAlphaCursor(&(m_ParticleBuffers.m_AlphaCursor[vertexID]), bfPtr, *m_SemanticOffsets); // Packed with UV0
 			}
 		}
 
 		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_Emissive) != 0)
 		{
-			FillEmissiveColors(&(m_ParticleBuffers.m_EmissiveColors[vertexID]), bfPtr, *m_SemanticOffsets);
+			if (m_IsEmissive3)
+				FillEmissiveColors3(&(m_ParticleBuffers.m_EmissiveColors3[vertexID]), bfPtr, *m_SemanticOffsets);
+			else
+				FillEmissiveColors(&(m_ParticleBuffers.m_EmissiveColors4[vertexID]), bfPtr, *m_SemanticOffsets);
 		}
 		if ((m_ShaderVariationFlags & ShaderVariationFlags::Has_TransformUVs) != 0)
 		{

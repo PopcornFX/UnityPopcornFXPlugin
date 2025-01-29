@@ -197,7 +197,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -226,7 +226,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -254,7 +254,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -282,7 +282,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -317,7 +317,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -351,7 +351,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -385,7 +385,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -420,7 +420,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -454,7 +454,7 @@
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -481,6 +481,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_1.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_2.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_3.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_4.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12compatibility.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12video.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_barriers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_check_feature_support.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_core.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_default.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_pipeline_state_stream.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_property_format_table.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_render_pass.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_resource_helpers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_root_signature.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_state_object.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcapi.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcerrors.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcisense.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Font.h" />

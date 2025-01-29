@@ -64,6 +64,15 @@
     <Filter Include="Sources\render_features">
       <UniqueIdentifier>{56DFCBB0-C216-1448-CB20-786B37D73A41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_External">
+      <UniqueIdentifier>{07CD4F05-7337-047C-BC75-B521281FE2D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX">
+      <UniqueIdentifier>{B2545DA7-9EB7-EC4B-473D-2502337FB8CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX\Headers">
+      <UniqueIdentifier>{5DF51B81-4984-A54A-F2A2-B945DE10B6F0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="_Natvis">
       <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
     </Filter>
@@ -329,6 +338,108 @@
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\src\precompiled\rh_precompiled.h">
       <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_1.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_2.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_3.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_4.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12compatibility.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12video.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_barriers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_check_feature_support.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_core.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_default.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_pipeline_state_stream.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_property_format_table.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_render_pass.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_resource_helpers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_root_signature.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_state_object.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcapi.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcerrors.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcisense.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h">
+      <Filter>_External\DX\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -39,6 +39,7 @@ namespace	PKFX
 
 		EPlugin_MeshCodecFBX			= 1 << 16,
 		EPlugin_MeshCodecGranny			= 1 << 17,
+		EPlugin_MeshCodecUSD			= 1 << 18,
 
 		EPlugin_CompilerBackendVM		= 1 << 20,
 		EPlugin_CompilerBackendISPC		= 1 << 21,

@@ -398,9 +398,9 @@ namespace PopcornFX
 #endif
 		//----------------------------------------------------------------------------
 
-		private const string m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.20.6 for " + m_UnityVersion;
-		public static string m_CurrentVersionString = "";
+		private const string	m_UnityVersion = "Unity 2019.4 and up";
+		public const string		m_PluginVersion = "2.21.0 for " + m_UnityVersion;
+		public static string	m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
 		public static string	m_EditorCameraLayer = "PopcornFX_Editor";

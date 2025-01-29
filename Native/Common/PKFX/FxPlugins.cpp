@@ -24,6 +24,7 @@
 //#define	USE_IMAGE_PLUGIN_PVR
 //#define	USE_FBXIMPORTER
 //#define	USE_GRANNYIMPORTER
+//#define	USE_USDIMPORTER
 
 #if !defined(PK_COMPILER_BUILD_COMPILER_D3D) || \
 	!defined(PK_COMPILER_BUILD_COMPILER_UNKNOWN2)
@@ -91,6 +92,9 @@
 #	endif
 #	if defined(USE_GRANNYIMPORTER)
 		PK_PLUGIN_DECLARE(CMeshCodecGranny);
+#	endif
+#	if defined(USE_USDIMPORTER)
+		PK_PLUGIN_DECLARE(CMeshCodecUSD);
 #	endif
 
 #	if defined(PK_DEBUG)
@@ -259,6 +263,15 @@ namespace	PKFX
 			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
 		}
 #	endif	// defined(USE_GRANNYIMPORTER)
+
+#	if	defined(USE_USDIMPORTER)
+		if (selected & EPlugin_MeshCodecUSD)
+		{
+			const char		*codecPath = "Plugins/MeshCodecUSD" PK_PLUGIN_POSTFIX_BUILD PK_PLUGIN_POSTFIX_EXT;
+			IPluginModule	*codec = StartupPlugin_CMeshCodecUSD();
+			success &= (codec != null && CPluginManager::PluginRegister(codec, true, codecPath));
+		}
+#	endif	// defined(USE_USDIMPORTER)
 #endif
 
 		g_LoadedPlugins = selected;
@@ -406,6 +419,15 @@ namespace	PKFX
 			ShutdownPlugin_CMeshCodecGranny();
 		}
 #	endif	// defined(USE_GRANNYIMPORTER)
+
+#	if	defined(USE_USDIMPORTER)
+		if (g_LoadedPlugins & EPlugin_MeshCodecUSD)
+		{
+			IPluginModule	*codec = GetPlugin_CMeshCodecUSD();
+			(codec != null && CPluginManager::PluginRelease(codec));
+			ShutdownPlugin_CMeshCodecUSD();
+		}
+#	endif	// defined(USE_USDIMPORTER)
 #endif
 
 		g_LoadedPlugins = 0;

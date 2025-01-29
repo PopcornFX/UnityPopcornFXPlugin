@@ -113,6 +113,7 @@ namespace
 	static const char* kAndroid = "android";
 
 	static const char* kEditor = "editor";
+	static const char* kEngineTag = "unity";
 
 	//----------------------------------------------------------------------------
 
@@ -131,6 +132,8 @@ namespace
 	{
 		// Keep this an array, allows to do some compile time checks if the list mismatches PopcornFX supported tags
 		TStaticCountedArray<PopcornFX::CString, 5>	buildTags;
+
+		PK_VERIFY(buildTags.PushBack(kEngineTag).Valid());
 
 		if (platform == "Editor") // Pre-cooked
 		{

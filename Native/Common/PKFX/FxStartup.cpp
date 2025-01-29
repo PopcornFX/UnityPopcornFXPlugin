@@ -39,6 +39,10 @@
 #include <pk_kernel/include/kr_thread_pool_default.h>
 #include <pk_version_base.h>
 
+#if defined(PK_USE_JSONSERIALIZER)
+#	include <json_hbo_serializer.h>
+#endif
+
 #if defined(PK_NX)
 #	define	LOG_FILE "cache:/popcorn.htm"
 #else
@@ -548,8 +552,18 @@ namespace	PKFX
 		else
 			configKernel.m_AddDefaultLogListeners = &AddDefaultLogListenersOverride_NoDefaultLogger;
 
+		HBO::ISerializer *serializers[] =
+		{
+#if defined(PK_USE_JSONSERIALIZER)
+			new(JsonHBO::CSerializerJSON),
+#endif
+			new(HBO::CSerializerPKBO),
+		};
+		CPKBaseObject::Config  configBaseObject;
+		configBaseObject.m_CustomSerializers = serializers;
+
 		if (CPKKernel::Startup(engineVersion, configKernel) &&
-			CPKBaseObject::Startup(engineVersion, CPKBaseObject::Config()) &&
+			CPKBaseObject::Startup(engineVersion, configBaseObject) &&
 			CPKEngineUtils::Startup(engineVersion, CPKEngineUtils::Config()) &&
 			CPKCompiler::Startup(engineVersion, CPKCompiler::Config()) &&
 			CPKImaging::Startup(engineVersion, CPKImaging::Config()) &&

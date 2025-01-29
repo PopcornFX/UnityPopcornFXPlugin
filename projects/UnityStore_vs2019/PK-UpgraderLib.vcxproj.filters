@@ -169,6 +169,12 @@
     <Filter Include="Sources\Upgrades\Data\2.20.1.21978">
       <UniqueIdentifier>{655155C4-518D-582E-BA9F-7025A6FA0049}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.21.0.22636">
+      <UniqueIdentifier>{BD04D8EB-A940-DB55-1253-F34CFEAD8370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.21.0.22818">
+      <UniqueIdentifier>{FF0CD8EB-EB48-DB55-545B-F34C40B68370}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\Upgrades\Data\2.3.0.59136">
       <UniqueIdentifier>{D2A7990E-3E16-EF8D-87FF-A98DF3ACE429}</UniqueIdentifier>
     </Filter>
@@ -307,11 +313,122 @@
     <Filter Include="Sources\Upgrades\Data\PopcornFXEditorCore\Shaders\ShaderInclude">
       <UniqueIdentifier>{9D408211-09D4-E3BF-12BB-53767ECD7A87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_External">
+      <UniqueIdentifier>{07CD4F05-7337-047C-BC75-B521281FE2D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX">
+      <UniqueIdentifier>{B2545DA7-9EB7-EC4B-473D-2502337FB8CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_External\DX\Headers">
+      <UniqueIdentifier>{5DF51B81-4984-A54A-F2A2-B945DE10B6F0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="_Natvis">
       <UniqueIdentifier>{D972AB51-4552-2AED-4E6A-B5C3BAC8904E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_1.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_2.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_3.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_4.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12compatibility.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12video.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_barriers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_check_feature_support.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_core.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_default.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_pipeline_state_stream.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_property_format_table.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_render_pass.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_resource_helpers.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_root_signature.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_state_object.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcapi.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcerrors.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcisense.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h">
+      <Filter>_External\DX\Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_axis_system.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -2091,6 +2208,69 @@
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\Library_PopcornFXCore_Templates_Core_pkfx_2_20_1_21978.h">
       <Filter>Sources\Upgrades\Data\2.20.1.21978</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Editor_Presets_Effects_Basic_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Editor_Presets_Effects_FX_Simple_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Materials_Interface_Default_pkri_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Materials_Interface_Legacy_pkri_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Materials_Ribbon_AnimatedMasked_pkma_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Materials_Ribbon_CorrectDeformation_Opaque_pkma_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Materials_Ribbon_CorrectDeformation_Transparent_pkma_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Shaders_Legacy_Default_Ribbon_frag_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Shaders_Particle_Master_frag_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Shaders_includes_FeatureRibbonCorrectDeformation_h_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Templates_Core_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Templates_Dynamics_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Templates_Events_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Templates_Legacy_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Templates_Placement_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Templates_Samplers_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\Library_PopcornFXCore_Templates_Utils_pkfx_2_21_0_22636.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\Library_PopcornFXCore_Shaders_Particle_Master_frag_2_21_0_22818.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22818</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\Library_PopcornFXCore_Templates_Dynamics_pkfx_2_21_0_22818.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22818</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\Library_PopcornFXCore_Templates_Events_pkfx_2_21_0_22818.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22818</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\Library_PopcornFXCore_Templates_Legacy_pkfx_2_21_0_22818.h">
+      <Filter>Sources\Upgrades\Data\2.21.0.22818</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\Editor_Templates_Basic_pkfx_2_3_0_59136.h">
       <Filter>Sources\Upgrades\Data\2.3.0.59136</Filter>
     </ClInclude>
@@ -3068,6 +3248,12 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\core_upgrader_2_20_1_21978.cpp">
       <Filter>Sources\Upgrades\Data\2.20.1.21978</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\core_upgrader_2_21_0_22636.cpp">
+      <Filter>Sources\Upgrades\Data\2.21.0.22636</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\core_upgrader_2_21_0_22818.cpp">
+      <Filter>Sources\Upgrades\Data\2.21.0.22818</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\core_upgrader_2_3_0_59136.cpp">
       <Filter>Sources\Upgrades\Data\2.3.0.59136</Filter>
     </ClCompile>
@@ -3867,6 +4053,9 @@
       <Filter>Sources\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.20.0.cpp">
+      <Filter>Sources\Upgrades</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.21.0.cpp">
       <Filter>Sources\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.3.0.cpp">

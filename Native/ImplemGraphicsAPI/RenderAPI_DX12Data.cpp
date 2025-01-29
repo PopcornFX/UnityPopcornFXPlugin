@@ -293,8 +293,7 @@ void	CDX12Data::EndModifyNativeBuffer(SBufferHandles &bufferHandle, bool isIdxBu
 		writeRange.End = 0;
 		hostVisibleBuff->Unmap(0, &writeRange);
 
-		ID3D12Device	*device = CRuntimeManager::Instance().GetDeviceD3D12();
-		PK_ASSERT(device != null);
+		PK_ASSERT(CRuntimeManager::Instance().GetDeviceD3D12() != null);
 
 		if (m_NeedCommandReset[m_CurrentBuffIdx])
 		{

@@ -167,7 +167,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -201,7 +201,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -230,7 +230,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -270,7 +270,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -305,7 +305,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -345,7 +345,7 @@
       <DisableSpecificWarnings>4701;4512;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=1;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_GLES_SUPPORT=0;PK_BUILD_WITH_GLES3_SUPPORT=0;PK_BUILD_WITH_METAL_SUPPORT=0;PK_BUILD_WITH_GNM_SUPPORT=0;PK_BUILD_WITH_AGC_SUPPORT=0;PK_BUILD_WITH_GL_SUPPORT=1;PK_BUILD_WITH_NVN_SUPPORT=0;PK_PRINTF_TO_CLOG;PK_SAMPLE_USES_WINMAIN;GLEW_STATIC;GL_GLEXT_PROTOTYPES;PKFX_PLUGIN_EXPORT;PK_UNITY_EXPORT;PK_UNITY_EDITOR=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\Native;..\..\Native\precompiled;..\..\Native\Common\PKFX;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\Gl;..\..\Native\Common\GLES;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\Native\Common\DXUT11\Core;..\..\Native\Common\DXUT11\Optional;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -481,6 +481,40 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxRendererSubView.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_1.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_2.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_3.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11_4.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11sdklayers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d11shader.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12compatibility.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12sdklayers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12shader.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3d12video.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcommon.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dcompiler.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_barriers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_check_feature_support.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_core.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_default.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_pipeline_state_stream.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_property_format_table.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_render_pass.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_resource_helpers.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_root_signature.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\d3dx12\d3dx12_state_object.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcapi.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcerrors.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxcisense.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_2.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_3.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_4.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgi1_5.h" />
+    <ClInclude Include="..\..\SDK\Samples\External\DX\include\dxgiformat.h" />
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\eglew.h" />
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glew.h" />
     <ClInclude Include="..\..\ExternalLibs\GL\include\GL\glext.h" />

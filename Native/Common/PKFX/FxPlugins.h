@@ -60,19 +60,6 @@ namespace	PKFX
 
 	// unloads all previously loaded plugins
 	void	UnregisterPlugins();
-
-	// Deprecated, to remove
-#if defined(PK_COMPILER_MSVC)
-	PK_DEPRECATED("Deprecated v1.19.0.19915: Use explicit bitwise combination instead, or no argument to 'RegisterPlugins' to register everything that was compiled in")
-	enum EPlugin_All_Deprecated { EPlugin_All = EPlugin_CompilerBackendVM | EPlugin_ImageCodecPKIM | EPlugin_ImageCodecDDS | EPlugin_ImageCodecPNG | EPlugin_ImageCodecJPG | EPlugin_ImageCodecTGA };
-	PK_DEPRECATED("Deprecated v1.19.0.19915: Use EPlugin_CompilerBackendD3D instead")
-	enum EPlugin_D3D11_Deprecated { EPlugin_CompilerBackendD3D11 = EPlugin_CompilerBackendD3D };
-#else
-	enum PK_DEPRECATED("Deprecated v1.19.0.19915: Use explicit bitwise combination instead, or no argument to 'RegisterPlugins' to register everything that was compiled in")
-	EPlugin_All_Deprecated { EPlugin_All = EPlugin_CompilerBackendVM | EPlugin_ImageCodecPKIM | EPlugin_ImageCodecDDS | EPlugin_ImageCodecPNG | EPlugin_ImageCodecJPG | EPlugin_ImageCodecTGA };
-	enum PK_DEPRECATED("Deprecated v1.19.0.19915: Use EPlugin_CompilerBackendD3D instead")
-	EPlugin_D3D11_Deprecated { EPlugin_CompilerBackendD3D11 = EPlugin_CompilerBackendD3D };
-#endif
 }
 
 //----------------------------------------------------------------------------

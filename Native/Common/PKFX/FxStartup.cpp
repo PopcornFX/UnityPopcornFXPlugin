@@ -554,10 +554,10 @@ namespace	PKFX
 
 		HBO::ISerializer *serializers[] =
 		{
+			new (HBO::CSerializerPKBO),
 #if defined(PK_USE_JSONSERIALIZER)
-			new(JsonHBO::CSerializerJSON),
+			new (JsonHBO::CSerializerJSON),
 #endif
-			new(HBO::CSerializerPKBO),
 		};
 		CPKBaseObject::Config  configBaseObject;
 		configBaseObject.m_CustomSerializers = serializers;
@@ -608,6 +608,14 @@ namespace	PKFX
 		}
 
 		RuntimeShutdown();	// shutdown the modules we were able to load...
+
+		//Delete the serializer overloads
+		if (serializers[0] != null)
+			delete serializers[0];
+#if defined(PK_USE_JSONSERIALIZER)
+		if (serializers[1] != null)
+			delete serializers[1];
+#endif
 		return false;
 	}
 

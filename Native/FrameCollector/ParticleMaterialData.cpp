@@ -219,16 +219,14 @@ bool	CParticleMaterialDescMesh::SMeshDescriptorData::InitFromRenderer(const CPar
 
 //----------------------------------------------------------------------------
 
-CStringId	CParticleMaterialDescMesh::m_DiffuseColorStringId = CStringId::Null;
+CStringId	CParticleMaterialDescMesh::m_DiffuseColorStringId;
 
 //----------------------------------------------------------------------------
 
 void		CParticleMaterialDescMesh::InitFromRenderer(const CParticleRenderer_Mesh &renderer)
 {
-	if (m_DiffuseColorStringId == CStringId::Null)
-	{
+	if (m_DiffuseColorStringId.Empty())
 		m_DiffuseColorStringId = CStringId("DiffuseColor");
-	}
 
 	m_UserData = CStringId(renderer.UserData());
 	m_EffectNamePath = renderer.RawName();

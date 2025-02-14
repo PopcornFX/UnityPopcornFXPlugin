@@ -70,22 +70,14 @@ u32	CParticleMaterialDescFlags::CombineFlags()
 CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 :	m_InvSoftnessDistance(1)
 ,	m_AlphaThreshold(0.5f)
-,	m_AtlasDefinition(CStringId::Null)
 ,	m_AtlasSubdivX(0)
 ,	m_AtlasSubdivY(0)
 ,	m_RibbonAlignment(0)
 //Feature Lit
-,	m_NormalMap(CStringId::Null)
-,	m_RoughMetalMap(CStringId::Null)
 ,	m_CastShadows(false)
 ,	m_NormalBendingFactor(0.5f)
 ,	m_Roughness(1.0f)
 ,	m_Metalness(0.0f)
-,	m_DiffuseRampMap(CStringId::Null)
-,	m_EmissiveMap(CStringId::Null)
-,	m_EmissiveRampMap(CStringId::Null)
-,	m_AlphaMasks1Map(CStringId::Null)
-,	m_AlphaMasks2Map(CStringId::Null)
 ,	m_AlphaMasks1Intensity(0.f)
 ,	m_AlphaMasks2Intensity(0.f)
 ,	m_AlphaMasks1Weight(0.f)
@@ -96,8 +88,6 @@ CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 ,	m_AlphaMasks2RotationSpeed(0.f)
 ,	m_AlphaMasks1TranslationSpeed(0.f, 0.f)
 ,	m_AlphaMasks2TranslationSpeed(0.f, 0.f)
-,	m_UVDistortions1Map(CStringId::Null)
-,	m_UVDistortions2Map(CStringId::Null)
 ,	m_UVDistortions1Intensity(0.f)
 ,	m_UVDistortions2Intensity(0.f)
 ,	m_UVDistortions1Scale(0.f)
@@ -106,7 +96,6 @@ CParticleMaterialDescBillboard::CParticleMaterialDescBillboard()
 ,	m_UVDistortions2RotationSpeed(0.f)
 ,	m_UVDistortions1TranslationSpeed(0.f)
 ,	m_UVDistortions2TranslationSpeed(0.f)
-,	m_DissolveMap(CStringId::Null)
 ,	m_DissolveSoftness(0.f)
 ,	m_TransformUVs_RGBOnly(false)
 {
@@ -473,7 +462,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		//SID_LegacyLit_CastShadows()				--
 		//SID_LegacyLit_SpecularMap()				--
 		//const SRendererFeaturePropertyValue	*normalMapLegacy = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_LegacyLit_NormalMap());
-		//if (m_NormalMap == CStringId::Null && normalMapLegacy != null && !normalMapLegacy->ValuePath().Empty())
+		//if (m_NormalMap.Empty() && normalMapLegacy != null && !normalMapLegacy->ValuePath().Empty())
 		//{
 		//	m_NormalMap = CStringId(normalMapLegacy->ValuePath());
 		//}
@@ -642,21 +631,13 @@ bool	CParticleMaterialDescBillboard::operator == (const CParticleMaterialDescBil
 //----------------------------------------------------------------------------
 
 CParticleMaterialDescMesh::CParticleMaterialDescMesh()
-:	m_MeshPath(CStringId::Null)
-,	m_DiffuseMap(CStringId::Null)
-,	m_HasMeshAtlas(false)
+:	m_HasMeshAtlas(false)
 //Feature Lit
-,	m_NormalMap(CStringId::Null)
-,	m_RoughMetalMap(CStringId::Null)
 ,	m_CastShadows(false)
 ,	m_NormalBendingFactor(0.5f)
 ,	m_Roughness(1.0f)
 ,	m_Metalness(0.0f)
 //Feature Vat
-,	m_Vat_PositionMap(CStringId::Null)
-,	m_Vat_NormalMap(CStringId::Null)
-,	m_Vat_ColorMap(CStringId::Null)
-,	m_Vat_RotationMap(CStringId::Null)
 ,	m_Vat_NumFrames(0)
 ,	m_Vat_PackedData(false)
 ,	m_Vat_BoundsPivot(CFloat2::ZERO)
@@ -664,7 +645,6 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_Vat_BoundsPosition(CFloat2::ZERO)
 ,	m_Vat_PadToPowerOf2(false)
 ,	m_Vat_PaddedRatio(CFloat2::ZERO)
-,	m_SkeletalAnimationTexture(CStringId::Null)
 ,	m_SkeletalAnimUseBoneScale(false)
 ,	m_SkeletalAnimTextureResol(CUint2::ZERO)
 ,	m_SkeletalAnimCount(1)
@@ -672,15 +652,10 @@ CParticleMaterialDescMesh::CParticleMaterialDescMesh()
 ,	m_SkeletalAnimTranslationBoundsMax(CFloat3::ZERO)
 ,	m_SkeletalAnimScaleBoundsMin(CFloat3::ZERO)
 ,	m_SkeletalAnimScaleBoundsMax(CFloat3::ZERO)
-,	m_DiffuseRampMap(CStringId::Null)
-,	m_EmissiveMap(CStringId::Null)
-,	m_EmissiveRampMap(CStringId::Null)
-,	m_AlphaMap(CStringId::Null)
 ,	m_InvSoftnessDistance(0.0f)
 ,	m_AlphaThreshold(0.5f)
 ,	m_TransformUVs_RGBOnly(false)
 ,	m_UseVertexColor(false)
-,	m_AtlasPath(CStringId::Null)
 ,	m_AtlasSubdivs(0, 0)
 {
 }
@@ -1108,7 +1083,7 @@ bool	CParticleMaterialDescMesh::InitFromRenderer(const CRendererDataMesh &render
 		//SID_LegacyLit_CastShadows()				--
 		//SID_LegacyLit_SpecularMap()				--
 		//const SRendererFeaturePropertyValue	*normalMapLegacy = renderer.m_Declaration.FindProperty(BasicRendererProperties::SID_LegacyLit_NormalMap());
-		//if (m_NormalMap == CStringId::Null && normalMapLegacy != null && !normalMapLegacy->ValuePath().Empty())
+		//if (m_NormalMap.Empty() && normalMapLegacy != null && !normalMapLegacy->ValuePath().Empty())
 		//{
 		//	m_NormalMap = CStringId(normalMapLegacy->ValuePath());
 		//}

@@ -6,7 +6,7 @@ Shader "PopcornFX/HDRP/PKFxParticleShader"
 {
 	Properties
 	{
-		 _MainTex("Sprite Texture", 2D) = "white" {}
+		_MainTex("Sprite Texture", 2D) = "white" {}
 		_AlphaMap("Alpha Remap Texture", 2D) = "white" {}
 		_DiffuseRampMap("Diffuse Ramp Texture", 2D) = "white" {}
 		_EmissiveMap("Emissive Texture", 2D) = "white" {}

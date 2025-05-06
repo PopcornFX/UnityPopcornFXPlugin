@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 718d0c6ed6ff2634e8a669a91e3959a9, type: 3}
-  m_Name: HDRP_CPUParticle_Distortion
+  m_Name: HDRP_CPUParticle_Distortion_Default
   m_EditorClassIdentifier: 
   m_SourceBlendPropertyName: 
   m_DestinationBlendPropertyName: 
@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Shader: {fileID: 4800000, guid: c4edd00ff2db5b24391a4fcb1762e459, type: 3}
   m_Material: {fileID: 2100000, guid: 8bb6739257b0c754aab8c6640bcb0eac, type: 2}
   m_RenderTypes: 01010000000000
-  m_BlendMode: 010000000000
-  m_IsLegacy: 1
+  m_BlendMode: 000000010000
+  m_IsLegacy: 0
   m_SupportedShaderMask: 6371
   m_MandatoryShaderMask: 64
   m_BillboardingLocation: 0

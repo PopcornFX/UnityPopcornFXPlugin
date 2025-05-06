@@ -836,10 +836,10 @@ namespace PopcornFX
 			ClearRenderers();
 			SetMaxCameraCount(MaxCameraSupport);
 
-            foreach (PKFxEmitter effect in killedEffects)
-            {
-                effect.StartEffect();
-            }
+			foreach (PKFxEmitter effect in killedEffects)
+			{
+				effect.StartEffect();
+			}
 		}
 
 		public static void SetQualityLevelSettings()

@@ -231,7 +231,11 @@ namespace PopcornFX
 			}
 			if (assetMat == null)
 			{
-				material = new Material(binding.m_Shader);
+				if (binding.m_UseShader)
+					material = new Material(binding.m_Shader);
+				else
+					material = new Material(binding.m_Material);
+
 				if (batchDesc.m_Type == ERendererType.Mesh)
 					material.enableInstancing = true;
 				binding.SetMaterialKeywords(batchDesc, material);

@@ -51,6 +51,8 @@ namespace PopcornFX
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitDoubleSidedDefault;
 		[HideInInspector] public PKFxRenderFeatureBinding			m_OpaqueMeshLitSkinnedDoubleSidedDefault;
 
+		public PKFxRenderFeatureBinding								m_DistortionBillboard_Default;
+		public PKFxRenderFeatureBinding								m_DistortionBillboard;
 #if UNITY_EDITOR
 		[MenuItem("Assets/Create/PopcornFX/Material Factory/HDRP")]
 		public static PKFxMaterialFactoryHDRP CreateMaterialFactoryHDRP()
@@ -76,6 +78,11 @@ namespace PopcornFX
 #endif
 		public override void SetupFallBackFeatureBinding()
 		{
+			//Distortion
+			if (m_DistortionBillboard != null)
+				m_RenderFeatureBindings.Add(m_DistortionBillboard);
+			if (m_DistortionBillboard_Default != null)
+				m_RenderFeatureBindings.Add(m_DistortionBillboard_Default);
 #if UNITY_2021_1_OR_NEWER
 			// Meshes:
 			if (m_TransparentMeshUnlitLegacy != null)
@@ -145,6 +152,7 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
 			if (m_AdditiveParticleUnlitLegacy != null)
 				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitLegacy);
+
 
 			if (m_AlphaBlendDecal != null)
 				m_RenderFeatureBindings.Add(m_AlphaBlendDecal);

@@ -131,7 +131,7 @@ namespace
 	void			UnityPlatformToPkBackendConfig(const CString &platform, SBackendAndBuildTags &outBackendAndBuildTags)
 	{
 		// Keep this an array, allows to do some compile time checks if the list mismatches PopcornFX supported tags
-		TStaticCountedArray<PopcornFX::CString, 5>	buildTags;
+		TStaticCountedArray<PopcornFX::CString, 6>	buildTags;
 
 		PK_VERIFY(buildTags.PushBack(kEngineTag).Valid());
 

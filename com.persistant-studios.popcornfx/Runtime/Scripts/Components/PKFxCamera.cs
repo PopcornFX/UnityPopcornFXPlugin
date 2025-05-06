@@ -364,12 +364,12 @@ namespace PopcornFX
 						{
 							if (desc.m_RenderingObject.activeInHierarchy)
 							{
-                                if (desc.m_Material == null)
-                                {
-                                    Debug.LogWarning("[PopcornFX] Couldn't render distortion, material is null");
-                                    continue;
-                                }
-                                if (desc.m_Slice != null)
+								if (desc.m_Material == null)
+								{
+									Debug.LogWarning("[PopcornFX] Couldn't render distortion, material is null");
+									continue;
+								}
+								if (desc.m_Slice != null)
 									m_CommandBuffer.DrawMesh(desc.m_Slice.mesh, Matrix4x4.identity, desc.m_Material);
 								else if (desc.m_Procedural != null)
 									m_CommandBuffer.DrawProceduralIndirect(Matrix4x4.identity, desc.m_Material, 0, MeshTopology.Triangles, desc.m_Procedural.DrawIndirectArgs);

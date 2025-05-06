@@ -79,6 +79,10 @@ MonoImporter:
   - m_OpaqueMeshLitDoubleSidedDefault: {fileID: 11400000, guid: 02bd4aca7f0877a44aff73d0a20f813b,
       type: 2}
   - m_OpaqueMeshLitSkinnedDoubleSidedDefault: {instanceID: 0}
+  - m_DistortionBillboard_Default: {fileID: 11400000, guid: 118aff2fc41bd954b89ca0f7f5cb0ced,
+      type: 2}
+  - m_DistortionBillboard: {fileID: 11400000, guid: 8aaeee52ac7216c4690176b35e45f634,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

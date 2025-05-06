@@ -284,7 +284,7 @@ bool	CParticleMaterialDescBillboard::InitFromRenderer(const CRendererDataBase &r
 		if (transparentType == null)
 		{
 			m_Flags.m_BlendMode = BlendMode::PremultipliedAlpha;
-			if (lit->ValueB())
+			if (lit != null && lit->ValueB())
 			{
 				m_Flags.m_BlendMode = BlendMode::AlphaBlend;
 			}

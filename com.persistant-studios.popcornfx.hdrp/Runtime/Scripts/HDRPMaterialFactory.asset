@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86258acff9b07e4082f2e3d0fa6a3a9, type: 3}
+  m_Name: HDRPMaterialFactory
+  m_EditorClassIdentifier: 
+  m_UseSortingLayers: 0
+  m_FactoryType: 2
+  DistortionShader: {fileID: 4800000, guid: d148465e45222432f85a1d3e92677308, type: 3}
+  BlurShader: {fileID: 4800000, guid: 0dc1a323808c03945a1db3a1cfacef2a, type: 3}
+  m_TransparentMeshUnlitLegacy: {fileID: 11400000, guid: 44aa7c6a17feeb747957fb1b194e31a9,
+    type: 2}
+  m_TransparentMeshUnlitDefault: {fileID: 11400000, guid: 44aa7c6a17feeb747957fb1b194e31a9,
+    type: 2}
+  m_EmissiveMeshUnlitDefault: {fileID: 11400000, guid: 44aa7c6a17feeb747957fb1b194e31a9,
+    type: 2}
+  m_OpaqueMeshUnlitLegacy: {fileID: 11400000, guid: d9d219e8a322c144283414064a6402e6,
+    type: 2}
+  m_OpaqueMeshUnlitDefault: {fileID: 11400000, guid: d9d219e8a322c144283414064a6402e6,
+    type: 2}
+  m_TransparentMeshLitLegacy: {fileID: 11400000, guid: dc019a0c65753dd4899c14c3878d0c56,
+    type: 2}
+  m_TransparentMeshLitDefault: {fileID: 11400000, guid: dc019a0c65753dd4899c14c3878d0c56,
+    type: 2}
+  m_OpaqueMeshLitLegacy: {fileID: 11400000, guid: d18f18e58d6d72d40b79263d3232298d,
+    type: 2}
+  m_OpaqueMeshLitDefault: {fileID: 11400000, guid: d18f18e58d6d72d40b79263d3232298d,
+    type: 2}
+  m_OpaqueMeshLitSkinnedLegacy: {fileID: 0}
+  m_OpaqueParticleUnlitLegacy: {fileID: 11400000, guid: 4a9fbef0372a2d14983d828dee9359ad,
+    type: 2}
+  m_OpaqueParticleUnlitDefault: {fileID: 0}
+  m_TransparentParticleUnlitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_TransparentParticleUnlitDefault: {fileID: 0}
+  m_AdditiveParticleUnlitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_OpaqueCorrectDeformationUnlitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_OpaqueCorrectDeformationUnlitDefault: {fileID: 0}
+  m_TransparentCorrectDeformationUnlitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_TransparentCorrectDeformationUnlitDefault: {fileID: 0}
+  m_AdditiveCorrectDeformationUnlitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_OpaqueParticleLitLegacy: {fileID: 11400000, guid: 4a9fbef0372a2d14983d828dee9359ad,
+    type: 2}
+  m_OpaqueParticleLitDefault: {fileID: 0}
+  m_TransparentParticleLitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_TransparentParticleLitDefault: {fileID: 0}
+  m_AdditiveParticleLitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_OpaqueCorrectDeformationLitLegacy: {fileID: 11400000, guid: 4a9fbef0372a2d14983d828dee9359ad,
+    type: 2}
+  m_OpaqueCorrectDeformationLitDefault: {fileID: 0}
+  m_TransparentCorrectDeformationLitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_TransparentCorrectDeformationLitDefault: {fileID: 0}
+  m_AdditiveCorrectDeformationLitLegacy: {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22,
+    type: 2}
+  m_AlphaBlendDecal: {fileID: 0}
+  m_CPUParticleLegacy: {fileID: 11400000, guid: 42c4cd98ec9966142ba5118051d18f5e,
+    type: 2}
+  m_CPUParticleOpaqueLegacy: {fileID: 11400000, guid: 55f3db6beebff084da8144594da18bab,
+    type: 2}
+  m_VertexBillboardingLegacy: {fileID: 11400000, guid: 0b7d6fe980a45e646a51602b5365cf20,
+    type: 2}
+  m_VertexBillboardingOpaqueLegacy: {fileID: 11400000, guid: d19a42aac00a18d4a8d50480e52271a7,
+    type: 2}
+  m_CPUParticleDistortion: {fileID: 11400000, guid: 8aaeee52ac7216c4690176b35e45f634,
+    type: 2}
+  m_VertexBillboardingDistortion: {fileID: 11400000, guid: e75b4eb5b4889b949990ffd5ab8eae06,
+    type: 2}
+  m_RenderFeatureBindings:
+  - {fileID: 11400000, guid: 44aa7c6a17feeb747957fb1b194e31a9, type: 2}
+  - {fileID: 11400000, guid: 44aa7c6a17feeb747957fb1b194e31a9, type: 2}
+  - {fileID: 11400000, guid: 44aa7c6a17feeb747957fb1b194e31a9, type: 2}
+  - {fileID: 11400000, guid: d9d219e8a322c144283414064a6402e6, type: 2}
+  - {fileID: 11400000, guid: d9d219e8a322c144283414064a6402e6, type: 2}
+  - {fileID: 11400000, guid: dc019a0c65753dd4899c14c3878d0c56, type: 2}
+  - {fileID: 11400000, guid: dc019a0c65753dd4899c14c3878d0c56, type: 2}
+  - {fileID: 11400000, guid: d18f18e58d6d72d40b79263d3232298d, type: 2}
+  - {fileID: 11400000, guid: d18f18e58d6d72d40b79263d3232298d, type: 2}
+  - {fileID: 11400000, guid: 4a9fbef0372a2d14983d828dee9359ad, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 4a9fbef0372a2d14983d828dee9359ad, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 4a9fbef0372a2d14983d828dee9359ad, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 1f74078b18e1b97488f70163e0a92f22, type: 2}
+  - {fileID: 11400000, guid: 42c4cd98ec9966142ba5118051d18f5e, type: 2}
+  - {fileID: 11400000, guid: 55f3db6beebff084da8144594da18bab, type: 2}
+  - {fileID: 11400000, guid: 0b7d6fe980a45e646a51602b5365cf20, type: 2}
+  - {fileID: 11400000, guid: d19a42aac00a18d4a8d50480e52271a7, type: 2}
+  m_RenderQueue: 3050
+  m_TransparentMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: 16ef58c9d1a82fd44a520ea7b7348b96,
+    type: 2}
+  m_OpaqueMeshUnlitDoubleSidedDefault: {fileID: 11400000, guid: d9d219e8a322c144283414064a6402e6,
+    type: 2}
+  m_TransparentMeshLitDoubleSidedDefault: {fileID: 11400000, guid: f0466275546cb4642971172939b0e2fc,
+    type: 2}
+  m_OpaqueMeshLitDoubleSidedDefault: {fileID: 11400000, guid: 02bd4aca7f0877a44aff73d0a20f813b,
+    type: 2}
+  m_OpaqueMeshLitSkinnedDoubleSidedDefault: {fileID: 0}
+  m_DistortionBillboard: {fileID: 0}

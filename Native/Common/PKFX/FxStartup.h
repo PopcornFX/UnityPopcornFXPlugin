@@ -19,7 +19,7 @@ using namespace	PK_NAMESPACE;
 
 namespace	PKFX
 {
-	bool	RuntimeStartup(const char *assertScriptFilePath = null, bool installDefaultLogger = true);
+	bool	RuntimeStartup(const char *assertScriptFilePath = null, bool installDefaultLogger = true, u32 maxThreads = 0);	// maxThreads only used on PK_DESKTOP
 	void	RuntimeShutdown();
 }
 

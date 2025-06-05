@@ -463,13 +463,42 @@ namespace	PKFX
 
 	//----------------------------------------------------------------------------
 	//
+	// Worker Thread Pool: Capped thread count
+	//
+	//----------------------------------------------------------------------------
+
+#if defined(PK_DESKTOP)
+	static u32	g_MaxThreads = 0;
+
+	static Threads::PAbstractPool		_CreateThreadPool_Capped()
+	{
+		PWorkerThreadPool				pool = PK_NEW(CWorkerThreadPool);
+		if (!PK_VERIFY(pool != null))
+			return null;
+
+		u32		processorCount = CPU::Caps().ProcessAffinity().NumBitsSet();
+		processorCount = PKMin(processorCount, CThreadManager::AvailableUserThreadSlots());
+		if (g_MaxThreads != 0)
+			processorCount = PKMin(processorCount, g_MaxThreads);
+
+		if (processorCount == 0 ||
+			!pool->AddFullAffinityWorkers(processorCount, CPU::Caps().ProcessAffinity(), CThreadManager::Priority_High))
+			return null;
+
+		pool->StartWorkers();
+		return pool;
+	}
+#endif	// defined(PK_DESKTOP)
+
+	//----------------------------------------------------------------------------
+	//
 	// Startup
 	//
 	//----------------------------------------------------------------------------
 
-	bool	RuntimeStartup(const char *assertScriptFilePath /* = null*/, bool installDefaultLogger /*= true*/)
+	bool	RuntimeStartup(const char *assertScriptFilePath /* = null*/, bool installDefaultLogger /*= true*/, u32 maxThreads /*= 0*/)
 	{
-		(void)assertScriptFilePath;
+		(void)assertScriptFilePath; (void)maxThreads;
 		SDllVersion	engineVersion;
 
 		PK_ASSERT(engineVersion.Major == PK_VERSION_MAJOR);
@@ -523,7 +552,19 @@ namespace	PKFX
 #	endif
 #endif // (CATCH_ASSERTS != 0)
 
-#if	defined(PK_ORBIS)
+		const bool		forceDefaultThreadPool = false;
+		if (forceDefaultThreadPool)
+		{
+			configKernel.m_CreateThreadPool = &_CreateThreadPool_Default;
+		}
+
+#if defined(PK_DESKTOP)
+		if (maxThreads != 0)
+		{
+			g_MaxThreads = maxThreads;	// horrible, workaround create pool callback not taking any custom args
+			configKernel.m_CreateThreadPool = &_CreateThreadPool_Capped;
+		}
+#elif	defined(PK_ORBIS)
 		// Our main-thread is scheduled on core 3 (see the CCurrentThread::SetTargetProcessor() call below)
 		const u32	kOrbisWorkerAffinities[] =
 		{
@@ -539,12 +580,6 @@ namespace	PKFX
 		configKernel.m_WorkerAffinityMasks = kOrbisWorkerAffinities;
 		configKernel.m_WorkerAffinityMasksCount = PK_ARRAY_COUNT(kOrbisWorkerAffinities);
 #endif
-
-		const bool		forceDefaultThreadPool = false;
-		if (forceDefaultThreadPool)
-		{
-			configKernel.m_CreateThreadPool = &_CreateThreadPool_Default;
-		}
 
 		// depending on whether or not we want default loggers, override the callback:
 		if (installDefaultLogger)

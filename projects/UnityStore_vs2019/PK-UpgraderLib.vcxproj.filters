@@ -175,6 +175,12 @@
     <Filter Include="Sources\Upgrades\Data\2.21.0.22818">
       <UniqueIdentifier>{FF0CD8EB-EB48-DB55-545B-F34C40B68370}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.22.0.23751">
+      <UniqueIdentifier>{9D065560-8942-58CA-F254-70C1DEAF00E5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Upgrades\Data\2.22.0.23868">
+      <UniqueIdentifier>{060B5560-F246-58CA-5B59-70C147B400E5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Sources\Upgrades\Data\2.3.0.59136">
       <UniqueIdentifier>{D2A7990E-3E16-EF8D-87FF-A98DF3ACE429}</UniqueIdentifier>
     </Filter>
@@ -2190,6 +2196,228 @@
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\3_Legacy_pkfx.h">
       <Filter>Sources\Upgrades\Data\2.21.0.22818</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\0_Mesh_Emissive.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\10_Triangle_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\11_Triangle_Transparent.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\12_Default.pkri.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\13_Legacy.pkri.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\14_Opaque_Ribbon.frag.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\15_FeatureTransformUVs.h.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\16_Core.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\17_Placement.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\18_Samplers.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\19_Utils.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\1_Mesh_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\2_Mesh_Tinted.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\3_Ribbon_CorrectDeformation_Distortion.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\4_Ribbon_CorrectDeformation_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\5_Ribbon_CorrectDeformation_Transparent.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\6_Ribbon_Distortion.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\7_Ribbon_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\8_Ribbon_Transparent.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\9_Triangle_Distortion.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\0_Basic.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\10_Billboard_Transparent.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\11_Decal_Default.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\12_Mesh_AnimatedMasked.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\13_Mesh_Emissive.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\14_Mesh_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\15_Mesh_Tinted.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\16_Ribbon_AnimatedMasked.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\17_Ribbon_CorrectDeformation_Distortion.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\18_Ribbon_CorrectDeformation_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\19_Ribbon_CorrectDeformation_Transparent.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\1_FX_Simple.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\20_Ribbon_Distortion.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\21_Ribbon_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\22_Ribbon_Transparent.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\23_Triangle_Distortion.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\24_Triangle_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\25_Triangle_Transparent.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\26_Default.pkri.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\27_Legacy.pkri.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\28_Legacy_Animated_Mesh.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\29_Legacy_Default_Billboard.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\2_SimpleSolid.pkgo.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\30_Legacy_Default_Decal.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\31_Legacy_Default_Mesh.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\32_Legacy_Default_Ribbon.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\33_Legacy_Default_Triangle.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\34_Legacy_Distortion_Billboard.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\35_Legacy_Distortion_Ribbon.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\36_Legacy_Opaque_Billboard.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\37_Legacy_Opaque_Ribbon.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\38_Legacy_Opaque_Triangle.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\39_Legacy_Transparent_Mesh.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\3_VertexGraph.pkgo.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\40_Default_Ribbon.frag.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\41_Distortion_Billboard.frag.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\42_Distortion_Ribbon.frag.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\43_Opaque_Ribbon.frag.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\44_Particle_Master.frag.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\45_FeatureTransformUVs.h.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\46_PKSurface.h.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\47_Color.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\48_Core.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\49_Dynamics.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\4_ConstantColor.pktx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\50_Events.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\51_Legacy.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\52_Samplers.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\53_Utils.pkfx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\5_Substance.pktx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\6_TextureGraph.pktx.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\7_Billboard_AnimatedMasked.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\8_Billboard_Distortion.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\9_Billboard_Opaque.pkma.h">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\0_Basic_pkfx.h">
       <Filter>Sources\Upgrades\Data\2.3.0.59136</Filter>
     </ClInclude>
@@ -3173,6 +3401,12 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\core_upgrader_2_21_0_22818.cpp">
       <Filter>Sources\Upgrades\Data\2.21.0.22818</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\core_upgrader_2_22_0_23751.cpp">
+      <Filter>Sources\Upgrades\Data\2.22.0.23751</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\core_upgrader_2_22_0_23868.cpp">
+      <Filter>Sources\Upgrades\Data\2.22.0.23868</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\core_upgrader_2_3_0_59136.cpp">
       <Filter>Sources\Upgrades\Data\2.3.0.59136</Filter>
     </ClCompile>
@@ -3281,6 +3515,9 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\Mwao_Legacy.pkfx.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXCore\Upgrades</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\Q4P5_AssetGenerators.pkfx.cpp">
+      <Filter>Sources\Upgrades\Data\PopcornFXCore\Upgrades</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\QxEW_Default_Sound.pkma.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXCore\Upgrades</Filter>
     </ClCompile>
@@ -3367,6 +3604,9 @@
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\manifest.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXCore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\00dj_ConstantColor.pktx.cpp">
+      <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\0kYk_Editor_2.9.0.pkri.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
@@ -3605,6 +3845,9 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\VP1n_MeshMaterial.pkfx.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\ViaO_Substance.pktx.cpp">
+      <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\WloZ_Legacy_Default_Mesh.pkma.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
@@ -3737,6 +3980,9 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\j3Ha_PingPong.pkcf.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\jFj7_SimpleSolid.pkgo.cpp">
+      <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\jUul_Default_Triangle.frag.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
@@ -3758,6 +4004,9 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\lYSl_Opaque_Ribbon.frag.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\mYZv_VertexGraph.pkgo.cpp">
+      <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\mfOK_Light_Default.pkma.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
@@ -3765,6 +4014,9 @@
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\negz_Default_Billboard.frag.cpp">
+      <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\oMyq_TextureGraph.pktx.cpp">
       <Filter>Sources\Upgrades\Data\PopcornFXEditorCore\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\orAW_Default_Decal.vert.cpp">
@@ -3975,6 +4227,9 @@
       <Filter>Sources\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.21.0.cpp">
+      <Filter>Sources\Upgrades</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.22.0.cpp">
       <Filter>Sources\Upgrades</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.3.0.cpp">

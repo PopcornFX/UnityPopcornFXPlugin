@@ -322,8 +322,13 @@ namespace PopcornFX
 				so = new SerializedObject(customRule);
 				so.FindProperty("m_AssetVirtualPath").stringValue = AssetVirtualPath;
 				so.FindProperty("m_BatchDescName").stringValue = sBatchDesc.m_GeneratedName;
+#if UNITY_2022_1_OR_NEWER
+				so.FindProperty("m_UID").uintValue = id;
+#else
 				so.FindProperty("m_UID").intValue = (int)id;
+#endif
 				so.FindProperty("m_CustomMaterial").objectReferenceValue = newMat;
+				so.ApplyModifiedProperties();
 			}
 			else
 				so = new SerializedObject(customRule);

@@ -1,25 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Retail|Win32">
-      <Configuration>Retail</Configuration>
-      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Retail|x64">
       <Configuration>Retail</Configuration>
@@ -35,31 +23,13 @@
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
@@ -74,44 +44,21 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\release\builds\x32_Samples\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Debug\PK-Sample_08_CustomCollision\</IntDir>
-    <TargetName>PK-Sample_08_CustomCollision_d</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\release\builds\x64_Samples\</OutDir>
     <IntDir>..\intermediate\UnityStore\VC142\x64\Debug\PK-Sample_08_CustomCollision\</IntDir>
     <TargetName>PK-Sample_08_CustomCollision_d</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\release\builds\x32_Samples\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Release\PK-Sample_08_CustomCollision\</IntDir>
-    <TargetName>PK-Sample_08_CustomCollision_r</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,13 +68,6 @@
     <TargetName>PK-Sample_08_CustomCollision_r</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\release\builds\x32_Samples\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Retail\PK-Sample_08_CustomCollision\</IntDir>
-    <TargetName>PK-Sample_08_CustomCollision_s</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\release\builds\x64_Samples\</OutDir>
@@ -135,36 +75,6 @@
     <TargetName>PK-Sample_08_CustomCollision_s</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_08_CustomCollision;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>false</OmitFramePointers>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>dxgi.lib;opengl32.lib;vulkan-1.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-MCPP.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;fmodex_vc.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;SDL2.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WindowsSDK_LibraryPath_x86);$(VULKAN_SDK)\lib32;..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\SDK\Samples\External\SDL2\lib\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -191,42 +101,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>dxgi.lib;opengl32.lib;vulkan-1.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-MCPP.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Discretizers_d.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;PK-ZLib_d.lib;fmodex64_vc.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;SDL2.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(WindowsSDK_LibraryPath_x64);$(VULKAN_SDK)\lib;..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\SDK\Samples\External\SDL2\lib\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_08_CustomCollision;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>false</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>dxgi.lib;opengl32.lib;vulkan-1.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-MCPP.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;fmodex_vc.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;SDL2.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WindowsSDK_LibraryPath_x86);$(VULKAN_SDK)\lib32;..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\SDK\Samples\External\SDL2\lib\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -262,42 +136,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>dxgi.lib;opengl32.lib;vulkan-1.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-MCPP.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Discretizers_r.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;PK-ZLib_r.lib;fmodex64_vc.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;SDL2.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(WindowsSDK_LibraryPath_x64);$(VULKAN_SDK)\lib;..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\SDK\Samples\External\SDL2\lib\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PKSAMPLE_PROJNAME=PK-Sample_08_CustomCollision;PK_BUILD_WITH_D3D11_SUPPORT=1;PK_BUILD_WITH_D3D12_SUPPORT=1;PK_BUILD_WITH_OGL_SUPPORT=1;GL_GLEXT_PROTOTYPES;GLEW_STATIC;GLEW_NO_GLU;PK_BUILD_WITH_VULKAN_SUPPORT=1;PK_BUILD_WITH_FMODEX_SUPPORT=0;PK_BUILD_WITH_SDL=1;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\PK-Samples\PK-Sample_08_CustomCollision;..\..\SDK\Samples\PK-Samples\precompiled;..\..\SDK\Samples\PK-Samples\PK-Sample_02_FullIntegration\Scene;..\..\SDK\Samples\PK-Samples;..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\GL\include;$(VULKAN_SDK)\include;..\..\SDK\Samples\External\imgui;..\..\SDK\Samples\External\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>dxgi.lib;opengl32.lib;vulkan-1.lib;PK-RHI.lib;PK-RenderHelpers.lib;PK-MCPP.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-Plugin_CodecImage_PKIM_s.lib;PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CodecImage_PKM_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_PVR_s.lib;PK-Plugin_CodecImage_TGA_s.lib;PK-Plugin_CodecImage_HDR_s.lib;PK-Discretizers_s.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;PK-ZLib_s.lib;fmodex_vc.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(WindowsSDK_LibraryPath_x86);$(VULKAN_SDK)\lib32;..\..\SDK\Samples\External\fmodex-4.44.19\lib;..\..\SDK\Samples\External\SDL2\lib\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>

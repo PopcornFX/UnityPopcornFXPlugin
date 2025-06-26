@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -13,10 +9,6 @@
       <Configuration>Debug</Configuration>
       <Platform>ARM64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
@@ -24,10 +16,6 @@
     <ProjectConfiguration Include="Release|ARM64">
       <Configuration>Release</Configuration>
       <Platform>ARM64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Retail|Win32">
-      <Configuration>Retail</Configuration>
-      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Retail|x64">
       <Configuration>Retail</Configuration>
@@ -47,12 +35,6 @@
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -66,12 +48,6 @@
     <PlatformToolset>v142</PlatformToolset>
     <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -84,12 +60,6 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
     <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -107,25 +77,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
@@ -135,13 +96,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\..\release\builds\x32_Samples\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Debug\PK-Sample_04_Baking\</IntDir>
-    <TargetName>PK-Sample_04_Baking_d</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\release\builds\x64_Samples\</OutDir>
@@ -154,13 +108,6 @@
     <OutDir>..\..\..\release\builds\ARM64_Samples\</OutDir>
     <IntDir>..\intermediate\UnityStore\VC142\ARM64\Debug\PK-Sample_04_Baking\</IntDir>
     <TargetName>PK-Sample_04_Baking_d</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\release\builds\x32_Samples\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Release\PK-Sample_04_Baking\</IntDir>
-    <TargetName>PK-Sample_04_Baking_r</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -177,13 +124,6 @@
     <TargetName>PK-Sample_04_Baking_r</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\release\builds\x32_Samples\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Retail\PK-Sample_04_Baking\</IntDir>
-    <TargetName>PK-Sample_04_Baking_s</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\release\builds\x64_Samples\</OutDir>
@@ -198,36 +138,6 @@
     <TargetName>PK-Sample_04_Baking_s</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>false</OmitFramePointers>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TIFF_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;PK-Plugin_CodecMesh_FBX_d.lib;PK-Plugin_CodecImage_EXR_d.lib;freetype.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x32\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -253,7 +163,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TIFF_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;PK-Plugin_CodecMesh_FBX_d.lib;PK-Plugin_CodecImage_EXR_d.lib;freetype.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.13.3\lib\vs2022_x64\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -282,43 +192,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_d.lib;PK-Plugin_CodecImage_DDS_d.lib;PK-Plugin_CodecImage_PNG_d.lib;PK-Plugin_CodecImage_JPG_d.lib;PK-Plugin_CodecImage_TGA_d.lib;PK-Plugin_CodecImage_PKM_d.lib;PK-Plugin_CodecImage_PVR_d.lib;PK-Plugin_CodecImage_TIFF_d.lib;PK-Plugin_CodecImage_HDR_d.lib;PK-Plugin_CompilerBackend_CPU_VM_d.lib;PK-ZLib_d.lib;PK-Plugin_CodecMesh_FBX_d.lib;PK-Plugin_CodecImage_EXR_d.lib;freetype.lib;libfbxsdk-md_d.lib;libxml2-md_d.lib;zlib-md_d.lib;dxguid.lib;PK-ParticlesToolbox_d.lib;PK-Runtime_d.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_ARM64\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019{cfg.platform};..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>false</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TIFF_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;PK-Plugin_CodecMesh_FBX_r.lib;PK-Plugin_CodecImage_EXR_r.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x32\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.13.3\lib\vs2022_ARM64\Debug;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019{cfg.platform};..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -353,7 +227,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TIFF_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;PK-Plugin_CodecMesh_FBX_r.lib;PK-Plugin_CodecImage_EXR_r.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.13.3\lib\vs2022_x64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -388,43 +262,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_r.lib;PK-Plugin_CodecImage_DDS_r.lib;PK-Plugin_CodecImage_PNG_r.lib;PK-Plugin_CodecImage_JPG_r.lib;PK-Plugin_CodecImage_TGA_r.lib;PK-Plugin_CodecImage_PKM_r.lib;PK-Plugin_CodecImage_PVR_r.lib;PK-Plugin_CodecImage_TIFF_r.lib;PK-Plugin_CodecImage_HDR_r.lib;PK-Plugin_CompilerBackend_CPU_VM_r.lib;PK-ZLib_r.lib;PK-Plugin_CodecMesh_FBX_r.lib;PK-Plugin_CodecImage_EXR_r.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;dxguid.lib;PK-ParticlesToolbox_r.lib;PK-Runtime_r.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_ARM64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019{cfg.platform};..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;PK_USE_RENDER_HELPERS=0;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\SDK\Samples\ParticleSample\src;..\..\SDK\Samples\ParticleSample\src\include;..\..\ExternalLibs\PK-AssetBakerLib;..\..\Native\Common\PKFX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_s.lib;PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CodecImage_TGA_s.lib;PK-Plugin_CodecImage_PKM_s.lib;PK-Plugin_CodecImage_PVR_s.lib;PK-Plugin_CodecImage_TIFF_s.lib;PK-Plugin_CodecImage_HDR_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-Plugin_CodecMesh_FBX_s.lib;PK-Plugin_CodecImage_EXR_s.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x32\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x86;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.13.3\lib\vs2022_ARM64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019{cfg.platform};..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -459,9 +297,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_s.lib;PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CodecImage_TGA_s.lib;PK-Plugin_CodecImage_PKM_s.lib;PK-Plugin_CodecImage_PVR_s.lib;PK-Plugin_CodecImage_TIFF_s.lib;PK-Plugin_CodecImage_HDR_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-Plugin_CodecMesh_FBX_s.lib;PK-Plugin_CodecImage_EXR_s.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_x64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.13.3\lib\vs2022_x64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019\x64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|ARM64'">
     <ClCompile>
@@ -494,9 +335,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>PK-Plugin_CodecImage_PKIM_s.lib;PK-Plugin_CodecImage_DDS_s.lib;PK-Plugin_CodecImage_PNG_s.lib;PK-Plugin_CodecImage_JPG_s.lib;PK-Plugin_CodecImage_TGA_s.lib;PK-Plugin_CodecImage_PKM_s.lib;PK-Plugin_CodecImage_PVR_s.lib;PK-Plugin_CodecImage_TIFF_s.lib;PK-Plugin_CodecImage_HDR_s.lib;PK-Plugin_CompilerBackend_CPU_VM_s.lib;PK-ZLib_s.lib;PK-Plugin_CodecMesh_FBX_s.lib;PK-Plugin_CodecImage_EXR_s.lib;freetype.lib;libfbxsdk-md_r.lib;libxml2-md_r.lib;zlib-md_r.lib;PK-ParticlesToolbox_s.lib;PK-Runtime_s.lib;winmm.lib;User32.lib;Psapi.lib;Version.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.5.5\lib\vs2015_ARM64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019{cfg.platform};..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\libs\freetype-2.13.3\lib\vs2022_ARM64\Release;..\..\ExternalLibs\CodecMesh_FBX\libs\vs2019{cfg.platform};..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform);..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Native\Common\PKFX\FxPlugins.h" />

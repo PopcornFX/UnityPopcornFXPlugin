@@ -52,8 +52,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-UpgraderLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/android/Debug/PK-UpgraderLib
 DEFINES += -D_DEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -mfpu=neon -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -mfpu=neon -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),debug_android64)
@@ -70,8 +70,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-UpgraderLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/android64/Debug/PK-UpgraderLib
 DEFINES += -D_DEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_android)
@@ -88,8 +88,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-UpgraderLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/android/Release/PK-UpgraderLib
 DEFINES += -DNDEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_android64)
@@ -106,8 +106,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-UpgraderLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/android64/Release/PK-UpgraderLib
 DEFINES += -DNDEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),retail_android)
@@ -124,8 +124,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android
 TARGET = $(TARGETDIR)/libPK-UpgraderLib_s.a
 OBJDIR = ../intermediate/UnityStore/GM/android/Retail/PK-UpgraderLib
 DEFINES += -DNDEBUG -DPK_RETAIL
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -mfpu=neon -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
 ALL_LDFLAGS += $(LDFLAGS) -s
 
 else ifeq ($(config),retail_android64)
@@ -142,8 +142,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_android64
 TARGET = $(TARGETDIR)/libPK-UpgraderLib_s.a
 OBJDIR = ../intermediate/UnityStore/GM/android64/Retail/PK-UpgraderLib
 DEFINES += -DNDEBUG -DPK_RETAIL
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
 ALL_LDFLAGS += $(LDFLAGS) -s
 
 #else
@@ -161,6 +161,7 @@ PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden
 GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/00dj_ConstantColor.pktx.o
 GENERATED += $(OBJDIR)/0kYk_Editor_2.9.0.pkri.o
 GENERATED += $(OBJDIR)/1UDj_Decal_Default.pkma.o
 GENERATED += $(OBJDIR)/1s9V_White.dds.o
@@ -252,6 +253,7 @@ GENERATED += $(OBJDIR)/Oh1K_TriangleMaterial.pkfx.o
 GENERATED += $(OBJDIR)/PALN_PKOutputColor.h.o
 GENERATED += $(OBJDIR)/PSm9_FeatureDithering.h.o
 GENERATED += $(OBJDIR)/PlBH_Default_Decal.pkma.o
+GENERATED += $(OBJDIR)/Q4P5_AssetGenerators.pkfx.o
 GENERATED += $(OBJDIR)/Q9dG_AnimatedMesh.vert.o
 GENERATED += $(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o
 GENERATED += $(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o
@@ -266,6 +268,7 @@ GENERATED += $(OBJDIR)/UfZf_Debug.pkfx.o
 GENERATED += $(OBJDIR)/V1wW_FeatureDiffuse.h.o
 GENERATED += $(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o
 GENERATED += $(OBJDIR)/VP1n_MeshMaterial.pkfx.o
+GENERATED += $(OBJDIR)/ViaO_Substance.pktx.o
 GENERATED += $(OBJDIR)/W9iC_CurvePresets.pkfx.o
 GENERATED += $(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o
 GENERATED += $(OBJDIR)/WwnR_FeatureAtlas.h.o
@@ -348,6 +351,8 @@ GENERATED += $(OBJDIR)/core_upgrader_2_20_0_21896.o
 GENERATED += $(OBJDIR)/core_upgrader_2_20_1_21978.o
 GENERATED += $(OBJDIR)/core_upgrader_2_21_0_22636.o
 GENERATED += $(OBJDIR)/core_upgrader_2_21_0_22818.o
+GENERATED += $(OBJDIR)/core_upgrader_2_22_0_23751.o
+GENERATED += $(OBJDIR)/core_upgrader_2_22_0_23868.o
 GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -388,6 +393,7 @@ GENERATED += $(OBJDIR)/iED0_ExBillboard_Distortion.pkma.1.o
 GENERATED += $(OBJDIR)/ihBc_SampleLibSettings.pkbo.o
 GENERATED += $(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o
 GENERATED += $(OBJDIR)/j3Ha_PingPong.pkcf.o
+GENERATED += $(OBJDIR)/jFj7_SimpleSolid.pkgo.o
 GENERATED += $(OBJDIR)/jUul_Default_Triangle.frag.o
 GENERATED += $(OBJDIR)/jW9j_Default_Ribbon.pkma.o
 GENERATED += $(OBJDIR)/kTZU_FeatureDecal.h.o
@@ -397,12 +403,14 @@ GENERATED += $(OBJDIR)/l6KV_Events.pkfx.o
 GENERATED += $(OBJDIR)/lCSW_Light_Default.frag.o
 GENERATED += $(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o
 GENERATED += $(OBJDIR)/lYSl_Opaque_Ribbon.frag.o
+GENERATED += $(OBJDIR)/mYZv_VertexGraph.pkgo.o
 GENERATED += $(OBJDIR)/manifest.o
 GENERATED += $(OBJDIR)/manifest1.o
 GENERATED += $(OBJDIR)/mfOK_Light_Default.pkma.o
 GENERATED += $(OBJDIR)/mh4F_Dynamics.pkfx.o
 GENERATED += $(OBJDIR)/nPaD_Sphere.fbx.o
 GENERATED += $(OBJDIR)/negz_Default_Billboard.frag.o
+GENERATED += $(OBJDIR)/oMyq_TextureGraph.pktx.o
 GENERATED += $(OBJDIR)/orAW_Default_Decal.vert.o
 GENERATED += $(OBJDIR)/oueu_Triangle_Distortion.pkma.o
 GENERATED += $(OBJDIR)/po2N_ExRibbon_Distortion.pkma.1.o
@@ -476,6 +484,7 @@ GENERATED += $(OBJDIR)/upg_upgrades_v2.19.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.2.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.20.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.21.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.22.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -503,6 +512,7 @@ GENERATED += $(OBJDIR)/zNpM_Mesh_Tinted.pkma.o
 GENERATED += $(OBJDIR)/zQA6_PingPong.fbx.o
 GENERATED += $(OBJDIR)/zfkR_Sound_Default.pkma.o
 GENERATED += $(OBJDIR)/zgL9_Transparent_Mesh.frag.o
+OBJECTS += $(OBJDIR)/00dj_ConstantColor.pktx.o
 OBJECTS += $(OBJDIR)/0kYk_Editor_2.9.0.pkri.o
 OBJECTS += $(OBJDIR)/1UDj_Decal_Default.pkma.o
 OBJECTS += $(OBJDIR)/1s9V_White.dds.o
@@ -594,6 +604,7 @@ OBJECTS += $(OBJDIR)/Oh1K_TriangleMaterial.pkfx.o
 OBJECTS += $(OBJDIR)/PALN_PKOutputColor.h.o
 OBJECTS += $(OBJDIR)/PSm9_FeatureDithering.h.o
 OBJECTS += $(OBJDIR)/PlBH_Default_Decal.pkma.o
+OBJECTS += $(OBJDIR)/Q4P5_AssetGenerators.pkfx.o
 OBJECTS += $(OBJDIR)/Q9dG_AnimatedMesh.vert.o
 OBJECTS += $(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o
 OBJECTS += $(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o
@@ -608,6 +619,7 @@ OBJECTS += $(OBJDIR)/UfZf_Debug.pkfx.o
 OBJECTS += $(OBJDIR)/V1wW_FeatureDiffuse.h.o
 OBJECTS += $(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o
 OBJECTS += $(OBJDIR)/VP1n_MeshMaterial.pkfx.o
+OBJECTS += $(OBJDIR)/ViaO_Substance.pktx.o
 OBJECTS += $(OBJDIR)/W9iC_CurvePresets.pkfx.o
 OBJECTS += $(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o
 OBJECTS += $(OBJDIR)/WwnR_FeatureAtlas.h.o
@@ -690,6 +702,8 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_20_0_21896.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_20_1_21978.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_21_0_22636.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_21_0_22818.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_22_0_23751.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_22_0_23868.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -730,6 +744,7 @@ OBJECTS += $(OBJDIR)/iED0_ExBillboard_Distortion.pkma.1.o
 OBJECTS += $(OBJDIR)/ihBc_SampleLibSettings.pkbo.o
 OBJECTS += $(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o
 OBJECTS += $(OBJDIR)/j3Ha_PingPong.pkcf.o
+OBJECTS += $(OBJDIR)/jFj7_SimpleSolid.pkgo.o
 OBJECTS += $(OBJDIR)/jUul_Default_Triangle.frag.o
 OBJECTS += $(OBJDIR)/jW9j_Default_Ribbon.pkma.o
 OBJECTS += $(OBJDIR)/kTZU_FeatureDecal.h.o
@@ -739,12 +754,14 @@ OBJECTS += $(OBJDIR)/l6KV_Events.pkfx.o
 OBJECTS += $(OBJDIR)/lCSW_Light_Default.frag.o
 OBJECTS += $(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o
 OBJECTS += $(OBJDIR)/lYSl_Opaque_Ribbon.frag.o
+OBJECTS += $(OBJDIR)/mYZv_VertexGraph.pkgo.o
 OBJECTS += $(OBJDIR)/manifest.o
 OBJECTS += $(OBJDIR)/manifest1.o
 OBJECTS += $(OBJDIR)/mfOK_Light_Default.pkma.o
 OBJECTS += $(OBJDIR)/mh4F_Dynamics.pkfx.o
 OBJECTS += $(OBJDIR)/nPaD_Sphere.fbx.o
 OBJECTS += $(OBJDIR)/negz_Default_Billboard.frag.o
+OBJECTS += $(OBJDIR)/oMyq_TextureGraph.pktx.o
 OBJECTS += $(OBJDIR)/orAW_Default_Decal.vert.o
 OBJECTS += $(OBJDIR)/oueu_Triangle_Distortion.pkma.o
 OBJECTS += $(OBJDIR)/po2N_ExRibbon_Distortion.pkma.1.o
@@ -818,6 +835,7 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.19.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.2.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.20.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.21.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.22.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -1073,6 +1091,12 @@ $(OBJDIR)/core_upgrader_2_21_0_22636.o: ../../ExternalLibs/pk_upgraderlib/src/Up
 $(OBJDIR)/core_upgrader_2_21_0_22818.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22818/core_upgrader_2_21_0_22818.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23751.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23751/core_upgrader_2_22_0_23751.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23868.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23868/core_upgrader_2_22_0_23868.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -1181,6 +1205,9 @@ $(OBJDIR)/MmWQ_Utils_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrade
 $(OBJDIR)/Mwao_Legacy.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Mwao_Legacy.pkfx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q4P5_AssetGenerators.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Q4P5_AssetGenerators.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/QxEW_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/QxEW_Default_Sound.pkma.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -1266,6 +1293,9 @@ $(OBJDIR)/ykcF_Trails.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Dat
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/manifest.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/00dj_ConstantColor.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/00dj_ConstantColor.pktx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/0kYk_Editor_2.9.0.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/0kYk_Editor_2.9.0.pkri.cpp
@@ -1505,6 +1535,9 @@ $(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgrad
 $(OBJDIR)/VP1n_MeshMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VP1n_MeshMaterial.pkfx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ViaO_Substance.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ViaO_Substance.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WloZ_Legacy_Default_Mesh.pkma.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -1637,6 +1670,9 @@ $(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib
 $(OBJDIR)/j3Ha_PingPong.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/j3Ha_PingPong.pkcf.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jFj7_SimpleSolid.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jFj7_SimpleSolid.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/jUul_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jUul_Default_Triangle.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -1658,6 +1694,9 @@ $(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src
 $(OBJDIR)/lYSl_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lYSl_Opaque_Ribbon.frag.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mYZv_VertexGraph.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mYZv_VertexGraph.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/mfOK_Light_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mfOK_Light_Default.pkma.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -1665,6 +1704,9 @@ $(OBJDIR)/nPaD_Sphere.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/negz_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/negz_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oMyq_TextureGraph.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oMyq_TextureGraph.pktx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/orAW_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/orAW_Default_Decal.vert.cpp
@@ -1875,6 +1917,9 @@ $(OBJDIR)/upg_upgrades_v2.20.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.21.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.21.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.22.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.22.0.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp

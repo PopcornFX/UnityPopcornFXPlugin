@@ -50,8 +50,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_x64
 TARGET = $(TARGETDIR)/libPK-MCPP_d.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Debug/PK-MCPP_SDK1
 DEFINES += -D_DEBUG -DMCPP_LIB=1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
 
 else ifeq ($(config),debug_arm64)
@@ -59,8 +59,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64
 TARGET = $(TARGETDIR)/libPK-MCPP_d.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-MCPP_SDK1
 DEFINES += -D_DEBUG -DMCPP_LIB=1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
 ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 else ifeq ($(config),release_x64)
@@ -68,8 +68,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_x64
 TARGET = $(TARGETDIR)/libPK-MCPP_r.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Release/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DMCPP_LIB=1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
 
 else ifeq ($(config),release_arm64)
@@ -77,8 +77,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64
 TARGET = $(TARGETDIR)/libPK-MCPP_r.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DMCPP_LIB=1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
 ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 else ifeq ($(config),retail_x64)
@@ -86,8 +86,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_x64
 TARGET = $(TARGETDIR)/libPK-MCPP_s.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Retail/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL -DMCPP_LIB=1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -mfpmath=sse -target x86_64-apple-macos10.14 -iwithsysroot `xcrun --show-sdk-path`
 ALL_LDFLAGS += $(LDFLAGS) -m64 -target x86_64-apple-macos10.14
 
 else ifeq ($(config),retail_arm64)
@@ -95,8 +95,8 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64
 TARGET = $(TARGETDIR)/libPK-MCPP_s.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Retail/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL -DMCPP_LIB=1
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
 ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
 
 #else

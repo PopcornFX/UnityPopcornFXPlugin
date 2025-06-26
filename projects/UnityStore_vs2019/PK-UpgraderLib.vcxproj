@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -13,10 +9,6 @@
       <Configuration>Debug</Configuration>
       <Platform>ARM64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
@@ -24,10 +16,6 @@
     <ProjectConfiguration Include="Release|ARM64">
       <Configuration>Release</Configuration>
       <Platform>ARM64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Retail|Win32">
-      <Configuration>Retail</Configuration>
-      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Retail|x64">
       <Configuration>Retail</Configuration>
@@ -47,12 +35,6 @@
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -66,12 +48,6 @@
     <PlatformToolset>v142</PlatformToolset>
     <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -84,12 +60,6 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
     <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -107,25 +77,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
@@ -135,12 +96,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Debug\PK-UpgraderLib\</IntDir>
-    <TargetName>PK-UpgraderLib_d</TargetName>
-    <TargetExt>.lib</TargetExt>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\UnityStore\VC142\x64\Debug\PK-UpgraderLib\</IntDir>
@@ -151,12 +106,6 @@
     <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_ARM64\</OutDir>
     <IntDir>..\intermediate\UnityStore\VC142\ARM64\Debug\PK-UpgraderLib\</IntDir>
     <TargetName>PK-UpgraderLib_d</TargetName>
-    <TargetExt>.lib</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Release\PK-UpgraderLib\</IntDir>
-    <TargetName>PK-UpgraderLib_r</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -171,12 +120,6 @@
     <TargetName>PK-UpgraderLib_r</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
-    <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
-    <IntDir>..\intermediate\UnityStore\VC142\x32\Retail\PK-UpgraderLib\</IntDir>
-    <TargetName>PK-UpgraderLib_s</TargetName>
-    <TargetExt>.lib</TargetExt>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Retail|x64'">
     <OutDir>..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_$(Platform)\</OutDir>
     <IntDir>..\intermediate\UnityStore\VC142\x64\Retail\PK-UpgraderLib\</IntDir>
@@ -189,35 +132,6 @@
     <TargetName>PK-UpgraderLib_s</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>upg_precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\ExternalLibs\pk_upgraderlib\src;..\..\ExternalLibs\pk_upgraderlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>false</OmitFramePointers>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -272,41 +186,6 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>upg_precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\ExternalLibs\pk_upgraderlib\src;..\..\ExternalLibs\pk_upgraderlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>false</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -365,41 +244,6 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <ConformanceMode>true</ConformanceMode>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
-      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>upg_precompiled.h</PrecompiledHeaderFile>
-      <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs;..\..\ExternalLibs\pk_upgraderlib\src;..\..\ExternalLibs\pk_upgraderlib\src\precompiled;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>pk_compiler_warnings.h</ForcedIncludeFiles>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ConformanceMode>true</ConformanceMode>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -1129,6 +973,80 @@
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\1_Dynamics_pkfx.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\2_Events_pkfx.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\3_Legacy_pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\0_Mesh_Emissive.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\10_Triangle_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\11_Triangle_Transparent.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\12_Default.pkri.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\13_Legacy.pkri.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\14_Opaque_Ribbon.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\15_FeatureTransformUVs.h.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\16_Core.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\17_Placement.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\18_Samplers.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\19_Utils.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\1_Mesh_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\2_Mesh_Tinted.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\3_Ribbon_CorrectDeformation_Distortion.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\4_Ribbon_CorrectDeformation_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\5_Ribbon_CorrectDeformation_Transparent.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\6_Ribbon_Distortion.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\7_Ribbon_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\8_Ribbon_Transparent.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\9_Triangle_Distortion.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\0_Basic.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\10_Billboard_Transparent.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\11_Decal_Default.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\12_Mesh_AnimatedMasked.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\13_Mesh_Emissive.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\14_Mesh_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\15_Mesh_Tinted.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\16_Ribbon_AnimatedMasked.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\17_Ribbon_CorrectDeformation_Distortion.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\18_Ribbon_CorrectDeformation_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\19_Ribbon_CorrectDeformation_Transparent.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\1_FX_Simple.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\20_Ribbon_Distortion.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\21_Ribbon_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\22_Ribbon_Transparent.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\23_Triangle_Distortion.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\24_Triangle_Opaque.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\25_Triangle_Transparent.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\26_Default.pkri.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\27_Legacy.pkri.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\28_Legacy_Animated_Mesh.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\29_Legacy_Default_Billboard.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\2_SimpleSolid.pkgo.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\30_Legacy_Default_Decal.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\31_Legacy_Default_Mesh.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\32_Legacy_Default_Ribbon.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\33_Legacy_Default_Triangle.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\34_Legacy_Distortion_Billboard.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\35_Legacy_Distortion_Ribbon.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\36_Legacy_Opaque_Billboard.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\37_Legacy_Opaque_Ribbon.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\38_Legacy_Opaque_Triangle.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\39_Legacy_Transparent_Mesh.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\3_VertexGraph.pkgo.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\40_Default_Ribbon.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\41_Distortion_Billboard.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\42_Distortion_Ribbon.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\43_Opaque_Ribbon.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\44_Particle_Master.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\45_FeatureTransformUVs.h.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\46_PKSurface.h.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\47_Color.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\48_Core.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\49_Dynamics.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\4_ConstantColor.pktx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\50_Events.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\51_Legacy.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\52_Samplers.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\53_Utils.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\5_Substance.pktx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\6_TextureGraph.pktx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\7_Billboard_AnimatedMasked.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\8_Billboard_Distortion.pkma.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\9_Billboard_Opaque.pkma.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\0_Basic_pkfx.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\10_Billboard_frag.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\11_Mesh_frag.h" />
@@ -1458,6 +1376,8 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.20.1.21978\core_upgrader_2_20_1_21978.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22636\core_upgrader_2_21_0_22636.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.21.0.22818\core_upgrader_2_21_0_22818.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23751\core_upgrader_2_22_0_23751.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.22.0.23868\core_upgrader_2_22_0_23868.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\core_upgrader_2_3_0_59136.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59175\core_upgrader_2_3_0_59175.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59344\core_upgrader_2_3_0_59344.cpp" />
@@ -1494,6 +1414,7 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\MTie_Default_Light.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\MmWQ_Utils_2.9.0.pkfx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\Mwao_Legacy.pkfx.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\Q4P5_AssetGenerators.pkfx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\QxEW_Default_Sound.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\SayE_Opaque_Ribbon.frag.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\TZEH_Trails_2.9.0.pkfx.cpp" />
@@ -1523,6 +1444,7 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\xnTO_Dynamics_2.9.0.pkfx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\Upgrades\ykcF_Trails.pkfx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXCore\manifest.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\00dj_ConstantColor.pktx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\0kYk_Editor_2.9.0.pkri.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\1UDj_Decal_Default.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\1xZV_ExDecal_Emissive.pkma.1.cpp" />
@@ -1602,6 +1524,7 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\V1wW_FeatureDiffuse.h.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\VN0Q_FeatureRibbonCorrectDeformation.h.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\VP1n_MeshMaterial.pkfx.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\ViaO_Substance.pktx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\WloZ_Legacy_Default_Mesh.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\WwnR_FeatureAtlas.h.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\Wx91_ExRibbon_CD_Diffuse.pkma.1.cpp" />
@@ -1646,6 +1569,7 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\iED0_ExBillboard_Distortion.pkma.1.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\ivJt_Legacy_Default_Triangle.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\j3Ha_PingPong.pkcf.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\jFj7_SimpleSolid.pkgo.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\jUul_Default_Triangle.frag.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\jW9j_Default_Ribbon.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\kTZU_FeatureDecal.h.cpp" />
@@ -1653,9 +1577,11 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\lCSW_Light_Default.frag.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\lPee_ExTriangle_Opaque.pkma.1.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\lYSl_Opaque_Ribbon.frag.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\mYZv_VertexGraph.pkgo.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\mfOK_Light_Default.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\nPaD_Sphere.fbx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\negz_Default_Billboard.frag.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\oMyq_TextureGraph.pktx.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\orAW_Default_Decal.vert.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\oueu_Triangle_Distortion.pkma.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\PopcornFXEditorCore\Upgrades\po2N_ExRibbon_Distortion.pkma.1.cpp" />
@@ -1728,6 +1654,7 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.2.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.20.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.21.0.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.22.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.3.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.4.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.5.0.cpp" />

@@ -34,8 +34,7 @@ struct	IUnityGraphicsPS4;
 struct	IUnityGraphicsUNKNOWN2;
 #endif	// PK_NX
 #if	(PK_BUILD_WITH_VULKAN_SUPPORT != 0)
-#include "ImplemGraphicsAPI/RenderAPI_VulkanData.h"
-#include "UnityGraphicsAPI/IUnityGraphicsVulkan.h"
+struct	IUnityGraphicsVulkan;
 #endif
 #if	(PK_BUILD_WITH_D3D12_SUPPORT != 0)
 #include "ImplemGraphicsAPI/RenderAPI_DX12Data.h"

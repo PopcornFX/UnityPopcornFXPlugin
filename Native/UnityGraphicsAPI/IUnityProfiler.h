@@ -92,6 +92,8 @@ enum UnityBuiltinProfilerCategory_
     kUnityProfilerCategoryNetworkOperations = 34,
     kUnityProfilerCategoryUIDetails = 35,
     kUnityProfilerCategoryDebug = 36,
+    kUnityProfilerCategoryJobs = 37,
+    kUnityProfilerCategoryText = 38,
 };
 typedef uint16_t UnityProfilerCategoryId;
 
@@ -165,6 +167,7 @@ enum UnityProfilerMarkerDataType_
     kUnityProfilerMarkerDataTypeString = 8,
     kUnityProfilerMarkerDataTypeString16 = 9,
     kUnityProfilerMarkerDataTypeBlob8 = 11,
+    kUnityProfilerMarkerDataTypeGfxResourceId = 12,
     kUnityProfilerMarkerDataTypeCount // Total count of data types
 };
 typedef uint8_t UnityProfilerMarkerDataType;
@@ -374,14 +377,14 @@ UNITY_REGISTER_INTERFACE_GUID(0xB957E0189CB6A30BULL, 0x83CE589AE85B9068ULL, IUni
 struct UnityProfilerCounterValue
 {
     UnityProfilerCounterValue()
-        : m_Value(nullptr)
-        , m_Profiler(nullptr)
+        : m_Profiler(nullptr)
+        , m_Value(nullptr)
     {
     }
 
     UnityProfilerCounterValue(IUnityProfilerV2* profiler, void* value)
-        : m_Value(value)
-        , m_Profiler(profiler)
+        : m_Profiler(profiler)
+        , m_Value(value)
     {
     }
 

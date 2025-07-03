@@ -1,3 +1,9 @@
+// Unity Native Plugin API copyright © 2015 Unity Technologies ApS
+//
+// Licensed under the Unity Companion License for Unity - dependent projects--see[Unity Companion License](http://www.unity3d.com/legal/licenses/Unity_Companion_License).
+//
+// Unless expressly provided otherwise, the Software under this license is made available strictly on an “AS IS” BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.Please review the license for details on these and other terms and conditions.
+
 #pragma once
 
 
@@ -20,23 +26,29 @@ enum UnityShaderCompilerExtCompilerPlatform
     kUnityShaderCompilerExtCompPlatformUnused2,
     kUnityShaderCompilerExtCompPlatformUnused3,
     kUnityShaderCompilerExtCompPlatformD3D11,           // Direct3D 11 (FL10.0 and up), compiled with MS D3DCompiler
-    kUnityShaderCompilerExtCompPlatformGLES20,          // OpenGL ES 2.0 / WebGL 1.0, compiled with hlsl2glslfork + glsl-optimizer
+    kUnityShaderCompilerExtCompPlatformUnused5,
     kUnityShaderCompilerExtCompPlatformUnused6,
     kUnityShaderCompilerExtCompPlatformUnused7,
-    kUnityShaderCompilerExtCompPlatformD3D11_9x,        // Direct3D 11 Feature Levels 9.x, compiled with MS D3DCompiler
+    kUnityShaderCompilerExtCompPlatformUnused8,
     kUnityShaderCompilerExtCompPlatformGLES3Plus,       // OpenGL ES 3.0+ / WebGL 2.0, compiled with MS D3DCompiler + HLSLcc
-    kUnityShaderCompilerExtCompPlatformPSP2,            // Sony PSP2/Vita
+    kUnityShaderCompilerExtCompPlatformUnused10,
     kUnityShaderCompilerExtCompPlatformPS4,             // Sony PS4
-	kUnityShaderCompilerExtCompPlatformUNKNOWN2,             // UNKNOWN2
     kUnityShaderCompilerExtCompPlatformXboxOne,         // MS XboxOne
     kUnityShaderCompilerExtCompPlatformUnused13,
     kUnityShaderCompilerExtCompPlatformMetal,           // Apple Metal, compiled with MS D3DCompiler + HLSLcc
     kUnityShaderCompilerExtCompPlatformOpenGLCore,      // Desktop OpenGL 3+, compiled with MS D3DCompiler + HLSLcc
-    kUnityShaderCompilerExtCompPlatformN3DS,            // Nintendo 3DS
+    kUnityShaderCompilerExtCompPlatformUnused16,
     kUnityShaderCompilerExtCompPlatformUnused17,
     kUnityShaderCompilerExtCompPlatformVulkan,          // Vulkan SPIR-V, compiled with MS D3DCompiler + HLSLcc
     kUnityShaderCompilerExtCompPlatformSwitch,          // Nintendo Switch (NVN)
     kUnityShaderCompilerExtCompPlatformXboxOneD3D12,    // Xbox One D3D12
+    kUnityShaderCompilerExtCompPlatformGameCoreXboxOne, // GameCore XboxOne
+    kUnityShaderCompilerExtCompPlatformGameCoreUNKNOWN1eries,// GameCore UNKNOWN1eries
+    kUnityShaderCompilerExtCompPlatformUNKNOWN2,
+    kUnityShaderCompilerExtCompPlatformUNKNOWN2NGGC,
+    kUnityShaderCompilerExtCompPlatformUnused25,
+    kUnityShaderCompilerExtCompPlatformWebGPU,
+    kUnityShaderCompilerExtCompPlatformReservedCFE,
     kUnityShaderCompilerExtCompPlatformCount
 };
 
@@ -49,6 +61,7 @@ enum UnityShaderCompilerExtShaderType
     kUnityShaderCompilerExtShaderGeometry = 3,
     kUnityShaderCompilerExtShaderHull = 4,
     kUnityShaderCompilerExtShaderDomain = 5,
+    kUnityShaderCompilerExtShaderRayTracing = 6,
     kUnityShaderCompilerExtShaderTypeCount // keep this last!
 };
 
@@ -61,7 +74,7 @@ enum UnityShaderCompilerExtGPUProgramType
     kUnityShaderCompilerExtGPUProgramTargetGLES31AEP = 2,
     kUnityShaderCompilerExtGPUProgramTargetGLES31 = 3,
     kUnityShaderCompilerExtGPUProgramTargetGLES3 = 4,
-    kUnityShaderCompilerExtGPUProgramTargetGLES = 5,
+    kUnityShaderCompilerExtGPUProgramTargetGLES = 5, // removed
     kUnityShaderCompilerExtGPUProgramTargetGLCore32 = 6,
     kUnityShaderCompilerExtGPUProgramTargetGLCore41 = 7,
     kUnityShaderCompilerExtGPUProgramTargetGLCore43 = 8,
@@ -83,6 +96,13 @@ enum UnityShaderCompilerExtGPUProgramType
     kUnityShaderCompilerExtGPUProgramTargetMetalFS = 24,
     kUnityShaderCompilerExtGPUProgramTargetSPIRV = 25,
     kUnityShaderCompilerExtGPUProgramTargetUnused1 = 26,
+    kUnityShaderCompilerExtGPUProgramTargetUnused2 = 27,
+    kUnityShaderCompilerExtGPUProgramTargetUnused3 = 28,
+    kUnityShaderCompilerExtGPUProgramTargetUnused4 = 29,
+    kUnityShaderCompilerExtGPUProgramTargetUnused5 = 30,
+    kUnityShaderCompilerExtGPUProgramTargetRayTracing = 31,
+    kUnityShaderCompilerExtGPUProgramTargetUNKNOWN2NGGC = 32,
+    kUnityShaderCompilerExtGPUProgramTargetWebGPU = 33,
     kUnityShaderCompilerExtGPUProgramTargetCount
 };
 

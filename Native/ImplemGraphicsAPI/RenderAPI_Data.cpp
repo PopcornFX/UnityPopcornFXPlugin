@@ -44,7 +44,7 @@ extern class	IRenderAPIData* CreateGNMData();
 #endif
 #if defined(PK_UNKNOWN2)
 #include <ImplemGraphicsAPI/RenderAPI_AGCData.h>
-extern class	IRenderAPIData* UNKNOWN2Data();
+extern class	IRenderAPIData* UNKNOWN2Data(bool);
 #endif
 
 //-------------------------------------------------------------------------------------
@@ -78,9 +78,11 @@ bool SBufferHandles::Init(UnityGfxRenderer deviceType)
 		break;
 #endif
 #if (PK_BUILD_WITH_GLES_SUPPORT != 0)
+#	if 0 // Removed in Unity 6
 	case UnityGfxRenderer::kUnityGfxRendererOpenGLES20:
 		m_Buffer = PK_NEW(CBufferAbstract);
 		break;
+#	endif
 #	if (PK_BUILD_WITH_GLES3_SUPPORT != 0)
 	case UnityGfxRenderer::kUnityGfxRendererOpenGLES30:
 		m_Buffer = PK_NEW(CBufferAbstract);
@@ -104,6 +106,7 @@ bool SBufferHandles::Init(UnityGfxRenderer deviceType)
 #endif
 #if defined(PK_UNKNOWN2)
 		case UnityGfxRenderer::kUnityGfxRendererUNKNOWN2:
+		case UnityGfxRenderer::kUnityGfxRendererUNKNOWN2NGGC:
 			m_Buffer = PK_NEW(CUNKNOWN2BufferHandles);
 			break;
 #endif
@@ -196,9 +199,11 @@ IRenderAPIData *IRenderAPIData::GetRenderAPISpecificData(UnityGfxRenderer device
 		break;
 #endif
 #if (PK_BUILD_WITH_GLES_SUPPORT != 0)
+#	if 0 // Removed in Unity 6
 	case UnityGfxRenderer::kUnityGfxRendererOpenGLES20:
 		return CreateGLES2Data();
 		break;
+#	endif
 #	if (PK_BUILD_WITH_GLES3_SUPPORT != 0)
 	case UnityGfxRenderer::kUnityGfxRendererOpenGLES30:
 		return CreateGLES3Data();
@@ -222,7 +227,10 @@ IRenderAPIData *IRenderAPIData::GetRenderAPISpecificData(UnityGfxRenderer device
 #endif
 #if defined(PK_UNKNOWN2)
 	case UnityGfxRenderer::kUnityGfxRendererUNKNOWN2:
-		return UNKNOWN2Data();
+		return UNKNOWN2Data(false);
+		break;
+	case UnityGfxRenderer::kUnityGfxRendererUNKNOWN2NGGC:
+		return UNKNOWN2Data(true);
 		break;
 #endif
 	case UnityGfxRenderer::kUnityGfxRendererNull:

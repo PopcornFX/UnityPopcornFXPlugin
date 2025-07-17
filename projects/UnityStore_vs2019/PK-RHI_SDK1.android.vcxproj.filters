@@ -495,6 +495,9 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanGpuBuffer.h">
       <Filter>Headers\vulkan</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanPlatformSpecificData.h">
+      <Filter>Headers\vulkan</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanPopcornEnumConversion.h">
       <Filter>Headers\vulkan</Filter>
     </ClInclude>

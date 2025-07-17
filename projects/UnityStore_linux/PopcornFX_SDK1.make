@@ -198,6 +198,7 @@ else ifeq ($(config),retail_x32)
   PK_Runtime_SDK1_config = retail_x32
   PK_Discretizers_SDK1_config = retail_x32
   PK_ParticlesToolbox_SDK1_config = retail_x32
+  PK_AssetBakerLib_config = retail_x32
   PK_UpgraderLib_config = retail_x32
   PK_Upgrader_config = retail_x32
   PK_Sample_01_BasicStartup_config = retail_x32
@@ -226,6 +227,7 @@ else ifeq ($(config),retail_x64)
   PK_Runtime_SDK1_config = retail_x64
   PK_Discretizers_SDK1_config = retail_x64
   PK_ParticlesToolbox_SDK1_config = retail_x64
+  PK_AssetBakerLib_config = retail_x64
   PK_UpgraderLib_config = retail_x64
   PK_Upgrader_config = retail_x64
   PK_Sample_01_BasicStartup_config = retail_x64
@@ -254,6 +256,7 @@ else ifeq ($(config),retail_arm64)
   PK_Runtime_SDK1_config = retail_arm64
   PK_Discretizers_SDK1_config = retail_arm64
   PK_ParticlesToolbox_SDK1_config = retail_arm64
+  PK_AssetBakerLib_config = retail_arm64
   PK_UpgraderLib_config = retail_arm64
   PK_Upgrader_config = retail_arm64
   PK_Sample_01_BasicStartup_config = retail_arm64

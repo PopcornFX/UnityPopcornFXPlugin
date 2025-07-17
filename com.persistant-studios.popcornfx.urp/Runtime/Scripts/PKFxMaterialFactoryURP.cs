@@ -166,11 +166,9 @@ namespace PopcornFX
 				m_RenderFeatureBindings.Add(m_TransparentParticleUnlitDefault);
 			if (m_AdditiveParticleUnlitLegacy != null)
 				m_RenderFeatureBindings.Add(m_AdditiveParticleUnlitLegacy);
+
 			if (m_AlphaBlendDecal != null)
 				m_RenderFeatureBindings.Add(m_AlphaBlendDecal);
-			if (m_CPUParticleDistortion != null)
-				m_RenderFeatureBindings.Add(m_CPUParticleDistortion);
-
 #elif UNITY_2020_3_OR_NEWER
 			// Meshes:
 			if (m_TransparentMeshUnlit2020 != null)

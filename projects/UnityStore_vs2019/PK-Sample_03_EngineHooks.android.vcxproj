@@ -210,8 +210,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -234,8 +233,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -262,8 +260,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -292,8 +289,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -322,8 +318,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
@@ -352,8 +347,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>

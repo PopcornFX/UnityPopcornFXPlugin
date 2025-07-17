@@ -178,6 +178,7 @@ bool	CFileStreamFS_Unity::Flush()
 
 void	CFileStreamFS_Unity::Close()
 {
+	_InternalCloseIFN();
 }
 
 //----------------------------------------------------------------------------
@@ -192,26 +193,6 @@ u64	CFileStreamFS_Unity::SizeInBytes() const
 void	CFileStreamFS_Unity::Timestamps(SFileTimes &)
 {
 	PK_ASSERT_NOT_REACHED();
-}
-
-//----------------------------------------------------------------------------
-
-void	CFileStreamFS_Unity::_InternalCloseIFN()
-{
-	if (m_Mode == IFileSystem::Access_WriteCreate ||
-		m_Mode == IFileSystem::Access_ReadWrite ||
-		m_Mode == IFileSystem::Access_ReadWriteCreate)
-	{
-		PK_ONLY_IF_ASSERTS(u64 writtenSize = )::OnResourceWrite(m_Path.Data(), m_PseudoFileHandle, 0, m_Size);
-		PK_ASSERT(writtenSize == m_Size);
-	}
-	if (!PK_VERIFY(::OnResourceUnload(m_Path.Data())))
-		CLog::Log(PK_ERROR, "OnResourceUnload could not free \'%s\'", m_Path.Data());
-	if (m_OwnBuffer)
-		PK_FREE(m_PseudoFileHandle);
-	m_PseudoFileHandle = null;
-	m_Cursor = 0;
-	m_Size = 0;
 }
 
 //----------------------------------------------------------------------------
@@ -287,6 +268,26 @@ bool	CUnityPseudoFileSystem::DirectoryDelete(const CString &path, bool pathNotVi
 	(void)path; (void)pathNotVirtual;
 	PK_ASSERT_NOT_REACHED_MESSAGE("Can't create dir in Unity Assets");
 	return false;
+}
+
+//----------------------------------------------------------------------------
+
+void	CFileStreamFS_Unity::_InternalCloseIFN()
+{
+	if (m_Mode == IFileSystem::Access_WriteCreate ||
+		m_Mode == IFileSystem::Access_ReadWrite ||
+		m_Mode == IFileSystem::Access_ReadWriteCreate)
+	{
+		PK_ONLY_IF_ASSERTS(u64 writtenSize = )::OnResourceWrite(m_Path.Data(), m_PseudoFileHandle, 0, m_Size);
+		PK_ASSERT(writtenSize == m_Size);
+	}
+	if (!PK_VERIFY(::OnResourceUnload(m_Path.Data())))
+		CLog::Log(PK_ERROR, "OnResourceUnload could not free \'%s\'", m_Path.Data());
+	if (m_OwnBuffer)
+		PK_FREE(m_PseudoFileHandle);
+	m_PseudoFileHandle = null;
+	m_Cursor = 0;
+	m_Size = 0;
 }
 
 //----------------------------------------------------------------------------

@@ -1,3 +1,9 @@
+// Unity Native Plugin API copyright © 2015 Unity Technologies ApS
+//
+// Licensed under the Unity Companion License for Unity - dependent projects--see[Unity Companion License](http://www.unity3d.com/legal/licenses/Unity_Companion_License).
+//
+// Unless expressly provided otherwise, the Software under this license is made available strictly on an “AS IS” BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.Please review the license for details on these and other terms and conditions.
+
 #pragma once
 
 #include "IUnityInterface.h"
@@ -205,7 +211,7 @@ namespace UnityEventQueue
     // If you get errors about return values related to this method
     // then you have forgotten to include REGISTER_EVENT_ID() for your
     // payload / event. This method should never be compiled, ever.
-    template<typename T> const EventId GetEventId() {}
+    template<typename T> const EventId GetEventId();
     class EventQueue;
     class EventHandler;
 

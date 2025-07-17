@@ -957,6 +957,7 @@ bool	CRuntimeManager::UnityAPIDeviceInitialize()
 #endif // PK_ORBIS
 #if	defined(PK_UNKNOWN2)
 	case	kUnityGfxRendererUNKNOWN2:
+	case	kUnityGfxRendererUNKNOWN2NGGC:
 		{
 			CLog::Log(PK_INFO, "Initialize UNKNOWN2 Graphics API");
 			m_UNKNOWN2Interface = m_UnityInterfaces->Get<IUnityGraphicsUNKNOWN2>();
@@ -1005,6 +1006,7 @@ bool	CRuntimeManager::UnityAPIDeviceUnInitialize()
 #endif //PK_ORBIS
 #if	defined(PK_UNKNOWN2)
 	case	kUnityGfxRendererUNKNOWN2:
+	case	kUnityGfxRendererUNKNOWN2NGGC:
 	{
 		m_UNKNOWN2Interface = null;
 		m_ContextUNKNOWN2 = null;

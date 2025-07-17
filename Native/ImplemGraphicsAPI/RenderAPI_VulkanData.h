@@ -10,8 +10,6 @@
 
 #if (PK_BUILD_WITH_VULKAN_SUPPORT != 0)
 
-#include "UnityGraphicsAPI/IUnityGraphicsVulkan.h"
-
 //-------------------------------------------------------------------------------------
 
 class	CVulkanBufferHandles : public CBufferAbstract

@@ -1,9 +1,6 @@
 //----------------------------------------------------------------------------
 // Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
 //----------------------------------------------------------------------------
-using Codice.Client.BaseCommands;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;

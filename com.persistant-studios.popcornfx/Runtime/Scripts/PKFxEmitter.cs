@@ -211,7 +211,7 @@ namespace PopcornFX
 					}
 					// Setup the default values for the samplers:
 					UpdateSamplers(true);
-
+					UpdateAttributes();
 				}
 				else
 				{

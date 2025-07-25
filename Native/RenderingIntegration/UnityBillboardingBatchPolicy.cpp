@@ -945,6 +945,7 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 		const u8										enabledTrue = u8(-1);
 		TStridedMemoryView<const u8>					enabledParticles = (bbRequest.m_EnabledStreamId.Valid()) ? page->StreamForReading<bool>(bbRequest.m_EnabledStreamId) : TStridedMemoryView<const u8>(&enabledTrue, pcount, 0);
 
+#if defined(PK_DEBUG)
 		const u32	posCount = positions.Count();
 		PK_ASSERT(
 			posCount == pcount &&
@@ -954,6 +955,7 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 			posCount == velocities.Count() &&
 			posCount == volumes.Count() &&
 			posCount == radii.Count());
+#endif
 
 
 		for (u32 parti = 0; parti < pcount; ++parti)
@@ -971,7 +973,6 @@ bool	CUnityBillboardingBatchPolicy::_UpdateThread_IssueDrawCallSound(const Drawe
 
 			const float		soundId = 0;
 			const float		soundIdFrac = PKFrac(soundId) * isBlended;
-			const u32		soundId0 = u32(soundId);
 
 			PopcornFX::CGuid	ldatai = soundDatas.PushBack();
 

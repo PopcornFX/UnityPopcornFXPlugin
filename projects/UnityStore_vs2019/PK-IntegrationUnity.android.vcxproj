@@ -216,7 +216,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
-      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -225,7 +226,7 @@
     <Link>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\gmake_android;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wl,--build-id -Wl,-z,noexecstack -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
@@ -239,7 +240,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
-      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -248,7 +250,7 @@
     <Link>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_d;PK-Plugin_CompilerBackend_CPU_VM_d;PK-ZLib_d;PK-Plugin_CodecImage_PKM_d;m;log;PK-ParticlesToolbox_d;PK-Runtime_d;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\gmake_android64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wl,--build-id -Wl,-z,noexecstack -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
@@ -266,7 +268,8 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -277,7 +280,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\gmake_android;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wl,--build-id -Wl,-z,noexecstack -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
@@ -295,7 +298,8 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -306,7 +310,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_r;PK-Plugin_CompilerBackend_CPU_VM_r;PK-ZLib_r;PK-Plugin_CodecImage_PKM_r;m;log;PK-ParticlesToolbox_r;PK-Runtime_r;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\gmake_android64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wl,--build-id -Wl,-z,noexecstack -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
@@ -324,7 +328,8 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalOptions>-fno-math-errno -fno-trapping-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -335,7 +340,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_s;PK-Plugin_CompilerBackend_CPU_VM_s;PK-ZLib_s;PK-Plugin_CodecImage_PKM_s;m;log;PK-ParticlesToolbox_s;PK-Runtime_s;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\gmake_android;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wl,--build-id -Wl,-z,noexecstack -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
@@ -353,7 +358,8 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Disabled</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalOptions>-fno-math-errno -fno-trapping-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <AdditionalOptions>-fno-finite-math-only -fsigned-zeros -fno-associative-math -fvisibility=hidden %(AdditionalOptions)</AdditionalOptions>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <StrictAliasing>false</StrictAliasing>
       <PositionIndependentCode>true</PositionIndependentCode>
@@ -364,7 +370,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <LibraryDependencies>%(LibraryDependencies);PK-RenderHelpers_s;PK-Plugin_CompilerBackend_CPU_VM_s;PK-ZLib_s;PK-Plugin_CodecImage_PKM_s;m;log;PK-ParticlesToolbox_s;PK-Runtime_s;EGL;GLESv3</LibraryDependencies>
       <AdditionalLibraryDirectories>..\..\ExternalLibs\Runtime\bin\UnityStore\gmake_android64;..\..\ExternalLibs\Runtime\bin\UnityStore\vs2019_android64.android;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>-Wl,--build-id -shared %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Wl,--build-id -Wl,-z,noexecstack -shared %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -147,6 +147,36 @@
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_Graph.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Constant.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Graph.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Substance.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX_Constant.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX_Graph.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_SimInterfaces.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -186,6 +216,45 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_VectorField.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_Graph.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_SimInterfaces.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Constant.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Graph.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_SimInterfaces.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Substance.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX_Constant.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX_Graph.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX_SimInterfaces.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_SimInterfaces.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Startup.cpp">

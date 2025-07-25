@@ -53,24 +53,24 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-SampleLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/ios64/Debug/PK-SampleLib
 DEFINES += -D_DEBUG -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -miphoneos-version-min=8.0 -fembed-bitcode
 
 else ifeq ($(config),release_ios64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-SampleLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/ios64/Release/PK-SampleLib
 DEFINES += -DNDEBUG -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -miphoneos-version-min=8.0 -fembed-bitcode
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -miphoneos-version-min=8.0 -fembed-bitcode
 
 else ifeq ($(config),retail_ios64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_ios64
 TARGET = $(TARGETDIR)/libPK-SampleLib_s.a
 OBJDIR = ../intermediate/UnityStore/GM/ios64/Retail/PK-SampleLib
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_SDL=0 -DPK_BUILD_WITH_FMODEX_SUPPORT=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-math-errno -fno-trapping-math -miphoneos-version-min=8.0 -fembed-bitcode
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -miphoneos-version-min=8.0 -fembed-bitcode
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -arch arm64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -pipe -isysroot `xcrun --sdk iphoneos --show-sdk-path` -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -miphoneos-version-min=8.0 -fembed-bitcode
 
 #else
 #  $(error "invalid configuration $(config)")

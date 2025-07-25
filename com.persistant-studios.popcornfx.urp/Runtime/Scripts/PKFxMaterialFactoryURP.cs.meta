@@ -72,7 +72,8 @@ MonoImporter:
       type: 2}
   - m_VertexBillboardingOpaqueLegacy: {fileID: 11400000, guid: d19a42aac00a18d4a8d50480e52271a7,
       type: 2}
-  - m_CPUParticleDistortion: {instanceID: 0}
+  - m_CPUParticleDistortion: {fileID: 11400000, guid: 0424bb726ab77574d9b199426f7abb38,
+      type: 2}
   - m_VertexBillboardingDistortion: {instanceID: 0}
   - m_TransparentMeshUnlit2020: {fileID: 11400000, guid: 5f97069cae9ee2c45955649abd3f8dd6,
       type: 2}

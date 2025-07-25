@@ -628,7 +628,6 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanConstantSet.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanFrameBuffer.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanGpuBuffer.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanPlatformSpecificData.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanPopcornEnumConversion.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanQueryPool.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_rhi\include\vulkan\VulkanRHI.h" />

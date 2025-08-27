@@ -52,7 +52,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 LIBS += -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lGL -lGLU -lPK-ParticlesToolbox_d -lPK-Runtime_d -ldl -lpthread -lm -lz
 LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux32 -L../../ExternalLibs/CodecMesh_FBX/libs/linux32 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x32 -L/usr/lib32 -m32 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux32 -L../../ExternalLibs/CodecMesh_FBX/libs/linux32 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x32 -L/usr/lib32 -m32 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined -Wl,-z,noexecstack
 
 else ifeq ($(config),debug_x64)
 TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/x86_64
@@ -64,7 +64,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-AssetBakerLib_d.a -lPK-RenderHelpers_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-Plugin_CodecMesh_FBX_d -lPK-Plugin_CodecImage_PKIM_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_PVR_d -lPK-Plugin_CodecImage_TGA_d -lPK-Plugin_CodecImage_TIFF_d -lPK-Plugin_CodecImage_HDR_d -lPK-Plugin_CodecImage_EXR_d -lPK-ZLib_d -lPK-Plugin_CodecImage_PKM_d -lGL -lGLU -lvulkan -lfbxsdk_d -lxml2 -lfreetype -lPK-ParticlesToolbox_d -lPK-Runtime_d -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_d.a ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-AssetBakerLib_d.a
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux64 -L../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/linux64 -L$$VULKAN_SDK/lib -L../../ExternalLibs/CodecMesh_FBX/libs/linux64 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux64 -L../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/linux64 -L$$VULKAN_SDK/lib -L../../ExternalLibs/CodecMesh_FBX/libs/linux64 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined -Wl,-z,noexecstack
 
 else ifeq ($(config),release_x32)
 TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/x86
@@ -76,7 +76,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 LIBS += -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lGL -lGLU -lPK-ParticlesToolbox_r -lPK-Runtime_r -ldl -lpthread -lm -lz
 LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux32 -L../../ExternalLibs/CodecMesh_FBX/libs/linux32 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x32 -L/usr/lib32 -m32 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux32 -L../../ExternalLibs/CodecMesh_FBX/libs/linux32 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x32 -L/usr/lib32 -m32 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined -Wl,-z,noexecstack
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/x86_64
@@ -88,7 +88,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-po
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-AssetBakerLib_r.a -lPK-RenderHelpers_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-Plugin_CodecMesh_FBX_r -lPK-Plugin_CodecImage_PKIM_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_PVR_r -lPK-Plugin_CodecImage_TGA_r -lPK-Plugin_CodecImage_TIFF_r -lPK-Plugin_CodecImage_HDR_r -lPK-Plugin_CodecImage_EXR_r -lPK-ZLib_r -lPK-Plugin_CodecImage_PKM_r -lGL -lGLU -lvulkan -lfbxsdk_r -lxml2 -lfreetype -lPK-ParticlesToolbox_r -lPK-Runtime_r -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_r.a ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-AssetBakerLib_r.a
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux64 -L../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/linux64 -L$$VULKAN_SDK/lib -L../../ExternalLibs/CodecMesh_FBX/libs/linux64 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux64 -L../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/linux64 -L$$VULKAN_SDK/lib -L../../ExternalLibs/CodecMesh_FBX/libs/linux64 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -shared -Wl,-soname=libPK-UnityPlugin.so -Wl,--no-undefined -Wl,-z,noexecstack
 
 else ifeq ($(config),retail_x32)
 TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/x86
@@ -100,7 +100,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fomit-frame-point
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 LIBS += -lPK-RenderHelpers_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -lPK-Plugin_CodecImage_PKM_s -lGL -lGLU -lPK-ParticlesToolbox_s -lPK-Runtime_s -ldl -lpthread -lm -lz
 LDDEPS +=
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux32 -L../../ExternalLibs/CodecMesh_FBX/libs/linux32 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x32 -L/usr/lib32 -m32 -shared -Wl,-soname=libPK-UnityPlugin.so -s -Wl,--no-undefined
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux32 -L../../ExternalLibs/CodecMesh_FBX/libs/linux32 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x32 -L/usr/lib32 -m32 -shared -Wl,-soname=libPK-UnityPlugin.so -s -Wl,--no-undefined -Wl,-z,noexecstack
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../com.persistant-studios.popcornfx/Runtime/Plugins/x86_64
@@ -112,7 +112,7 @@ ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-point
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-AssetBakerLib_s.a -lPK-RenderHelpers_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-Plugin_CodecMesh_FBX_s -lPK-Plugin_CodecImage_PKIM_s -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_PVR_s -lPK-Plugin_CodecImage_TGA_s -lPK-Plugin_CodecImage_TIFF_s -lPK-Plugin_CodecImage_HDR_s -lPK-Plugin_CodecImage_EXR_s -lPK-ZLib_s -lPK-Plugin_CodecImage_PKM_s -lGL -lGLU -lvulkan -lfbxsdk_r -lxml2 -lfreetype -lPK-ParticlesToolbox_s -lPK-Runtime_s -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_s.a ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-AssetBakerLib_s.a
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux64 -L../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/linux64 -L$$VULKAN_SDK/lib -L../../ExternalLibs/CodecMesh_FBX/libs/linux64 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -shared -Wl,-soname=libPK-UnityPlugin.so -s -Wl,--no-undefined
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/GL/lib/linux64 -L../../ExternalLibs/Runtime/libs/freetype-2.5.5/lib/linux64 -L$$VULKAN_SDK/lib -L../../ExternalLibs/CodecMesh_FBX/libs/linux64 -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -shared -Wl,-soname=libPK-UnityPlugin.so -s -Wl,--no-undefined -Wl,-z,noexecstack
 
 #else
 #  $(error "invalid configuration $(config)")

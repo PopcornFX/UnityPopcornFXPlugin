@@ -31,27 +31,6 @@
 __PK_API_BEGIN
 //----------------------------------------------------------------------------
 
-namespace
-{
-	CFloat4x4		RemoveScale(const CFloat4x4 &matrix)
-	{
-		CFloat4x4	m = matrix;
-
-		//m.StrippedXAxis() = -m.StrippedXAxis();
-
-		m.StrippedXAxis().Normalize();
-		m.StrippedYAxis().Normalize();
-		m.StrippedZAxis().Normalize();
-		m.XAxis().w() = 0;
-		m.YAxis().w() = 0;
-		m.ZAxis().w() = 0;
-		m.WAxis().w() = 1;
-		return m;
-	}
-}
-
-//----------------------------------------------------------------------------
-
 CPKFXEffect::CPKFXEffect(bool requiresGameThreadCollect, const CFloat4x4 &transforms /*= CFloat4x4::IDENTITY*/)
 :	m_WorldVelCurrent(CFloat3::ZERO)
 ,	m_WorldVelPrevious(CFloat3::ZERO)
@@ -60,7 +39,7 @@ CPKFXEffect::CPKFXEffect(bool requiresGameThreadCollect, const CFloat4x4 &transf
 ,	m_AttributesDescriptor(null)
 ,	m_AttributesContainer(null)
 {
-	m_WorldTransformsCurrent = RemoveScale(transforms);
+	m_WorldTransformsCurrent = transforms;
 	m_WorldTransformsPrevious = m_WorldTransformsCurrent;
 
 	m_Bounds.SetMin(CFloat3(-0.1f));
@@ -253,7 +232,7 @@ void	 CPKFXEffect::UnregisterAllEventCallback()
 void	CPKFXEffect::UpdateTransforms(const CFloat4x4 &newTransforms)
 {
 	m_WorldTransformsPrevious = m_WorldTransformsCurrent;
-	m_WorldTransformsCurrent = RemoveScale(newTransforms);
+	m_WorldTransformsCurrent = newTransforms;
 }
 
 //----------------------------------------------------------------------------

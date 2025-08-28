@@ -223,7 +223,9 @@ extern "C"
 
 		CUnityLog	*logger = CRuntimeManager::Instance().GetLogger();
 
-		return (int)logger->Count();
+		if (logger != null)
+			return (int)logger->Count();
+		return 0;
 	}
 
 	//----------------------------------------------------------------------------

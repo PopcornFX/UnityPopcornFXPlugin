@@ -21,7 +21,7 @@ using UnityEngine.SceneManagement;
 
 namespace PopcornFX
 {
-	public static class PKFxAssetCreationUtils : object
+	public static class PKFxAssetCreationUtils
 	{
 		public static Dictionary<int, List<PKFxEffectAsset>> m_DependenciesLoading = new Dictionary<int, List<PKFxEffectAsset>>();
 		public static Dictionary<int, List<PKFxEffectAsset>> DependenciesLoading { get { return m_DependenciesLoading; } }

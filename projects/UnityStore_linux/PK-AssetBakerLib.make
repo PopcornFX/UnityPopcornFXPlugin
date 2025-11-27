@@ -53,8 +53,8 @@ TARGET = $(TARGETDIR)/libPK-AssetBakerLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Debug/PK-AssetBakerLib
 DEFINES += -D_DEBUG
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),debug_arm64)
@@ -73,8 +73,8 @@ TARGET = $(TARGETDIR)/libPK-AssetBakerLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-AssetBakerLib
 DEFINES += -D_DEBUG
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -fuse-ld=lld -target aarch64-linux-gnu
 
 else ifeq ($(config),release_x64)
@@ -93,8 +93,8 @@ TARGET = $(TARGETDIR)/libPK-AssetBakerLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Release/PK-AssetBakerLib
 DEFINES += -DNDEBUG
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release_arm64)
@@ -113,8 +113,8 @@ TARGET = $(TARGETDIR)/libPK-AssetBakerLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-AssetBakerLib
 DEFINES += -DNDEBUG
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -fuse-ld=lld -target aarch64-linux-gnu
 
 #else
@@ -145,8 +145,12 @@ GENERATED += $(OBJDIR)/AssetBaker_PKGO.o
 GENERATED += $(OBJDIR)/AssetBaker_PKGO_Graph.o
 GENERATED += $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_Atlas.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_BAT.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_Constant.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_Font.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_Graph.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_Python.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_SimInterfaces.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_Substance.o
 GENERATED += $(OBJDIR)/AssetBaker_PKVX.o
@@ -171,8 +175,12 @@ OBJECTS += $(OBJDIR)/AssetBaker_PKGO.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKGO_Graph.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Atlas.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_BAT.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Constant.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Font.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Graph.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Python.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_SimInterfaces.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Substance.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKVX.o
@@ -286,10 +294,22 @@ $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o: ../../ExternalLibs/PK-AssetBakerLib/A
 $(OBJDIR)/AssetBaker_PKTX.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_Atlas.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Atlas.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_BAT.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_BAT.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKTX_Constant.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Constant.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_Font.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Font.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKTX_Graph.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Graph.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_Python.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Python.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKTX_SimInterfaces.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_SimInterfaces.cpp

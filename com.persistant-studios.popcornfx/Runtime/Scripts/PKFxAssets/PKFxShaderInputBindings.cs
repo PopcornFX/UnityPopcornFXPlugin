@@ -728,6 +728,12 @@ namespace PopcornFX
 				_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
 				material.SetFloat("PK_HAS_EMISSIVE", 0.0f);
 			}
+			// Diffuse ramp: PK_HAS_DIFFUSE
+			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
+				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE");
+			else
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE");
+			// Alpha remap: PK_HAS_ALPHA_REMAP
 			// Diffuse ramp: PK_HAS_DIFFUSE_RAMP
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
 				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE_RAMP");

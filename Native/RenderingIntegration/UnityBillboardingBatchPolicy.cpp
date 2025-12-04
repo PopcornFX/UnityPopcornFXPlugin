@@ -1538,7 +1538,7 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 		billboardBatch->m_Exec_Texcoords.m_Texcoords2 = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_TexCoords1.m_Ptr, m_VertexCount);
 	}
 	if ((toMap.m_GeneratedInputs & Drawers::GenInput_RawUV0) != 0)
-	{                                                                                                                                                                                                                            
+	{
 		if (!PK_VERIFY(m_ParticleBuffers.m_RawTexCoords0.m_Ptr != null))
 			return false;
 		billboardBatch->m_Exec_Texcoords.m_RawTexcoords = TStridedMemoryView<CFloat2>(m_ParticleBuffers.m_RawTexCoords0.m_Ptr, m_VertexCount);

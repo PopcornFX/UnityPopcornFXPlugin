@@ -267,12 +267,8 @@
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_Graph.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Atlas.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_BAT.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Constant.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Font.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Graph.h" />
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Python.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Substance.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX_Constant.h" />
@@ -297,12 +293,8 @@
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_Graph.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_SimInterfaces.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Atlas.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_BAT.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Constant.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Font.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Graph.cpp" />
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Python.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_SimInterfaces.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Substance.cpp" />
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKVX.cpp" />

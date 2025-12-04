@@ -156,7 +156,7 @@ bool		CPkFxSkinnedMesh::_Init(u32 samplerUsage,
 				return false;
 			TStridedMemoryView<CFloat3> srcNormData = TStridedMemoryView<CFloat3>(reinterpret_cast<CFloat3*>(m_SrcNormalsData.RawDataPointer()), m_SrcNormalsData.Count(), 0x10);
 			Mem::CopyStreamToStream(srcNormData, srcNormals);
-			m_SrcNormals = srcNormData;
+			m_SrcPositions = srcNormData;
 		}
 	}
 	else

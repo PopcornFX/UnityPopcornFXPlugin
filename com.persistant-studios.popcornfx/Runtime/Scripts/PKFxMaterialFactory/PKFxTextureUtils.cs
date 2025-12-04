@@ -126,6 +126,14 @@ namespace PopcornFX
 				PKImageConverter.RGB2BGR(ref data);
 				return EImageFormat.Format_BGR8;
 			}
+			else if (t.format == TextureFormat.PVRTC_RGB4)
+				return EImageFormat.Format_RGB4_PVRTC1;
+			else if (t.format == TextureFormat.PVRTC_RGBA4)
+				return EImageFormat.Format_RGBA4_PVRTC1;
+			else if (t.format == TextureFormat.PVRTC_RGB2)
+				return EImageFormat.Format_RGB2_PVRTC1;
+			else if (t.format == TextureFormat.PVRTC_RGBA2)
+				return EImageFormat.Format_RGBA2_PVRTC1;
 			else if (t.format == TextureFormat.ETC_RGB4)
 				return EImageFormat.Format_RGB8_ETC1;
 			else if (t.format == TextureFormat.ETC2_RGB)

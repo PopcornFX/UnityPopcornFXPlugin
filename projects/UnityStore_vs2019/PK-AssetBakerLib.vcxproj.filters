@@ -156,22 +156,10 @@
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Atlas.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_BAT.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Constant.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Font.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Graph.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Python.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Substance.h">
@@ -242,22 +230,10 @@
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Atlas.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_BAT.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Constant.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Font.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Graph.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_Python.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX_SimInterfaces.cpp">

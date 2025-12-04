@@ -430,8 +430,8 @@ namespace PopcornFX
 			// Remove draggedItems from their parents
 			foreach (var draggedItem in elements)
 			{
-				draggedItem.parent.children.Remove(draggedItem);			// remove from old parent
-				draggedItem.parent = parentElement;							// set new parent
+				draggedItem.parent.children.Remove(draggedItem);            // remove from old parent
+				draggedItem.parent = parentElement;                         // set new parent
 			}
 
 			if (parentElement.children == null)
@@ -453,30 +453,30 @@ namespace PopcornFX
 		}
 	}
 
-	internal class PKTreeViewItem<T> : TreeViewItem<int> where T : TreeElement
+	internal class TreeViewItem<T> : TreeViewItem where T : TreeElement
 	{
 		public T data { get; set; }
 
-		public PKTreeViewItem(int id, int depth, string displayName, T data) : base(id, depth, displayName)
+		public TreeViewItem(int id, int depth, string displayName, T data) : base(id, depth, displayName)
 		{
 			this.data = data;
 		}
 	}
 
-	internal class TreeViewWithTreeModel<T> : TreeView<int> where T : TreeElement
+	internal class TreeViewWithTreeModel<T> : TreeView where T : TreeElement
 	{
 		TreeModel<T> m_TreeModel;
-		readonly List<TreeViewItem<int>> m_Rows = new List<TreeViewItem<int>> (100);
+		readonly List<TreeViewItem> m_Rows = new List<TreeViewItem>(100);
 		public event Action treeChanged;
 
 		public TreeModel<T> treeModel { get { return m_TreeModel; } }
 
-		public TreeViewWithTreeModel(TreeViewState<int> state, TreeModel<T> model) : base(state)
+		public TreeViewWithTreeModel(TreeViewState state, TreeModel<T> model) : base(state)
 		{
 			Init(model);
 		}
 
-		public TreeViewWithTreeModel(TreeViewState<int> state, MultiColumnHeader multiColumnHeader, TreeModel<T> model)
+		public TreeViewWithTreeModel(TreeViewState state, MultiColumnHeader multiColumnHeader, TreeModel<T> model)
 			: base(state, multiColumnHeader)
 		{
 			Init(model);
@@ -496,13 +496,13 @@ namespace PopcornFX
 			Reload();
 		}
 
-		protected override TreeViewItem<int> BuildRoot()
+		protected override TreeViewItem BuildRoot()
 		{
 			int depthForHiddenRoot = -1;
-			return new PKTreeViewItem<TreeElement>(m_TreeModel.root.id, depthForHiddenRoot, m_TreeModel.root.name, m_TreeModel.root);
+			return new TreeViewItem<T>(m_TreeModel.root.id, depthForHiddenRoot, m_TreeModel.root.name, m_TreeModel.root);
 		}
 
-		protected override IList<TreeViewItem<int>> BuildRows(TreeViewItem<int> root)
+		protected override IList<TreeViewItem> BuildRows(TreeViewItem root)
 		{
 			if (m_TreeModel.root == null)
 			{
@@ -527,11 +527,11 @@ namespace PopcornFX
 			return m_Rows;
 		}
 
-		void AddChildrenRecursive(T parent, int depth, IList<TreeViewItem<int>> newRows)
+		void AddChildrenRecursive(T parent, int depth, IList<TreeViewItem> newRows)
 		{
 			foreach (T child in parent.children)
 			{
-				var item = new PKTreeViewItem<T>(child.id, depth, child.name, child);
+				var item = new TreeViewItem<T>(child.id, depth, child.name, child);
 				newRows.Add(item);
 
 				if (child.hasChildren)
@@ -548,7 +548,7 @@ namespace PopcornFX
 			}
 		}
 
-		void Search(T searchFromThis, string search, List<TreeViewItem<int>> result)
+		void Search(T searchFromThis, string search, List<TreeViewItem> result)
 		{
 			if (string.IsNullOrEmpty(search))
 				throw new ArgumentException("Invalid search: cannot be null or empty", "search");
@@ -564,7 +564,7 @@ namespace PopcornFX
 				// Matches search?
 				if (current.name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0)
 				{
-					result.Add(new PKTreeViewItem<T>(current.id, kItemDepth, current.name, current));
+					result.Add(new TreeViewItem<T>(current.id, kItemDepth, current.name, current));
 				}
 
 				if (current.children != null && current.children.Count > 0)
@@ -578,7 +578,7 @@ namespace PopcornFX
 			SortSearchResult(result);
 		}
 
-		protected virtual void SortSearchResult(List<TreeViewItem<int>> rows)
+		protected virtual void SortSearchResult(List<TreeViewItem> rows)
 		{
 			rows.Sort((x, y) => EditorUtility.NaturalCompare(x.displayName, y.displayName)); // sort by displayName by default, can be overriden for multicolumn solutions
 		}
@@ -592,5 +592,92 @@ namespace PopcornFX
 		{
 			return m_TreeModel.GetDescendantsThatHaveChildren(id);
 		}
+
+		/*
+		// Dragging
+		//-----------
+		public event Action<IList<TreeViewItem>> beforeDroppingDraggedItems;
+		const string k_GenericDragID = "GenericDragColumnDragging";
+
+		protected override bool CanStartDrag(CanStartDragArgs args)
+		{
+			return true;
+		}
+
+		protected override void SetupDragAndDrop(SetupDragAndDropArgs args)
+		{
+			if (hasSearch)
+				return;
+
+			DragAndDrop.PrepareStartDrag();
+			var draggedRows = GetRows().Where(item => args.draggedItemIDs.Contains(item.id)).ToList();
+			DragAndDrop.SetGenericData(k_GenericDragID, draggedRows);
+			DragAndDrop.objectReferences = new UnityEngine.Object[] { }; // this IS required for dragging to work
+			string title = draggedRows.Count == 1 ? draggedRows[0].displayName : "< Multiple >";
+			DragAndDrop.StartDrag(title);
+		}
+
+		protected override DragAndDropVisualMode HandleDragAndDrop(DragAndDropArgs args)
+		{
+			// Check if we can handle the current drag data (could be dragged in from other areas/windows in the editor)
+			var draggedRows = DragAndDrop.GetGenericData(k_GenericDragID) as List<TreeViewItem>;
+			if (draggedRows == null)
+				return DragAndDropVisualMode.None;
+
+			// Parent item is null when dragging outside any tree view items.
+			switch (args.dragAndDropPosition)
+			{
+				case DragAndDropPosition.UponItem:
+				case DragAndDropPosition.BetweenItems:
+					{
+						bool validDrag = ValidDrag(args.parentItem, draggedRows);
+						if (args.performDrop && validDrag)
+						{
+							T parentData = ((TreeViewItem<T>)args.parentItem).data;
+							OnDropDraggedElementsAtIndex(draggedRows, parentData, args.insertAtIndex == -1 ? 0 : args.insertAtIndex);
+						}
+						return validDrag ? DragAndDropVisualMode.Move : DragAndDropVisualMode.None;
+					}
+
+				case DragAndDropPosition.OutsideItems:
+					{
+						if (args.performDrop)
+							OnDropDraggedElementsAtIndex(draggedRows, m_TreeModel.root, m_TreeModel.root.children.Count);
+
+						return DragAndDropVisualMode.Move;
+					}
+				default:
+					Debug.LogError("Unhandled enum " + args.dragAndDropPosition);
+					return DragAndDropVisualMode.None;
+			}
+		}
+
+		public virtual void OnDropDraggedElementsAtIndex(List<TreeViewItem> draggedRows, T parent, int insertIndex)
+		{
+			if (beforeDroppingDraggedItems != null)
+				beforeDroppingDraggedItems(draggedRows);
+
+			var draggedElements = new List<TreeElement>();
+			foreach (var x in draggedRows)
+				draggedElements.Add(((TreeViewItem<T>)x).data);
+
+			var selectedIDs = draggedElements.Select(x => x.id).ToArray();
+			m_TreeModel.MoveElements(parent, insertIndex, draggedElements);
+			SetSelection(selectedIDs, TreeViewSelectionOptions.RevealAndFrame);
+		}
+
+
+		bool ValidDrag(TreeViewItem parent, List<TreeViewItem> draggedItems)
+		{
+			TreeViewItem currentParent = parent;
+			while (currentParent != null)
+			{
+				if (draggedItems.Contains(currentParent))
+					return false;
+				currentParent = currentParent.parent;
+			}
+			return true;
+		}
+		*/
 	}
 }

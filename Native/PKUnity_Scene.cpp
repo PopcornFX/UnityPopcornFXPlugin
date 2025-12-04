@@ -112,29 +112,15 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 				m_EnableRaycastCollisions = false;
 			}
 		}
-		else if (settings.m_UnityVersion <= 2023)
+		else
 		{
-			if (settings.m_RaycastCommandSize != sizeof(RaycastCommand2022OrNewer))
+			if (settings.m_RaycastCommandSize != sizeof(RaycastCommand2022orNewer))
 			{
 				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
 				m_EnableRaycastCollisions = false;
 			}
 
-			if (settings.m_RaycastHitSize != sizeof(RaycastHit2022OrNewer))
-			{
-				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
-				m_EnableRaycastCollisions = false;
-			}
-		}
-		else if (settings.m_UnityVersion <= 6002)
-		{
-			if (settings.m_RaycastCommandSize != sizeof(RaycastCommand6002OrNewer))
-			{
-				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
-				m_EnableRaycastCollisions = false;
-			}
-
-			if (settings.m_RaycastHitSize != sizeof(RaycastHit2022OrNewer))
+			if (settings.m_RaycastHitSize != sizeof(RaycastHit2022orNewer))
 			{
 				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
 				m_EnableRaycastCollisions = false;
@@ -154,33 +140,19 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 				m_EnableRaycastCollisions = false;
 			}
 		}
-		else if (settings.m_UnityVersion <= 2023)
+		else
 		{
-				if (settings.m_SpherecastCommandSize != sizeof(SphereCastCommand2022OrNewer))
+				if (settings.m_SpherecastCommandSize != sizeof(SphereCastCommand2022orNewer))
 				{
 					CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
 					m_EnableRaycastCollisions = false;
 				}
 
-				if (settings.m_SpherecastHitSize != sizeof(SphereCastHit2022OrNewer))
+				if (settings.m_SpherecastHitSize != sizeof(SphereCastHit2022orNewer))
 				{
 					CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
 					m_EnableRaycastCollisions = false;
 				}
-		}
-		else if (settings.m_UnityVersion <= 6002)
-		{
-			if (settings.m_SpherecastCommandSize != sizeof(SphereCastCommand6002OrNewer))
-			{
-				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastCommand struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
-				m_EnableRaycastCollisions = false;
-			}
-
-			if (settings.m_SpherecastHitSize != sizeof(SphereCastHit2022OrNewer))
-			{
-				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
-				m_EnableRaycastCollisions = false;
-			}
 		}
 	}
 	m_WaitForUpdateOnRenderThread = (!m_IsSingleThreaded && !m_EnableRaycastCollisions); //settings.m_SingleThreadedExecution == 0 && settings.m_EnableRaycastForCollisions == 0;
@@ -575,7 +547,7 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 			}
 			else
 			{
-				RaycastCommand2022OrNewer* cmdBuffer2022orNewer = (RaycastCommand2022OrNewer*)cmd;
+				RaycastCommand2022orNewer* cmdBuffer2022orNewer = (RaycastCommand2022orNewer*)cmd;
 				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
 				{
 					cmdBuffer2022orNewer[i].from = origins[i].xyz();
@@ -625,7 +597,7 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 			}
 			else
 			{
-				RaycastHit2022OrNewer* resBuffer = (RaycastHit2022OrNewer*)res;
+				RaycastHit2022orNewer* resBuffer = (RaycastHit2022orNewer*)res;
 				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
 				{
 					if (resBuffer[i].collider != 0)
@@ -677,7 +649,7 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 			}
 			else
 			{
-				SphereCastCommand2022OrNewer	*cmdBuffer = (SphereCastCommand2022OrNewer*)cmd;
+				SphereCastCommand2022orNewer	*cmdBuffer = (SphereCastCommand2022orNewer*)cmd;
 				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
 				{
 					cmdBuffer[i].from = origins[i].xyz();

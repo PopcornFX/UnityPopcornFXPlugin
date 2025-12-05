@@ -8,6 +8,8 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using Unity.Collections.LowLevel.Unsafe;
+using System.Reflection;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -231,6 +233,44 @@ namespace PopcornFX
 				SetMaxLogsPerFrame(0);
 		}
 
+		private static void DebugLogStructMemoryLayout(Type type)
+		{
+			FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+			string cppStruct = "struct" + type.AssemblyQualifiedName + " {\n";
+
+			foreach (FieldInfo field in fields)
+			{
+				string fieldName = field.Name;
+				string fieldType = field.FieldType.ToString();
+				string fieldSize = Marshal.SizeOf(field.FieldType).ToString();
+
+				fieldType = ConvertToCppType(fieldType);
+				cppStruct += $"    {fieldType} {fieldName} {fieldSize};\n";
+			}
+			cppStruct += "};";
+			Debug.Log(cppStruct);
+		}
+
+		private static string ConvertToCppType(string type)
+		{
+			switch (type)
+			{
+				case "System.Single":
+					return "float";
+				case "UnityEngine.Vector3":
+					return "CFloat3";
+				case "System.Int32":
+					return "u32";
+				case "System.Boolean":
+					return "bool";
+				case "System.String":
+					return "CString";
+				default:
+					return "UNKNOWN_TYPE";
+			}
+		}
+
+
 		public static void SetupPopcornFxSettings(bool isUnitTesting)
 		{
 			SPopcornFxSettings settings = new SPopcornFxSettings();
@@ -290,7 +330,17 @@ namespace PopcornFX
 			settings.m_SpherecastHitSize = UnsafeUtility.SizeOf<RaycastHit>(); // Same as Raycast hit for now, keep it in case it change in the next versions.
 			settings.m_SpherecastCommandSize = UnsafeUtility.SizeOf<SpherecastCommand>();
 
-#if UNITY_2023_3_OR_NEWER
+#if false
+			DebugLogStructMemoryLayout(typeof(RaycastCommand));
+			DebugLogStructMemoryLayout(typeof(SpherecastCommand));
+			DebugLogStructMemoryLayout(typeof(PhysicsScene));
+
+			Debug.Log("QueryParameters Size " + UnsafeUtility.SizeOf<QueryParameters>().ToString());
+#endif
+
+#if UNITY_6000_2_OR_NEWER
+			settings.m_UnityVersion = 6002;
+#elif UNITY_2023_3_OR_NEWER
 			settings.m_UnityVersion = 2023;
 #elif UNITY_2022_3_OR_NEWER
 			settings.m_UnityVersion = 2022;

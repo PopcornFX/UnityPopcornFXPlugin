@@ -107,7 +107,24 @@ public:
 		bool			hitMultipleFaces = false;
 	};
 
-	struct RaycastCommand2022orNewer
+#if defined(PK_WINDOWS)
+#pragma pack(push, 1)
+#endif
+
+	struct RaycastCommand6002OrNewer
+	{
+		CFloat3				from;
+		CFloat3				direction;
+		u64					padding = 0; //PhysicsScene
+		float				distance;
+		QueryParameters		queryParams;
+	}
+#if !defined(PK_WINDOWS) 
+	__attribute__((packed))
+#endif
+	;
+
+	struct RaycastCommand2022OrNewer
 	{
 		CFloat3				from;
 		CFloat3				direction;
@@ -116,7 +133,7 @@ public:
 		QueryParameters		queryParams;
 	};
 
-	struct RaycastHit2022orNewer
+	struct RaycastHit2022OrNewer
 	{
 		CFloat3			point;
 		CFloat3			normal;
@@ -147,7 +164,7 @@ public:
 		int				collider;
 	};
 
-	struct SphereCastCommand2022orNewer
+	struct SphereCastCommand2022OrNewer
 	{
 		CFloat3				from;
 		float				radius = 0.0f;
@@ -156,8 +173,18 @@ public:
 		int					padding = 0; //PhysicsScene
 		QueryParameters		queryParams;
 	};
+	
+	struct SphereCastCommand6002OrNewer
+	{
+		CFloat3				from;
+		float				radius = 0.0f;
+		CFloat3				direction;
+		float				distance;
+		u64					padding = 0; //PhysicsScene
+		QueryParameters		queryParams;
+	};
 
-	struct SphereCastHit2022orNewer
+	struct SphereCastHit2022OrNewer
 	{
 		CFloat3			point;
 		CFloat3			normal;
@@ -166,6 +193,10 @@ public:
 		CFloat2			uv;
 		int				collider;
 	};
+	
+#if defined(PK_WINDOWS)
+#pragma pack(pop)
+#endif
 
 public:
 	CPKFXScene();

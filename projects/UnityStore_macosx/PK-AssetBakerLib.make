@@ -112,8 +112,12 @@ GENERATED += $(OBJDIR)/AssetBaker_PKGO.o
 GENERATED += $(OBJDIR)/AssetBaker_PKGO_Graph.o
 GENERATED += $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_Atlas.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_BAT.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_Constant.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_Font.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_Graph.o
+GENERATED += $(OBJDIR)/AssetBaker_PKTX_Python.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_SimInterfaces.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_Substance.o
 GENERATED += $(OBJDIR)/AssetBaker_PKVX.o
@@ -138,8 +142,12 @@ OBJECTS += $(OBJDIR)/AssetBaker_PKGO.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKGO_Graph.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Atlas.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_BAT.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Constant.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Font.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Graph.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Python.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_SimInterfaces.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Substance.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKVX.o
@@ -253,10 +261,22 @@ $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o: ../../ExternalLibs/PK-AssetBakerLib/A
 $(OBJDIR)/AssetBaker_PKTX.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_Atlas.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Atlas.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_BAT.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_BAT.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKTX_Constant.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Constant.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_Font.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Font.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKTX_Graph.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Graph.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKTX_Python.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_Python.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKTX_SimInterfaces.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX_SimInterfaces.cpp

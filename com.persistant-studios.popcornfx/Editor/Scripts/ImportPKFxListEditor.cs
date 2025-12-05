@@ -61,7 +61,7 @@ namespace PopcornFX
 			Name,
 		}
 
-		public PKFXAssetTreeView(TreeViewState state, MultiColumnHeader multicolumnHeader, TreeModel<PKFxAssetElement> model)
+		public PKFXAssetTreeView(TreeViewState<int> state, MultiColumnHeader multicolumnHeader, TreeModel<PKFxAssetElement> model)
 			: base(state, multicolumnHeader, model)
 		{
 			showBorder = true;
@@ -73,7 +73,7 @@ namespace PopcornFX
 
 		protected override void RowGUI(RowGUIArgs args)
 		{
-			var item = (TreeViewItem<PKFxAssetElement>)args.item;
+			var item = args.item as PKTreeViewItem<PKFxAssetElement>; ;
 
 			for (int i = 0; i < args.GetNumVisibleColumns(); ++i)
 			{
@@ -81,9 +81,9 @@ namespace PopcornFX
 			}
 		}
 
-		public List<int> SelectionOverride(TreeViewItem clickedItem, bool keepMultiSelection, bool useActionKeyAsShift)
+		public List<int> SelectionOverride(TreeViewItem<int> clickedItem, bool keepMultiSelection, bool useActionKeyAsShift)
 		{
-			TreeViewItem<PKFxAssetElement> item = clickedItem as TreeViewItem<PKFxAssetElement>;
+			PKTreeViewItem<PKFxAssetElement> item = clickedItem as PKTreeViewItem<PKFxAssetElement>;
 			if (item != null && keepMultiSelection == false)
 			{
 				item.data.Import = !item.data.Import;
@@ -91,7 +91,7 @@ namespace PopcornFX
 			return new List<int>();
 		}
 
-		void CellGUI(Rect cellRect, TreeViewItem<PKFxAssetElement> item, Columns column, ref RowGUIArgs args)
+		void CellGUI(Rect cellRect, PKTreeViewItem<PKFxAssetElement> item, Columns column, ref RowGUIArgs args)
 		{
 			// Center cell rect vertically (makes it easier to place controls, icons etc in the cells)
 			CenterRectUsingSingleLineHeight(ref cellRect);
@@ -227,7 +227,7 @@ namespace PopcornFX
 		[NonSerialized]
 		bool m_Initialized;
 		[SerializeField]
-		TreeViewState m_TreeViewState;
+		TreeViewState<int> m_TreeViewState;
 		[SerializeField]
 		MultiColumnHeaderState m_MultiColumnHeaderState;
 
@@ -309,7 +309,7 @@ namespace PopcornFX
 			{
 				// Check if it already exists (deserialized from window layout file or scriptable object)
 				if (m_TreeViewState == null)
-					m_TreeViewState = new TreeViewState();
+					m_TreeViewState = new TreeViewState<int>();
 
 				bool firstInit = m_MultiColumnHeaderState == null;
 

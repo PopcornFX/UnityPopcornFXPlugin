@@ -1573,7 +1573,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "SampleParticleTextureTransformed (Custom Function)",
+    "m_Name": "SampleParticleTextureTransformed_Mesh (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -1625,7 +1625,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "SampleParticleTextureTransformed",
+    "m_FunctionName": "SampleParticleTextureTransformed_Mesh",
     "m_FunctionSource": "9907a8f2b0a1ade42903784acac65b48",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."

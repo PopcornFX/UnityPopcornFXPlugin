@@ -23,7 +23,6 @@ ifeq ($(config),debug_ios64)
   PK_Sample_04_EffectInterface_config = debug_ios64
   PK_Sample_05_Stats_config = debug_ios64
   PK_Sample_06_SimInterface_config = debug_ios64
-  PK_Sample_06_SimInterfaceGPU_config = debug_ios64
   PK_Sample_07_LOD_config = debug_ios64
   PK_Sample_08_CustomCollision_config = debug_ios64
   PK_Sample_09_AsyncLoading_config = debug_ios64
@@ -46,7 +45,6 @@ else ifeq ($(config),release_ios64)
   PK_Sample_04_EffectInterface_config = release_ios64
   PK_Sample_05_Stats_config = release_ios64
   PK_Sample_06_SimInterface_config = release_ios64
-  PK_Sample_06_SimInterfaceGPU_config = release_ios64
   PK_Sample_07_LOD_config = release_ios64
   PK_Sample_08_CustomCollision_config = release_ios64
   PK_Sample_09_AsyncLoading_config = release_ios64
@@ -69,7 +67,6 @@ else ifeq ($(config),retail_ios64)
   PK_Sample_04_EffectInterface_config = retail_ios64
   PK_Sample_05_Stats_config = retail_ios64
   PK_Sample_06_SimInterface_config = retail_ios64
-  PK_Sample_06_SimInterfaceGPU_config = retail_ios64
   PK_Sample_07_LOD_config = retail_ios64
   PK_Sample_08_CustomCollision_config = retail_ios64
   PK_Sample_09_AsyncLoading_config = retail_ios64
@@ -81,7 +78,7 @@ else
   $(error "invalid configuration $(config)")
 endif
 
-PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-UpgraderLib PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-RenderHelpers_SDK1 PK-RHI_SDK1 PK-SampleLib PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
+PROJECTS := PK-Runtime_SDK1 PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-UpgraderLib PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks PK-RenderHelpers_SDK1 PK-RHI_SDK1 PK-SampleLib PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
 .PHONY: all clean help $(PROJECTS) Rendering Runtime Samples Samples/Basic Tools Tools/Upgrader
 
@@ -91,7 +88,7 @@ Rendering: PK-RHI_SDK1 PK-RenderHelpers_SDK1 PK-SampleLib
 
 Runtime: PK-Discretizers_SDK1 PK-ParticlesToolbox_SDK1 PK-Runtime_SDK1
 
-Samples: Samples/Basic PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_06_SimInterfaceGPU PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
+Samples: Samples/Basic PK-Sample_02_FullIntegration PK-Sample_04_EffectInterface PK-Sample_05_Stats PK-Sample_06_SimInterface PK-Sample_07_LOD PK-Sample_08_CustomCollision PK-Sample_09_AsyncLoading PK-Sample_10_AsyncRendering PK-Sample_11_ThreadPool PK-Sample_12_GBufferSampling
 
 Samples/Basic: PK-Sample_01_BasicStartup PK-Sample_02_BasicEvolve PK-Sample_03_EngineHooks
 
@@ -183,12 +180,6 @@ ifneq (,$(PK_Sample_06_SimInterface_config))
 	@${MAKE} --no-print-directory -C . -f PK-Sample_06_SimInterface.make config=$(PK_Sample_06_SimInterface_config)
 endif
 
-PK-Sample_06_SimInterfaceGPU: PK-SampleLib
-ifneq (,$(PK_Sample_06_SimInterfaceGPU_config))
-	@echo "==== Building PK-Sample_06_SimInterfaceGPU ($(PK_Sample_06_SimInterfaceGPU_config)) ===="
-	@${MAKE} --no-print-directory -C . -f PK-Sample_06_SimInterfaceGPU.make config=$(PK_Sample_06_SimInterfaceGPU_config)
-endif
-
 PK-Sample_07_LOD: PK-SampleLib
 ifneq (,$(PK_Sample_07_LOD_config))
 	@echo "==== Building PK-Sample_07_LOD ($(PK_Sample_07_LOD_config)) ===="
@@ -240,7 +231,6 @@ clean:
 	@${MAKE} --no-print-directory -C . -f PK-Sample_04_EffectInterface.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_05_Stats.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_06_SimInterface.make clean
-	@${MAKE} --no-print-directory -C . -f PK-Sample_06_SimInterfaceGPU.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_07_LOD.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_08_CustomCollision.make clean
 	@${MAKE} --no-print-directory -C . -f PK-Sample_09_AsyncLoading.make clean
@@ -273,7 +263,6 @@ help:
 	@echo "   PK-Sample_04_EffectInterface"
 	@echo "   PK-Sample_05_Stats"
 	@echo "   PK-Sample_06_SimInterface"
-	@echo "   PK-Sample_06_SimInterfaceGPU"
 	@echo "   PK-Sample_07_LOD"
 	@echo "   PK-Sample_08_CustomCollision"
 	@echo "   PK-Sample_09_AsyncLoading"

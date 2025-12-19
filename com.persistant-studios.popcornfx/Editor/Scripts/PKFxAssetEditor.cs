@@ -426,8 +426,17 @@ namespace PopcornFX
 					if ((depUsage & (int)EUseInfoFlag.IsTextureSampler) != 0)
 						EditorGUILayout.LabelField("IsTextureSampler");
 
-					using (new EditorGUI.DisabledScope(true))
-						EditorGUILayout.ObjectField(depObject);
+					if (((depUsage & (int)EUseInfoFlag.IsMeshSampler) != 0 ||
+						 (depUsage & (int)EUseInfoFlag.IsTextureSampler) != 0) &&
+						 depObject.boxedValue == null)
+					{
+						EditorGUILayout.LabelField("dependency constant folded into the effect");
+					}
+					else
+					{
+						using (new EditorGUI.DisabledScope(true))
+							EditorGUILayout.ObjectField(depObject);
+					}
 					EditorGUI.indentLevel--;
 				}
 				EditorGUI.indentLevel--;

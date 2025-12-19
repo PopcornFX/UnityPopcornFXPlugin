@@ -53,8 +53,8 @@ OBJDIR = ../intermediate/UnityStore/GM/x32/Debug/PK-RHI
 DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -m32
 
 else ifeq ($(config),debug_x64)
@@ -74,8 +74,8 @@ OBJDIR = ../intermediate/UnityStore/GM/x64/Debug/PK-RHI
 DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DPK_BUILD_WITH_VULKAN_SUPPORT=1
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include -I"$(VULKAN_SDK)/include"
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),debug_arm64)
@@ -95,8 +95,8 @@ OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-RHI
 DEFINES += -D_DEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include
 FORCE_INCLUDE +=
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -fuse-ld=lld -target aarch64-linux-gnu
 
 else ifeq ($(config),release_x32)
@@ -116,8 +116,8 @@ OBJDIR = ../intermediate/UnityStore/GM/x32/Release/PK-RHI
 DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -m32
 
 else ifeq ($(config),release_x64)
@@ -137,8 +137,8 @@ OBJDIR = ../intermediate/UnityStore/GM/x64/Release/PK-RHI
 DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DPK_BUILD_WITH_VULKAN_SUPPORT=1
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include -I"$(VULKAN_SDK)/include"
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),release_arm64)
@@ -158,8 +158,8 @@ OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-RHI
 DEFINES += -DNDEBUG -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include
 FORCE_INCLUDE +=
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -fuse-ld=lld -target aarch64-linux-gnu
 
 else ifeq ($(config),retail_x32)
@@ -179,8 +179,8 @@ OBJDIR = ../intermediate/UnityStore/GM/x32/Retail/PK-RHI
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -m32 -s
 
 else ifeq ($(config),retail_x64)
@@ -200,8 +200,8 @@ OBJDIR = ../intermediate/UnityStore/GM/x64/Retail/PK-RHI
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU -DPK_BUILD_WITH_VULKAN_SUPPORT=1
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include -I"$(VULKAN_SDK)/include"
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 else ifeq ($(config),retail_arm64)
@@ -221,8 +221,8 @@ OBJDIR = ../intermediate/UnityStore/GM/ARM64/Retail/PK-RHI
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_BUILD_WITH_OGL_SUPPORT=1 -DGL_GLEXT_PROTOTYPES -DGLEW_STATIC -DGLEW_NO_GLU
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_rhi/include -I../../ExternalLibs/Runtime/pk_rhi/src -I../../ExternalLibs/Runtime/pk_rhi/src/precompiled -I../../SDK/Samples/PK-Samples/Common -I../../ExternalLibs/GL/include
 FORCE_INCLUDE +=
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -fuse-ld=lld -target aarch64-linux-gnu
 
 #else

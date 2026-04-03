@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 #pragma once
 
@@ -47,6 +48,7 @@ public:
 	bool	Init();
 	void	Destroy();
 	bool	Reinit();
+	bool	ShouldBakeDependency(const CString &path) const;
 
 	void	_RemapResourcesPath(CString &path, bool &, CMessageStream &);
 };
@@ -130,7 +132,7 @@ public:
 	CString				GetTargetPlatform() const;
 	void				UpdateCookeryConfigFile();
 
-	static void			OutputBakedResourceInCache(const CString path, TStaticCountedArray<CString, 4> &outputs);
+	static void			OutputBakedResourceInCache(const CString &path, TStaticCountedArray<CString, 4> &outputs);
 
 	CString				GetTempDir(const char *dirPrefix = null);
 	bool				ExtractPackage(IFileSystem *fs, const CString &srcArchiveAbsPath, const CString &dstDirAbsPath, CString &outPkprojAbsPath);
@@ -152,7 +154,8 @@ private:
 	TArray<CString>				m_IgnoredPaths;
 	TArray<SAssetChange>		m_ToProcess;
 	TArray<SAssetChange>		m_ToBake;
-	bool						m_ReloadProjectSettings;
+	bool						m_ReloadProjectSettings = false;
+	bool						m_Initialized  = false;
 	CString						m_PKPackPath;
 	CString						m_PlatformName;
 	u32							m_QualitySettingCount = 0;
@@ -165,7 +168,7 @@ private:
 
 	Threads::CCriticalSection	m_Lock;
 
-	COvenBakeConfig_Particle	*m_BakeConfigParticle;
+	COvenBakeConfig_Particle	*m_BakeConfigParticle = null;
 
 	bool						m_ForceDeterminism = false;
 	bool						m_BakeForStandalone = false;

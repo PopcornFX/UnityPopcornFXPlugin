@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 
 #include "precompiled.h"
@@ -562,7 +563,7 @@ bool	CPKFXEffect::SetSamplerShapeMesh(u32 smpID, SMeshDataToFill *meshSampler, c
 
 #if	(PK_GEOMETRICS_BUILD_MESH_SAMPLER_SURFACE != 0)
 	// Build sampling info IFN
-	if ((usageFlags & SParticleDeclaration::SSampler::UsageFlags_Mesh_Sample) != 0)
+	if ((usageFlags & SParticleDeclaration::SSampler::UsageFlags_Mesh_Sample) != 0)	// TODO: Should be 'UsageFlags_Mesh_SampleSurface', but it's just an optimization to not build surface accel structs when just doing vertex sampling. Should do it later, I don't want to break things
 	{
 		if (!samplerData.m_MeshData.CreateSurfaceSamplingStructs(meshProxy))
 			CLog::Log(PK_WARN, "Failed building mesh surface-sampling acceleration structure");
@@ -1725,7 +1726,7 @@ void	CPKFXEffect::SSetSamplerTask::operator()()
 
 #if	(PK_GEOMETRICS_BUILD_MESH_SAMPLER_SURFACE != 0)
 	// Build sampling info IFN
-	if ((usageFlags & SParticleDeclaration::SSampler::UsageFlags_Mesh_Sample) != 0)
+	if ((usageFlags & SParticleDeclaration::SSampler::UsageFlags_Mesh_Sample) != 0)	// TODO: Should be 'UsageFlags_Mesh_SampleSurface', but it's just an optimization to not build surface accel structs when just doing vertex sampling. Should do it later, I don't want to break things
 	{
 		if (!m_MeshData.CreateSurfaceSamplingStructs(m_Mesh))
 			CLog::Log(PK_WARN, "Failed building mesh surface-sampling acceleration structure");

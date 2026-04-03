@@ -207,6 +207,9 @@
       <PositionIndependentCode>true</PositionIndependentCode>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
+    <Lib>
+      <AdditionalOptions>-Wl,-z,max-page-size=16384 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug android64|ARM64'">
     <ClCompile>
@@ -228,6 +231,9 @@
       <PositionIndependentCode>true</PositionIndependentCode>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
     </ClCompile>
+    <Lib>
+      <AdditionalOptions>-Wl,-z,max-page-size=16384 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android|ARM'">
     <ClCompile>
@@ -257,6 +263,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalOptions>-Wl,-z,max-page-size=16384 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release android64|ARM64'">
     <ClCompile>
@@ -286,6 +295,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalOptions>-Wl,-z,max-page-size=16384 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android|ARM'">
     <ClCompile>
@@ -315,6 +327,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalOptions>-Wl,-z,max-page-size=16384 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Retail android64|ARM64'">
     <ClCompile>
@@ -344,6 +359,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalOptions>-Wl,-z,max-page-size=16384 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\include\upg_helper_axis_system.h" />
@@ -1087,6 +1105,27 @@
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.23.0.25065\3_Billboard_Transparent.pkma.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.23.0.25065\4_Particle_Master.frag.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.23.0.25065\5_Utils.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\0_Basic.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\10_Legacy.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\11_Placement.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\12_Trails.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\1_FX_Simple.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\2_BAT.pktx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\3_VectorGraph.pkvx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\4_Particle_Master.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\5_Color.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\6_CurvePresets.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\7_Debug.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\8_Dynamics.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\9_Events.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25832\0_Particle_Master.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25832\1_Samplers.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25832\2_Utils.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.26241\0_Particle_Master.frag.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.26241\1_Dynamics.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.26241\2_Placement.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.26241\3_Samplers.pkfx.h" />
+    <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.26241\4_Utils.pkfx.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\0_Basic_pkfx.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\10_Billboard_frag.h" />
     <ClInclude Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\11_Mesh_frag.h" />
@@ -1421,6 +1460,9 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.23.0.25019\core_upgrader_2_23_0_25019.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.23.0.25047\core_upgrader_2_23_0_25047.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.23.0.25065\core_upgrader_2_23_0_25065.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25771\core_upgrader_2_24_0_25771.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.25832\core_upgrader_2_24_0_25832.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.24.0.26241\core_upgrader_2_24_0_26241.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59136\core_upgrader_2_3_0_59136.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59175\core_upgrader_2_3_0_59175.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\Data\2.3.0.59344\core_upgrader_2_3_0_59344.cpp" />
@@ -1708,6 +1750,7 @@
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.21.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.22.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.23.0.cpp" />
+    <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.24.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.3.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.4.0.cpp" />
     <ClCompile Include="..\..\ExternalLibs\pk_upgraderlib\src\Upgrades\upg_upgrades_v2.5.0.cpp" />

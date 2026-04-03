@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 using UnityEngine;
 using UnityEditor;
@@ -95,7 +96,6 @@ namespace PopcornFX
 				{
 					PKFxManager.UnloadEffect(curAsset);
 				}
-				AssetDatabase.Refresh();
 			}
 
 			// We can display the PopcornFX logs here for baking errors:

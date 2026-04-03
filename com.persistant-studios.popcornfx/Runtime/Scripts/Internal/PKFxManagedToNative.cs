@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 using UnityEngine;
 using System;
@@ -399,7 +400,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string	m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.23.4 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.24.0 for " + m_UnityVersion;
 		public static string	m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";

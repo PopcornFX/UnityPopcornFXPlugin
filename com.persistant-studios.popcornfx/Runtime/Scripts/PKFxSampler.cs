@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 using System;
 using System.Runtime.InteropServices;
@@ -129,7 +130,7 @@ namespace PopcornFX
 		[FormerlySerializedAs("Type")] public ESamplerType m_Type;
 		[FormerlySerializedAs("Name")] public string m_Name;
 		[FormerlySerializedAs("Description")] public string m_Description;
-        [FormerlySerializedAs("Category")] public string m_Category;
+		[FormerlySerializedAs("Category")] public string m_Category;
 
 		public int m_UsageFlags;
 
@@ -182,8 +183,8 @@ namespace PopcornFX
 			m_Type = desc.m_Type;
 			m_Name = desc.m_Name;
 			m_Description = desc.m_Description;
-            m_Category = desc.m_Category;
-            m_UsageFlags = desc.m_UsageFlags;
+			m_Category = desc.m_Category;
+			m_UsageFlags = desc.m_UsageFlags;
 			m_ShapeDefaultTransform = desc.m_ShapeDefaultTransform;
 		}
 
@@ -193,8 +194,8 @@ namespace PopcornFX
 			m_Type = (ESamplerType)desc.m_SamplerType;
 			m_Name = Marshal.PtrToStringAnsi(desc.m_SamplerName);
 			m_Description = Marshal.PtrToStringUni(desc.m_Description);
-            m_Category = Marshal.PtrToStringUni(desc.m_Category);
-            m_UsageFlags = desc.m_SamplerUsageFlags;
+			m_Category = Marshal.PtrToStringUni(desc.m_Category);
+			m_UsageFlags = desc.m_SamplerUsageFlags;
 			m_ShapeDefaultTransform = new ShapeTransform(desc.m_ShapePosition, desc.m_ShapeRotation, Vector3.one);
 			m_CurveDefaultValue = new CurveDefaultValue(desc.m_CurveDimension,
 														desc.m_CurveKeyCount,

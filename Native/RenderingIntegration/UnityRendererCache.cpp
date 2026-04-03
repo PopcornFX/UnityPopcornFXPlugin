@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 
 #include "precompiled.h"
@@ -1481,6 +1482,89 @@ bool	CUnityRendererCache::GetRendererInfo(SMeshRendererDesc &desc)
 		desc.m_EmissiveRampMap = m_MaterialDescMesh.m_EmissiveRampMap.ToStringData();
 	if (!m_MaterialDescMesh.m_AlphaMap.Empty())
 		desc.m_AlphaRemap = m_MaterialDescMesh.m_AlphaMap.ToStringData();
+	return true;
+}
+
+CStringId		PatchDependencyIFN(CStringId &strID)
+{
+	CString str = strID.ToString();
+	CString ext = CFilePath::ExtractExtension(str);
+	if (ext.Compare("pktx", CaseInsensitive))
+	{
+		str = CFilePath::StripExtension(str) + ".dds";
+
+		return CStringId(str);
+	}
+	else if (ext.Compare("pkgo", CaseInsensitive))
+	{
+	}
+	return strID;
+}
+
+CStringId	PatchMeshDependencyIFN(CStringId &strID)
+{
+	CString str = strID.ToString();
+	CString ext = CFilePath::ExtractExtension(str);
+	if (ext.Compare("pkgo", CaseInsensitive))
+	{
+		str = CFilePath::StripExtension(str) + ".fbx";
+		return CStringId(str);
+	}
+	return strID;
+}
+
+bool	CUnityRendererCache::PatchProceduralDependencies()
+{
+	if (m_RendererType == Renderer_Mesh)
+	{
+		m_MaterialDescMesh.m_MeshPath = PatchMeshDependencyIFN(m_MaterialDescMesh.m_MeshPath);
+		m_MaterialDescMesh.m_DiffuseMap = PatchDependencyIFN(m_MaterialDescMesh.m_DiffuseMap);
+		
+		m_MaterialDescMesh.m_NormalMap = PatchDependencyIFN(m_MaterialDescMesh.m_NormalMap);
+		m_MaterialDescMesh.m_RoughMetalMap = PatchDependencyIFN(m_MaterialDescMesh.m_RoughMetalMap);
+		m_MaterialDescMesh.m_Vat_PositionMap = PatchDependencyIFN(m_MaterialDescMesh.m_Vat_PositionMap);
+		m_MaterialDescMesh.m_Vat_NormalMap = PatchDependencyIFN(m_MaterialDescMesh.m_Vat_NormalMap);
+		m_MaterialDescMesh.m_Vat_ColorMap = PatchDependencyIFN(m_MaterialDescMesh.m_Vat_ColorMap);
+		m_MaterialDescMesh.m_Vat_RotationMap = PatchDependencyIFN(m_MaterialDescMesh.m_Vat_RotationMap);
+		m_MaterialDescMesh.m_SkeletalAnimationTexture = PatchDependencyIFN(m_MaterialDescMesh.m_SkeletalAnimationTexture);
+		m_MaterialDescMesh.m_DiffuseRampMap = PatchDependencyIFN(m_MaterialDescMesh.m_DiffuseRampMap);
+		m_MaterialDescMesh.m_EmissiveMap = PatchDependencyIFN(m_MaterialDescMesh.m_EmissiveMap);
+		m_MaterialDescMesh.m_EmissiveRampMap = PatchDependencyIFN(m_MaterialDescMesh.m_EmissiveRampMap);
+		m_MaterialDescMesh.m_AlphaMap = PatchDependencyIFN(m_MaterialDescMesh.m_AlphaMap);
+		m_MaterialDescMesh.m_AlphaMasks1Map = PatchDependencyIFN(m_MaterialDescMesh.m_AlphaMasks1Map);
+		m_MaterialDescMesh.m_AlphaMasks2Map = PatchDependencyIFN(m_MaterialDescMesh.m_AlphaMasks2Map);
+		m_MaterialDescMesh.m_UVDistortions1Map = PatchDependencyIFN(m_MaterialDescMesh.m_UVDistortions1Map);
+		m_MaterialDescMesh.m_UVDistortions2Map = PatchDependencyIFN(m_MaterialDescMesh.m_UVDistortions2Map);
+		m_MaterialDescMesh.m_DissolveMap = PatchDependencyIFN(m_MaterialDescMesh.m_DissolveMap);
+		m_MaterialDescMesh.m_AtlasPath = PatchDependencyIFN(m_MaterialDescMesh.m_AtlasPath);
+	}
+	else if (m_RendererType == Renderer_Billboard ||
+			 m_RendererType == Renderer_Triangle ||
+			 m_RendererType == Renderer_Ribbon)
+	{
+		m_MaterialDescBillboard.m_DiffuseMap = PatchDependencyIFN(m_MaterialDescBillboard.m_DiffuseMap);
+		m_MaterialDescBillboard.m_AlphaMap = PatchDependencyIFN(m_MaterialDescBillboard.m_AlphaMap);
+		m_MaterialDescBillboard.m_AtlasDefinition = PatchDependencyIFN(m_MaterialDescBillboard.m_AtlasDefinition);
+		m_MaterialDescBillboard.m_NormalMap = PatchDependencyIFN(m_MaterialDescBillboard.m_NormalMap);
+		m_MaterialDescBillboard.m_RoughMetalMap = PatchDependencyIFN(m_MaterialDescBillboard.m_RoughMetalMap);
+		m_MaterialDescBillboard.m_DiffuseRampMap = PatchDependencyIFN(m_MaterialDescBillboard.m_DiffuseRampMap);
+		m_MaterialDescBillboard.m_EmissiveMap = PatchDependencyIFN(m_MaterialDescBillboard.m_EmissiveMap);
+		m_MaterialDescBillboard.m_EmissiveRampMap = PatchDependencyIFN(m_MaterialDescBillboard.m_EmissiveRampMap);
+		m_MaterialDescBillboard.m_AlphaMasks1Map = PatchDependencyIFN(m_MaterialDescBillboard.m_AlphaMasks1Map);
+		m_MaterialDescBillboard.m_AlphaMasks2Map = PatchDependencyIFN(m_MaterialDescBillboard.m_AlphaMasks2Map);
+		m_MaterialDescBillboard.m_UVDistortions1Map = PatchDependencyIFN(m_MaterialDescBillboard.m_UVDistortions1Map);
+		m_MaterialDescBillboard.m_UVDistortions2Map = PatchDependencyIFN(m_MaterialDescBillboard.m_UVDistortions2Map);
+		m_MaterialDescBillboard.m_DissolveMap = PatchDependencyIFN(m_MaterialDescBillboard.m_DissolveMap);
+	}
+	else if (m_RendererType == Renderer_Decal)
+	{
+		m_MaterialDescDecal.m_DiffuseMap = PatchDependencyIFN(m_MaterialDescDecal.m_DiffuseMap);
+		m_MaterialDescDecal.m_EmissiveMap = PatchDependencyIFN(m_MaterialDescDecal.m_EmissiveMap);
+	}
+	else if (m_RendererType == Renderer_Sound)
+	{
+		m_MaterialDescSound.m_SoundData = PatchDependencyIFN(m_MaterialDescSound.m_SoundData);
+	}
 	return true;
 }
 

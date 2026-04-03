@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 
 #pragma once
@@ -437,6 +438,8 @@ public:
 	bool								GetRendererInfo(SPopcornRendererDesc &desc);
 	bool								GetRendererInfo(SDecalRendererDesc &desc);
 	bool								GetRendererInfo(SMeshRendererDesc &desc);
+
+	bool								PatchProceduralDependencies();
 
 	void								CreateUnityMesh(u32 idx, bool gpuBillboarding, bool isEmissive3);
 

@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 
 #include "precompiled.h"
@@ -69,34 +70,49 @@ PK_STATIC_ASSERT(BaseType_Float4 == 34);
 
 static CString	PatchPathForAnimTrack(const CString &path)
 {
-	CString		patchedPath;
+	CString		patchedPath = path;
 
-	if (path.EndsWith(".pkmm", CaseInsensitive))
-	{
-		patchedPath = path.Extract(0, path.Length() - 5);
-		patchedPath += ".pkan";
-	}
-	else if (path.EndsWith(".fbx", CaseInsensitive))
-	{
-		patchedPath = path.Extract(0, path.Length() - 4);
-			patchedPath += ".pkan";
-	}
+	if (path.EndsWith(".pkmm", CaseInsensitive) ||
+		path.EndsWith(".fbx", CaseInsensitive))
+		patchedPath = CFilePath::StripExtension(path) + ".pkan";
 	return patchedPath;
 }
+
+//----------------------------------------------------------------------------
 
 static CString	PatchPathForMeshSampler(const CString &path)
 {
-	CString		patchedPath;
+	CString		patchedPath = path;
 
 	if (path.EndsWith(".fbx", CaseInsensitive))
-	{
-		patchedPath = path.Extract(0, path.Length() - 4);
-		patchedPath += ".pkmm";
-	}
-	else
-		patchedPath = path;
+		patchedPath = CFilePath::StripExtension(path) + ".pkmm";
 	return patchedPath;
 }
+
+//----------------------------------------------------------------------------
+
+static CString	PatchPathForMeshRenderer(const CString &path)
+{
+	CString		patchedPath = path;
+
+	if (path.EndsWith(".pkgo", CaseInsensitive))
+		patchedPath = CFilePath::StripExtension(path) + ".fbx";
+	return patchedPath;
+}
+
+//----------------------------------------------------------------------------
+
+static CString	PatchPathForTexture(const CString &path)
+{
+	CString		patchedPath = path;
+
+	if (path.EndsWith(".pkim", CaseInsensitive) ||
+		path.EndsWith(".pktx", CaseInsensitive))
+		patchedPath = CFilePath::StripExtension(path) + ".dds";
+	return patchedPath;
+}
+
+//----------------------------------------------------------------------------
 
 struct	SUnityDependencyAppendHelper
 {
@@ -220,7 +236,7 @@ bool	CEffectBrowser::InitializeIFN()
 	m_BrowseResourceManager->RegisterHandler<PopcornFX::CRectangleList>(m_BrowseResourceRectangleListHandler);
 	m_BrowseResourceManager->RegisterHandler<PopcornFX::CFontMetrics>(m_BrowseResourceFontMetricsHandler);
 	m_BrowseResourceManager->RegisterHandler<PopcornFX::CVectorField>(m_BrowseResourceVectorFieldHandler);
-
+	
 	m_BrowseContext = PK_NEW(PopcornFX::HBO::CContext(m_BrowseResourceManager));
 	if (!PK_VERIFY(m_BrowseContext != null))
 		return false;
@@ -392,6 +408,7 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 			if (dependency.m_Type == SResourceDependency::Type_Mesh)
 			{
 				dependencyMask |= IsMeshRenderer;
+				path = PatchPathForMeshRenderer(path);
 				requiresGameThreadCollect = true;
 			}
 			else if (dependency.m_Type == SResourceDependency::Type_Image)
@@ -402,6 +419,8 @@ bool	CEffectBrowser::BrowseObjectForDependencies(TArray<SResourceDependency> &de
 					dependencyMask |= IsLinearTextureRenderer;
 				else
 					dependencyMask |= IsTextureRenderer;
+				if (dependency.m_Usage & SResourceDependency::UsageFlags_UsedInRender)
+					path = PatchPathForTexture(path);
 			}
 			::OnEffectDependencyFound(path.Data(), dependencyMask);
 		}
@@ -484,6 +503,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				const CRendererDataBillboard	*dataBillboard = static_cast<const CRendererDataBillboard*>(renderer.Get());
 
 				dummyCache.GameThread_SetupRenderer(dataBillboard);
+				dummyCache.PatchProceduralDependencies();
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				unityMeshDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
@@ -497,6 +517,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				const CRendererDataRibbon		*dataRibbon = static_cast<const CRendererDataRibbon*>(renderer.Get());
 
 				dummyCache.GameThread_SetupRenderer(dataRibbon);
+				dummyCache.PatchProceduralDependencies();
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				unityMeshDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
@@ -510,6 +531,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				const CRendererDataMesh			*dataMesh = static_cast<const CRendererDataMesh*>(renderer.Get());
 
 				dummyCache.GameThread_SetupRenderer(dataMesh);
+				dummyCache.PatchProceduralDependencies();
 				dummyCache.GetRendererInfo(unityMeshDesc);
 				unityMeshDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityMeshDesc, renderer->m_RendererType, m_UniqueRendererCount);
@@ -524,6 +546,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				const CRendererDataTriangle		*dataTriangle = static_cast<const CRendererDataTriangle*>(renderer.Get());
 
 				dummyCache.GameThread_SetupRenderer(dataTriangle);
+				dummyCache.PatchProceduralDependencies();
 				dummyCache.GetRendererInfo(unityTriangleDesc);
 				unityTriangleDesc.m_CustomName = customName.Data();
 				::OnEffectRendererFound(&unityTriangleDesc, renderer->m_RendererType, m_UniqueRendererCount);
@@ -537,6 +560,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				const CRendererDataLight		*dataLight = static_cast<const CRendererDataLight*>(renderer.Get());
 
 				dummyCache.GameThread_SetupRenderer(dataLight);
+				dummyCache.PatchProceduralDependencies();
 				dummyCache.GetRendererInfo(unityLightDesc);
 				unityLightDesc.m_CustomName = customName.Data();
 				requiresGameThreadCollect = true;
@@ -551,6 +575,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				const CRendererDataSound		*dataSound = static_cast<const CRendererDataSound*>(renderer.Get());
 
 				dummyCache.GameThread_SetupRenderer(dataSound);
+				dummyCache.PatchProceduralDependencies();
 				dummyCache.GetRendererInfo(unitySoundDesc);
 				unitySoundDesc.m_CustomName = customName.Data();
 				requiresGameThreadCollect = true;
@@ -564,6 +589,7 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				SDecalRendererDesc				unityDecalDesc;
 				const CRendererDataDecal		*dataDecal = static_cast<const CRendererDataDecal*>(renderer.Get());
 				dummyCache.GameThread_SetupRenderer(dataDecal);
+				dummyCache.PatchProceduralDependencies();
 				dummyCache.GetRendererInfo(unityDecalDesc);
 				::OnEffectRendererFound(&unityDecalDesc, renderer->m_RendererType, m_UniqueRendererCount);
 				::OnEffectRendererLink(m_UniqueRendererCount, currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);

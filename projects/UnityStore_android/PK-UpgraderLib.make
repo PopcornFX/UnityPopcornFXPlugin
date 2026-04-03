@@ -54,7 +54,7 @@ OBJDIR = ../intermediate/UnityStore/GM/android/Debug/PK-UpgraderLib
 DEFINES += -D_DEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -mfpu=neon -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),debug_android64)
 ifeq ($(origin CC), default)
@@ -72,7 +72,7 @@ OBJDIR = ../intermediate/UnityStore/GM/android64/Debug/PK-UpgraderLib
 DEFINES += -D_DEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),release_android)
 ifeq ($(origin CC), default)
@@ -90,7 +90,7 @@ OBJDIR = ../intermediate/UnityStore/GM/android/Release/PK-UpgraderLib
 DEFINES += -DNDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),release_android64)
 ifeq ($(origin CC), default)
@@ -108,7 +108,7 @@ OBJDIR = ../intermediate/UnityStore/GM/android64/Release/PK-UpgraderLib
 DEFINES += -DNDEBUG
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),retail_android)
 ifeq ($(origin CC), default)
@@ -126,7 +126,7 @@ OBJDIR = ../intermediate/UnityStore/GM/android/Retail/PK-UpgraderLib
 DEFINES += -DNDEBUG -DPK_RETAIL
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
-ALL_LDFLAGS += $(LDFLAGS) -s
+ALL_LDFLAGS += $(LDFLAGS) -s -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),retail_android64)
 ifeq ($(origin CC), default)
@@ -144,7 +144,7 @@ OBJDIR = ../intermediate/UnityStore/GM/android64/Retail/PK-UpgraderLib
 DEFINES += -DNDEBUG -DPK_RETAIL
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
-ALL_LDFLAGS += $(LDFLAGS) -s
+ALL_LDFLAGS += $(LDFLAGS) -s -Wl,-z,max-page-size=16384
 
 #else
 #  $(error "invalid configuration $(config)")
@@ -359,6 +359,9 @@ GENERATED += $(OBJDIR)/core_upgrader_2_22_0_23868.o
 GENERATED += $(OBJDIR)/core_upgrader_2_23_0_25019.o
 GENERATED += $(OBJDIR)/core_upgrader_2_23_0_25047.o
 GENERATED += $(OBJDIR)/core_upgrader_2_23_0_25065.o
+GENERATED += $(OBJDIR)/core_upgrader_2_24_0_25771.o
+GENERATED += $(OBJDIR)/core_upgrader_2_24_0_25832.o
+GENERATED += $(OBJDIR)/core_upgrader_2_24_0_26241.o
 GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -496,6 +499,7 @@ GENERATED += $(OBJDIR)/upg_upgrades_v2.20.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.21.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.22.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.23.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.24.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -721,6 +725,9 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_22_0_23868.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_23_0_25019.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_23_0_25047.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_23_0_25065.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_24_0_25771.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_24_0_25832.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_24_0_26241.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -858,6 +865,7 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.20.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.21.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.22.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.23.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.24.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -1126,6 +1134,15 @@ $(OBJDIR)/core_upgrader_2_23_0_25047.o: ../../ExternalLibs/pk_upgraderlib/src/Up
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_23_0_25065.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25065/core_upgrader_2_23_0_25065.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25771.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25771/core_upgrader_2_24_0_25771.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25832.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25832/core_upgrader_2_24_0_25832.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_26241.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.26241/core_upgrader_2_24_0_26241.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
@@ -1975,6 +1992,9 @@ $(OBJDIR)/upg_upgrades_v2.22.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.23.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.23.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.24.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.24.0.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp

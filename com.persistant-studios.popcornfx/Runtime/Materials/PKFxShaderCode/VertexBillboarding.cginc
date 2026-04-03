@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------
-// Copyright Persistant Studios, SARL. All Rights Reserved. https://www.popcornfx.com/terms-and-conditions/
+// Copyright Persistant Studios, SARL.
+// https://popcornfx.com/popcornfx-community-license/
 //----------------------------------------------------------------------------
 /* Use this pragma to use different lvl features
 	#pragma shader_feature BB_FeatureC0 BB_FeatureC1 BB_FeatureC1_Capsule BB_FeatureC2

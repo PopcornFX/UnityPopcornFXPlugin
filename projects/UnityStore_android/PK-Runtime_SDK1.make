@@ -51,7 +51,7 @@ DEFINES += -D_DEBUG
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/UnityStore/GM/android/Debug/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -mfpu=neon -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),debug_android64)
 ifeq ($(origin CC), default)
@@ -70,7 +70,7 @@ DEFINES += -D_DEBUG
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/UnityStore/GM/android64/Debug/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),release_android)
 ifeq ($(origin CC), default)
@@ -89,7 +89,7 @@ DEFINES += -DNDEBUG
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/UnityStore/GM/android/Release/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),release_android64)
 ifeq ($(origin CC), default)
@@ -108,7 +108,7 @@ DEFINES += -DNDEBUG
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/UnityStore/GM/android64/Release/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
-ALL_LDFLAGS += $(LDFLAGS)
+ALL_LDFLAGS += $(LDFLAGS) -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),retail_android)
 ifeq ($(origin CC), default)
@@ -127,7 +127,7 @@ DEFINES += -DNDEBUG -DPK_RETAIL
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/UnityStore/GM/android/Retail/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS) -march=armv7-a -mfloat-abi=softfp -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -mfpu=neon -pipe
-ALL_LDFLAGS += $(LDFLAGS) -s
+ALL_LDFLAGS += $(LDFLAGS) -s -Wl,-z,max-page-size=16384
 
 else ifeq ($(config),retail_android64)
 ifeq ($(origin CC), default)
@@ -146,7 +146,7 @@ DEFINES += -DNDEBUG -DPK_RETAIL
 INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/Runtime/pk_maths/src -I../../ExternalLibs/Runtime/pk_maths -I../../ExternalLibs/Runtime/pk_toolkit -I../../ExternalLibs/Runtime/pk_toolkit/src/include -I../../ExternalLibs/Runtime/pk_kernel -I../../ExternalLibs/Runtime/pk_imaging -I../../ExternalLibs/Runtime/pk_base_object/src -I../../ExternalLibs/Runtime/pk_base_object/src/precompiled -I../../ExternalLibs/Runtime/pk_compiler/src -I../../ExternalLibs/Runtime/pk_compiler/src/precompiled -I../../ExternalLibs/Runtime/pk_engine_utils/src/precompiled -I../../ExternalLibs/Runtime/pk_geometrics -I../../ExternalLibs/Runtime/pk_particles/src -I../intermediate/UnityStore/GM/android64/Retail/PK-Runtime_SDK1
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -MP -pipe -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ADDITIONAL_FLAGS64) -march=armv8-a -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fno-unsigned-char -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe
-ALL_LDFLAGS += $(LDFLAGS) -s
+ALL_LDFLAGS += $(LDFLAGS) -s -Wl,-z,max-page-size=16384
 
 #else
 #  $(error "invalid configuration $(config)")

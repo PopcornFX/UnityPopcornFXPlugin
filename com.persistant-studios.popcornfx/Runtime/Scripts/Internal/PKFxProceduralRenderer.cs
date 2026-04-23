@@ -272,8 +272,8 @@ namespace PopcornFX
 					break;
 
 				default:
-                    Debug.LogError("[PopcornFX] unsupported billboarding mode");
-                    break;
+					Debug.LogError("[PopcornFX] unsupported billboarding mode");
+					break;
 			}
 			if (desc.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
 			{

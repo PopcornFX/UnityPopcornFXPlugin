@@ -192,13 +192,13 @@ bool	CUnityBillboardingBatchPolicy::AllocBuffers(SUnityRenderContext &ctx, const
 			{
 				if (rendererType == Renderer_Billboard)
 				{
-					const Drawers::SBillboard_BillboardingRequest	*bbRequest = checked_cast<const Drawers::SBillboard_BillboardingRequest*>(&dr->BaseBillboardingRequest());
+					const Drawers::SBillboard_BillboardingRequest	*bbRequest = static_cast<const Drawers::SBillboard_BillboardingRequest*>(&dr->BaseBillboardingRequest());
 					if (PK_VERIFY(bbRequest != null))
 						m_AtlasList = bbRequest->m_Atlas;
 				}
 				else if (rendererType == Renderer_Ribbon)
 				{
-					const Drawers::SRibbon_BillboardingRequest		*bbRequest = checked_cast<const Drawers::SRibbon_BillboardingRequest*>(&dr->BaseBillboardingRequest());
+					const Drawers::SRibbon_BillboardingRequest		*bbRequest = static_cast<const Drawers::SRibbon_BillboardingRequest*>(&dr->BaseBillboardingRequest());
 					if (PK_VERIFY(bbRequest != null))
 						m_AtlasList = bbRequest->m_Atlas;
 				}
@@ -1157,7 +1157,9 @@ void	CUnityBillboardingBatchPolicy::_UpdateThread_ResizeUnityMeshInstanceCount(c
 			perMeshDataSize += sizeof(float);
 			m_HasAtlas = true;
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		else if ((addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor()
+				|| addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaRemapCursor())
+				&& addInput.m_Type == BaseType_Float)
 		{
 			perMeshDataSize += sizeof(float);
 			hasAlphaRemap = true;
@@ -1453,7 +1455,8 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_AllocBillboardingBuffers(const
 			m_ParticleBuffers.m_EmissiveColors4.ResizeIFN(m_VertexCount);
 		if (_FindAdditionalInput(BasicRendererProperties::SID_Emissive_EmissiveColor(), BaseType_Float3, genInputs))
 			m_ParticleBuffers.m_EmissiveColors3.ResizeIFN(m_VertexCount);
-		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_Cursor(), BaseType_Float, genInputs))
+		if (_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_Cursor(), BaseType_Float, genInputs) ||
+			_FindAdditionalInput(BasicRendererProperties::SID_AlphaRemap_AlphaRemapCursor(), BaseType_Float, genInputs))
 			m_ParticleBuffers.m_AlphaCursor.ResizeIFN(m_VertexCount);
 
 		if (_FindAdditionalInput(BasicRendererProperties::SID_TransformUVs_UVRotate(), BaseType_Float, genInputs))
@@ -1594,7 +1597,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersBillboards(const S
 				field.m_Storage.m_Stride = sizeof(CFloat4);
 			}
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		else if ((addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor()
+				|| addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaRemapCursor())
+				&& addInput.m_Type == BaseType_Float)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1807,7 +1812,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersGeomBillboards(con
 			field.m_Storage.m_Stride = sizeof(CFloat4);
 			rawBufferOffset += sizeof(float) * 4;
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		else if ((addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor()
+				|| addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaRemapCursor())
+				&& addInput.m_Type == BaseType_Float)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -1945,7 +1952,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersRibbons(const SGen
 				field.m_Storage.m_Stride = sizeof(CFloat4);
 			}
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		else if ((addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor()
+				|| addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaRemapCursor())
+				&& addInput.m_Type == BaseType_Float)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;
@@ -2106,7 +2115,9 @@ bool    CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersMeshes(const SG
 			m_MeshAdditionalField.Last().m_AdditionalInputIndex = i;
 			m_MeshAdditionalField.Last().m_Storage = TStridedMemoryView<SStridedMemoryViewRawStorage>(reinterpret_cast<SStridedMemoryViewRawStorage*>(&m_PerMeshBuffers.First().m_Colors), m_PerMeshBuffers.Count(), sizeof(SMeshParticleBuffers));
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		else if ((addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor()
+				|| addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaRemapCursor())
+				&& addInput.m_Type == BaseType_Float)
 		{
 			if (!PK_VERIFY(m_MeshAdditionalField.PushBack().Valid()))
 				return false;
@@ -2328,7 +2339,9 @@ bool	CUnityBillboardingBatchPolicy::_RenderThread_SetupBuffersTriangles(const SG
 				field.m_Storage.m_Stride = sizeof(CFloat4);
 			}
 		}
-		else if (addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor() && addInput.m_Type == BaseType_Float)
+		else if ((addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_Cursor()
+				|| addInput.m_Name == BasicRendererProperties::SID_AlphaRemap_AlphaRemapCursor())
+				&& addInput.m_Type == BaseType_Float)
 		{
 			if (!PK_VERIFY(m_ParticleBuffers.m_AdditionalFieldsBuffers.PushBack().Valid()))
 				return false;

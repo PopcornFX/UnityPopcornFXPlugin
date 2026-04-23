@@ -37,8 +37,8 @@ namespace PopcornFX
 
 		public IntPtr m_AttributeName;
 		public IntPtr m_Description;
-        public IntPtr m_Category;
-        public IntPtr m_DropNameList;
+		public IntPtr m_Category;
+		public IntPtr m_DropNameList;
 
 		public SAttribContainer_Vector4 m_DefaultValue;
 		public SAttribContainer_Vector4 m_MinValue;
@@ -54,8 +54,8 @@ namespace PopcornFX
 		public ESamplerType m_SamplerType;
 		public IntPtr m_SamplerName;
 		public IntPtr m_Description;
-        public IntPtr m_Category;
-        public int m_SamplerUsageFlags;
+		public IntPtr m_Category;
+		public int m_SamplerUsageFlags;
 
 		public Quaternion m_ShapeRotation; // Rotation quaternion
 		public Vector3 m_ShapePosition;
@@ -84,23 +84,23 @@ namespace PopcornFX
 		public float m_Metalness;
 	};
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct SRenderingFeatureAlphaMasksDesc
+	[StructLayout(LayoutKind.Sequential)]
+	public struct SRenderingFeatureAlphaMasksDesc
 	{
-        public IntPtr m_AlphaMasks1Map;
-        public IntPtr m_AlphaMasks2Map;
+		public IntPtr m_AlphaMasks1Map;
+		public IntPtr m_AlphaMasks2Map;
 
-        public float m_AlphaMask1Intensity;
-        public float m_AlphaMask2Intensity;
-        public float m_AlphaMask1Weight;
-        public float m_AlphaMask2Weight;
-        public Vector2 m_AlphaMask1Scale;
-        public Vector2 m_AlphaMask2Scale;
-        public float m_AlphaMask1RotationSpeed;
-        public float m_AlphaMask2RotationSpeed;
-        public Vector2 m_AlphaMask1TranslationSpeed;
-        public Vector2 m_AlphaMask2TranslationSpeed;
-    };
+		public float m_AlphaMask1Intensity;
+		public float m_AlphaMask2Intensity;
+		public float m_AlphaMask1Weight;
+		public float m_AlphaMask2Weight;
+		public Vector2 m_AlphaMask1Scale;
+		public Vector2 m_AlphaMask2Scale;
+		public float m_AlphaMask1RotationSpeed;
+		public float m_AlphaMask2RotationSpeed;
+		public Vector2 m_AlphaMask1TranslationSpeed;
+		public Vector2 m_AlphaMask2TranslationSpeed;
+	};
 
 	[StructLayout(LayoutKind.Sequential)]
 	public struct SRenderingFeatureUVDistortionsDesc
@@ -173,7 +173,7 @@ namespace PopcornFX
 		public IntPtr m_DiffuseRampMap;
 		public IntPtr m_EmissiveRampMap;
 
-        public float m_InvSoftnessDistance;
+		public float m_InvSoftnessDistance;
 		public float m_AlphaClipThreshold;
 		public int m_TransformUVs_RGBOnly;
 
@@ -181,7 +181,7 @@ namespace PopcornFX
 		public int m_DrawOrder;
 
 		public IntPtr m_LitRendering;
-        public IntPtr m_AlphaMasks;
+		public IntPtr m_AlphaMasks;
 		public IntPtr m_UVDistortions;
 		public IntPtr m_Dissolve;
 
@@ -198,7 +198,7 @@ namespace PopcornFX
 		public IntPtr m_MeshAsset;
 		public int m_ShaderVariationFlags;
 		public EBlendMode m_BlendMode;
-        public int m_IsLegacy;
+		public int m_IsLegacy;
 		public int m_HasMeshAtlas;
 
 		public IntPtr m_DiffuseMap;

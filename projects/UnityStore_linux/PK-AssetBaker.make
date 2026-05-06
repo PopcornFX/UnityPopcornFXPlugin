@@ -21,7 +21,7 @@ endif
 PCH = ../../ExternalLibs/PK-AssetBaker/precompiled.h
 PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
 GCH = $(PCH_PLACEHOLDER).gch
-INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/PK-AssetBaker -I../../ExternalLibs/PK-AssetBakerLib -I../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/PKFX -I../../ExternalLibs/Runtime/libs/zlib-1.2.8
+INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I../../ExternalLibs/Runtime/include/license/UnityStore -I../../ExternalLibs/PK-AssetBaker -I../../ExternalLibs/PK-AssetBakerLib -I../../ExternalLibs/pk_upgraderlib/include -I../../Native/Common/PKFX -I../../ExternalLibs/Runtime/libs/zlib-1.3.2
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -46,7 +46,7 @@ RESCOMP = windres
 TARGETDIR = ../../../release/application/BinariesGM_linux_x32_d
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/x32/Debug/PK-AssetBaker
-DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -D_DEBUG -DZ_PREFIX -DZ_HAVE_STDARG_H -DZ_HAVE_UNISTD_H -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
@@ -68,7 +68,7 @@ RESCOMP = windres
 TARGETDIR = ../../../release/application/BinariesGM_linux_x64_d
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/x64/Debug/PK-AssetBaker
-DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -D_DEBUG -DZ_PREFIX -DZ_HAVE_STDARG_H -DZ_HAVE_UNISTD_H -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -mfpmath=sse
@@ -90,7 +90,7 @@ RESCOMP = windres
 TARGETDIR = ../../../release/application/BinariesGM_linux_ARM64_d
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-AssetBaker
-DEFINES += -D_DEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -D_DEBUG -DZ_PREFIX -DZ_HAVE_STDARG_H -DZ_HAVE_UNISTD_H -DPK_USE_RENDER_HELPERS=0 -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE +=
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -ggdb -pipe -target aarch64-linux-gnu
@@ -112,7 +112,7 @@ RESCOMP = windres
 TARGETDIR = ../../../release/application/BinariesGM_linux_x32_r
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/x32/Release/PK-AssetBaker
-DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -DNDEBUG -DZ_PREFIX -DZ_HAVE_STDARG_H -DZ_HAVE_UNISTD_H -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
@@ -134,7 +134,7 @@ RESCOMP = windres
 TARGETDIR = ../../../release/application/BinariesGM_linux_x64_r
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/x64/Release/PK-AssetBaker
-DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -DNDEBUG -DZ_PREFIX -DZ_HAVE_STDARG_H -DZ_HAVE_UNISTD_H -DPK_USE_RENDER_HELPERS=0 -DUSE_FBXIMPORTER -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -mfpmath=sse
@@ -156,7 +156,7 @@ RESCOMP = windres
 TARGETDIR = ../../../release/application/BinariesGM_linux_ARM64_r
 TARGET = $(TARGETDIR)/PK-AssetBaker
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-AssetBaker
-DEFINES += -DNDEBUG -DZ_PREFIX -DZ_PREFIX_CUSTOM=pk_z_ -DPK_USE_RENDER_HELPERS=0 -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
+DEFINES += -DNDEBUG -DZ_PREFIX -DZ_HAVE_STDARG_H -DZ_HAVE_UNISTD_H -DPK_USE_RENDER_HELPERS=0 -DUSE_IMAGE_PLUGIN_HDR -DUSE_IMAGE_PLUGIN_TIFF -DUSE_IMAGE_PLUGIN_PKM -DUSE_IMAGE_PLUGIN_PVR
 FORCE_INCLUDE +=
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-math-errno -fno-trapping-math -pipe -target aarch64-linux-gnu

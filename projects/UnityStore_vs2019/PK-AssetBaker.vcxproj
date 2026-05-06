@@ -102,8 +102,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_HAVE_STDARG_H;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.3.2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -132,8 +132,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_HAVE_STDARG_H;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.3.2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -161,8 +161,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_HAVE_STDARG_H;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.3.2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -197,8 +197,8 @@
       <WarningLevel>Level4</WarningLevel>
       <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
-      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_PREFIX_CUSTOM=pk_z_;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;Z_PREFIX;Z_HAVE_STDARG_H;PK_USE_RENDER_HELPERS=0;USE_FBXIMPORTER;USE_IMAGE_PLUGIN_HDR;USE_IMAGE_PLUGIN_TIFF;USE_IMAGE_PLUGIN_PKM;USE_IMAGE_PLUGIN_PVR;USE_IMAGE_PLUGIN_EXR;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\PK-AssetBaker;..\..\ExternalLibs\PK-AssetBakerLib;..\..\ExternalLibs\pk_upgraderlib\include;..\..\Native\Common\PKFX;..\..\ExternalLibs\Runtime\libs\zlib-1.3.2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -226,17 +226,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\crc32.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\deflate.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\gzguts.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffast.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inffixed.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inflate.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\inftrees.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\trees.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zconf.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zlib.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.2.8\zutil.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\crc32.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\deflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\gzguts.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\inffast.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\inffixed.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\inflate.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\inftrees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\trees.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\zconf.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\zlib.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\libs\zlib-1.3.2\zutil.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxPlugins.h" />
     <ClInclude Include="..\..\Native\Common\PKFX\FxStartup.h" />
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBaker\AssetBaker.h" />

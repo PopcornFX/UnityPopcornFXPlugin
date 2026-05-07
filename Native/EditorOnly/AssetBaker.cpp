@@ -33,6 +33,21 @@
 #include "PK-AssetBakerLib/AssetBaker_Oven_Texture.h"
 #include "PK-AssetBakerLib/AssetBaker_Oven_StraightCopy.h"
 
+#include "PK-AssetBakerLib/AssetBaker_PKTX.h"
+#include "PK-AssetBakerLib/AssetBaker_PKTX_Atlas.h"
+#include "PK-AssetBakerLib/AssetBaker_PKTX_Constant.h"
+//#include "PK-AssetBakerLib/AssetBaker_PKTX_Font.h"
+#include "PK-AssetBakerLib/AssetBaker_PKTX_Graph.h"
+#include "PK-AssetBakerLib/AssetBaker_PKTX_Substance.h"
+#include "PK-AssetBakerLib/AssetBaker_PKTX_Python.h"
+#include "PK-AssetBakerLib/AssetBaker_PKTX_BAT.h"
+#include "PK-AssetBakerLib/AssetBaker_PKGO.h"
+#include "PK-AssetBakerLib/AssetBaker_PKGO_Graph.h"
+#include "PK-AssetBakerLib/AssetBaker_PKVX.h"
+#include "PK-AssetBakerLib/AssetBaker_PKVX_Constant.h"
+#include "PK-AssetBakerLib/AssetBaker_PKVX_Graph.h"
+#include "PK-AssetBakerLib/AssetBaker_SimInterfaces.h"
+
 #include "pk_particles_toolbox/include/pt_file_helpers.h"
 
 #include "pk_engine_utils/include/eu_random.h"
@@ -279,6 +294,29 @@ bool	SBakeContext::Init()
 	COvenBakeConfig_Particle::RegisterHandler();
 	COvenBakeConfig_StraightCopy::RegisterHandler();
 	COvenBakeConfig_Audio::RegisterHandler();
+
+	// register asset generators
+	CAssetGeneratorTexture::RegisterHandler();
+	CAssetGeneratorTexture_Atlas::RegisterHandler();
+	CAssetGeneratorTexture_Constant::RegisterHandler();
+	//CAssetGeneratorTexture_Font::RegisterHandler();
+	CAssetGeneratorTexture_Graph::RegisterHandler();
+
+#if (PK_ASSET_BAKER_USE_SUBSTANCE != 0)
+	CAssetGeneratorTexture_Substance::RegisterHandler();
+#endif
+#if (PK_ASSET_BAKER_USE_PYTHON != 0)
+	CAssetGeneratorTexture_Python::Startup();
+	CAssetGeneratorTexture_Python::RegisterHandler();
+#endif
+	CAssetGeneratorTexture_BAT::RegisterHandler();
+	CAssetGeneratorGeometry::RegisterHandler();
+	CAssetGeneratorGeometry_Graph::RegisterHandler();
+	CAssetGeneratorVectorField::RegisterHandler();
+	CAssetGeneratorVectorField_Constant::RegisterHandler();
+	CAssetGeneratorVectorField_Graph::RegisterHandler();
+
+	
 	return true;
 }
 
@@ -308,6 +346,26 @@ void	SBakeContext::Destroy()
 	PK_SAFE_DELETE(m_BakeFSController);
 	PK_SAFE_DELETE(m_BakeResourceManager);
 
+	// unregister asset generators
+	CAssetGeneratorVectorField_Graph::UnregisterHandler();
+	CAssetGeneratorVectorField_Constant::UnregisterHandler();
+	CAssetGeneratorVectorField::UnregisterHandler();
+	CAssetGeneratorTexture_BAT::UnregisterHandler();
+#if (PK_ASSET_BAKER_USE_SUBSTANCE != 0)
+	CAssetGeneratorTexture_Substance::UnregisterHandler();
+#endif
+#if (PK_ASSET_BAKER_USE_PYTHON != 0)
+	CAssetGeneratorTexture_Python::Shutdown();
+	CAssetGeneratorTexture_Python::UnregisterHandler();
+#endif
+	CAssetGeneratorGeometry_Graph::UnregisterHandler();
+	CAssetGeneratorGeometry::UnregisterHandler();
+	CAssetGeneratorTexture_Graph::UnregisterHandler();
+	//CAssetGeneratorTexture_Font::UnregisterHandler();
+	CAssetGeneratorTexture_Constant::UnregisterHandler();
+	CAssetGeneratorTexture_Atlas::UnregisterHandler();
+	CAssetGeneratorTexture::UnregisterHandler();
+
 	// unregister the oven's HBO bake-config classes:
 	COvenBakeConfig_Audio::UnregisterHandler();
 	COvenBakeConfig_StraightCopy::UnregisterHandler();
@@ -320,6 +378,8 @@ void	SBakeContext::Destroy()
 	COvenBakeConfig_Mesh::UnregisterHandler();
 	COvenBakeConfig_HBO::UnregisterHandler();
 	COvenBakeConfig_Base::UnregisterHandler();
+
+	UnbindSimInterfacesBaker(m_Cookery);
 }
 
 //----------------------------------------------------------------------------
@@ -332,11 +392,30 @@ bool	SBakeContext::Reinit()
 
 //----------------------------------------------------------------------------
 
+bool	SBakeContext::ShouldBakeDependency(const CString &path) const
+{
+	if (path.EndsWith(".pktx", CaseInsensitive))
+		return true;
+	else if (path.EndsWith(".pkgo", CaseInsensitive))
+		return true;
+	else if (path.EndsWith(".pkvx", CaseInsensitive))
+		return true;
+	return false;
+}
+
+//----------------------------------------------------------------------------
+
 void	SBakeContext::_RemapResourcesPath(CString &path, bool &, CMessageStream &)
 {
 	if (path.EndsWith(".fbx", CaseInsensitive))
 		path = CFilePath::StripExtension(path) + ".pkmm";
 	if (path.EndsWith(".fga", CaseInsensitive))
+		path = CFilePath::StripExtension(path) + ".pkvf";
+	if (path.EndsWith(".pktx", CaseInsensitive))
+		path = CFilePath::StripExtension(path) + ".dds";
+	if (path.EndsWith(".pkgo", CaseInsensitive))
+		path = CFilePath::StripExtension(path) + ".fbx";
+	if (path.EndsWith(".pkvx", CaseInsensitive))
 		path = CFilePath::StripExtension(path) + ".pkvf";
 
 	TStaticCountedArray<CString, 4>		outputPaths;
@@ -348,10 +427,6 @@ void	SBakeContext::_RemapResourcesPath(CString &path, bool &, CMessageStream &)
 //----------------------------------------------------------------------------
 
 CEffectBaker::CEffectBaker()
-	: m_ReloadProjectSettings(false)
-	, m_PKSourcePack(null)
-	, m_ProjectSettings(null)
-	, m_BakeConfigParticle(null)
 {
 	m_BakeContext.Init();
 }
@@ -362,6 +437,7 @@ CEffectBaker::~CEffectBaker()
 {
 }
 
+//----------------------------------------------------------------------------
 
 bool	CEffectBaker::IsPathOnIgnorePath(const CString &path) const
 {
@@ -511,6 +587,11 @@ void			CEffectBaker::SetPackSettings(const char *pKPackPath, const char *targetP
 
 void			CEffectBaker::Initialize()
 {
+	if (m_Initialized)
+	{
+		UnbindSimInterfacesBaker(m_BakeContext.m_Cookery);
+		m_Initialized = false;
+	}
 	m_BakeContext.m_BakeContext->UnloadAllFiles();
 	m_BakeContext.m_BakeFSController->UnmountAllPacks();
 
@@ -624,6 +705,10 @@ void			CEffectBaker::Initialize()
 	m_BakeContext.m_Cookery.MapOven("mp3", ovenIdAudio);			// mp3 sound
 	m_BakeContext.m_Cookery.MapOven("wav", ovenIdAudio);			// wav sound
 	m_BakeContext.m_Cookery.MapOven("ogg", ovenIdAudio);			// ogg sound
+	
+	m_BakeContext.m_Cookery.MapOven("pktx", ovenIdTexture);			// PopcornFX Texture (Procedural asset gen)
+	m_BakeContext.m_Cookery.MapOven("pkgo", ovenIdMesh);			// PopcornFX Mesh (Procedural asset gen)
+	m_BakeContext.m_Cookery.MapOven("pkvx", ovenIdVectorField);		// PopcornFX VectorField (Procedural asset gen)
 
 	if (!PK_VERIFY(m_BakeContext.m_Cookery.m_DstPackPaths.PushBack(m_BakeContext.m_DstBakeTarget).Valid()))
 		return;
@@ -633,6 +718,15 @@ void			CEffectBaker::Initialize()
 	SetTargetPlatform(m_UnityPackSettings.m_TargetPlatformName, m_UnityPackSettings.m_QualitySettingsCount);
 	UpdateCookeryConfigFile();
 	_UpdateProjectSettings();
+
+	m_BakeContext.m_Cookery.m_CachePath = general->EditorCacheDir();
+	m_BakeContext.m_Cookery.m_ConfigsPath = general->RuntimeConfigsDir();
+	m_BakeContext.m_Cookery.m_LibraryPath = general->LibraryDir();
+	m_BakeContext.m_Cookery.m_BindSimInterfaces = true;
+	if (!BindSimInterfacesBaker(m_BakeContext.m_Cookery))	// Builtin sim interfaces used to generate procedural assets (Must be done after 'bakery.SetupIngredients()', which mounts the virtual filesystem)
+		return;
+
+	m_Initialized = true;
 }
 
 //----------------------------------------------------------------------------
@@ -844,7 +938,8 @@ bool	CEffectBaker::BakeAsset(const CString &path, bool bakeDependencies, bool is
 				CLog::Log(PK_WARN, "Asset Dependency of '%s' does not exist:	'%s'", path.Data(), dependency.Data());
 				continue;
 			}
-			if (BakeAsset(dependency, false) == false)
+			bool bakeDependency = m_BakeContext.ShouldBakeDependency(dependency);
+			if (BakeAsset(dependency, bakeDependency) == false)
 			{
 				CLog::Log(PK_ERROR, "Asset Dependency of '%s' failed baking:	'%s'", path.Data(), dependency.Data());
 				return false;
@@ -991,6 +1086,7 @@ void	CEffectBaker::UpdateCookeryConfigFile()
 	PBaseObjectFile	configFile = m_BakeContext.m_Cookery.m_BaseConfigFile;
 	if (configFile == null)
 		return;
+	
 	for (const PBaseObject &obj : configFile->ObjectList())
 	{
 		COvenBakeConfig_Particle *config = HBO::Cast<COvenBakeConfig_Particle>(obj);
@@ -1001,7 +1097,7 @@ void	CEffectBaker::UpdateCookeryConfigFile()
 			config->SetCompile(true);
 			config->SetRemoveEditorNodes(true);
 
-			config->SetSourceConfig(/*m_BakeForStandalone ? EBakeSourceConfig::Bake_NoSource : */Bake_StandaloneSource);
+			config->SetSourceConfig(Bake_StandaloneSource);
 			config->SetBakeMode(/*m_BakeForStandalone ? COvenBakeConfig_HBO::EBakeMode::Bake_SaveAsBinary : */COvenBakeConfig_HBO::EBakeMode::Bake_SaveAsText);
 
 			// build versions
@@ -1013,11 +1109,26 @@ void	CEffectBaker::UpdateCookeryConfigFile()
 			continue;
 		}
 	}
+	POvenBakeConfig_Texture	texGeneratorConfig = m_BakeContext.m_BakeContext->NewObject<COvenBakeConfig_Texture>(configFile.Get());
+	texGeneratorConfig->SetBakeTarget("Unity_Cache");
+	texGeneratorConfig->SetExtensionFilter("pktx");
+	texGeneratorConfig->SetExportFormat(COvenBakeConfig_Texture::ExportCodec_DDS);
+
+#if 0
+	//when #15483 is implemented:
+	POvenBakeConfig_Mesh meshGeneratorConfig = m_BakeContext.m_BakeContext->NewObject<COvenBakeConfig_Mesh>(configFile.Get());
+	meshGeneratorConfig->SetBakeTarget("Unity_Cache");
+	meshGeneratorConfig->SetExtensionFilter("pkgo");
+
+	POvenBakeConfig_VectorField vectorfieldGeneratorConfig = m_BakeContext.m_BakeContext->NewObject<POvenBakeConfig_VectorField>(configFile.Get());
+	vectorfieldGeneratorConfig->SetBakeTarget("Unity_Cache");
+	vectorfieldGeneratorConfig->SetExtensionFilter("pkvx");
+#endif
 }
 
 //----------------------------------------------------------------------------
 
-void	CEffectBaker::OutputBakedResourceInCache(const CString path, TStaticCountedArray<CString, 4> &outputs)
+void	CEffectBaker::OutputBakedResourceInCache(const CString &path, TStaticCountedArray<CString, 4> &outputs)
 {
 	if (path.EndsWith(".fbx", CaseInsensitive))
 	{
@@ -1036,6 +1147,23 @@ void	CEffectBaker::OutputBakedResourceInCache(const CString path, TStaticCounted
 				path.EndsWith(".pkvf", CaseInsensitive))
 	{
 		outputs.PushBack(path);
+	}
+	else if (path.EndsWith(".pktx", CaseInsensitive) ||
+			 path.EndsWith(".pkim", CaseInsensitive))
+	{
+		outputs.PushBack(CFilePath::StripExtension(path) + ".pktx");
+		outputs.PushBack(CFilePath::StripExtension(path) + ".dds");
+	}
+	else if (path.EndsWith(".pkgo", CaseInsensitive))
+	{
+		outputs.PushBack(CFilePath::StripExtension(path) + ".pkgo");
+		outputs.PushBack(CFilePath::StripExtension(path) + ".fbx");
+		outputs.PushBack(CFilePath::StripExtension(path) + ".pkmm");
+	}
+	else if (path.EndsWith(".pkvx", CaseInsensitive))
+	{
+		outputs.PushBack(CFilePath::StripExtension(path) + ".pkvx");
+		outputs.PushBack(CFilePath::StripExtension(path) + ".pkvf");
 	}
 }
 

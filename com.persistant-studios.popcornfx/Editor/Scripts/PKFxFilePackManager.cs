@@ -95,7 +95,6 @@ namespace PopcornFX
 				{
 					PKFxManager.UnloadEffect(curAsset);
 				}
-				AssetDatabase.Refresh();
 			}
 
 			// We can display the PopcornFX logs here for baking errors:

@@ -438,6 +438,8 @@ public:
 	bool								GetRendererInfo(SDecalRendererDesc &desc);
 	bool								GetRendererInfo(SMeshRendererDesc &desc);
 
+	bool								PatchProceduralDependencies();
+
 	void								CreateUnityMesh(u32 idx, bool gpuBillboarding, bool isEmissive3);
 
 	virtual void						UpdateThread_BuildBillboardingFlags(const PRendererDataBase &renderer) override;

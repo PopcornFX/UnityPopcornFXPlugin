@@ -136,7 +136,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4701;4709;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -170,7 +170,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4701;4709;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -204,7 +204,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4701;4709;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\UnityStore\VC142\x64\Release\PK-Runtime_SDK1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -238,7 +238,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4701;4709;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\UnityStore\VC142\ARM64\Release\PK-Runtime_SDK1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -272,7 +272,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4701;4709;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\UnityStore\VC142\x64\Retail\PK-Runtime_SDK1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -306,7 +306,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DisableSpecificWarnings>4701;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4701;4709;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <TreatSpecificWarningsAsErrors>4002;4003;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
       <PreprocessorDefinitions>NDEBUG;PK_RETAIL;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\SDK\Samples\External\DX\include;..\..\ExternalLibs\Runtime;..\..\ExternalLibs\Runtime\include;..\..\ExternalLibs\Runtime\include\license\UnityStore;..\..\ExternalLibs\Runtime\pk_maths\src;..\..\ExternalLibs\Runtime\pk_maths;..\..\ExternalLibs\Runtime\pk_toolkit;..\..\ExternalLibs\Runtime\pk_toolkit\src\include;..\..\ExternalLibs\Runtime\pk_kernel;..\..\ExternalLibs\Runtime\pk_imaging;..\..\ExternalLibs\Runtime\pk_base_object\src;..\..\ExternalLibs\Runtime\pk_base_object\src\precompiled;..\..\ExternalLibs\Runtime\pk_compiler\src;..\..\ExternalLibs\Runtime\pk_compiler\src\precompiled;..\..\ExternalLibs\Runtime\pk_engine_utils\src\precompiled;..\..\ExternalLibs\Runtime\pk_geometrics;..\..\ExternalLibs\Runtime\pk_particles\src;..\intermediate\UnityStore\VC142\ARM64\Retail\PK-Runtime_SDK1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

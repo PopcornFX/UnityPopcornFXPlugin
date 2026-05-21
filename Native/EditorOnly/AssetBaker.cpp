@@ -121,7 +121,7 @@ namespace
 	static const char* kXOne = "xboxone";
 	static const char* kXSeries = "UNKNOWN1eries";
 	static const char* kPS4 = "ps4";
-	static const char* kUNKNOWN2 = "UNKNOWN2";
+	static const char* kUNKNOWN2 = "ps5";
 	static const char* kSwitch = "switch"; // console?
 
 	static const char* kMobile = "mobile";

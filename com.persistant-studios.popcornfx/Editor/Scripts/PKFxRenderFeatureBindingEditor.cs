@@ -25,7 +25,7 @@ namespace PopcornFX
 			"Vertex",
 		};
 		static string[] m_ShaderVariationFlagsString = new string[]
-        {
+		{
 			"RibbonComplex",
 			"AnimBlend",
 			"AlphaRemap",
@@ -55,7 +55,7 @@ namespace PopcornFX
 			"Dissolve",
 		};
 
-        public static string GetSelectedPathOrFallback()
+		public static string GetSelectedPathOrFallback()
 		{
 			string path = "Assets";
 
@@ -99,7 +99,7 @@ namespace PopcornFX
 			SerializedProperty	SupportedShaderMask = serializedObject.FindProperty("m_SupportedShaderMask");
 			SerializedProperty	MandatoryShaderMask = serializedObject.FindProperty("m_MandatoryShaderMask");
 			SerializedProperty	BlendMode = serializedObject.FindProperty("m_BlendMode");
-            SerializedProperty  IsLegacy = serializedObject.FindProperty("m_IsLegacy");
+			SerializedProperty  IsLegacy = serializedObject.FindProperty("m_IsLegacy");
 			SerializedProperty	BillboardingLocation = serializedObject.FindProperty("m_BillboardingLocation");
 
 			UseShader.boolValue = EditorGUILayout.Toggle("Use Shader", UseShader.boolValue);
@@ -125,13 +125,13 @@ namespace PopcornFX
 					{
 						if (type.boolValue)
 							bindingHasMeshRenderer = true;
-                    }
-                    else if (rendererType == ERendererType.Decal)
-                    {
-                        if (type.boolValue)
-                            bindingHasDecalRenderer = true;
-                    }
-                }
+					}
+					else if (rendererType == ERendererType.Decal)
+					{
+						if (type.boolValue)
+							bindingHasDecalRenderer = true;
+					}
+				}
 				for (int i = 0; i < ArraySize; i++)
 				{
 					SerializedProperty type = RenderTypes.GetArrayElementAtIndex(i);
@@ -142,7 +142,7 @@ namespace PopcornFX
 						EditorGUI.BeginDisabledGroup(!_RendererTypeShouldHaveBindings(rendererType));
 						EditorGUILayout.BeginHorizontal();
 						bool disabledGroup = (bindingHasMeshRenderer && rendererType != ERendererType.Mesh) || (bindingHasDecalRenderer && rendererType != ERendererType.Decal);
-                        EditorGUI.BeginDisabledGroup(disabledGroup);
+						EditorGUI.BeginDisabledGroup(disabledGroup);
 						EditorGUILayout.LabelField(_RendererTypeToString(rendererType));
 						if (disabledGroup)
 							type.boolValue = false;
@@ -189,14 +189,14 @@ namespace PopcornFX
 					}
 				}
 				EditorGUILayout.EndFoldoutHeaderGroup();
-                
-            }
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Legacy Material");
-            IsLegacy.boolValue = EditorGUILayout.Toggle(IsLegacy.boolValue);
-            EditorGUILayout.EndHorizontal();
+				
+			}
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.LabelField("Legacy Material");
+			IsLegacy.boolValue = EditorGUILayout.Toggle(IsLegacy.boolValue);
+			EditorGUILayout.EndHorizontal();
 
-            SupportedShaderMask.intValue = EditorGUILayout.MaskField("Supported Shader Variation Mask", SupportedShaderMask.intValue, m_ShaderVariationFlagsString);
+			SupportedShaderMask.intValue = EditorGUILayout.MaskField("Supported Shader Variation Mask", SupportedShaderMask.intValue, m_ShaderVariationFlagsString);
 			MandatoryShaderMask.intValue = EditorGUILayout.MaskField("Mandatory Shader Variation Mask", MandatoryShaderMask.intValue, m_ShaderVariationFlagsString);
 			SupportedShaderMask.intValue |= MandatoryShaderMask.intValue;
 			PKFxShaderInputBindings shaderInputs = serializedObject.targetObject as PKFxShaderInputBindings;

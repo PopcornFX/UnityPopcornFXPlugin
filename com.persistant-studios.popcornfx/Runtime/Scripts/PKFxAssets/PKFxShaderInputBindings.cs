@@ -274,6 +274,7 @@ namespace PopcornFX
 					Debug.LogError(string.Format("[PopcornFX] Failed to create Texture for \"{0}\" in effect \"{1}\"", batchDesc.m_AlphaRemap, asset.AssetVirtualPath));
 				}
 				material.SetTexture(m_AlphaRemapPropertyName, alphaRemap);
+				material.SetFloat("_AlphaClip", 1);
 			}
 			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp) &&
 				!string.IsNullOrEmpty(m_DiffuseRampMapPropertyName) && !string.IsNullOrEmpty(batchDesc.m_DiffuseRampMap))

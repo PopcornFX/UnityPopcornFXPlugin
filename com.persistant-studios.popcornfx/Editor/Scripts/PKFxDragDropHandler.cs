@@ -11,9 +11,9 @@ namespace PopcornFX
 		[InitializeOnLoadMethod]
 		static void OnLoad()
 		{
-			DragAndDrop.AddDropHandler(OnSceneDrop);
+			DragAndDrop.AddDropHandlerV2(OnSceneDrop);
 			DragAndDrop.AddDropHandler(OnHierarchyDrop);
-			DragAndDrop.AddDropHandler(OnInspectorDrop);
+			DragAndDrop.AddDropHandlerV2(OnInspectorDrop);
 		}
 
 		private static List<GameObject> _gameObjectsToSelect = new List<GameObject>();

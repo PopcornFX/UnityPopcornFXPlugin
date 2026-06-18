@@ -56,9 +56,9 @@ namespace PopcornFX
 						{
 							SerializedObject obj = method.Invoke(settingInstance, null) as SerializedObject;
 							SerializedProperty prop = obj.FindProperty("shaderVariantLimit");
-							if (prop != null && prop.intValue < 4096)
+							if (prop != null && prop.intValue < 16384)
 							{
-								prop.intValue = 4096;
+								prop.intValue = 16384;
 								obj.ApplyModifiedProperties();
 								dirty = true;
 							}
@@ -77,8 +77,8 @@ namespace PopcornFX
 					{
 						System.Object value = prop.GetValue(null);
 						int intValue = (int)value;
-						if (intValue < 4096)
-							prop.SetValue(null, 4096);
+						if (intValue < 16384)
+							prop.SetValue(null, 16384);
 					}
 				}
 			}

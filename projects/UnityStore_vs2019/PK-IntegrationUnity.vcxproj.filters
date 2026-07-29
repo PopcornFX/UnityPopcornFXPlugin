@@ -204,10 +204,31 @@
     <ClInclude Include="..\..\Native\RenderingIntegration\FrameCollectorUnityTypes.h">
       <Filter>Headers\RenderingIntegration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBillboardingBatchPolicy.h">
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Billboard.h">
       <Filter>Headers\RenderingIntegration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Native\RenderingIntegration\UnityRenderDataFactory.h">
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Billboard_GPU.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Decal.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Helper.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Light.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Mesh.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Ribbon.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Sound.h">
+      <Filter>Headers\RenderingIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Triangle.h">
       <Filter>Headers\RenderingIntegration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Native\RenderingIntegration\UnityRendererCache.h">
@@ -518,10 +539,31 @@
     <ClCompile Include="..\..\Native\RenderingIntegration\FrameCollectorUnityTypes.cpp">
       <Filter>Sources\RenderingIntegration</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBillboardingBatchPolicy.cpp">
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Billboard.cpp">
       <Filter>Sources\RenderingIntegration</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Native\RenderingIntegration\UnityRenderDataFactory.cpp">
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Billboard_GPU.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Decal.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Helper.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Light.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Mesh.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Ribbon.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Sound.cpp">
+      <Filter>Sources\RenderingIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Native\RenderingIntegration\UnityBatchDrawer_Triangle.cpp">
       <Filter>Sources\RenderingIntegration</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Native\RenderingIntegration\UnityRendererCache.cpp">

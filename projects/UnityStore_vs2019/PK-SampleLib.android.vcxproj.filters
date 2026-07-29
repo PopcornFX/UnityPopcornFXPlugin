@@ -285,9 +285,6 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.h">
-      <Filter>Headers\RenderIntegrationRHI</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.h">
       <Filter>Headers\RenderIntegrationRHI</Filter>
     </ClInclude>
@@ -489,9 +486,6 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.cpp">
-      <Filter>Sources\RenderIntegrationRHI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.cpp">
       <Filter>Sources\RenderIntegrationRHI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.cpp">

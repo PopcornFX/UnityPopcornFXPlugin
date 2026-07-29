@@ -111,8 +111,15 @@ GENERATED += $(OBJDIR)/RenderAPI_GLData.o
 GENERATED += $(OBJDIR)/RenderAPI_MetalData.o
 GENERATED += $(OBJDIR)/RenderAPI_VulkanData.o
 GENERATED += $(OBJDIR)/RuntimeManager.o
-GENERATED += $(OBJDIR)/UnityBillboardingBatchPolicy.o
-GENERATED += $(OBJDIR)/UnityRenderDataFactory.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Billboard.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Billboard_GPU.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Decal.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Helper.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Light.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Mesh.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Ribbon.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Sound.o
+GENERATED += $(OBJDIR)/UnityBatchDrawer_Triangle.o
 GENERATED += $(OBJDIR)/UnityRendererCache.o
 GENERATED += $(OBJDIR)/precompiled.o
 OBJECTS += $(OBJDIR)/FrameCollectorUnityTypes.o
@@ -135,8 +142,15 @@ OBJECTS += $(OBJDIR)/RenderAPI_GLData.o
 OBJECTS += $(OBJDIR)/RenderAPI_MetalData.o
 OBJECTS += $(OBJDIR)/RenderAPI_VulkanData.o
 OBJECTS += $(OBJDIR)/RuntimeManager.o
-OBJECTS += $(OBJDIR)/UnityBillboardingBatchPolicy.o
-OBJECTS += $(OBJDIR)/UnityRenderDataFactory.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Billboard.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Billboard_GPU.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Decal.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Helper.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Light.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Mesh.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Ribbon.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Sound.o
+OBJECTS += $(OBJDIR)/UnityBatchDrawer_Triangle.o
 OBJECTS += $(OBJDIR)/UnityRendererCache.o
 OBJECTS += $(OBJDIR)/precompiled.o
 
@@ -259,10 +273,31 @@ $(OBJDIR)/PKUnity_Tasks.o: ../../Native/PKUnity_Tasks.cpp
 $(OBJDIR)/FrameCollectorUnityTypes.o: ../../Native/RenderingIntegration/FrameCollectorUnityTypes.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/UnityBillboardingBatchPolicy.o: ../../Native/RenderingIntegration/UnityBillboardingBatchPolicy.cpp
+$(OBJDIR)/UnityBatchDrawer_Billboard.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Billboard.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/UnityRenderDataFactory.o: ../../Native/RenderingIntegration/UnityRenderDataFactory.cpp
+$(OBJDIR)/UnityBatchDrawer_Billboard_GPU.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Billboard_GPU.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UnityBatchDrawer_Decal.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Decal.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UnityBatchDrawer_Helper.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Helper.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UnityBatchDrawer_Light.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Light.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UnityBatchDrawer_Mesh.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Mesh.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UnityBatchDrawer_Ribbon.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Ribbon.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UnityBatchDrawer_Sound.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Sound.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UnityBatchDrawer_Triangle.o: ../../Native/RenderingIntegration/UnityBatchDrawer_Triangle.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/UnityRendererCache.o: ../../Native/RenderingIntegration/UnityRendererCache.cpp

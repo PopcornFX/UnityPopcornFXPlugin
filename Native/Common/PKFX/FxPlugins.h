@@ -45,6 +45,7 @@ namespace	PKFX
 		EPlugin_CompilerBackendISPC		= 1 << 21,
 		EPlugin_CompilerBackendD3D		= 1 << 22,
 		EPlugin_CompilerBackendPSSLC	= 1 << 23,
+		EPlugin_CompilerBackendVulkan	= 1 << 24,
 
 		// All "base" plugins
 		EPlugin_Default =	EPlugin_CompilerBackendVM |

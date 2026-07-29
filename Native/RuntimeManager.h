@@ -6,6 +6,7 @@
 
 #include <pk_kernel/include/kr_threads_job_pool.h>
 #include <pk_kernel/include/kr_string_id.h>
+#include <pk_kernel/include/kr_scheduler.h>
 #include <pk_kernel/include/kr_log_listeners_file.h>
 #include <pk_particles/include/ps_mediums.h>
 #include <pk_particles/include/ps_descriptor.h>

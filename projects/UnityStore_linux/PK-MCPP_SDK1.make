@@ -50,8 +50,8 @@ TARGET = $(TARGETDIR)/libPK-MCPP_d.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Debug/PK-MCPP_SDK1
 DEFINES += -D_DEBUG -DMCPP_LIB=1
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -Wl,--no-as-needed
 
 else ifeq ($(config),debug_arm64)
@@ -70,8 +70,8 @@ TARGET = $(TARGETDIR)/libPK-MCPP_d.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-MCPP_SDK1
 DEFINES += -D_DEBUG -DMCPP_LIB=1
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
 
 else ifeq ($(config),release_x64)
@@ -90,8 +90,8 @@ TARGET = $(TARGETDIR)/libPK-MCPP_r.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Release/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DMCPP_LIB=1
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -Wl,--no-as-needed
 
 else ifeq ($(config),release_arm64)
@@ -110,8 +110,8 @@ TARGET = $(TARGETDIR)/libPK-MCPP_r.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DMCPP_LIB=1
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
 
 else ifeq ($(config),retail_x64)
@@ -130,8 +130,8 @@ TARGET = $(TARGETDIR)/libPK-MCPP_s.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Retail/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL -DMCPP_LIB=1
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s -Wl,--no-as-needed
 
 else ifeq ($(config),retail_arm64)
@@ -150,8 +150,8 @@ TARGET = $(TARGETDIR)/libPK-MCPP_s.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Retail/PK-MCPP_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL -DMCPP_LIB=1
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
 
 #else
@@ -161,7 +161,8 @@ endif
 # Per File Configurations
 # #############################################
 
-PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden
+PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling-reference
+PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling
 
 # File sets
 # #############################################
@@ -252,6 +253,7 @@ endif
 # File Rules
 # #############################################
 
+ifeq ($(config),debug_x64)
 $(OBJDIR)/directive.o: ../../SDK/Samples/PK-Samples/PK-MCPP/directive.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -282,6 +284,170 @@ $(OBJDIR)/support.o: ../../SDK/Samples/PK-Samples/PK-MCPP/support.cpp
 $(OBJDIR)/system.o: ../../SDK/Samples/PK-Samples/PK-MCPP/system.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),debug_arm64)
+$(OBJDIR)/directive.o: ../../SDK/Samples/PK-Samples/PK-MCPP/directive.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eval.o: ../../SDK/Samples/PK-Samples/PK-MCPP/eval.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/expand.o: ../../SDK/Samples/PK-Samples/PK-MCPP/expand.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main.o: ../../SDK/Samples/PK-Samples/PK-MCPP/main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mbchar.o: ../../SDK/Samples/PK-Samples/PK-MCPP/mbchar.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_mcpp_bridge.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_mcpp_bridge.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_preprocessor.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_preprocessor.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/PK-MCPP/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/support.o: ../../SDK/Samples/PK-Samples/PK-MCPP/support.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/system.o: ../../SDK/Samples/PK-Samples/PK-MCPP/system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),release_x64)
+$(OBJDIR)/directive.o: ../../SDK/Samples/PK-Samples/PK-MCPP/directive.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eval.o: ../../SDK/Samples/PK-Samples/PK-MCPP/eval.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/expand.o: ../../SDK/Samples/PK-Samples/PK-MCPP/expand.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main.o: ../../SDK/Samples/PK-Samples/PK-MCPP/main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mbchar.o: ../../SDK/Samples/PK-Samples/PK-MCPP/mbchar.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_mcpp_bridge.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_mcpp_bridge.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_preprocessor.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_preprocessor.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/PK-MCPP/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/support.o: ../../SDK/Samples/PK-Samples/PK-MCPP/support.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/system.o: ../../SDK/Samples/PK-Samples/PK-MCPP/system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),release_arm64)
+$(OBJDIR)/directive.o: ../../SDK/Samples/PK-Samples/PK-MCPP/directive.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eval.o: ../../SDK/Samples/PK-Samples/PK-MCPP/eval.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/expand.o: ../../SDK/Samples/PK-Samples/PK-MCPP/expand.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main.o: ../../SDK/Samples/PK-Samples/PK-MCPP/main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mbchar.o: ../../SDK/Samples/PK-Samples/PK-MCPP/mbchar.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_mcpp_bridge.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_mcpp_bridge.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_preprocessor.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_preprocessor.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/PK-MCPP/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/support.o: ../../SDK/Samples/PK-Samples/PK-MCPP/support.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/system.o: ../../SDK/Samples/PK-Samples/PK-MCPP/system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),retail_x64)
+$(OBJDIR)/directive.o: ../../SDK/Samples/PK-Samples/PK-MCPP/directive.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eval.o: ../../SDK/Samples/PK-Samples/PK-MCPP/eval.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/expand.o: ../../SDK/Samples/PK-Samples/PK-MCPP/expand.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main.o: ../../SDK/Samples/PK-Samples/PK-MCPP/main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mbchar.o: ../../SDK/Samples/PK-Samples/PK-MCPP/mbchar.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_mcpp_bridge.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_mcpp_bridge.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_preprocessor.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_preprocessor.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/PK-MCPP/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/support.o: ../../SDK/Samples/PK-Samples/PK-MCPP/support.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/system.o: ../../SDK/Samples/PK-Samples/PK-MCPP/system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),retail_arm64)
+$(OBJDIR)/directive.o: ../../SDK/Samples/PK-Samples/PK-MCPP/directive.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eval.o: ../../SDK/Samples/PK-Samples/PK-MCPP/eval.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/expand.o: ../../SDK/Samples/PK-Samples/PK-MCPP/expand.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main.o: ../../SDK/Samples/PK-Samples/PK-MCPP/main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mbchar.o: ../../SDK/Samples/PK-Samples/PK-MCPP/mbchar.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_mcpp_bridge.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_mcpp_bridge.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pk_preprocessor.o: ../../SDK/Samples/PK-Samples/PK-MCPP/pk_preprocessor.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/PK-Samples/PK-MCPP/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/support.o: ../../SDK/Samples/PK-Samples/PK-MCPP/support.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/system.o: ../../SDK/Samples/PK-Samples/PK-MCPP/system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+#else
+#  $(error "invalid configuration $(config)")
+endif
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

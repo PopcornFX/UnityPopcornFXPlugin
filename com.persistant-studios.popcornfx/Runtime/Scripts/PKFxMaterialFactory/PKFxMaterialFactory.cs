@@ -20,6 +20,8 @@ namespace PopcornFX
 	{
 		public static void SetVariantCount()
 		{
+			const int kVariantLimit = 32768;
+
 			Assembly asm = null;
 			Assembly[] assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
 			foreach (var assembly in assemblies)
@@ -30,56 +32,61 @@ namespace PopcornFX
 					break;
 				}
 			}
-			if (asm != null)
-			{
-				Type[] types = asm.GetTypes();
-				Type ShaderGraphProjectSettingsType = null;
-				Type ShaderGraphPreferencesType = null;
-				foreach (var type in types)
-				{
-					if (type.FullName == "UnityEditor.ShaderGraph.ShaderGraphPreferences")
-						ShaderGraphPreferencesType = type;
-					if (type.FullName == "UnityEditor.ShaderGraph.ShaderGraphProjectSettings")
-						ShaderGraphProjectSettingsType = type;
-					if (ShaderGraphPreferencesType != null && ShaderGraphProjectSettingsType != null)
-						break;
-				}
-				if (ShaderGraphProjectSettingsType != null)
-				{
-					object settingInstance = ShaderGraphProjectSettingsType.BaseType.GetMethod("get_instance").Invoke(null, null);
-					MethodInfo[] methods = ShaderGraphProjectSettingsType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic);
-					MethodInfo save = null;
-					bool dirty = false;
-					foreach (var method in methods)
-					{
-						if (method.Name == "GetSerializedObject")
-						{
-							SerializedObject obj = method.Invoke(settingInstance, null) as SerializedObject;
-							SerializedProperty prop = obj.FindProperty("shaderVariantLimit");
-							if (prop != null && prop.intValue < 16384)
-							{
-								prop.intValue = 16384;
-								obj.ApplyModifiedProperties();
-								dirty = true;
-							}
-						}
-						if (method.Name == "Save")
-							save = method;
-					}
-					if (save != null && dirty)
-						save.Invoke(settingInstance, new object[] { true });
+			if (asm == null)
+				return;
 
-				}
-				if (ShaderGraphPreferencesType != null)
+			Type ShaderGraphProjectSettingsType = asm.GetType("UnityEditor.ShaderGraph.ShaderGraphProjectSettings");
+			Type ShaderGraphPreferencesType = asm.GetType("UnityEditor.ShaderGraph.ShaderGraphPreferences");
+
+			if (ShaderGraphProjectSettingsType != null)
+			{
+				MethodInfo getInstance = ShaderGraphProjectSettingsType.BaseType != null ? ShaderGraphProjectSettingsType.BaseType.GetMethod("get_instance") : null;
+				object settingInstance = getInstance != null ? getInstance.Invoke(null, null) : null;
+				MethodInfo getSerializedObject = ShaderGraphProjectSettingsType.GetMethod("GetSerializedObject", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+				SerializedObject obj = (settingInstance != null && getSerializedObject != null) ? getSerializedObject.Invoke(settingInstance, null) as SerializedObject : null;
+				if (obj != null)
 				{
-					PropertyInfo prop = ShaderGraphPreferencesType.GetProperty("variantLimit", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-					if (prop != null)
+					bool dirty = false;
+
+					SerializedProperty limit = obj.FindProperty("shaderVariantLimit");
+					if (limit != null && limit.intValue < kVariantLimit)
 					{
-						System.Object value = prop.GetValue(null);
-						int intValue = (int)value;
-						if (intValue < 16384)
-							prop.SetValue(null, 16384);
+						limit.intValue = kVariantLimit;
+						dirty = true;
 					}
+					SerializedProperty over = obj.FindProperty("overrideShaderVariantLimit");
+					if (over != null && !over.boolValue)
+					{
+						over.boolValue = true;
+						dirty = true;
+					}
+					if (dirty)
+					{
+						obj.ApplyModifiedProperties();
+						MethodInfo save = ShaderGraphProjectSettingsType.GetMethod("Save", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, Type.EmptyTypes, null);
+						if (save != null)
+							save.Invoke(settingInstance, null);
+						else
+						{
+							save = ShaderGraphProjectSettingsType.GetMethod("Save", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new Type[] { typeof(bool) }, null)
+								?? ShaderGraphProjectSettingsType.BaseType.GetMethod("Save", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new Type[] { typeof(bool) }, null);
+							if (save != null)
+								save.Invoke(settingInstance, new object[] { true });
+						}
+					}
+				}
+			}
+
+			if (ShaderGraphPreferencesType != null)
+			{
+				PropertyInfo prop = ShaderGraphPreferencesType.GetProperty("previewVariantLimit", BindingFlags.NonPublic | BindingFlags.Static)
+								 ?? ShaderGraphPreferencesType.GetProperty("variantLimit", BindingFlags.NonPublic | BindingFlags.Static)
+								 ?? ShaderGraphPreferencesType.GetProperty("previewvariantLimit", BindingFlags.NonPublic | BindingFlags.Static);
+				if (prop != null && prop.CanRead && prop.CanWrite)
+				{
+					int intValue = (int)prop.GetValue(null);
+					if (intValue < kVariantLimit)
+						prop.SetValue(null, kVariantLimit);
 				}
 			}
 		}

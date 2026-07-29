@@ -185,6 +185,7 @@ namespace
 
 void	AddDefaultLogListenersOverride(void *userHandle)
 {
+	(void)userHandle;
 #if	(PK_LOG_ENABLED != 0)
 	CRuntimeManager::SPopcornFXRuntimeData		*runtimeData = static_cast<CRuntimeManager::SPopcornFXRuntimeData*>(userHandle);
 	runtimeData->m_UnityLogger = PK_NEW(CUnityLog);
@@ -1596,6 +1597,7 @@ CUnityLog			*CRuntimeManager::GetLogger() const
 
 void			CRuntimeManager::SetMaxLogStack(u32 maxLogStack)
 {
+	(void)maxLogStack;
 #if	(PK_LOG_ENABLED != 0)
 	if (PK_VERIFY(m_PopcornFXRuntimeData->m_UnityLogger != null))
 		m_PopcornFXRuntimeData->m_UnityLogger->SetMaxLogsCount(maxLogStack);
@@ -2111,6 +2113,7 @@ void	CRuntimeManager::CBackgroundTask::_VirtualLaunch(Threads::SThreadContext &t
 
 bool	CRuntimeManager::SPopcornFXRuntimeData::PopcornFXStartup(IUnityInterfaces *unityInterfaces)
 {
+	(void)unityInterfaces;
 #ifdef	PK_DEBUG
 	const bool	debugMode = true;
 #else

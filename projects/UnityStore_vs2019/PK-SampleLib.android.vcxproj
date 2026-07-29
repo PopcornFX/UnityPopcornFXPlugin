@@ -428,7 +428,6 @@
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ProfilerRenderer.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RHIRenderParticleSceneHelpers.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.h" />
-    <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_CPUsim.h" />
     <ClInclude Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_GPUsim.h" />
@@ -503,7 +502,6 @@
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\ProfilerRenderer.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RHIRenderParticleSceneHelpers.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FeatureRenderingSettings.cpp" />
-    <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\FrameCollector.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\MaterialToRHI.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_CPUsim.cpp" />
     <ClCompile Include="..\..\SDK\Samples\PK-Samples\PK-SampleLib\RenderIntegrationRHI\RHIBillboardingBatch_GPUsim.cpp" />

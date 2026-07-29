@@ -216,6 +216,7 @@ GENERATED += $(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o
 GENERATED += $(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o
 GENERATED += $(OBJDIR)/QxEW_Default_Sound.pkma.o
 GENERATED += $(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o
+GENERATED += $(OBJDIR)/RdQG_Houdini.pksx.o
 GENERATED += $(OBJDIR)/S9it_PKSurface.h.o
 GENERATED += $(OBJDIR)/SayE_Opaque_Ribbon.frag.o
 GENERATED += $(OBJDIR)/Sjzi_BAT.pktx.o
@@ -318,6 +319,9 @@ GENERATED += $(OBJDIR)/core_upgrader_2_23_0_25065.o
 GENERATED += $(OBJDIR)/core_upgrader_2_24_0_25771.o
 GENERATED += $(OBJDIR)/core_upgrader_2_24_0_25832.o
 GENERATED += $(OBJDIR)/core_upgrader_2_24_0_26241.o
+GENERATED += $(OBJDIR)/core_upgrader_2_25_0_27256.o
+GENERATED += $(OBJDIR)/core_upgrader_2_25_0_27280.o
+GENERATED += $(OBJDIR)/core_upgrader_2_25_0_27465.o
 GENERATED += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 GENERATED += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -456,6 +460,7 @@ GENERATED += $(OBJDIR)/upg_upgrades_v2.21.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.22.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.23.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.24.0.o
+GENERATED += $(OBJDIR)/upg_upgrades_v2.25.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.3.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.4.0.o
 GENERATED += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -477,6 +482,7 @@ GENERATED += $(OBJDIR)/xTR4_PKSurface.h.o
 GENERATED += $(OBJDIR)/xmJW_Default_AlphaMap.dds.o
 GENERATED += $(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o
 GENERATED += $(OBJDIR)/ySDu_FeatureTransformUVs.h.o
+GENERATED += $(OBJDIR)/yYkv_ThirdParty.pkfx.o
 GENERATED += $(OBJDIR)/ykcF_Trails.pkfx.o
 GENERATED += $(OBJDIR)/zLtU_Noise_Billboard.frag.o
 GENERATED += $(OBJDIR)/zNpM_Mesh_Tinted.pkma.o
@@ -582,6 +588,7 @@ OBJECTS += $(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o
 OBJECTS += $(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o
 OBJECTS += $(OBJDIR)/QxEW_Default_Sound.pkma.o
 OBJECTS += $(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o
+OBJECTS += $(OBJDIR)/RdQG_Houdini.pksx.o
 OBJECTS += $(OBJDIR)/S9it_PKSurface.h.o
 OBJECTS += $(OBJDIR)/SayE_Opaque_Ribbon.frag.o
 OBJECTS += $(OBJDIR)/Sjzi_BAT.pktx.o
@@ -684,6 +691,9 @@ OBJECTS += $(OBJDIR)/core_upgrader_2_23_0_25065.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_24_0_25771.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_24_0_25832.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_24_0_26241.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_25_0_27256.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_25_0_27280.o
+OBJECTS += $(OBJDIR)/core_upgrader_2_25_0_27465.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_2_0_56591.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59136.o
 OBJECTS += $(OBJDIR)/core_upgrader_2_3_0_59175.o
@@ -822,6 +832,7 @@ OBJECTS += $(OBJDIR)/upg_upgrades_v2.21.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.22.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.23.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.24.0.o
+OBJECTS += $(OBJDIR)/upg_upgrades_v2.25.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.3.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.4.0.o
 OBJECTS += $(OBJDIR)/upg_upgrades_v2.5.0.o
@@ -843,6 +854,7 @@ OBJECTS += $(OBJDIR)/xTR4_PKSurface.h.o
 OBJECTS += $(OBJDIR)/xmJW_Default_AlphaMap.dds.o
 OBJECTS += $(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o
 OBJECTS += $(OBJDIR)/ySDu_FeatureTransformUVs.h.o
+OBJECTS += $(OBJDIR)/yYkv_ThirdParty.pkfx.o
 OBJECTS += $(OBJDIR)/ykcF_Trails.pkfx.o
 OBJECTS += $(OBJDIR)/zLtU_Noise_Billboard.frag.o
 OBJECTS += $(OBJDIR)/zNpM_Mesh_Tinted.pkma.o
@@ -1101,6 +1113,15 @@ $(OBJDIR)/core_upgrader_2_24_0_25832.o: ../../ExternalLibs/pk_upgraderlib/src/Up
 $(OBJDIR)/core_upgrader_2_24_0_26241.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.26241/core_upgrader_2_24_0_26241.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_25_0_27256.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.25.0.27256/core_upgrader_2_25_0_27256.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_25_0_27280.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.25.0.27280/core_upgrader_2_25_0_27280.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_25_0_27465.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.25.0.27465/core_upgrader_2_25_0_27465.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -1294,6 +1315,9 @@ $(OBJDIR)/waqm_Placement_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upg
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/xnTO_Dynamics_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/yYkv_ThirdParty.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/yYkv_ThirdParty.pkfx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/ykcF_Trails.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ykcF_Trails.pkfx.cpp
@@ -1528,6 +1552,9 @@ $(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upg
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/R9Pa_Triangle_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/RdQG_Houdini.pksx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/RdQG_Houdini.pksx.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/S9it_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/S9it_PKSurface.h.cpp
@@ -1951,6 +1978,9 @@ $(OBJDIR)/upg_upgrades_v2.23.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.24.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.24.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.25.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.25.0.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp

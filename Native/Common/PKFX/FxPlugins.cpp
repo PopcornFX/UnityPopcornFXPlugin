@@ -27,7 +27,8 @@
 //#define	USE_USDIMPORTER
 
 #if !defined(PK_COMPILER_BUILD_COMPILER_D3D) || \
-	!defined(PK_COMPILER_BUILD_COMPILER_UNKNOWN2)
+	!defined(PK_COMPILER_BUILD_COMPILER_UNKNOWN2) || \
+	!defined(PK_COMPILER_BUILD_COMPILER_VULKAN)
 #	error Configuration error: Should be defined in ps_config.h
 #endif
 
@@ -40,6 +41,11 @@
 #	if !defined(USE_COMPILER_BACKEND_UNKNOWN2)
 #		if	(PK_COMPILER_BUILD_COMPILER_UNKNOWN2 != 0)
 #			define	USE_COMPILER_BACKEND_UNKNOWN2
+#		endif
+#	endif
+#	if !defined(USE_COMPILER_BACKEND_VULKAN)
+#		if	(PK_COMPILER_BUILD_COMPILER_VULKAN != 0)
+#			define	USE_COMPILER_BACKEND_VULKAN
 #		endif
 #	endif
 #endif
@@ -61,6 +67,9 @@
 #		endif
 #		if defined(USE_COMPILER_BACKEND_UNKNOWN2)
 		PK_PLUGIN_DECLARE(CCompilerBackendGPU_PSSLC);
+#		endif
+#		if defined(USE_COMPILER_BACKEND_VULKAN)
+		PK_PLUGIN_DECLARE(CCompilerBackendGPU_Vulkan);
 #		endif
 #	endif
 
@@ -165,6 +174,15 @@ namespace	PKFX
 			success &= (backend != null && CPluginManager::PluginRegister(backend, true, backendPath));
 		}
 #	endif	// defined(USE_COMPILER_BACKEND_UNKNOWN2)
+
+#	if	defined(USE_COMPILER_BACKEND_VULKAN)
+		if (selected & EPlugin_CompilerBackendVulkan)
+		{
+			const char		*backendPath = "Plugins/CBGPU_Vulkan" PK_PLUGIN_POSTFIX_BUILD PK_PLUGIN_POSTFIX_EXT;
+			IPluginModule	*backend = StartupPlugin_CCompilerBackendGPU_Vulkan();
+			success &= (backend != null && CPluginManager::PluginRegister(backend, true, backendPath));
+		}
+#	endif	// defined(USE_COMPILER_BACKEND_VULKAN)
 
 		if (selected & EPlugin_ImageCodecPKIM)
 		{
@@ -321,6 +339,15 @@ namespace	PKFX
 			ShutdownPlugin_CCompilerBackendGPU_PSSLC();
 		}
 #	endif	// defined(USE_COMPILER_BACKEND_UNKNOWN2)
+
+#	if	defined(USE_COMPILER_BACKEND_VULKAN)
+		if (g_LoadedPlugins & EPlugin_CompilerBackendVulkan)
+		{
+			IPluginModule	*backend = GetPlugin_CCompilerBackendGPU_Vulkan();
+			(backend != null && CPluginManager::PluginRelease(backend));
+			ShutdownPlugin_CCompilerBackendGPU_Vulkan();
+		}
+#	endif	// defined(USE_COMPILER_BACKEND_VULKAN)
 
 		if (g_LoadedPlugins & EPlugin_ImageCodecPKIM)
 		{

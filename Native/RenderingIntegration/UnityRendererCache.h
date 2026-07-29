@@ -18,8 +18,6 @@
 #include <pk_render_helpers/include/draw_requests/rh_triangle.h>
 #include "pk_render_helpers/include/frame_collector/rh_particle_render_data_factory.h"
 
-#include <pk_render_helpers/include/frame_collector/rh_particle_render_data_factory.h>
-
 #include "NativeToManaged.h"
 #include "ImplemGraphicsAPI/RenderAPI_Data.h"
 #if		defined(PK_ORBIS)
@@ -407,11 +405,15 @@ struct		SUnityMeshInfo
 	}
 };
 
+__PK_API_BEGIN
+PK_FORWARD_DECLARE(UnityFrameCollector);
+__PK_API_END
+
 class	CUnityRendererCache : public CRendererCacheBase
 {
 public:
-	CUnityRendererCache(const CUnityRenderDataFactory *renderDataFactory)
-	:	m_RenderDataFactory(renderDataFactory)
+	CUnityRendererCache(const CUnityFrameCollector *frameCollector)
+	:	m_FrameCollector(frameCollector)
 	,	m_AssetName("")
 	,	m_HasCustomMat(false)
 	,	m_CustomMatID(-1)
@@ -423,10 +425,10 @@ public:
 
 
 private:
-	const CUnityRenderDataFactory		*m_RenderDataFactory;
+	const CUnityFrameCollector			*m_FrameCollector;
 public:
 
-	const CUnityRenderDataFactory		*RenderDataFactory() const { return m_RenderDataFactory; }
+	const CUnityFrameCollector			*FrameCollector() const { return m_FrameCollector; }
 
 	template<typename _T>
 	bool								GameThread_SetupRenderer(const _T *renderer);

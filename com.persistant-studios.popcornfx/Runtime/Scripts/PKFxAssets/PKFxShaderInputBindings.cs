@@ -730,14 +730,32 @@ namespace PopcornFX
 				_EnableMaterialKeywords(material, "PK_HAS_EMISSIVE_NONE");
 				material.SetFloat("PK_HAS_EMISSIVE", 0.0f);
 			}
-			// Diffuse ramp: PK_HAS_DIFFUSE
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Color))
-				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE");
+			// Diffuse enum (2nd-gen "Default" shadergraphs): PK_HAS_DIFFUSE_NONE PK_HAS_DIFFUSE_BASIC PK_HAS_DIFFUSE_WITH_RAMP
+			bool hasColor = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_Color);
+			bool hasDiffuseRamp = batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp);
+			if (!hasColor)
+			{
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_BASIC");
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_WITH_RAMP");
+				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE_NONE");
+				material.SetFloat("PK_HAS_DIFFUSE", 0.0f);
+			}
+			else if (hasDiffuseRamp)
+			{
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_NONE");
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_BASIC");
+				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE_WITH_RAMP");
+				material.SetFloat("PK_HAS_DIFFUSE", 2.0f);
+			}
 			else
-				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE");
-			// Alpha remap: PK_HAS_ALPHA_REMAP
-			// Diffuse ramp: PK_HAS_DIFFUSE_RAMP
-			if (batchDesc.HasShaderVariationFlag(EShaderVariationFlags.Has_DiffuseRamp))
+			{
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_NONE");
+				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_WITH_RAMP");
+				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE_BASIC");
+				material.SetFloat("PK_HAS_DIFFUSE", 1.0f);
+			}
+			// Legacy / mesh (1st-gen) shaders still branch on the PK_HAS_DIFFUSE_RAMP boolean:
+			if (hasColor && hasDiffuseRamp)
 				_EnableMaterialKeywords(material, "PK_HAS_DIFFUSE_RAMP");
 			else
 				_DisableMaterialKeywords(material, "PK_HAS_DIFFUSE_RAMP");

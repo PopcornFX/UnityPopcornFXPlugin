@@ -26,6 +26,7 @@
 
 #include <pk_particles/include/ps_descriptor.h>
 #include <pk_kernel/include/kr_thread_pool_details.h>
+#include <pk_render_helpers/include/draw_requests/rh_common.h>
 
 extern volatile u32	g_UpdateId;
 
@@ -223,7 +224,7 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 	}
 
 	// Split double sided materials:
-	m_RenderDataFactory.SetGPUBillboarding(settings.m_EnableGPUBillboarding == ManagedBool_True);
+	m_ParticleFrameCollector->SetGPUBillboarding(settings.m_EnableGPUBillboarding == ManagedBool_True);
 
 	m_RenderContext.m_FreeUnusedBatches = settings.m_FreeUnusedBatches == ManagedBool_True;
 	m_RenderContext.m_FrameCountBeforeFreeingUnusedBatches = settings.m_FrameCountBeforeFreeingUnusedBatches;
@@ -331,29 +332,25 @@ void	CPKFXScene::LaunchUpdate(float dt)
 				if (!m_GameThreadCalled)
 				{
 					TMemoryView<SUnitySceneView>		views = m_SceneViews;
-					SUnityDrawOutputs					dummy;
 
-					if (m_GameThreadFrameCollector->UpdateThread_BeginCollectFrame())
+					m_GameThreadFrameCollector->CollectFrame();
+					auto *newToRender = m_GameThreadFrameCollector->GetLastCollectedFrame();
+					if (newToRender != null)
 					{
-						m_GameThreadFrameCollector->UpdateThread_CollectFrame(m_ParticleMediumCollection);
-						m_GameThreadFrameCollector->BuildNewFrame(m_GameThreadFrameCollector->UpdateThread_GetLastCollectedFrame());
-
-						if (m_GameThreadFrameCollector->RenderedFrame() != null)
-						{
-							_RemoveUnloadedRenderers(m_GameThreadFrameCollector->RenderedFrame());
-							m_GameThreadFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kAllStepsMask);
-						}
+						m_GameThreadFrameCollector->BuildNewFrame(newToRender);
+						if (m_GameThreadFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
+							m_GameThreadFrameCollector->EndRenderBuiltFrame(m_RenderContext);
 					}
-					if (m_ParticleFrameCollector->UpdateThread_BeginCollectFrame())
+
+					m_ParticleFrameCollector->CollectFrame();
+					newToRender = m_ParticleFrameCollector->GetLastCollectedFrame();
+					if (newToRender != null)
 					{
-						m_ParticleFrameCollector->UpdateThread_CollectFrame(m_ParticleMediumCollection);
-						m_ParticleFrameCollector->BuildNewFrame(m_ParticleFrameCollector->UpdateThread_GetLastCollectedFrame());
-						if (m_ParticleFrameCollector->RenderedFrame() != null)
-						{
-							_RemoveUnloadedRenderers(m_ParticleFrameCollector->RenderedFrame());
-							m_ParticleFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kGameThreadGenDrawCallsSteps);
-						}
-						m_RenderDataFactory.CustomStepFlagInactive();
+						m_ParticleFrameCollector->BuildNewFrame(newToRender);
+						if (m_ParticleFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
+							m_ParticleFrameCollector->EndRenderBuiltFrame(m_RenderContext);
+
+						//m_RenderDataFactory.CustomStepFlagInactive();
 					}
 				}
 				CRuntimeManager::Instance().AfterUpdate();
@@ -381,18 +378,15 @@ void	CPKFXScene::LaunchUpdate(float dt)
 #endif // (PK_PARTICLES_HAS_STATS != 0)
 
 				TMemoryView<SUnitySceneView>		views = m_SceneViews;
-				SUnityDrawOutputs					dummy;
 
-				if (m_GameThreadFrameCollector->UpdateThread_BeginCollectFrame())
+				m_GameThreadFrameCollector->CollectFrame();
+				auto *newToRender = m_GameThreadFrameCollector->GetLastCollectedFrame();
+				if (newToRender != null)
 				{
-					m_GameThreadFrameCollector->UpdateThread_CollectFrame(m_GameThreadMediumCollection);
-					m_GameThreadFrameCollector->BuildNewFrame(m_GameThreadFrameCollector->UpdateThread_GetLastCollectedFrame());
+					m_GameThreadFrameCollector->BuildNewFrame(newToRender);
 
-					if (m_GameThreadFrameCollector->RenderedFrame() != null)
-					{
-						_RemoveUnloadedRenderers(m_GameThreadFrameCollector->RenderedFrame());
-						m_GameThreadFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kAllStepsMask);
-					}
+					if (m_GameThreadFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
+						m_GameThreadFrameCollector->EndRenderBuiltFrame(m_RenderContext);
 				}
 #if	(PK_PARTICLES_HAS_STATS != 0)
 				m_ParticleMediumCollection->Stats().Reset();
@@ -431,8 +425,8 @@ void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 	}
 	m_RenderContext.m_RenderApiData->BeginFrame();
 
-	TMemoryView<SUnitySceneView>		views = m_SceneViews;
-	SUnityDrawOutputs					dummy;
+	TStridedMemoryView<SSceneView>		views = TStridedMemoryView<SSceneView>(m_SceneViews.RawDataPointer(), m_SceneViews.Count(), sizeof(SUnitySceneView));
+	m_RenderContext.m_Views = views;
 
 	if (m_WaitForUpdateOnRenderThread)
 	{
@@ -458,13 +452,17 @@ void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 		profiler.AddReport("Particles", m_ParticleMediumCollection, bbMediumCollectionTime);
 #endif // (PK_PARTICLES_HAS_STATS != 0)
 
-		m_ParticleFrameCollector->BuildNewFrame(m_ParticleFrameCollector->UpdateThread_GetLastCollectedFrame());
-		if (m_ParticleFrameCollector->RenderedFrame() != null)
+		m_ParticleFrameCollector->CollectFrame();
+		auto *newToRender = m_ParticleFrameCollector->GetLastCollectedFrame();
+		if (newToRender != null)
 		{
-			_RemoveUnloadedRenderers(m_ParticleFrameCollector->RenderedFrame());
-			m_ParticleFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kGameThreadGenDrawCallsSteps);
+			m_ParticleFrameCollector->BuildNewFrame(newToRender);
+
+			if (m_ParticleFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
+				m_ParticleFrameCollector->EndRenderBuiltFrame(m_RenderContext);
+			m_ParticleFrameCollector->Render(m_RenderContext, true, kGameThreadGenDrawCallsSteps);
 		}
-		m_RenderDataFactory.CustomStepFlagInactive();
+		//m_RenderDataFactory.CustomStepFlagInactive();
 
 #if	(PK_PARTICLES_HAS_STATS != 0)
 		profiler.EndFrame();
@@ -472,7 +470,7 @@ void	CPKFXScene::BuildDrawCalls(const SUnitySceneView &view)
 	}
 	if (m_ParticleFrameCollector->RenderedFrame() != null)
 	{
-		m_ParticleFrameCollector->GenerateDrawCalls(&m_RenderContext, &views, &dummy, true, kRenderThreadGenDrawCallsSteps);
+		m_ParticleFrameCollector->Render(m_RenderContext, true, kRenderThreadGenDrawCallsSteps);
 	}
 	m_GameThreadCalled = false;
 
@@ -496,7 +494,10 @@ void	CPKFXScene::Reset()
 		m_ParticleMediumCollection->Clear();
 	if (m_GameThreadMediumCollection != null)
 		m_GameThreadMediumCollection->Clear();
-	m_RenderDataFactory.EmptyAllBatches();
+	if (m_ParticleFrameCollector != null)
+		m_ParticleFrameCollector->Reset();
+	if (m_GameThreadFrameCollector != null)
+		m_GameThreadFrameCollector->Reset();
 }
 
 //----------------------------------------------------------------------------
@@ -504,8 +505,6 @@ void	CPKFXScene::Reset()
 void	CPKFXScene::HardReset()
 {
 	_ResetParticleMediumCollections();
-	m_RenderDataFactory.EmptyAllBatches();
-	m_RenderDataFactory.Reset();
 }
 
 //----------------------------------------------------------------------------
@@ -998,15 +997,6 @@ void	CPKFXScene::_PostUpdateEvents()
 	_ClearPendingEventsNoLock();
 }
 
-void	CPKFXScene::_RemoveUnloadedRenderers(const SParticleCollectedFrameToRender *renderedFrame)
-{
-	for (u32 i = 0; i < renderedFrame->m_PendingDeleteRendererCaches.Count(); ++i)
-	{
-		const CUnityRendererCache *cache = static_cast<const CUnityRendererCache*>(renderedFrame->m_PendingDeleteRendererCaches[i].Get());
-		m_RenderDataFactory.RemoveRendererCache(cache);
-	}
-}
-
 bool	CPKFXScene::RegisterEventListener(s32 guid, const CStringId &event, u32 unityKey)
 {
 	CRuntimeManager	&runtimeManager = CRuntimeManager::Instance();
@@ -1206,12 +1196,12 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 	{
 		// Release the collected frame prior to deleting the medium collection
 		m_GameThreadFrameCollector->ReleaseRenderedFrame();
-		m_GameThreadFrameCollector->UpdateThread_UninstallFromMediumCollection(m_GameThreadMediumCollection);
+		m_GameThreadFrameCollector->UninstallFromMediumCollection(m_GameThreadMediumCollection);
 	}
 	if (m_ParticleMediumCollection && m_ParticleFrameCollector)
 	{
 		m_ParticleFrameCollector->ReleaseRenderedFrame();
-		m_ParticleFrameCollector->UpdateThread_UninstallFromMediumCollection(m_ParticleMediumCollection);
+		m_ParticleFrameCollector->UninstallFromMediumCollection(m_ParticleMediumCollection);
 	}
 	PK_SAFE_DELETE(m_ParticleMediumCollection);
 	PK_SAFE_DELETE(m_GameThreadMediumCollection);
@@ -1226,7 +1216,7 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 	const bool		useMeshMedCol = m_WaitForUpdateOnRenderThread && !m_EnableRaycastCollisions;
 
 	// If so, we need to delay the Unity callbacks to the next frame as the frame will be collected on a worker:
-	m_RenderDataFactory.SetDelayUnityCallbacks(useMeshMedCol);
+	//m_ParticleFrameCollector->SetDelayUnityCallbacks(useMeshMedCol);
 
 	// Initialize the standard medium collection for billboards and ribbons:
 	m_ParticleMediumCollection = PK_NEW(CParticleMediumCollection);
@@ -1239,8 +1229,10 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 	if (!PK_VERIFY(m_ParticleFrameCollector != null))
 		return false;
 
-	CUnityFrameCollector::SFrameCollectorInit	init(&m_RenderDataFactory, (1U << Renderer_Billboard) | (1U << Renderer_Ribbon) | (1U << Renderer_Triangle));
-	PK_VERIFY(m_ParticleFrameCollector->UpdateThread_Initialize(init));
+	CUnityFrameCollector::SFrameCollectorInit	init(	(1U << Renderer_Billboard) | (1U << Renderer_Ribbon) | (1U << Renderer_Triangle),
+														CbNewBatchDrawer(this, &CPKFXScene::NewBatchDrawer),
+														CbNewRendererCache(this, &CPKFXScene::NewRendererCache));
+	PK_VERIFY(m_ParticleFrameCollector->Initialize(init));
 
 	// Initialize the meshes frame collector:
 	m_GameThreadFrameCollector = PK_NEW(CUnityFrameCollector);
@@ -1256,10 +1248,12 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 	if (CRuntimeManager::Instance().m_PopcornFXRuntimeData->m_DecalRenderer)
 		enabledRenderer = enabledRenderer | (1U << Renderer_Decal);
 
-	CUnityFrameCollector::SFrameCollectorInit	init_Meshes(&m_RenderDataFactory, enabledRenderer);
-	PK_VERIFY(m_GameThreadFrameCollector->UpdateThread_Initialize(init_Meshes));
+	CUnityFrameCollector::SFrameCollectorInit	init_Meshes(enabledRenderer,
+															CbNewBatchDrawer(this, &CPKFXScene::NewBatchDrawer),
+															CbNewRendererCache(this, &CPKFXScene::NewRendererCache));
+	PK_VERIFY(m_GameThreadFrameCollector->Initialize(init_Meshes));
 
-	m_ParticleFrameCollector->UpdateThread_InstallToMediumCollection(m_ParticleMediumCollection);
+	m_ParticleFrameCollector->InstallToMediumCollection(m_ParticleMediumCollection);
 
 	if (useMeshMedCol)
 	{
@@ -1273,25 +1267,23 @@ bool	CPKFXScene::_ResetParticleMediumCollections()
 		m_ParticleMediumCollection->m_OnUpdateComplete += FastDelegate<void(CParticleMediumCollection*)>(this, &CPKFXScene::_CollectFrame);
 
 		// Instal the game thread frame collector:
-		m_GameThreadFrameCollector->UpdateThread_InstallToMediumCollection(m_GameThreadMediumCollection);
-		m_ParticleFrameCollector->UpdateThread_InstallToMediumCollection(m_GameThreadMediumCollection);
+		m_GameThreadFrameCollector->InstallToMediumCollection(m_GameThreadMediumCollection);
+		m_ParticleFrameCollector->InstallToMediumCollection(m_GameThreadMediumCollection);
 	}
 	else
 	{
 		// Instal the game thread frame collector:
-		m_GameThreadFrameCollector->UpdateThread_InstallToMediumCollection(m_ParticleMediumCollection);
+		m_GameThreadFrameCollector->InstallToMediumCollection(m_ParticleMediumCollection);
 	}
 	if (m_MediumCollectionSettings.m_Initialized)
 	{
 		// Enable/Disable bounds
 		m_ParticleMediumCollection->EnableBounds(m_MediumCollectionSettings.m_EnableDynamicEffectBounds);
-		m_ParticleMediumCollection->EnableLocalizedPages(	m_MediumCollectionSettings.m_EnableLocalizedPages,
-			m_MediumCollectionSettings.m_EnableLocalizedByDefault);
+		m_ParticleMediumCollection->AllowLocalizedPages(m_MediumCollectionSettings.m_EnableLocalizedPages);
 		if (m_GameThreadMediumCollection != null)
 		{
 			m_GameThreadMediumCollection->EnableBounds(m_MediumCollectionSettings.m_EnableDynamicEffectBounds);
-			m_GameThreadMediumCollection->EnableLocalizedPages(	m_MediumCollectionSettings.m_EnableLocalizedPages,
-				m_MediumCollectionSettings.m_EnableLocalizedByDefault);
+			m_GameThreadMediumCollection->AllowLocalizedPages(m_MediumCollectionSettings.m_EnableLocalizedPages);
 		}
 
 		// LOD
@@ -1315,11 +1307,33 @@ void	CPKFXScene::_CollectFrame(CParticleMediumCollection *medCol)
 {
 	CRuntimeManager::Instance().AfterUpdate();
 	(void)medCol;
-	if (m_ParticleFrameCollector->UpdateThread_BeginCollectFrame())
+	if (m_ParticleFrameCollector->CollectFrame())
 	{
-		m_ParticleFrameCollector->UpdateThread_CollectFrame(m_ParticleMediumCollection);
-		m_ParticleFrameCollector->UpdateThread_CollectFrame(m_GameThreadMediumCollection);
+		//m_ParticleFrameCollector->CollectFrame(m_ParticleMediumCollection);
+		//m_ParticleFrameCollector->CollectFrame(m_GameThreadMediumCollection);
 	}
+}
+
+//----------------------------------------------------------------------------
+//
+//	RenderHelpers integration
+//
+//----------------------------------------------------------------------------
+
+CRendererBatchDrawer	*CPKFXScene::NewBatchDrawer(ERendererClass rendererType, const PRendererCacheBase &rendererCache, bool gpuStorage)
+{
+	if (m_ParticleFrameCollector == null)
+		return null;
+	return m_ParticleFrameCollector->CreateBillboardingBatch(rendererType, rendererCache, gpuStorage);
+}
+
+//----------------------------------------------------------------------------
+
+PRendererCacheBase	CPKFXScene::NewRendererCache(const PRendererDataBase &renderer, const CParticleDescriptor *particleDesc)
+{
+	if (m_ParticleFrameCollector == null)
+		return null;
+	return m_ParticleFrameCollector->CreateRendererCache(renderer, particleDesc);
 }
 
 //----------------------------------------------------------------------------

@@ -153,6 +153,9 @@
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_SimCache.h">
+      <Filter>Headers\Ovens</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
       <Filter>Headers\Ovens</Filter>
     </ClInclude>

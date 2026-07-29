@@ -35,10 +35,6 @@
 #include <pk_base_object/include/hbo_helpers.h>
 #include <pk_particles_toolbox/include/pt_compile.h>	// for SEffectSourceCompilationHelper
 
-#include <pk_render_helpers/include/batches/rh_ribbon_batch.h>
-#include <pk_render_helpers/include/batches/rh_billboard_batch.h>
-#include <pk_render_helpers/include/batches/rh_mesh_batch.h>
-
 #include "RenderingIntegration/UnityRendererCache.h"
 
 #include <pk_render_helpers/include/render_features/rh_features_basic.h>
@@ -473,7 +469,6 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 	const PCEventConnectionMap eventConnectionMap = particleEffect->EventConnectionMap();
 	if (!PK_VERIFY(eventConnectionMap != null))
 		return false;
-	u32 count = 0;
 	for (const CEventConnectionMap::SLayerDefinition	&layerDef : eventConnectionMap->m_LayerSlots)
 	{
 		PParticleDescriptor	descriptor = layerDef.m_ParentDescriptor;
@@ -485,7 +480,6 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 			if (idx.Valid())
 			{
 				::OnEffectRendererLink(idx.Get(), currentUnityQuality.Data(), renderer->m_Declaration.m_RendererUID);
-				++count;
 				continue;
 			}
 
@@ -598,7 +592,6 @@ bool	CEffectBrowser::BrowseRenderers(CParticleEffect *particleEffect, CBaseObjec
 				++m_UniqueRendererCount;
 				m_RendererUIDs.PushBack(renderer->m_Declaration.m_RendererUID);
 			}
-			++count;
 		}
 	}
 	return true;

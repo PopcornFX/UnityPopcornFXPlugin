@@ -479,7 +479,6 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_onstack.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_onstack.inl" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_static.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_decorated_pointer.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_delegates.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_engine_version.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_file.h" />
@@ -710,6 +709,16 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_sound.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Renderers\ps_renderer_triangle.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_animtrack.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_audio.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_curve.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_event_stream.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_grid.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_image.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_image_atlas.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_shape.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_text.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_vectorfield.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\GPU\sampler_gpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\Auto\storage_spatial_auto.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Storage\GPU\storage_gpu.h" />

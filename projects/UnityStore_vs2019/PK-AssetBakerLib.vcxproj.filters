@@ -138,6 +138,9 @@
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_SimCache.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -151,6 +154,15 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_Graph.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKSX.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKSX_Effect.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKSX_Houdini.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.h">
@@ -221,6 +233,9 @@
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_Mesh.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_SimCache.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven_StraightCopy.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -237,6 +252,15 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKGO_SimInterfaces.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKSX.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKSX_Effect.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKSX_Houdini.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_PKTX.cpp">

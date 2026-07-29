@@ -5,7 +5,6 @@
 
 #include "precompiled.h"
 #include "UnityRendererCache.h"
-#include "UnityRenderDataFactory.h"
 #include <pk_render_helpers/include/render_features/rh_features_basic.h>
 #include <pk_render_helpers/include/render_features/rh_features_vat_static.h>
 

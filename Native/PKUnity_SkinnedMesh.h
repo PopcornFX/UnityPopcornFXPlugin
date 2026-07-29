@@ -18,6 +18,8 @@ public:
 		: m_SkinningStreams(null)
 		, m_OwnSkinningStreams(false)
 		, m_SkeletonView(null)
+		, m_FirstFrameAfterLoad(false)
+		, m_SkinDt(0.0f)
 	{
 	}
 	~CPkFxSkinnedMesh()

@@ -134,17 +134,19 @@ GENERATED += $(OBJDIR)/rh_batch_jobs_triangle_gpu.o
 GENERATED += $(OBJDIR)/rh_billboard.o
 GENERATED += $(OBJDIR)/rh_billboard_cpu.o
 GENERATED += $(OBJDIR)/rh_billboard_cpu_tasks.o
-GENERATED += $(OBJDIR)/rh_billboard_ribbon_batch_helper.o
 GENERATED += $(OBJDIR)/rh_billboarders_billboards_axial_capsule.o
 GENERATED += $(OBJDIR)/rh_billboarders_billboards_axial_quad.o
 GENERATED += $(OBJDIR)/rh_billboarders_billboards_axial_spheroidal.o
+GENERATED += $(OBJDIR)/rh_billboarders_billboards_axial_trimmed.o
 GENERATED += $(OBJDIR)/rh_billboarders_billboards_planar_quad.o
+GENERATED += $(OBJDIR)/rh_billboarders_billboards_planar_trimmed.o
 GENERATED += $(OBJDIR)/rh_billboarders_billboards_screen_quad.o
+GENERATED += $(OBJDIR)/rh_billboarders_billboards_screen_trimmed.o
 GENERATED += $(OBJDIR)/rh_billboarders_billboards_standard.o
 GENERATED += $(OBJDIR)/rh_billboarders_billboards_view_quad.o
+GENERATED += $(OBJDIR)/rh_billboarders_billboards_view_trimmed.o
 GENERATED += $(OBJDIR)/rh_billboarders_ribbons.o
 GENERATED += $(OBJDIR)/rh_billboarders_ribbons_axial.o
-GENERATED += $(OBJDIR)/rh_bufferpool.o
 GENERATED += $(OBJDIR)/rh_common.o
 GENERATED += $(OBJDIR)/rh_copystream_cpu.o
 GENERATED += $(OBJDIR)/rh_copystream_cpu_tasks.o
@@ -190,17 +192,19 @@ OBJECTS += $(OBJDIR)/rh_batch_jobs_triangle_gpu.o
 OBJECTS += $(OBJDIR)/rh_billboard.o
 OBJECTS += $(OBJDIR)/rh_billboard_cpu.o
 OBJECTS += $(OBJDIR)/rh_billboard_cpu_tasks.o
-OBJECTS += $(OBJDIR)/rh_billboard_ribbon_batch_helper.o
 OBJECTS += $(OBJDIR)/rh_billboarders_billboards_axial_capsule.o
 OBJECTS += $(OBJDIR)/rh_billboarders_billboards_axial_quad.o
 OBJECTS += $(OBJDIR)/rh_billboarders_billboards_axial_spheroidal.o
+OBJECTS += $(OBJDIR)/rh_billboarders_billboards_axial_trimmed.o
 OBJECTS += $(OBJDIR)/rh_billboarders_billboards_planar_quad.o
+OBJECTS += $(OBJDIR)/rh_billboarders_billboards_planar_trimmed.o
 OBJECTS += $(OBJDIR)/rh_billboarders_billboards_screen_quad.o
+OBJECTS += $(OBJDIR)/rh_billboarders_billboards_screen_trimmed.o
 OBJECTS += $(OBJDIR)/rh_billboarders_billboards_standard.o
 OBJECTS += $(OBJDIR)/rh_billboarders_billboards_view_quad.o
+OBJECTS += $(OBJDIR)/rh_billboarders_billboards_view_trimmed.o
 OBJECTS += $(OBJDIR)/rh_billboarders_ribbons.o
 OBJECTS += $(OBJDIR)/rh_billboarders_ribbons_axial.o
-OBJECTS += $(OBJDIR)/rh_bufferpool.o
 OBJECTS += $(OBJDIR)/rh_common.o
 OBJECTS += $(OBJDIR)/rh_copystream_cpu.o
 OBJECTS += $(OBJDIR)/rh_copystream_cpu_tasks.o
@@ -334,9 +338,6 @@ $(OBJDIR)/rh_batch_jobs_triangle_cpu.o: ../../ExternalLibs/Runtime/pk_render_hel
 $(OBJDIR)/rh_batch_jobs_triangle_gpu.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batch_jobs/rh_batch_jobs_triangle_gpu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_billboard_ribbon_batch_helper.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/batches/rh_billboard_ribbon_batch_helper.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_billboarders_billboards_axial_capsule.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_capsule.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -346,10 +347,19 @@ $(OBJDIR)/rh_billboarders_billboards_axial_quad.o: ../../ExternalLibs/Runtime/pk
 $(OBJDIR)/rh_billboarders_billboards_axial_spheroidal.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_spheroidal.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rh_billboarders_billboards_axial_trimmed.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_axial_trimmed.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_billboarders_billboards_planar_quad.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_planar_quad.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rh_billboarders_billboards_planar_trimmed.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_planar_trimmed.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_billboarders_billboards_screen_quad.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_screen_quad.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rh_billboarders_billboards_screen_trimmed.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_screen_trimmed.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_billboarders_billboards_standard.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_standard.cpp
@@ -358,13 +368,13 @@ $(OBJDIR)/rh_billboarders_billboards_standard.o: ../../ExternalLibs/Runtime/pk_r
 $(OBJDIR)/rh_billboarders_billboards_view_quad.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_view_quad.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rh_billboarders_billboards_view_trimmed.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_billboards_view_trimmed.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_billboarders_ribbons.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_ribbons.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_billboarders_ribbons_axial.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/billboarders/rh_billboarders_ribbons_axial.cpp
-	@echo "$(notdir $<)"
-	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rh_bufferpool.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/buffer_pool/rh_bufferpool.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/rh_billboard.o: ../../ExternalLibs/Runtime/pk_render_helpers/src/draw_requests/rh_billboard.cpp

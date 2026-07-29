@@ -25,6 +25,7 @@ public:
 	,	m_PrettyName(CStringView::FromNullTerminatedString(prettyName))
 #	endif
 	{
+		(void)prettyName;
 		PK_ASSERT(m_TargetCount != null && m_DoneCount != null && m_DoneCount->Load() != 0);
 	}
 

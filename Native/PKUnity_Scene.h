@@ -9,7 +9,6 @@
 #include <pk_particles/include/ps_scene.h>
 #include <pk_geometrics/include/ge_mesh_resource.h>
 
-#include "RenderingIntegration/UnityRenderDataFactory.h"
 #include "RenderingIntegration/FrameCollectorUnityTypes.h"
 
 #include "ManagedToNative.h"
@@ -199,6 +198,13 @@ public:
 #pragma pack(pop)
 #endif
 
+	// RaycastCommand6002OrNewer is the only mirror struct whose managed layout differs from its
+	// natural C++ layout (the u64 PhysicsScene handle pulls the alignment to 8 and adds tail padding).
+	// gcc reports "ignoring packed attribute" on the non-POD members, so pin the size explicitly:
+	// if the packing were really dropped the sizeof check against the managed side would silently
+	// disable raycast collisions instead of failing here.
+	PK_STATIC_ASSERT(sizeof(RaycastCommand6002OrNewer) == sizeof(CFloat3) * 2 + sizeof(u64) + sizeof(float) + sizeof(QueryParameters));
+
 public:
 	CPKFXScene();
 	~CPKFXScene();
@@ -239,9 +245,13 @@ public:
 	virtual	TMemoryView<const float * const>	GetAudioSpectrum(CStringId channelGroup, u32 &outBaseCount) const override;
 	virtual	TMemoryView<const float * const>	GetAudioWaveform(CStringId channelGroup, u32 &outBaseCount) const  override;
 
-	CUnityFrameCollector						*GetFrameCollector() const { return m_ParticleFrameCollector; }
+	const CUnityFrameCollector					*GetFrameCollector() const { return m_ParticleFrameCollector; }
 
 	bool										GameThread_WaitForUpdateEnd();
+
+	//	RenderHelpers integration
+	CRendererBatchDrawer						*NewBatchDrawer(ERendererClass rendererType, const PRendererCacheBase &rendererCache, bool gpuStorage);
+	PRendererCacheBase							NewRendererCache(const PRendererDataBase &renderer, const CParticleDescriptor *particleDesc);
 
 	//Events
 private:
@@ -370,7 +380,6 @@ private:
 	void	_ClearPendingEventsNoLock();
 	void	_ClearEvents();
 	void	_PostUpdateEvents();
-	void	_RemoveUnloadedRenderers(const SParticleCollectedFrameToRender *renderedFrame);
 
 public:
 	bool										RegisterEventListener(s32 guid, const CStringId &event, u32 unityKey);
@@ -414,6 +423,12 @@ private:
 
 		SMediumCollectionSettings()
 		:	m_Initialized(false)
+		,	m_EnableDynamicEffectBounds(false)
+		,	m_EnableLocalizedPages(false)
+		,	m_EnableLocalizedByDefault(false)
+		,	m_LODMinDist(0.0f)
+		,	m_LODMaxDist(1.0f)
+		,	m_LODMinMinDist(1.0f)
 		{
 		}
 	};
@@ -423,8 +438,6 @@ private:
 
 	// Unity render context:
 	SUnityRenderContext							m_RenderContext;
-	// Render data factory used for both frame collector
-	CUnityRenderDataFactory						m_RenderDataFactory;
 	// For regular particles:
 	CParticleMediumCollection					*m_ParticleMediumCollection;
 	CUnityFrameCollector						*m_ParticleFrameCollector;

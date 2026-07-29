@@ -105,12 +105,16 @@ GENERATED += $(OBJDIR)/AssetBaker_Oven_Font.o
 GENERATED += $(OBJDIR)/AssetBaker_Oven_HBO.o
 GENERATED += $(OBJDIR)/AssetBaker_Oven_HBO_AttributeHotfix.o
 GENERATED += $(OBJDIR)/AssetBaker_Oven_Mesh.o
+GENERATED += $(OBJDIR)/AssetBaker_Oven_SimCache.o
 GENERATED += $(OBJDIR)/AssetBaker_Oven_StraightCopy.o
 GENERATED += $(OBJDIR)/AssetBaker_Oven_Texture.o
 GENERATED += $(OBJDIR)/AssetBaker_Oven_VectorField.o
 GENERATED += $(OBJDIR)/AssetBaker_PKGO.o
 GENERATED += $(OBJDIR)/AssetBaker_PKGO_Graph.o
 GENERATED += $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o
+GENERATED += $(OBJDIR)/AssetBaker_PKSX.o
+GENERATED += $(OBJDIR)/AssetBaker_PKSX_Effect.o
+GENERATED += $(OBJDIR)/AssetBaker_PKSX_Houdini.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_Atlas.o
 GENERATED += $(OBJDIR)/AssetBaker_PKTX_BAT.o
@@ -135,12 +139,16 @@ OBJECTS += $(OBJDIR)/AssetBaker_Oven_Font.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven_HBO.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven_HBO_AttributeHotfix.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven_Mesh.o
+OBJECTS += $(OBJDIR)/AssetBaker_Oven_SimCache.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven_StraightCopy.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven_Texture.o
 OBJECTS += $(OBJDIR)/AssetBaker_Oven_VectorField.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKGO.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKGO_Graph.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKSX.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKSX_Effect.o
+OBJECTS += $(OBJDIR)/AssetBaker_PKSX_Houdini.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_Atlas.o
 OBJECTS += $(OBJDIR)/AssetBaker_PKTX_BAT.o
@@ -240,6 +248,9 @@ $(OBJDIR)/AssetBaker_Oven_HBO_AttributeHotfix.o: ../../ExternalLibs/PK-AssetBake
 $(OBJDIR)/AssetBaker_Oven_Mesh.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_Oven_Mesh.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_Oven_SimCache.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_Oven_SimCache.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_Oven_StraightCopy.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_Oven_StraightCopy.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -256,6 +267,15 @@ $(OBJDIR)/AssetBaker_PKGO_Graph.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBake
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKGO_SimInterfaces.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKGO_SimInterfaces.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKSX.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKSX.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKSX_Effect.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKSX_Effect.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AssetBaker_PKSX_Houdini.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKSX_Houdini.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/AssetBaker_PKTX.o: ../../ExternalLibs/PK-AssetBakerLib/AssetBaker_PKTX.cpp

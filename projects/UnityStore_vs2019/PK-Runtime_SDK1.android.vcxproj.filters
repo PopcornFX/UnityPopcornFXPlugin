@@ -537,9 +537,6 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_containers_static.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_decorated_pointer.h">
-      <Filter>Kernel\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_kernel\include\kr_delegates.h">
       <Filter>Kernel\Headers</Filter>
     </ClInclude>
@@ -1015,6 +1012,36 @@
       <Filter>Particles\Headers\Renderers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_animtrack.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_audio.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_curve.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_event_stream.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_grid.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_image.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_image_atlas.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_shape.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_text.h">
+      <Filter>Particles\Headers\Samplers\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\CPU\sampler_cpu_vectorfield.h">
       <Filter>Particles\Headers\Samplers\CPU</Filter>
     </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles\include\Samplers\GPU\sampler_gpu.h">

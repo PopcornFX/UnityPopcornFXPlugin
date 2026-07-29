@@ -968,6 +968,7 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void	ProfilerSetEnable(ManagedBool enable)
 	{
+		(void)enable;
 		NEED_PK_MEDIUM_COLLECTION_CREATED(return);
 #if	(KR_PROFILER_ENABLED != 0)
 		Profiler::CProfiler	*profiler = Profiler::MainEngineProfiler();

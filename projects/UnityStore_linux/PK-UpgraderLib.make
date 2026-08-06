@@ -53,8 +53,8 @@ TARGET = $(TARGETDIR)/libPK-UpgraderLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Debug/PK-UpgraderLib
 DEFINES += -D_DEBUG
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -Wl,--no-as-needed
 
 else ifeq ($(config),debug_arm64)
@@ -73,8 +73,8 @@ TARGET = $(TARGETDIR)/libPK-UpgraderLib_d.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-UpgraderLib
 DEFINES += -D_DEBUG
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
 
 else ifeq ($(config),release_x64)
@@ -93,8 +93,8 @@ TARGET = $(TARGETDIR)/libPK-UpgraderLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Release/PK-UpgraderLib
 DEFINES += -DNDEBUG
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -Wl,--no-as-needed
 
 else ifeq ($(config),release_arm64)
@@ -113,8 +113,8 @@ TARGET = $(TARGETDIR)/libPK-UpgraderLib_r.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-UpgraderLib
 DEFINES += -DNDEBUG
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fPIC -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
 
 else ifeq ($(config),retail_x64)
@@ -133,8 +133,8 @@ TARGET = $(TARGETDIR)/libPK-UpgraderLib_s.a
 OBJDIR = ../intermediate/UnityStore/GM/x64/Retail/PK-UpgraderLib
 DEFINES += -DNDEBUG -DPK_RETAIL
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s -Wl,--no-as-needed
 
 else ifeq ($(config),retail_arm64)
@@ -153,8 +153,8 @@ TARGET = $(TARGETDIR)/libPK-UpgraderLib_s.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Retail/PK-UpgraderLib
 DEFINES += -DNDEBUG -DPK_RETAIL
 FORCE_INCLUDE += -include pk_compiler_warnings.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
 
 #else
@@ -164,7 +164,8 @@ endif
 # Per File Configurations
 # #############################################
 
-PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden
+PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling-reference
+PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling
 
 # File sets
 # #############################################
@@ -948,6 +949,8 @@ endif
 prebuild: | $(OBJDIR)
 	$(PREBUILDCMDS)
 
+
+ifeq ($(config),debug_x64)
 ifneq (,$(PCH))
 $(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
 $(GCH): $(PCH) | prebuild
@@ -964,9 +967,99 @@ $(OBJECTS): | prebuild
 endif
 
 
+else ifeq ($(config),debug_arm64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_1) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),release_x64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_0) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),release_arm64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_1) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),retail_x64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_0) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),retail_arm64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_1) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+#else
+#  $(error "invalid configuration $(config)")
+endif
+
 # File Rules
 # #############################################
 
+ifeq ($(config),debug_x64)
 $(OBJDIR)/upg_precompiled.o: ../../ExternalLibs/pk_upgraderlib/src/precompiled/upg_precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -2065,6 +2158,5510 @@ $(OBJDIR)/upg_rawfile.o: ../../ExternalLibs/pk_upgraderlib/src/upg_rawfile.cpp
 $(OBJDIR)/upg_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/upg_upgrader.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),debug_arm64)
+$(OBJDIR)/upg_precompiled.o: ../../ExternalLibs/pk_upgraderlib/src/precompiled/upg_precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrades_generated.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrades_generated.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_45754.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.45754/core_upgrader_2_0_0_45754.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_46520.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.46520/core_upgrader_2_0_0_46520.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47147.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47147/core_upgrader_2_0_0_47147.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47887.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47887/core_upgrader_2_0_0_47887.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48439.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48439/core_upgrader_2_0_0_48439.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48597.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48597/core_upgrader_2_0_0_48597.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_49290.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.49290/core_upgrader_2_0_0_49290.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50071/core_upgrader_2_0_0_50071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50306.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50306/core_upgrader_2_0_0_50306.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50392.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50392/core_upgrader_2_0_0_50392.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_51547.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.51547/core_upgrader_2_0_0_51547.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_2_51773.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.2.51773/core_upgrader_2_0_2_51773.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53018.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53018/core_upgrader_2_1_0_53018.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53244.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53244/core_upgrader_2_1_0_53244.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_8984.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.8984/core_upgrader_2_10_0_8984.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9172.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9172/core_upgrader_2_10_0_9172.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9560.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9560/core_upgrader_2_10_0_9560.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9625.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9625/core_upgrader_2_10_0_9625.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9653.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9653/core_upgrader_2_10_0_9653.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_11_0_11056.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.11.0.11056/core_upgrader_2_11_0_11056.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12548.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12548/core_upgrader_2_12_0_12548.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12698.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12698/core_upgrader_2_12_0_12698.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_13_0_13590.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.13.0.13590/core_upgrader_2_13_0_13590.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14494.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14494/core_upgrader_2_14_0_14494.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14605.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14605/core_upgrader_2_14_0_14605.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15495.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15495/core_upgrader_2_15_0_15495.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15714/core_upgrader_2_15_0_15714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16433.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16433/core_upgrader_2_16_0_16433.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16626.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16626/core_upgrader_2_16_0_16626.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16685.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16685/core_upgrader_2_16_0_16685.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16701.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16701/core_upgrader_2_16_0_16701.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17463.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17463/core_upgrader_2_17_0_17463.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17579.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17579/core_upgrader_2_17_0_17579.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17673.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17673/core_upgrader_2_17_0_17673.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18518.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18518/core_upgrader_2_18_0_18518.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18710.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18710/core_upgrader_2_18_0_18710.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18748.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18748/core_upgrader_2_18_0_18748.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18759.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18759/core_upgrader_2_18_0_18759.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20350.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20350/core_upgrader_2_19_0_20350.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20470.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20470/core_upgrader_2_19_0_20470.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20475.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20475/core_upgrader_2_19_0_20475.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20538.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20538/core_upgrader_2_19_0_20538.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20545.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20545/core_upgrader_2_19_0_20545.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20554.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20554/core_upgrader_2_19_0_20554.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20558.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20558/core_upgrader_2_19_0_20558.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_20910.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.20910/core_upgrader_2_20_0_20910.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21121.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21121/core_upgrader_2_20_0_21121.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21896.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21896/core_upgrader_2_20_0_21896.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_1_21978.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.1.21978/core_upgrader_2_20_1_21978.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22636.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22636/core_upgrader_2_21_0_22636.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22818.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22818/core_upgrader_2_21_0_22818.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23751.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23751/core_upgrader_2_22_0_23751.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23868.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23868/core_upgrader_2_22_0_23868.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25019.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25019/core_upgrader_2_23_0_25019.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25047.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25047/core_upgrader_2_23_0_25047.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25065.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25065/core_upgrader_2_23_0_25065.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25771.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25771/core_upgrader_2_24_0_25771.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25832.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25832/core_upgrader_2_24_0_25832.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_26241.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.26241/core_upgrader_2_24_0_26241.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59175.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59175/core_upgrader_2_3_0_59175.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59344.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59344/core_upgrader_2_3_0_59344.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61372.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61372/core_upgrader_2_4_0_61372.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61427.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61427/core_upgrader_2_4_0_61427.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61613.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61613/core_upgrader_2_4_0_61613.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_5_0_63107.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.5.0.63107/core_upgrader_2_5_0_63107.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64722.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64722/core_upgrader_2_6_0_64722.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64941.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64941/core_upgrader_2_6_0_64941.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_7_0_835.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.7.0.835/core_upgrader_2_7_0_835.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3675.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3675/core_upgrader_2_8_0_3675.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3864.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3864/core_upgrader_2_8_0_3864.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_4071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.4071/core_upgrader_2_8_0_4071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6358.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6358/core_upgrader_2_9_0_6358.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6714/core_upgrader_2_9_0_6714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1s9V_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/1s9V_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2Bh4_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2Bh4_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2OpI_Color.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2OpI_Color.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3I5R_Color_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/3I5R_Color_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4yEw_Samplers.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/4yEw_Samplers.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7HQR_Legacy_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7HQR_Legacy_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7cjK_Core_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7cjK_Core_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CSip_Classic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/CSip_Classic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FHih_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FHih_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FO9q_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FO9q_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GLGX_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/GLGX_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HbBl_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/HbBl_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Hsaq_Events_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Hsaq_Events_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IBDN_Samplers_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IBDN_Samplers_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IGtI_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IGtI_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JDoa_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/JDoa_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/K42Z_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/K42Z_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LXOn_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/LXOn_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MTie_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MTie_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MmWQ_Utils_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MmWQ_Utils_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Mwao_Legacy.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Mwao_Legacy.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q4P5_AssetGenerators.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Q4P5_AssetGenerators.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QxEW_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/QxEW_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/SayE_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/SayE_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/TZEH_Trails_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/TZEH_Trails_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/U0f4_CurvePresets_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/U0f4_CurvePresets_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UfZf_Debug.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/UfZf_Debug.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/W9iC_CurvePresets.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/W9iC_CurvePresets.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XwPE_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/XwPE_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbyT_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/YbyT_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Z5fe_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Z5fe_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/a4sE_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/a4sE_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/b78S_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/b78S_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/c6w8_Placement.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/c6w8_Placement.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cZ8S_Debug_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/cZ8S_Debug_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ihBc_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ihBc_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kiJ2_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/kiJ2_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l6KV_Events.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/l6KV_Events.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mh4F_Dynamics.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/mh4F_Dynamics.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qQJQ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/qQJQ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rbR1_Utils.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rbR1_Utils.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rqKe_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rqKe_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sLBf_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/sLBf_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uDhK_Core.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uDhK_Core.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uFyX_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uFyX_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsx_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vZsx_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vc0t_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vc0t_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/waqm_Placement_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/waqm_Placement_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/xnTO_Dynamics_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ykcF_Trails.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ykcF_Trails.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/00dj_ConstantColor.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/00dj_ConstantColor.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/0kYk_Editor_2.9.0.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/0kYk_Editor_2.9.0.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1UDj_Decal_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1UDj_Decal_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1xZV_ExDecal_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1xZV_ExDecal_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/28st_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/28st_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/37Xi_MeshAnim.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/37Xi_MeshAnim.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3xud_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/3xud_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4GsL_ExMesh_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4GsL_ExMesh_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4YDO_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4YDO_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4xZI_ExRibbon_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4xZI_ExRibbon_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6QZI_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6QZI_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6RYl_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6RYl_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6cc6_Utils.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6cc6_Utils.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7G2Q_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7G2Q_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7PF5_SoundMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7PF5_SoundMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8DXU_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8DXU_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8Fdl_Legacy_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8Fdl_Legacy_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8db4_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8db4_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/98xY_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/98xY_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/996O_ExTriangle_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/996O_ExTriangle_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9aOq_Billboard_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9aOq_Billboard_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9ehc_Legacy_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9ehc_Legacy_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9rBt_Legacy_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9rBt_Legacy_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/A5Bd_RibbonMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/A5Bd_RibbonMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AVr7_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/AVr7_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BA3z_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BA3z_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BdoJ_Opaque_Triangle.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BdoJ_Opaque_Triangle.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BtJA_Triangle_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BtJA_Triangle_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/C3ck_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/C3ck_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CRKZ_Font.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CRKZ_Font.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CdlR_BillboardMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CdlR_BillboardMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DaPU_Ribbon_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DaPU_Ribbon_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DizI_Default.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DizI_Default.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ed4Q_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ed4Q_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/EpeO_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/EpeO_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/F4z6_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/F4z6_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FCJV_Editor.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FCJV_Editor.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FRv3_ExRibbon_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FRv3_ExRibbon_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FXZZ_DecalMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FXZZ_DecalMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Fc6U_LightMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Fc6U_LightMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GYYL_ExLight_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/GYYL_ExLight_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gtt8_ExSound_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gtt8_ExSound_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gzic_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gzic_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/H4f2_Blur.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/H4f2_Blur.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HSQU_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/HSQU_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I3R2_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I3R2_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I63W_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I63W_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ILrB_ExRibbon_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ILrB_ExRibbon_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Irti_Circle.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Irti_Circle.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JSFk_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JSFk_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtCS_ExBillboard_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtCS_ExBillboard_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtQC_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtQC_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KMEO_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KMEO_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KfZ2_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KfZ2_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KyUa_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KyUa_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIlG_SkeletalAnimationTexture.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIlG_SkeletalAnimationTexture.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIpN_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIpN_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LLcC_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LLcC_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LRz5_ExTriangle_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LRz5_ExTriangle_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LWg5_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LWg5_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LaF2_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LaF2_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LjPK_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LjPK_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LuXO_ExBillboard_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LuXO_ExBillboard_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LxrX_Legacy.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LxrX_Legacy.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MlCD_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MlCD_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MzN9_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MzN9_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/NMEz_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/NMEz_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ntyi_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ntyi_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Oh1K_TriangleMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Oh1K_TriangleMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PALN_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PALN_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PSm9_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PSm9_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PlBH_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PlBH_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q9dG_AnimatedMesh.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Q9dG_AnimatedMesh.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/QJve_Legacy_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Qfpp_ExMesh_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/R9Pa_Triangle_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/S9it_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/S9it_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Sjzi_BAT.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Sjzi_BAT.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/USnb_FeatureTransformedNoises.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/USnb_FeatureTransformedNoises.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/V1wW_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/V1wW_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VN0Q_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VP1n_MeshMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VP1n_MeshMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ViaO_Substance.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ViaO_Substance.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WES9_VectorGraph.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WES9_VectorGraph.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WloZ_Legacy_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WwnR_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WwnR_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Wx91_ExRibbon_CD_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Wx91_ExRibbon_CD_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XSLy_ExBillboard_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XSLy_ExBillboard_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XeEd_ExRibbon_CD_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XeEd_ExRibbon_CD_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XqLq_Circle.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XqLq_Circle.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Y00z_ExRibbon_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Y00z_ExRibbon_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YMTO_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YMTO_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YW7Q_FeatureAlphaMasks.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YW7Q_FeatureAlphaMasks.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbjT_ExRibbon_CD_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YbjT_ExRibbon_CD_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZAxG_Legacy_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZAxG_Legacy_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Zbwf_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Zbwf_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZfpQ_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZfpQ_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aAEj_Legacy_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aAEj_Legacy_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aC9h_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aC9h_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aydX_Experimental.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aydX_Experimental.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bU8i_FeatureUVDistortions.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bU8i_FeatureUVDistortions.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bw4z_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bw4z_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cDF8_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cDF8_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cVPA_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cVPA_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/chrn_Mesh_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/chrn_Mesh_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cjr1_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cjr1_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cvmg_ExTriangle_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cvmg_ExTriangle_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/d1Dp_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/d1Dp_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dGrV_Mesh_Emissive.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dGrV_Mesh_Emissive.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dWRY_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dWRY_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dtGH_Billboard_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dtGH_Billboard_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/e1Q8_ExDecal_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/e1Q8_ExDecal_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eRgs_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eRgs_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eqkz_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eqkz_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/f9Qm_Legacy_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/f9Qm_Legacy_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fC9J_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fC9J_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fDuU_ExRibbon_CD_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fDuU_ExRibbon_CD_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fTEk_ExTriangle_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fTEk_ExTriangle_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gmFL_ExBillboard_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gmFL_ExBillboard_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hTfT_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hTfT_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hYo9_Python.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hYo9_Python.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hkzu_Legacy_Opaque_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hkzu_Legacy_Opaque_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hrRO_Legacy_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hrRO_Legacy_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/htHV_Billboard_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/htHV_Billboard_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/iED0_ExBillboard_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/iED0_ExBillboard_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ivJt_Legacy_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/j3Ha_PingPong.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/j3Ha_PingPong.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jFj7_SimpleSolid.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jFj7_SimpleSolid.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jUul_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jUul_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jW9j_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jW9j_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kTZU_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/kTZU_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l45j_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/l45j_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lCSW_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lCSW_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lPee_ExTriangle_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lYSl_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lYSl_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mYZv_VertexGraph.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mYZv_VertexGraph.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mfOK_Light_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mfOK_Light_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/nPaD_Sphere.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/nPaD_Sphere.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/negz_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/negz_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oMyq_TextureGraph.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oMyq_TextureGraph.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/orAW_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/orAW_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oueu_Triangle_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oueu_Triangle_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/po2N_ExRibbon_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/po2N_ExRibbon_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/poq5_Ribbon_CorrectDeformation_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/poq5_Ribbon_CorrectDeformation_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pqvq_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pqvq_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/psnk_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/psnk_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pyZ4_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pyZ4_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/q2q7_Legacy_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/q2q7_Legacy_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qNc5_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qNc5_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qaey_Legacy_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qaey_Legacy_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qfzW_ExMesh_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qfzW_ExMesh_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzT2_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzT2_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzyb_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzyb_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rVTR_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/rVTR_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/smkz_Ribbon_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/smkz_Ribbon_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/soLj_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/soLj_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sqvk_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/sqvk_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ssqy_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ssqy_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/t4TY_FeatureFastLit.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/t4TY_FeatureFastLit.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/u9nV_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/u9nV_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uBkt_Mesh_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uBkt_Mesh_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uLY4_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uLY4_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uSpK_Billboard_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uSpK_Billboard_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uUg2_Ribbon_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uUg2_Ribbon_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uXep_ExRibbon_CD_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uXep_ExRibbon_CD_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ud8g_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ud8g_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ufOj_ConstantVector.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ufOj_ConstantVector.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vGob_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vGob_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsR_Ribbon_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vZsR_Ribbon_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vfHh_Legacy_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vfHh_Legacy_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vkHk_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vkHk_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/wjZZ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/wjZZ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xAlT_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xAlT_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xFbh_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xFbh_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xTR4_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xTR4_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xmJW_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xmJW_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ySDu_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ySDu_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zLtU_Noise_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zLtU_Noise_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zNpM_Mesh_Tinted.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zNpM_Mesh_Tinted.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zQA6_PingPong.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zQA6_PingPong.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zfkR_Sound_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zfkR_Sound_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zgL9_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zgL9_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_import_v1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_import_v1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_hardfix.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_hardfix.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.1.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.1.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.10.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.10.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.11.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.11.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.12.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.12.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.15.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.15.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.16.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.16.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.17.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.17.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.18.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.18.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.19.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.19.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.20.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.20.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.21.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.21.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.22.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.22.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.23.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.23.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.24.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.24.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.4.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.4.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.5.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.5.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.6.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.6.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.7.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.7.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.8.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.8.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.9.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.9.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_builder.o: ../../ExternalLibs/pk_upgraderlib/src/upg_builder.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_axis_system.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_axis_system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_core_upgrade.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_core_upgrade.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_file.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_file.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_material.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_material.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_nodegraph.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_nodegraph.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_script.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_script.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_string.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_string.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_logger.o: ../../ExternalLibs/pk_upgraderlib/src/upg_logger.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_main.o: ../../ExternalLibs/pk_upgraderlib/src/upg_main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_rawfile.o: ../../ExternalLibs/pk_upgraderlib/src/upg_rawfile.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/upg_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),release_x64)
+$(OBJDIR)/upg_precompiled.o: ../../ExternalLibs/pk_upgraderlib/src/precompiled/upg_precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrades_generated.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrades_generated.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_45754.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.45754/core_upgrader_2_0_0_45754.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_46520.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.46520/core_upgrader_2_0_0_46520.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47147.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47147/core_upgrader_2_0_0_47147.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47887.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47887/core_upgrader_2_0_0_47887.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48439.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48439/core_upgrader_2_0_0_48439.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48597.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48597/core_upgrader_2_0_0_48597.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_49290.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.49290/core_upgrader_2_0_0_49290.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50071/core_upgrader_2_0_0_50071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50306.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50306/core_upgrader_2_0_0_50306.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50392.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50392/core_upgrader_2_0_0_50392.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_51547.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.51547/core_upgrader_2_0_0_51547.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_2_51773.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.2.51773/core_upgrader_2_0_2_51773.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53018.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53018/core_upgrader_2_1_0_53018.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53244.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53244/core_upgrader_2_1_0_53244.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_8984.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.8984/core_upgrader_2_10_0_8984.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9172.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9172/core_upgrader_2_10_0_9172.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9560.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9560/core_upgrader_2_10_0_9560.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9625.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9625/core_upgrader_2_10_0_9625.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9653.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9653/core_upgrader_2_10_0_9653.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_11_0_11056.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.11.0.11056/core_upgrader_2_11_0_11056.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12548.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12548/core_upgrader_2_12_0_12548.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12698.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12698/core_upgrader_2_12_0_12698.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_13_0_13590.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.13.0.13590/core_upgrader_2_13_0_13590.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14494.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14494/core_upgrader_2_14_0_14494.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14605.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14605/core_upgrader_2_14_0_14605.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15495.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15495/core_upgrader_2_15_0_15495.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15714/core_upgrader_2_15_0_15714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16433.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16433/core_upgrader_2_16_0_16433.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16626.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16626/core_upgrader_2_16_0_16626.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16685.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16685/core_upgrader_2_16_0_16685.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16701.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16701/core_upgrader_2_16_0_16701.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17463.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17463/core_upgrader_2_17_0_17463.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17579.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17579/core_upgrader_2_17_0_17579.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17673.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17673/core_upgrader_2_17_0_17673.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18518.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18518/core_upgrader_2_18_0_18518.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18710.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18710/core_upgrader_2_18_0_18710.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18748.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18748/core_upgrader_2_18_0_18748.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18759.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18759/core_upgrader_2_18_0_18759.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20350.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20350/core_upgrader_2_19_0_20350.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20470.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20470/core_upgrader_2_19_0_20470.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20475.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20475/core_upgrader_2_19_0_20475.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20538.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20538/core_upgrader_2_19_0_20538.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20545.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20545/core_upgrader_2_19_0_20545.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20554.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20554/core_upgrader_2_19_0_20554.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20558.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20558/core_upgrader_2_19_0_20558.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_20910.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.20910/core_upgrader_2_20_0_20910.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21121.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21121/core_upgrader_2_20_0_21121.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21896.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21896/core_upgrader_2_20_0_21896.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_1_21978.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.1.21978/core_upgrader_2_20_1_21978.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22636.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22636/core_upgrader_2_21_0_22636.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22818.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22818/core_upgrader_2_21_0_22818.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23751.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23751/core_upgrader_2_22_0_23751.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23868.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23868/core_upgrader_2_22_0_23868.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25019.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25019/core_upgrader_2_23_0_25019.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25047.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25047/core_upgrader_2_23_0_25047.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25065.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25065/core_upgrader_2_23_0_25065.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25771.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25771/core_upgrader_2_24_0_25771.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25832.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25832/core_upgrader_2_24_0_25832.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_26241.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.26241/core_upgrader_2_24_0_26241.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59175.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59175/core_upgrader_2_3_0_59175.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59344.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59344/core_upgrader_2_3_0_59344.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61372.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61372/core_upgrader_2_4_0_61372.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61427.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61427/core_upgrader_2_4_0_61427.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61613.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61613/core_upgrader_2_4_0_61613.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_5_0_63107.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.5.0.63107/core_upgrader_2_5_0_63107.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64722.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64722/core_upgrader_2_6_0_64722.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64941.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64941/core_upgrader_2_6_0_64941.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_7_0_835.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.7.0.835/core_upgrader_2_7_0_835.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3675.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3675/core_upgrader_2_8_0_3675.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3864.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3864/core_upgrader_2_8_0_3864.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_4071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.4071/core_upgrader_2_8_0_4071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6358.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6358/core_upgrader_2_9_0_6358.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6714/core_upgrader_2_9_0_6714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1s9V_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/1s9V_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2Bh4_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2Bh4_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2OpI_Color.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2OpI_Color.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3I5R_Color_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/3I5R_Color_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4yEw_Samplers.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/4yEw_Samplers.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7HQR_Legacy_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7HQR_Legacy_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7cjK_Core_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7cjK_Core_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CSip_Classic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/CSip_Classic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FHih_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FHih_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FO9q_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FO9q_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GLGX_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/GLGX_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HbBl_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/HbBl_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Hsaq_Events_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Hsaq_Events_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IBDN_Samplers_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IBDN_Samplers_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IGtI_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IGtI_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JDoa_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/JDoa_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/K42Z_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/K42Z_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LXOn_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/LXOn_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MTie_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MTie_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MmWQ_Utils_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MmWQ_Utils_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Mwao_Legacy.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Mwao_Legacy.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q4P5_AssetGenerators.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Q4P5_AssetGenerators.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QxEW_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/QxEW_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/SayE_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/SayE_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/TZEH_Trails_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/TZEH_Trails_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/U0f4_CurvePresets_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/U0f4_CurvePresets_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UfZf_Debug.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/UfZf_Debug.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/W9iC_CurvePresets.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/W9iC_CurvePresets.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XwPE_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/XwPE_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbyT_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/YbyT_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Z5fe_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Z5fe_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/a4sE_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/a4sE_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/b78S_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/b78S_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/c6w8_Placement.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/c6w8_Placement.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cZ8S_Debug_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/cZ8S_Debug_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ihBc_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ihBc_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kiJ2_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/kiJ2_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l6KV_Events.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/l6KV_Events.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mh4F_Dynamics.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/mh4F_Dynamics.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qQJQ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/qQJQ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rbR1_Utils.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rbR1_Utils.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rqKe_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rqKe_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sLBf_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/sLBf_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uDhK_Core.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uDhK_Core.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uFyX_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uFyX_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsx_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vZsx_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vc0t_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vc0t_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/waqm_Placement_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/waqm_Placement_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/xnTO_Dynamics_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ykcF_Trails.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ykcF_Trails.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/00dj_ConstantColor.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/00dj_ConstantColor.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/0kYk_Editor_2.9.0.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/0kYk_Editor_2.9.0.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1UDj_Decal_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1UDj_Decal_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1xZV_ExDecal_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1xZV_ExDecal_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/28st_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/28st_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/37Xi_MeshAnim.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/37Xi_MeshAnim.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3xud_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/3xud_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4GsL_ExMesh_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4GsL_ExMesh_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4YDO_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4YDO_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4xZI_ExRibbon_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4xZI_ExRibbon_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6QZI_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6QZI_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6RYl_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6RYl_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6cc6_Utils.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6cc6_Utils.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7G2Q_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7G2Q_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7PF5_SoundMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7PF5_SoundMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8DXU_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8DXU_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8Fdl_Legacy_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8Fdl_Legacy_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8db4_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8db4_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/98xY_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/98xY_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/996O_ExTriangle_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/996O_ExTriangle_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9aOq_Billboard_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9aOq_Billboard_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9ehc_Legacy_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9ehc_Legacy_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9rBt_Legacy_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9rBt_Legacy_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/A5Bd_RibbonMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/A5Bd_RibbonMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AVr7_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/AVr7_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BA3z_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BA3z_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BdoJ_Opaque_Triangle.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BdoJ_Opaque_Triangle.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BtJA_Triangle_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BtJA_Triangle_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/C3ck_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/C3ck_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CRKZ_Font.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CRKZ_Font.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CdlR_BillboardMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CdlR_BillboardMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DaPU_Ribbon_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DaPU_Ribbon_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DizI_Default.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DizI_Default.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ed4Q_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ed4Q_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/EpeO_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/EpeO_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/F4z6_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/F4z6_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FCJV_Editor.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FCJV_Editor.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FRv3_ExRibbon_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FRv3_ExRibbon_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FXZZ_DecalMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FXZZ_DecalMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Fc6U_LightMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Fc6U_LightMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GYYL_ExLight_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/GYYL_ExLight_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gtt8_ExSound_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gtt8_ExSound_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gzic_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gzic_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/H4f2_Blur.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/H4f2_Blur.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HSQU_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/HSQU_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I3R2_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I3R2_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I63W_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I63W_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ILrB_ExRibbon_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ILrB_ExRibbon_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Irti_Circle.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Irti_Circle.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JSFk_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JSFk_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtCS_ExBillboard_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtCS_ExBillboard_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtQC_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtQC_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KMEO_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KMEO_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KfZ2_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KfZ2_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KyUa_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KyUa_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIlG_SkeletalAnimationTexture.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIlG_SkeletalAnimationTexture.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIpN_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIpN_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LLcC_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LLcC_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LRz5_ExTriangle_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LRz5_ExTriangle_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LWg5_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LWg5_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LaF2_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LaF2_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LjPK_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LjPK_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LuXO_ExBillboard_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LuXO_ExBillboard_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LxrX_Legacy.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LxrX_Legacy.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MlCD_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MlCD_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MzN9_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MzN9_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/NMEz_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/NMEz_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ntyi_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ntyi_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Oh1K_TriangleMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Oh1K_TriangleMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PALN_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PALN_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PSm9_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PSm9_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PlBH_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PlBH_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q9dG_AnimatedMesh.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Q9dG_AnimatedMesh.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/QJve_Legacy_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Qfpp_ExMesh_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/R9Pa_Triangle_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/S9it_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/S9it_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Sjzi_BAT.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Sjzi_BAT.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/USnb_FeatureTransformedNoises.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/USnb_FeatureTransformedNoises.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/V1wW_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/V1wW_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VN0Q_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VP1n_MeshMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VP1n_MeshMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ViaO_Substance.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ViaO_Substance.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WES9_VectorGraph.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WES9_VectorGraph.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WloZ_Legacy_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WwnR_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WwnR_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Wx91_ExRibbon_CD_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Wx91_ExRibbon_CD_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XSLy_ExBillboard_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XSLy_ExBillboard_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XeEd_ExRibbon_CD_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XeEd_ExRibbon_CD_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XqLq_Circle.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XqLq_Circle.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Y00z_ExRibbon_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Y00z_ExRibbon_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YMTO_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YMTO_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YW7Q_FeatureAlphaMasks.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YW7Q_FeatureAlphaMasks.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbjT_ExRibbon_CD_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YbjT_ExRibbon_CD_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZAxG_Legacy_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZAxG_Legacy_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Zbwf_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Zbwf_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZfpQ_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZfpQ_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aAEj_Legacy_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aAEj_Legacy_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aC9h_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aC9h_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aydX_Experimental.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aydX_Experimental.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bU8i_FeatureUVDistortions.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bU8i_FeatureUVDistortions.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bw4z_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bw4z_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cDF8_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cDF8_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cVPA_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cVPA_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/chrn_Mesh_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/chrn_Mesh_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cjr1_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cjr1_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cvmg_ExTriangle_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cvmg_ExTriangle_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/d1Dp_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/d1Dp_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dGrV_Mesh_Emissive.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dGrV_Mesh_Emissive.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dWRY_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dWRY_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dtGH_Billboard_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dtGH_Billboard_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/e1Q8_ExDecal_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/e1Q8_ExDecal_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eRgs_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eRgs_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eqkz_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eqkz_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/f9Qm_Legacy_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/f9Qm_Legacy_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fC9J_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fC9J_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fDuU_ExRibbon_CD_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fDuU_ExRibbon_CD_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fTEk_ExTriangle_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fTEk_ExTriangle_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gmFL_ExBillboard_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gmFL_ExBillboard_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hTfT_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hTfT_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hYo9_Python.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hYo9_Python.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hkzu_Legacy_Opaque_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hkzu_Legacy_Opaque_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hrRO_Legacy_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hrRO_Legacy_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/htHV_Billboard_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/htHV_Billboard_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/iED0_ExBillboard_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/iED0_ExBillboard_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ivJt_Legacy_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/j3Ha_PingPong.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/j3Ha_PingPong.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jFj7_SimpleSolid.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jFj7_SimpleSolid.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jUul_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jUul_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jW9j_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jW9j_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kTZU_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/kTZU_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l45j_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/l45j_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lCSW_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lCSW_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lPee_ExTriangle_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lYSl_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lYSl_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mYZv_VertexGraph.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mYZv_VertexGraph.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mfOK_Light_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mfOK_Light_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/nPaD_Sphere.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/nPaD_Sphere.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/negz_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/negz_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oMyq_TextureGraph.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oMyq_TextureGraph.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/orAW_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/orAW_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oueu_Triangle_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oueu_Triangle_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/po2N_ExRibbon_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/po2N_ExRibbon_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/poq5_Ribbon_CorrectDeformation_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/poq5_Ribbon_CorrectDeformation_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pqvq_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pqvq_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/psnk_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/psnk_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pyZ4_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pyZ4_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/q2q7_Legacy_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/q2q7_Legacy_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qNc5_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qNc5_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qaey_Legacy_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qaey_Legacy_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qfzW_ExMesh_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qfzW_ExMesh_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzT2_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzT2_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzyb_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzyb_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rVTR_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/rVTR_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/smkz_Ribbon_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/smkz_Ribbon_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/soLj_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/soLj_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sqvk_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/sqvk_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ssqy_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ssqy_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/t4TY_FeatureFastLit.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/t4TY_FeatureFastLit.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/u9nV_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/u9nV_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uBkt_Mesh_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uBkt_Mesh_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uLY4_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uLY4_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uSpK_Billboard_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uSpK_Billboard_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uUg2_Ribbon_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uUg2_Ribbon_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uXep_ExRibbon_CD_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uXep_ExRibbon_CD_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ud8g_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ud8g_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ufOj_ConstantVector.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ufOj_ConstantVector.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vGob_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vGob_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsR_Ribbon_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vZsR_Ribbon_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vfHh_Legacy_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vfHh_Legacy_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vkHk_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vkHk_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/wjZZ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/wjZZ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xAlT_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xAlT_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xFbh_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xFbh_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xTR4_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xTR4_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xmJW_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xmJW_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ySDu_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ySDu_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zLtU_Noise_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zLtU_Noise_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zNpM_Mesh_Tinted.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zNpM_Mesh_Tinted.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zQA6_PingPong.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zQA6_PingPong.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zfkR_Sound_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zfkR_Sound_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zgL9_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zgL9_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_import_v1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_import_v1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_hardfix.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_hardfix.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.1.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.1.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.10.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.10.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.11.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.11.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.12.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.12.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.15.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.15.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.16.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.16.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.17.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.17.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.18.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.18.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.19.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.19.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.20.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.20.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.21.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.21.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.22.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.22.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.23.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.23.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.24.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.24.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.4.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.4.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.5.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.5.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.6.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.6.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.7.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.7.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.8.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.8.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.9.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.9.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_builder.o: ../../ExternalLibs/pk_upgraderlib/src/upg_builder.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_axis_system.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_axis_system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_core_upgrade.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_core_upgrade.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_file.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_file.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_material.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_material.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_nodegraph.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_nodegraph.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_script.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_script.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_string.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_string.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_logger.o: ../../ExternalLibs/pk_upgraderlib/src/upg_logger.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_main.o: ../../ExternalLibs/pk_upgraderlib/src/upg_main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_rawfile.o: ../../ExternalLibs/pk_upgraderlib/src/upg_rawfile.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/upg_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),release_arm64)
+$(OBJDIR)/upg_precompiled.o: ../../ExternalLibs/pk_upgraderlib/src/precompiled/upg_precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrades_generated.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrades_generated.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_45754.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.45754/core_upgrader_2_0_0_45754.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_46520.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.46520/core_upgrader_2_0_0_46520.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47147.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47147/core_upgrader_2_0_0_47147.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47887.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47887/core_upgrader_2_0_0_47887.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48439.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48439/core_upgrader_2_0_0_48439.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48597.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48597/core_upgrader_2_0_0_48597.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_49290.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.49290/core_upgrader_2_0_0_49290.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50071/core_upgrader_2_0_0_50071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50306.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50306/core_upgrader_2_0_0_50306.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50392.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50392/core_upgrader_2_0_0_50392.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_51547.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.51547/core_upgrader_2_0_0_51547.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_2_51773.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.2.51773/core_upgrader_2_0_2_51773.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53018.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53018/core_upgrader_2_1_0_53018.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53244.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53244/core_upgrader_2_1_0_53244.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_8984.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.8984/core_upgrader_2_10_0_8984.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9172.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9172/core_upgrader_2_10_0_9172.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9560.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9560/core_upgrader_2_10_0_9560.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9625.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9625/core_upgrader_2_10_0_9625.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9653.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9653/core_upgrader_2_10_0_9653.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_11_0_11056.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.11.0.11056/core_upgrader_2_11_0_11056.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12548.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12548/core_upgrader_2_12_0_12548.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12698.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12698/core_upgrader_2_12_0_12698.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_13_0_13590.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.13.0.13590/core_upgrader_2_13_0_13590.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14494.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14494/core_upgrader_2_14_0_14494.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14605.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14605/core_upgrader_2_14_0_14605.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15495.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15495/core_upgrader_2_15_0_15495.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15714/core_upgrader_2_15_0_15714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16433.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16433/core_upgrader_2_16_0_16433.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16626.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16626/core_upgrader_2_16_0_16626.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16685.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16685/core_upgrader_2_16_0_16685.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16701.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16701/core_upgrader_2_16_0_16701.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17463.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17463/core_upgrader_2_17_0_17463.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17579.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17579/core_upgrader_2_17_0_17579.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17673.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17673/core_upgrader_2_17_0_17673.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18518.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18518/core_upgrader_2_18_0_18518.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18710.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18710/core_upgrader_2_18_0_18710.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18748.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18748/core_upgrader_2_18_0_18748.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18759.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18759/core_upgrader_2_18_0_18759.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20350.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20350/core_upgrader_2_19_0_20350.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20470.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20470/core_upgrader_2_19_0_20470.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20475.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20475/core_upgrader_2_19_0_20475.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20538.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20538/core_upgrader_2_19_0_20538.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20545.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20545/core_upgrader_2_19_0_20545.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20554.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20554/core_upgrader_2_19_0_20554.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20558.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20558/core_upgrader_2_19_0_20558.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_20910.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.20910/core_upgrader_2_20_0_20910.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21121.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21121/core_upgrader_2_20_0_21121.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21896.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21896/core_upgrader_2_20_0_21896.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_1_21978.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.1.21978/core_upgrader_2_20_1_21978.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22636.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22636/core_upgrader_2_21_0_22636.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22818.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22818/core_upgrader_2_21_0_22818.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23751.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23751/core_upgrader_2_22_0_23751.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23868.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23868/core_upgrader_2_22_0_23868.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25019.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25019/core_upgrader_2_23_0_25019.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25047.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25047/core_upgrader_2_23_0_25047.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25065.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25065/core_upgrader_2_23_0_25065.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25771.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25771/core_upgrader_2_24_0_25771.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25832.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25832/core_upgrader_2_24_0_25832.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_26241.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.26241/core_upgrader_2_24_0_26241.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59175.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59175/core_upgrader_2_3_0_59175.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59344.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59344/core_upgrader_2_3_0_59344.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61372.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61372/core_upgrader_2_4_0_61372.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61427.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61427/core_upgrader_2_4_0_61427.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61613.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61613/core_upgrader_2_4_0_61613.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_5_0_63107.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.5.0.63107/core_upgrader_2_5_0_63107.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64722.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64722/core_upgrader_2_6_0_64722.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64941.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64941/core_upgrader_2_6_0_64941.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_7_0_835.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.7.0.835/core_upgrader_2_7_0_835.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3675.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3675/core_upgrader_2_8_0_3675.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3864.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3864/core_upgrader_2_8_0_3864.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_4071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.4071/core_upgrader_2_8_0_4071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6358.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6358/core_upgrader_2_9_0_6358.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6714/core_upgrader_2_9_0_6714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1s9V_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/1s9V_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2Bh4_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2Bh4_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2OpI_Color.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2OpI_Color.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3I5R_Color_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/3I5R_Color_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4yEw_Samplers.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/4yEw_Samplers.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7HQR_Legacy_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7HQR_Legacy_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7cjK_Core_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7cjK_Core_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CSip_Classic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/CSip_Classic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FHih_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FHih_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FO9q_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FO9q_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GLGX_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/GLGX_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HbBl_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/HbBl_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Hsaq_Events_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Hsaq_Events_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IBDN_Samplers_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IBDN_Samplers_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IGtI_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IGtI_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JDoa_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/JDoa_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/K42Z_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/K42Z_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LXOn_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/LXOn_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MTie_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MTie_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MmWQ_Utils_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MmWQ_Utils_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Mwao_Legacy.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Mwao_Legacy.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q4P5_AssetGenerators.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Q4P5_AssetGenerators.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QxEW_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/QxEW_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/SayE_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/SayE_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/TZEH_Trails_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/TZEH_Trails_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/U0f4_CurvePresets_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/U0f4_CurvePresets_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UfZf_Debug.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/UfZf_Debug.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/W9iC_CurvePresets.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/W9iC_CurvePresets.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XwPE_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/XwPE_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbyT_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/YbyT_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Z5fe_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Z5fe_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/a4sE_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/a4sE_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/b78S_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/b78S_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/c6w8_Placement.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/c6w8_Placement.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cZ8S_Debug_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/cZ8S_Debug_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ihBc_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ihBc_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kiJ2_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/kiJ2_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l6KV_Events.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/l6KV_Events.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mh4F_Dynamics.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/mh4F_Dynamics.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qQJQ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/qQJQ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rbR1_Utils.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rbR1_Utils.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rqKe_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rqKe_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sLBf_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/sLBf_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uDhK_Core.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uDhK_Core.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uFyX_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uFyX_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsx_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vZsx_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vc0t_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vc0t_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/waqm_Placement_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/waqm_Placement_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/xnTO_Dynamics_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ykcF_Trails.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ykcF_Trails.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/00dj_ConstantColor.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/00dj_ConstantColor.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/0kYk_Editor_2.9.0.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/0kYk_Editor_2.9.0.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1UDj_Decal_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1UDj_Decal_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1xZV_ExDecal_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1xZV_ExDecal_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/28st_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/28st_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/37Xi_MeshAnim.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/37Xi_MeshAnim.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3xud_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/3xud_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4GsL_ExMesh_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4GsL_ExMesh_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4YDO_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4YDO_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4xZI_ExRibbon_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4xZI_ExRibbon_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6QZI_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6QZI_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6RYl_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6RYl_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6cc6_Utils.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6cc6_Utils.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7G2Q_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7G2Q_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7PF5_SoundMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7PF5_SoundMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8DXU_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8DXU_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8Fdl_Legacy_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8Fdl_Legacy_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8db4_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8db4_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/98xY_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/98xY_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/996O_ExTriangle_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/996O_ExTriangle_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9aOq_Billboard_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9aOq_Billboard_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9ehc_Legacy_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9ehc_Legacy_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9rBt_Legacy_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9rBt_Legacy_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/A5Bd_RibbonMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/A5Bd_RibbonMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AVr7_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/AVr7_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BA3z_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BA3z_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BdoJ_Opaque_Triangle.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BdoJ_Opaque_Triangle.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BtJA_Triangle_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BtJA_Triangle_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/C3ck_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/C3ck_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CRKZ_Font.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CRKZ_Font.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CdlR_BillboardMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CdlR_BillboardMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DaPU_Ribbon_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DaPU_Ribbon_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DizI_Default.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DizI_Default.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ed4Q_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ed4Q_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/EpeO_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/EpeO_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/F4z6_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/F4z6_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FCJV_Editor.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FCJV_Editor.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FRv3_ExRibbon_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FRv3_ExRibbon_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FXZZ_DecalMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FXZZ_DecalMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Fc6U_LightMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Fc6U_LightMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GYYL_ExLight_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/GYYL_ExLight_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gtt8_ExSound_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gtt8_ExSound_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gzic_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gzic_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/H4f2_Blur.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/H4f2_Blur.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HSQU_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/HSQU_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I3R2_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I3R2_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I63W_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I63W_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ILrB_ExRibbon_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ILrB_ExRibbon_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Irti_Circle.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Irti_Circle.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JSFk_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JSFk_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtCS_ExBillboard_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtCS_ExBillboard_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtQC_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtQC_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KMEO_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KMEO_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KfZ2_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KfZ2_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KyUa_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KyUa_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIlG_SkeletalAnimationTexture.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIlG_SkeletalAnimationTexture.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIpN_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIpN_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LLcC_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LLcC_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LRz5_ExTriangle_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LRz5_ExTriangle_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LWg5_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LWg5_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LaF2_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LaF2_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LjPK_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LjPK_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LuXO_ExBillboard_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LuXO_ExBillboard_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LxrX_Legacy.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LxrX_Legacy.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MlCD_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MlCD_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MzN9_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MzN9_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/NMEz_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/NMEz_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ntyi_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ntyi_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Oh1K_TriangleMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Oh1K_TriangleMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PALN_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PALN_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PSm9_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PSm9_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PlBH_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PlBH_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q9dG_AnimatedMesh.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Q9dG_AnimatedMesh.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/QJve_Legacy_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Qfpp_ExMesh_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/R9Pa_Triangle_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/S9it_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/S9it_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Sjzi_BAT.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Sjzi_BAT.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/USnb_FeatureTransformedNoises.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/USnb_FeatureTransformedNoises.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/V1wW_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/V1wW_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VN0Q_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VP1n_MeshMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VP1n_MeshMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ViaO_Substance.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ViaO_Substance.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WES9_VectorGraph.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WES9_VectorGraph.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WloZ_Legacy_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WwnR_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WwnR_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Wx91_ExRibbon_CD_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Wx91_ExRibbon_CD_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XSLy_ExBillboard_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XSLy_ExBillboard_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XeEd_ExRibbon_CD_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XeEd_ExRibbon_CD_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XqLq_Circle.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XqLq_Circle.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Y00z_ExRibbon_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Y00z_ExRibbon_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YMTO_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YMTO_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YW7Q_FeatureAlphaMasks.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YW7Q_FeatureAlphaMasks.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbjT_ExRibbon_CD_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YbjT_ExRibbon_CD_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZAxG_Legacy_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZAxG_Legacy_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Zbwf_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Zbwf_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZfpQ_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZfpQ_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aAEj_Legacy_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aAEj_Legacy_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aC9h_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aC9h_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aydX_Experimental.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aydX_Experimental.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bU8i_FeatureUVDistortions.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bU8i_FeatureUVDistortions.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bw4z_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bw4z_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cDF8_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cDF8_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cVPA_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cVPA_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/chrn_Mesh_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/chrn_Mesh_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cjr1_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cjr1_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cvmg_ExTriangle_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cvmg_ExTriangle_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/d1Dp_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/d1Dp_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dGrV_Mesh_Emissive.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dGrV_Mesh_Emissive.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dWRY_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dWRY_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dtGH_Billboard_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dtGH_Billboard_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/e1Q8_ExDecal_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/e1Q8_ExDecal_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eRgs_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eRgs_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eqkz_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eqkz_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/f9Qm_Legacy_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/f9Qm_Legacy_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fC9J_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fC9J_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fDuU_ExRibbon_CD_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fDuU_ExRibbon_CD_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fTEk_ExTriangle_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fTEk_ExTriangle_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gmFL_ExBillboard_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gmFL_ExBillboard_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hTfT_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hTfT_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hYo9_Python.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hYo9_Python.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hkzu_Legacy_Opaque_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hkzu_Legacy_Opaque_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hrRO_Legacy_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hrRO_Legacy_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/htHV_Billboard_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/htHV_Billboard_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/iED0_ExBillboard_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/iED0_ExBillboard_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ivJt_Legacy_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/j3Ha_PingPong.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/j3Ha_PingPong.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jFj7_SimpleSolid.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jFj7_SimpleSolid.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jUul_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jUul_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jW9j_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jW9j_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kTZU_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/kTZU_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l45j_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/l45j_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lCSW_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lCSW_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lPee_ExTriangle_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lYSl_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lYSl_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mYZv_VertexGraph.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mYZv_VertexGraph.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mfOK_Light_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mfOK_Light_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/nPaD_Sphere.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/nPaD_Sphere.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/negz_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/negz_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oMyq_TextureGraph.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oMyq_TextureGraph.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/orAW_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/orAW_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oueu_Triangle_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oueu_Triangle_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/po2N_ExRibbon_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/po2N_ExRibbon_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/poq5_Ribbon_CorrectDeformation_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/poq5_Ribbon_CorrectDeformation_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pqvq_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pqvq_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/psnk_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/psnk_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pyZ4_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pyZ4_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/q2q7_Legacy_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/q2q7_Legacy_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qNc5_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qNc5_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qaey_Legacy_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qaey_Legacy_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qfzW_ExMesh_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qfzW_ExMesh_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzT2_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzT2_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzyb_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzyb_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rVTR_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/rVTR_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/smkz_Ribbon_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/smkz_Ribbon_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/soLj_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/soLj_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sqvk_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/sqvk_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ssqy_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ssqy_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/t4TY_FeatureFastLit.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/t4TY_FeatureFastLit.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/u9nV_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/u9nV_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uBkt_Mesh_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uBkt_Mesh_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uLY4_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uLY4_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uSpK_Billboard_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uSpK_Billboard_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uUg2_Ribbon_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uUg2_Ribbon_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uXep_ExRibbon_CD_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uXep_ExRibbon_CD_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ud8g_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ud8g_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ufOj_ConstantVector.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ufOj_ConstantVector.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vGob_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vGob_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsR_Ribbon_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vZsR_Ribbon_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vfHh_Legacy_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vfHh_Legacy_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vkHk_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vkHk_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/wjZZ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/wjZZ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xAlT_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xAlT_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xFbh_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xFbh_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xTR4_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xTR4_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xmJW_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xmJW_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ySDu_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ySDu_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zLtU_Noise_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zLtU_Noise_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zNpM_Mesh_Tinted.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zNpM_Mesh_Tinted.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zQA6_PingPong.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zQA6_PingPong.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zfkR_Sound_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zfkR_Sound_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zgL9_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zgL9_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_import_v1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_import_v1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_hardfix.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_hardfix.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.1.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.1.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.10.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.10.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.11.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.11.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.12.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.12.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.15.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.15.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.16.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.16.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.17.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.17.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.18.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.18.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.19.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.19.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.20.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.20.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.21.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.21.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.22.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.22.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.23.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.23.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.24.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.24.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.4.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.4.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.5.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.5.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.6.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.6.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.7.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.7.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.8.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.8.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.9.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.9.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_builder.o: ../../ExternalLibs/pk_upgraderlib/src/upg_builder.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_axis_system.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_axis_system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_core_upgrade.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_core_upgrade.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_file.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_file.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_material.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_material.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_nodegraph.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_nodegraph.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_script.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_script.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_string.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_string.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_logger.o: ../../ExternalLibs/pk_upgraderlib/src/upg_logger.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_main.o: ../../ExternalLibs/pk_upgraderlib/src/upg_main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_rawfile.o: ../../ExternalLibs/pk_upgraderlib/src/upg_rawfile.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/upg_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),retail_x64)
+$(OBJDIR)/upg_precompiled.o: ../../ExternalLibs/pk_upgraderlib/src/precompiled/upg_precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrades_generated.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrades_generated.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_45754.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.45754/core_upgrader_2_0_0_45754.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_46520.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.46520/core_upgrader_2_0_0_46520.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47147.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47147/core_upgrader_2_0_0_47147.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47887.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47887/core_upgrader_2_0_0_47887.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48439.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48439/core_upgrader_2_0_0_48439.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48597.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48597/core_upgrader_2_0_0_48597.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_49290.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.49290/core_upgrader_2_0_0_49290.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50071/core_upgrader_2_0_0_50071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50306.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50306/core_upgrader_2_0_0_50306.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50392.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50392/core_upgrader_2_0_0_50392.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_51547.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.51547/core_upgrader_2_0_0_51547.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_2_51773.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.2.51773/core_upgrader_2_0_2_51773.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53018.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53018/core_upgrader_2_1_0_53018.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53244.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53244/core_upgrader_2_1_0_53244.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_8984.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.8984/core_upgrader_2_10_0_8984.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9172.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9172/core_upgrader_2_10_0_9172.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9560.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9560/core_upgrader_2_10_0_9560.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9625.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9625/core_upgrader_2_10_0_9625.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9653.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9653/core_upgrader_2_10_0_9653.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_11_0_11056.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.11.0.11056/core_upgrader_2_11_0_11056.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12548.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12548/core_upgrader_2_12_0_12548.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12698.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12698/core_upgrader_2_12_0_12698.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_13_0_13590.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.13.0.13590/core_upgrader_2_13_0_13590.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14494.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14494/core_upgrader_2_14_0_14494.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14605.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14605/core_upgrader_2_14_0_14605.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15495.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15495/core_upgrader_2_15_0_15495.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15714/core_upgrader_2_15_0_15714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16433.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16433/core_upgrader_2_16_0_16433.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16626.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16626/core_upgrader_2_16_0_16626.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16685.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16685/core_upgrader_2_16_0_16685.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16701.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16701/core_upgrader_2_16_0_16701.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17463.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17463/core_upgrader_2_17_0_17463.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17579.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17579/core_upgrader_2_17_0_17579.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17673.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17673/core_upgrader_2_17_0_17673.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18518.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18518/core_upgrader_2_18_0_18518.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18710.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18710/core_upgrader_2_18_0_18710.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18748.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18748/core_upgrader_2_18_0_18748.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18759.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18759/core_upgrader_2_18_0_18759.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20350.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20350/core_upgrader_2_19_0_20350.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20470.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20470/core_upgrader_2_19_0_20470.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20475.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20475/core_upgrader_2_19_0_20475.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20538.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20538/core_upgrader_2_19_0_20538.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20545.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20545/core_upgrader_2_19_0_20545.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20554.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20554/core_upgrader_2_19_0_20554.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20558.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20558/core_upgrader_2_19_0_20558.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_20910.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.20910/core_upgrader_2_20_0_20910.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21121.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21121/core_upgrader_2_20_0_21121.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21896.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21896/core_upgrader_2_20_0_21896.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_1_21978.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.1.21978/core_upgrader_2_20_1_21978.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22636.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22636/core_upgrader_2_21_0_22636.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22818.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22818/core_upgrader_2_21_0_22818.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23751.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23751/core_upgrader_2_22_0_23751.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23868.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23868/core_upgrader_2_22_0_23868.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25019.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25019/core_upgrader_2_23_0_25019.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25047.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25047/core_upgrader_2_23_0_25047.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25065.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25065/core_upgrader_2_23_0_25065.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25771.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25771/core_upgrader_2_24_0_25771.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25832.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25832/core_upgrader_2_24_0_25832.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_26241.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.26241/core_upgrader_2_24_0_26241.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59175.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59175/core_upgrader_2_3_0_59175.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59344.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59344/core_upgrader_2_3_0_59344.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61372.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61372/core_upgrader_2_4_0_61372.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61427.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61427/core_upgrader_2_4_0_61427.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61613.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61613/core_upgrader_2_4_0_61613.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_5_0_63107.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.5.0.63107/core_upgrader_2_5_0_63107.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64722.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64722/core_upgrader_2_6_0_64722.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64941.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64941/core_upgrader_2_6_0_64941.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_7_0_835.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.7.0.835/core_upgrader_2_7_0_835.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3675.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3675/core_upgrader_2_8_0_3675.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3864.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3864/core_upgrader_2_8_0_3864.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_4071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.4071/core_upgrader_2_8_0_4071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6358.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6358/core_upgrader_2_9_0_6358.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6714/core_upgrader_2_9_0_6714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1s9V_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/1s9V_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2Bh4_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2Bh4_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2OpI_Color.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2OpI_Color.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3I5R_Color_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/3I5R_Color_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4yEw_Samplers.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/4yEw_Samplers.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7HQR_Legacy_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7HQR_Legacy_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7cjK_Core_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7cjK_Core_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CSip_Classic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/CSip_Classic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FHih_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FHih_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FO9q_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FO9q_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GLGX_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/GLGX_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HbBl_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/HbBl_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Hsaq_Events_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Hsaq_Events_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IBDN_Samplers_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IBDN_Samplers_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IGtI_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IGtI_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JDoa_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/JDoa_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/K42Z_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/K42Z_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LXOn_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/LXOn_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MTie_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MTie_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MmWQ_Utils_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MmWQ_Utils_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Mwao_Legacy.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Mwao_Legacy.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q4P5_AssetGenerators.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Q4P5_AssetGenerators.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QxEW_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/QxEW_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/SayE_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/SayE_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/TZEH_Trails_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/TZEH_Trails_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/U0f4_CurvePresets_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/U0f4_CurvePresets_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UfZf_Debug.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/UfZf_Debug.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/W9iC_CurvePresets.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/W9iC_CurvePresets.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XwPE_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/XwPE_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbyT_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/YbyT_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Z5fe_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Z5fe_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/a4sE_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/a4sE_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/b78S_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/b78S_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/c6w8_Placement.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/c6w8_Placement.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cZ8S_Debug_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/cZ8S_Debug_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ihBc_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ihBc_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kiJ2_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/kiJ2_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l6KV_Events.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/l6KV_Events.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mh4F_Dynamics.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/mh4F_Dynamics.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qQJQ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/qQJQ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rbR1_Utils.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rbR1_Utils.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rqKe_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rqKe_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sLBf_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/sLBf_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uDhK_Core.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uDhK_Core.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uFyX_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uFyX_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsx_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vZsx_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vc0t_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vc0t_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/waqm_Placement_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/waqm_Placement_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/xnTO_Dynamics_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ykcF_Trails.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ykcF_Trails.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/00dj_ConstantColor.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/00dj_ConstantColor.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/0kYk_Editor_2.9.0.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/0kYk_Editor_2.9.0.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1UDj_Decal_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1UDj_Decal_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1xZV_ExDecal_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1xZV_ExDecal_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/28st_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/28st_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/37Xi_MeshAnim.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/37Xi_MeshAnim.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3xud_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/3xud_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4GsL_ExMesh_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4GsL_ExMesh_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4YDO_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4YDO_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4xZI_ExRibbon_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4xZI_ExRibbon_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6QZI_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6QZI_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6RYl_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6RYl_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6cc6_Utils.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6cc6_Utils.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7G2Q_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7G2Q_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7PF5_SoundMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7PF5_SoundMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8DXU_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8DXU_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8Fdl_Legacy_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8Fdl_Legacy_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8db4_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8db4_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/98xY_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/98xY_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/996O_ExTriangle_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/996O_ExTriangle_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9aOq_Billboard_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9aOq_Billboard_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9ehc_Legacy_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9ehc_Legacy_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9rBt_Legacy_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9rBt_Legacy_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/A5Bd_RibbonMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/A5Bd_RibbonMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AVr7_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/AVr7_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BA3z_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BA3z_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BdoJ_Opaque_Triangle.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BdoJ_Opaque_Triangle.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BtJA_Triangle_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BtJA_Triangle_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/C3ck_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/C3ck_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CRKZ_Font.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CRKZ_Font.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CdlR_BillboardMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CdlR_BillboardMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DaPU_Ribbon_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DaPU_Ribbon_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DizI_Default.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DizI_Default.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ed4Q_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ed4Q_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/EpeO_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/EpeO_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/F4z6_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/F4z6_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FCJV_Editor.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FCJV_Editor.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FRv3_ExRibbon_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FRv3_ExRibbon_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FXZZ_DecalMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FXZZ_DecalMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Fc6U_LightMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Fc6U_LightMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GYYL_ExLight_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/GYYL_ExLight_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gtt8_ExSound_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gtt8_ExSound_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gzic_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gzic_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/H4f2_Blur.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/H4f2_Blur.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HSQU_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/HSQU_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I3R2_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I3R2_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I63W_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I63W_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ILrB_ExRibbon_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ILrB_ExRibbon_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Irti_Circle.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Irti_Circle.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JSFk_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JSFk_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtCS_ExBillboard_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtCS_ExBillboard_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtQC_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtQC_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KMEO_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KMEO_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KfZ2_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KfZ2_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KyUa_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KyUa_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIlG_SkeletalAnimationTexture.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIlG_SkeletalAnimationTexture.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIpN_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIpN_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LLcC_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LLcC_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LRz5_ExTriangle_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LRz5_ExTriangle_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LWg5_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LWg5_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LaF2_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LaF2_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LjPK_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LjPK_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LuXO_ExBillboard_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LuXO_ExBillboard_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LxrX_Legacy.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LxrX_Legacy.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MlCD_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MlCD_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MzN9_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MzN9_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/NMEz_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/NMEz_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ntyi_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ntyi_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Oh1K_TriangleMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Oh1K_TriangleMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PALN_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PALN_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PSm9_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PSm9_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PlBH_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PlBH_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q9dG_AnimatedMesh.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Q9dG_AnimatedMesh.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/QJve_Legacy_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Qfpp_ExMesh_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/R9Pa_Triangle_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/S9it_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/S9it_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Sjzi_BAT.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Sjzi_BAT.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/USnb_FeatureTransformedNoises.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/USnb_FeatureTransformedNoises.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/V1wW_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/V1wW_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VN0Q_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VP1n_MeshMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VP1n_MeshMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ViaO_Substance.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ViaO_Substance.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WES9_VectorGraph.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WES9_VectorGraph.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WloZ_Legacy_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WwnR_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WwnR_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Wx91_ExRibbon_CD_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Wx91_ExRibbon_CD_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XSLy_ExBillboard_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XSLy_ExBillboard_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XeEd_ExRibbon_CD_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XeEd_ExRibbon_CD_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XqLq_Circle.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XqLq_Circle.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Y00z_ExRibbon_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Y00z_ExRibbon_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YMTO_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YMTO_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YW7Q_FeatureAlphaMasks.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YW7Q_FeatureAlphaMasks.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbjT_ExRibbon_CD_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YbjT_ExRibbon_CD_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZAxG_Legacy_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZAxG_Legacy_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Zbwf_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Zbwf_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZfpQ_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZfpQ_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aAEj_Legacy_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aAEj_Legacy_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aC9h_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aC9h_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aydX_Experimental.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aydX_Experimental.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bU8i_FeatureUVDistortions.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bU8i_FeatureUVDistortions.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bw4z_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bw4z_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cDF8_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cDF8_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cVPA_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cVPA_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/chrn_Mesh_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/chrn_Mesh_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cjr1_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cjr1_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cvmg_ExTriangle_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cvmg_ExTriangle_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/d1Dp_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/d1Dp_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dGrV_Mesh_Emissive.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dGrV_Mesh_Emissive.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dWRY_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dWRY_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dtGH_Billboard_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dtGH_Billboard_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/e1Q8_ExDecal_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/e1Q8_ExDecal_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eRgs_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eRgs_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eqkz_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eqkz_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/f9Qm_Legacy_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/f9Qm_Legacy_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fC9J_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fC9J_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fDuU_ExRibbon_CD_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fDuU_ExRibbon_CD_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fTEk_ExTriangle_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fTEk_ExTriangle_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gmFL_ExBillboard_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gmFL_ExBillboard_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hTfT_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hTfT_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hYo9_Python.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hYo9_Python.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hkzu_Legacy_Opaque_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hkzu_Legacy_Opaque_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hrRO_Legacy_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hrRO_Legacy_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/htHV_Billboard_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/htHV_Billboard_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/iED0_ExBillboard_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/iED0_ExBillboard_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ivJt_Legacy_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/j3Ha_PingPong.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/j3Ha_PingPong.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jFj7_SimpleSolid.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jFj7_SimpleSolid.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jUul_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jUul_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jW9j_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jW9j_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kTZU_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/kTZU_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l45j_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/l45j_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lCSW_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lCSW_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lPee_ExTriangle_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lYSl_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lYSl_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mYZv_VertexGraph.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mYZv_VertexGraph.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mfOK_Light_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mfOK_Light_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/nPaD_Sphere.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/nPaD_Sphere.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/negz_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/negz_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oMyq_TextureGraph.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oMyq_TextureGraph.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/orAW_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/orAW_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oueu_Triangle_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oueu_Triangle_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/po2N_ExRibbon_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/po2N_ExRibbon_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/poq5_Ribbon_CorrectDeformation_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/poq5_Ribbon_CorrectDeformation_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pqvq_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pqvq_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/psnk_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/psnk_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pyZ4_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pyZ4_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/q2q7_Legacy_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/q2q7_Legacy_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qNc5_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qNc5_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qaey_Legacy_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qaey_Legacy_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qfzW_ExMesh_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qfzW_ExMesh_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzT2_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzT2_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzyb_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzyb_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rVTR_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/rVTR_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/smkz_Ribbon_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/smkz_Ribbon_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/soLj_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/soLj_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sqvk_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/sqvk_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ssqy_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ssqy_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/t4TY_FeatureFastLit.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/t4TY_FeatureFastLit.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/u9nV_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/u9nV_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uBkt_Mesh_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uBkt_Mesh_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uLY4_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uLY4_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uSpK_Billboard_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uSpK_Billboard_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uUg2_Ribbon_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uUg2_Ribbon_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uXep_ExRibbon_CD_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uXep_ExRibbon_CD_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ud8g_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ud8g_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ufOj_ConstantVector.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ufOj_ConstantVector.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vGob_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vGob_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsR_Ribbon_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vZsR_Ribbon_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vfHh_Legacy_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vfHh_Legacy_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vkHk_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vkHk_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/wjZZ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/wjZZ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xAlT_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xAlT_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xFbh_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xFbh_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xTR4_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xTR4_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xmJW_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xmJW_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ySDu_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ySDu_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zLtU_Noise_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zLtU_Noise_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zNpM_Mesh_Tinted.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zNpM_Mesh_Tinted.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zQA6_PingPong.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zQA6_PingPong.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zfkR_Sound_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zfkR_Sound_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zgL9_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zgL9_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_import_v1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_import_v1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_hardfix.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_hardfix.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.1.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.1.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.10.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.10.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.11.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.11.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.12.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.12.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.15.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.15.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.16.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.16.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.17.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.17.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.18.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.18.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.19.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.19.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.20.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.20.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.21.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.21.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.22.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.22.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.23.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.23.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.24.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.24.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.4.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.4.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.5.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.5.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.6.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.6.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.7.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.7.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.8.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.8.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.9.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.9.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_builder.o: ../../ExternalLibs/pk_upgraderlib/src/upg_builder.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_axis_system.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_axis_system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_core_upgrade.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_core_upgrade.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_file.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_file.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_material.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_material.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_nodegraph.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_nodegraph.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_script.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_script.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_string.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_string.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_logger.o: ../../ExternalLibs/pk_upgraderlib/src/upg_logger.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_main.o: ../../ExternalLibs/pk_upgraderlib/src/upg_main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_rawfile.o: ../../ExternalLibs/pk_upgraderlib/src/upg_rawfile.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/upg_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),retail_arm64)
+$(OBJDIR)/upg_precompiled.o: ../../ExternalLibs/pk_upgraderlib/src/precompiled/upg_precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrades_generated.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/CoreUpgrades/core_upgrades_generated.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_45754.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.45754/core_upgrader_2_0_0_45754.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_46520.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.46520/core_upgrader_2_0_0_46520.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47147.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47147/core_upgrader_2_0_0_47147.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_47887.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.47887/core_upgrader_2_0_0_47887.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48439.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48439/core_upgrader_2_0_0_48439.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_48597.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.48597/core_upgrader_2_0_0_48597.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_49290.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.49290/core_upgrader_2_0_0_49290.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50071/core_upgrader_2_0_0_50071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50306.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50306/core_upgrader_2_0_0_50306.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_50392.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.50392/core_upgrader_2_0_0_50392.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_0_51547.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.0.51547/core_upgrader_2_0_0_51547.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_0_2_51773.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.0.2.51773/core_upgrader_2_0_2_51773.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53018.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53018/core_upgrader_2_1_0_53018.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_1_0_53244.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.1.0.53244/core_upgrader_2_1_0_53244.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_8984.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.8984/core_upgrader_2_10_0_8984.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9172.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9172/core_upgrader_2_10_0_9172.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9560.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9560/core_upgrader_2_10_0_9560.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9625.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9625/core_upgrader_2_10_0_9625.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_10_0_9653.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.10.0.9653/core_upgrader_2_10_0_9653.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_11_0_11056.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.11.0.11056/core_upgrader_2_11_0_11056.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12548.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12548/core_upgrader_2_12_0_12548.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_12_0_12698.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.12.0.12698/core_upgrader_2_12_0_12698.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_13_0_13590.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.13.0.13590/core_upgrader_2_13_0_13590.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14494.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14494/core_upgrader_2_14_0_14494.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_14_0_14605.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.14.0.14605/core_upgrader_2_14_0_14605.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15495.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15495/core_upgrader_2_15_0_15495.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_15_0_15714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.15.0.15714/core_upgrader_2_15_0_15714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16433.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16433/core_upgrader_2_16_0_16433.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16626.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16626/core_upgrader_2_16_0_16626.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16685.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16685/core_upgrader_2_16_0_16685.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_16_0_16701.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.16.0.16701/core_upgrader_2_16_0_16701.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17463.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17463/core_upgrader_2_17_0_17463.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17579.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17579/core_upgrader_2_17_0_17579.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_17_0_17673.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.17.0.17673/core_upgrader_2_17_0_17673.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18518.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18518/core_upgrader_2_18_0_18518.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18710.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18710/core_upgrader_2_18_0_18710.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18748.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18748/core_upgrader_2_18_0_18748.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_18_0_18759.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.18.0.18759/core_upgrader_2_18_0_18759.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20350.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20350/core_upgrader_2_19_0_20350.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20470.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20470/core_upgrader_2_19_0_20470.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20475.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20475/core_upgrader_2_19_0_20475.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20538.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20538/core_upgrader_2_19_0_20538.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20545.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20545/core_upgrader_2_19_0_20545.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20554.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20554/core_upgrader_2_19_0_20554.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_19_0_20558.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.19.0.20558/core_upgrader_2_19_0_20558.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_2_0_56591.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.2.0.56591/core_upgrader_2_2_0_56591.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_20910.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.20910/core_upgrader_2_20_0_20910.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21121.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21121/core_upgrader_2_20_0_21121.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_0_21896.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.0.21896/core_upgrader_2_20_0_21896.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_20_1_21978.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.20.1.21978/core_upgrader_2_20_1_21978.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22636.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22636/core_upgrader_2_21_0_22636.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_21_0_22818.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.21.0.22818/core_upgrader_2_21_0_22818.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23751.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23751/core_upgrader_2_22_0_23751.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_22_0_23868.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.22.0.23868/core_upgrader_2_22_0_23868.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25019.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25019/core_upgrader_2_23_0_25019.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25047.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25047/core_upgrader_2_23_0_25047.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_23_0_25065.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.23.0.25065/core_upgrader_2_23_0_25065.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25771.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25771/core_upgrader_2_24_0_25771.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_25832.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.25832/core_upgrader_2_24_0_25832.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_24_0_26241.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.24.0.26241/core_upgrader_2_24_0_26241.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59136.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59136/core_upgrader_2_3_0_59136.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59175.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59175/core_upgrader_2_3_0_59175.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_3_0_59344.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.3.0.59344/core_upgrader_2_3_0_59344.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61372.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61372/core_upgrader_2_4_0_61372.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61427.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61427/core_upgrader_2_4_0_61427.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_4_0_61613.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.4.0.61613/core_upgrader_2_4_0_61613.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_5_0_63107.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.5.0.63107/core_upgrader_2_5_0_63107.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64722.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64722/core_upgrader_2_6_0_64722.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_6_0_64941.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.6.0.64941/core_upgrader_2_6_0_64941.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_7_0_835.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.7.0.835/core_upgrader_2_7_0_835.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3675.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3675/core_upgrader_2_8_0_3675.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_3864.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.3864/core_upgrader_2_8_0_3864.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_8_0_4071.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.8.0.4071/core_upgrader_2_8_0_4071.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6358.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6358/core_upgrader_2_9_0_6358.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/core_upgrader_2_9_0_6714.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/2.9.0.6714/core_upgrader_2_9_0_6714.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1s9V_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/1s9V_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2Bh4_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2Bh4_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/2OpI_Color.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/2OpI_Color.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3I5R_Color_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/3I5R_Color_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4yEw_Samplers.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/4yEw_Samplers.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7HQR_Legacy_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7HQR_Legacy_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7cjK_Core_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/7cjK_Core_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CSip_Classic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/CSip_Classic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FHih_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FHih_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FO9q_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/FO9q_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GLGX_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/GLGX_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HbBl_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/HbBl_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Hsaq_Events_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Hsaq_Events_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IBDN_Samplers_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IBDN_Samplers_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/IGtI_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/IGtI_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JDoa_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/JDoa_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/K42Z_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/K42Z_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LXOn_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/LXOn_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MTie_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MTie_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MmWQ_Utils_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/MmWQ_Utils_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Mwao_Legacy.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Mwao_Legacy.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q4P5_AssetGenerators.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Q4P5_AssetGenerators.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QxEW_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/QxEW_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/SayE_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/SayE_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/TZEH_Trails_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/TZEH_Trails_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/U0f4_CurvePresets_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/U0f4_CurvePresets_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/UfZf_Debug.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/UfZf_Debug.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/W9iC_CurvePresets.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/W9iC_CurvePresets.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XwPE_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/XwPE_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbyT_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/YbyT_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Z5fe_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/Z5fe_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/a4sE_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/a4sE_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/b78S_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/b78S_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/c6w8_Placement.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/c6w8_Placement.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cZ8S_Debug_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/cZ8S_Debug_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ihBc_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ihBc_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kiJ2_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/kiJ2_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l6KV_Events.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/l6KV_Events.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mh4F_Dynamics.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/mh4F_Dynamics.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qQJQ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/qQJQ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rbR1_Utils.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rbR1_Utils.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rqKe_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/rqKe_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sLBf_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/sLBf_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uDhK_Core.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uDhK_Core.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uFyX_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/uFyX_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsx_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vZsx_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vc0t_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/vc0t_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/waqm_Placement_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/waqm_Placement_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xnTO_Dynamics_2.9.0.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/xnTO_Dynamics_2.9.0.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ykcF_Trails.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/Upgrades/ykcF_Trails.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/00dj_ConstantColor.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/00dj_ConstantColor.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/0kYk_Editor_2.9.0.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/0kYk_Editor_2.9.0.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1UDj_Decal_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1UDj_Decal_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/1xZV_ExDecal_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/1xZV_ExDecal_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/28st_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/28st_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/37Xi_MeshAnim.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/37Xi_MeshAnim.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/3xud_White.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/3xud_White.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4GsL_ExMesh_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4GsL_ExMesh_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4YDO_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4YDO_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/4xZI_ExRibbon_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/4xZI_ExRibbon_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6QZI_SampleLibSettings.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6QZI_SampleLibSettings.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6RYl_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6RYl_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/6cc6_Utils.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/6cc6_Utils.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7G2Q_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7G2Q_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/7PF5_SoundMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/7PF5_SoundMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8DXU_Opaque_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8DXU_Opaque_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8Fdl_Legacy_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8Fdl_Legacy_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/8db4_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/8db4_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/98xY_PKLighting.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/98xY_PKLighting.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/996O_ExTriangle_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/996O_ExTriangle_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9aOq_Billboard_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9aOq_Billboard_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9ehc_Legacy_Transparent_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9ehc_Legacy_Transparent_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/9rBt_Legacy_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/9rBt_Legacy_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/A5Bd_RibbonMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/A5Bd_RibbonMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/AVr7_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/AVr7_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BA3z_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BA3z_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BdoJ_Opaque_Triangle.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BdoJ_Opaque_Triangle.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/BtJA_Triangle_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/BtJA_Triangle_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/C3ck_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/C3ck_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CRKZ_Font.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CRKZ_Font.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/CdlR_BillboardMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/CdlR_BillboardMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DaPU_Ribbon_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DaPU_Ribbon_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/DizI_Default.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/DizI_Default.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ed4Q_FX_Simple.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ed4Q_FX_Simple.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/EpeO_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/EpeO_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/F4z6_Animated_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/F4z6_Animated_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FCJV_Editor.pkbo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FCJV_Editor.pkbo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FRv3_ExRibbon_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FRv3_ExRibbon_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/FXZZ_DecalMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/FXZZ_DecalMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Fc6U_LightMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Fc6U_LightMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/GYYL_ExLight_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/GYYL_ExLight_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gtt8_ExSound_Default.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gtt8_ExSound_Default.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Gzic_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Gzic_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/H4f2_Blur.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/H4f2_Blur.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/HSQU_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/HSQU_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I3R2_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I3R2_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/I63W_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/I63W_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ILrB_ExRibbon_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ILrB_ExRibbon_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Irti_Circle.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Irti_Circle.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JSFk_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JSFk_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtCS_ExBillboard_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtCS_ExBillboard_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/JtQC_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/JtQC_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KMEO_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KMEO_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KfZ2_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KfZ2_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/KyUa_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/KyUa_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIlG_SkeletalAnimationTexture.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIlG_SkeletalAnimationTexture.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LIpN_Default_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LIpN_Default_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LLcC_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LLcC_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LRz5_ExTriangle_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LRz5_ExTriangle_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LWg5_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LWg5_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LaF2_Distortion_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LaF2_Distortion_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LjPK_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LjPK_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LuXO_ExBillboard_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LuXO_ExBillboard_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LxrX_Legacy.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/LxrX_Legacy.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MlCD_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MlCD_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MzN9_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/MzN9_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/NMEz_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/NMEz_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Ntyi_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Ntyi_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Oh1K_TriangleMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Oh1K_TriangleMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PALN_PKOutputColor.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PALN_PKOutputColor.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PSm9_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PSm9_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/PlBH_Default_Decal.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/PlBH_Default_Decal.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Q9dG_AnimatedMesh.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Q9dG_AnimatedMesh.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/QJve_Legacy_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/QJve_Legacy_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Qfpp_ExMesh_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Qfpp_ExMesh_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/R9Pa_Triangle_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/R9Pa_Triangle_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/S9it_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/S9it_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Sjzi_BAT.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Sjzi_BAT.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/USnb_FeatureTransformedNoises.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/USnb_FeatureTransformedNoises.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/V1wW_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/V1wW_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VN0Q_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VN0Q_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/VP1n_MeshMaterial.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/VP1n_MeshMaterial.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ViaO_Substance.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ViaO_Substance.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WES9_VectorGraph.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WES9_VectorGraph.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WloZ_Legacy_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WloZ_Legacy_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WwnR_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/WwnR_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Wx91_ExRibbon_CD_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Wx91_ExRibbon_CD_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XSLy_ExBillboard_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XSLy_ExBillboard_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XeEd_ExRibbon_CD_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XeEd_ExRibbon_CD_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/XqLq_Circle.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/XqLq_Circle.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Y00z_ExRibbon_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Y00z_ExRibbon_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YMTO_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YMTO_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YW7Q_FeatureAlphaMasks.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YW7Q_FeatureAlphaMasks.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/YbjT_ExRibbon_CD_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/YbjT_ExRibbon_CD_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZAxG_Legacy_Default_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZAxG_Legacy_Default_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/Zbwf_NMap_Flat.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/Zbwf_NMap_Flat.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ZfpQ_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ZfpQ_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aAEj_Legacy_Opaque_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aAEj_Legacy_Opaque_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aC9h_FeatureDiffuse.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aC9h_FeatureDiffuse.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/aydX_Experimental.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/aydX_Experimental.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bU8i_FeatureUVDistortions.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bU8i_FeatureUVDistortions.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/bw4z_Distortion_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/bw4z_Distortion_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cDF8_Decal_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cDF8_Decal_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cVPA_Black.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cVPA_Black.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/chrn_Mesh_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/chrn_Mesh_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cjr1_FeatureRibbonCorrectDeformation.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cjr1_FeatureRibbonCorrectDeformation.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cpSF_Ribbon_CorrectDeformation_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/cvmg_ExTriangle_Tinted.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/cvmg_ExTriangle_Tinted.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/d1Dp_FeatureDistortion.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/d1Dp_FeatureDistortion.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dGrV_Mesh_Emissive.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dGrV_Mesh_Emissive.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dWRY_Editor.pkri.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dWRY_Editor.pkri.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/dtGH_Billboard_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/dtGH_Billboard_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/e1Q8_ExDecal_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/e1Q8_ExDecal_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eRgs_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eRgs_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/eqkz_Default_Decal.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/eqkz_Default_Decal.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/f9Qm_Legacy_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/f9Qm_Legacy_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fC9J_Diffuse.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fC9J_Diffuse.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fDuU_ExRibbon_CD_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fDuU_ExRibbon_CD_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/fTEk_ExTriangle_Diffuse.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/fTEk_ExTriangle_Diffuse.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gmFL_ExBillboard_Emissive.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gmFL_ExBillboard_Emissive.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/gsmS_Ribbon_CorrectDeformation_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hTfT_Default_Light.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hTfT_Default_Light.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hYo9_Python.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hYo9_Python.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hkzu_Legacy_Opaque_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hkzu_Legacy_Opaque_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/hrRO_Legacy_Opaque_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/hrRO_Legacy_Opaque_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/htHV_Billboard_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/htHV_Billboard_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/iED0_ExBillboard_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/iED0_ExBillboard_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ivJt_Legacy_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ivJt_Legacy_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/j3Ha_PingPong.pkcf.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/j3Ha_PingPong.pkcf.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jFj7_SimpleSolid.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jFj7_SimpleSolid.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jUul_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jUul_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/jW9j_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/jW9j_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kTZU_FeatureDecal.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/kTZU_FeatureDecal.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/l45j_FeatureEmissive.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/l45j_FeatureEmissive.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lCSW_Light_Default.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lCSW_Light_Default.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lPee_ExTriangle_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lPee_ExTriangle_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/lYSl_Opaque_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/lYSl_Opaque_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mYZv_VertexGraph.pkgo.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mYZv_VertexGraph.pkgo.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/mfOK_Light_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/mfOK_Light_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/nPaD_Sphere.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/nPaD_Sphere.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/negz_Default_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/negz_Default_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oMyq_TextureGraph.pktx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oMyq_TextureGraph.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/orAW_Default_Decal.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/orAW_Default_Decal.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/oueu_Triangle_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/oueu_Triangle_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/po2N_ExRibbon_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/po2N_ExRibbon_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/poq5_Ribbon_CorrectDeformation_Transparent.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/poq5_Ribbon_CorrectDeformation_Transparent.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pqvq_Light_Default.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pqvq_Light_Default.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/psnk_Default_Mesh.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/psnk_Default_Mesh.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/pyZ4_FeatureSoftParticles.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/pyZ4_FeatureSoftParticles.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/q2q7_Legacy_Default_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/q2q7_Legacy_Default_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qNc5_Particle_Master.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qNc5_Particle_Master.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qaey_Legacy_Distortion_Billboard.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qaey_Legacy_Distortion_Billboard.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qfzW_ExMesh_Opaque.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qfzW_ExMesh_Opaque.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzT2_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzT2_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/qzyb_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/qzyb_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/rVTR_Default_Light.vert.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/rVTR_Default_Light.vert.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/smkz_Ribbon_AnimatedMasked.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/smkz_Ribbon_AnimatedMasked.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/soLj_FeatureTint.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/soLj_FeatureTint.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/sqvk_Default_Light.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/sqvk_Default_Light.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ssqy_Default_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ssqy_Default_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/t4TY_FeatureFastLit.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/t4TY_FeatureFastLit.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/tOYm_Atlas.pktx1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/tOYm_Atlas.pktx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/u9nV_Distortion_Ribbon.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/u9nV_Distortion_Ribbon.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uBkt_Mesh_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uBkt_Mesh_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uLY4_Default_Triangle.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uLY4_Default_Triangle.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uSpK_Billboard_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uSpK_Billboard_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uUg2_Ribbon_Opaque.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uUg2_Ribbon_Opaque.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/uXep_ExRibbon_CD_Distortion.pkma.1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/uXep_ExRibbon_CD_Distortion.pkma.1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ud8g_FeatureAtlas.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ud8g_FeatureAtlas.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ufOj_ConstantVector.pkvx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ufOj_ConstantVector.pkvx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vGob_Default_Ribbon.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vGob_Default_Ribbon.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vZsR_Ribbon_Distortion.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vZsR_Ribbon_Distortion.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vfHh_Legacy_Default_Sound.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vfHh_Legacy_Default_Sound.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/vkHk_Opaque_Triangle.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/vkHk_Opaque_Triangle.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/wjZZ_Distort.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/wjZZ_Distort.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xAlT_Basic.pkfx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xAlT_Basic.pkfx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xFbh_FeatureDithering.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xFbh_FeatureDithering.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xTR4_PKSurface.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xTR4_PKSurface.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/xmJW_Default_AlphaMap.dds.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/xmJW_Default_AlphaMap.dds.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ySDu_FeatureTransformUVs.h.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/ySDu_FeatureTransformUVs.h.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zLtU_Noise_Billboard.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zLtU_Noise_Billboard.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zNpM_Mesh_Tinted.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zNpM_Mesh_Tinted.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zQA6_PingPong.fbx.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zQA6_PingPong.fbx.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zfkR_Sound_Default.pkma.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zfkR_Sound_Default.pkma.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zgL9_Transparent_Mesh.frag.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/Upgrades/zgL9_Transparent_Mesh.frag.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/manifest1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/Data/PopcornFXEditorCore/manifest.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_import_v1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_import_v1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_hardfix.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_hardfix.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v1.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v1.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_alpha4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_alpha4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta1.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta1.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta2.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta2.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta3.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta3.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.0.0_beta4.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.0.0_beta4.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.1.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.1.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.10.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.10.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.11.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.11.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.12.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.12.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.13.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.13.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.14.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.14.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.15.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.15.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.16.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.16.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.17.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.17.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.18.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.18.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.19.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.19.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.2.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.2.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.20.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.20.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.21.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.21.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.22.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.22.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.23.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.23.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.24.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.24.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.3.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.3.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.4.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.4.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.5.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.5.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.6.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.6.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.7.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.7.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.8.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.8.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrades_v2.9.0.o: ../../ExternalLibs/pk_upgraderlib/src/Upgrades/upg_upgrades_v2.9.0.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_builder.o: ../../ExternalLibs/pk_upgraderlib/src/upg_builder.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_axis_system.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_axis_system.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_core_upgrade.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_core_upgrade.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_file.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_file.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_material.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_material.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_nodegraph.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_nodegraph.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_script.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_script.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_helper_string.o: ../../ExternalLibs/pk_upgraderlib/src/upg_helper_string.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_logger.o: ../../ExternalLibs/pk_upgraderlib/src/upg_logger.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_main.o: ../../ExternalLibs/pk_upgraderlib/src/upg_main.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_rawfile.o: ../../ExternalLibs/pk_upgraderlib/src/upg_rawfile.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/upg_upgrader.o: ../../ExternalLibs/pk_upgraderlib/src/upg_upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+#else
+#  $(error "invalid configuration $(config)")
+endif
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

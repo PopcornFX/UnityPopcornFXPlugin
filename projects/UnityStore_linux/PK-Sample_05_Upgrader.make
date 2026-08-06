@@ -48,8 +48,8 @@ TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_d
 OBJDIR = ../intermediate/UnityStore/GM/x64/Debug/PK-Sample_05_Upgrader
 DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=0
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_d.a -lPK-Plugin_CodecImage_PKIM_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -lbfd -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_d.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -Wl,--no-as-needed
@@ -70,8 +70,8 @@ TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_d
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-Sample_05_Upgrader
 DEFINES += -D_DEBUG -DPK_USE_RENDER_HELPERS=0
 FORCE_INCLUDE +=
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -ggdb -pipe -target aarch64-linux-gnu
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64/libPK-UpgraderLib_d.a -lPK-Plugin_CodecImage_PKIM_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-ParticlesToolbox_d -lPK-Runtime_d -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64/libPK-UpgraderLib_d.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64 -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
@@ -92,8 +92,8 @@ TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_r
 OBJDIR = ../intermediate/UnityStore/GM/x64/Release/PK-Sample_05_Upgrader
 DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=0
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_r.a -lPK-Plugin_CodecImage_PKIM_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -lbfd -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_r.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -Wl,--no-as-needed
@@ -114,8 +114,8 @@ TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_r
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-Sample_05_Upgrader
 DEFINES += -DNDEBUG -DPK_USE_RENDER_HELPERS=0
 FORCE_INCLUDE +=
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64/libPK-UpgraderLib_r.a -lPK-Plugin_CodecImage_PKIM_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-ParticlesToolbox_r -lPK-Runtime_r -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64/libPK-UpgraderLib_r.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64 -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
@@ -136,8 +136,8 @@ TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_s
 OBJDIR = ../intermediate/UnityStore/GM/x64/Retail/PK-Sample_05_Upgrader
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_USE_RENDER_HELPERS=0
 FORCE_INCLUDE += -include ../../ExternalLibs/Runtime/include/pk_linux_glibc2.19_symvers.h
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -msse2 -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -mfpmath=sse
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_s.a -lPK-Plugin_CodecImage_PKIM_s -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -lPK-ParticlesToolbox_s -lPK-Runtime_s -lbfd -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64/libPK-UpgraderLib_s.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_x64 -L/usr/lib64 -m64 -s -Wl,--no-as-needed
@@ -158,8 +158,8 @@ TARGET = $(TARGETDIR)/PK-Sample_05_Upgrader_linux_s
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Retail/PK-Sample_05_Upgrader
 DEFINES += -DNDEBUG -DPK_RETAIL -DPK_USE_RENDER_HELPERS=0
 FORCE_INCLUDE +=
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -Wno-dangling-reference -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 LIBS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64/libPK-UpgraderLib_s.a -lPK-Plugin_CodecImage_PKIM_s -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -lPK-ParticlesToolbox_s -lPK-Runtime_s -ldl -lpthread -lm -lz
 LDDEPS += ../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64/libPK-UpgraderLib_s.a
 ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_linux_ARM64 -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
@@ -171,7 +171,8 @@ endif
 # Per File Configurations
 # #############################################
 
-PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden
+PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling-reference
+PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling
 
 # File sets
 # #############################################
@@ -229,6 +230,8 @@ endif
 prebuild: | $(OBJDIR)
 	$(PREBUILDCMDS)
 
+
+ifeq ($(config),debug_x64)
 ifneq (,$(PCH))
 $(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
 $(GCH): $(PCH) | prebuild
@@ -245,9 +248,99 @@ $(OBJECTS): | prebuild
 endif
 
 
+else ifeq ($(config),debug_arm64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_1) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),release_x64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_0) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),release_arm64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_1) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),retail_x64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_0) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+else ifeq ($(config),retail_arm64)
+ifneq (,$(PCH))
+$(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
+$(GCH): $(PCH) | prebuild
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -x c++-header $(PERFILE_FLAGS_1) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+$(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
+ifeq (posix,$(SHELLTYPE))
+	$(SILENT) touch "$@"
+else
+	$(SILENT) echo $null >> "$@"
+endif
+else
+$(OBJECTS): | prebuild
+endif
+
+
+#else
+#  $(error "invalid configuration $(config)")
+endif
+
 # File Rules
 # #############################################
 
+ifeq ($(config),debug_x64)
 $(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
@@ -257,6 +350,65 @@ $(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/Par
 $(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),debug_arm64)
+$(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_05_Upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),release_x64)
+$(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_05_Upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),release_arm64)
+$(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_05_Upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),retail_x64)
+$(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_05_Upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_0) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+else ifeq ($(config),retail_arm64)
+$(OBJDIR)/FxStartup.o: ../../Native/Common/PKFX/FxStartup.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/ParticleSample_05_Upgrader.o: ../../SDK/Samples/ParticleSample/src/ParticleSample_05_Upgrader.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/precompiled.o: ../../SDK/Samples/ParticleSample/src/precompiled.cpp
+	@echo "$(notdir $<)"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(PERFILE_FLAGS_1) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+
+#else
+#  $(error "invalid configuration $(config)")
+endif
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

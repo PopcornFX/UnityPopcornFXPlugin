@@ -161,7 +161,7 @@ endif
 # Per File Configurations
 # #############################################
 
-PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling-reference
+PERFILE_FLAGS_0 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling-reference -Wno-clobbered
 PERFILE_FLAGS_1 = $(ALL_CXXFLAGS) -fvisibility-inlines-hidden -Wno-dangling
 
 # File sets

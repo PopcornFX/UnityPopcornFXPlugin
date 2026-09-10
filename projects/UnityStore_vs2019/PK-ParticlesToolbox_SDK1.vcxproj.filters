@@ -27,6 +27,9 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_effect_analysis.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_effect_disassembler.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_file_helpers.h">
       <Filter>Headers</Filter>
     </ClInclude>

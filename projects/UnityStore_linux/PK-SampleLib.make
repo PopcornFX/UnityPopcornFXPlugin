@@ -160,7 +160,7 @@ INCLUDES += -I../../ExternalLibs/Runtime -I../../ExternalLibs/Runtime/include -I
 FORCE_INCLUDE += -include pk_compiler_warnings.h
 ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
 ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fPIC -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-format-overflow -fno-finite-math-only -fsigned-zeros -fno-associative-math -pipe -target aarch64-linux-gnu
-ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -fuse-ld=lld -target aarch64-linux-gnu
+ALL_LDFLAGS += $(LDFLAGS) -Wl,--no-as-needed -s -fuse-ld=lld -target aarch64-linux-gnu
 
 #else
 #  $(error "invalid configuration $(config)")

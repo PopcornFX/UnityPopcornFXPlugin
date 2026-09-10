@@ -587,11 +587,15 @@ namespace	PKFX
 		else
 			configKernel.m_AddDefaultLogListeners = &AddDefaultLogListenersOverride_NoDefaultLogger;
 
+		static HBO::CSerializerPKBO		kSerializerPKBO;
+#if defined(PK_USE_JSONSERIALIZER)
+		static JsonHBO::CSerializerJSON	kSerializerJSON;
+#endif
 		HBO::ISerializer *serializers[] =
 		{
-			new (HBO::CSerializerPKBO),
+			&kSerializerPKBO,
 #if defined(PK_USE_JSONSERIALIZER)
-			new (JsonHBO::CSerializerJSON),
+			&kSerializerJSON,
 #endif
 		};
 		CPKBaseObject::Config  configBaseObject;
@@ -643,14 +647,6 @@ namespace	PKFX
 		}
 
 		RuntimeShutdown();	// shutdown the modules we were able to load...
-
-		//Delete the serializer overloads
-		if (serializers[0] != null)
-			delete serializers[0];
-#if defined(PK_USE_JSONSERIALIZER)
-		if (serializers[1] != null)
-			delete serializers[1];
-#endif
 		return false;
 	}
 

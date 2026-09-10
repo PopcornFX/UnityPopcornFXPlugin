@@ -383,6 +383,7 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_compile.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_debug_symbols_provider.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_effect_analysis.h" />
+    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_effect_disassembler.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_file_helpers.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_helpers.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_particles_toolbox\include\pt_init.h" />

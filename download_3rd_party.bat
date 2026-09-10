@@ -7,7 +7,7 @@ set OPEN_SOURCE_UNITY_REPO_PATH=%~dp0
 
 bitsadmin /reset
 bitsadmin /create third_party_download
-bitsadmin /addfile third_party_download http://downloads.popcornfx.com/Plugins/ExternalLibs/ExternalLibs_UnityStore_2.24.5-27590_x64_android_ios64_arm64_android64_vs2019_android_ios_macosx_linux.zip "%OPEN_SOURCE_UNITY_REPO_PATH%ExternalLibs.zip"
+bitsadmin /addfile third_party_download http://downloads.popcornfx.com/Plugins/ExternalLibs/ExternalLibs_UnityStore_2.24.6-27934_x64_android64_ios64_android_arm64_android_vs2019_ios_macosx_linux.zip "%OPEN_SOURCE_UNITY_REPO_PATH%ExternalLibs.zip"
 bitsadmin /setpriority third_party_download "FOREGROUND"
 bitsadmin /resume third_party_download
 

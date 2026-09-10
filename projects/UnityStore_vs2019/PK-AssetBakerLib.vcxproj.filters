@@ -126,6 +126,9 @@
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_EffectDisassembler.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -204,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Cookery.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_EffectDisassembler.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\ExternalLibs\PK-AssetBakerLib\AssetBaker_Oven.cpp">

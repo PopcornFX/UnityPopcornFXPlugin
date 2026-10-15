@@ -62,9 +62,9 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64
 TARGET = $(TARGETDIR)/libPK-RenderHelpers_d.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-RenderHelpers_SDK1
 DEFINES += -D_DEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O2 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos12.0
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_x64
@@ -80,9 +80,9 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64
 TARGET = $(TARGETDIR)/libPK-RenderHelpers_r.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-RenderHelpers_SDK1
 DEFINES += -DNDEBUG
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos12.0
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_x64
@@ -98,9 +98,9 @@ TARGETDIR = ../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64
 TARGET = $(TARGETDIR)/libPK-RenderHelpers_s.a
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Retail/PK-RenderHelpers_SDK1
 DEFINES += -DNDEBUG -DPK_RETAIL
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos11.0
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fhonor-infinities -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_LDFLAGS += $(LDFLAGS) -target arm64-apple-macos12.0
 
 #else
 #  $(error "invalid configuration $(config)")

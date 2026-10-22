@@ -167,9 +167,7 @@ void	*CUnityResourceHandlerImage::Load(	const CResourceManager	*resourceManager,
 
 					dstResource->m_OnReloading(dstResource.Get());
 
-					PKSwap(dstResource->m_Flags, resource->m_Flags);
-					PKSwap(dstResource->m_Format, resource->m_Format);
-					PKSwap(dstResource->m_Frames, resource->m_Frames);
+					dstResource->Swap(*resource);
 				}
 			}
 		}
@@ -312,9 +310,7 @@ void	CUnityResourceHandlerImage::BroadcastResourceChanged(const CResourceManager
 
 				//				if (resource != null)
 				{
-					PKSwap(dstImage->m_Flags, resource->m_Flags);
-					PKSwap(dstImage->m_Format, resource->m_Format);
-					PKSwap(dstImage->m_Frames, resource->m_Frames);
+					dstImage->Swap(*resource);
 					dstImage->m_OnReloaded(dstImage);
 				}
 				//				else

@@ -59,10 +59,10 @@ TARGETDIR = ../../../release/builds/ARM64_Samples
 TARGET = $(TARGETDIR)/PK-Sample_03_EngineHooks_macosx_d
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Debug/PK-Sample_03_EngineHooks
 DEFINES += -D_DEBUG -DMACOSX -DPK_USE_RENDER_HELPERS=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -ggdb -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += -lPK-Plugin_CodecImage_PKIM_d -lPK-Plugin_CodecImage_DDS_d -lPK-Plugin_CodecImage_PNG_d -lPK-Plugin_CodecImage_JPG_d -lPK-Plugin_CompilerBackend_CPU_VM_d -lPK-ZLib_d -lPK-ParticlesToolbox_d -lPK-Runtime_d
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64 -target arm64-apple-macos11.0
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64 -target arm64-apple-macos12.0
 
 else ifeq ($(config),release_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
@@ -79,10 +79,10 @@ TARGETDIR = ../../../release/builds/ARM64_Samples
 TARGET = $(TARGETDIR)/PK-Sample_03_EngineHooks_macosx_r
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Release/PK-Sample_03_EngineHooks
 DEFINES += -DNDEBUG -DMACOSX -DPK_USE_RENDER_HELPERS=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fno-omit-frame-pointer -O3 -fno-strict-aliasing -g -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += -lPK-Plugin_CodecImage_PKIM_r -lPK-Plugin_CodecImage_DDS_r -lPK-Plugin_CodecImage_PNG_r -lPK-Plugin_CodecImage_JPG_r -lPK-Plugin_CompilerBackend_CPU_VM_r -lPK-ZLib_r -lPK-ParticlesToolbox_r -lPK-Runtime_r
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64 -target arm64-apple-macos11.0
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64 -target arm64-apple-macos12.0
 
 else ifeq ($(config),retail_x64)
 TARGETDIR = ../../../release/builds/x64_Samples
@@ -99,10 +99,10 @@ TARGETDIR = ../../../release/builds/ARM64_Samples
 TARGET = $(TARGETDIR)/PK-Sample_03_EngineHooks_macosx_s
 OBJDIR = ../intermediate/UnityStore/GM/ARM64/Retail/PK-Sample_03_EngineHooks
 DEFINES += -DNDEBUG -DPK_RETAIL -DMACOSX -DPK_USE_RENDER_HELPERS=0
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos11.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -Wundef -ffast-math -fomit-frame-pointer -O3 -fno-strict-aliasing -fvisibility=hidden -Wall -Wextra -std=gnu++0x -fno-exceptions -fno-rtti -Winvalid-pch -Wno-pragma-pack -fno-finite-math-only -fsigned-zeros -mrecip=!sqrt -target arm64-apple-macos12.0 -iwithsysroot `xcrun --show-sdk-path`
 LIBS += -lPK-Plugin_CodecImage_PKIM_s -lPK-Plugin_CodecImage_DDS_s -lPK-Plugin_CodecImage_PNG_s -lPK-Plugin_CodecImage_JPG_s -lPK-Plugin_CompilerBackend_CPU_VM_s -lPK-ZLib_s -lPK-ParticlesToolbox_s -lPK-Runtime_s
-ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64 -target arm64-apple-macos11.0
+ALL_LDFLAGS += $(LDFLAGS) -L../../ExternalLibs/Runtime/bin/UnityStore/gmake_macosx_ARM64 -target arm64-apple-macos12.0
 
 #else
 #  $(error "invalid configuration $(config)")

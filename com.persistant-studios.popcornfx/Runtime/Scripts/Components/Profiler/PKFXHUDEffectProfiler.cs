@@ -232,7 +232,7 @@ namespace PopcornFX
 				return ((calculationTime / 1e-3).ToString("F2").Replace(',', '.') + " ms");
 			// micro : 10e-6
 			if (calculationTime > 1e-7)
-				return ((calculationTime / 1e-6).ToString("F2").Replace(',', '.') + " �s");
+				return ((calculationTime / 1e-6).ToString("F2").Replace(',', '.') + " µs");
 			// nano : 10e-9
 			if (calculationTime > 1e-10)
 				return ((calculationTime / 1e-9).ToString("F2").Replace(',', '.') + " ns");

@@ -467,7 +467,7 @@ public:
 	SUnityMeshInfo								m_UnityMeshInfo;
 
 	bool										m_HasCustomMat;
-	int											m_CustomMatID;
+	s64											m_CustomMatID;
 	unsigned int								m_UID;
 };
 PK_DECLARE_REFPTRCLASS(UnityRendererCache);

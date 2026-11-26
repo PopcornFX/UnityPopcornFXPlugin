@@ -409,7 +409,11 @@ namespace PopcornFX
 					}
 
 					//Clear FxName, Attributes and Samplers if the asset is None
+#if UNITY_6000_4_OR_NEWER
+					if (m_FxAsset.objectReferenceEntityIdValue.Equals(EntityId.None))
+#else
 					if (m_FxAsset.objectReferenceInstanceIDValue == 0)
+#endif
 					{
 						m_FxAttributesDesc.ClearArray();
 						m_FxAttributesStartValues.ClearArray();

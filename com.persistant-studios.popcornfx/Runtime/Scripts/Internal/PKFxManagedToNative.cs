@@ -11,6 +11,11 @@ using System.Text;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+#if UNITY_6000_4_OR_NEWER
+using PKFxObjectID = UnityEngine.EntityId;
+#else
+using PKFxObjectID = System.Int32;
+#endif
 
 namespace PopcornFX
 {
@@ -400,7 +405,7 @@ namespace PopcornFX
 		//----------------------------------------------------------------------------
 
 		private const string	m_UnityVersion = "Unity 2019.4 and up";
-		public const string m_PluginVersion = "2.24.8 for " + m_UnityVersion;
+		public const string m_PluginVersion = "2.24.9 for " + m_UnityVersion;
 		public static string	m_CurrentVersionString = "";
 		public static bool		m_IsStarted = false;
 		public static string	m_DistortionLayer = "PopcornFX_Disto";
@@ -428,7 +433,7 @@ namespace PopcornFX
 
 		// Resource dependencies:
 
-		public static Dictionary<int, PKFxAsset> m_Dependencies = new Dictionary<int, PKFxAsset>();
+		public static Dictionary<PKFxObjectID, PKFxAsset> m_Dependencies = new Dictionary<PKFxObjectID, PKFxAsset>();
 		public static Dictionary<string, Texture2D> m_TexDependencies = new Dictionary<string, Texture2D>();
 		public static Dictionary<string, AudioClip> m_SoundDependencies = new Dictionary<string, AudioClip>();
 
@@ -681,6 +686,17 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		private static PKFxObjectID _ObjectID(UnityEngine.Object obj)
+		{
+#if UNITY_6000_4_OR_NEWER
+			return obj.GetEntityId();
+#else
+			return obj.GetInstanceID();
+#endif
+		}
+
+		//----------------------------------------------------------------------------
+
 		private static void WalkDependencies(PKFxEffectAsset fxAsset)
 		{
 			foreach (PKFxEffectAsset.DependencyDesc depDesc in fxAsset.m_Dependencies)
@@ -703,7 +719,7 @@ namespace PopcornFX
 
 				if (depFx != null)
 				{
-					if (m_Dependencies.TryAdd(depFx.GetInstanceID(), depFx))
+					if (m_Dependencies.TryAdd(_ObjectID(depFx), depFx))
 						WalkDependencies(depFx);
 				}
 				else if (depTex != null)
@@ -711,7 +727,7 @@ namespace PopcornFX
 				else if (depAudio != null)
 					m_SoundDependencies.TryAdd(depDesc.m_Path, depAudio);
 				else if (depAsset != null)
-					m_Dependencies.TryAdd(depAsset.GetInstanceID(), depAsset);
+					m_Dependencies.TryAdd(_ObjectID(depAsset), depAsset);
 			}
 		}
 
@@ -724,7 +740,7 @@ namespace PopcornFX
 				var loading = fxToPreload as PKFxAsset;
 				Debug.Assert(fxToPreload.m_Data.Length > 0);
 				Debug.Assert(loading.m_Data.Length > 0);
-				if (m_Dependencies.TryAdd(loading.GetInstanceID(), loading))
+				if (m_Dependencies.TryAdd(_ObjectID(loading), loading))
 					WalkDependencies(fxToPreload);
 				return true;
 			}
@@ -741,7 +757,7 @@ namespace PopcornFX
 			{
 				var loading = mesh as PKFxAsset;
 				Debug.Assert(mesh.m_Data.Length > 0, "scene mesh " + mesh.AssetVirtualPath + " len " + mesh.m_Data.Length);
-				m_Dependencies.TryAdd(loading.GetInstanceID(), loading);
+				m_Dependencies.TryAdd(_ObjectID(loading), loading);
 				return true;
 			}
 			else
@@ -771,7 +787,7 @@ namespace PopcornFX
 			// May be null when recompiling C#
 			if (m_Dependencies != null)
 			{
-				foreach (KeyValuePair<int, PKFxAsset> pair in m_Dependencies)
+				foreach (KeyValuePair<PKFxObjectID, PKFxAsset> pair in m_Dependencies)
 				{
 					if (pair.Value.AssetVirtualPath == path)
 					{

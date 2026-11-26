@@ -386,7 +386,7 @@ extern "C"
 		ManagedBool	*m_UseComputeBuffers;
 
 		ManagedBool	*m_HasCustomMaterial;
-		int			*m_CustomMatID;
+		s64			*m_CustomMatID;
 	};
 
 	//----------------------------------------------------------------------------
@@ -475,7 +475,7 @@ extern "C"
 	void										OnSetDecalsBuffer(void *decalInfos, int count);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr);
-	void										OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID);
+	void										OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, s64 *customMaterialID);
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveRendererBufferInfo(void *delegatePtr);
 	void										OnRetrieveRendererBufferInfo(int rendererGUID, const SRetrieveRendererInfo *info);

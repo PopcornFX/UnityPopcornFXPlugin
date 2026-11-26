@@ -561,15 +561,15 @@ namespace PopcornFX
 			// On last resort: Load via general array of dependencies.
 			if (m_Dependencies != null && PKFxUtils.ArrayContains(s_CustomFileTypes, ext))
 			{
-				foreach (KeyValuePair<int, PKFxAsset> pair in m_Dependencies)
+				foreach (PKFxAsset dependency in m_Dependencies.Values)
 				{
-					string virtualPath = pair.Value.AssetVirtualPath;
+					string virtualPath = dependency.AssetVirtualPath;
 					if (virtualPath == path)
 					{
-						var pinned = PinnedData.PinAsset(pair.Value, path);
+						var pinned = PinnedData.PinAsset(dependency, path);
 						handler = pinned;
 						Debug.LogWarning("[PopcornFX] Perfomance issue: " + path + " found in general dependencies.");
-						return (ulong)pair.Value.m_Data.Length;
+						return (ulong)dependency.m_Data.Length;
 					}
 				}
 			}
@@ -1485,6 +1485,17 @@ namespace PopcornFX
 
 		//----------------------------------------------------------------------------
 
+		private static long _CustomMaterialID(Material material)
+		{
+#if UNITY_6000_4_OR_NEWER
+			return (long)EntityId.ToULong(material.GetEntityId());
+#else
+			return material.GetInstanceID();
+#endif
+		}
+
+		//----------------------------------------------------------------------------
+
 		private delegate void RetrieveCustomMaterialInfoCallback(int type, IntPtr rendererDescPtr, int idx, IntPtr hasCustomMaterialPtr, IntPtr customMaterialIdPtr);
 
 		[MonoPInvokeCallback(typeof(RetrieveRendererBufferInfoCallback))]
@@ -1493,7 +1504,7 @@ namespace PopcornFX
 			unsafe
 			{
 				int* hasCustomMat = (int*)hasCustomMaterialPtr;
-				int* customMatID = (int*)customMaterialIdPtr;
+				long* customMatID = (long*)customMaterialIdPtr;
 
 				SBatchDesc batchDesc = null;
 				if (type == 0 || type == 1 || type == 3)
@@ -1514,7 +1525,7 @@ namespace PopcornFX
 				else
 				{
 					*hasCustomMat = 1;
-					*customMatID = matInfo.m_CustomMaterial.GetInstanceID();
+					*customMatID = _CustomMaterialID(matInfo.m_CustomMaterial);
 				}
 			}
 		}
@@ -1532,7 +1543,7 @@ namespace PopcornFX
 			unsafe
 			{
 				int* isIdx32 = (int*)rendererInfo.m_IsIndex32.ToPointer();
-				int* customMatID = (int*)rendererInfo.m_CustomMatID.ToPointer();
+				long* customMatID = (long*)rendererInfo.m_CustomMatID.ToPointer();
 				int* vertexBufferSize = (int*)rendererInfo.m_VertexBufferSize.ToPointer();
 				int* indexBufferSize = (int*)rendererInfo.m_IndexBufferSize.ToPointer();
 				IntPtr* vbHandler = (IntPtr*)rendererInfo.m_VBHandler.ToPointer();
@@ -1550,7 +1561,7 @@ namespace PopcornFX
 						if (matInfo != null && matInfo.m_CustomMaterial != null)
 						{
 							*hasCustomMat = 1;
-							*customMatID = matInfo.m_CustomMaterial.GetInstanceID();
+							*customMatID = _CustomMaterialID(matInfo.m_CustomMaterial);
 						}
 						else
 							*hasCustomMat = 0;

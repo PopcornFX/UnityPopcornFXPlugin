@@ -403,7 +403,13 @@ namespace PopcornFX
 		void OnSelectionChange()
 		{
 			if (m_FxTreeView != null)
+			{
+#if UNITY_6000_4_OR_NEWER
+				m_FxTreeView.SetSelection(new int[0]);
+#else
 				m_FxTreeView.SetSelection(Selection.instanceIDs);
+#endif
+			}
 			Repaint();
 		}
 	}

@@ -29,11 +29,13 @@ public:
 	virtual bool		LaunchCustomTasks(SRenderContext &ctx) override;
 
 	virtual void		BeginFrame(PopcornFX::SRenderContext &ctx) override;
+	virtual bool		StartRenderPass(PopcornFX::SRenderMediumDrawRequests &drs, PopcornFX::SRenderContext &ctx) override;
 	virtual bool		EmitDrawCall(PopcornFX::SRenderContext &ctx, const PopcornFX::SDrawCallDesc &toEmit) override;
 	virtual void		Destroy() override;
 
 private:
 	void				_OnRenderMediumActiveStateChanged(CParticleRenderMedium *renderMedium, bool active);
+	void				_HideUnityRenderers();
 	void				_ClearBuffers();
 	void				_UpdateThread_ResizeUnityMeshInstanceCount(const PopcornFX::SRendererBatchDrawPass &drawPasss, IRenderAPIData *renderApiData);
 	bool				_RenderThread_SetupBuffersMeshes(const SGeneratedInputs &toMap);

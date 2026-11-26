@@ -68,29 +68,38 @@ bool CUnityBatchDrawer_Triangle::EmitDrawCall(PopcornFX::SRenderContext &ctx, co
 
 void CUnityBatchDrawer_Triangle::Destroy()
 {
-	CRuntimeManager	&manager = CRuntimeManager::Instance();
-	if (m_PrevParticleCount != 0)
-	{
-		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
-		{
-			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
-				manager.OnSetRendererActive(m_UnityMeshInfoPerViews[i].m_RendererGUID, ManagedBool_False);
-		}
-	}
+	if (m_PrevParticleCount != 0 || m_ParticleCount != 0)
+		_HideUnityRenderers();
 }
 
 void	CUnityBatchDrawer_Triangle::_OnRenderMediumActiveStateChanged(CParticleRenderMedium *renderMedium, bool active)
 {
-	(void) renderMedium; (void) active;
+	(void) renderMedium;
+	// Not gated on m_PrevParticleCount: it is still 0 if the renderer was only shown for one frame
+	if (!active)
+		_HideUnityRenderers();
+}
+
+bool	CUnityBatchDrawer_Triangle::StartRenderPass(PopcornFX::SRenderMediumDrawRequests &drs, PopcornFX::SRenderContext &ctx)
+{
+	if (!CRendererBatchJobs_Triangle_CPUBB::StartRenderPass(drs, ctx))
+		return false;
+	// Render() skips empty batches, the Unity mesh would keep showing the last frame
+	if (Empty() && (m_ParticleCount != 0 || m_PrevParticleCount != 0))
+		_HideUnityRenderers();
+	return true;
+}
+
+void	CUnityBatchDrawer_Triangle::_HideUnityRenderers()
+{
 	CRuntimeManager	&manager = CRuntimeManager::Instance();
-	if (m_PrevParticleCount != 0)
+	for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
 	{
-		for (u32 i = 0; i < m_UnityMeshInfoPerViews.Count(); ++i)
-		{
-			if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
-				manager.OnSetRendererActive(m_UnityMeshInfoPerViews[i].m_RendererGUID, ManagedBool_False);
-		}
+		if (PK_VERIFY(m_UnityMeshInfoPerViews[i].m_RendererGUID != -1))
+			manager.OnSetRendererActive(m_UnityMeshInfoPerViews[i].m_RendererGUID, ManagedBool_False);
 	}
+	m_PrevParticleCount = 0;
+	m_ParticleCount = 0;
 }
 
 void	CUnityBatchDrawer_Triangle::_ClearBuffers()

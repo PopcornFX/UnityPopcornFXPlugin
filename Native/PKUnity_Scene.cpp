@@ -98,6 +98,7 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 	m_IsSingleThreaded = (settings.m_SingleThreadedExecution == ManagedBool_True);
 	m_EnableRaycastCollisions = (settings.m_EnableRaycastForCollisions == ManagedBool_True);
 	m_UnityVersion = settings.m_UnityVersion;
+	m_RaycastHitUsesEntityId = (settings.m_UnityVersion > 2023 && settings.m_RaycastHitSize == sizeof(RaycastHitEntityId));
 	if (m_EnableRaycastCollisions)
 	{
 		if (settings.m_UnityVersion <= 2021)
@@ -128,7 +129,7 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 				m_EnableRaycastCollisions = false;
 			}
 		}
-		else if (settings.m_UnityVersion <= 6002)
+		else
 		{
 			if (settings.m_RaycastCommandSize != sizeof(RaycastCommand6002OrNewer))
 			{
@@ -136,7 +137,7 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 				m_EnableRaycastCollisions = false;
 			}
 
-			if (settings.m_RaycastHitSize != sizeof(RaycastHit2022OrNewer))
+			if (settings.m_RaycastHitSize != (m_RaycastHitUsesEntityId ? sizeof(RaycastHitEntityId) : sizeof(RaycastHit2022OrNewer)))
 			{
 				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the RaycastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
 				m_EnableRaycastCollisions = false;
@@ -170,7 +171,7 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 					m_EnableRaycastCollisions = false;
 				}
 		}
-		else if (settings.m_UnityVersion <= 6002)
+		else
 		{
 			if (settings.m_SpherecastCommandSize != sizeof(SphereCastCommand6002OrNewer))
 			{
@@ -178,7 +179,7 @@ bool	CPKFXScene::PopcornFXChangeSettings(const SPopcornFxSettings &settings)
 				m_EnableRaycastCollisions = false;
 			}
 
-			if (settings.m_SpherecastHitSize != sizeof(SphereCastHit2022OrNewer))
+			if (settings.m_SpherecastHitSize != (m_RaycastHitUsesEntityId ? sizeof(RaycastHitEntityId) : sizeof(SphereCastHit2022OrNewer)))
 			{
 				CLog::Log(PK_ERROR, "CPKFXScene::PopcornFXChangeSettings: The size of the SpherecastHit struct doesn't match. Did the layout changed? Disabling EnableRaycastCollisions.");
 				m_EnableRaycastCollisions = false;
@@ -281,6 +282,14 @@ bool	CPKFXScene::ShouldUpdatePopcorn()
 
 //----------------------------------------------------------------------------
 
+bool	CPKFXScene::_RefreshRenderContextViews()
+{
+	m_RenderContext.m_Views = TStridedMemoryView<SSceneView>(m_SceneViews.RawDataPointer(), m_SceneViews.Count(), sizeof(SUnitySceneView));
+	return !m_RenderContext.m_Views.Empty();
+}
+
+//----------------------------------------------------------------------------
+
 void	CPKFXScene::LaunchUpdate(float dt)
 {
 	PK_SCOPEDPROFILE();
@@ -288,6 +297,8 @@ void	CPKFXScene::LaunchUpdate(float dt)
 	PK_TODO("Gore hack for Durango. revise the sample lib locks.");
 	PK_SCOPEDLOCK(m_test);
 #endif
+
+	const bool	hasViews = _RefreshRenderContextViews();
 
 #if	(PK_PARTICLES_HAS_STATS != 0)
 	CLiveProfiler	&profiler = CRuntimeManager::Instance().GetProfiler();
@@ -338,7 +349,7 @@ void	CPKFXScene::LaunchUpdate(float dt)
 					if (newToRender != null)
 					{
 						m_GameThreadFrameCollector->BuildNewFrame(newToRender);
-						if (m_GameThreadFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
+						if (hasViews && m_GameThreadFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
 							m_GameThreadFrameCollector->EndRenderBuiltFrame(m_RenderContext);
 					}
 
@@ -347,7 +358,7 @@ void	CPKFXScene::LaunchUpdate(float dt)
 					if (newToRender != null)
 					{
 						m_ParticleFrameCollector->BuildNewFrame(newToRender);
-						if (m_ParticleFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
+						if (hasViews && m_ParticleFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
 							m_ParticleFrameCollector->EndRenderBuiltFrame(m_RenderContext);
 
 						//m_RenderDataFactory.CustomStepFlagInactive();
@@ -385,7 +396,7 @@ void	CPKFXScene::LaunchUpdate(float dt)
 				{
 					m_GameThreadFrameCollector->BuildNewFrame(newToRender);
 
-					if (m_GameThreadFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
+					if (hasViews && m_GameThreadFrameCollector->BeginRenderBuiltFrame(m_RenderContext))
 						m_GameThreadFrameCollector->EndRenderBuiltFrame(m_RenderContext);
 				}
 #if	(PK_PARTICLES_HAS_STATS != 0)
@@ -525,6 +536,36 @@ void	CPKFXScene::SetCollisionMesh(const PMeshNew &mesh)
 
 //----------------------------------------------------------------------------
 
+template <typename _HitType>
+static void	_FillTraceResults(const _HitType *resBuffer, const CFloat4 *directions, const Colliders::STracePacket &results)
+{
+	for (u32 i = 0; i < results.Count(); ++i)
+	{
+		if (resBuffer[i].collider != 0)
+		{
+			results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
+			if (results.m_ContactNormals_Aligned16 != null)
+				results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
+			if (results.m_ContactPoints_Aligned16 != null)
+				results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
+
+			if (results.m_ContactObjects_Aligned16 != null)
+			{
+				if (results.m_HitTimes_Aligned16[i] < directions[i].w())
+				{
+					results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
+				}
+				else
+				{
+					results.m_ContactObjects_Aligned16[i] = null;
+				}
+			}
+		}
+	}
+}
+
+//----------------------------------------------------------------------------
+
 void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 									const Colliders::SRayPacket &packet,
 									const Colliders::STracePacket &results)
@@ -561,6 +602,8 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 			const CFloat4* directions = packet.m_RayDirectionsAndLengths_Aligned16.Data();
 			s32				layerMask = traceFilter.m_FilterFlags == 0 ? -5/*Physics.DefaultRaycastLayers*/ : (1 << traceFilter.m_FilterFlags);
 
+			// 'cmd' is the managed NativeArray<RaycastCommand> storage: the mirror picked here must be the
+			// one PopcornFXChangeSettings validated the managed size against, or we write at the wrong stride.
 			if (m_UnityVersion <= 2021)
 			{
 				RaycastCommand* cmdBuffer = (RaycastCommand*)cmd;
@@ -573,7 +616,7 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 					cmdBuffer[i].maxHits = 1;
 				}
 			}
-			else
+			else if (m_UnityVersion <= 2023)
 			{
 				RaycastCommand2022OrNewer* cmdBuffer2022orNewer = (RaycastCommand2022OrNewer*)cmd;
 				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
@@ -582,6 +625,17 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 					cmdBuffer2022orNewer[i].direction = directions[i].xyz();
 					cmdBuffer2022orNewer[i].queryParams.layerMask = layerMask;
 					cmdBuffer2022orNewer[i].distance = directions[i].w();
+				}
+			}
+			else
+			{
+				RaycastCommand6002OrNewer* cmdBuffer6002orNewer = (RaycastCommand6002OrNewer*)cmd;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+				{
+					cmdBuffer6002orNewer[i].from = origins[i].xyz();
+					cmdBuffer6002orNewer[i].direction = directions[i].xyz();
+					cmdBuffer6002orNewer[i].queryParams.layerMask = layerMask;
+					cmdBuffer6002orNewer[i].distance = directions[i].w();
 				}
 			}
 
@@ -597,59 +651,11 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 
 
 			if (m_UnityVersion <= 2021)
-			{
-				RaycastHit* resBuffer = (RaycastHit*)res;
-				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
-				{
-					if (resBuffer[i].collider != 0)
-					{
-						results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
-						if (results.m_ContactNormals_Aligned16 != null)
-							results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
-						if (results.m_ContactPoints_Aligned16 != null)
-							results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
-
-						if (results.m_ContactObjects_Aligned16 != null)
-						{
-							if (results.m_HitTimes_Aligned16[i] < directions[i].w())
-							{
-								results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
-							}
-							else
-							{
-								results.m_ContactObjects_Aligned16[i] = null;
-							}
-						}
-					}
-				}
-			}
+				_FillTraceResults((const RaycastHit*)res, directions, results);
+			else if (m_RaycastHitUsesEntityId)
+				_FillTraceResults((const RaycastHitEntityId*)res, directions, results);
 			else
-			{
-				RaycastHit2022OrNewer* resBuffer = (RaycastHit2022OrNewer*)res;
-				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
-				{
-					if (resBuffer[i].collider != 0)
-					{
-						results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
-						if (results.m_ContactNormals_Aligned16 != null)
-							results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
-						if (results.m_ContactPoints_Aligned16 != null)
-							results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
-
-						if (results.m_ContactObjects_Aligned16 != null)
-						{
-							if (results.m_HitTimes_Aligned16[i] < directions[i].w())
-							{
-								results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
-							}
-							else
-							{
-								results.m_ContactObjects_Aligned16[i] = null;
-							}
-						}
-					}
-				}
-			}
+				_FillTraceResults((const RaycastHit2022OrNewer*)res, directions, results);
 		}
 		else
 		{
@@ -675,9 +681,21 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 					cmdBuffer[i].maxHit = 1;
 				}
 			}
-			else
+			else if (m_UnityVersion <= 2023)
 			{
 				SphereCastCommand2022OrNewer	*cmdBuffer = (SphereCastCommand2022OrNewer*)cmd;
+				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
+				{
+					cmdBuffer[i].from = origins[i].xyz();
+					cmdBuffer[i].direction = directions[i].xyz();
+					cmdBuffer[i].queryParams.layerMask = layerMask;
+					cmdBuffer[i].distance = directions[i].w();
+					cmdBuffer[i].radius = radii[i];
+				}
+			}
+			else
+			{
+				SphereCastCommand6002OrNewer	*cmdBuffer = (SphereCastCommand6002OrNewer*)cmd;
 				for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
 				{
 					cmdBuffer[i].from = origins[i].xyz();
@@ -697,30 +715,10 @@ void	CPKFXScene::RayTracePacket(	const Colliders::STraceFilter &traceFilter,
 
 			::OnSpherecastPack(&res);
 
-			SphereCastHit	*resBuffer = (SphereCastHit*)res;
-			for (u32 i = 0; i < packet.m_RayOrigins_Aligned16.Count(); ++i)
-			{
-				if (resBuffer[i].collider != 0)
-				{
-					results.m_HitTimes_Aligned16[i] = resBuffer[i].distance;
-					if (results.m_ContactNormals_Aligned16 != null)
-						results.m_ContactNormals_Aligned16[i].xyz() = resBuffer[i].normal;
-					if (results.m_ContactPoints_Aligned16 != null)
-						results.m_ContactPoints_Aligned16[i].xyz() = resBuffer[i].point;
-
-					if (results.m_ContactObjects_Aligned16 != null)
-					{
-						if (results.m_HitTimes_Aligned16[i] < directions[i].w())
-						{
-							results.m_ContactObjects_Aligned16[i] = CollidableObject::DEFAULT;
-						}
-						else
-						{
-							results.m_ContactObjects_Aligned16[i] = null;
-						}
-					}
-				}
-			}
+			if (m_RaycastHitUsesEntityId)
+				_FillTraceResults((const RaycastHitEntityId*)res, directions, results);
+			else
+				_FillTraceResults((const SphereCastHit*)res, directions, results);
 		}
 
 	}

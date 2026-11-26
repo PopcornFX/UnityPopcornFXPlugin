@@ -12,7 +12,11 @@ namespace PopcornFX
 		static void OnLoad()
 		{
 			DragAndDrop.AddDropHandlerV2(OnSceneDrop);
+#if UNITY_6000_4_OR_NEWER
+			DragAndDrop.AddDropHandlerV2(OnHierarchyDrop);
+#else
 			DragAndDrop.AddDropHandler(OnHierarchyDrop);
+#endif
 			DragAndDrop.AddDropHandlerV2(OnInspectorDrop);
 		}
 
@@ -76,7 +80,11 @@ namespace PopcornFX
 			return DragAndDropVisualMode.Move;
 		}
 
-		static DragAndDropVisualMode OnHierarchyDrop(int dropTargetInstanceID, HierarchyDropFlags dropMode, Transform parentForDraggedObjects, bool perform)
+#if UNITY_6000_4_OR_NEWER
+		static DragAndDropVisualMode OnHierarchyDrop(EntityId dropTargetID, HierarchyDropFlags dropMode, Transform parentForDraggedObjects, bool perform)
+#else
+		static DragAndDropVisualMode OnHierarchyDrop(int dropTargetID, HierarchyDropFlags dropMode, Transform parentForDraggedObjects, bool perform)
+#endif
 		{
 			List<PKFxEffectAsset> effectAssets = _GetEffectAssets();
 			if (effectAssets.Count == 0)
@@ -92,7 +100,11 @@ namespace PopcornFX
 						parent = parentForDraggedObjects;
 					else
 					{
-						GameObject dropTarget = EditorUtility.InstanceIDToObject(dropTargetInstanceID) as GameObject;
+#if UNITY_6000_4_OR_NEWER
+						GameObject dropTarget = EditorUtility.EntityIdToObject(dropTargetID) as GameObject;
+#else
+						GameObject dropTarget = EditorUtility.InstanceIDToObject(dropTargetID) as GameObject;
+#endif
 						if (dropTarget != null)
 						{
 							if (dropMode.HasFlag(HierarchyDropFlags.DropUpon))

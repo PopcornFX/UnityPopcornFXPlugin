@@ -49,7 +49,7 @@ extern "C"
 	void				(POPCORN_TO_MANAGED_CONVENTION  *_OnSetSoundsBuffer)(void *soundInfos, int count) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION  *_OnSetDecalsBuffer)(void *decalInfos, int count) = null;
 
-	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveCustomMaterialInfo)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID) = null;
+	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveCustomMaterialInfo)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, s64 *customMaterialID) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnRetrieveRendererBufferInfo)(int rendererGUID, const SRetrieveRendererInfo *info) = null;
 	void				(POPCORN_TO_MANAGED_CONVENTION	*_OnUpdateRendererBounds)(int rendererGUID, const SUpdateRendererBounds *bounds) = null;
 
@@ -185,7 +185,7 @@ extern "C"
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveCustomMaterialInfo(void *delegatePtr)
 	{
-		_OnRetrieveCustomMaterialInfo = (void (POPCORN_TO_MANAGED_CONVENTION *)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int* customMaterialID))delegatePtr;
+		_OnRetrieveCustomMaterialInfo = (void (POPCORN_TO_MANAGED_CONVENTION *)(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, s64 *customMaterialID))delegatePtr;
 	}
 
 	MANAGED_TO_POPCORN_CONVENTION void			SetDelegateOnRetrieveRendererBufferInfo(void *delegatePtr)
@@ -561,7 +561,7 @@ extern "C"
 		}
 	}
 
-	void	OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, int *customMaterialID)
+	void	OnRetrieveCustomMaterialInfo(int type, const void *rendererDesc, int idx, ManagedBool *hasCustomMaterial, s64 *customMaterialID)
 	{
 		PK_SCOPEDPROFILE();
 		if (!PK_VERIFY(CCurrentThread::IsMainThread()))

@@ -115,14 +115,10 @@ public:
 	{
 		CFloat3				from;
 		CFloat3				direction;
-		u64					padding = 0; //PhysicsScene
+		u32					padding[2] = { 0, 0 }; //PhysicsScene, split in two u32 to keep the struct 4-aligned
 		float				distance;
 		QueryParameters		queryParams;
-	}
-#if !defined(PK_WINDOWS) 
-	__attribute__((packed))
-#endif
-	;
+	};
 
 	struct RaycastCommand2022OrNewer
 	{
@@ -194,16 +190,25 @@ public:
 		int				collider;
 	};
 	
+	struct RaycastHitEntityId
+	{
+		CFloat3			point;
+		CFloat3			normal;
+		unsigned int	faceID;
+		float			distance;
+		CFloat2			uv;
+		u64				collider;
+	};
+	
 #if defined(PK_WINDOWS)
 #pragma pack(pop)
 #endif
 
-	// RaycastCommand6002OrNewer is the only mirror struct whose managed layout differs from its
-	// natural C++ layout (the u64 PhysicsScene handle pulls the alignment to 8 and adds tail padding).
-	// gcc reports "ignoring packed attribute" on the non-POD members, so pin the size explicitly:
-	// if the packing were really dropped the sizeof check against the managed side would silently
-	// disable raycast collisions instead of failing here.
-	PK_STATIC_ASSERT(sizeof(RaycastCommand6002OrNewer) == sizeof(CFloat3) * 2 + sizeof(u64) + sizeof(float) + sizeof(QueryParameters));
+	// RaycastCommand6002OrNewer mirrors the managed PhysicsScene handle as two u32 rather than one u64:
+	// a u64 would pull the struct alignment to 8 and add 4 bytes of tail padding, which no packing can
+	// remove here (gcc drops __attribute__((packed)) on the non-POD CFloat3 / QueryParameters members).
+	// Pin the size so a layout change fails the build instead of silently disabling raycast collisions.
+	PK_STATIC_ASSERT(sizeof(RaycastCommand6002OrNewer) == sizeof(CFloat3) * 2 + sizeof(u32) * 2 + sizeof(float) + sizeof(QueryParameters));
 
 public:
 	CPKFXScene();
@@ -227,6 +232,7 @@ public:
 	// Both of those need to be called for the particles to be correctly updated:
 	void						SyncPreviousUpdateAndRunDeferredCallsIFN();
 	void						LaunchUpdate(float dt);
+	bool						_RefreshRenderContextViews();
 	// Then build draw-calls:
 	void						BuildDrawCalls(const SUnitySceneView &view);
 
@@ -471,6 +477,7 @@ private:
 	PopcornFX::CTimer							m_UpdateTimer;
 
 	s32											m_UnityVersion = 0;
+	bool										m_RaycastHitUsesEntityId = false;
 };
 PK_DECLARE_REFPTRCLASS(PKFXScene);
 

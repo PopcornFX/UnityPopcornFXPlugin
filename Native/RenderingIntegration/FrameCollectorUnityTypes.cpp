@@ -114,7 +114,7 @@ PRendererCacheBase	CUnityFrameCollector::CreateRendererCache(const PRendererData
 			{
 				//Check if rdr got custom material
 				ManagedBool	hasCustomMaterial = ManagedBool_False;
-				int			customMaterialID = -1;
+				s64			customMaterialID = -1;
 
 				if (renderer->m_RendererType == Renderer_Billboard ||
 					renderer->m_RendererType == Renderer_Ribbon ||

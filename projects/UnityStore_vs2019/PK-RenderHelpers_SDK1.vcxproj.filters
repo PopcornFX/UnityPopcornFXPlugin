@@ -174,9 +174,6 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_batch_drawer.h">
       <Filter>Headers\frame_collector</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.h">
-      <Filter>Headers\frame_collector</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.h">
       <Filter>Headers\frame_collector</Filter>
     </ClInclude>

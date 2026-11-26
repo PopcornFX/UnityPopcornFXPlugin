@@ -425,7 +425,6 @@
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\draw_requests\rh_triangle_cpu_tasks.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_batch_drawer.h" />
-    <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_billboarding_batches_manager.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_collector.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_frame_data.h" />
     <ClInclude Include="..\..\ExternalLibs\Runtime\pk_render_helpers\include\frame_collector\rh_particle_render_data_factory.h" />

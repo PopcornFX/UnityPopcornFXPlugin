@@ -69,7 +69,7 @@ namespace PopcornFX
 		[SerializeField] private List<PKFxEffectAsset.AttributeDesc>			m_FxAttributesDesc = null;
 
 		[SerializeField] private List<PKFxRaiseEventCallbackData>				m_DelayedCallbacks;
-		[SerializeField] private Dictionary<int, PKFxRaiseEventCallbackData>	m_Callbacks;
+		private Dictionary<int, PKFxRaiseEventCallbackData>					m_Callbacks;
 		public int m_EventDescsHash = 0;
 
 		[SerializeField] private PKFxAttributesContainer m_AttributesContainer = null;
